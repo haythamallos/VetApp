@@ -29,10 +29,18 @@ namespace VetWebApp
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvcWithDefaultRoute();
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.UseMvc(
+            //    routes =>
+            //    {
+            //        routes
+            //        .MapRoute("Default", "{controller=Home}/{action=Index}/{id?}")
+            //        .MapRoute("Member", "Member/{controller=Member}/{action=Index}/{id?}");
+            //    });
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }
