@@ -3,6 +3,6 @@ namespace RESTAPI.Repository
 {
     public interface IKeyRepository
     {
-        bool CheckValidApiKey(string apikey);
+        bool CheckValidUserKey(string reqkey);
     }
 }

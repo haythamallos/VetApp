@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using RESTAPI.Middleware;
 using RESTAPI.Repository;
 
 namespace RESTAPI
@@ -32,6 +33,9 @@ namespace RESTAPI
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+
+            //using Dependency Injection
+            services.AddSingleton<IKeyRepository, KeyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +43,7 @@ namespace RESTAPI
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.ApplyApiKeyValidation();
+            app.ApplyUserKeyValidation();
             app.UseMvc();
         }
     }
