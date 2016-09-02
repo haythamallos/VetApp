@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace RESTAPI.Models
 {
+
     public class Apikey : DbContext
     {
         public long ApikeyId { get; set; }
@@ -12,10 +13,21 @@ namespace RESTAPI.Models
         public bool IsDisabled { get; set; }
         public string ApiauthToken { get; set; }
         public string Notes { get; set; }
-        public string Description { get; set; }
 
         public Apikey(DbContextOptions<Apikey> options)
             : base(options)
         { }
+    }
+
+    public class ApikeyContext : DbContext
+    {
+        public DbSet<Apikey> Apikeys { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            AppSettings appSettings = new AppSettings();
+            
+            optionsBuilder.UseSqlServer(appSettings.DefaultConnection);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using RESTAPI.Repository;
+using RESTAPI.Models;
 
 namespace RESTAPI.Middleware
 {
