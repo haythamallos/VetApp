@@ -3,16 +3,21 @@ using RESTAPI.Models;
 using Microsoft.Extensions.Options;
 using RESTAPI.Facade;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace RESTAPI.Repository
 {
     public class KeyRepository : IKeyRepository
     {
         private readonly AppSettings _settings;
+        private readonly IMemoryCache _memoryCache;
+
+        private const string CACHEKEYLIST = "APIKeyList";
 
         public KeyRepository(IOptions<AppSettings> settings, IMemoryCache memoryCache)
         {
             _settings = settings.Value;
+            _memoryCache = memoryCache;
         }
         public bool CheckValidUserKey(string key)
         {
@@ -28,52 +33,28 @@ namespace RESTAPI.Repository
         {
             get
             {
-                BusFacCore busFacCore = new BusFacCore(_settings);
-                List<Apikey> lstApikey = busFacCore.ApikeyGetList();
-                List<string> keys = new List<string>();
-                //var keys = HttpContext.Current.Cache[APIKEYLIST] as List<string>;
+                List<string> keys = _memoryCache.Get(CACHEKEYLIST) as List<string>;
 
-                //if (keys == null)
-                //{
-                //    keys = PopulateAPIKeys();
-                //}
-                //else if (keys.Count == 0)
-                //{
-                //    keys = PopulateAPIKeys();
-                //}
+                if (keys == null)
+                {
+                    BusFacCore busFacCore = new BusFacCore(_settings);
+                    List<Apikey> lstApikey = busFacCore.ApikeyGetList();
+                    if ((lstApikey != null) && (lstApikey.Count > 0))
+                    {
+                        keys = new List<string>();
+                        foreach (Apikey k in lstApikey)
+                        {
+                            keys.Add(k.Token);
+                        }
+                        _memoryCache.Set(CACHEKEYLIST, keys,
+                            new MemoryCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromMinutes(5))
+                            .SetAbsoluteExpiration(TimeSpan.FromHours(1)));
+                    }
+                }
 
                 return keys;
             }
         }
-
-        //private static List<string> APIKeys
-        //{
-        //    get
-        //    {
-        //        // Get from the cache
-        //        // Could also use AppFabric cache for scalability
-        //        var keys = HttpContext.Current.Cache[APIKEYLIST] as List<string>;
-
-        //        if (keys == null)
-        //        {
-        //            keys = PopulateAPIKeys();
-        //        }
-        //        else if (keys.Count == 0)
-        //        {
-        //            keys = PopulateAPIKeys();
-        //        }
-
-        //        return keys;
-        //    }
-        //}
-
-        //private List<string> PopulateAPIKeys()
-        //{
-        //    List<string> keyList = new List<string>();
-        //    BusFacCore busFacCore = new BusFacCore(_settings);
-        //    List<Apikey> lstApikey = busFacCore.ApikeyGetList();
-        //    return keyList;
-        //}
-
     }
 }

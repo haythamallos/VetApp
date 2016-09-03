@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RESTAPI.Models;
+using System.Linq;
 
 namespace RESTAPI.Facade
 {
@@ -34,16 +35,22 @@ namespace RESTAPI.Facade
             {
                 using (var db = new ApikeyContext(_settings.DefaultConnection))
                 {
-                    
-                    foreach (var k in db.Apikeys)
-                    {
+                    IQueryable<Apikey> q;
+                    q = db.Apikeys;
+                    items = q.ToList();
+                    //foreach (var k in db.Apikeys)
+                    //{
 
-                    }
+                    //}
                 }
             }
             catch (Exception ex)
             {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
             }
+
             return items;
         }
     }
