@@ -22,32 +22,32 @@
 IF EXISTS (SELECT *
            FROM   sysobjects
            WHERE  type = 'U'
-                  AND name = 'apikey')
+                  AND name = 'Apikey')
   BEGIN
-      PRINT 'Dropping Table apikey'
+      PRINT 'Dropping Table Apikey'
 
-      DROP TABLE apikey
+      DROP TABLE Apikey
   END
 
 go
 
-CREATE TABLE apikey
+CREATE TABLE Apikey
   (
-     apikey_id       INT NOT NULL PRIMARY KEY,
-     date_created    DATETIME NULL,
-     date_modified   DATETIME NULL,
-     date_expiration DATETIME NULL,
-     is_disabled     BIT NULL,
-     apiauth_token        NVARCHAR(255) NULL,
-     notes           NVARCHAR(255) NULL
+     ApikeyId       INT NOT NULL PRIMARY KEY,
+     CreatedDate    DATETIME NULL,
+     ModifiedDate   DATETIME NULL,
+     ExpirationDate DATETIME NULL,
+     IsDisabled     BIT NULL,
+     Token        NVARCHAR(255) NULL,
+     Notes           NVARCHAR(255) NULL
   )
 
 go
 
-IF Object_id('apikey') IS NOT NULL
-  PRINT '<<< CREATED TABLE apikey >>>'
+IF Object_id('Apikey') IS NOT NULL
+  PRINT '<<< CREATED TABLE Apikey >>>'
 ELSE
-  PRINT '<<< FAILED CREATING TABLE apikey >>>'
+  PRINT '<<< FAILED CREATING TABLE Apikey >>>'
 
 go
 
@@ -65,10 +65,10 @@ go
 **		8/23/146		HA			Created
 **    
 *******************************************************************************/
-delete from [apikey]
-INSERT INTO [apikey] (apikey_id, date_created, apiauth_token, notes) VALUES (1, GETDATE(), '6cfebbdd8b6a41babab5b644ab86a456', 'MAINWEB');
-INSERT INTO [apikey] (apikey_id, date_created, apiauth_token, notes) VALUES (2, GETDATE(), '94ac2960f33040ad9cc6311a87065acb', '');
-INSERT INTO [apikey] (apikey_id, date_created, apiauth_token, notes) VALUES (3, GETDATE(), 'd63e8eafc3c54c90a75afa581fd05e10', '');
-INSERT INTO [apikey] (apikey_id, date_created, apiauth_token, notes) VALUES (4, GETDATE(), '7b6a27958fef4ddd99d652e432e564a7', '');
-INSERT INTO [apikey] (apikey_id, date_created, apiauth_token, notes) VALUES (5, GETDATE(), '5d1c6e75feff40b08ed5966d28df0db9', '');
+delete from [Apikey]
+INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (1, GETDATE(), '6cfebbdd8b6a41babab5b644ab86a456', 'MAINWEB');
+INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (2, GETDATE(), '94ac2960f33040ad9cc6311a87065acb', '');
+INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (3, GETDATE(), 'd63e8eafc3c54c90a75afa581fd05e10', '');
+INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (4, GETDATE(), '7b6a27958fef4ddd99d652e432e564a7', '');
+INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (5, GETDATE(), '5d1c6e75feff40b08ed5966d28df0db9', '');
 GO

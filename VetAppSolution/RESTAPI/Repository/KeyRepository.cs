@@ -1,27 +1,48 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using RESTAPI.Models;
+using Microsoft.Extensions.Options;
+using RESTAPI.Facade;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace RESTAPI.Repository
 {
     public class KeyRepository : IKeyRepository
     {
-        public bool CheckValidUserKey(string reqkey)
-        {
-            var userkeyList = new List<string>();
-            userkeyList.Add("28236d8ec201df516d0f6472d516d72d");
-            userkeyList.Add("38236d8ec201df516d0f6472d516d72c");
-            userkeyList.Add("48236d8ec201df516d0f6472d516d72b");
+        private readonly AppSettings _settings;
 
-            if (userkeyList.Contains(reqkey))
+        public KeyRepository(IOptions<AppSettings> settings, IMemoryCache memoryCache)
+        {
+            _settings = settings.Value;
+        }
+        public bool CheckValidUserKey(string key)
+        {
+            bool bReturn = false;
+            if ((key != null) && (APIKeys.Contains(key)))
             {
-                return true;
+                bReturn = true;
             }
-            else
+            return bReturn;
+        }
+
+        private List<string> APIKeys
+        {
+            get
             {
-                return false;
+                BusFacCore busFacCore = new BusFacCore(_settings);
+                List<Apikey> lstApikey = busFacCore.ApikeyGetList();
+                List<string> keys = new List<string>();
+                //var keys = HttpContext.Current.Cache[APIKEYLIST] as List<string>;
+
+                //if (keys == null)
+                //{
+                //    keys = PopulateAPIKeys();
+                //}
+                //else if (keys.Count == 0)
+                //{
+                //    keys = PopulateAPIKeys();
+                //}
+
+                return keys;
             }
         }
 
@@ -46,22 +67,13 @@ namespace RESTAPI.Repository
         //    }
         //}
 
-        //private static List<string> PopulateAPIKeys()
+        //private List<string> PopulateAPIKeys()
         //{
         //    List<string> keyList = new List<string>();
-        //    keyList = getTestKeys();
+        //    BusFacCore busFacCore = new BusFacCore(_settings);
+        //    List<Apikey> lstApikey = busFacCore.ApikeyGetList();
         //    return keyList;
         //}
-        
-        //private List<string> getTestKeys()
-        //{
-        //    List<string> keyList = new List<string>();
 
-        //    keyList.Add("28236d8ec201df516d0f6472d516d72d");
-        //    keyList.Add("38236d8ec201df516d0f6472d516d72c");
-        //    keyList.Add("48236d8ec201df516d0f6472d516d72b");
-
-        //    return keyList;
-        //}
     }
 }

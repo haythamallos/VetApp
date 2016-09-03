@@ -19,6 +19,7 @@ namespace RESTAPI
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -33,6 +34,9 @@ namespace RESTAPI
             //using Dependency Injection
             services.AddSingleton<IKeyRepository, KeyRepository>();
             services.AddMemoryCache();
+            services.AddSingleton<IConfigurationRoot>(Configuration);
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

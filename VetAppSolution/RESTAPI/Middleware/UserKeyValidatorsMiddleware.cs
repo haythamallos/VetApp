@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using RESTAPI.Repository;
 using RESTAPI.Models;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 namespace RESTAPI.Middleware
 {
     public class UserKeyValidatorsMiddleware
     {
         private readonly RequestDelegate _next;
-        private IKeyRepository KeyRepo { get; set; }
-
+        private IKeyRepository KeyRepo;
         public UserKeyValidatorsMiddleware(RequestDelegate next, IKeyRepository _repo)
         {
             _next = next;
