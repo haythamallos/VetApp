@@ -1,0 +1,26 @@
+﻿<Window x:Class="TesterClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TesterClient"
+        mc:Ignorable="d"
+        Title="Vet App Tester Client" Height="600" Width="760.147" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="apiLinkLabel" Content="Service URL:  " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="serviceUrlTextBox" HorizontalAlignment="Left" Height="23" Margin="96,13,0,0" TextWrapping="Wrap" Text="http://localhost:59677" VerticalAlignment="Top" Width="265"/>
+        <RichTextBox x:Name="responseRichTextBox" Margin="10,426,10,10">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label x:Name="apiLinkLabel_Copy" Content="User-Key:  " HorizontalAlignment="Left" Margin="378,11,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="userKeyTextBox" HorizontalAlignment="Left" Height="23" Margin="450,15,0,0" TextWrapping="Wrap" Text="6cfebbdd8b6a41babab5b644ab86a456" VerticalAlignment="Top" Width="292"/>
+        <Button x:Name="validateUserKeyButton" Content="Validate User Key" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="124" Click="validateUserKeyButton_Click"/>
+        <TextBox x:Name="responseStatusCodeTextBox" Height="23" Margin="96,398,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Status Code" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
