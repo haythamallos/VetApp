@@ -51,7 +51,82 @@ ELSE
 
 go
 
+/*******************************************************************************
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		9/7/16		HA		Created
+*******************************************************************************/
+IF EXISTS (SELECT *
+           FROM   sysobjects
+           WHERE  type = 'U'
+                  AND name = 'login_role')
+  BEGIN
+      PRINT 'Dropping Table login_role'
 
+      DROP TABLE login_role
+  END
+
+go
+
+CREATE TABLE login_role
+  (
+     login_role_id NUMERIC(10) NOT NULL PRIMARY KEY,
+     date_created DATETIME NULL,
+     code         NVARCHAR(255) NULL,
+     description  NVARCHAR(255) NULL,
+     visible_code NVARCHAR(255) NULL
+  )
+
+go
+
+IF Object_id('login_role') IS NOT NULL
+  PRINT '<<< CREATED TABLE login_role >>>'
+ELSE
+  PRINT '<<< FAILED CREATING TABLE login_role >>>'
+
+go
+
+/*******************************************************************************
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		9/7/16		HA		Created
+*******************************************************************************/
+IF EXISTS (SELECT *
+           FROM   sysobjects
+           WHERE  type = 'U'
+                  AND name = 'login')
+  BEGIN
+      PRINT 'Dropping Table login'
+
+      DROP TABLE login
+  END
+
+go
+
+CREATE TABLE login
+  (
+     login_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
+	 login_role_id        NUMERIC(10) NULL,
+     date_created      DATETIME NULL,
+     date_modified     DATETIME NULL,
+     loginname        NVARCHAR(255) NULL,
+     password_encrypted    NVARCHAR(255) NULL,
+     encryption_algorithm    NVARCHAR(255) NULL,
+	 welcome_email_sent                   BIT NULL,
+	 is_active                   BIT NULL,
+     num_of_tries                 INT NULL
+  )
+
+go
+
+IF Object_id('login') IS NOT NULL
+  PRINT '<<< CREATED TABLE login >>>'
+ELSE
+  PRINT '<<< FAILED CREATING TABLE login >>>'
+
+go
 /******************************************************************************
 **		Name:  Lookup Data
 **		Desc: Creates the lookup or static for the project

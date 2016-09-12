@@ -46,9 +46,12 @@ namespace RESTAPI.Repository
                         {
                             keys.Add(k.Token);
                         }
+                        // keep item in cache as long as it is requested at least
+                        // once every 5 minutes...
+                        // but in any case make sure to refresh it every hour
                         _memoryCache.Set(CACHEKEYLIST, keys,
                             new MemoryCacheEntryOptions()
-                            .SetSlidingExpiration(TimeSpan.FromMinutes(5))
+                            .SetSlidingExpiration(TimeSpan.FromMinutes(30))
                             .SetAbsoluteExpiration(TimeSpan.FromHours(1)));
                     }
                 }
