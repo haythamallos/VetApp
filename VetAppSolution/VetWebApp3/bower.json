@@ -1,10 +1,19 @@
 {
-  "name": "asp.net",
+  "name": "Valued Veteran Web App",
+  "homepage": "",
+  "version": "1.0.0",
+  "authors": [
+    "Haytham Allos"
+  ],
+  "description": "A web application to help military veterans with benefits.",
   "private": true,
+  "main": [
+    "css/sb-admin-2.css",
+    "js/sb-admin-2.js"
+  ],
   "dependencies": {
-    "bootstrap": "3.3.6",
-    "jquery": "2.2.0",
-    "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.6"
+    "bootstrap": "3.3.7",
+    "jquery": "3.1.0",
+    "jquery-validation-unobtrusive": "1.15.1"
   }
 }

@@ -51,6 +51,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MockWebApp", "MockWebApp\",
 		SlnRelativePath = "MockWebApp\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSite\", "{43CB8288-00D5-40C1-88C2-9C989E639F1A}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_60643"
+		Debug.AspNetCompiler.PhysicalPath = "TemplateSite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60643\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_60643"
+		Release.AspNetCompiler.PhysicalPath = "TemplateSite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60643\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "60643"
+		SlnRelativePath = "TemplateSite\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +180,22 @@ Global
 		{15B2F15F-2EA8-4B08-A332-6A10169C42A2}.Release|x64.Build.0 = Debug|Any CPU
 		{15B2F15F-2EA8-4B08-A332-6A10169C42A2}.Release|x86.ActiveCfg = Debug|Any CPU
 		{15B2F15F-2EA8-4B08-A332-6A10169C42A2}.Release|x86.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|x64.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Debug|x86.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|ARM.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|ARM.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|x64.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|x64.Build.0 = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|x86.ActiveCfg = Debug|Any CPU
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,5 +211,6 @@ Global
 		{D4A8E22B-766E-43FB-A3DD-54C2FD95084C} = {13007AE5-39C4-470C-A935-4E90616BDCA6}
 		{14DCF823-6F77-41CC-A753-5137A365B134} = {D0DDFFA8-38CD-406E-AA07-2D9AFB821D6C}
 		{15B2F15F-2EA8-4B08-A332-6A10169C42A2} = {D0DDFFA8-38CD-406E-AA07-2D9AFB821D6C}
+		{43CB8288-00D5-40C1-88C2-9C989E639F1A} = {D0DDFFA8-38CD-406E-AA07-2D9AFB821D6C}
 	EndGlobalSection
 EndGlobal

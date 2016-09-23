@@ -14,8 +14,14 @@ namespace VetWebApp.Controllers
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
-            Contact contact = new Contact() { FirstName = "Haytham", LastName = "Allos", Id = id };
-            return View(contact);
+            //Contact contact = new Contact() { FirstName = "Haytham", LastName = "Allos", Id = id };
+            //return View(contact);
+
+            return View();
+        }
+        public IActionResult GetStarted()
+        {
+            return View();
         }
     }
 }
