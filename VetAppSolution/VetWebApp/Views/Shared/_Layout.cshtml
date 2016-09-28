@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
+    <!-- MetisMenu CSS -->
+    <link href="~/lib/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="~/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="~/lib/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
 
 </head>
 <body>
@@ -34,6 +47,7 @@
                     else
                     {
                         <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-controller="Account" asp-action="Login">Register</a></li>
                     }
                 </ul>
             </div>
@@ -53,5 +67,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
