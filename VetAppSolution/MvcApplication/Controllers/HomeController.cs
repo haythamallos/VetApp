@@ -12,5 +12,10 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
+        [Route("GetStarted", Name = "GetStarted")]
+        public ActionResult GetStarted()
+        {
+            return View();
+        }
     }
 }
