@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MvcApplication", "MvcApplication\", "{F028046A-36D7-41ED-954C-4E3F2BF0AEE7}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65169"
 		Debug.AspNetCompiler.PhysicalPath = "MvcApplication\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65169\"
@@ -46,6 +46,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MvcApplication", "MvcApplic
 		VWDPort = "65169"
 		SlnRelativePath = "MvcApplication\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainSite", "MainSite\MainSite.csproj", "{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,22 @@ Global
 		{F028046A-36D7-41ED-954C-4E3F2BF0AEE7}.Release|x64.Build.0 = Debug|Any CPU
 		{F028046A-36D7-41ED-954C-4E3F2BF0AEE7}.Release|x86.ActiveCfg = Debug|Any CPU
 		{F028046A-36D7-41ED-954C-4E3F2BF0AEE7}.Release|x86.Build.0 = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|ARM.Build.0 = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|x64.Build.0 = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Debug|x86.Build.0 = Debug|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|ARM.Build.0 = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|x64.ActiveCfg = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|x64.Build.0 = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|x86.ActiveCfg = Release|Any CPU
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,5 +154,6 @@ Global
 		{13007AE5-39C4-470C-A935-4E90616BDCA6} = {0F62C9C1-265F-45C6-B0B3-CDE436D435C3}
 		{D4A8E22B-766E-43FB-A3DD-54C2FD95084C} = {13007AE5-39C4-470C-A935-4E90616BDCA6}
 		{F028046A-36D7-41ED-954C-4E3F2BF0AEE7} = {D0DDFFA8-38CD-406E-AA07-2D9AFB821D6C}
+		{BDDDA647-C9FF-4651-BDE7-2BB011C1EF95} = {D0DDFFA8-38CD-406E-AA07-2D9AFB821D6C}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Intro Header -->
+@*<header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Valued Veteran</h1>
+                        <p class="intro-text">
+                            A free, responsive, one page Bootstrap theme.
+                            <br>Created by Start Bootstrap.
+                        </p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>*@
+
+
+<div class="banner-social-buttons text-center">
+    <h1>Valued Veteran Consulting Services (619) 822-2070</h1>
+</div>
+<div class="jumbotron">
+    <p class="lead">
+        Helping veterans increase current overall disability  <a class="btn btn-default" data-toggle="modal" data-target="#myModal" href="">
+            Get a Free Online Evaluation  &raquo;
+        </a>
+    </p>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-4">
+        <p class="lead">Register now for <span class="text-success">FREE</span></p>
+        <ul class="list-unstyled" style="line-height: 2">
+            <li><span class="fa fa-check text-success"></span> Obtain results of benefits estimator</li>
+            <li><span class="fa fa-check text-success"></span> Online access to member's portal</li>
+            <li><span class="fa fa-check text-success"></span> Access to DBQ Applications</li>
+            <li><span class="fa fa-check text-success"></span> In-depth benefit calculations</li>
+            <li><span class="fa fa-check text-success"></span> Automatic completed DBQ applications</li>
+        </ul>
+        <p><a href="/Account/Login" class="btn btn-info btn-block">Yes please, register now!</a></p>
+    </div>
+    <div class="col-lg-8">
+        <h2>Why use Valued Veteran Consulting Services?</h2>
+        <p>We have assisted over 10,000 veterans successfully obtain large rating increases.  First online service solely dedicated to assisting Veterans with building their disability file paperwork.</p>
+        <p><a class="btn btn-default" href="/Home/LearnMore">Learn more &raquo;</a></p>
+
+    </div>
+</div>
+
+@*<div class="col-xs-6">
+    <p class="lead">Register now for <span class="text-success">FREE</span></p>
+    <ul class="list-unstyled" style="line-height: 2">
+        <li><span class="fa fa-check text-success"></span> Obtain results of benefits estimator</li>
+        <li><span class="fa fa-check text-success"></span> Online access to member's portal</li>
+        <li><span class="fa fa-check text-success"></span> Access to DBQ Applications</li>
+        <li><span class="fa fa-check text-success"></span> In-depth benefit calculations</li>
+        <li><span class="fa fa-check text-success"></span> Automatic completed DBQ applications</li>
+        <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+    </ul>
+    <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+</div>*@
+@*<div class="col-lg-6">
+            <h2>Why use Valued Veteran Consulting Services?</h2>
+            <p>We have assisted over 10,000 veterans successfully obtain large rating increases.  First online service solely dedicated to assisting Veterans with building their disability file paperwork.</p>
+            <p><a class="btn btn-default" href="/Home/LearnMore">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Valued Veteran</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-mini-container">
+
+                            <h1>Free Evaluation Form</h1>
+                            <p>Check all that apply</p>
+                            <form class="form-mini" method="post" action="#">
+                                <div class="form-row">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span data-toggle="tooltip" data-placement="right" title="Check the box if this the first time filing with the VA">It's my first time filing with the VA</span>
+                                    </label>
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span data-toggle="tooltip" data-placement="right" title="Check the box if you have a claim with the VA">I already have a claim in with the VA</span>
+                                    </label>
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span data-toggle="tooltip" data-placement="right" title="Check the box if you have an active appeal with the VA">I have an active appeal with the VA</span>
+                                    </label>
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" name="active" id="active" value="1">
+                                        <span data-toggle="tooltip" data-placement="right" title="Check the box if you have a percent rating with the VA">I currently have a rating from the VA</span>
+                                    </label>
+                                    @*<div id="active_sub" class="collapse" >
+                                             <span>What is your current percent rating?</span>
+                                             <input type="text" class="">
+                                        </div>*@
+                                    <div id="active_sub" class="collapse">
+                                        <label class="sr-only" for="exampleInputAmount">Rating (in percent)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">%</div>
+                                            <input type="text" class="input-group-lg" id="exampleInputAmount" placeholder="Rating">
+
+                                        </div>
+                                    </div>
+                                    @*<div style='margin-top: 10px;'>
+                                            Percentage
+                                        </div>
+                                        <div style='margin-top: 3px;' id='percentageInput'>
+                                        </div>*@
+                                </div>
+                                @*<div class="form-row form-last-row">
+                                        <button type="submit" data-toggle="modal" data-target="#myModal">Submit</button>
+                                    </div>*@
+                                @*<div class="modal-footer">
+                                    <a class="btn btn-default" href="/Account/Login">Submit &raquo;</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>*@
+                                <p>You will see the estimation once you submit and sign up for an account.</p>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <a class="btn btn-default" href="/Account/Login">Submit &raquo;</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // assign function to onclick property of checkbox
+document.getElementById('active').onclick = function () {
+    // call toggleSub when checkbox clicked
+    // toggleSub args: checkbox clicked on (this), id of element to show/hide
+    toggleSub(this, 'active_sub');
+};
+
+// called onclick of checkbox
+function toggleSub(box, id) {
+    // get reference to related content to display/hide
+    var el = document.getElementById(id);
+
+    if (box.checked) {
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+    }
+}
+
+</script>

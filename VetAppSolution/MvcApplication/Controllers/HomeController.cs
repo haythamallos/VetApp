@@ -12,9 +12,9 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
-        [Route("GetStarted", Name = "GetStarted")]
         public ActionResult GetStarted()
         {
+            ViewBag.Message = "Get  page.";
             return View();
         }
     }
