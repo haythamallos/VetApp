@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -32,14 +33,22 @@ namespace RESTUtilLib
 
             return request;
         }
-        public static HttpWebRequest createPostRequest(string url, string postData, string method, string contenttype)
+
+        public static HttpWebRequest createPostRequest(string url, string postData, string method, List<KeyValuePair<string, string>> Headers)
         {
             HttpWebRequest request = null;
             Uri uri = new Uri(url);
             request = (HttpWebRequest)WebRequest.Create(uri);
             request.Method = method;
-            request.ContentType = contenttype;
+            request.ContentType = "application/json";
             request.ContentLength = postData.Length;
+            if (Headers != null)
+            {
+                foreach (var element in Headers)
+                {
+                    request.Headers.Add(element.Key, element.Value);
+                }
+            }
             using (Stream writeStream = request.GetRequestStream())
             {
                 UTF8Encoding encoding = new UTF8Encoding();

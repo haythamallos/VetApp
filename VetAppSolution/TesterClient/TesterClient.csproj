@@ -96,6 +96,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Proxy\Proxy.csproj">
+      <Project>{727a8f52-c841-401c-b8be-9aab333fc01d}</Project>
+      <Name>Proxy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RESTUtilLib\RESTUtilLib.csproj">
       <Project>{d4a8e22b-766e-43fb-a3dd-54c2fd95084c}</Project>
       <Name>RESTUtilLib</Name>

@@ -51,41 +51,6 @@ ELSE
 
 go
 
-/*******************************************************************************
-**		Change History
-*******************************************************************************
-**		Date:		Author:		Description:
-**		9/7/16		HA		Created
-*******************************************************************************/
-IF EXISTS (SELECT *
-           FROM   sysobjects
-           WHERE  type = 'U'
-                  AND name = 'login_role')
-  BEGIN
-      PRINT 'Dropping Table login_role'
-
-      DROP TABLE login_role
-  END
-
-go
-
-CREATE TABLE login_role
-  (
-     login_role_id NUMERIC(10) NOT NULL PRIMARY KEY,
-     date_created DATETIME NULL,
-     code         NVARCHAR(255) NULL,
-     description  NVARCHAR(255) NULL,
-     visible_code NVARCHAR(255) NULL
-  )
-
-go
-
-IF Object_id('login_role') IS NOT NULL
-  PRINT '<<< CREATED TABLE login_role >>>'
-ELSE
-  PRINT '<<< FAILED CREATING TABLE login_role >>>'
-
-go
 
 /*******************************************************************************
 **		Change History
@@ -96,35 +61,33 @@ go
 IF EXISTS (SELECT *
            FROM   sysobjects
            WHERE  type = 'U'
-                  AND name = 'login')
+                  AND name = 'member')
   BEGIN
-      PRINT 'Dropping Table login'
+      PRINT 'Dropping Table member'
 
-      DROP TABLE login
+      DROP TABLE member
   END
 
 go
 
-CREATE TABLE login
+CREATE TABLE member
   (
-     login_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
-	 login_role_id        NUMERIC(10) NULL,
+     member_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
      date_created      DATETIME NULL,
      date_modified     DATETIME NULL,
-     loginname        NVARCHAR(255) NULL,
-     password_encrypted    NVARCHAR(255) NULL,
-     encryption_algorithm    NVARCHAR(255) NULL,
-	 welcome_email_sent                   BIT NULL,
-	 is_active                   BIT NULL,
-     num_of_tries                 INT NULL
+     firstname        NVARCHAR(255) NULL,
+     middlename        NVARCHAR(255) NULL,
+     lastname        NVARCHAR(255) NULL,
+     profileimageurl        NVARCHAR(255) NULL,
+	 is_disabled                   BIT NULL
   )
 
 go
 
-IF Object_id('login') IS NOT NULL
-  PRINT '<<< CREATED TABLE login >>>'
+IF Object_id('member') IS NOT NULL
+  PRINT '<<< CREATED TABLE member >>>'
 ELSE
-  PRINT '<<< FAILED CREATING TABLE login >>>'
+  PRINT '<<< FAILED CREATING TABLE member >>>'
 
 go
 /******************************************************************************
@@ -147,3 +110,287 @@ INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (3, GETDATE(),
 INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (4, GETDATE(), '7b6a27958fef4ddd99d652e432e564a7', '');
 INSERT INTO [Apikey] (ApikeyId, CreatedDate, Token, Notes) VALUES (5, GETDATE(), '5d1c6e75feff40b08ed5966d28df0db9', '');
 GO
+
+
+
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberExist >>>>'
+	DROP PROCEDURE [dbo].[spMemberExist]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberExist
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spMemberExist
+(
+@MemberID        NUMERIC(10) = 0,
+@COUNT          INT = 0 OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+SELECT @COUNT = COUNT(member_id) 
+FROM [member] 
+WHERE member_id = @MemberID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberExist >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberExist >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberLoad >>>>'
+	DROP PROCEDURE [dbo].[spMemberLoad]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberLoad
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spMemberLoad
+(
+@MemberID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- select record(s) with specified id
+
+SELECT  [member_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [profileimageurl], [is_disabled] 
+FROM [member] 
+WHERE member_id = @MemberID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberLoad >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberLoad >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberUpdate >>>>'
+	DROP PROCEDURE [dbo].[spMemberUpdate]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberUpdate
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spMemberUpdate
+(
+	@MemberID                  NUMERIC(10) = 0,
+	@DateModified              DATETIME = NULL,
+	@Firstname                 NVARCHAR(255) = NULL,
+	@Middlename                NVARCHAR(255) = NULL,
+	@Lastname                  NVARCHAR(255) = NULL,
+	@Profileimageurl           NVARCHAR(255) = NULL,
+	@IsDisabled                NUMERIC(1,0) = 0,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+UPDATE [member] SET 
+	[date_modified] = @DateModified,
+	[firstname] = @Firstname,
+	[middlename] = @Middlename,
+	[lastname] = @Lastname,
+	[profileimageurl] = @Profileimageurl,
+	[is_disabled] = @IsDisabled
+WHERE member_id = @MemberID
+
+-- return ID for updated record
+SELECT @PKID = @MemberID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberUpdate >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberUpdate >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberDelete >>>>'
+	DROP PROCEDURE [dbo].[spMemberDelete]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberDelete
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spMemberDelete
+(
+@MemberID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+DELETE FROM [member] 
+WHERE member_id = @MemberID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberDelete >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberDelete >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberInsert >>>>'
+	DROP PROCEDURE [dbo].[spMemberInsert]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberInsert
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spMemberInsert
+(
+	@MemberID                  NUMERIC(10) = 0,
+	@DateCreated               DATETIME = NULL,
+	@Firstname                 NVARCHAR(255) = NULL,
+	@Middlename                NVARCHAR(255) = NULL,
+	@Lastname                  NVARCHAR(255) = NULL,
+	@Profileimageurl           NVARCHAR(255) = NULL,
+	@IsDisabled                NUMERIC(1,0) = 0,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+INSERT INTO [member]
+(
+	[date_created],
+	[firstname],
+	[middlename],
+	[lastname],
+	[profileimageurl],
+	[is_disabled]
+)
+ VALUES 
+(
+	@DateCreated,
+	@Firstname,
+	@Middlename,
+	@Lastname,
+	@Profileimageurl,
+	@IsDisabled
+)
+
+
+-- return ID for new record
+SELECT @PKID = SCOPE_IDENTITY()
+
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberInsert >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberInsert >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spMemberEnum >>>>'
+	DROP PROCEDURE [dbo].[spMemberEnum]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spMemberEnum
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		10/20/2016		HA		Created
+*******************************************************************************/
+
+
+
+
+CREATE PROCEDURE spMemberEnum
+	@MemberID                  NUMERIC(10) = 0,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+    	@BeginDateModified         DATETIME = NULL,
+    	@EndDateModified           DATETIME = NULL,
+	@Firstname                 NVARCHAR(255) = NULL,
+	@Middlename                NVARCHAR(255) = NULL,
+	@Lastname                  NVARCHAR(255) = NULL,
+	@Profileimageurl           NVARCHAR(255) = NULL,
+	@IsDisabled                NUMERIC(1,0) = NULL,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
+AS
+    	SET NOCOUNT ON
+
+
+      SELECT  [member_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [profileimageurl], [is_disabled]
+      FROM [member] 
+      WHERE ((@MemberID = 0) OR ([member_id] LIKE @MemberID))
+      AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
+      AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
+      AND ((@BeginDateModified IS NULL) OR ([date_modified] >= @BeginDateModified))
+      AND ((@EndDateModified IS NULL) OR ([date_modified] <= @EndDateModified))
+      AND ((@Firstname IS NULL) OR ([firstname] LIKE @Firstname))
+      AND ((@Middlename IS NULL) OR ([middlename] LIKE @Middlename))
+      AND ((@Lastname IS NULL) OR ([lastname] LIKE @Lastname))
+      AND ((@Profileimageurl IS NULL) OR ([profileimageurl] LIKE @Profileimageurl))
+      AND ((@IsDisabled IS NULL) OR ([is_disabled] LIKE @IsDisabled))
+ ORDER BY [member_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
+GO
+IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[spMemberEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure dbo.spMemberEnum >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure dbo.spMemberEnum >>>'
+GO
+

@@ -1,0 +1,3 @@
+- Make namespace as part of the UI
+- Make sure to create ErrorCode class for data access layer.
+- Make sure to include Column.cs class as part of Common project.

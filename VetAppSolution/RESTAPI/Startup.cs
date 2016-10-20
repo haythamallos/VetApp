@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using RESTAPI.Middleware;
 using RESTAPI.Repository;
+using RESTAPI.Models;
 
 namespace RESTAPI
 {
@@ -36,6 +37,8 @@ namespace RESTAPI
             services.AddMemoryCache();
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddSingleton<IUserRepository, UserRepository>();
+
 
         }
 
