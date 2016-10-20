@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using RESTAPI.Models;
 using Microsoft.Extensions.Options;
-using RESTAPI.Facade;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 

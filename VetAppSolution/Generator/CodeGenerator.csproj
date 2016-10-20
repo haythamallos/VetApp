@@ -196,20 +196,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessFacadeLayer\BusinessFacadeLayer.csproj">
-      <Project>{4736b595-881c-4f86-a200-3d3adebf35f8}</Project>
-      <Name>BusinessFacadeLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{0602a04f-e7b4-47b9-a1f6-f193ee6b3374}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{e26ad610-36a6-4e1a-8de4-c134394ae775}</Project>
-      <Name>DataAccessLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
