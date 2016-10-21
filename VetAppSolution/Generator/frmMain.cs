@@ -1,6 +1,5 @@
 using FileHelpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -239,7 +238,7 @@ namespace CodeGenerator
             // 
             // txtOutput
             // 
-            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutput.Location = new System.Drawing.Point(747, 68);
             this.txtOutput.Multiline = true;
@@ -565,7 +564,7 @@ namespace CodeGenerator
             // 
             // lblOutput
             // 
-            this.lblOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOutput.BackColor = System.Drawing.Color.Transparent;
             this.lblOutput.Location = new System.Drawing.Point(743, 50);
@@ -1452,7 +1451,7 @@ namespace CodeGenerator
                 sb.Append("\n");
                 sb.Append("            " + li + " " + liPas + " = new " + li + "() { " + li + "ID = pLng" + li + "ID };");
                 sb.Append("\n");
-                sb.Append("            _log(\"GET\", \"Received Get Request " + li + "\");");
+                //sb.Append("            _log(\"GET\", \"Received Get Request " + li + "\");");
                 sb.Append("\n");
                 sb.Append("            bool bConn = false;");
                 sb.Append("\n");
@@ -1464,13 +1463,13 @@ namespace CodeGenerator
                 sb.Append("\n");
                 sb.Append("                Bus" + li + " bus" + li + " = null;");
                 sb.Append("\n");
-                sb.Append("                bus" + li + " = new Bus" + li + "(conn, _config);");
+                sb.Append("                bus" + li + " = new Bus" + li + "(conn);");
                 sb.Append("\n");
                 sb.Append("                bus" + li + ".Load(" + liPas + ");");
                 sb.Append("\n");
                 sb.Append("                // close the db connection");
                 sb.Append("\n");
-                sb.Append("                bConn = _pool.CloseConnection(conn);");
+                sb.Append("                bConn = CloseConnection(conn);");
                 sb.Append("\n");
                 sb.Append("                _hasError = bus" + li + ".HasError;");
                 sb.Append("\n");
@@ -1482,7 +1481,7 @@ namespace CodeGenerator
                 sb.Append("\n");
                 sb.Append("                    ErrorCode error = new ErrorCode();");
                 sb.Append("\n");
-                sb.Append("                    _log(\"ERROR\", error.ToString());");
+                //sb.Append("                    _log(\"ERROR\", error.ToString());");
                 sb.Append("\n");
                 sb.Append("                }");
                 sb.Append("\n");
@@ -1636,13 +1635,13 @@ namespace CodeGenerator
             string dbn = TableName;
             string csn = CamCase(TableName);
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Load]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Load]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Load >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Load]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Load]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -1715,13 +1714,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("");
             sb.Append("\n");
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Load]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Load]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Load >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Load >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Load >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Load >>>'");
             sb.Append("\n");
             sb.Append("GO");
             sb.Append("\n");
@@ -1781,9 +1780,9 @@ namespace CodeGenerator
             sb.Append("	public class Bus" + csn + "\n");
             sb.Append("	{\n");
             sb.Append("		private SqlConnection _conn = null;\n");
-            sb.Append("		private Config _config = null;\n");
-            sb.Append("		private Logger _oLog = null;\n");
-            sb.Append("		private string _strLognameText = \"BusinessAccessLayer-Bus-" + csn + "\";\n");
+            //sb.Append("		private Config _config = null;\n");
+            //sb.Append("		private Logger _oLog = null;\n");
+            //sb.Append("		private string _strLognameText = \"BusinessAccessLayer-Bus-" + csn + "\";\n");
             sb.Append("		private bool _hasError = false;\n");
             sb.Append("		private bool _hasInvalid = false;\n");
             sb.Append("\n");
@@ -1820,13 +1819,13 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			_conn = conn;\n");
             sb.Append("		}\n");
-            sb.Append("		/// <summary>Bus" + csn + " constructor takes SqlConnection object and Config Object</summary>\n");
-            sb.Append("		public Bus" + csn + "(SqlConnection conn, Config pConfig)\n");
-            sb.Append("		{\n");
-            sb.Append("			_conn = conn;\n");
-            sb.Append("			_config = pConfig;\n");
-            sb.Append("			_oLog = new Logger(_strLognameText);\n");
-            sb.Append("		}\n");
+            //sb.Append("		/// <summary>Bus" + csn + " constructor takes SqlConnection object and Config Object</summary>\n");
+            //sb.Append("		public Bus" + csn + "(SqlConnection conn, Config pConfig)\n");
+            //sb.Append("		{\n");
+            //sb.Append("			_conn = conn;\n");
+            ////sb.Append("			_config = pConfig;\n");
+            ////sb.Append("			_oLog = new Logger(_strLognameText);\n");
+            //sb.Append("		}\n");
             sb.Append("\n");
 
             sb.Append("	 /// <summary>\n");
@@ -2206,7 +2205,7 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			" + NS(csn) + " data = null;\n");
             sb.Append("			_arrlstEntities = new ArrayList();\n");
-            sb.Append("			Enum" + csn + " enum" + csn + " = new Enum" + csn + "(_conn, _config);\n");
+            sb.Append("			Enum" + csn + " enum" + csn + " = new Enum" + csn + "(_conn);\n");
 
             sb.Append("			 enum" + csn + ".SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enum" + csn + ".SP_ENUM_NAME;\n");
 
@@ -2299,7 +2298,7 @@ namespace CodeGenerator
 
             sb.Append("			enum" + csn + ".EnumData();\n");
 
-            sb.Append("			_log(\"Get\", enum" + csn + ".ToString());\n");
+            //sb.Append("			_log(\"Get\", enum" + csn + ".ToString());\n");
             sb.Append("			while (enum" + csn + ".hasMoreElements())\n");
             sb.Append("			{\n");
             sb.Append("				data = (" + NS(csn) + ") enum" + csn + ".nextElement();\n");
@@ -2320,11 +2319,11 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			if ( o != null )\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"SAVING\", o.ToString());\n");
+            //sb.Append("				_log(\"SAVING\", o.ToString());\n");
             sb.Append("				o.Save(_conn);\n");
             sb.Append("				if ( o.HasError )\n");
             sb.Append("				{\n");
-            sb.Append("					_log(\"ERROR SAVING\", o.ToString());\n");
+            //sb.Append("     _log(\"ERROR SAVING\", o.ToString());\n");
             sb.Append("					_hasError = true;\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
@@ -2340,11 +2339,11 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			if ( o != null )\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"UPDATING\", o.ToString());\n");
+            //sb.Append("				_log(\"UPDATING\", o.ToString());\n");
             sb.Append("				o.Update(_conn);\n");
             sb.Append("				if ( o.HasError )\n");
             sb.Append("				{\n");
-            sb.Append("					_log(\"ERROR UPDATING\", o.ToString());\n");
+            //sb.Append("     _log(\"ERROR UPDATING\", o.ToString());\n");
             sb.Append("					_hasError = true;\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
@@ -2359,11 +2358,11 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			if ( o != null )\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"LOADING\", o.ToString());\n");
+            //sb.Append("				_log(\"LOADING\", o.ToString());\n");
             sb.Append("				o.Load(_conn);\n");
             sb.Append("				if ( o.HasError )\n");
             sb.Append("				{\n");
-            sb.Append("					_log(\"ERROR LOADING\", o.ToString());\n");
+            //sb.Append("     _log(\"ERROR LOADING\", o.ToString());\n");
             sb.Append("					_hasError = true;\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
@@ -2378,11 +2377,11 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			if ( o != null )\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"DELETING\", o.ToString());\n");
+            //sb.Append("				_log(\"DELETING\", o.ToString());\n");
             sb.Append("				o.Delete(_conn);\n");
             sb.Append("				if ( o.HasError )\n");
             sb.Append("				{\n");
-            sb.Append("					_log(\"ERROR DELETING\", o.ToString());\n");
+            //sb.Append("     _log(\"ERROR DELETING\", o.ToString());\n");
             sb.Append("					_hasError = true;\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
@@ -2398,11 +2397,11 @@ namespace CodeGenerator
             sb.Append("			bool bExist = false;\n");
             sb.Append("			if ( o != null )\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"EXIST\", o.ToString());\n");
+            //sb.Append("				_log(\"EXIST\", o.ToString());\n");
             sb.Append("				bExist = o.Exist(_conn);\n");
             sb.Append("				if ( o.HasError )\n");
             sb.Append("				{\n");
-            sb.Append("					_log(\"ERROR EXIST\", o.ToString());\n");
+            //sb.Append("     _log(\"ERROR EXIST\", o.ToString());\n");
             sb.Append("					_hasError = true;\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
@@ -2434,7 +2433,7 @@ namespace CodeGenerator
             sb.Append("				{\n");
             sb.Append("					" + NS(csn) + " data = null;\n");
             sb.Append("					_arrlstEntities = new ArrayList();\n");
-            sb.Append("					Enum" + csn + " enum" + csn + " = new Enum" + csn + "(_conn, _config);\n");
+            sb.Append("					Enum" + csn + " enum" + csn + " = new Enum" + csn + "(_conn);\n");
             sb.Append("					enum" + csn + ".EnumData();\n");
             sb.Append("					while (enum" + csn + ".hasMoreElements())\n");
             sb.Append("					{\n");
@@ -2765,243 +2764,243 @@ namespace CodeGenerator
                 MessageBox.Show(ee.Message);
             }
 
-            sb.Append("        /// <summary>\n");
-            sb.Append("        ///     Standard Error Logging\n");
-            sb.Append("        ///     <retvalue>void</retvalue>\n");
-            sb.Append("        /// </summary>\n");
-            sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
-            sb.Append("		{\n");
-            sb.Append("			if (_config != null )\n");
-            sb.Append("			{\n");
-            sb.Append("				if (_config.DoLogInfo)\n");
-            sb.Append("				{\n");
-            sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
-            sb.Append("				}\n");
-            sb.Append("			}\n");
-            sb.Append("\n");
-            sb.Append("		}\n");
-            sb.Append("\n");
-            sb.Append("        /// <summary>\n");
-            sb.Append("        ///     Command Line Prompts to get values\n");
-            sb.Append("        ///     <retvalue>void</retvalue>\n");
-            sb.Append("        /// </summary>\n");
-            sb.Append("		public void Prompt(bool GetIdendity, " + NS(csn) + " pRef" + csn + ")\n");
-            sb.Append("		{\n");
-            sb.Append("			try \n");
-            sb.Append("			{\n");
-            sb.Append("				GetIdendity = true;				\n");
-            sb.Append("				if (GetIdendity)\n");
-            sb.Append("				{\n");
-            sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_ID + \":  \");\n");
-            sb.Append("					try\n");
-            sb.Append("					{\n");
-            sb.Append("						pRef" + csn + "." + csn + "ID = long.Parse(Console.ReadLine());\n");
-            sb.Append("					}\n");
-            sb.Append("					catch \n");
-            sb.Append("					{\n");
-            sb.Append("						pRef" + csn + "." + csn + "ID = 0;\n");
-            sb.Append("					}\n");
-            sb.Append("				}\n");
-            sb.Append("\n");
-            //here
-            try
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    if (dr["ProviderType"].ToString() == "29")
-                    {
-                        continue;
-                    }
+            //sb.Append("        /// <summary>\n");
+            //sb.Append("        ///     Standard Error Logging\n");
+            //sb.Append("        ///     <retvalue>void</retvalue>\n");
+            //sb.Append("        /// </summary>\n");
+            //sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
+            //sb.Append("		{\n");
+            //sb.Append("			if (_config != null )\n");
+            //sb.Append("			{\n");
+            //sb.Append("				if (_config.DoLogInfo)\n");
+            //sb.Append("				{\n");
+            //sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
+            //sb.Append("				}\n");
+            //sb.Append("			}\n");
+            //sb.Append("\n");
+            //sb.Append("		}\n");
+            //sb.Append("\n");
+            //sb.Append("        /// <summary>\n");
+            //sb.Append("        ///     Command Line Prompts to get values\n");
+            //sb.Append("        ///     <retvalue>void</retvalue>\n");
+            //sb.Append("        /// </summary>\n");
+            //sb.Append("		public void Prompt(bool GetIdendity, " + NS(csn) + " pRef" + csn + ")\n");
+            //sb.Append("		{\n");
+            //sb.Append("			try \n");
+            //sb.Append("			{\n");
+            //sb.Append("				GetIdendity = true;				\n");
+            //sb.Append("				if (GetIdendity)\n");
+            //sb.Append("				{\n");
+            //sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_ID + \":  \");\n");
+            //sb.Append("					try\n");
+            //sb.Append("					{\n");
+            //sb.Append("						pRef" + csn + "." + csn + "ID = long.Parse(Console.ReadLine());\n");
+            //sb.Append("					}\n");
+            //sb.Append("					catch \n");
+            //sb.Append("					{\n");
+            //sb.Append("						pRef" + csn + "." + csn + "ID = 0;\n");
+            //sb.Append("					}\n");
+            //sb.Append("				}\n");
+            //sb.Append("\n");
+            ////here
+            //try
+            //{
+            //    foreach (DataRow dr in dt.Rows)
+            //    {
+            //        if (dr["ProviderType"].ToString() == "29")
+            //        {
+            //            continue;
+            //        }
 
-                    if (dr["ColumnName"].ToString() == dbn + "_id") continue;
-                    switch (dr["ProviderType"].ToString())
-                    {
-                        case "22": // VARCHAR
-                            sb.Append("\n");
-                            sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
+            //        if (dr["ColumnName"].ToString() == dbn + "_id") continue;
+            //        switch (dr["ProviderType"].ToString())
+            //        {
+            //            case "22": // VARCHAR
+            //                sb.Append("\n");
+            //                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
 
-                        case "12": // NVARCHAR
-                            sb.Append("\n");
-                            sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
+            //            case "12": // NVARCHAR
+            //                sb.Append("\n");
+            //                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
 
-                        case "21": // VARBINARY
-                            sb.Append("             // Cannot reliably convert byte[] to string.\n");
-                            //    sb.Append("\n");
-                            //    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            //    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
+            //            case "21": // VARBINARY
+            //                sb.Append("             // Cannot reliably convert byte[] to string.\n");
+            //                //    sb.Append("\n");
+            //                //    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                //    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
 
-                        case "18": // TEXT
-                            sb.Append("\n");
-                            sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
+            //            case "18": // TEXT
+            //                sb.Append("\n");
+            //                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
 
-                        case "11": // NTEXT
-                            sb.Append("\n");
-                            sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
+            //            case "11": // NTEXT
+            //                sb.Append("\n");
+            //                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
 
-                        case "20":
-                        case "2":
-                        case "16":
-                        case "8":
-                        case "5": // NUMERIC
-                            if (dr["ColumnName"].ToString().ToLower().EndsWith("_id"))
-                            {
-                                if (dr["ColumnName"].ToString() == (dbn + "_id"))
-                                {
-                                    // NUMERIC(10)
-                                    sb.Append("\n");
-                                    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                                    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
-                                }
-                                else
-                                {
-                                    // NUMERIC(10)
-                                    sb.Append("\n");
-                                    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                                    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
-                                }
-                            }
-                            else if (dr["NumericPrecision"].ToString() == "1" || dr["ProviderType"].ToString() == "16" || dr["ProviderType"].ToString() == "2" || dr["ProviderType"].ToString() == "20")
-                            {
-                                // BOOLEAN
-                                sb.Append("\n");
-                                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Convert.ToBoolean(Console.ReadLine());\n");
-                            }
-                            else if (dr["NumericScale"].ToString() == "0" || dr["NumericScale"].ToString() == "255")
-                            {
-                                // INT / LONG
-                                sb.Append("\n");
-                                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
-                            }
-                            else
-                            {
-                                // DECIMAL
-                                sb.Append("\n");
-                                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                                sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Convert.ToSingle(Console.ReadLine());\n");
-                            }
-                            break;
+            //            case "20":
+            //            case "2":
+            //            case "16":
+            //            case "8":
+            //            case "5": // NUMERIC
+            //                if (dr["ColumnName"].ToString().ToLower().EndsWith("_id"))
+            //                {
+            //                    if (dr["ColumnName"].ToString() == (dbn + "_id"))
+            //                    {
+            //                        // NUMERIC(10)
+            //                        sb.Append("\n");
+            //                        sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                        sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
+            //                    }
+            //                    else
+            //                    {
+            //                        // NUMERIC(10)
+            //                        sb.Append("\n");
+            //                        sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                        sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
+            //                    }
+            //                }
+            //                else if (dr["NumericPrecision"].ToString() == "1" || dr["ProviderType"].ToString() == "16" || dr["ProviderType"].ToString() == "2" || dr["ProviderType"].ToString() == "20")
+            //                {
+            //                    // BOOLEAN
+            //                    sb.Append("\n");
+            //                    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Convert.ToBoolean(Console.ReadLine());\n");
+            //                }
+            //                else if (dr["NumericScale"].ToString() == "0" || dr["NumericScale"].ToString() == "255")
+            //                {
+            //                    // INT / LONG
+            //                    sb.Append("\n");
+            //                    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = (long)Convert.ToInt32(Console.ReadLine());\n");
+            //                }
+            //                else
+            //                {
+            //                    // DECIMAL
+            //                    sb.Append("\n");
+            //                    sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                    sb.Append("				pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = Convert.ToSingle(Console.ReadLine());\n");
+            //                }
+            //                break;
 
-                        case "15": //SMALLDATETIME
-                            sb.Append("				try\n");
-                            sb.Append("				{\n");
-                            sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = DateTime.Parse(Console.ReadLine());\n");
-                            sb.Append("				}\n");
-                            sb.Append("				catch \n");
-                            sb.Append("				{\n");
-                            sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = new DateTime();\n");
-                            sb.Append("				}\n");
-                            break;
+            //            case "15": //SMALLDATETIME
+            //                sb.Append("				try\n");
+            //                sb.Append("				{\n");
+            //                sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = DateTime.Parse(Console.ReadLine());\n");
+            //                sb.Append("				}\n");
+            //                sb.Append("				catch \n");
+            //                sb.Append("				{\n");
+            //                sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = new DateTime();\n");
+            //                sb.Append("				}\n");
+            //                break;
 
-                        case "4": //DATETETIME
-                            sb.Append("				try\n");
-                            sb.Append("				{\n");
-                            sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = DateTime.Parse(Console.ReadLine());\n");
-                            sb.Append("				}\n");
-                            sb.Append("				catch \n");
-                            sb.Append("				{\n");
-                            sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = new DateTime();\n");
-                            sb.Append("				}\n");
-                            break;
+            //            case "4": //DATETETIME
+            //                sb.Append("				try\n");
+            //                sb.Append("				{\n");
+            //                sb.Append("					Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = DateTime.Parse(Console.ReadLine());\n");
+            //                sb.Append("				}\n");
+            //                sb.Append("				catch \n");
+            //                sb.Append("				{\n");
+            //                sb.Append("					pRef" + csn + "." + CamCase(dr["ColumnName"].ToString()) + " = new DateTime();\n");
+            //                sb.Append("				}\n");
+            //                break;
 
-                        default: // OTHER?
-                            MessageBox.Show(dr["ColumnName"].ToString() + " in table: " + dbn + " has an unknown type");
-                            sb.Append("\n");
-                            sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
-                            sb.Append("				" + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //            default: // OTHER?
+            //                MessageBox.Show(dr["ColumnName"].ToString() + " in table: " + dbn + " has an unknown type");
+            //                sb.Append("\n");
+            //                sb.Append("				Console.WriteLine(" + NS(csn) + ".TAG_" + dr["ColumnName"].ToString().ToUpper() + " + \":  \");\n");
+            //                sb.Append("				" + CamCase(dr["ColumnName"].ToString()) + " = Console.ReadLine();\n");
+            //                break;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
 
-            sb.Append("\n");
-            sb.Append("			}\n");
-            sb.Append("			catch (Exception e) \n");
-            sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
-            sb.Append("			}\n");
-            sb.Append("		}\n");
-            sb.Append("\n");
-            sb.Append("		/// <summary>Unit Testing: Save, Delete, Update, Exist, Load and ToXml</summary>\n");
-            sb.Append("		public void Test()\n");
-            sb.Append("		{\n");
-            sb.Append("			try \n");
-            sb.Append("			{\n");
-            sb.Append("				Console.WriteLine(\"What would you like to do?\");\n");
-            sb.Append("				Console.WriteLine(\"1.  Save.\");\n");
-            sb.Append("				Console.WriteLine(\"2.  Get All.\");\n");
-            sb.Append("				Console.WriteLine(\"q.  Quit.\");\n");
-            sb.Append("				\n");
-            sb.Append("				string strAns = \"\";\n");
-            sb.Append("\n");
-            sb.Append("				strAns = Console.ReadLine();\n");
-            sb.Append("				if (strAns != \"q\")\n");
-            sb.Append("				{	\n");
-            sb.Append("					int nAns = 0;\n");
-            sb.Append("					nAns = int.Parse(strAns);\n");
-            sb.Append("					switch(nAns)\n");
-            sb.Append("					{\n");
-            sb.Append("						case 1:\n");
-            sb.Append("							// save\n");
-            sb.Append("							" + NS(csn) + " o = null;\n");
-            sb.Append("							o = new " + NS(csn) + "(_config);\n");
-            sb.Append("							Console.WriteLine(\"Save:  \");\n");
-            sb.Append("							Prompt(true, o);\n");
-            sb.Append("							Save(o);\n");
-            sb.Append("							Console.WriteLine(\"Has error:  \" + HasError.ToString() );\n");
-            sb.Append("							Console.WriteLine(\"Has invalid:  \" + HasInvalid.ToString() );\n");
-            sb.Append("							Console.WriteLine(\"Column Errors Count:  \" + ColumnErrors.Count.ToString() );\n");
-            sb.Append("							if ( ColumnErrors.Count > 0 )\n");
-            sb.Append("							{\n");
-            sb.Append("								foreach (Column item in ColumnErrors)\n");
-            sb.Append("								{\n");
-            sb.Append("									Console.WriteLine(\"Column Errors Count:  \" + item.ToString() );\n");
-            sb.Append("								}\n");
-            sb.Append("							}\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 2:\n");
-            sb.Append("							ArrayList " + csn + " = null;\n");
-            sb.Append("							" + csn + " = Get();\n");
-            sb.Append("							Console.WriteLine(\"" + csn + " count:  \" + " + csn + "s.Count.ToString() );\n");
-            sb.Append("							foreach (" + NS(csn) + " item in " + csn + "s)\n");
-            sb.Append("							{\n");
-            sb.Append("								Console.WriteLine(\"-------\\n\");\n");
-            sb.Append("								Console.WriteLine(item.ToString() );\n");
-            sb.Append("							}\n");
-            sb.Append("							break;\n");
-            sb.Append("						default:\n");
-            sb.Append("							Console.WriteLine(\"Undefined option.\");\n");
-            sb.Append("							break;\n");
-            sb.Append("					}\n");
-            sb.Append("				}\n");
-            sb.Append("			}\n");
-            sb.Append("			catch (Exception e) \n");
-            sb.Append("			{\n");
-            sb.Append("				Console.WriteLine(e.ToString());\n");
-            sb.Append("				Console.WriteLine(e.StackTrace);\n");
-            sb.Append("				Console.ReadLine();\n");
-            sb.Append("			}\n");
-            sb.Append("		}\n");
-            sb.Append("\n");
+            //sb.Append("\n");
+            //sb.Append("			}\n");
+            //sb.Append("			catch (Exception e) \n");
+            //sb.Append("			{\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("			}\n");
+            //sb.Append("		}\n");
+            //sb.Append("\n");
+            //sb.Append("		/// <summary>Unit Testing: Save, Delete, Update, Exist, Load and ToXml</summary>\n");
+            //sb.Append("		public void Test()\n");
+            //sb.Append("		{\n");
+            //sb.Append("			try \n");
+            //sb.Append("			{\n");
+            //sb.Append("				Console.WriteLine(\"What would you like to do?\");\n");
+            //sb.Append("				Console.WriteLine(\"1.  Save.\");\n");
+            //sb.Append("				Console.WriteLine(\"2.  Get All.\");\n");
+            //sb.Append("				Console.WriteLine(\"q.  Quit.\");\n");
+            //sb.Append("				\n");
+            //sb.Append("				string strAns = \"\";\n");
+            //sb.Append("\n");
+            //sb.Append("				strAns = Console.ReadLine();\n");
+            //sb.Append("				if (strAns != \"q\")\n");
+            //sb.Append("				{	\n");
+            //sb.Append("					int nAns = 0;\n");
+            //sb.Append("					nAns = int.Parse(strAns);\n");
+            //sb.Append("					switch(nAns)\n");
+            //sb.Append("					{\n");
+            //sb.Append("						case 1:\n");
+            //sb.Append("							// save\n");
+            //sb.Append("							" + NS(csn) + " o = null;\n");
+            //sb.Append("							o = new " + NS(csn) + "(_config);\n");
+            //sb.Append("							Console.WriteLine(\"Save:  \");\n");
+            //sb.Append("							Prompt(true, o);\n");
+            //sb.Append("							Save(o);\n");
+            //sb.Append("							Console.WriteLine(\"Has error:  \" + HasError.ToString() );\n");
+            //sb.Append("							Console.WriteLine(\"Has invalid:  \" + HasInvalid.ToString() );\n");
+            //sb.Append("							Console.WriteLine(\"Column Errors Count:  \" + ColumnErrors.Count.ToString() );\n");
+            //sb.Append("							if ( ColumnErrors.Count > 0 )\n");
+            //sb.Append("							{\n");
+            //sb.Append("								foreach (Column item in ColumnErrors)\n");
+            //sb.Append("								{\n");
+            //sb.Append("									Console.WriteLine(\"Column Errors Count:  \" + item.ToString() );\n");
+            //sb.Append("								}\n");
+            //sb.Append("							}\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 2:\n");
+            //sb.Append("							ArrayList " + csn + " = null;\n");
+            //sb.Append("							" + csn + " = Get();\n");
+            //sb.Append("							Console.WriteLine(\"" + csn + " count:  \" + " + csn + "s.Count.ToString() );\n");
+            //sb.Append("							foreach (" + NS(csn) + " item in " + csn + "s)\n");
+            //sb.Append("							{\n");
+            //sb.Append("								Console.WriteLine(\"-------\\n\");\n");
+            //sb.Append("								Console.WriteLine(item.ToString() );\n");
+            //sb.Append("							}\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						default:\n");
+            //sb.Append("							Console.WriteLine(\"Undefined option.\");\n");
+            //sb.Append("							break;\n");
+            //sb.Append("					}\n");
+            //sb.Append("				}\n");
+            //sb.Append("			}\n");
+            //sb.Append("			catch (Exception e) \n");
+            //sb.Append("			{\n");
+            //sb.Append("				Console.WriteLine(e.ToString());\n");
+            //sb.Append("				Console.WriteLine(e.StackTrace);\n");
+            //sb.Append("				Console.ReadLine();\n");
+            //sb.Append("			}\n");
+            //sb.Append("		}\n");
+            //sb.Append("\n");
             sb.Append("	}\n");
             sb.Append("}\n");
             sb.Append(" // END OF CLASS FILE");
@@ -3086,13 +3085,13 @@ namespace CodeGenerator
 
             sb = new System.Text.StringBuilder();
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Enum >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Enum]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Enum]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -3511,13 +3510,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("GO\n");
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Enum >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Enum >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Enum >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Enum >>>'");
             sb.Append("\n");
             sb.Append("GO\n\n");
 
@@ -3545,13 +3544,13 @@ namespace CodeGenerator
 
             sb = new System.Text.StringBuilder();
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Enum >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Enum]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Enum]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -3695,13 +3694,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("GO\n");
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Enum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Enum >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Enum >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Enum >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Enum >>>'");
             sb.Append("\n");
             sb.Append("GO\n\n");
 
@@ -3882,13 +3881,13 @@ namespace CodeGenerator
             string dbn = TableName;
             string csn = CamCase(TableName);
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Exist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Exist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Exist >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Exist]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Exist]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -3939,13 +3938,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("");
             sb.Append("\n");
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Exist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Exist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Exist >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Exist >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Exist >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Exist >>>'");
             sb.Append("\n");
             sb.Append("GO");
             sb.Append("\n");
@@ -4098,10 +4097,10 @@ namespace CodeGenerator
 
             sb.Append("\n");
 
-            sb.Append("		private Config _config = null;\n");
+            //sb.Append("		private Config _config = null;\n");
             sb.Append("		private ErrorCode _errorCode = null;\n");
-            sb.Append("		private Logger _oLog = null;\n");
-            sb.Append("		private string _strLognameText = \"DataAccessLayer-Data-" + csn + "\";\n");
+            //sb.Append("		private Logger _oLog = null;\n");
+            //sb.Append("		private string _strLognameText = \"DataAccessLayer-Data-" + csn + "\";\n");
             sb.Append("		private bool _hasError = false;\n");
             sb.Append("		private static DateTime dtNull = new DateTime();\n");
             sb.Append("\n");
@@ -4326,12 +4325,12 @@ namespace CodeGenerator
             sb.Append("		public " + csn + "()\n");
             sb.Append("		{\n");
             sb.Append("		}\n");
-            sb.Append("		/// <summary>" + csn + " constructor takes a Config</summary>\n");
-            sb.Append("		public " + csn + "(Config pConfig)\n");
-            sb.Append("		{\n");
-            sb.Append("			_config = pConfig;\n");
-            sb.Append("			_oLog = new Logger(_strLognameText);\n");
-            sb.Append("		}\n");
+            //sb.Append("		/// <summary>" + csn + " constructor takes a Config</summary>\n");
+            //sb.Append("		public " + csn + "(Config pConfig)\n");
+            //sb.Append("		{\n");
+            ////sb.Append("			_config = pConfig;\n");
+            ////sb.Append("			_oLog = new Logger(_strLognameText);\n");
+            //sb.Append("		}\n");
             sb.Append("		/// <summary>" + csn + " constructor takes " + csn + "ID and a SqlConnection</summary>\n");
             sb.Append("		public " + csn + "(long l, SqlConnection conn) \n");
             sb.Append("		{\n");
@@ -4342,17 +4341,17 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
             sb.Append("\n");
             sb.Append("		}\n");
             sb.Append("		/// <summary>" + csn + " Constructor takes pStrData and Config</summary>\n");
-            sb.Append("		public " + csn + "(string pStrData, Config pConfig)\n");
+            sb.Append("		public " + csn + "(string pStrData)\n");
             sb.Append("		{\n");
-            sb.Append("			_config = pConfig;\n");
-            sb.Append("			_oLog = new Logger(_strLognameText);\n");
+            //sb.Append("			_config = pConfig;\n");
+            //sb.Append("			_oLog = new Logger(_strLognameText);\n");
             sb.Append("			Parse(pStrData);\n");
             sb.Append("		}\n");
             sb.Append("		/// <summary>" + csn + " Constructor takes SqlDataReader</summary>\n");
@@ -4473,7 +4472,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4708,12 +4707,12 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			try\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"LOAD\", ToString());\n");
+            //sb.Append("				_log(\"LOAD\", ToString());\n");
             sb.Append("				sqlLoad(conn);\n");
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4725,7 +4724,7 @@ namespace CodeGenerator
             sb.Append("			bool bExist = false;\n");
             sb.Append("			try\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"UPDATE\", ToString());\n");
+            //sb.Append("				_log(\"UPDATE\", ToString());\n");
             sb.Append("				bExist = Exist(conn);\n");
             sb.Append("				if (bExist)\n");
             sb.Append("				{\n");
@@ -4733,12 +4732,12 @@ namespace CodeGenerator
             sb.Append("				}\n");
             sb.Append("				else\n");
             sb.Append("				{\n");
-            sb.Append("				_log(\"NOT_EXIST\", ToString());\n");
+            //sb.Append("				_log(\"NOT_EXIST\", ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4750,7 +4749,7 @@ namespace CodeGenerator
             sb.Append("			{\n");
             sb.Append("				bool bExist = false;\n");
             sb.Append("\n");
-            sb.Append("				_log(\"INSERT\", ToString());\n");
+            //sb.Append("				_log(\"INSERT\", ToString());\n");
 
             sb.Append("				bExist = Exist(conn);\n");
             sb.Append("				if (!bExist)\n");
@@ -4759,13 +4758,13 @@ namespace CodeGenerator
             sb.Append("				}\n");
             sb.Append("				else\n");
             sb.Append("				{\n");
-            sb.Append("				_log(\"ALREADY_EXISTS\", ToString());\n");
+            //sb.Append("				_log(\"ALREADY_EXISTS\", ToString());\n");
             sb.Append("					sqlUpdate(conn);\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4776,12 +4775,12 @@ namespace CodeGenerator
             sb.Append("		{\n");
             sb.Append("			try\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"DELETE\", ToString());\n");
+            //sb.Append("				_log(\"DELETE\", ToString());\n");
             sb.Append("				sqlDelete(conn);\n");
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4796,7 +4795,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -4950,7 +4949,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -5444,7 +5443,7 @@ namespace CodeGenerator
             sb.Append("				sqlParseResultSet(rdr);\n");
             sb.Append("			}\n");
             sb.Append("			// cleanup\n");
-            sb.Append("			rdr.Close();\n");
+            sb.Append("			rdr.Dispose();\n");
             sb.Append("			rdr = null;\n");
             sb.Append("			param" + csn + "ID = null;\n");
             sb.Append("			cmd = null;\n");
@@ -5610,116 +5609,116 @@ namespace CodeGenerator
 
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		//private\n");
-            sb.Append("		/// <summary>Log errors</summary>\n");
-            sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
-            sb.Append("		{\n");
-            sb.Append("			if (_config != null )\n");
-            sb.Append("			{\n");
-            sb.Append("				if (_config.DoLogInfo)\n");
-            sb.Append("				{\n");
-            sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
-            sb.Append("				}\n");
-            sb.Append("			}\n");
-            sb.Append("\n");
-            sb.Append("		}\n");
-            sb.Append("\n");
-            sb.Append("		/// <summary>Unit Testing: Save, Delete, Update, Exist, Load and ToXml</summary>\n");
-            sb.Append("		public void Test(SqlConnection conn)\n");
-            sb.Append("		{\n");
-            sb.Append("			try \n");
-            sb.Append("			{\n");
-            sb.Append("				Console.WriteLine(\"What would you like to do?\");\n");
-            sb.Append("				Console.WriteLine(\"1.  Save.\");\n");
-            sb.Append("				Console.WriteLine(\"2.  Delete.\");\n");
-            sb.Append("				Console.WriteLine(\"3.  Update.\");\n");
-            sb.Append("				Console.WriteLine(\"4.  Exist.\");\n");
-            sb.Append("				Console.WriteLine(\"5.  Load.\");\n");
-            sb.Append("				Console.WriteLine(\"6.  ToXml.\");\n");
-            sb.Append("				Console.WriteLine(\"q.  Quit.\");\n");
-            sb.Append("				\n");
-            sb.Append("				string strAns = \"\";\n");
-            sb.Append("\n");
-            sb.Append("				strAns = Console.ReadLine();\n");
-            sb.Append("				if (strAns != \"q\")\n");
-            sb.Append("				{	\n");
-            sb.Append("					int nAns = 0;\n");
-            sb.Append("					nAns = int.Parse(strAns);\n");
-            sb.Append("					switch(nAns)\n");
-            sb.Append("					{\n");
-            sb.Append("						case 1:\n");
-            sb.Append("							// insert\n");
-            sb.Append("							Console.WriteLine(\"Save:  \");\n");
-            sb.Append("							Prompt();\n");
-            sb.Append("							Save(conn);\n");
-            sb.Append("							Console.WriteLine(ToString());\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 2:\n");
-            sb.Append("							Console.WriteLine(\"Delete \" + TAG_ID + \":  \");\n");
-            sb.Append("							strAns = Console.ReadLine();\n");
-            sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
-            sb.Append("							Delete(conn);\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 3:\n");
-            sb.Append("							Console.WriteLine(\"Update:  \");\n");
-            sb.Append("							Prompt();\n");
-            sb.Append("							Update(conn);\n");
-            sb.Append("							Console.WriteLine(ToString());\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 4:\n");
-            sb.Append("							Console.WriteLine(\"Exist \" + TAG_ID + \":  \");\n");
-            sb.Append("							strAns = Console.ReadLine();\n");
-            sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
-            sb.Append("							bool bExist = false;\n");
-            sb.Append("							bExist = Exist(conn);\n");
-            sb.Append("							Console.WriteLine(\"Record id \" + " + csn + "ID + \" exist:  \" + bExist.ToString() );\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 5:\n");
-            sb.Append("							Console.WriteLine(\"Load \" + TAG_ID + \":  \");\n");
-            sb.Append("							strAns = Console.ReadLine();\n");
-            sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
-            sb.Append("							Load(conn);\n");
-            sb.Append("							Console.WriteLine(ToString());\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						case 6:\n");
-            sb.Append("							Console.WriteLine(\"ToXml \" + TAG_ID + \":  \");\n");
-            sb.Append("							strAns = Console.ReadLine();\n");
-            sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
-            sb.Append("							Load(conn);\n");
-            sb.Append("							Console.WriteLine(ToXml());\n");
-            sb.Append("							Console.WriteLine(\" \");\n");
-            sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
-            sb.Append("							Console.ReadLine();\n");
-            sb.Append("							break;\n");
-            sb.Append("						default:\n");
-            sb.Append("							Console.WriteLine(\"Undefined option.\");\n");
-            sb.Append("							break;\n");
-            sb.Append("					}\n");
-            sb.Append("				}\n");
-            sb.Append("			}\n");
-            sb.Append("			catch (Exception e) \n");
-            sb.Append("			{\n");
-            sb.Append("				Console.WriteLine(e.ToString());\n");
-            sb.Append("				Console.WriteLine(e.StackTrace);\n");
-            sb.Append("				Console.ReadLine();\n");
-            sb.Append("			}\n");
-            sb.Append("\n");
-            sb.Append("		}		\n");
+            //sb.Append("		//private\n");
+            //sb.Append("		/// <summary>Log errors</summary>\n");
+            //sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
+            //sb.Append("		{\n");
+            //sb.Append("			if (_config != null )\n");
+            //sb.Append("			{\n");
+            //sb.Append("				if (_config.DoLogInfo)\n");
+            //sb.Append("				{\n");
+            //sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
+            //sb.Append("				}\n");
+            //sb.Append("			}\n");
+            //sb.Append("\n");
+            //sb.Append("		}\n");
+            //sb.Append("\n");
+            //sb.Append("		/// <summary>Unit Testing: Save, Delete, Update, Exist, Load and ToXml</summary>\n");
+            //sb.Append("		public void Test(SqlConnection conn)\n");
+            //sb.Append("		{\n");
+            //sb.Append("			try \n");
+            //sb.Append("			{\n");
+            //sb.Append("				Console.WriteLine(\"What would you like to do?\");\n");
+            //sb.Append("				Console.WriteLine(\"1.  Save.\");\n");
+            //sb.Append("				Console.WriteLine(\"2.  Delete.\");\n");
+            //sb.Append("				Console.WriteLine(\"3.  Update.\");\n");
+            //sb.Append("				Console.WriteLine(\"4.  Exist.\");\n");
+            //sb.Append("				Console.WriteLine(\"5.  Load.\");\n");
+            //sb.Append("				Console.WriteLine(\"6.  ToXml.\");\n");
+            //sb.Append("				Console.WriteLine(\"q.  Quit.\");\n");
+            //sb.Append("				\n");
+            //sb.Append("				string strAns = \"\";\n");
+            //sb.Append("\n");
+            //sb.Append("				strAns = Console.ReadLine();\n");
+            //sb.Append("				if (strAns != \"q\")\n");
+            //sb.Append("				{	\n");
+            //sb.Append("					int nAns = 0;\n");
+            //sb.Append("					nAns = int.Parse(strAns);\n");
+            //sb.Append("					switch(nAns)\n");
+            //sb.Append("					{\n");
+            //sb.Append("						case 1:\n");
+            //sb.Append("							// insert\n");
+            //sb.Append("							Console.WriteLine(\"Save:  \");\n");
+            //sb.Append("							Prompt();\n");
+            //sb.Append("							Save(conn);\n");
+            //sb.Append("							Console.WriteLine(ToString());\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 2:\n");
+            //sb.Append("							Console.WriteLine(\"Delete \" + TAG_ID + \":  \");\n");
+            //sb.Append("							strAns = Console.ReadLine();\n");
+            //sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
+            //sb.Append("							Delete(conn);\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 3:\n");
+            //sb.Append("							Console.WriteLine(\"Update:  \");\n");
+            //sb.Append("							Prompt();\n");
+            //sb.Append("							Update(conn);\n");
+            //sb.Append("							Console.WriteLine(ToString());\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 4:\n");
+            //sb.Append("							Console.WriteLine(\"Exist \" + TAG_ID + \":  \");\n");
+            //sb.Append("							strAns = Console.ReadLine();\n");
+            //sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
+            //sb.Append("							bool bExist = false;\n");
+            //sb.Append("							bExist = Exist(conn);\n");
+            //sb.Append("							Console.WriteLine(\"Record id \" + " + csn + "ID + \" exist:  \" + bExist.ToString() );\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 5:\n");
+            //sb.Append("							Console.WriteLine(\"Load \" + TAG_ID + \":  \");\n");
+            //sb.Append("							strAns = Console.ReadLine();\n");
+            //sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
+            //sb.Append("							Load(conn);\n");
+            //sb.Append("							Console.WriteLine(ToString());\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						case 6:\n");
+            //sb.Append("							Console.WriteLine(\"ToXml \" + TAG_ID + \":  \");\n");
+            //sb.Append("							strAns = Console.ReadLine();\n");
+            //sb.Append("							" + csn + "ID = long.Parse(strAns);\n");
+            //sb.Append("							Load(conn);\n");
+            //sb.Append("							Console.WriteLine(ToXml());\n");
+            //sb.Append("							Console.WriteLine(\" \");\n");
+            //sb.Append("							Console.WriteLine(\"Press ENTER to continue...\");\n");
+            //sb.Append("							Console.ReadLine();\n");
+            //sb.Append("							break;\n");
+            //sb.Append("						default:\n");
+            //sb.Append("							Console.WriteLine(\"Undefined option.\");\n");
+            //sb.Append("							break;\n");
+            //sb.Append("					}\n");
+            //sb.Append("				}\n");
+            //sb.Append("			}\n");
+            //sb.Append("			catch (Exception e) \n");
+            //sb.Append("			{\n");
+            //sb.Append("				Console.WriteLine(e.ToString());\n");
+            //sb.Append("				Console.WriteLine(e.StackTrace);\n");
+            //sb.Append("				Console.ReadLine();\n");
+            //sb.Append("			}\n");
+            //sb.Append("\n");
+            //sb.Append("		}		\n");
             sb.Append("	}\n");
             sb.Append("}\n");
             sb.Append("\n//END OF " + CamCase(csn) + " CLASS FILE");
@@ -5734,13 +5733,13 @@ namespace CodeGenerator
             string dbn = TableName;
             string csn = CamCase(TableName);
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Update]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Update]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Update >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Update]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Update]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -5915,13 +5914,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("");
             sb.Append("\n");
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Update]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Update]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Update >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Update >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Update >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Update >>>'");
             sb.Append("\n");
             sb.Append("GO");
             sb.Append("\n");
@@ -5983,9 +5982,9 @@ namespace CodeGenerator
             sb.Append("		private SqlDataReader _rdr = null;\n");
             sb.Append("		private SqlConnection _conn = null;\n");
             sb.Append("		\n");
-            sb.Append("		private Config _config = null;\n");
-            sb.Append("		private Logger _oLog = null;\n");
-            sb.Append("		private string _strLognameText = \"DataAccessLayer-Enum-Enum" + csn + "\";\n");
+            //sb.Append("		private Config _config = null;\n");
+            //sb.Append("		private Logger _oLog = null;\n");
+            //sb.Append("		private string _strLognameText = \"DataAccessLayer-Enum-Enum" + csn + "\";\n");
             sb.Append("		private ErrorCode _errorCode = null;\n");
             sb.Append("		private bool _hasError = false;\n");
             sb.Append("		private int _nCount = 0;\n");
@@ -6318,7 +6317,7 @@ namespace CodeGenerator
             sb.Append("			get\n");
             sb.Append("			{\n");
             sb.Append("				_bSetup = true;\n");
-            sb.Append("				_log(\"ENUM COUNT\", \"Calling sp \" + SP_ENUM_NAME);\n");
+            //sb.Append("				_log(\"ENUM COUNT\", \"Calling sp \" + SP_ENUM_NAME);\n");
             sb.Append("				// if necessary, close the old reader\n");
             sb.Append("				if ( (_cmd != null) || (_rdr != null) )\n");
             sb.Append("				{\n");
@@ -6353,13 +6352,13 @@ namespace CodeGenerator
             sb.Append("			_conn = conn;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		/// <summary>Constructor takes 2 parameters: SqlConnection and Config</summary>\n");
-            sb.Append("		public Enum" + csn + "(SqlConnection conn, Config pConfig)\n");
-            sb.Append("		{\n");
-            sb.Append("			_conn = conn;\n");
-            sb.Append("			_config = pConfig;\n");
-            sb.Append("			_oLog = new Logger(_strLognameText);\n");
-            sb.Append("		}\n");
+            //sb.Append("		/// <summary>Constructor takes 2 parameters: SqlConnection and Config</summary>\n");
+            //sb.Append("		public Enum" + csn + "(SqlConnection conn)\n");
+            //sb.Append("		{\n");
+            //sb.Append("			_conn = conn;\n");
+            ////sb.Append("			_config = pConfig;\n");
+            ////sb.Append("			_oLog = new Logger(_strLognameText);\n");
+            //sb.Append("		}\n");
             sb.Append("\n");
             sb.Append("		// Implementation of IEnumerator\n");
             sb.Append("		/// <summary>Property of type " + csn + ". Returns the next " + csn + " in the list</summary>\n");
@@ -6392,7 +6391,7 @@ namespace CodeGenerator
             sb.Append("			if (!_bSetup)\n");
             sb.Append("			{\n");
             sb.Append("				_bSetup = true;\n");
-            sb.Append("				_log(\"ENUM\", \"Calling sp \" + SP_ENUM_NAME);\n");
+            //sb.Append("				_log(\"ENUM\", \"Calling sp \" + SP_ENUM_NAME);\n");
             sb.Append("				// if necessary, close the old reader\n");
             sb.Append("				if ( (_cmd != null) || (_rdr != null) )\n");
             sb.Append("				{\n");
@@ -6418,7 +6417,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("				return null;\n");
@@ -6437,7 +6436,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -6452,12 +6451,12 @@ namespace CodeGenerator
             sb.Append("			{\n");
             sb.Append("				if ( _rdr != null )\n");
             sb.Append("				{\n");
-            sb.Append("					_rdr.Close();\n");
+            sb.Append("					_rdr.Dispose();\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -6975,7 +6974,7 @@ namespace CodeGenerator
             sb.Append("			}\n");
             sb.Append("			catch (Exception e) \n");
             sb.Append("			{\n");
-            sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
+            //sb.Append("				 _log(\"ERROR\", e.ToString() + e.StackTrace.ToString());\n");
             sb.Append("				_hasError = true;\n");
             sb.Append("				_errorCode = new ErrorCode();\n");
             sb.Append("			}\n");
@@ -7221,7 +7220,7 @@ namespace CodeGenerator
                             sb.Append("			if (!dtNull.Equals(Begin" + CamCase(dr["ColumnName"].ToString()) + "))\n");
                             sb.Append("			{\n");
                             sb.Append("				paramBegin" + CamCase(dr["ColumnName"].ToString()) + " = new SqlParameter(\"@\" + TAG_BEGIN_" + dr["ColumnName"].ToString().ToUpper() + ", Begin" + CamCase(dr["ColumnName"].ToString()) + ");\n");
-                            sb.Append("				sbLog.Append(TAG_BEGIN_" + dr["ColumnName"].ToString().ToUpper() + " + \"=\" + Begin" + CamCase(dr["ColumnName"].ToString()) + ".ToLongDateString());\n");
+                            //sb.Append("				sbLog.Append(TAG_BEGIN_" + dr["ColumnName"].ToString().ToUpper() + " + \"=\" + Begin" + CamCase(dr["ColumnName"].ToString()) + ".ToLongDateString());\n");
                             sb.Append("			}\n");
                             sb.Append("			else\n");
                             sb.Append("			{\n");
@@ -7233,7 +7232,7 @@ namespace CodeGenerator
                             sb.Append("			if (!dtNull.Equals(End" + CamCase(dr["ColumnName"].ToString()) + "))\n");
                             sb.Append("			{\n");
                             sb.Append("				paramEnd" + CamCase(dr["ColumnName"].ToString()) + " = new SqlParameter(\"@\" + TAG_END_" + dr["ColumnName"].ToString().ToUpper() + ", End" + CamCase(dr["ColumnName"].ToString()) + ");\n");
-                            sb.Append("				sbLog.Append(TAG_END_" + dr["ColumnName"].ToString().ToUpper() + " + \"=\" + End" + CamCase(dr["ColumnName"].ToString()) + ".ToLongDateString());\n");
+                            //sb.Append("				sbLog.Append(TAG_END_" + dr["ColumnName"].ToString().ToUpper() + " + \"=\" + End" + CamCase(dr["ColumnName"].ToString()) + ".ToLongDateString());\n");
                             sb.Append("			}\n");
                             sb.Append("			else\n");
                             sb.Append("			{\n");
@@ -7268,23 +7267,23 @@ namespace CodeGenerator
                 MessageBox.Show(ex.Message);
             }
 
-            sb.Append("				_log(\"ENUM PARAMS\", sbLog.ToString());\n");
+            //sb.Append("				_log(\"ENUM PARAMS\", sbLog.ToString());\n");
 
             //sb.Append("			sbLog = null;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		//private\n");
-            sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
-            sb.Append("		{\n");
-            sb.Append("			if (_config != null )\n");
-            sb.Append("			{\n");
-            sb.Append("				if (_config.DoLogInfo)\n");
-            sb.Append("				{\n");
-            sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
-            sb.Append("				}\n");
-            sb.Append("			}\n");
-            sb.Append("\n");
-            sb.Append("		}\n");
+            //sb.Append("		//private\n");
+            //sb.Append("		private void _log(string pStrAction, string pStrMsgText) \n");
+            //sb.Append("		{\n");
+            //sb.Append("			if (_config != null )\n");
+            //sb.Append("			{\n");
+            //sb.Append("				if (_config.DoLogInfo)\n");
+            //sb.Append("				{\n");
+            //sb.Append("						_oLog.Log(pStrAction, pStrMsgText);\n");
+            //sb.Append("				}\n");
+            //sb.Append("			}\n");
+            //sb.Append("\n");
+            //sb.Append("		}\n");
             sb.Append("	}\n");
             sb.Append("}\n");
 
@@ -7472,7 +7471,7 @@ namespace CodeGenerator
         //			sb.Append("			{\n");
         //			sb.Append("				if ( _rdr != null )\n");
         //			sb.Append("				{\n");
-        //			sb.Append("					_rdr.Close();\n");
+        //			sb.Append("					_rdr.Dispose();\n");
         //			sb.Append("				}\n");
         //			sb.Append("			}\n");
         //			sb.Append("			catch (Exception e) \n");
@@ -7577,13 +7576,13 @@ namespace CodeGenerator
             string dbn = TableName;
             string csn = CamCase(TableName);
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Delete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Delete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Delete >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Delete]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Delete]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -7630,13 +7629,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("");
             sb.Append("\n");
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Delete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Delete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Delete >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Delete >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Delete >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Delete >>>'");
             sb.Append("\n");
             sb.Append("GO");
             sb.Append("\n");
@@ -7684,18 +7683,18 @@ namespace CodeGenerator
             sb.Append("		 Description = \"Creates a " + csn + " and returns a serialized response object.\")]\n");
             sb.Append("	public string " + csn + "Create(string pSerialized" + csn + "Object)\n");
             sb.Append("	{\n");
-            sb.Append("		_log(\"" + csn + "Create\", \"Received Create request:  \" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Create\", \"Received Create request:  \" + pSerialized" + csn + "Object);\n");
             sb.Append("		BusFacBudgeting customer = null;\n");
             sb.Append("		customer = new BusFacBudgeting();\n");
             sb.Append("		bool bValid = false;\n");
             sb.Append("		bValid = IsXmlValid(pSerialized" + csn + "Object);\n");
-            sb.Append("		_log(\"" + csn + "Create\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Create\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("		if (bValid)\n");
             sb.Append("		{\n");
             sb.Append("			customer.Response.RequestData = pSerialized" + csn + "Object;\n");
             sb.Append("			if (IsAuthenticated((int)EnumPermission." + csn + "Create))\n");
             sb.Append("			{\n");
-            sb.Append("				_log(\"" + csn + "Create\", \"IsAuthenticated:  True\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("				_log(\"" + csn + "Create\", \"IsAuthenticated:  True\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("				customer.Response.RequestData = \"<WorkingStatus>Incomplete</WorkingStatus>\";\n");
             sb.Append("				customer.Response.AuthenticationObject.ID = 0;\n");
             sb.Append("				customer." + csn + "Create(pSerialized" + csn + "Object);\n");
@@ -7713,7 +7712,7 @@ namespace CodeGenerator
             sb.Append("			// invalid XML\n");
             sb.Append("			customer.Response.IsXmlValid = false;\n");
             sb.Append("		}\n");
-            sb.Append("		_log(\"" + csn + "Create\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
+            //sb.Append("		_log(\"" + csn + "Create\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
             sb.Append("		return customer.Response.ToXml();\n");
             sb.Append("	}\n");
             sb.Append("\n");
@@ -7721,12 +7720,12 @@ namespace CodeGenerator
             sb.Append("		 Description = \"Modifies a " + csn + " and returns a serialized response object.\")]\n");
             sb.Append("	public string " + csn + "Edit(string pSerialized" + csn + "Object)\n");
             sb.Append("	{\n");
-            sb.Append("		_log(\"" + csn + "Edit\", \"Received edit request:  \" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Edit\", \"Received edit request:  \" + pSerialized" + csn + "Object);\n");
             sb.Append("		BusFacBudgeting customer = null;\n");
             sb.Append("		customer = new BusFacBudgeting();\n");
             sb.Append("		bool bValid = false;\n");
             sb.Append("		bValid = IsXmlValid(pSerialized" + csn + "Object);\n");
-            sb.Append("		_log(\"" + csn + "Edit\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Edit\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("		if (bValid)\n");
             sb.Append("		{\n");
             sb.Append("			customer.Response.RequestData = pSerialized" + csn + "Object;\n");
@@ -7747,11 +7746,11 @@ namespace CodeGenerator
             sb.Append("		else\n");
             sb.Append("		{\n");
             sb.Append("			// invalid XML\n");
-            sb.Append("			_log(\"" + csn + "Edit\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("			_log(\"" + csn + "Edit\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("			customer.Response.IsXmlValid = false;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		_log(\"" + csn + "Edit\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
+            //sb.Append("		_log(\"" + csn + "Edit\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
             sb.Append("		return customer.Response.ToXml();\n");
             sb.Append("	}\n");
             sb.Append("\n");
@@ -7759,12 +7758,12 @@ namespace CodeGenerator
             sb.Append("		 Description = \"Removes a " + csn + " and returns a serialized response object.\")]\n");
             sb.Append("	public string " + csn + "Remove(string pSerialized" + csn + "Object)\n");
             sb.Append("	{\n");
-            sb.Append("		_log(\"" + csn + "Remove\", \"Received remove request:  \" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Remove\", \"Received remove request:  \" + pSerialized" + csn + "Object);\n");
             sb.Append("		BusFacBudgeting customer = null;\n");
             sb.Append("		customer = new BusFacBudgeting();\n");
             sb.Append("		bool bValid = false;\n");
             sb.Append("		bValid = IsXmlValid(pSerialized" + csn + "Object);\n");
-            sb.Append("		_log(\"" + csn + "Remove\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Remove\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("		if (bValid)\n");
             sb.Append("		{\n");
             sb.Append("			customer.Response.RequestData = pSerialized" + csn + "Object;\n");
@@ -7785,11 +7784,11 @@ namespace CodeGenerator
             sb.Append("		else\n");
             sb.Append("		{\n");
             sb.Append("			// invalid XML\n");
-            sb.Append("			_log(\"" + csn + "Remove\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("			_log(\"" + csn + "Remove\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("			customer.Response.IsXmlValid = false;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		_log(\"" + csn + "Remove\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
+            //sb.Append("		_log(\"" + csn + "Remove\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
             sb.Append("		return customer.Response.ToXml();\n");
             sb.Append("	}\n");
             sb.Append("\n");
@@ -7797,12 +7796,12 @@ namespace CodeGenerator
             sb.Append("		 Description = \"Gets a " + csn + " and returns a serialized response object.\")]\n");
             sb.Append("	public string " + csn + "Get(string pSerialized" + csn + "Object)\n");
             sb.Append("	{\n");
-            sb.Append("		_log(\"" + csn + "Get\", \"Received get request:  \" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Get\", \"Received get request:  \" + pSerialized" + csn + "Object);\n");
             sb.Append("		BusFacBudgeting customer = null;\n");
             sb.Append("		customer = new BusFacBudgeting();\n");
             sb.Append("		bool bValid = false;\n");
             sb.Append("		bValid = IsXmlValid(pSerialized" + csn + "Object);\n");
-            sb.Append("		_log(\"" + csn + "Get\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "Get\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("		if (bValid)\n");
             sb.Append("		{\n");
             sb.Append("			customer.Response.RequestData = pSerialized" + csn + "Object;\n");
@@ -7823,11 +7822,11 @@ namespace CodeGenerator
             sb.Append("		else\n");
             sb.Append("		{\n");
             sb.Append("			// invalid XML\n");
-            sb.Append("			_log(\"" + csn + "Get\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
+            //sb.Append("			_log(\"" + csn + "Get\", \"XML is invalid\\n\" + pSerialized" + csn + "Object);\n");
             sb.Append("			customer.Response.IsXmlValid = false;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		_log(\"" + csn + "Get\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
+            //sb.Append("		_log(\"" + csn + "Get\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
             sb.Append("		return customer.Response.ToXml();\n");
             sb.Append("	}\n");
             sb.Append("\n");
@@ -7835,7 +7834,7 @@ namespace CodeGenerator
             sb.Append("		 Description = \"Gets a constrained list of " + csn + "s and returns a serialized response object.\")]\n");
             sb.Append("	public string " + csn + "GetList(string pSerializedEnum" + csn + "Object)\n");
             sb.Append("	{\n");
-            sb.Append("		_log(\"" + csn + "GetList\", \"Received get request:  \" + pSerializedEnum" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "GetList\", \"Received get request:  \" + pSerializedEnum" + csn + "Object);\n");
             sb.Append("		BusFacBudgeting customer = null;\n");
             sb.Append("		customer = new BusFacBudgeting();\n");
             sb.Append("\n");
@@ -7843,7 +7842,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		bool bValid = false;\n");
             sb.Append("		bValid = IsXmlValid(pSerializedEnum" + csn + "Object);\n");
-            sb.Append("		_log(\"" + csn + "GetList\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerializedEnum" + csn + "Object);\n");
+            //sb.Append("		_log(\"" + csn + "GetList\", \"IsValid:  \" + bValid.ToString() + \"\\n\" + pSerializedEnum" + csn + "Object);\n");
             sb.Append("		if (bValid)\n");
             sb.Append("		{\n");
             sb.Append("			customer.Response.RequestData = pSerializedEnum" + csn + "Object;\n");
@@ -7864,11 +7863,11 @@ namespace CodeGenerator
             sb.Append("		else\n");
             sb.Append("		{\n");
             sb.Append("			// invalid XML\n");
-            sb.Append("			_log(\"" + csn + "GetList\", \"XML is invalid\\n\" + pSerializedEnum" + csn + "Object);\n");
+            //sb.Append("			_log(\"" + csn + "GetList\", \"XML is invalid\\n\" + pSerializedEnum" + csn + "Object);\n");
             sb.Append("			customer.Response.IsXmlValid = false;\n");
             sb.Append("		}\n");
             sb.Append("\n");
-            sb.Append("		_log(\"" + csn + "GetList\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
+            //sb.Append("		_log(\"" + csn + "GetList\", \"Returning response:  \\n\" + customer.Response.ToXml());\n");
             sb.Append("		return customer.Response.ToXml();\n");
             sb.Append("	}\n");
             sb.Append("\n");
@@ -7901,7 +7900,7 @@ namespace CodeGenerator
             sb.Append("		DROP  Table [" + TableName + "]\n");
             sb.Append("END\n");
             sb.Append("GO\n");
-            sb.Append("CREATE TABLE dbo.[" + TableName + "]\n");
+            sb.Append("CREATE TABLE [" + TableName + "]\n");
             sb.Append("(\n");
 
             try
@@ -7961,10 +7960,10 @@ namespace CodeGenerator
             sb.Append(")\n");
             sb.Append("GO\n");
             sb.Append("\n");
-            sb.Append("IF OBJECT_ID('dbo." + TableName + "') IS NOT NULL\n");
-            sb.Append("    PRINT '<<< CREATED TABLE dbo." + TableName + " >>>'\n");
+            sb.Append("IF OBJECT_ID('" + TableName + "') IS NOT NULL\n");
+            sb.Append("    PRINT '<<< CREATED TABLE " + TableName + " >>>'\n");
             sb.Append("ELSE\n");
-            sb.Append("    PRINT '<<< FAILED CREATING TABLE dbo." + TableName + " >>>'\n");
+            sb.Append("    PRINT '<<< FAILED CREATING TABLE " + TableName + " >>>'\n");
             sb.Append("GO\n");
 
             return sb.ToString();
@@ -7983,13 +7982,13 @@ namespace CodeGenerator
             string csn = CamCase(TableName);
             bool Auto = false;
 
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Insert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Insert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
             sb.Append("BEGIN");
             sb.Append("\n");
             sb.Append("	PRINT '<<<< Dropping Stored Procedure sp" + csn + "Insert >>>>'");
             sb.Append("\n");
-            sb.Append("	DROP PROCEDURE [dbo].[sp" + csn + "Insert]");
+            sb.Append("	DROP PROCEDURE [sp" + csn + "Insert]");
             sb.Append("\n");
             sb.Append("END");
             sb.Append("\n");
@@ -8191,13 +8190,13 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("");
             sb.Append("\n");
-            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[dbo].[sp" + csn + "Insert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
+            sb.Append("IF EXISTS (select * from sysobjects where id = object_id(N'[sp" + csn + "Insert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)");
             sb.Append("\n");
-            sb.Append("PRINT '<<<< Created Stored Procedure dbo.sp" + csn + "Insert >>>>'");
+            sb.Append("PRINT '<<<< Created Stored Procedure sp" + csn + "Insert >>>>'");
             sb.Append("\n");
             sb.Append("ELSE");
             sb.Append("\n");
-            sb.Append("PRINT '<<< Failed Creating Stored Procedure dbo.sp" + csn + "Insert >>>'");
+            sb.Append("PRINT '<<< Failed Creating Stored Procedure sp" + csn + "Insert >>>'");
             sb.Append("\n");
             sb.Append("GO");
             sb.Append("\n");
@@ -9736,7 +9735,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		public void " + csn + "Create(string pSerializedObject)\n");
             sb.Append("		{\n");
-            sb.Append("			_log(\"CREATE\", \"Received Create request:  \" + pSerializedObject);\n");
+            //sb.Append("			_log(\"CREATE\", \"Received Create request:  \" + pSerializedObject);\n");
             sb.Append("\n");
             sb.Append("			// create a new object\n");
             sb.Append("			" + NS(csn) + " " + PascalCase(dbn) + " = null;\n");
@@ -9754,26 +9753,26 @@ namespace CodeGenerator
                 sb.Append("				" + PascalCase(dbn) + "." + csn + "ID = 0;\n");
             }
 
-            sb.Append("				SqlConnection conn = _pool.GetConnection();\n");
+            sb.Append("				SqlConnection conn = GetConnection();\n");
             sb.Append("				if ( conn != null )\n");
             sb.Append("				{\n");
             sb.Append("					bool bConn = false;\n");
             sb.Append("\n");
-            sb.Append("					bConn = _pool.OpenConnection(conn);\n");
+            sb.Append("					bConn = OpenConnection(conn);\n");
             sb.Append("					if ( bConn )\n");
             sb.Append("					{\n");
             sb.Append("						Bus" + csn + " bus" + csn + " = null;\n");
             sb.Append("						bus" + csn + " = new Bus" + csn + "(conn, _config);\n");
             sb.Append("						bus" + csn + ".Save(" + PascalCase(dbn) + ");\n");
             sb.Append("						// close the db connection\n");
-            sb.Append("						bConn = _pool.CloseConnection(conn);\n");
+            sb.Append("						bConn = CloseConnection(conn);\n");
             sb.Append("						_response.ResultData = " + PascalCase(dbn) + ".ToXml();\n");
             sb.Append("						if ( bus" + csn + ".HasError )\n");
             sb.Append("						{\n");
             sb.Append("							// error\n");
             sb.Append("							ErrorCode error = new ErrorCode();\n");
             sb.Append("							_response.ErrorArray.Add( error );\n");
-            sb.Append("							_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("							_log(\"ERROR\", error.ToString());\n");
             sb.Append("						}\n");
             sb.Append("					}\n");
             sb.Append("					else\n");
@@ -9782,7 +9781,7 @@ namespace CodeGenerator
             sb.Append("						// error\n");
             sb.Append("						ErrorCode error = new ErrorCode();\n");
             sb.Append("						_response.ErrorArray.Add( error );\n");
-            sb.Append("						_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("						_log(\"ERROR\", error.ToString());\n");
             sb.Append("					}\n");
             sb.Append("					conn = null;\n");
             sb.Append("				}\n");
@@ -9795,7 +9794,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("					_log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -9803,7 +9802,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		public void " + csn + "Edit(string pSerializedObject)\n");
             sb.Append("		{\n");
-            sb.Append("			_log(\"EDIT\", \"Received edit request:  \" + pSerializedObject);\n");
+            //sb.Append("			_log(\"EDIT\", \"Received edit request:  \" + pSerializedObject);\n");
             sb.Append("\n");
             sb.Append("			// create a new object\n");
             sb.Append("			" + NS(csn) + " " + PascalCase(dbn) + " = null;\n");
@@ -9813,26 +9812,26 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("			if ( !" + PascalCase(dbn) + ".HasError ) \n");
             sb.Append("			{\n");
-            sb.Append("				SqlConnection conn = _pool.GetConnection();\n");
+            sb.Append("				SqlConnection conn = GetConnection();\n");
             sb.Append("				if ( conn != null )\n");
             sb.Append("				{\n");
             sb.Append("					bool bConn = false;\n");
             sb.Append("\n");
-            sb.Append("					bConn = _pool.OpenConnection(conn);\n");
+            sb.Append("					bConn = OpenConnection(conn);\n");
             sb.Append("					if ( bConn )\n");
             sb.Append("					{\n");
             sb.Append("						Bus" + csn + " bus" + csn + " = null;\n");
             sb.Append("						bus" + csn + " = new Bus" + csn + "(conn, _config);\n");
             sb.Append("						bus" + csn + ".Update(" + PascalCase(dbn) + ");\n");
             sb.Append("						// close the db connection\n");
-            sb.Append("						bConn = _pool.CloseConnection(conn);\n");
+            sb.Append("						bConn = CloseConnection(conn);\n");
             sb.Append("						_response.ResultData = " + PascalCase(dbn) + ".ToXml();\n");
             sb.Append("						if ( bus" + csn + ".HasError )\n");
             sb.Append("						{\n");
             sb.Append("							// error\n");
             sb.Append("							ErrorCode error = new ErrorCode();\n");
             sb.Append("							_response.ErrorArray.Add( error );\n");
-            sb.Append("							_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("							_log(\"ERROR\", error.ToString());\n");
             sb.Append("						}\n");
             sb.Append("					}\n");
             sb.Append("					else\n");
@@ -9841,7 +9840,7 @@ namespace CodeGenerator
             sb.Append("						// error\n");
             sb.Append("						ErrorCode error = new ErrorCode();\n");
             sb.Append("						_response.ErrorArray.Add( error );\n");
-            sb.Append("						_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("						_log(\"ERROR\", error.ToString());\n");
             sb.Append("					}\n");
             sb.Append("					conn = null;\n");
             sb.Append("				}\n");
@@ -9854,7 +9853,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("					_log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -9862,7 +9861,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		public void " + csn + "Remove(string pSerializedObject)\n");
             sb.Append("		{\n");
-            sb.Append("			_log(\"REMOVE\", \"Received edit request:  \" + pSerializedObject);\n");
+            //sb.Append("			_log(\"REMOVE\", \"Received edit request:  \" + pSerializedObject);\n");
             sb.Append("\n");
             sb.Append("			// create a new object\n");
             sb.Append("			" + NS(csn) + " " + PascalCase(dbn) + " = null;\n");
@@ -9872,26 +9871,26 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("			if ( !" + PascalCase(dbn) + ".HasError ) \n");
             sb.Append("			{\n");
-            sb.Append("				SqlConnection conn = _pool.GetConnection();\n");
+            sb.Append("				SqlConnection conn = GetConnection();\n");
             sb.Append("				if ( conn != null )\n");
             sb.Append("				{\n");
             sb.Append("					bool bConn = false;\n");
             sb.Append("\n");
-            sb.Append("					bConn = _pool.OpenConnection(conn);\n");
+            sb.Append("					bConn = OpenConnection(conn);\n");
             sb.Append("					if ( bConn )\n");
             sb.Append("					{\n");
             sb.Append("						Bus" + csn + " bus" + csn + " = null;\n");
             sb.Append("						bus" + csn + " = new Bus" + csn + "(conn, _config);\n");
             sb.Append("						bus" + csn + ".Delete(" + PascalCase(dbn) + ");\n");
             sb.Append("						// close the db connection\n");
-            sb.Append("						bConn = _pool.CloseConnection(conn);\n");
+            sb.Append("						bConn = CloseConnection(conn);\n");
             sb.Append("						_response.ResultData = " + PascalCase(dbn) + ".ToXml();\n");
             sb.Append("						if ( bus" + csn + ".HasError )\n");
             sb.Append("						{\n");
             sb.Append("							// error\n");
             sb.Append("							ErrorCode error = new ErrorCode();\n");
             sb.Append("							_response.ErrorArray.Add( error );\n");
-            sb.Append("							_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("							_log(\"ERROR\", error.ToString());\n");
             sb.Append("						}\n");
             sb.Append("					}\n");
             sb.Append("					else\n");
@@ -9900,7 +9899,7 @@ namespace CodeGenerator
             sb.Append("						// error\n");
             sb.Append("						ErrorCode error = new ErrorCode();\n");
             sb.Append("						_response.ErrorArray.Add( error );\n");
-            sb.Append("						_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("						_log(\"ERROR\", error.ToString());\n");
             sb.Append("\n");
             sb.Append("					}\n");
             sb.Append("					conn = null;\n");
@@ -9914,7 +9913,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("					_log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -9922,7 +9921,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		public void " + csn + "Get(string pSerializedObject)\n");
             sb.Append("		{\n");
-            sb.Append("			_log(\"GET\", \"Received get request:  \" + pSerializedObject);\n");
+            //sb.Append("			_log(\"GET\", \"Received get request:  \" + pSerializedObject);\n");
             sb.Append("\n");
             sb.Append("			// create a new object\n");
             sb.Append("			" + NS(csn) + " " + PascalCase(dbn) + " = null;\n");
@@ -9932,26 +9931,26 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("			if ( !" + PascalCase(dbn) + ".HasError ) \n");
             sb.Append("			{\n");
-            sb.Append("				SqlConnection conn = _pool.GetConnection();\n");
+            sb.Append("				SqlConnection conn = GetConnection();\n");
             sb.Append("				if ( conn != null )\n");
             sb.Append("				{\n");
             sb.Append("					bool bConn = false;\n");
             sb.Append("\n");
-            sb.Append("					bConn = _pool.OpenConnection(conn);\n");
+            sb.Append("					bConn = OpenConnection(conn);\n");
             sb.Append("					if ( bConn )\n");
             sb.Append("					{\n");
             sb.Append("						Bus" + csn + " bus" + csn + " = null;\n");
             sb.Append("						bus" + csn + " = new Bus" + csn + "(conn, _config);\n");
             sb.Append("						bus" + csn + ".Load(" + PascalCase(dbn) + ");\n");
             sb.Append("						// close the db connection\n");
-            sb.Append("						bConn = _pool.CloseConnection(conn);\n");
+            sb.Append("						bConn = CloseConnection(conn);\n");
             sb.Append("						_response.ResultData = " + PascalCase(dbn) + ".ToXml();\n");
             sb.Append("						if ( bus" + csn + ".HasError )\n");
             sb.Append("						{\n");
             sb.Append("							// error\n");
             sb.Append("							ErrorCode error = new ErrorCode();\n");
             sb.Append("							_response.ErrorArray.Add( error );\n");
-            sb.Append("							_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("							_log(\"ERROR\", error.ToString());\n");
             sb.Append("						}\n");
             sb.Append("					}\n");
             sb.Append("					else\n");
@@ -9960,7 +9959,7 @@ namespace CodeGenerator
             sb.Append("						// error\n");
             sb.Append("						ErrorCode error = new ErrorCode();\n");
             sb.Append("						_response.ErrorArray.Add( error );\n");
-            sb.Append("						_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("						_log(\"ERROR\", error.ToString());\n");
             sb.Append("					}\n");
             sb.Append("					conn = null;\n");
             sb.Append("				}\n");
@@ -9973,7 +9972,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("     _log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -9990,12 +9989,12 @@ namespace CodeGenerator
             sb.Append("			enum" + csn + ".Parse( pSerializedObject );\n");
             sb.Append("			if ( !enum" + csn + ".HasError ) \n");
             sb.Append("			{\n");
-            sb.Append("				SqlConnection conn = _pool.GetConnection();\n");
+            sb.Append("				SqlConnection conn = GetConnection();\n");
             sb.Append("				if ( conn != null )\n");
             sb.Append("				{\n");
             sb.Append("					bool bConn = false;\n");
             sb.Append("\n");
-            sb.Append("					bConn = _pool.OpenConnection(conn);\n");
+            sb.Append("					bConn = OpenConnection(conn);\n");
             sb.Append("					if ( bConn )\n");
             sb.Append("					{\n");
             sb.Append("						ArrayList " + PascalCase(dbn) + "s = null;\n");
@@ -10010,7 +10009,7 @@ namespace CodeGenerator
             sb.Append("							sbResultData.Append(item.ToXml() );\n");
             sb.Append("						}\n");
             sb.Append("						// close the db connection\n");
-            sb.Append("						bConn = _pool.CloseConnection(conn);\n");
+            sb.Append("						bConn = CloseConnection(conn);\n");
             sb.Append("						_response.ResultData = sbResultData.ToString();\n");
             sb.Append("						sbResultData = null;\n");
             sb.Append("						if ( bus" + csn + ".HasError )\n");
@@ -10018,7 +10017,7 @@ namespace CodeGenerator
             sb.Append("							// error\n");
             sb.Append("							ErrorCode error = new ErrorCode();\n");
             sb.Append("							_response.ErrorArray.Add( error );\n");
-            sb.Append("							_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("							_log(\"ERROR\", error.ToString());\n");
             sb.Append("						}\n");
             sb.Append("					}\n");
             sb.Append("					else\n");
@@ -10027,7 +10026,7 @@ namespace CodeGenerator
             sb.Append("						// error\n");
             sb.Append("						ErrorCode error = new ErrorCode();\n");
             sb.Append("						_response.ErrorArray.Add( error );\n");
-            sb.Append("						_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("						_log(\"ERROR\", error.ToString());\n");
             sb.Append("					}\n");
             sb.Append("					conn = null;\n");
             sb.Append("				}\n");
@@ -10040,7 +10039,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("     _log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -10048,7 +10047,7 @@ namespace CodeGenerator
             sb.Append("\n");
             sb.Append("		public void " + csn + "Check(string pSerializedObject)\n");
             sb.Append("		{\n");
-            sb.Append("			_log(\"GET\", \"Received validate request:  \" + pSerializedObject);\n");
+            //sb.Append("			_log(\"GET\", \"Received validate request:  \" + pSerializedObject);\n");
             sb.Append("\n");
             sb.Append("			// create a new object\n");
             sb.Append("			" + NS(csn) + " " + PascalCase(dbn) + " = null;\n");
@@ -10075,7 +10074,7 @@ namespace CodeGenerator
             sb.Append("					// error\n");
             sb.Append("					ErrorCode error = new ErrorCode();\n");
             sb.Append("					_response.ErrorArray.Add( error );\n");
-            sb.Append("					_log(\"ERROR\", error.ToString());\n");
+            //sb.Append("     _log(\"ERROR\", error.ToString());\n");
             sb.Append("				}\n");
             sb.Append("			}\n");
             sb.Append("\n");
@@ -10996,7 +10995,7 @@ namespace CodeGenerator
         {
         }
 
- 
+
         private void txtCS_SelectedIndexChanged(object sender, EventArgs e)
         {
         }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using RESTAPI.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using Vetapp.Engine.BusinessFacadeLayer;
+using Vetapp.Engine.DataAccessLayer.Enumeration;
+using Vetapp.Engine.DataAccessLayer.Data;
 
 namespace RESTAPI.Repository
 {
@@ -36,8 +38,9 @@ namespace RESTAPI.Repository
 
                 if (keys == null)
                 {
-                    BusFacCore busFacCore = new BusFacCore(_settings);
-                    List<Apikey> lstApikey = busFacCore.ApikeyGetList();
+                    BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
+                    EnumApikey enumApikey = new EnumApikey();
+                    System.Collections.ArrayList lstApikey = busFacCore.ApikeyGetList(enumApikey);
                     if ((lstApikey != null) && (lstApikey.Count > 0))
                     {
                         keys = new List<string>();

@@ -9,22 +9,20 @@
         {
             long lID = 0;
             bool bConn = false;
-            _log("CREATE", "Received Create Request <<REPLACE_1>>");
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
                 Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
-                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn, _config);
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
                 bus<<REPLACE_1>>.Save(p<<REPLACE_1>>);
                 // close the db connection
-                bConn = _pool.CloseConnection(conn);
+                bConn = CloseConnection(conn);
                 lID = p<<REPLACE_1>>.<<REPLACE_1>>ID;
                 _hasError = bus<<REPLACE_1>>.HasError;
                 if (bus<<REPLACE_1>>.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
-                    _log("ERROR", error.ToString());
                 }
             }
             return lID;
@@ -40,21 +38,19 @@
         {
             ArrayList items = null;
             bool bConn = false;
-            _log("CREATE", "Received Get List Request <<REPLACE_1>>");
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
                 Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
-                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn, _config);
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
                 items = bus<<REPLACE_1>>.Get(pEnum<<REPLACE_1>>);
                 // close the db connection
-                bConn = _pool.CloseConnection(conn);
+                bConn = CloseConnection(conn);
                 _hasError = bus<<REPLACE_1>>.HasError;
                 if (bus<<REPLACE_1>>.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
-                    _log("ERROR", error.ToString());
                 }
             }
             return items;
@@ -69,22 +65,20 @@
         public <<REPLACE_1>> <<REPLACE_1>>Get(long pLng<<REPLACE_1>>ID)
         {
             <<REPLACE_1>> <<REPLACE_2>> = new <<REPLACE_1>>() { <<REPLACE_1>>ID = pLng<<REPLACE_1>>ID };
-			_log("GET", "Received Get Request <<REPLACE_1>>);");
 			bool bConn = false;
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
                 Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
-                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn, _config);
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
                 bus<<REPLACE_1>>.Load(<<REPLACE_2>>);
                 // close the db connection
-                bConn = _pool.CloseConnection(conn);
+                bConn = CloseConnection(conn);
                 _hasError = bus<<REPLACE_1>>.HasError;
                 if (bus<<REPLACE_1>>.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
-                    _log("ERROR", error.ToString());
                 }
             }
             return <<REPLACE_2>>;
@@ -100,23 +94,21 @@
         {
             bool bConn = false;
 
-            _log("REMOVE", "Received Remove Request <<REPLACE_1>>");
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
                 <<REPLACE_1>> <<REPLACE_2>> = new <<REPLACE_1>>();
                 <<REPLACE_2>>.<<REPLACE_1>>ID = p<<REPLACE_1>>ID;
                 Bus<<REPLACE_1>> bus = null;
-                bus = new Bus<<REPLACE_1>>(conn, _config);
+                bus = new Bus<<REPLACE_1>>(conn);
                 bus.Delete(<<REPLACE_2>>);
                 // close the db connection
-                bConn = _pool.CloseConnection(conn);
+                bConn = CloseConnection(conn);
                 _hasError = bus.HasError;
                 if (bus.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
-                    _log("ERROR", error.ToString());
                 }
             }
         }
