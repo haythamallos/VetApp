@@ -1,6 +1,6 @@
 ﻿namespace Vetapp.Client.Proxy
 {
-    public class User
+    public class UserProxy
     {
         public long UserID { get; set; }
         public string AuthUserid { get; set; }
@@ -16,5 +16,10 @@
         public string Profileimageurl { get; set; }
         public bool IsDisabled { get; set; }
         public bool CanTextMsg { get; set; }
+
+        // custom
+        public string AuthName { get; set; }
+        public string AuthNickname { get; set; }
+
     }
 }

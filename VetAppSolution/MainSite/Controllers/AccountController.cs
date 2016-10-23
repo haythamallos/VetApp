@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using MainSite.ViewModels;
+using System.Web.Security;
 
 namespace MainSite.Controllers
 {
@@ -19,7 +20,6 @@ namespace MainSite.Controllers
         public ActionResult Logout()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
-
             return RedirectToAction("Index", "Home");
         }
 

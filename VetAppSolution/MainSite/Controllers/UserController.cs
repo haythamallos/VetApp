@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Security.Claims;
+using Vetapp.Client.Proxy;
+using MainSite.Extensions;
+using MainSite.Core;
 
 namespace MainSite.Controllers
 {
     public class UserController : Controller
     {
         // GET: User
+        [Authorize]
         public ActionResult Index()
         {
+            DataManager dm = new DataManager(User.Identity as ClaimsIdentity);
+            dm.SaveUserIfNotExist();
             return View();
         }
     }

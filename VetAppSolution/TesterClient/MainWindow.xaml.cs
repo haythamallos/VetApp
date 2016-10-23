@@ -51,7 +51,7 @@ namespace TesterClient
             StringBuilder parameters = new StringBuilder();
             string url = this.serviceUrlTextBox.Text.Trim() + "/api/user";
 
-            User useritem = new User() { Firstname = "Haytham" };
+            UserProxy useritem = new UserProxy() { Firstname = "Haytham" };
             string jsonBody = Utils.ToJson(useritem, useritem.GetType());
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserItemID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserID", "");

@@ -159,7 +159,8 @@
     <Compile Include="Controllers\Auth0AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Core\Data\UserInfo.cs" />
+    <Compile Include="Core\DataManager.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,7 +227,7 @@
     <Content Include="Views\Account\Tokens.cshtml" />
     <Content Include="Views\Home\GetStarted.cshtml" />
     <Content Include="Views\Home\LearnMore.cshtml" />
-    <Content Include="Views\User\User.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -239,6 +240,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proxy\Proxy.csproj">
+      <Project>{727a8f52-c841-401c-b8be-9aab333fc01d}</Project>
+      <Name>Proxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RESTUtilLib\RESTUtilLib.csproj">
+      <Project>{d4a8e22b-766e-43fb-a3dd-54c2fd95084c}</Project>
+      <Name>RESTUtilLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

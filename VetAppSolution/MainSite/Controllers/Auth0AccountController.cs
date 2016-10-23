@@ -1,3 +1,4 @@
+using MainSite.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
@@ -7,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Vetapp.Client.Proxy;
 
 namespace MainSite.Controllers
 {
@@ -36,6 +38,7 @@ namespace MainSite.Controllers
             }
 
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, CreateIdentity(externalIdentity));
+
             return RedirectToLocal(returnUrl);
         }
 
@@ -56,7 +59,7 @@ namespace MainSite.Controllers
                     ConfigurationManager.AppSettings["auth0:Domain"],
                     absoluteReturnUrl));
         }
-		
+
         private static ClaimsIdentity CreateIdentity(ClaimsIdentity externalIdentity)
         {
             var identity = new ClaimsIdentity(externalIdentity.Claims, DefaultAuthenticationTypes.ApplicationCookie);
@@ -65,8 +68,8 @@ namespace MainSite.Controllers
             // See http://msdn.microsoft.com/en-us/library/system.web.helpers.antiforgeryconfig.uniqueclaimtypeidentifier(v=vs.111).aspx
             identity.AddClaim(
                 new Claim(
-                    "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", 
-                    "ASP.NET Identity", 
+                    "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
+                    "ASP.NET Identity",
                     "http://www.w3.org/2001/XMLSchema#string"));
 
             return identity;
@@ -74,6 +77,7 @@ namespace MainSite.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
+
             return RedirectToAction("Index", "User");
             //if (Url.IsLocalUrl(returnUrl))
             //{
