@@ -37,7 +37,7 @@ namespace RESTAPI
             services.AddMemoryCache();
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddSingleton<IUserRepository, UserRepository>();
+            //services.AddSingleton<IUserRepository, UserRepository>();
 
 
         }

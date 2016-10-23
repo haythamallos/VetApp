@@ -1,44 +1,58 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RESTAPI.Models;
+using RESTAPI.Reply;
 
 namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        public UserController(IUserRepository userItems)
+        public UserController()
         {
-            UserItems = userItems;
         }
-        public IUserRepository UserItems { get; set; }
-
         [HttpGet]
-        public IEnumerable<UserItem> GetAll()
-        {
-            return UserItems.GetAll();
-        }
+        //public IEnumerable<MemberModel> GetAll()
+        //{
+        //    return MemberItems.GetAll();
+        //}
 
-        [HttpGet("{id}", Name = "GetUser")]
-        public IActionResult GetById(string id)
-        {
-            var item = UserItems.Find(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return new ObjectResult(item);
-        }
+        //[HttpGet("{id}", Name = "GetUser")]
+        //public IActionResult GetById(string id)
+        //{
+        //    var item = MemberItems.Find(id);
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return new ObjectResult(item);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Create([FromBody] Member item)
+        //{
+        //    if (item == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    //MemberItems.Add(item);
+        //    //return CreatedAtRoute("GetUser", new {}, item);
+        //    return Ok();
+        //}
 
         [HttpPost]
-        public IActionResult Create([FromBody] UserItem item)
+        public IActionResult Create([FromBody] UserModel pMemberModel)
         {
-            if (item == null)
+            UserModel memberModel = null;
+            UserControllerReply reply = new UserControllerReply();
+
+
+            memberModel = reply.Create(pMemberModel);
+            if (reply.HasError)
             {
-                return BadRequest();
+                return BadRequest(reply.ErrorMessage);
             }
-            UserItems.Add(item);
-            return CreatedAtRoute("GetUser", new {}, item);
+            return Ok(memberModel);
         }
     }
 }

@@ -60,34 +60,42 @@ go
 IF EXISTS (SELECT *
            FROM   sysobjects
            WHERE  type = 'U'
-                  AND name = 'member')
+                  AND name = 'user')
   BEGIN
-      PRINT 'Dropping Table member'
+      PRINT 'Dropping Table user'
 
-      DROP TABLE member
+      DROP TABLE [user]
   END
 
 go
 
-CREATE TABLE member
+CREATE TABLE [user]
   (
-     member_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
-     authtoken        NVARCHAR(255) NULL,
+     user_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
+     AuthUserid        NVARCHAR(255) NULL,
+     AuthConnection        NVARCHAR(255) NULL,
+     AuthProvider        NVARCHAR(255) NULL,
+     AuthAccessToken        NVARCHAR(255) NULL,
+     AuthIdToken        NVARCHAR(1024) NULL,
      date_created      DATETIME NULL,
      date_modified     DATETIME NULL,
      firstname        NVARCHAR(255) NULL,
      middlename        NVARCHAR(255) NULL,
      lastname        NVARCHAR(255) NULL,
+     phone_number        NVARCHAR(255) NULL,
+	 email_address        NVARCHAR(255) NULL,
      profileimageurl        NVARCHAR(255) NULL,
-	 is_disabled                   BIT NULL
+	 is_disabled                   BIT NULL,
+	 can_text_msg                   BIT NULL,
+     date_text_msg_approved      DATETIME NULL
   )
 
 go
 
-IF Object_id('member') IS NOT NULL
-  PRINT '<<< CREATED TABLE member >>>'
+IF Object_id('user') IS NOT NULL
+  PRINT '<<< CREATED TABLE user >>>'
 ELSE
-  PRINT '<<< FAILED CREATING TABLE member >>>'
+  PRINT '<<< FAILED CREATING TABLE user >>>'
 
 go
 /******************************************************************************
@@ -111,56 +119,77 @@ INSERT INTO apikey (apikey_id, date_created, token, notes) VALUES (4, GETDATE(),
 INSERT INTO apikey (apikey_id, date_created, token, notes) VALUES (5, GETDATE(), '5d1c6e75feff40b08ed5966d28df0db9', '');
 GO
 /*********************** CUSTOM  BEGIN *********************/
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberExistByAuthtoken]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnumByAuthUserid]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberExistByAuthtoken >>>>'
-	DROP PROCEDURE [spMemberExistByAuthtoken]
+	PRINT '<<<< Dropping Stored Procedure spUserEnumByAuthUserid >>>>'
+	DROP PROCEDURE [spUserEnumByAuthUserid]
 END
 GO
 
-CREATE PROCEDURE spMemberExistByAuthtoken
-(
-@Authtoken                 NVARCHAR(255) = NULL,
-@COUNT          INT = 0 OUTPUT
-)
+CREATE PROCEDURE spUserEnumByAuthUserid
+		@UserID                    NUMERIC(10) = 0,
+	@AuthUserid                NVARCHAR(255) = NULL,
+	@AuthConnection            NVARCHAR(255) = NULL,
+	@AuthProvider              NVARCHAR(255) = NULL,
+	@AuthAccessToken           NVARCHAR(255) = NULL,
+	@AuthIdToken               NVARCHAR(1024) = NULL,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+    	@BeginDateModified         DATETIME = NULL,
+    	@EndDateModified           DATETIME = NULL,
+	@Firstname                 NVARCHAR(255) = NULL,
+	@Middlename                NVARCHAR(255) = NULL,
+	@Lastname                  NVARCHAR(255) = NULL,
+	@PhoneNumber               NVARCHAR(255) = NULL,
+	@EmailAddress              NVARCHAR(255) = NULL,
+	@Profileimageurl           NVARCHAR(255) = NULL,
+	@IsDisabled                NUMERIC(1,0) = NULL,
+	@CanTextMsg                NUMERIC(1,0) = NULL,
+    	@BeginDateTextMsgApproved  DATETIME = NULL,
+    	@EndDateTextMsgApproved    DATETIME = NULL,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
 AS
-SET NOCOUNT ON
+    	SET NOCOUNT ON
 
--- check if a record with the specified id exists
 
-SELECT @COUNT = COUNT(authtoken) 
-FROM [member] 
-WHERE authtoken = @Authtoken
-RETURN 0
-------------------------------------------------
+      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved]
+      FROM [user] 
+      WHERE [AuthUserid]=@AuthUserid
+ ORDER BY [user_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberExistByAuthtoken]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberExistByAuthtoken >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnumByAuthUserid]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserEnumByAuthUserid >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberExistByAuthtoken >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserEnumByAuthUserid >>>'
 GO
 /*********************** CUSTOM  END *********************/
 
 
-
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberExist >>>>'
-	DROP PROCEDURE [spMemberExist]
+	PRINT '<<<< Dropping Stored Procedure spUserExist >>>>'
+	DROP PROCEDURE [spUserExist]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberExist
+**		PROCEDURE NAME: spUserExist
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
-CREATE PROCEDURE spMemberExist
+CREATE PROCEDURE spUserExist
 (
-@MemberID        NUMERIC(10) = 0,
+@UserID        NUMERIC(10) = 0,
 @COUNT          INT = 0 OUTPUT
 )
 AS
@@ -168,79 +197,87 @@ SET NOCOUNT ON
 
 -- check if a record with the specified id exists
 
-SELECT @COUNT = COUNT(member_id) 
-FROM [member] 
-WHERE member_id = @MemberID
+SELECT @COUNT = COUNT(user_id) 
+FROM [user] 
+WHERE user_id = @UserID
 RETURN 0
 ------------------------------------------------
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberExist >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserExist >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberExist >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserExist >>>'
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberLoad >>>>'
-	DROP PROCEDURE [spMemberLoad]
+	PRINT '<<<< Dropping Stored Procedure spUserLoad >>>>'
+	DROP PROCEDURE [spUserLoad]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberLoad
+**		PROCEDURE NAME: spUserLoad
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
-CREATE PROCEDURE spMemberLoad
+CREATE PROCEDURE spUserLoad
 (
-@MemberID        NUMERIC(10) = 0
+@UserID        NUMERIC(10) = 0
 )
 AS
 SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [member_id], [authtoken], [date_created], [date_modified], [firstname], [middlename], [lastname], [profileimageurl], [is_disabled] 
-FROM [member] 
-WHERE member_id = @MemberID
+SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved] 
+FROM [user] 
+WHERE user_id = @UserID
 RETURN 0
 ------------------------------------------------
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberLoad >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserLoad >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberLoad >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserLoad >>>'
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberUpdate >>>>'
-	DROP PROCEDURE [spMemberUpdate]
+	PRINT '<<<< Dropping Stored Procedure spUserUpdate >>>>'
+	DROP PROCEDURE [spUserUpdate]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberUpdate
+**		PROCEDURE NAME: spUserUpdate
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
-CREATE PROCEDURE spMemberUpdate
+CREATE PROCEDURE spUserUpdate
 (
-	@MemberID                  NUMERIC(10) = 0,
-	@Authtoken                 NVARCHAR(255) = NULL,
+	@UserID                    NUMERIC(10) = 0,
+	@AuthUserid                NVARCHAR(255) = NULL,
+	@AuthConnection            NVARCHAR(255) = NULL,
+	@AuthProvider              NVARCHAR(255) = NULL,
+	@AuthAccessToken           NVARCHAR(255) = NULL,
+	@AuthIdToken               NVARCHAR(1024) = NULL,
 	@DateModified              DATETIME = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
+	@PhoneNumber               NVARCHAR(255) = NULL,
+	@EmailAddress              NVARCHAR(255) = NULL,
 	@Profileimageurl           NVARCHAR(255) = NULL,
 	@IsDisabled                NUMERIC(1,0) = 0,
+	@CanTextMsg                NUMERIC(1,0) = 0,
+	@DateTextMsgApproved       DATETIME = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -248,85 +285,101 @@ SET NOCOUNT ON
 
    -- Update record wth NUMERIC(10) value
 
-UPDATE [member] SET 
-	[authtoken] = @Authtoken,
+UPDATE [user] SET 
+	[AuthUserid] = @AuthUserid,
+	[AuthConnection] = @AuthConnection,
+	[AuthProvider] = @AuthProvider,
+	[AuthAccessToken] = @AuthAccessToken,
+	[AuthIdToken] = @AuthIdToken,
 	[date_modified] = @DateModified,
 	[firstname] = @Firstname,
 	[middlename] = @Middlename,
 	[lastname] = @Lastname,
+	[phone_number] = @PhoneNumber,
+	[email_address] = @EmailAddress,
 	[profileimageurl] = @Profileimageurl,
-	[is_disabled] = @IsDisabled
-WHERE member_id = @MemberID
+	[is_disabled] = @IsDisabled,
+	[can_text_msg] = @CanTextMsg,
+	[date_text_msg_approved] = @DateTextMsgApproved
+WHERE user_id = @UserID
 
 -- return ID for updated record
-SELECT @PKID = @MemberID
+SELECT @PKID = @UserID
 ------------------------------------------------
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberUpdate >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserUpdate >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberUpdate >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserUpdate >>>'
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberDelete >>>>'
-	DROP PROCEDURE [spMemberDelete]
+	PRINT '<<<< Dropping Stored Procedure spUserDelete >>>>'
+	DROP PROCEDURE [spUserDelete]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberDelete
+**		PROCEDURE NAME: spUserDelete
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
-CREATE PROCEDURE spMemberDelete
+CREATE PROCEDURE spUserDelete
 (
-@MemberID        NUMERIC(10) = 0
+@UserID        NUMERIC(10) = 0
 )
 AS
 SET NOCOUNT ON
 
 -- check if a record with the specified id exists
 
-DELETE FROM [member] 
-WHERE member_id = @MemberID
+DELETE FROM [user] 
+WHERE user_id = @UserID
 ------------------------------------------------
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberDelete >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserDelete >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberDelete >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserDelete >>>'
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberInsert >>>>'
-	DROP PROCEDURE [spMemberInsert]
+	PRINT '<<<< Dropping Stored Procedure spUserInsert >>>>'
+	DROP PROCEDURE [spUserInsert]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberInsert
+**		PROCEDURE NAME: spUserInsert
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
-CREATE PROCEDURE spMemberInsert
+CREATE PROCEDURE spUserInsert
 (
-	@MemberID                  NUMERIC(10) = 0,
-	@Authtoken                 NVARCHAR(255) = NULL,
+	@UserID                    NUMERIC(10) = 0,
+	@AuthUserid                NVARCHAR(255) = NULL,
+	@AuthConnection            NVARCHAR(255) = NULL,
+	@AuthProvider              NVARCHAR(255) = NULL,
+	@AuthAccessToken           NVARCHAR(255) = NULL,
+	@AuthIdToken               NVARCHAR(1024) = NULL,
 	@DateCreated               DATETIME = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
+	@PhoneNumber               NVARCHAR(255) = NULL,
+	@EmailAddress              NVARCHAR(255) = NULL,
 	@Profileimageurl           NVARCHAR(255) = NULL,
 	@IsDisabled                NUMERIC(1,0) = 0,
+	@CanTextMsg                NUMERIC(1,0) = 0,
+	@DateTextMsgApproved       DATETIME = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -334,25 +387,41 @@ SET NOCOUNT ON
 
    -- Update record wth NUMERIC(10) value
 
-INSERT INTO [member]
+INSERT INTO [user]
 (
-	[authtoken],
+	[AuthUserid],
+	[AuthConnection],
+	[AuthProvider],
+	[AuthAccessToken],
+	[AuthIdToken],
 	[date_created],
 	[firstname],
 	[middlename],
 	[lastname],
+	[phone_number],
+	[email_address],
 	[profileimageurl],
-	[is_disabled]
+	[is_disabled],
+	[can_text_msg],
+	[date_text_msg_approved]
 )
  VALUES 
 (
-	@Authtoken,
+	@AuthUserid,
+	@AuthConnection,
+	@AuthProvider,
+	@AuthAccessToken,
+	@AuthIdToken,
 	@DateCreated,
 	@Firstname,
 	@Middlename,
 	@Lastname,
+	@PhoneNumber,
+	@EmailAddress,
 	@Profileimageurl,
-	@IsDisabled
+	@IsDisabled,
+	@CanTextMsg,
+	@DateTextMsgApproved
 )
 
 
@@ -362,33 +431,37 @@ SELECT @PKID = SCOPE_IDENTITY()
 ------------------------------------------------
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberInsert >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserInsert >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberInsert >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserInsert >>>'
 GO
 
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spMemberEnum >>>>'
-	DROP PROCEDURE [spMemberEnum]
+	PRINT '<<<< Dropping Stored Procedure spUserEnum >>>>'
+	DROP PROCEDURE [spUserEnum]
 END
 GO
 
 /*******************************************************************************
-**		PROCEDURE NAME: spMemberEnum
+**		PROCEDURE NAME: spUserEnum
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		10/21/2016		HA		Created
+**		10/23/2016		HA		Created
 *******************************************************************************/
 
 
 
 
-CREATE PROCEDURE spMemberEnum
-	@MemberID                  NUMERIC(10) = 0,
-	@Authtoken                 NVARCHAR(255) = NULL,
+CREATE PROCEDURE spUserEnum
+	@UserID                    NUMERIC(10) = 0,
+	@AuthUserid                NVARCHAR(255) = NULL,
+	@AuthConnection            NVARCHAR(255) = NULL,
+	@AuthProvider              NVARCHAR(255) = NULL,
+	@AuthAccessToken           NVARCHAR(255) = NULL,
+	@AuthIdToken               NVARCHAR(1024) = NULL,
     	@BeginDateCreated          DATETIME = NULL,
     	@EndDateCreated            DATETIME = NULL,
     	@BeginDateModified         DATETIME = NULL,
@@ -396,18 +469,27 @@ CREATE PROCEDURE spMemberEnum
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
+	@PhoneNumber               NVARCHAR(255) = NULL,
+	@EmailAddress              NVARCHAR(255) = NULL,
 	@Profileimageurl           NVARCHAR(255) = NULL,
 	@IsDisabled                NUMERIC(1,0) = NULL,
+	@CanTextMsg                NUMERIC(1,0) = NULL,
+    	@BeginDateTextMsgApproved  DATETIME = NULL,
+    	@EndDateTextMsgApproved    DATETIME = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [member_id], [authtoken], [date_created], [date_modified], [firstname], [middlename], [lastname], [profileimageurl], [is_disabled]
-      FROM [member] 
-      WHERE ((@MemberID = 0) OR ([member_id] LIKE @MemberID))
-      AND ((@Authtoken IS NULL) OR ([authtoken] LIKE @Authtoken))
+      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved]
+      FROM [user] 
+      WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
+      AND ((@AuthUserid IS NULL) OR ([AuthUserid] LIKE @AuthUserid))
+      AND ((@AuthConnection IS NULL) OR ([AuthConnection] LIKE @AuthConnection))
+      AND ((@AuthProvider IS NULL) OR ([AuthProvider] LIKE @AuthProvider))
+      AND ((@AuthAccessToken IS NULL) OR ([AuthAccessToken] LIKE @AuthAccessToken))
+      AND ((@AuthIdToken IS NULL) OR ([AuthIdToken] LIKE @AuthIdToken))
       AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
       AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
       AND ((@BeginDateModified IS NULL) OR ([date_modified] >= @BeginDateModified))
@@ -415,9 +497,14 @@ AS
       AND ((@Firstname IS NULL) OR ([firstname] LIKE @Firstname))
       AND ((@Middlename IS NULL) OR ([middlename] LIKE @Middlename))
       AND ((@Lastname IS NULL) OR ([lastname] LIKE @Lastname))
+      AND ((@PhoneNumber IS NULL) OR ([phone_number] LIKE @PhoneNumber))
+      AND ((@EmailAddress IS NULL) OR ([email_address] LIKE @EmailAddress))
       AND ((@Profileimageurl IS NULL) OR ([profileimageurl] LIKE @Profileimageurl))
       AND ((@IsDisabled IS NULL) OR ([is_disabled] LIKE @IsDisabled))
- ORDER BY [member_id] ASC
+      AND ((@CanTextMsg IS NULL) OR ([can_text_msg] LIKE @CanTextMsg))
+      AND ((@BeginDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] >= @BeginDateTextMsgApproved))
+      AND ((@EndDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] <= @EndDateTextMsgApproved))
+ ORDER BY [user_id] ASC
 
 
       SELECT @COUNT=@@rowcount 
@@ -425,11 +512,14 @@ AS
     	RETURN 0
 
 GO
-IF EXISTS (select * from sysobjects where id = object_id(N'[spMemberEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spMemberEnum >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserEnum >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spMemberEnum >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserEnum >>>'
 GO
+
+
+
 
 IF EXISTS (select * from sysobjects where id = object_id(N'[spApikeyExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN

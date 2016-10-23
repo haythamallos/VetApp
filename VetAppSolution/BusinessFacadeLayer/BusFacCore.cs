@@ -79,7 +79,29 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
         /*********************** CUSTOM BEGIN *********************/
-
+        public User UserEnumByAuthUserid(string pStrUserid)
+        {
+            User user = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                ArrayList items = null;
+                BusUser busUser = null;
+                busUser = new BusUser(conn);
+                busUser.SP_ENUM_NAME = "spUserEnumByAuthUserid";
+                EnumUser enumUser = new EnumUser() { AuthUserid = pStrUserid };
+                items = busUser.Get(enumUser);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busUser.HasError;
+                if ((items != null) && (items.Count > 0))
+                {
+                    user = (User) items[items.Count - 1];
+                }
+            }
+            return user;
+        }
         /*********************** CUSTOM END *********************/
 
 
@@ -199,29 +221,28 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
 
-
         //------------------------------------------
         /// <summary>
-        /// MemberCreateOrModify
+        /// UserCreateOrModify
         /// </summary>
-        /// <param name="">pMember</param>
+        /// <param name="">pUser</param>
         /// <returns>long</returns>
         /// 
-        public long MemberCreateOrModify(Member pMember)
+        public long UserCreateOrModify(User pUser)
         {
             long lID = 0;
             bool bConn = false;
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
-                BusMember busMember = null;
-                busMember = new BusMember(conn);
-                busMember.Save(pMember);
+                BusUser busUser = null;
+                busUser = new BusUser(conn);
+                busUser.Save(pUser);
                 // close the db connection
                 bConn = CloseConnection(conn);
-                lID = pMember.MemberID;
-                _hasError = busMember.HasError;
-                if (busMember.HasError)
+                lID = pUser.UserID;
+                _hasError = busUser.HasError;
+                if (busUser.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
@@ -231,25 +252,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
         /// <summary>
-        /// MemberGetList
+        /// UserGetList
         /// </summary>
-        /// <param name="">pEnumMember</param>
+        /// <param name="">pEnumUser</param>
         /// <returns>ArrayList</returns>
         /// 
-        public ArrayList MemberGetList(EnumMember pEnumMember)
+        public ArrayList UserGetList(EnumUser pEnumUser)
         {
             ArrayList items = null;
             bool bConn = false;
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
-                BusMember busMember = null;
-                busMember = new BusMember(conn);
-                items = busMember.Get(pEnumMember);
+                BusUser busUser = null;
+                busUser = new BusUser(conn);
+                items = busUser.Get(pEnumUser);
                 // close the db connection
                 bConn = CloseConnection(conn);
-                _hasError = busMember.HasError;
-                if (busMember.HasError)
+                _hasError = busUser.HasError;
+                if (busUser.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
@@ -259,51 +280,51 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
         /// <summary>
-        /// MemberGet
+        /// UserGet
         /// </summary>
-        /// <param name="">pLngMemberID</param>
-        /// <returns>Member</returns>
+        /// <param name="">pLngUserID</param>
+        /// <returns>User</returns>
         /// 
-        public Member MemberGet(long pLngMemberID)
+        public User UserGet(long pLngUserID)
         {
-            Member member = new Member() { MemberID = pLngMemberID };
+            User user = new User() { UserID = pLngUserID };
             bool bConn = false;
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
-                BusMember busMember = null;
-                busMember = new BusMember(conn);
-                busMember.Load(member);
+                BusUser busUser = null;
+                busUser = new BusUser(conn);
+                busUser.Load(user);
                 // close the db connection
                 bConn = CloseConnection(conn);
-                _hasError = busMember.HasError;
-                if (busMember.HasError)
+                _hasError = busUser.HasError;
+                if (busUser.HasError)
                 {
                     // error
                     ErrorCode error = new ErrorCode();
                 }
             }
-            return member;
+            return user;
         }
 
         /// <summary>
-        /// MemberRemove
+        /// UserRemove
         /// </summary>
-        /// <param name="">pMemberID</param>
+        /// <param name="">pUserID</param>
         /// <returns>void</returns>
         /// 
-        public void MemberRemove(long pMemberID)
+        public void UserRemove(long pUserID)
         {
             bool bConn = false;
 
             SqlConnection conn = getDBConnection();
             if (conn != null)
             {
-                Member member = new Member();
-                member.MemberID = pMemberID;
-                BusMember bus = null;
-                bus = new BusMember(conn);
-                bus.Delete(member);
+                User user = new User();
+                user.UserID = pUserID;
+                BusUser bus = null;
+                bus = new BusUser(conn);
+                bus.Delete(user);
                 // close the db connection
                 bConn = CloseConnection(conn);
                 _hasError = bus.HasError;
@@ -313,7 +334,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+
+
+
+
+
+
 
     }
 }

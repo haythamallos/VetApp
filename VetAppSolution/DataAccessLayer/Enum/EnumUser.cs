@@ -14,14 +14,14 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// Copyright (c) 2016 Haytham Allos.  San Diego, California, USA
     /// All Rights Reserved
     /// 
-    /// File:  EnumMember.cs
+    /// File:  EnumUser.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	10/21/2016	Created
+    /// 001	HA	10/23/2016	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
-    public class EnumMember
+    public class EnumUser
     {
         private bool _hasAny = false;
         private bool _hasMore = false;
@@ -42,12 +42,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
 
         /// <summary>Attribute of type string</summary>
-        public static readonly string ENTITY_NAME = "EnumMember"; //Table name to abstract
+        public static readonly string ENTITY_NAME = "EnumUser"; //Table name to abstract
         private static DateTime dtNull = new DateTime();
         private static readonly string PARAM_COUNT = "@COUNT"; //Sp count parameter
 
-        private long _lMemberID = 0;
-        private string _strAuthtoken = null;
+        private long _lUserID = 0;
+        private string _strAuthUserid = null;
+        private string _strAuthConnection = null;
+        private string _strAuthProvider = null;
+        private string _strAuthAccessToken = null;
+        private string _strAuthIdToken = null;
         private DateTime _dtBeginDateCreated = new DateTime();
         private DateTime _dtEndDateCreated = new DateTime();
         private DateTime _dtBeginDateModified = new DateTime();
@@ -55,18 +59,31 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private string _strFirstname = null;
         private string _strMiddlename = null;
         private string _strLastname = null;
+        private string _strPhoneNumber = null;
+        private string _strEmailAddress = null;
         private string _strProfileimageurl = null;
         private bool? _bIsDisabled = null;
+        private bool? _bCanTextMsg = null;
+        private DateTime _dtBeginDateTextMsgApproved = new DateTime();
+        private DateTime _dtEndDateTextMsgApproved = new DateTime();
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
         /// <summary>DB_FIELD_ID Attribute type string</summary>
-        public static readonly string DB_FIELD_ID = "member_id"; //Table id field name
-                                                                 /// <summary>MemberID Attribute type string</summary>
-        public static readonly string TAG_MEMBER_ID = "MemberID"; //Attribute MemberID  name
-                                                                  /// <summary>Authtoken Attribute type string</summary>
-        public static readonly string TAG_AUTHTOKEN = "Authtoken"; //Attribute Authtoken  name
-                                                                   /// <summary>DateCreated Attribute type string</summary>
+        public static readonly string DB_FIELD_ID = "user_id"; //Table id field name
+                                                               /// <summary>UserID Attribute type string</summary>
+        public static readonly string TAG_USER_ID = "UserID"; //Attribute UserID  name
+                                                              /// <summary>AuthUserid Attribute type string</summary>
+        public static readonly string TAG_AUTHUSERID = "AuthUserid"; //Attribute AuthUserid  name
+                                                                     /// <summary>AuthConnection Attribute type string</summary>
+        public static readonly string TAG_AUTHCONNECTION = "AuthConnection"; //Attribute AuthConnection  name
+                                                                             /// <summary>AuthProvider Attribute type string</summary>
+        public static readonly string TAG_AUTHPROVIDER = "AuthProvider"; //Attribute AuthProvider  name
+                                                                         /// <summary>AuthAccessToken Attribute type string</summary>
+        public static readonly string TAG_AUTHACCESSTOKEN = "AuthAccessToken"; //Attribute AuthAccessToken  name
+                                                                               /// <summary>AuthIdToken Attribute type string</summary>
+        public static readonly string TAG_AUTHIDTOKEN = "AuthIdToken"; //Attribute AuthIdToken  name
+                                                                       /// <summary>DateCreated Attribute type string</summary>
         public static readonly string TAG_BEGIN_DATE_CREATED = "BeginDateCreated"; //Attribute DateCreated  name
                                                                                    /// <summary>EndDateCreated Attribute type string</summary>
         public static readonly string TAG_END_DATE_CREATED = "EndDateCreated"; //Attribute DateCreated  name
@@ -80,30 +97,64 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_MIDDLENAME = "Middlename"; //Attribute Middlename  name
                                                                      /// <summary>Lastname Attribute type string</summary>
         public static readonly string TAG_LASTNAME = "Lastname"; //Attribute Lastname  name
-                                                                 /// <summary>Profileimageurl Attribute type string</summary>
+                                                                 /// <summary>PhoneNumber Attribute type string</summary>
+        public static readonly string TAG_PHONE_NUMBER = "PhoneNumber"; //Attribute PhoneNumber  name
+                                                                        /// <summary>EmailAddress Attribute type string</summary>
+        public static readonly string TAG_EMAIL_ADDRESS = "EmailAddress"; //Attribute EmailAddress  name
+                                                                          /// <summary>Profileimageurl Attribute type string</summary>
         public static readonly string TAG_PROFILEIMAGEURL = "Profileimageurl"; //Attribute Profileimageurl  name
                                                                                /// <summary>IsDisabled Attribute type string</summary>
         public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Attribute IsDisabled  name
-                                                                      // Stored procedure name
-        public string SP_ENUM_NAME = "spMemberEnum"; //Enum sp name
+                                                                      /// <summary>CanTextMsg Attribute type string</summary>
+        public static readonly string TAG_CAN_TEXT_MSG = "CanTextMsg"; //Attribute CanTextMsg  name
+                                                                       /// <summary>DateTextMsgApproved Attribute type string</summary>
+        public static readonly string TAG_BEGIN_DATE_TEXT_MSG_APPROVED = "BeginDateTextMsgApproved"; //Attribute DateTextMsgApproved  name
+                                                                                                     /// <summary>EndDateTextMsgApproved Attribute type string</summary>
+        public static readonly string TAG_END_DATE_TEXT_MSG_APPROVED = "EndDateTextMsgApproved"; //Attribute DateTextMsgApproved  name
+                                                                                                 // Stored procedure name
+        public string SP_ENUM_NAME = "spUserEnum"; //Enum sp name
 
-        /// <summary>HasError is a Property in the Member Class of type bool</summary>
+        /// <summary>HasError is a Property in the User Class of type bool</summary>
         public bool HasError
         {
             get { return _hasError; }
             set { _hasError = value; }
         }
-        /// <summary>MemberID is a Property in the Member Class of type long</summary>
-        public long MemberID
+        /// <summary>UserID is a Property in the User Class of type long</summary>
+        public long UserID
         {
-            get { return _lMemberID; }
-            set { _lMemberID = value; }
+            get { return _lUserID; }
+            set { _lUserID = value; }
         }
-        /// <summary>Authtoken is a Property in the Member Class of type String</summary>
-        public string Authtoken
+        /// <summary>AuthUserid is a Property in the User Class of type String</summary>
+        public string AuthUserid
         {
-            get { return _strAuthtoken; }
-            set { _strAuthtoken = value; }
+            get { return _strAuthUserid; }
+            set { _strAuthUserid = value; }
+        }
+        /// <summary>AuthConnection is a Property in the User Class of type String</summary>
+        public string AuthConnection
+        {
+            get { return _strAuthConnection; }
+            set { _strAuthConnection = value; }
+        }
+        /// <summary>AuthProvider is a Property in the User Class of type String</summary>
+        public string AuthProvider
+        {
+            get { return _strAuthProvider; }
+            set { _strAuthProvider = value; }
+        }
+        /// <summary>AuthAccessToken is a Property in the User Class of type String</summary>
+        public string AuthAccessToken
+        {
+            get { return _strAuthAccessToken; }
+            set { _strAuthAccessToken = value; }
+        }
+        /// <summary>AuthIdToken is a Property in the User Class of type String</summary>
+        public string AuthIdToken
+        {
+            get { return _strAuthIdToken; }
+            set { _strAuthIdToken = value; }
         }
         /// <summary>Property DateCreated. Type: DateTime</summary>
         public DateTime BeginDateCreated
@@ -129,35 +180,65 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             get { return _dtEndDateModified; }
             set { _dtEndDateModified = value; }
         }
-        /// <summary>Firstname is a Property in the Member Class of type String</summary>
+        /// <summary>Firstname is a Property in the User Class of type String</summary>
         public string Firstname
         {
             get { return _strFirstname; }
             set { _strFirstname = value; }
         }
-        /// <summary>Middlename is a Property in the Member Class of type String</summary>
+        /// <summary>Middlename is a Property in the User Class of type String</summary>
         public string Middlename
         {
             get { return _strMiddlename; }
             set { _strMiddlename = value; }
         }
-        /// <summary>Lastname is a Property in the Member Class of type String</summary>
+        /// <summary>Lastname is a Property in the User Class of type String</summary>
         public string Lastname
         {
             get { return _strLastname; }
             set { _strLastname = value; }
         }
-        /// <summary>Profileimageurl is a Property in the Member Class of type String</summary>
+        /// <summary>PhoneNumber is a Property in the User Class of type String</summary>
+        public string PhoneNumber
+        {
+            get { return _strPhoneNumber; }
+            set { _strPhoneNumber = value; }
+        }
+        /// <summary>EmailAddress is a Property in the User Class of type String</summary>
+        public string EmailAddress
+        {
+            get { return _strEmailAddress; }
+            set { _strEmailAddress = value; }
+        }
+        /// <summary>Profileimageurl is a Property in the User Class of type String</summary>
         public string Profileimageurl
         {
             get { return _strProfileimageurl; }
             set { _strProfileimageurl = value; }
         }
-        /// <summary>IsDisabled is a Property in the Member Class of type bool</summary>
+        /// <summary>IsDisabled is a Property in the User Class of type bool</summary>
         public bool? IsDisabled
         {
             get { return _bIsDisabled; }
             set { _bIsDisabled = value; }
+        }
+        /// <summary>CanTextMsg is a Property in the User Class of type bool</summary>
+        public bool? CanTextMsg
+        {
+            get { return _bCanTextMsg; }
+            set { _bCanTextMsg = value; }
+        }
+        /// <summary>Property DateTextMsgApproved. Type: DateTime</summary>
+        public DateTime BeginDateTextMsgApproved
+        {
+            get { return _dtBeginDateTextMsgApproved; }
+            set { _dtBeginDateTextMsgApproved = value; }
+        }
+        /// <summary>Property DateTextMsgApproved. Type: DateTime</summary>
+        public DateTime EndDateTextMsgApproved
+        {
+            get { return _dtEndDateTextMsgApproved; }
+            set { _dtEndDateTextMsgApproved = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -192,23 +273,23 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         }
 
         /// <summary>Contructor takes 1 parameter: SqlConnection</summary>
-        public EnumMember()
+        public EnumUser()
         {
         }
         /// <summary>Contructor takes 1 parameter: SqlConnection</summary>
-        public EnumMember(SqlConnection conn)
+        public EnumUser(SqlConnection conn)
         {
             _conn = conn;
         }
 
 
         // Implementation of IEnumerator
-        /// <summary>Property of type Member. Returns the next Member in the list</summary>
-        private Member _nextTransaction
+        /// <summary>Property of type User. Returns the next User in the list</summary>
+        private User _nextTransaction
         {
             get
             {
-                Member o = null;
+                User o = null;
 
                 if (!_bSetup)
                 {
@@ -216,7 +297,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 }
                 if (_hasMore)
                 {
-                    o = new Member(_rdr);
+                    o = new User(_rdr);
                     _hasMore = _rdr.Read();
                     if (!_hasMore)
                     {
@@ -302,14 +383,18 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             _cmd = null;
         }
 
-        /// <summary>ToString is overridden to display all properties of the Member Class</summary>
+        /// <summary>ToString is overridden to display all properties of the User Class</summary>
         public override string ToString()
         {
             StringBuilder sbReturn = null;
 
             sbReturn = new StringBuilder();
-            sbReturn.Append(TAG_MEMBER_ID + ":  " + MemberID.ToString() + "\n");
-            sbReturn.Append(TAG_AUTHTOKEN + ":  " + Authtoken + "\n");
+            sbReturn.Append(TAG_USER_ID + ":  " + UserID.ToString() + "\n");
+            sbReturn.Append(TAG_AUTHUSERID + ":  " + AuthUserid + "\n");
+            sbReturn.Append(TAG_AUTHCONNECTION + ":  " + AuthConnection + "\n");
+            sbReturn.Append(TAG_AUTHPROVIDER + ":  " + AuthProvider + "\n");
+            sbReturn.Append(TAG_AUTHACCESSTOKEN + ":  " + AuthAccessToken + "\n");
+            sbReturn.Append(TAG_AUTHIDTOKEN + ":  " + AuthIdToken + "\n");
             if (!dtNull.Equals(BeginDateCreated))
             {
                 sbReturn.Append(TAG_BEGIN_DATE_CREATED + ":  " + BeginDateCreated.ToString() + "\n");
@@ -345,20 +430,43 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_FIRSTNAME + ":  " + Firstname + "\n");
             sbReturn.Append(TAG_MIDDLENAME + ":  " + Middlename + "\n");
             sbReturn.Append(TAG_LASTNAME + ":  " + Lastname + "\n");
+            sbReturn.Append(TAG_PHONE_NUMBER + ":  " + PhoneNumber + "\n");
+            sbReturn.Append(TAG_EMAIL_ADDRESS + ":  " + EmailAddress + "\n");
             sbReturn.Append(TAG_PROFILEIMAGEURL + ":  " + Profileimageurl + "\n");
             sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
+            sbReturn.Append(TAG_CAN_TEXT_MSG + ":  " + CanTextMsg + "\n");
+            if (!dtNull.Equals(BeginDateTextMsgApproved))
+            {
+                sbReturn.Append(TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ":  " + BeginDateTextMsgApproved.ToString() + "\n");
+            }
+            else
+            {
+                sbReturn.Append(TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ":\n");
+            }
+            if (!dtNull.Equals(EndDateTextMsgApproved))
+            {
+                sbReturn.Append(TAG_END_DATE_TEXT_MSG_APPROVED + ":  " + EndDateTextMsgApproved.ToString() + "\n");
+            }
+            else
+            {
+                sbReturn.Append(TAG_END_DATE_TEXT_MSG_APPROVED + ":\n");
+            }
 
             return sbReturn.ToString();
         }
-        /// <summary>Creates well formatted XML - includes all properties of Member</summary>
+        /// <summary>Creates well formatted XML - includes all properties of User</summary>
         public string ToXml()
         {
             StringBuilder sbReturn = null;
 
             sbReturn = new StringBuilder();
             sbReturn.Append("<" + ENTITY_NAME + ">\n");
-            sbReturn.Append("<" + TAG_MEMBER_ID + ">" + MemberID + "</" + TAG_MEMBER_ID + ">\n");
-            sbReturn.Append("<" + TAG_AUTHTOKEN + ">" + Authtoken + "</" + TAG_AUTHTOKEN + ">\n");
+            sbReturn.Append("<" + TAG_USER_ID + ">" + UserID + "</" + TAG_USER_ID + ">\n");
+            sbReturn.Append("<" + TAG_AUTHUSERID + ">" + AuthUserid + "</" + TAG_AUTHUSERID + ">\n");
+            sbReturn.Append("<" + TAG_AUTHCONNECTION + ">" + AuthConnection + "</" + TAG_AUTHCONNECTION + ">\n");
+            sbReturn.Append("<" + TAG_AUTHPROVIDER + ">" + AuthProvider + "</" + TAG_AUTHPROVIDER + ">\n");
+            sbReturn.Append("<" + TAG_AUTHACCESSTOKEN + ">" + AuthAccessToken + "</" + TAG_AUTHACCESSTOKEN + ">\n");
+            sbReturn.Append("<" + TAG_AUTHIDTOKEN + ">" + AuthIdToken + "</" + TAG_AUTHIDTOKEN + ">\n");
             if (!dtNull.Equals(BeginDateCreated))
             {
                 sbReturn.Append("<" + TAG_BEGIN_DATE_CREATED + ">" + BeginDateCreated.ToString() + "</" + TAG_BEGIN_DATE_CREATED + ">\n");
@@ -394,8 +502,27 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_FIRSTNAME + ">" + Firstname + "</" + TAG_FIRSTNAME + ">\n");
             sbReturn.Append("<" + TAG_MIDDLENAME + ">" + Middlename + "</" + TAG_MIDDLENAME + ">\n");
             sbReturn.Append("<" + TAG_LASTNAME + ">" + Lastname + "</" + TAG_LASTNAME + ">\n");
+            sbReturn.Append("<" + TAG_PHONE_NUMBER + ">" + PhoneNumber + "</" + TAG_PHONE_NUMBER + ">\n");
+            sbReturn.Append("<" + TAG_EMAIL_ADDRESS + ">" + EmailAddress + "</" + TAG_EMAIL_ADDRESS + ">\n");
             sbReturn.Append("<" + TAG_PROFILEIMAGEURL + ">" + Profileimageurl + "</" + TAG_PROFILEIMAGEURL + ">\n");
             sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
+            sbReturn.Append("<" + TAG_CAN_TEXT_MSG + ">" + CanTextMsg + "</" + TAG_CAN_TEXT_MSG + ">\n");
+            if (!dtNull.Equals(BeginDateTextMsgApproved))
+            {
+                sbReturn.Append("<" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ">" + BeginDateTextMsgApproved.ToString() + "</" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ">\n");
+            }
+            else
+            {
+                sbReturn.Append("<" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED + "></" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ">\n");
+            }
+            if (!dtNull.Equals(EndDateTextMsgApproved))
+            {
+                sbReturn.Append("<" + TAG_END_DATE_TEXT_MSG_APPROVED + ">" + EndDateTextMsgApproved.ToString() + "</" + TAG_END_DATE_TEXT_MSG_APPROVED + ">\n");
+            }
+            else
+            {
+                sbReturn.Append("<" + TAG_END_DATE_TEXT_MSG_APPROVED + "></" + TAG_END_DATE_TEXT_MSG_APPROVED + ">\n");
+            }
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -434,9 +561,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_MEMBER_ID);
+                xResultNode = xNode.SelectSingleNode(TAG_USER_ID);
                 strTmp = xResultNode.InnerText;
-                MemberID = (long)Convert.ToInt32(strTmp);
+                UserID = (long)Convert.ToInt32(strTmp);
             }
             catch
             {
@@ -444,14 +571,62 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_AUTHTOKEN);
-                Authtoken = xResultNode.InnerText;
-                if (Authtoken.Trim().Length == 0)
-                    Authtoken = null;
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHUSERID);
+                AuthUserid = xResultNode.InnerText;
+                if (AuthUserid.Trim().Length == 0)
+                    AuthUserid = null;
             }
             catch
             {
-                Authtoken = null;
+                AuthUserid = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHCONNECTION);
+                AuthConnection = xResultNode.InnerText;
+                if (AuthConnection.Trim().Length == 0)
+                    AuthConnection = null;
+            }
+            catch
+            {
+                AuthConnection = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHPROVIDER);
+                AuthProvider = xResultNode.InnerText;
+                if (AuthProvider.Trim().Length == 0)
+                    AuthProvider = null;
+            }
+            catch
+            {
+                AuthProvider = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHACCESSTOKEN);
+                AuthAccessToken = xResultNode.InnerText;
+                if (AuthAccessToken.Trim().Length == 0)
+                    AuthAccessToken = null;
+            }
+            catch
+            {
+                AuthAccessToken = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHIDTOKEN);
+                AuthIdToken = xResultNode.InnerText;
+                if (AuthIdToken.Trim().Length == 0)
+                    AuthIdToken = null;
+            }
+            catch
+            {
+                AuthIdToken = null;
             }
 
             try
@@ -528,6 +703,30 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
+                xResultNode = xNode.SelectSingleNode(TAG_PHONE_NUMBER);
+                PhoneNumber = xResultNode.InnerText;
+                if (PhoneNumber.Trim().Length == 0)
+                    PhoneNumber = null;
+            }
+            catch
+            {
+                PhoneNumber = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_EMAIL_ADDRESS);
+                EmailAddress = xResultNode.InnerText;
+                if (EmailAddress.Trim().Length == 0)
+                    EmailAddress = null;
+            }
+            catch
+            {
+                EmailAddress = null;
+            }
+
+            try
+            {
                 xResultNode = xNode.SelectSingleNode(TAG_PROFILEIMAGEURL);
                 Profileimageurl = xResultNode.InnerText;
                 if (Profileimageurl.Trim().Length == 0)
@@ -547,6 +746,34 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 IsDisabled = false;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CAN_TEXT_MSG);
+                CanTextMsg = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                CanTextMsg = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_BEGIN_DATE_TEXT_MSG_APPROVED);
+                BeginDateTextMsgApproved = DateTime.Parse(xResultNode.InnerText);
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_END_DATE_TEXT_MSG_APPROVED);
+                EndDateTextMsgApproved = DateTime.Parse(xResultNode.InnerText);
+            }
+            catch
+            {
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -554,11 +781,39 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             try
             {
 
-                Console.WriteLine(TAG_AUTHTOKEN + ":  ");
-                Authtoken = Console.ReadLine();
-                if (Authtoken.Length == 0)
+                Console.WriteLine(TAG_AUTHUSERID + ":  ");
+                AuthUserid = Console.ReadLine();
+                if (AuthUserid.Length == 0)
                 {
-                    Authtoken = null;
+                    AuthUserid = null;
+                }
+
+                Console.WriteLine(TAG_AUTHCONNECTION + ":  ");
+                AuthConnection = Console.ReadLine();
+                if (AuthConnection.Length == 0)
+                {
+                    AuthConnection = null;
+                }
+
+                Console.WriteLine(TAG_AUTHPROVIDER + ":  ");
+                AuthProvider = Console.ReadLine();
+                if (AuthProvider.Length == 0)
+                {
+                    AuthProvider = null;
+                }
+
+                Console.WriteLine(TAG_AUTHACCESSTOKEN + ":  ");
+                AuthAccessToken = Console.ReadLine();
+                if (AuthAccessToken.Length == 0)
+                {
+                    AuthAccessToken = null;
+                }
+
+                Console.WriteLine(TAG_AUTHIDTOKEN + ":  ");
+                AuthIdToken = Console.ReadLine();
+                if (AuthIdToken.Length == 0)
+                {
+                    AuthIdToken = null;
                 }
                 Console.WriteLine(TAG_BEGIN_DATE_CREATED + ":  ");
                 try
@@ -626,6 +881,20 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     Lastname = null;
                 }
 
+                Console.WriteLine(TAG_PHONE_NUMBER + ":  ");
+                PhoneNumber = Console.ReadLine();
+                if (PhoneNumber.Length == 0)
+                {
+                    PhoneNumber = null;
+                }
+
+                Console.WriteLine(TAG_EMAIL_ADDRESS + ":  ");
+                EmailAddress = Console.ReadLine();
+                if (EmailAddress.Length == 0)
+                {
+                    EmailAddress = null;
+                }
+
                 Console.WriteLine(TAG_PROFILEIMAGEURL + ":  ");
                 Profileimageurl = Console.ReadLine();
                 if (Profileimageurl.Length == 0)
@@ -640,6 +909,38 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 catch
                 {
                     IsDisabled = false;
+                }
+
+                Console.WriteLine(TAG_CAN_TEXT_MSG + ":  ");
+                try
+                {
+                    CanTextMsg = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch
+                {
+                    CanTextMsg = false;
+                }
+
+                Console.WriteLine(TAG_BEGIN_DATE_TEXT_MSG_APPROVED + ":  ");
+                try
+                {
+                    string s = Console.ReadLine();
+                    BeginDateTextMsgApproved = DateTime.Parse(s);
+                }
+                catch
+                {
+                    BeginDateTextMsgApproved = new DateTime();
+                }
+
+                Console.WriteLine(TAG_END_DATE_TEXT_MSG_APPROVED + ":  ");
+                try
+                {
+                    string s = Console.ReadLine();
+                    EndDateTextMsgApproved = DateTime.Parse(s);
+                }
+                catch
+                {
+                    EndDateTextMsgApproved = new DateTime();
                 }
 
 
@@ -680,8 +981,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private void _setupEnumParams()
         {
             System.Text.StringBuilder sbLog = null;
-            SqlParameter paramMemberID = null;
-            SqlParameter paramAuthtoken = null;
+            SqlParameter paramUserID = null;
+            SqlParameter paramAuthUserid = null;
+            SqlParameter paramAuthConnection = null;
+            SqlParameter paramAuthProvider = null;
+            SqlParameter paramAuthAccessToken = null;
+            SqlParameter paramAuthIdToken = null;
             SqlParameter paramBeginDateCreated = null;
             SqlParameter paramEndDateCreated = null;
             SqlParameter paramBeginDateModified = null;
@@ -689,28 +994,85 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramFirstname = null;
             SqlParameter paramMiddlename = null;
             SqlParameter paramLastname = null;
+            SqlParameter paramPhoneNumber = null;
+            SqlParameter paramEmailAddress = null;
             SqlParameter paramProfileimageurl = null;
             SqlParameter paramIsDisabled = null;
+            SqlParameter paramCanTextMsg = null;
+            SqlParameter paramBeginDateTextMsgApproved = null;
+            SqlParameter paramEndDateTextMsgApproved = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
-            paramMemberID = new SqlParameter("@" + TAG_MEMBER_ID, MemberID);
-            sbLog.Append(TAG_MEMBER_ID + "=" + MemberID + "\n");
-            paramMemberID.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramMemberID);
+            paramUserID = new SqlParameter("@" + TAG_USER_ID, UserID);
+            sbLog.Append(TAG_USER_ID + "=" + UserID + "\n");
+            paramUserID.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramUserID);
 
-            // Setup the authtoken text param
-            if (Authtoken != null)
+            // Setup the AuthUserid text param
+            if (AuthUserid != null)
             {
-                paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, Authtoken);
-                sbLog.Append(TAG_AUTHTOKEN + "=" + Authtoken + "\n");
+                paramAuthUserid = new SqlParameter("@" + TAG_AUTHUSERID, AuthUserid);
+                sbLog.Append(TAG_AUTHUSERID + "=" + AuthUserid + "\n");
             }
             else
             {
-                paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, DBNull.Value);
+                paramAuthUserid = new SqlParameter("@" + TAG_AUTHUSERID, DBNull.Value);
             }
-            paramAuthtoken.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramAuthtoken);
+            paramAuthUserid.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthUserid);
+
+            // Setup the AuthConnection text param
+            if (AuthConnection != null)
+            {
+                paramAuthConnection = new SqlParameter("@" + TAG_AUTHCONNECTION, AuthConnection);
+                sbLog.Append(TAG_AUTHCONNECTION + "=" + AuthConnection + "\n");
+            }
+            else
+            {
+                paramAuthConnection = new SqlParameter("@" + TAG_AUTHCONNECTION, DBNull.Value);
+            }
+            paramAuthConnection.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthConnection);
+
+            // Setup the AuthProvider text param
+            if (AuthProvider != null)
+            {
+                paramAuthProvider = new SqlParameter("@" + TAG_AUTHPROVIDER, AuthProvider);
+                sbLog.Append(TAG_AUTHPROVIDER + "=" + AuthProvider + "\n");
+            }
+            else
+            {
+                paramAuthProvider = new SqlParameter("@" + TAG_AUTHPROVIDER, DBNull.Value);
+            }
+            paramAuthProvider.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthProvider);
+
+            // Setup the AuthAccessToken text param
+            if (AuthAccessToken != null)
+            {
+                paramAuthAccessToken = new SqlParameter("@" + TAG_AUTHACCESSTOKEN, AuthAccessToken);
+                sbLog.Append(TAG_AUTHACCESSTOKEN + "=" + AuthAccessToken + "\n");
+            }
+            else
+            {
+                paramAuthAccessToken = new SqlParameter("@" + TAG_AUTHACCESSTOKEN, DBNull.Value);
+            }
+            paramAuthAccessToken.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthAccessToken);
+
+            // Setup the AuthIdToken text param
+            if (AuthIdToken != null)
+            {
+                paramAuthIdToken = new SqlParameter("@" + TAG_AUTHIDTOKEN, AuthIdToken);
+                sbLog.Append(TAG_AUTHIDTOKEN + "=" + AuthIdToken + "\n");
+            }
+            else
+            {
+                paramAuthIdToken = new SqlParameter("@" + TAG_AUTHIDTOKEN, DBNull.Value);
+            }
+            paramAuthIdToken.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthIdToken);
 
             // Setup the date created param
             if (!dtNull.Equals(BeginDateCreated))
@@ -797,6 +1159,32 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             paramLastname.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramLastname);
 
+            // Setup the phone number text param
+            if (PhoneNumber != null)
+            {
+                paramPhoneNumber = new SqlParameter("@" + TAG_PHONE_NUMBER, PhoneNumber);
+                sbLog.Append(TAG_PHONE_NUMBER + "=" + PhoneNumber + "\n");
+            }
+            else
+            {
+                paramPhoneNumber = new SqlParameter("@" + TAG_PHONE_NUMBER, DBNull.Value);
+            }
+            paramPhoneNumber.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramPhoneNumber);
+
+            // Setup the email address text param
+            if (EmailAddress != null)
+            {
+                paramEmailAddress = new SqlParameter("@" + TAG_EMAIL_ADDRESS, EmailAddress);
+                sbLog.Append(TAG_EMAIL_ADDRESS + "=" + EmailAddress + "\n");
+            }
+            else
+            {
+                paramEmailAddress = new SqlParameter("@" + TAG_EMAIL_ADDRESS, DBNull.Value);
+            }
+            paramEmailAddress.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramEmailAddress);
+
             // Setup the profileimageurl text param
             if (Profileimageurl != null)
             {
@@ -814,6 +1202,33 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_IS_DISABLED + "=" + IsDisabled + "\n");
             paramIsDisabled.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramIsDisabled);
+            paramCanTextMsg = new SqlParameter("@" + TAG_CAN_TEXT_MSG, CanTextMsg);
+            sbLog.Append(TAG_CAN_TEXT_MSG + "=" + CanTextMsg + "\n");
+            paramCanTextMsg.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramCanTextMsg);
+            // Setup the date text msg approved param
+            if (!dtNull.Equals(BeginDateTextMsgApproved))
+            {
+                paramBeginDateTextMsgApproved = new SqlParameter("@" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED, BeginDateTextMsgApproved);
+            }
+            else
+            {
+                paramBeginDateTextMsgApproved = new SqlParameter("@" + TAG_BEGIN_DATE_TEXT_MSG_APPROVED, DBNull.Value);
+            }
+            paramBeginDateTextMsgApproved.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramBeginDateTextMsgApproved);
+
+            if (!dtNull.Equals(EndDateTextMsgApproved))
+            {
+                paramEndDateTextMsgApproved = new SqlParameter("@" + TAG_END_DATE_TEXT_MSG_APPROVED, EndDateTextMsgApproved);
+            }
+            else
+            {
+                paramEndDateTextMsgApproved = new SqlParameter("@" + TAG_END_DATE_TEXT_MSG_APPROVED, DBNull.Value);
+            }
+            paramEndDateTextMsgApproved.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramEndDateTextMsgApproved);
+
         }
 
     }

@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RESTUtilLib;
 using System.Net;
-using Proxy;
+using Vetapp.Client.Proxy;
 
 namespace TesterClient
 {
@@ -51,7 +51,7 @@ namespace TesterClient
             StringBuilder parameters = new StringBuilder();
             string url = this.serviceUrlTextBox.Text.Trim() + "/api/user";
 
-            UserItem useritem = new UserItem() { FirstName = "Haytham" };
+            User useritem = new User() { Firstname = "Haytham" };
             string jsonBody = Utils.ToJson(useritem, useritem.GetType());
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserItemID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserID", "");

@@ -16,5 +16,11 @@ namespace RESTAPI.Controllers
         {
             return View();
         }
+
+        [HttpGet("version")]
+        public string Version()
+        {
+            return "Version 1.0.0";
+        }
     }
 }
