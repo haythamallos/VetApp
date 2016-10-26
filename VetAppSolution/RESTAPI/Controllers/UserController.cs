@@ -2,16 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using RESTAPI.Models;
 using RESTAPI.Reply;
+using Microsoft.Extensions.Options;
 
 namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        public UserController()
+        private readonly AppSettings _settings;
+
+        public UserController(IOptions<AppSettings> settings)
         {
+            _settings = settings.Value;
         }
-        [HttpGet]
+        //[HttpGet]
         //public IEnumerable<MemberModel> GetAll()
         //{
         //    return MemberItems.GetAll();
@@ -44,15 +48,15 @@ namespace RESTAPI.Controllers
         public IActionResult Create([FromBody] UserModel pMemberModel)
         {
             UserModel memberModel = null;
-            UserControllerReply reply = new UserControllerReply();
-
+            UserControllerReply reply = new UserControllerReply(_settings);
 
             memberModel = reply.Create(pMemberModel);
             if (reply.HasError)
             {
                 return BadRequest(reply.ErrorMessage);
             }
-            return Ok(memberModel);
+            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(memberModel);
+            return Ok(jsonString);
         }
     }
 }

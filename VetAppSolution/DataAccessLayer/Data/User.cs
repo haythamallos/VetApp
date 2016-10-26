@@ -57,6 +57,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private bool? _bCanTextMsg = null;
         /// <summary>DateTextMsgApproved Attribute type String</summary>
         private DateTime _dtDateTextMsgApproved = dtNull;
+        /// <summary>AuthName Attribute type String</summary>
+        private string _strAuthName = null;
+        /// <summary>AuthNickname Attribute type String</summary>
+        private string _strAuthNickname = null;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -100,6 +104,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_CAN_TEXT_MSG = "can_text_msg"; //Table CanTextMsg field name
                                                                               /// <summary>date_text_msg_approved Database field </summary>
         public static readonly string DB_FIELD_DATE_TEXT_MSG_APPROVED = "date_text_msg_approved"; //Table DateTextMsgApproved field name
+                                                                                                  /// <summary>AuthName Database field </summary>
+        public static readonly string DB_FIELD_AUTHNAME = "AuthName"; //Table AuthName field name
+                                                                      /// <summary>AuthNickname Database field </summary>
+        public static readonly string DB_FIELD_AUTHNICKNAME = "AuthNickname"; //Table AuthNickname field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -136,6 +144,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_CAN_TEXT_MSG = "CanTextMsg"; //Table CanTextMsg field name
                                                                        /// <summary>DateTextMsgApproved Attribute type string</summary>
         public static readonly string TAG_DATE_TEXT_MSG_APPROVED = "DateTextMsgApproved"; //Table DateTextMsgApproved field name
+                                                                                          /// <summary>AuthName Attribute type string</summary>
+        public static readonly string TAG_AUTHNAME = "AuthName"; //Table AuthName field name
+                                                                 /// <summary>AuthNickname Attribute type string</summary>
+        public static readonly string TAG_AUTHNICKNAME = "AuthNickname"; //Table AuthNickname field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spUserInsert"; //Insert sp name
@@ -247,6 +259,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _dtDateTextMsgApproved; }
             set { _dtDateTextMsgApproved = value; }
         }
+        /// <summary>AuthName is a Property in the User Class of type String</summary>
+        public string AuthName
+        {
+            get { return _strAuthName; }
+            set { _strAuthName = value; }
+        }
+        /// <summary>AuthNickname is a Property in the User Class of type String</summary>
+        public string AuthNickname
+        {
+            get { return _strAuthNickname; }
+            set { _strAuthNickname = value; }
+        }
 
 
         /*********************** CUSTOM NON-META BEGIN *********************/
@@ -357,6 +381,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 sbReturn.Append(TAG_DATE_TEXT_MSG_APPROVED + ":\n");
             }
+            sbReturn.Append(TAG_AUTHNAME + ":  " + AuthName + "\n");
+            sbReturn.Append(TAG_AUTHNICKNAME + ":  " + AuthNickname + "\n");
 
             return sbReturn.ToString();
         }
@@ -405,6 +431,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 sbReturn.Append("<" + TAG_DATE_TEXT_MSG_APPROVED + "></" + TAG_DATE_TEXT_MSG_APPROVED + ">\n");
             }
+            sbReturn.Append("<" + TAG_AUTHNAME + ">" + AuthName + "</" + TAG_AUTHNAME + ">\n");
+            sbReturn.Append("<" + TAG_AUTHNICKNAME + ">" + AuthNickname + "</" + TAG_AUTHNICKNAME + ">\n");
             sbReturn.Append("</User>" + "\n");
 
             return sbReturn.ToString();
@@ -607,6 +635,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch
             {
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHNAME);
+                AuthName = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHNICKNAME);
+                AuthNickname = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with user_id equal to the current object's UserID </summary>
         public void Load(SqlConnection conn)
@@ -768,6 +816,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                     DateTextMsgApproved = new DateTime();
                 }
 
+                Console.WriteLine(User.TAG_AUTHNAME + ":  ");
+                AuthName = Console.ReadLine();
+
+                Console.WriteLine(User.TAG_AUTHNICKNAME + ":  ");
+                AuthNickname = Console.ReadLine();
+
             }
             catch (Exception e)
             {
@@ -796,6 +850,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramIsDisabled = null;
             SqlParameter paramCanTextMsg = null;
             SqlParameter paramDateTextMsgApproved = null;
+            SqlParameter paramAuthName = null;
+            SqlParameter paramAuthNickname = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -887,6 +943,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramDateTextMsgApproved.DbType = DbType.DateTime;
             paramDateTextMsgApproved.Direction = ParameterDirection.Input;
 
+            paramAuthName = new SqlParameter("@" + TAG_AUTHNAME, AuthName);
+            paramAuthName.DbType = DbType.String;
+            paramAuthName.Size = 255;
+            paramAuthName.Direction = ParameterDirection.Input;
+
+            paramAuthNickname = new SqlParameter("@" + TAG_AUTHNICKNAME, AuthNickname);
+            paramAuthNickname.DbType = DbType.String;
+            paramAuthNickname.Size = 255;
+            paramAuthNickname.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -909,6 +975,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramIsDisabled);
             cmd.Parameters.Add(paramCanTextMsg);
             cmd.Parameters.Add(paramDateTextMsgApproved);
+            cmd.Parameters.Add(paramAuthName);
+            cmd.Parameters.Add(paramAuthNickname);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -934,6 +1002,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramIsDisabled = null;
             paramCanTextMsg = null;
             paramDateTextMsgApproved = null;
+            paramAuthName = null;
+            paramAuthNickname = null;
             paramPKID = null;
             cmd = null;
         }
@@ -998,6 +1068,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramIsDisabled = null;
             SqlParameter paramCanTextMsg = null;
             SqlParameter paramDateTextMsgApproved = null;
+            SqlParameter paramAuthName = null;
+            SqlParameter paramAuthNickname = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1094,6 +1166,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramDateTextMsgApproved.DbType = DbType.DateTime;
             paramDateTextMsgApproved.Direction = ParameterDirection.Input;
 
+            paramAuthName = new SqlParameter("@" + TAG_AUTHNAME, AuthName);
+            paramAuthName.DbType = DbType.String;
+            paramAuthName.Size = 255;
+            paramAuthName.Direction = ParameterDirection.Input;
+
+            paramAuthNickname = new SqlParameter("@" + TAG_AUTHNICKNAME, AuthNickname);
+            paramAuthNickname.DbType = DbType.String;
+            paramAuthNickname.Size = 255;
+            paramAuthNickname.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1117,6 +1199,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramIsDisabled);
             cmd.Parameters.Add(paramCanTextMsg);
             cmd.Parameters.Add(paramDateTextMsgApproved);
+            cmd.Parameters.Add(paramAuthName);
+            cmd.Parameters.Add(paramAuthNickname);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1142,6 +1226,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramIsDisabled = null;
             paramCanTextMsg = null;
             paramDateTextMsgApproved = null;
+            paramAuthName = null;
+            paramAuthNickname = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1278,6 +1364,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch
             {
             }
+            try
+            {
+                this.AuthName = rdr[DB_FIELD_AUTHNAME].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.AuthNickname = rdr[DB_FIELD_AUTHNICKNAME].ToString().Trim();
+            }
+            catch { }
         }
 
     }

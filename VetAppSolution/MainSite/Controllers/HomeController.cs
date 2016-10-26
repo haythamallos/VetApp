@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MainSite.Core;
 using System.Web.Mvc;
+using MainSite.ViewModels;
 
 namespace MainSite.Controllers
 {
@@ -37,6 +35,20 @@ namespace MainSite.Controllers
         public ActionResult LearnMore()
         {
             //ViewBag.Message = "Learn More";
+
+            return View();
+        }
+
+        public ActionResult Problem()
+        {
+            ViewBag.Message = "Encountered a Problem";
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Evaluator(string chkFirstTimeFiling )
+        {
+            DataManager dm = new DataManager();
 
             return View();
         }

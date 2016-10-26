@@ -66,6 +66,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private bool? _bCanTextMsg = null;
         private DateTime _dtBeginDateTextMsgApproved = new DateTime();
         private DateTime _dtEndDateTextMsgApproved = new DateTime();
+        private string _strAuthName = null;
+        private string _strAuthNickname = null;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -111,7 +113,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_BEGIN_DATE_TEXT_MSG_APPROVED = "BeginDateTextMsgApproved"; //Attribute DateTextMsgApproved  name
                                                                                                      /// <summary>EndDateTextMsgApproved Attribute type string</summary>
         public static readonly string TAG_END_DATE_TEXT_MSG_APPROVED = "EndDateTextMsgApproved"; //Attribute DateTextMsgApproved  name
-                                                                                                 // Stored procedure name
+                                                                                                 /// <summary>AuthName Attribute type string</summary>
+        public static readonly string TAG_AUTHNAME = "AuthName"; //Attribute AuthName  name
+                                                                 /// <summary>AuthNickname Attribute type string</summary>
+        public static readonly string TAG_AUTHNICKNAME = "AuthNickname"; //Attribute AuthNickname  name
+                                                                         // Stored procedure name
         public string SP_ENUM_NAME = "spUserEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the User Class of type bool</summary>
@@ -239,6 +245,18 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _dtEndDateTextMsgApproved; }
             set { _dtEndDateTextMsgApproved = value; }
+        }
+        /// <summary>AuthName is a Property in the User Class of type String</summary>
+        public string AuthName
+        {
+            get { return _strAuthName; }
+            set { _strAuthName = value; }
+        }
+        /// <summary>AuthNickname is a Property in the User Class of type String</summary>
+        public string AuthNickname
+        {
+            get { return _strAuthNickname; }
+            set { _strAuthNickname = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -451,6 +469,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 sbReturn.Append(TAG_END_DATE_TEXT_MSG_APPROVED + ":\n");
             }
+            sbReturn.Append(TAG_AUTHNAME + ":  " + AuthName + "\n");
+            sbReturn.Append(TAG_AUTHNICKNAME + ":  " + AuthNickname + "\n");
 
             return sbReturn.ToString();
         }
@@ -523,6 +543,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 sbReturn.Append("<" + TAG_END_DATE_TEXT_MSG_APPROVED + "></" + TAG_END_DATE_TEXT_MSG_APPROVED + ">\n");
             }
+            sbReturn.Append("<" + TAG_AUTHNAME + ">" + AuthName + "</" + TAG_AUTHNAME + ">\n");
+            sbReturn.Append("<" + TAG_AUTHNICKNAME + ">" + AuthNickname + "</" + TAG_AUTHNICKNAME + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -774,6 +796,30 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             catch
             {
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHNAME);
+                AuthName = xResultNode.InnerText;
+                if (AuthName.Trim().Length == 0)
+                    AuthName = null;
+            }
+            catch
+            {
+                AuthName = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHNICKNAME);
+                AuthNickname = xResultNode.InnerText;
+                if (AuthNickname.Trim().Length == 0)
+                    AuthNickname = null;
+            }
+            catch
+            {
+                AuthNickname = null;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -944,6 +990,20 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 }
 
 
+                Console.WriteLine(TAG_AUTHNAME + ":  ");
+                AuthName = Console.ReadLine();
+                if (AuthName.Length == 0)
+                {
+                    AuthName = null;
+                }
+
+                Console.WriteLine(TAG_AUTHNICKNAME + ":  ");
+                AuthNickname = Console.ReadLine();
+                if (AuthNickname.Length == 0)
+                {
+                    AuthNickname = null;
+                }
+
             }
             catch (Exception e)
             {
@@ -1001,6 +1061,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramCanTextMsg = null;
             SqlParameter paramBeginDateTextMsgApproved = null;
             SqlParameter paramEndDateTextMsgApproved = null;
+            SqlParameter paramAuthName = null;
+            SqlParameter paramAuthNickname = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -1228,6 +1290,32 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             }
             paramEndDateTextMsgApproved.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramEndDateTextMsgApproved);
+
+            // Setup the AuthName text param
+            if (AuthName != null)
+            {
+                paramAuthName = new SqlParameter("@" + TAG_AUTHNAME, AuthName);
+                sbLog.Append(TAG_AUTHNAME + "=" + AuthName + "\n");
+            }
+            else
+            {
+                paramAuthName = new SqlParameter("@" + TAG_AUTHNAME, DBNull.Value);
+            }
+            paramAuthName.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthName);
+
+            // Setup the AuthNickname text param
+            if (AuthNickname != null)
+            {
+                paramAuthNickname = new SqlParameter("@" + TAG_AUTHNICKNAME, AuthNickname);
+                sbLog.Append(TAG_AUTHNICKNAME + "=" + AuthNickname + "\n");
+            }
+            else
+            {
+                paramAuthNickname = new SqlParameter("@" + TAG_AUTHNICKNAME, DBNull.Value);
+            }
+            paramAuthNickname.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthNickname);
 
         }
 

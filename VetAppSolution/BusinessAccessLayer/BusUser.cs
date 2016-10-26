@@ -49,6 +49,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
         private const String REGEXP_ISVALID_IS_DISABLED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
         private const String REGEXP_ISVALID_CAN_TEXT_MSG = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
         private const String REGEXP_ISVALID_DATE_TEXT_MSG_APPROVED = "";
+        private const String REGEXP_ISVALID_AUTHNAME = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+        private const String REGEXP_ISVALID_AUTHNICKNAME = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
 
         public string SP_ENUM_NAME = null;
 
@@ -77,7 +79,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, null, null, null, null, null, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, false, false, new DateTime(), new DateTime()));
+            return (Get(0, null, null, null, null, null, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, false, false, new DateTime(), new DateTime(), null, null));
         }
 
         /// <summary>
@@ -89,7 +91,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lUserID)
         {
-            return (Get(lUserID, null, null, null, null, null, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, false, false, new DateTime(), new DateTime()));
+            return (Get(lUserID, null, null, null, null, null, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, false, false, new DateTime(), new DateTime(), null, null));
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(User o)
         {
-            return (Get(o.UserID, o.AuthUserid, o.AuthConnection, o.AuthProvider, o.AuthAccessToken, o.AuthIdToken, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.EmailAddress, o.Profileimageurl, o.IsDisabled, o.CanTextMsg, o.DateTextMsgApproved, o.DateTextMsgApproved));
+            return (Get(o.UserID, o.AuthUserid, o.AuthConnection, o.AuthProvider, o.AuthAccessToken, o.AuthIdToken, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.EmailAddress, o.Profileimageurl, o.IsDisabled, o.CanTextMsg, o.DateTextMsgApproved, o.DateTextMsgApproved, o.AuthName, o.AuthNickname));
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumUser o)
         {
-            return (Get(o.UserID, o.AuthUserid, o.AuthConnection, o.AuthProvider, o.AuthAccessToken, o.AuthIdToken, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.EmailAddress, o.Profileimageurl, o.IsDisabled, o.CanTextMsg, o.BeginDateTextMsgApproved, o.EndDateTextMsgApproved));
+            return (Get(o.UserID, o.AuthUserid, o.AuthConnection, o.AuthProvider, o.AuthAccessToken, o.AuthIdToken, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.EmailAddress, o.Profileimageurl, o.IsDisabled, o.CanTextMsg, o.BeginDateTextMsgApproved, o.EndDateTextMsgApproved, o.AuthName, o.AuthNickname));
         }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing User object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngUserID, string pStrAuthUserid, string pStrAuthConnection, string pStrAuthProvider, string pStrAuthAccessToken, string pStrAuthIdToken, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrFirstname, string pStrMiddlename, string pStrLastname, string pStrPhoneNumber, string pStrEmailAddress, string pStrProfileimageurl, bool? pBolIsDisabled, bool? pBolCanTextMsg, DateTime pDtBeginDateTextMsgApproved, DateTime pDtEndDateTextMsgApproved)
+        public ArrayList Get(long pLngUserID, string pStrAuthUserid, string pStrAuthConnection, string pStrAuthProvider, string pStrAuthAccessToken, string pStrAuthIdToken, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrFirstname, string pStrMiddlename, string pStrLastname, string pStrPhoneNumber, string pStrEmailAddress, string pStrProfileimageurl, bool? pBolIsDisabled, bool? pBolCanTextMsg, DateTime pDtBeginDateTextMsgApproved, DateTime pDtEndDateTextMsgApproved, string pStrAuthName, string pStrAuthNickname)
         {
             User data = null;
             _arrlstEntities = new ArrayList();
@@ -152,6 +154,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumUser.CanTextMsg = pBolCanTextMsg;
             enumUser.BeginDateTextMsgApproved = pDtBeginDateTextMsgApproved;
             enumUser.EndDateTextMsgApproved = pDtEndDateTextMsgApproved;
+            enumUser.AuthName = pStrAuthName;
+            enumUser.AuthNickname = pStrAuthNickname;
             enumUser.EnumData();
             while (enumUser.hasMoreElements())
             {
@@ -385,6 +389,16 @@ namespace Vetapp.Engine.BusinessAccessLayer
             }
             isValidTmp = IsValidDateTextMsgApproved(pRefUser.DateTextMsgApproved);
             if (!isValidTmp)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidAuthName(pRefUser.AuthName);
+            if (!isValidTmp && pRefUser.AuthName != null)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidAuthNickname(pRefUser.AuthNickname);
+            if (!isValidTmp && pRefUser.AuthNickname != null)
             {
                 isValid = false;
             }
@@ -742,6 +756,48 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = User.DB_FIELD_DATE_TEXT_MSG_APPROVED;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidAuthName(string pStrData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = !(new Regex(REGEXP_ISVALID_AUTHNAME)).IsMatch(pStrData);
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = User.DB_FIELD_AUTHNAME;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidAuthNickname(string pStrData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = !(new Regex(REGEXP_ISVALID_AUTHNICKNAME)).IsMatch(pStrData);
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = User.DB_FIELD_AUTHNICKNAME;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;

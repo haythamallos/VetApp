@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Vetapp.Engine.DataAccessLayer.Data;
+﻿using Vetapp.Engine.DataAccessLayer.Data;
 using RESTAPI.Models;
 
 namespace RESTAPI.Utils
 {
     public class DataToModelConverter
     {
-        public UserModel Convert(User pUser)
+        public static UserModel ConvertToModel(User pUser)
         {
             UserModel model = new UserModel()
             {
@@ -25,8 +21,10 @@ namespace RESTAPI.Utils
                 Middlename = pUser.Middlename,
                 PhoneNumber = pUser.PhoneNumber,
                 Profileimageurl = pUser.AuthProvider,
-                CanTextMsg = (bool)pUser.CanTextMsg,
-                IsDisabled = (bool)pUser.IsDisabled
+                CanTextMsg = (pUser.CanTextMsg == null) ? false : (bool)pUser.CanTextMsg,
+                IsDisabled = (pUser.IsDisabled == null) ? false : (bool)pUser.IsDisabled,
+                AuthName = pUser.AuthName,
+                AuthNickname = pUser.AuthNickname
             };
 
             return model;

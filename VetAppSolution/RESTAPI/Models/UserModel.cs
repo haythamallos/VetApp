@@ -33,6 +33,10 @@ namespace RESTAPI.Models
         public bool IsDisabled { get; set; }
         [DataMember(Name = "CanTextMsg")]
         public bool CanTextMsg { get; set; }
+        [DataMember(Name = "AuthName")]
+        public string AuthName { get; set; }
+        [DataMember(Name = "AuthNickname")]
+        public string AuthNickname { get; set; }
 
     }
 }

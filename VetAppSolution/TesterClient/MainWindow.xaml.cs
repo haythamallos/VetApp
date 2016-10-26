@@ -52,7 +52,7 @@ namespace TesterClient
             string url = this.serviceUrlTextBox.Text.Trim() + "/api/user";
 
             UserProxy useritem = new UserProxy() { Firstname = "Haytham" };
-            string jsonBody = Utils.ToJson(useritem, useritem.GetType());
+            string jsonBody = ToJson(useritem, useritem.GetType());
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserItemID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "FirstName", "Haytham");
@@ -70,6 +70,11 @@ namespace TesterClient
             this.responseRichTextBox.AppendText(responseBody + Environment.NewLine);
             this.responseStatusCodeTextBox.Text = responseStatusCode;
 
+        }
+
+        public string ToJson(object Obj, Type ObjType)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(Obj);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace RESTAPI.Reply
         private string _errorMessage = string.Empty;
         private string _errorStacktrace = string.Empty;
 
-        protected readonly AppSettings _settings;
+        protected AppSettings _settings = null;
 
         public bool HasError
         {

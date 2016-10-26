@@ -16,8 +16,6 @@
         public string Profileimageurl { get; set; }
         public bool IsDisabled { get; set; }
         public bool CanTextMsg { get; set; }
-
-        // custom
         public string AuthName { get; set; }
         public string AuthNickname { get; set; }
 

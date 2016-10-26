@@ -87,8 +87,10 @@ CREATE TABLE [user]
      profileimageurl        NVARCHAR(255) NULL,
 	 is_disabled                   BIT NULL,
 	 can_text_msg                   BIT NULL,
-     date_text_msg_approved      DATETIME NULL
-  )
+     date_text_msg_approved      DATETIME NULL,
+      AuthName        NVARCHAR(255) NULL,
+     AuthNickname        NVARCHAR(255) NULL
+ )
 
 go
 
@@ -127,7 +129,7 @@ END
 GO
 
 CREATE PROCEDURE spUserEnumByAuthUserid
-		@UserID                    NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
 	@AuthUserid                NVARCHAR(255) = NULL,
 	@AuthConnection            NVARCHAR(255) = NULL,
 	@AuthProvider              NVARCHAR(255) = NULL,
@@ -147,13 +149,15 @@ CREATE PROCEDURE spUserEnumByAuthUserid
 	@CanTextMsg                NUMERIC(1,0) = NULL,
     	@BeginDateTextMsgApproved  DATETIME = NULL,
     	@EndDateTextMsgApproved    DATETIME = NULL,
+	@AuthName                  NVARCHAR(255) = NULL,
+	@AuthNickname              NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved]
+      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname]
       FROM [user] 
       WHERE [AuthUserid]=@AuthUserid
  ORDER BY [user_id] ASC
@@ -233,7 +237,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved] 
+SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname] 
 FROM [user] 
 WHERE user_id = @UserID
 RETURN 0
@@ -278,6 +282,8 @@ CREATE PROCEDURE spUserUpdate
 	@IsDisabled                NUMERIC(1,0) = 0,
 	@CanTextMsg                NUMERIC(1,0) = 0,
 	@DateTextMsgApproved       DATETIME = NULL,
+	@AuthName                  NVARCHAR(255) = NULL,
+	@AuthNickname              NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -300,7 +306,9 @@ UPDATE [user] SET
 	[profileimageurl] = @Profileimageurl,
 	[is_disabled] = @IsDisabled,
 	[can_text_msg] = @CanTextMsg,
-	[date_text_msg_approved] = @DateTextMsgApproved
+	[date_text_msg_approved] = @DateTextMsgApproved,
+	[AuthName] = @AuthName,
+	[AuthNickname] = @AuthNickname
 WHERE user_id = @UserID
 
 -- return ID for updated record
@@ -380,6 +388,8 @@ CREATE PROCEDURE spUserInsert
 	@IsDisabled                NUMERIC(1,0) = 0,
 	@CanTextMsg                NUMERIC(1,0) = 0,
 	@DateTextMsgApproved       DATETIME = NULL,
+	@AuthName                  NVARCHAR(255) = NULL,
+	@AuthNickname              NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -403,7 +413,9 @@ INSERT INTO [user]
 	[profileimageurl],
 	[is_disabled],
 	[can_text_msg],
-	[date_text_msg_approved]
+	[date_text_msg_approved],
+	[AuthName],
+	[AuthNickname]
 )
  VALUES 
 (
@@ -421,7 +433,9 @@ INSERT INTO [user]
 	@Profileimageurl,
 	@IsDisabled,
 	@CanTextMsg,
-	@DateTextMsgApproved
+	@DateTextMsgApproved,
+	@AuthName,
+	@AuthNickname
 )
 
 
@@ -476,13 +490,15 @@ CREATE PROCEDURE spUserEnum
 	@CanTextMsg                NUMERIC(1,0) = NULL,
     	@BeginDateTextMsgApproved  DATETIME = NULL,
     	@EndDateTextMsgApproved    DATETIME = NULL,
+	@AuthName                  NVARCHAR(255) = NULL,
+	@AuthNickname              NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved]
+      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname]
       FROM [user] 
       WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
       AND ((@AuthUserid IS NULL) OR ([AuthUserid] LIKE @AuthUserid))
@@ -504,6 +520,8 @@ AS
       AND ((@CanTextMsg IS NULL) OR ([can_text_msg] LIKE @CanTextMsg))
       AND ((@BeginDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] >= @BeginDateTextMsgApproved))
       AND ((@EndDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] <= @EndDateTextMsgApproved))
+      AND ((@AuthName IS NULL) OR ([AuthName] LIKE @AuthName))
+      AND ((@AuthNickname IS NULL) OR ([AuthNickname] LIKE @AuthNickname))
  ORDER BY [user_id] ASC
 
 

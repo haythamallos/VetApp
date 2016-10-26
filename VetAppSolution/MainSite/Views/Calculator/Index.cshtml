@@ -1,0 +1,85 @@
+﻿@model MainSite.ViewModels.CalculatorViewModel
+@{
+    ViewBag.Title = "Caculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/content/calculator.css">
+}
+
+<h2>VA Disability Ratings Calculator</h2>
+<div class="row">
+    <div class="col-lg-4">
+        <div id="calculator">
+            <label>Rating</label>
+            <div class="keys">
+                <div class="inline-keys">
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["7"], "doWorkingItemRating", "Calculator", new { id = "7" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["8"], "doWorkingItemRating", "Calculator", new { id = "8" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["9"], "doWorkingItemRating", "Calculator", new { id = "9" }, null)</span>
+                </div>
+                <div class="inline-keys">
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["4"], "doWorkingItemRating", "Calculator", new { id = "4" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["5"], "doWorkingItemRating", "Calculator", new { id = "5" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["6"], "doWorkingItemRating", "Calculator", new { id = "6" }, null)</span>
+                </div>
+                <div class="inline-keys">
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["1"], "doWorkingItemRating", "Calculator", new { id = "1" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["2"], "doWorkingItemRating", "Calculator", new { id = "2" }, null)</span>
+                    <span>@Html.ActionLink(@Model.RatingCodeDictionary["3"], "doWorkingItemRating", "Calculator", new { id = "3" }, null)</span>
+                    <span class="clear">C</span>
+                </div>
+                <div class="keys">
+                    <label>Bilateral Facts</label>
+                    <div class="inline-keys">
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["1"], "doWorkingItemBilateral", "Calculator", new { id = "1" }, null)</span>
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["2"], "doWorkingItemBilateral", "Calculator", new { id = "2" }, null)</span>
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["3"], "doWorkingItemBilateral", "Calculator", new { id = "3" }, null)</span>
+                    </div>
+                    <div class="inline-keys">
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["4"], "doWorkingItemBilateral", "Calculator", new { id = "4" }, null)</span>
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["5"], "doWorkingItemBilateral", "Calculator", new { id = "5" }, null)</span>
+                        <span style="width:4em">@Html.ActionLink(@Model.BilateralFactorDictionary["6"], "doWorkingItemBilateral", "Calculator", new { id = "6" }, null)</span>
+                    </div>
+                    <label>Item</label>
+                    <div class="inline-keys">
+                        <div id="screen">
+                            <label style="color: white">@Model.WorkingItemText()</label>
+                        </div>
+                        <span class="operator">+</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-4">
+        <div id="calculator">
+            <label>Combined Rating</label>
+            <div class="keys">
+                <div class="inline-keys">
+                    <div id="screen">
+                        <label style="color: white">0</label>
+                    </div>
+                </div>
+            </div>
+            @*<div class="inline-keys">
+                        <div id="screen"></div>
+                        <span class="operator">-</span>
+                    </div>
+                    <div class="inline-keys">
+                        <div id="screen"></div>
+                        <span class="operator">-</span>
+                    </div>
+                    <div class="inline-keys">
+                        <div id="screen"></div>
+                        <span class="operator">-</span>
+                    </div>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+
+<script src="Scripts/calculator.js"></script>
+

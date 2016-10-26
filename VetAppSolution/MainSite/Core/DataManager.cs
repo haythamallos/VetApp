@@ -1,4 +1,5 @@
 ﻿using RESTUtilLib;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
@@ -31,10 +32,18 @@ namespace MainSite.Core
             get { return _errorMessage; }
         }
 
+        public DataManager()
+        {
+            init();
+        }
         public DataManager(ClaimsIdentity claimsIdentity)
         {
             _claimsIdentity = claimsIdentity;
             _userProxy = getUserProxy();
+            init();
+        }
+        private void init()
+        {
             _apiurl = System.Configuration.ConfigurationManager.AppSettings["Apiurl"];
             _apikey = System.Configuration.ConfigurationManager.AppSettings["Apikey"];
         }
@@ -84,7 +93,7 @@ namespace MainSite.Core
             StringBuilder parameters = new StringBuilder();
             string url = _apiurl + "/api/user";
 
-            string jsonBody = Utils.ToJson(_userProxy, _userProxy.GetType());
+            string jsonBody = ToJson(_userProxy, _userProxy.GetType());
             var Headers = new List<KeyValuePair<string, string>>();
             Headers.Add(new KeyValuePair<string, string>("user-key", _apikey));
             HttpWebRequest request = RESTUtil.createPostRequest(url, jsonBody, "POST", Headers);
@@ -92,8 +101,16 @@ namespace MainSite.Core
             string responseBody = null;
             string responseStatusCode = null;
             HttpWebResponse response = RESTUtil.ExecuteAction(request, ref responseBody, ref responseStatusCode);
+            if (responseStatusCode != "OK")
+            {
+                _hasError = true;
+            }
 
+        }
 
+        public string ToJson(object Obj, Type ObjType)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(Obj);
         }
     }
 }

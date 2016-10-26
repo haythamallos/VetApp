@@ -1,37 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using RESTAPI.Models;
 using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.DataAccessLayer.Data;
+using RESTAPI.Utils;
 
 namespace RESTAPI.Reply
 {
     public class UserControllerReply : ReplyBase
     {
-
-        public UserModel Create(UserModel bodyMemberModel)
+        public UserControllerReply(AppSettings settings)
         {
-            UserModel memberModel = null;
+            _settings = settings;
+        }
+        public UserModel Create(UserModel bodyUserModel)
+        {
+            UserModel userModel = null;
             try
             {
-                if (!string.IsNullOrEmpty(bodyMemberModel.AuthUserid))
+                if (!string.IsNullOrEmpty(bodyUserModel.AuthUserid))
                 {
                     BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
-                    User user = busFacCore.UserEnumByAuthUserid(bodyMemberModel.AuthUserid);
+                    User user = busFacCore.UserEnumByAuthUserid(bodyUserModel.AuthUserid);
                     if ((user == null) && (!busFacCore.HasError))
                     {
                         // create the member
+                        user = new User()
+                        {
+                            AuthAccessToken = bodyUserModel.AuthAccessToken,
+                            AuthConnection = bodyUserModel.AuthConnection,
+                            AuthIdToken = bodyUserModel.AuthIdToken,
+                            AuthName = bodyUserModel.AuthName,
+                            AuthNickname = bodyUserModel.AuthNickname,
+                            AuthProvider = bodyUserModel.AuthProvider,
+                            AuthUserid = bodyUserModel.AuthUserid,
+                            CanTextMsg = bodyUserModel.CanTextMsg,
+                            EmailAddress = bodyUserModel.EmailAddress,
+                            Firstname = bodyUserModel.Firstname,
+                            Lastname = bodyUserModel.Lastname,
+                            Middlename = bodyUserModel.Middlename,
+                            PhoneNumber = bodyUserModel.PhoneNumber,
+                            Profileimageurl = bodyUserModel.Profileimageurl
+                        };
+
+                        long lID = busFacCore.UserCreateOrModify(user);
+                    }
+                    if ((user != null) && (user.UserID > 0))
+                    {
+                        userModel = DataToModelConverter.ConvertToModel(user);
                     }
                     else
                     {
                         HasError = true;
-                        ErrorMessage = "General user exists already or error in creating.";
-
+                        ErrorMessage = "General error in creating or getting existing user.";
                     }
-
                 }
                 else
                 {
@@ -39,13 +60,13 @@ namespace RESTAPI.Reply
                     ErrorMessage = "AuthUserid in input parameter not specified";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 HasError = true;
                 ErrorStacktrace = ex.StackTrace;
                 ErrorMessage = ex.Message;
             }
-            return memberModel;
+            return userModel;
         }
 
         //public Member FindbyAuthtoken(string authtoken)
