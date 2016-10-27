@@ -17,25 +17,33 @@ namespace MainSite.ViewModels
             CombinedRating = 0;
             workingItem = new CalculatorItem();
         }
-        public string WorkingItemText()
-        {
-            string s = string.Empty;
-            if ((workingItem.RatingID != null) && (workingItem.BilateralFactorID != null))
-            {
-                s = RatingCodeDictionary[workingItem.RatingID] + " " + BilateralFactorDictionary[workingItem.BilateralFactorID];
-            }
-            else if (workingItem.RatingID != null)
-            {
-                s = RatingCodeDictionary[workingItem.RatingID];
-            }
-            else if (workingItem.BilateralFactorID != null)
-            {
-                s = BilateralFactorDictionary[workingItem.BilateralFactorID];
-            }
 
-            return s;
+        public void AddItem()
+        {
+            if (!string.IsNullOrEmpty(workingItem.RatingID))
+            {
+                CalculatorItem item = new CalculatorItem() {RatingID = workingItem.RatingID, BilateralFactorID = workingItem.BilateralFactorID };
+                lstCalculatorItem.Add(item);
+                workingItem.Clear();
+            }
         }
-        public readonly IDictionary<string, string> BilateralFactorDictionary = new Dictionary<string, string>
+        public void RemoveItem(int index)
+        {
+            if (index < lstCalculatorItem.Count)
+            {
+                lstCalculatorItem.RemoveAt(index);
+            }
+        }
+        public void Clear()
+        {
+            lstCalculatorItem.Clear();
+            workingItem.Clear();
+        }
+        public void CalcCombinedRating()
+        {
+
+        }
+        public static readonly IDictionary<string, string> BilateralFactorDictionary = new Dictionary<string, string>
         {
              { "1", "Bilateral Upper" }
             , {"2",  "Right Upper"}
@@ -44,26 +52,27 @@ namespace MainSite.ViewModels
             , {"5",  "Right Lower"}
             , {"6",  "Left Lower"}
          };
-
-        public readonly IDictionary<string, string> RatingCodeDictionary = new Dictionary<string, string>
-        {
-             {"1", "10"}
-             ,{"2", "20"}
-             ,{"3", "30"}
-             ,{"4", "40"}
-             ,{"5", "50"}
-             ,{"6", "60"}
-             ,{"7", "70"}
-             ,{"8", "80"}
-             ,{"9", "90"}
-         };
-
+     
     }
 
     public class CalculatorItem
     {
         public string RatingID { get; set; }
         public string BilateralFactorID { get; set; }
+        public override string ToString()
+        {
+            string s = RatingID;
+            if (!string.IsNullOrEmpty(BilateralFactorID))
+            {
+                s = s + " " + CalculatorViewModel.BilateralFactorDictionary[BilateralFactorID];
+            }
+            return s;
+        }
+        public void Clear()
+        {
+            BilateralFactorID = null;
+            RatingID = null;
+        }
     }
 
     //public class BilateralFactorDictionary

@@ -37,23 +37,7 @@ a, a:hover {
 
 #calculator {
     font-family: 'Lato', sans-serif;;
-    width: 18em;
-    -webkit-box-shadow: 0 0 5px #a9a9a9;
-    box-shadow: 0 0 5px #a9a9a9;
-    margin: 5em auto;
-    background-color: #b0e3e5;
-    padding: 0.5em 0;
-    font-size: 1.5em;
-    color: #585858;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-}
-
-#bilateral {
-    font-family: 'Lato', sans-serif;;
-    width: 22em;
+    width: 24em;
     -webkit-box-shadow: 0 0 5px #a9a9a9;
     box-shadow: 0 0 5px #a9a9a9;
     margin: 5em auto;
@@ -83,12 +67,13 @@ a, a:hover {
     -webkit-transition: all 0.2s ease;
     transition: all 0.3s ease;
 }
-#calculator span {
-    border-radius: 1em;
+
+#calculator input {
+    /*border-radius: 1em;*/
     display: inline-block;
     *display: inline;
     *zoom: 1;
-    width: 3em;
+    width: 4em;
     margin-left: 1em;
     padding: 0.2em 0;
     text-align: center;

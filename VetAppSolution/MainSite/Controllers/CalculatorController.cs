@@ -15,6 +15,62 @@ namespace MainSite.Controllers
             CalculatorViewModel model = getModel();
             return View(model);
         }
+        [HttpPost]
+        public ActionResult ProcessForm(string submit)
+        {
+            CalculatorViewModel model = getModel();
+
+            switch (submit)
+            {
+                case "10":
+                case "20":
+                case "30":
+                case "40":
+                case "50":
+                case "60":
+                case "70":
+                case "80":
+                case "90":
+                    model.workingItem.RatingID = submit;
+                    break;
+                case "Bilateral Upper":
+                    model.workingItem.BilateralFactorID = "1";
+                    break;
+                case "Right Upper":
+                    model.workingItem.BilateralFactorID = "2";
+                    break;
+                case "Left Upper":
+                    model.workingItem.BilateralFactorID = "3";
+                    break;
+                case "Bilateral Lower":
+                    model.workingItem.BilateralFactorID = "4";
+                    break;
+                case "Right Lower":
+                    model.workingItem.BilateralFactorID = "5";
+                    break;
+                case "Left Lower":
+                    model.workingItem.BilateralFactorID = "6";
+                    break;
+                case "Clr":
+                    model.Clear();
+                    break;
+                case "+":
+                    model.AddItem();
+                    break;
+                default:
+                    break;
+            }
+            TempData["oCalcModel"] = model;
+            return View("Index", model);
+        }
+        
+        public ActionResult RemoveItem(int id)
+        {
+            CalculatorViewModel model = getModel();
+            model.RemoveItem(id);
+            TempData["oCalcModel"] = model;
+            return View("Index", model);
+        }
         public ActionResult doWorkingItemRating(string id)
         {
             CalculatorViewModel model = getModel();
