@@ -52,7 +52,13 @@ namespace MainSite.Controllers
                 case "Left Lower":
                     model.workingItem.BilateralFactorID = "6";
                     break;
-                case "Clr":
+                case "Left Upper Arm":
+                    model.workingItem.BilateralFactorID = "7";
+                    break;
+                case "Right Lower Leg":
+                    model.workingItem.BilateralFactorID = "8";
+                    break;
+                case "Clear":
                     model.Clear();
                     break;
                 //case "+":

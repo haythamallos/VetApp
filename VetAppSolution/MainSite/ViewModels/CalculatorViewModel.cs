@@ -123,6 +123,8 @@ namespace MainSite.ViewModels
             , {"4",  "Bilateral Lower"}
             , {"5",  "Right Lower"}
             , {"6",  "Left Lower"}
+            , {"7",  "Left Upper Arm"}
+            , {"8",  "Right Lower Leg"}
          };
 
     }
