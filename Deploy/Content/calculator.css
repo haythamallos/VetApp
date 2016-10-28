@@ -1,0 +1,138 @@
+﻿
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+    *zoom: 1;
+}
+a, a:hover {
+    text-decoration: none;
+}
+
+
+#calculator {
+    font-family: 'Lato', sans-serif;;
+    width: 24em;
+    -webkit-box-shadow: 0 0 5px #a9a9a9;
+    box-shadow: 0 0 5px #a9a9a9;
+    margin: 5em auto;
+    background-color: #b0e3e5;
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    color: #585858;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+#calculator span {
+    border-radius: 1em;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 3em;
+    margin-left: 1em;
+    padding: 0.2em 0;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: top;
+    padding: 0;
+    background-color: #fff;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.3s ease;
+}
+
+#calculator input {
+    /*border-radius: 1em;*/
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 4em;
+    margin-left: 1em;
+    padding: 0.2em 0;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: top;
+    padding: 0;
+    background-color: #fff;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.3s ease;
+}
+#calculator span:hover {
+    background-color: #8e8e8e;
+    color: #fff;
+}
+
+#calculator span:active {
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8)
+}
+
+#calculator .top {
+    margin: 1em 0;
+    padding: 0;
+    color: #fff;
+    height: 1.5em;
+}
+
+.inline-keys {
+    margin-bottom: 0.7em;
+}
+
+#calculator .clear {
+    background-color: #7db4db;
+}
+
+#calculator #screen {
+    border-radius: 1em;
+    width: 11.5em;
+    height: 1.5em;
+    display: inline-block;
+    background-color: #3b3b3b;
+    margin-left: 1em;
+    text-align: right;
+    padding: 0 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#calculator .operator {
+    background-color: #ffffd9
+}
+
+#calculator .eval {
+    color: #fff;
+    background-color: #ffb2b2;
+}
+
+#calculator .eval:hover {
+    background-color: #585858;
+}

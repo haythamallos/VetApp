@@ -11,6 +11,8 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     @*<link rel="stylesheet" href="~/content/grayscale.css">*@
 
+    <link rel="stylesheet" href="~/content/form-basic.css">
+
 </head>
 <body data-spy="scroll">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,10 +31,12 @@
                     <li>@Html.ActionLink("GetStarted", "GetStarted", "Home")</li>
                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Calculator", "Index", "Calculator")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li>@Html.ActionLink("Dashboard", "Index", "User")</li>
                         <li>@Html.ActionLink("Hello " + User.Identity.Name, "Profile", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }

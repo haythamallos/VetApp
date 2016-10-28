@@ -31,7 +31,8 @@ namespace MainSite.Controllers
                 case "70":
                 case "80":
                 case "90":
-                    model.workingItem.RatingID = submit;
+                    model.workingItem.RatingID = Convert.ToInt32(submit);
+                    model.AddItem();
                     break;
                 case "Bilateral Upper":
                     model.workingItem.BilateralFactorID = "1";
@@ -54,9 +55,9 @@ namespace MainSite.Controllers
                 case "Clr":
                     model.Clear();
                     break;
-                case "+":
-                    model.AddItem();
-                    break;
+                //case "+":
+                //    model.AddItem();
+                //    break;
                 default:
                     break;
             }
@@ -68,13 +69,6 @@ namespace MainSite.Controllers
         {
             CalculatorViewModel model = getModel();
             model.RemoveItem(id);
-            TempData["oCalcModel"] = model;
-            return View("Index", model);
-        }
-        public ActionResult doWorkingItemRating(string id)
-        {
-            CalculatorViewModel model = getModel();
-            model.workingItem.RatingID = id;
             TempData["oCalcModel"] = model;
             return View("Index", model);
         }
