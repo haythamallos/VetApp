@@ -12,12 +12,12 @@ namespace MainSite.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            DataManager dm = new DataManager(User.Identity as ClaimsIdentity);
-            dm.SaveUserIfNotExist();
-            if (dm.HasError)
-            {
-                return RedirectToAction("Problem", "Home");
-            }
+            //DataManager dm = new DataManager(User.Identity as ClaimsIdentity);
+            //dm.SaveUserIfNotExist();
+            //if (dm.HasError)
+            //{
+            //    return RedirectToAction("Problem", "Home");
+            //}
             return View();
 
         }
