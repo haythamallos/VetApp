@@ -47,7 +47,7 @@ namespace MvcApplication.Controllers
             AuthenticationManager.SignOut(appTypes);
 
             var absoluteReturnUrl = string.IsNullOrEmpty(returnUrl) ?
-                this.Url.Action("Index", "Home", new { }, this.Request.Url.Scheme) :
+                this.Url.Action("Index", "Calculator", new { }, this.Request.Url.Scheme) :
                 this.Url.IsLocalUrl(returnUrl) ?
                     new Uri(this.Request.Url, returnUrl).AbsoluteUri : returnUrl;
 
@@ -80,7 +80,7 @@ namespace MvcApplication.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Calculator");
             }
         }
     }
