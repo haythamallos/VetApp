@@ -31,11 +31,11 @@
                     <li>@Html.ActionLink("GetStarted", "GetStarted", "Home")</li>
                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Calculator", "Index", "Calculator")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li>@Html.ActionLink("Calculator", "Index", "Calculator")</li>
                         <li>@Html.ActionLink("Dashboard", "Index", "User")</li>
                         <li>@Html.ActionLink("Hello " + User.Identity.Name, "Profile", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>

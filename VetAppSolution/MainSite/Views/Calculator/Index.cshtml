@@ -9,54 +9,47 @@
     <h4>VA Disability Ratings Calculator</h4>
     @using (Html.BeginForm("ProcessForm", "Calculator", FormMethod.Post))
     {
- 
+
         <div class="col-lg-7">
-           
+
             <div id="calculator">
                 <label>Rating</label>
-               
+
                 <div class="keys">
                     <div class="inline-keys">
                         <input type="submit" name="submit" value="70" class="btn btn-success btn-lg" />
-                        <input type="submit" name="submit" value="80" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="90" class="btn btn-success btn-lg"/>
+                        <input type="submit" name="submit" value="80" class="btn btn-success btn-lg" />
+                        <input type="submit" name="submit" value="90" class="btn btn-success btn-lg" />
                     </div>
                     <div class="inline-keys">
-                        <input type="submit" name="submit" value="40" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="50" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="60" class="btn btn-success btn-lg"/>
+                        <input type="submit" name="submit" value="40" class="btn btn-success btn-lg" />
+                        <input type="submit" name="submit" value="50" class="btn btn-success btn-lg" />
+                        <input type="submit" name="submit" value="60" class="btn btn-success btn-lg" />
                     </div>
                     <div class="inline-keys">
-                        <input type="submit" name="submit" value="10" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="20" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="30" class="btn btn-success btn-lg"/>
-                        @*<span class="clear">C</span>*@
+                        <input type="submit" name="submit" value="10" class="btn btn-success btn-lg" />
+                        <input type="submit" name="submit" value="20" class="btn btn-success btn-lg" />
+                        <input type="submit" name="submit" value="30" class="btn btn-success btn-lg" />
                     </div>
                     <div class="inline-keys">
                         <input type="submit" name="submit" value="Clear" class="btn btn-danger btn-lg" />
-                        @*<span class="clear">C</span>*@
                     </div>
                     <div class="keys">
                         <label>Bilateral Facts</label>
 
                         <div class="inline-keys">
-                            <input type="submit" name="submit" value="Bilateral Upper" class="btn btn-primary" />
-                            @*<input type="submit" name="submit" value="Bilateral Upper" style="width:auto" />*@
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("1")" class="btn btn-primary" />
                         </div>
                         <div class="inline-keys">
-                            <input type="submit" name="submit" value="Right Upper"class="btn btn-primary" />
-                            <input type="submit" name="submit" value="Left Upper" class="btn btn-primary" />
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("2")" class="btn btn-primary" />
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("3")" class="btn btn-primary" />
                         </div>
                         <div class="inline-keys">
-                            <input type="submit" name="submit" value="Right Lower"class="btn btn-primary" />
-                            <input type="submit" name="submit" value="Left Lower" class="btn btn-primary" />
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("4")" class="btn btn-primary" />
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("5")" class="btn btn-primary" />
                         </div>
                         <div class="inline-keys">
-                            <input type="submit" name="submit" value="Left Upper Arm" class="btn btn-primary" />
-                            <input type="submit" name="submit" value="Right Lower Leg" class="btn btn-primary" />
-                        </div>
-                        <div class="inline-keys">
-                            <input type="submit" name="submit" value="Bilateral Lower" class="btn btn-primary" />
+                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("6")" class="btn btn-primary" />
                         </div>
                         <div class="inline-keys">
                             <div id="screen">
@@ -71,7 +64,7 @@
         </div>
         <div class="col-lg-5">
             <div id="calculator">
-                
+
                 <div class="keys">
                     <div class="inline-keys">
                         <label>Combined Rating</label>
@@ -92,7 +85,6 @@
                                 <div id="screen">
                                     <label style="color: white">@item.ToString()</label>
                                 </div>
-                                @*<input type="submit" name="submit" value="-" style="background-color:#ffffd9" />*@
                                 @Html.ActionLink("Remove", "RemoveItem", "Calculator", new { id = ind }, null)
                             </div>
                         }
@@ -103,7 +95,7 @@
                         <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
                     }
                 }
-             
+
             </div>
 
         </div>
@@ -112,5 +104,4 @@
 </div>
 
 
-<script src="Scripts/calculator.js"></script>
 

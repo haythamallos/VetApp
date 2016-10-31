@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MainSite.ViewModels;
 
@@ -15,6 +12,7 @@ namespace MainSite.Controllers
             CalculatorViewModel model = getModel();
             return View(model);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult ProcessForm(string submit)
         {
@@ -34,43 +32,34 @@ namespace MainSite.Controllers
                     model.workingItem.RatingID = Convert.ToInt32(submit);
                     model.AddItem();
                     break;
-                case "Bilateral Upper":
+                case "Bilateral Upper Arms":
                     model.workingItem.BilateralFactorID = "1";
                     break;
-                case "Right Upper":
+                case "Right Upper Arm":
                     model.workingItem.BilateralFactorID = "2";
                     break;
-                case "Left Upper":
+                case "Left Upper Arm":
                     model.workingItem.BilateralFactorID = "3";
                     break;
-                case "Bilateral Lower":
+                case "Left Lower Leg":
                     model.workingItem.BilateralFactorID = "4";
                     break;
-                case "Right Lower":
+                case "Right Lower Leg":
                     model.workingItem.BilateralFactorID = "5";
                     break;
-                case "Left Lower":
+                case "Bilateral Lower Leg":
                     model.workingItem.BilateralFactorID = "6";
-                    break;
-                case "Left Upper Arm":
-                    model.workingItem.BilateralFactorID = "7";
-                    break;
-                case "Right Lower Leg":
-                    model.workingItem.BilateralFactorID = "8";
                     break;
                 case "Clear":
                     model.Clear();
                     break;
-                //case "+":
-                //    model.AddItem();
-                //    break;
                 default:
                     break;
             }
             TempData["oCalcModel"] = model;
             return View("Index", model);
         }
-        
+
         public ActionResult RemoveItem(int id)
         {
             CalculatorViewModel model = getModel();
