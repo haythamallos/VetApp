@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
 using CalculatorSite.ViewModels;
+using MvcApplication;
 
 namespace CalculatorSite.Controllers
 {
-
+    [BasicAuthenticationAttribute("valuedveteran", "muskrat", BasicRealm = "valuedveteran")]
     public class CalculatorController : Controller
     {
         public ActionResult Index()
@@ -12,7 +13,6 @@ namespace CalculatorSite.Controllers
             CalculatorViewModel model = getModel();
             return View(model);
         }
-        [Authorize]
         [HttpPost]
         public ActionResult ProcessForm(string submit)
         {
