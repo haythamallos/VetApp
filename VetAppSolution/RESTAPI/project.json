@@ -19,7 +19,8 @@
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
     "BusinessFacadeLayer": "1.0.0-*",
-    "DataAccessLayer": "1.0.0-*"
+    "DataAccessLayer": "1.0.0-*",
+    "ProxyCore": "1.0.0-*"
   },
 
   "tools": {

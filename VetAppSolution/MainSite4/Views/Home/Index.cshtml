@@ -1,0 +1,133 @@
+﻿@model CombinedLoginRegisterViewModel
+
+@{
+    Layout = "~/Views/_LayoutHome.cshtml";
+    ViewData["Title"] = "Valued Veteran";
+    ViewData["Description"] = "Valued Veteran";
+}
+
+<section id="wrapper" class="login-register">
+    <div class="login-box login-sidebar">
+        <div class="white-box">
+            <div id="loginformdiv" class="">
+                <form id="loginform" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material">
+                    <h1>Valued Veteran Consulting Services</h1>
+                    <p>Helping veterans increase disability benefits</p>
+                    @*<a href="javascript:void(0)" class="text-center db"><img src="../plugins/images/pixeladmin-logo.png" alt="Home" /><br /><img src="../plugins/images/pixeladmin-text.png" alt="Home" /></a>*@
+
+                    <div class="form-group m-t-40">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Login.Username" class="form-control" type="text" required="" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Login.Password" class="form-control" type="password" required="" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-primary pull-left p-t-0">
+                                <input asp-for="@Model.Login.RememberMe" id="checkbox-signup" type="checkbox">
+                                <label for="checkbox-signup"> Remember me </label>
+                            </div>
+                            <a href="javascript:void(0)" id="loginform-to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social">
+                                <a asp-controller="Account" asp-action="LoginExternal" asp-route-connection="facebook" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> 
+                                <i aria-hidden="true" class="fa fa-facebook"></i> </a> 
+                                <a asp-controller="Account" asp-action="LoginExternal" asp-route-connection="google-oauth2" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> 
+                                <i aria-hidden="true" class="fa fa-google-plus"></i> </a> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>Don't have an account? <a href="javascript:void(0)" id="loginform-to-signup" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="recoverformdiv" class="hidden">
+                <form id="recoverform" asp-controller="Account" asp-action="Recover" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h3>Recover Password</h3>
+                            <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Recover.Email" class="form-control" type="text" required="" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>Already have an account? <a href="javascript:void(0)" id="recoverform-to-loginform" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                            <p>Don't have an account? <a href="javascript:void(0)" id="recoverform-to-registerform" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="registerformdiv" class="hidden">
+                <form id="registerform" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material" >
+                    <h1>Valued Veteran Consulting Services</h1>
+                    <p>Helping veterans increase disability benefits</p>
+                    <h3 class="box-title m-t-40 m-b-0">Register Now</h3><small>Create your account and enjoy</small>
+                    <div class="form-group m-t-20">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Register.Name" class="form-control" type="text" required="" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Register.Email" class="form-control" type="text" required="" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Register.Password" class="form-control" type="password" required="" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input asp-for="@Model.Register.ConfirmPassword" class="form-control" type="password" required="" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-primary p-t-0">
+                                <input asp-for="@Model.Register.IsTermsAgreement" type="checkbox">
+                                <label for="checkbox-signup"> I agree to all <a href="/Home/Terms">Terms</a></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>Already have an account? <a href="javascript:void(0)" id="registerform-to-loginform" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

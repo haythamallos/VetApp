@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RESTAPI.Models;
 using RESTAPI.Reply;
 using Microsoft.Extensions.Options;
+using Vetapp.Client.ProxyCore;
 
 namespace RESTAPI.Controllers
 {
@@ -44,18 +45,29 @@ namespace RESTAPI.Controllers
         //    return Ok();
         //}
 
-        [HttpPost]
-        public IActionResult Create([FromBody] UserModel pMemberModel)
+        [HttpGet("{id}", Name = "GetUser")]
+        public IActionResult GetByUserId(string id, [FromQuery]string userid)
         {
-            UserModel memberModel = null;
-            UserControllerReply reply = new UserControllerReply(_settings);
-
-            memberModel = reply.Create(pMemberModel);
-            if (reply.HasError)
+            UserProxy item = new UserProxy() { AuthUserid = userid };
+            if (item == null)
             {
-                return BadRequest(reply.ErrorMessage);
+                return NotFound();
             }
-            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(memberModel);
+            return new ObjectResult(item);
+        }
+
+        [HttpPost]
+        public IActionResult Save([FromBody] UserProxy pUserProxy)
+        {
+            //UserModel memberModel = null;
+            //UserControllerReply reply = new UserControllerReply(_settings);
+
+            //memberModel = reply.Create(pMemberModel);
+            //if (reply.HasError)
+            //{
+            //    return BadRequest(reply.ErrorMessage);
+            //}
+            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(pUserProxy);
             return Ok(jsonString);
         }
     }
