@@ -219,8 +219,348 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 }
             }
         }
+        //------------------------------------------
+        /// <summary>
+        /// ApilogCreateOrModify
+        /// </summary>
+        /// <param name="">pApilog</param>
+        /// <returns>long</returns>
+        /// 
+        public long ApilogCreateOrModify(Apilog pApilog)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusApilog busApilog = null;
+                busApilog = new BusApilog(conn);
+                busApilog.Save(pApilog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pApilog.ApilogID;
+                _hasError = busApilog.HasError;
+                if (busApilog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
 
+        /// <summary>
+        /// ApilogGetList
+        /// </summary>
+        /// <param name="">pEnumApilog</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList ApilogGetList(EnumApilog pEnumApilog)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusApilog busApilog = null;
+                busApilog = new BusApilog(conn);
+                items = busApilog.Get(pEnumApilog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busApilog.HasError;
+                if (busApilog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
 
+        /// <summary>
+        /// ApilogGet
+        /// </summary>
+        /// <param name="">pLngApilogID</param>
+        /// <returns>Apilog</returns>
+        /// 
+        public Apilog ApilogGet(long pLngApilogID)
+        {
+            Apilog apilog = new Apilog() { ApilogID = pLngApilogID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusApilog busApilog = null;
+                busApilog = new BusApilog(conn);
+                busApilog.Load(apilog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busApilog.HasError;
+                if (busApilog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return apilog;
+        }
+
+        /// <summary>
+        /// ApilogRemove
+        /// </summary>
+        /// <param name="">pApilogID</param>
+        /// <returns>void</returns>
+        /// 
+        public void ApilogRemove(long pApilogID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Apilog apilog = new Apilog();
+                apilog.ApilogID = pApilogID;
+                BusApilog bus = null;
+                bus = new BusApilog(conn);
+                bus.Delete(apilog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
+        //------------------------------------------
+        /// <summary>
+        /// DbversionCreateOrModify
+        /// </summary>
+        /// <param name="">pDbversion</param>
+        /// <returns>long</returns>
+        /// 
+        public long DbversionCreateOrModify(Dbversion pDbversion)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                busDbversion.Save(pDbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pDbversion.DbversionID;
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// DbversionGetList
+        /// </summary>
+        /// <param name="">pEnumDbversion</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList DbversionGetList(EnumDbversion pEnumDbversion)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                items = busDbversion.Get(pEnumDbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// DbversionGet
+        /// </summary>
+        /// <param name="">pLngDbversionID</param>
+        /// <returns>Dbversion</returns>
+        /// 
+        public Dbversion DbversionGet(long pLngDbversionID)
+        {
+            Dbversion dbversion = new Dbversion() { DbversionID = pLngDbversionID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                busDbversion.Load(dbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return dbversion;
+        }
+
+        /// <summary>
+        /// DbversionRemove
+        /// </summary>
+        /// <param name="">pDbversionID</param>
+        /// <returns>void</returns>
+        /// 
+        public void DbversionRemove(long pDbversionID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Dbversion dbversion = new Dbversion();
+                dbversion.DbversionID = pDbversionID;
+                BusDbversion bus = null;
+                bus = new BusDbversion(conn);
+                bus.Delete(dbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
+        //------------------------------------------
+        /// <summary>
+        /// SyslogCreateOrModify
+        /// </summary>
+        /// <param name="">pSyslog</param>
+        /// <returns>long</returns>
+        /// 
+        public long SyslogCreateOrModify(Syslog pSyslog)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSyslog busSyslog = null;
+                busSyslog = new BusSyslog(conn);
+                busSyslog.Save(pSyslog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pSyslog.SyslogID;
+                _hasError = busSyslog.HasError;
+                if (busSyslog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// SyslogGetList
+        /// </summary>
+        /// <param name="">pEnumSyslog</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList SyslogGetList(EnumSyslog pEnumSyslog)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSyslog busSyslog = null;
+                busSyslog = new BusSyslog(conn);
+                items = busSyslog.Get(pEnumSyslog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busSyslog.HasError;
+                if (busSyslog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// SyslogGet
+        /// </summary>
+        /// <param name="">pLngSyslogID</param>
+        /// <returns>Syslog</returns>
+        /// 
+        public Syslog SyslogGet(long pLngSyslogID)
+        {
+            Syslog syslog = new Syslog() { SyslogID = pLngSyslogID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSyslog busSyslog = null;
+                busSyslog = new BusSyslog(conn);
+                busSyslog.Load(syslog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busSyslog.HasError;
+                if (busSyslog.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return syslog;
+        }
+
+        /// <summary>
+        /// SyslogRemove
+        /// </summary>
+        /// <param name="">pSyslogID</param>
+        /// <returns>void</returns>
+        /// 
+        public void SyslogRemove(long pSyslogID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Syslog syslog = new Syslog();
+                syslog.SyslogID = pSyslogID;
+                BusSyslog bus = null;
+                bus = new BusSyslog(conn);
+                bus.Delete(syslog);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
         //------------------------------------------
         /// <summary>
         /// UserCreateOrModify
@@ -334,8 +674,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
-
+        }
 
 
 

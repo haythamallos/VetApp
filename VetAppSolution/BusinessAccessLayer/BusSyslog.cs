@@ -15,15 +15,15 @@ namespace Vetapp.Engine.BusinessAccessLayer
 	/// Copyright (c) 2016 Haytham Allos.  San Diego, California, USA
 	/// All Rights Reserved
 	/// 
-	/// File:  BusApikey.cs
+	/// File:  BusSyslog.cs
 	/// History
 	/// ----------------------------------------------------
 	/// 001	HA	11/16/2016	Created
 	/// 
 	/// ----------------------------------------------------
-	/// Business Class for Apikey objects.
+	/// Business Class for Syslog objects.
 	/// </summary>
-	public class BusApikey
+	public class BusSyslog
 	{
 		private SqlConnection _conn = null;
 		private bool _hasError = false;
@@ -33,11 +33,12 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		private ArrayList _arrlstColumnErrors = new ArrayList();
 
 		private const String REGEXP_ISVALID_ID= BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
+		private const String REGEXP_ISVALID_INTERACTION_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
 		private const String REGEXP_ISVALID_DATE_CREATED = "";
-		private const String REGEXP_ISVALID_DATE_EXPIRATION = "";
-		private const String REGEXP_ISVALID_IS_DISABLED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-		private const String REGEXP_ISVALID_TOKEN = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
-		private const String REGEXP_ISVALID_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+		private const String REGEXP_ISVALID_DATE_MODIFIED = "";
+		private const String REGEXP_ISVALID_MSGSOURCE = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+		private const String REGEXP_ISVALID_MSGACTION = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+		private const String REGEXP_ISVALID_MSGTXT = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
 
 		public string SP_ENUM_NAME = null;
 
@@ -47,105 +48,106 @@ namespace Vetapp.Engine.BusinessAccessLayer
 /*********************** CUSTOM NON-META END *********************/
 
 
-		/// <summary>BusApikey constructor takes SqlConnection object</summary>
-		public BusApikey()
+		/// <summary>BusSyslog constructor takes SqlConnection object</summary>
+		public BusSyslog()
 		{
 		}
-		/// <summary>BusApikey constructor takes SqlConnection object</summary>
-		public BusApikey(SqlConnection conn)
+		/// <summary>BusSyslog constructor takes SqlConnection object</summary>
+		public BusSyslog(SqlConnection conn)
 		{
 			_conn = conn;
 		}
 
 	 /// <summary>
-	///     Gets all Apikey objects
+	///     Gets all Syslog objects
 	///     <remarks>   
-	///         No parameters. Returns all Apikey objects 
+	///         No parameters. Returns all Syslog objects 
 	///     </remarks>   
-	///     <retvalue>ArrayList containing all Apikey objects</retvalue>
+	///     <retvalue>ArrayList containing all Syslog objects</retvalue>
 	/// </summary>
 	public ArrayList Get()
 	{
-		return (Get(0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), false, null, null));
+		return (Get(0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null));
 	}
 
 	 /// <summary>
-	///     Gets all Apikey objects
+	///     Gets all Syslog objects
 	///     <remarks>   
-	///         No parameters. Returns all Apikey objects 
+	///         No parameters. Returns all Syslog objects 
 	///     </remarks>   
-	///     <retvalue>ArrayList containing all Apikey objects</retvalue>
+	///     <retvalue>ArrayList containing all Syslog objects</retvalue>
 	/// </summary>
-	public ArrayList Get(long lApikeyID)
+	public ArrayList Get(long lSyslogID)
 	{
-		return (Get(lApikeyID , new DateTime(), new DateTime(), new DateTime(), new DateTime(), false, null, null));
+		return (Get(lSyslogID , 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null));
 	}
 
         /// <summary>
-        ///     Gets all Apikey objects
+        ///     Gets all Syslog objects
         ///     <remarks>   
         ///         Returns ArrayList containing object passed in 
         ///     </remarks>   
-        ///     <param name="o">Apikey to be returned</param>
-        ///     <retvalue>ArrayList containing Apikey object</retvalue>
+        ///     <param name="o">Syslog to be returned</param>
+        ///     <retvalue>ArrayList containing Syslog object</retvalue>
         /// </summary>
-	public ArrayList Get(Apikey o)
+	public ArrayList Get(Syslog o)
 	{	
-		return (Get( o.ApikeyID, o.DateCreated, o.DateCreated, o.DateExpiration, o.DateExpiration, o.IsDisabled, o.Token, o.Notes	));
+		return (Get( o.SyslogID, o.InteractionID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.Msgsource, o.Msgaction, o.Msgtxt	));
 	}
 
         /// <summary>
-        ///     Gets all Apikey objects
+        ///     Gets all Syslog objects
         ///     <remarks>   
         ///         Returns ArrayList containing object passed in 
         ///     </remarks>   
-        ///     <param name="o">Apikey to be returned</param>
-        ///     <retvalue>ArrayList containing Apikey object</retvalue>
+        ///     <param name="o">Syslog to be returned</param>
+        ///     <retvalue>ArrayList containing Syslog object</retvalue>
         /// </summary>
-	public ArrayList Get(EnumApikey o)
+	public ArrayList Get(EnumSyslog o)
 	{	
-		return (Get( o.ApikeyID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateExpiration, o.EndDateExpiration, o.IsDisabled, o.Token, o.Notes	));
+		return (Get( o.SyslogID, o.InteractionID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.Msgsource, o.Msgaction, o.Msgtxt	));
 	}
 
 		/// <summary>
-		///     Gets all Apikey objects
+		///     Gets all Syslog objects
 		///     <remarks>   
-		///         Returns Apikey objects in an array list 
+		///         Returns Syslog objects in an array list 
 		///         using the given criteria 
 		///     </remarks>   
-		///     <retvalue>ArrayList containing Apikey object</retvalue>
+		///     <retvalue>ArrayList containing Syslog object</retvalue>
 		/// </summary>
-		public ArrayList Get( long pLngApikeyID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateExpiration, DateTime pDtEndDateExpiration, bool? pBolIsDisabled, string pStrToken, string pStrNotes)
+		public ArrayList Get( long pLngSyslogID, long pLngInteractionID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrMsgsource, string pStrMsgaction, string pStrMsgtxt)
 		{
-			Apikey data = null;
+			Syslog data = null;
 			_arrlstEntities = new ArrayList();
-			EnumApikey enumApikey = new EnumApikey(_conn);
-			 enumApikey.SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enumApikey.SP_ENUM_NAME;
-			enumApikey.ApikeyID = pLngApikeyID;
-			enumApikey.BeginDateCreated = pDtBeginDateCreated;
-			enumApikey.EndDateCreated = pDtEndDateCreated;
-			enumApikey.BeginDateExpiration = pDtBeginDateExpiration;
-			enumApikey.EndDateExpiration = pDtEndDateExpiration;
-			enumApikey.IsDisabled = pBolIsDisabled;
-			enumApikey.Token = pStrToken;
-			enumApikey.Notes = pStrNotes;
-			enumApikey.EnumData();
-			while (enumApikey.hasMoreElements())
+			EnumSyslog enumSyslog = new EnumSyslog(_conn);
+			 enumSyslog.SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enumSyslog.SP_ENUM_NAME;
+			enumSyslog.SyslogID = pLngSyslogID;
+			enumSyslog.InteractionID = pLngInteractionID;
+			enumSyslog.BeginDateCreated = pDtBeginDateCreated;
+			enumSyslog.EndDateCreated = pDtEndDateCreated;
+			enumSyslog.BeginDateModified = pDtBeginDateModified;
+			enumSyslog.EndDateModified = pDtEndDateModified;
+			enumSyslog.Msgsource = pStrMsgsource;
+			enumSyslog.Msgaction = pStrMsgaction;
+			enumSyslog.Msgtxt = pStrMsgtxt;
+			enumSyslog.EnumData();
+			while (enumSyslog.hasMoreElements())
 			{
-				data = (Apikey) enumApikey.nextElement();
+				data = (Syslog) enumSyslog.nextElement();
 				_arrlstEntities.Add(data);
 			}
-			enumApikey = null;
+			enumSyslog = null;
 			ArrayList.ReadOnly(_arrlstEntities);
 			return _arrlstEntities;
 		}
 
         /// <summary>
-        ///     Saves Apikey object to database
-        ///     <param name="o">Apikey to be saved.</param>
+        ///     Saves Syslog object to database
+        ///     <param name="o">Syslog to be saved.</param>
         ///     <retvalue>void</retvalue>
         /// </summary>
-		public void Save(Apikey o)
+		public void Save(Syslog o)
 		{
 			if ( o != null )
 			{
@@ -158,11 +160,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Syslog object to database
+		///     <param name="o">Syslog to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Update(Apikey o)
+		public void Update(Syslog o)
 		{
 			if ( o != null )
 			{
@@ -175,11 +177,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Syslog object to database
+		///     <param name="o">Syslog to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Load(Apikey o)
+		public void Load(Syslog o)
 		{
 			if ( o != null )
 			{
@@ -192,11 +194,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Syslog object to database
+		///     <param name="o">Syslog to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Delete(Apikey o)
+		public void Delete(Syslog o)
 		{
 			if ( o != null )
 			{
@@ -209,11 +211,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Exist Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Exist Syslog object to database
+		///     <param name="o">Syslog to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public bool Exist(Apikey o)
+		public bool Exist(Syslog o)
 		{
 			bool bExist = false;
 			if ( o != null )
@@ -242,23 +244,23 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		{
 			get{return _arrlstColumnErrors;}
 		}
-		/// <summary>Property returns an ArrayList containing Apikey objects</summary>
-		public ArrayList Apikeys 
+		/// <summary>Property returns an ArrayList containing Syslog objects</summary>
+		public ArrayList Syslogs 
 		{
 			get
 			{
 				if ( _arrlstEntities == null )
 				{
-					Apikey data = null;
+					Syslog data = null;
 					_arrlstEntities = new ArrayList();
-					EnumApikey enumApikey = new EnumApikey(_conn);
-					enumApikey.EnumData();
-					while (enumApikey.hasMoreElements())
+					EnumSyslog enumSyslog = new EnumSyslog(_conn);
+					enumSyslog.EnumData();
+					while (enumSyslog.hasMoreElements())
 					{
-						data = (Apikey) enumApikey.nextElement();
+						data = (Syslog) enumSyslog.nextElement();
 						_arrlstEntities.Add(data);
 					}
-					enumApikey = null;
+					enumSyslog = null;
 					ArrayList.ReadOnly(_arrlstEntities);
 				}
 				return _arrlstEntities;
@@ -272,7 +274,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     </remarks>   
 		///     <retvalue>true if object has valid entries, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValid(Apikey pRefApikey)
+		public bool IsValid(Syslog pRefSyslog)
 		{
 			bool isValid = true;
 			bool isValidTmp = true;
@@ -280,33 +282,38 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			_arrlstColumnErrors = null;
 			_arrlstColumnErrors = new ArrayList();
 
-			isValidTmp = IsValidApikeyID(pRefApikey.ApikeyID);
+			isValidTmp = IsValidSyslogID(pRefSyslog.SyslogID);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidDateCreated(pRefApikey.DateCreated);
+			isValidTmp = IsValidInteractionID(pRefSyslog.InteractionID);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidDateExpiration(pRefApikey.DateExpiration);
+			isValidTmp = IsValidDateCreated(pRefSyslog.DateCreated);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidIsDisabled(pRefApikey.IsDisabled);
-			if (!isValidTmp && pRefApikey.IsDisabled != null)
+			isValidTmp = IsValidDateModified(pRefSyslog.DateModified);
+			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidToken(pRefApikey.Token);
-			if (!isValidTmp && pRefApikey.Token != null)
+			isValidTmp = IsValidMsgsource(pRefSyslog.Msgsource);
+			if (!isValidTmp && pRefSyslog.Msgsource != null)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidNotes(pRefApikey.Notes);
-			if (!isValidTmp && pRefApikey.Notes != null)
+			isValidTmp = IsValidMsgaction(pRefSyslog.Msgaction);
+			if (!isValidTmp && pRefSyslog.Msgaction != null)
+			{
+				isValid = false;
+			}
+			isValidTmp = IsValidMsgtxt(pRefSyslog.Msgtxt);
+			if (!isValidTmp && pRefSyslog.Msgtxt != null)
 			{
 				isValid = false;
 			}
@@ -317,7 +324,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidApikeyID(long pLngData)
+		public bool IsValidSyslogID(long pLngData)
 		{
 			bool isValid = true;
             
@@ -327,7 +334,28 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_ID;
+				clm.ColumnName = Syslog.DB_FIELD_ID;
+				clm.HasError = true;
+				_arrlstColumnErrors.Add(clm);
+				_hasInvalid = true;
+			}
+			return isValid;
+		}
+		/// <summary>
+		///     Checks to make sure value is valid
+		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+		/// </summary>
+		public bool IsValidInteractionID(long pLngData)
+		{
+			bool isValid = true;
+            
+			// do some validation
+			isValid = (new Regex(REGEXP_ISVALID_INTERACTION_ID)).IsMatch(pLngData.ToString());
+			if ( !isValid )
+			{
+				Column clm = null;
+				clm = new Column();
+				clm.ColumnName = Syslog.DB_FIELD_INTERACTION_ID;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -348,7 +376,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_DATE_CREATED;
+				clm.ColumnName = Syslog.DB_FIELD_DATE_CREATED;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -359,17 +387,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidDateExpiration(DateTime pDtData)
+		public bool IsValidDateModified(DateTime pDtData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = (new Regex(REGEXP_ISVALID_DATE_EXPIRATION)).IsMatch(pDtData.ToString());
+			isValid = (new Regex(REGEXP_ISVALID_DATE_MODIFIED)).IsMatch(pDtData.ToString());
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_DATE_EXPIRATION;
+				clm.ColumnName = Syslog.DB_FIELD_DATE_MODIFIED;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -380,17 +408,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidIsDisabled(bool? pBolData)
+		public bool IsValidMsgsource(string pStrData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = (new Regex(REGEXP_ISVALID_IS_DISABLED)).IsMatch(pBolData.ToString());
+			isValid = !(new Regex(REGEXP_ISVALID_MSGSOURCE)).IsMatch(pStrData);
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_IS_DISABLED;
+				clm.ColumnName = Syslog.DB_FIELD_MSGSOURCE;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -401,17 +429,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidToken(string pStrData)
+		public bool IsValidMsgaction(string pStrData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = !(new Regex(REGEXP_ISVALID_TOKEN)).IsMatch(pStrData);
+			isValid = !(new Regex(REGEXP_ISVALID_MSGACTION)).IsMatch(pStrData);
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_TOKEN;
+				clm.ColumnName = Syslog.DB_FIELD_MSGACTION;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -422,17 +450,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidNotes(string pStrData)
+		public bool IsValidMsgtxt(string pStrData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = !(new Regex(REGEXP_ISVALID_NOTES)).IsMatch(pStrData);
+			isValid = !(new Regex(REGEXP_ISVALID_MSGTXT)).IsMatch(pStrData);
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_NOTES;
+				clm.ColumnName = Syslog.DB_FIELD_MSGTXT;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;

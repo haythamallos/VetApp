@@ -14,14 +14,14 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 	/// Copyright (c) 2016 Haytham Allos.  San Diego, California, USA
 	/// All Rights Reserved
 	/// 
-	/// File:  EnumApikey.cs
+	/// File:  EnumDbversion.cs
 	/// History
 	/// ----------------------------------------------------
 	/// 001	HA	11/16/2016	Created
 	/// 
 	/// ----------------------------------------------------
 	/// </summary>
-	public class EnumApikey
+	public class EnumDbversion
 	{
 		private bool _hasAny = false;
 		private bool _hasMore = false;
@@ -42,53 +42,47 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
 
 		/// <summary>Attribute of type string</summary>
-		public static readonly string ENTITY_NAME = "EnumApikey"; //Table name to abstract
+		public static readonly string ENTITY_NAME = "EnumDbversion"; //Table name to abstract
 		private static DateTime dtNull = new DateTime();
 		private static readonly string PARAM_COUNT = "@COUNT"; //Sp count parameter
 
-		private long _lApikeyID = 0;
+		private long _lDbversionID = 0;
 		private DateTime _dtBeginDateCreated = new DateTime();
 		private DateTime _dtEndDateCreated = new DateTime();
-		private DateTime _dtBeginDateExpiration = new DateTime();
-		private DateTime _dtEndDateExpiration = new DateTime();
-		private bool? _bIsDisabled = null;
-		private string _strToken = null;
+		private long _lMajorNum = 0;
+		private long _lMinorNum = 0;
 		private string _strNotes = null;
 //		private string _strOrderByEnum = "ASC";
 		private string _strOrderByField = DB_FIELD_ID;
 
 		/// <summary>DB_FIELD_ID Attribute type string</summary>
-		public static readonly string DB_FIELD_ID = "apikey_id"; //Table id field name
-		/// <summary>ApikeyID Attribute type string</summary>
-		public static readonly string TAG_APIKEY_ID = "ApikeyID"; //Attribute ApikeyID  name
+		public static readonly string DB_FIELD_ID = "dbversion_id"; //Table id field name
+		/// <summary>DbversionID Attribute type string</summary>
+		public static readonly string TAG_DBVERSION_ID = "DbversionID"; //Attribute DbversionID  name
 		/// <summary>DateCreated Attribute type string</summary>
 		public static readonly string TAG_BEGIN_DATE_CREATED = "BeginDateCreated"; //Attribute DateCreated  name
 		/// <summary>EndDateCreated Attribute type string</summary>
 		public static readonly string TAG_END_DATE_CREATED = "EndDateCreated"; //Attribute DateCreated  name
-		/// <summary>DateExpiration Attribute type string</summary>
-		public static readonly string TAG_BEGIN_DATE_EXPIRATION = "BeginDateExpiration"; //Attribute DateExpiration  name
-		/// <summary>EndDateExpiration Attribute type string</summary>
-		public static readonly string TAG_END_DATE_EXPIRATION = "EndDateExpiration"; //Attribute DateExpiration  name
-		/// <summary>IsDisabled Attribute type string</summary>
-		public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Attribute IsDisabled  name
-		/// <summary>Token Attribute type string</summary>
-		public static readonly string TAG_TOKEN = "Token"; //Attribute Token  name
+		/// <summary>MajorNum Attribute type string</summary>
+		public static readonly string TAG_MAJOR_NUM = "MajorNum"; //Attribute MajorNum  name
+		/// <summary>MinorNum Attribute type string</summary>
+		public static readonly string TAG_MINOR_NUM = "MinorNum"; //Attribute MinorNum  name
 		/// <summary>Notes Attribute type string</summary>
 		public static readonly string TAG_NOTES = "Notes"; //Attribute Notes  name
 		// Stored procedure name
-		public string SP_ENUM_NAME = "spApikeyEnum"; //Enum sp name
+		public string SP_ENUM_NAME = "spDbversionEnum"; //Enum sp name
 
-		/// <summary>HasError is a Property in the Apikey Class of type bool</summary>
+		/// <summary>HasError is a Property in the Dbversion Class of type bool</summary>
 		public bool HasError 
 		{
 			get{return _hasError;}
 			set{_hasError = value;}
 		}
-		/// <summary>ApikeyID is a Property in the Apikey Class of type long</summary>
-		public long ApikeyID 
+		/// <summary>DbversionID is a Property in the Dbversion Class of type long</summary>
+		public long DbversionID 
 		{
-			get{return _lApikeyID;}
-			set{_lApikeyID = value;}
+			get{return _lDbversionID;}
+			set{_lDbversionID = value;}
 		}
 		/// <summary>Property DateCreated. Type: DateTime</summary>
 		public DateTime BeginDateCreated
@@ -102,31 +96,19 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 			get{return _dtEndDateCreated;}
 			set{_dtEndDateCreated = value;}
 		}
-		/// <summary>Property DateExpiration. Type: DateTime</summary>
-		public DateTime BeginDateExpiration
+		/// <summary>MajorNum is a Property in the Dbversion Class of type long</summary>
+		public long MajorNum 
 		{
-			get{return _dtBeginDateExpiration;}
-			set{_dtBeginDateExpiration = value;}
+			get{return _lMajorNum;}
+			set{_lMajorNum = value;}
 		}
-		/// <summary>Property DateExpiration. Type: DateTime</summary>
-		public DateTime EndDateExpiration
+		/// <summary>MinorNum is a Property in the Dbversion Class of type long</summary>
+		public long MinorNum 
 		{
-			get{return _dtEndDateExpiration;}
-			set{_dtEndDateExpiration = value;}
+			get{return _lMinorNum;}
+			set{_lMinorNum = value;}
 		}
-		/// <summary>IsDisabled is a Property in the Apikey Class of type bool</summary>
-		public bool? IsDisabled 
-		{
-			get{return _bIsDisabled;}
-			set{_bIsDisabled = value;}
-		}
-		/// <summary>Token is a Property in the Apikey Class of type String</summary>
-		public string Token 
-		{
-			get{return _strToken;}
-			set{_strToken = value;}
-		}
-		/// <summary>Notes is a Property in the Apikey Class of type String</summary>
+		/// <summary>Notes is a Property in the Dbversion Class of type String</summary>
 		public string Notes 
 		{
 			get{return _strNotes;}
@@ -164,23 +146,23 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 		}
 
 		/// <summary>Contructor takes 1 parameter: SqlConnection</summary>
-		public EnumApikey()
+		public EnumDbversion()
 		{
 		}
 		/// <summary>Contructor takes 1 parameter: SqlConnection</summary>
-		public EnumApikey(SqlConnection conn)
+		public EnumDbversion(SqlConnection conn)
 		{
 			_conn = conn;
 		}
 
 
 		// Implementation of IEnumerator
-		/// <summary>Property of type Apikey. Returns the next Apikey in the list</summary>
-		private Apikey _nextTransaction
+		/// <summary>Property of type Dbversion. Returns the next Dbversion in the list</summary>
+		private Dbversion _nextTransaction
 		{
 			get
 			{
-				Apikey o = null;
+				Dbversion o = null;
 				
 				if (!_bSetup)
 				{
@@ -188,7 +170,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 				}
 				if (_hasMore)
 				{
-					o = new Apikey(_rdr);
+					o = new Dbversion(_rdr);
 					_hasMore = _rdr.Read();
 					if (!_hasMore)
 					{
@@ -274,13 +256,13 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 			_cmd = null;
 		}
 
-		/// <summary>ToString is overridden to display all properties of the Apikey Class</summary>
+		/// <summary>ToString is overridden to display all properties of the Dbversion Class</summary>
 		public override string ToString() 
 		{
 			StringBuilder sbReturn = null;
 
 			sbReturn = new StringBuilder();	
-			sbReturn.Append(TAG_APIKEY_ID + ":  " + ApikeyID.ToString() + "\n");
+			sbReturn.Append(TAG_DBVERSION_ID + ":  " + DbversionID.ToString() + "\n");
 			if (!dtNull.Equals(BeginDateCreated))
 			{
 				sbReturn.Append(TAG_BEGIN_DATE_CREATED + ":  " + BeginDateCreated.ToString() + "\n");
@@ -297,36 +279,20 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 			{
 				sbReturn.Append(TAG_END_DATE_CREATED + ":\n");
 			}
-			if (!dtNull.Equals(BeginDateExpiration))
-			{
-				sbReturn.Append(TAG_BEGIN_DATE_EXPIRATION + ":  " + BeginDateExpiration.ToString() + "\n");
-			}
-			else
-			{
-				sbReturn.Append(TAG_BEGIN_DATE_EXPIRATION + ":\n");
-			}
-			if (!dtNull.Equals(EndDateExpiration))
-			{
-				sbReturn.Append(TAG_END_DATE_EXPIRATION + ":  " + EndDateExpiration.ToString() + "\n");
-			}
-			else
-			{
-				sbReturn.Append(TAG_END_DATE_EXPIRATION + ":\n");
-			}
-			sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
-			sbReturn.Append(TAG_TOKEN + ":  " + Token + "\n");
+			sbReturn.Append(TAG_MAJOR_NUM + ":  " + MajorNum + "\n");
+			sbReturn.Append(TAG_MINOR_NUM + ":  " + MinorNum + "\n");
 			sbReturn.Append(TAG_NOTES + ":  " + Notes + "\n");
 
 			return sbReturn.ToString();
 		}
-		/// <summary>Creates well formatted XML - includes all properties of Apikey</summary>
+		/// <summary>Creates well formatted XML - includes all properties of Dbversion</summary>
 		public string ToXml() 
 		{
 			StringBuilder sbReturn = null;
 
 			sbReturn = new StringBuilder();	
 			sbReturn.Append("<" + ENTITY_NAME + ">\n");
-			sbReturn.Append("<" + TAG_APIKEY_ID + ">" + ApikeyID + "</" + TAG_APIKEY_ID + ">\n");
+			sbReturn.Append("<" + TAG_DBVERSION_ID + ">" + DbversionID + "</" + TAG_DBVERSION_ID + ">\n");
 			if (!dtNull.Equals(BeginDateCreated))
 			{
 				sbReturn.Append("<" + TAG_BEGIN_DATE_CREATED + ">" + BeginDateCreated.ToString() + "</" + TAG_BEGIN_DATE_CREATED + ">\n");
@@ -343,24 +309,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 			{
 				sbReturn.Append("<" + TAG_END_DATE_CREATED + "></" + TAG_END_DATE_CREATED + ">\n");
 			}
-			if (!dtNull.Equals(BeginDateExpiration))
-			{
-				sbReturn.Append("<" + TAG_BEGIN_DATE_EXPIRATION + ">" + BeginDateExpiration.ToString() + "</" + TAG_BEGIN_DATE_EXPIRATION + ">\n");
-			}
-			else
-			{
-				sbReturn.Append("<" + TAG_BEGIN_DATE_EXPIRATION + "></" + TAG_BEGIN_DATE_EXPIRATION + ">\n");
-			}
-			if (!dtNull.Equals(EndDateExpiration))
-			{
-				sbReturn.Append("<" + TAG_END_DATE_EXPIRATION + ">" + EndDateExpiration.ToString() + "</" + TAG_END_DATE_EXPIRATION + ">\n");
-			}
-			else
-			{
-				sbReturn.Append("<" + TAG_END_DATE_EXPIRATION + "></" + TAG_END_DATE_EXPIRATION + ">\n");
-			}
-			sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
-			sbReturn.Append("<" + TAG_TOKEN + ">" + Token + "</" + TAG_TOKEN + ">\n");
+			sbReturn.Append("<" + TAG_MAJOR_NUM + ">" + MajorNum + "</" + TAG_MAJOR_NUM + ">\n");
+			sbReturn.Append("<" + TAG_MINOR_NUM + ">" + MinorNum + "</" + TAG_MINOR_NUM + ">\n");
 			sbReturn.Append("<" + TAG_NOTES + ">" + Notes + "</" + TAG_NOTES + ">\n");
 			sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
@@ -400,9 +350,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
 			try
 			{
-				xResultNode = xNode.SelectSingleNode(TAG_APIKEY_ID);
+				xResultNode = xNode.SelectSingleNode(TAG_DBVERSION_ID);
 				strTmp = xResultNode.InnerText;
-				ApikeyID = (long) Convert.ToInt32(strTmp);
+				DbversionID = (long) Convert.ToInt32(strTmp);
 			}
 			catch  
 			{
@@ -428,42 +378,22 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
 			try
 			{
-				xResultNode = xNode.SelectSingleNode(TAG_BEGIN_DATE_EXPIRATION);
-				BeginDateExpiration = DateTime.Parse(xResultNode.InnerText);
+				xResultNode = xNode.SelectSingleNode(TAG_MAJOR_NUM);
+				MajorNum = (long) Convert.ToInt32(xResultNode.InnerText);
 			}
 			catch  
 			{
+			MajorNum = 0;
 			}
 
 			try
 			{
-				xResultNode = xNode.SelectSingleNode(TAG_END_DATE_EXPIRATION);
-				EndDateExpiration = DateTime.Parse(xResultNode.InnerText);
+				xResultNode = xNode.SelectSingleNode(TAG_MINOR_NUM);
+				MinorNum = (long) Convert.ToInt32(xResultNode.InnerText);
 			}
 			catch  
 			{
-			}
-
-			try
-			{
-				xResultNode = xNode.SelectSingleNode(TAG_IS_DISABLED);
-				IsDisabled = Convert.ToBoolean(xResultNode.InnerText);
-			}
-			catch  
-			{
-			IsDisabled = false;
-			}
-
-			try
-			{
-				xResultNode = xNode.SelectSingleNode(TAG_TOKEN);
-				Token = xResultNode.InnerText;
-				if (Token.Trim().Length == 0)
-					Token = null;
-			}
-			catch  
-			{
-				Token = null;
+			MinorNum = 0;
 			}
 
 			try
@@ -505,45 +435,26 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 					EndDateCreated = new DateTime();
 				}
 
-				Console.WriteLine(TAG_BEGIN_DATE_EXPIRATION + ":  ");
+				Console.WriteLine(TAG_MAJOR_NUM + ":  ");
 				try
 				{
-					string s = Console.ReadLine();
-					BeginDateExpiration = DateTime.Parse(s);
+					MajorNum = (long)Convert.ToInt32(Console.ReadLine());
 				}
 				catch 
 				{
-					BeginDateExpiration = new DateTime();
+					MajorNum = 0;
 				}
 
-				Console.WriteLine(TAG_END_DATE_EXPIRATION + ":  ");
+				Console.WriteLine(TAG_MINOR_NUM + ":  ");
 				try
 				{
-					string s = Console.ReadLine();
-					EndDateExpiration = DateTime.Parse(s);
-				}
-				catch  
-				{
-					EndDateExpiration = new DateTime();
-				}
-
-				Console.WriteLine(TAG_IS_DISABLED + ":  ");
-				try
-				{
-					IsDisabled = Convert.ToBoolean(Console.ReadLine());
+					MinorNum = (long)Convert.ToInt32(Console.ReadLine());
 				}
 				catch 
 				{
-					IsDisabled = false;
+					MinorNum = 0;
 				}
 
-
-				Console.WriteLine(TAG_TOKEN + ":  ");
-				Token = Console.ReadLine();
-				if (Token.Length == 0)
-				{
-					Token = null;
-				}
 
 				Console.WriteLine(TAG_NOTES + ":  ");
 				Notes = Console.ReadLine();
@@ -589,21 +500,19 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 		private void _setupEnumParams()
 		{
 			System.Text.StringBuilder sbLog = null;
-			SqlParameter paramApikeyID = null;
+			SqlParameter paramDbversionID = null;
 			SqlParameter paramBeginDateCreated = null;
 			SqlParameter paramEndDateCreated = null;
-			SqlParameter paramBeginDateExpiration = null;
-			SqlParameter paramEndDateExpiration = null;
-			SqlParameter paramIsDisabled = null;
-			SqlParameter paramToken = null;
+			SqlParameter paramMajorNum = null;
+			SqlParameter paramMinorNum = null;
 			SqlParameter paramNotes = null;
 			DateTime dtNull = new DateTime();
 
 			sbLog = new System.Text.StringBuilder();
-				paramApikeyID = new SqlParameter("@" + TAG_APIKEY_ID, ApikeyID);
-				sbLog.Append(TAG_APIKEY_ID + "=" + ApikeyID + "\n");
-				paramApikeyID.Direction = ParameterDirection.Input;
-				_cmd.Parameters.Add(paramApikeyID);
+				paramDbversionID = new SqlParameter("@" + TAG_DBVERSION_ID, DbversionID);
+				sbLog.Append(TAG_DBVERSION_ID + "=" + DbversionID + "\n");
+				paramDbversionID.Direction = ParameterDirection.Input;
+				_cmd.Parameters.Add(paramDbversionID);
 
 			// Setup the date created param
 			if (!dtNull.Equals(BeginDateCreated))
@@ -628,45 +537,15 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 			paramEndDateCreated.Direction = ParameterDirection.Input;
 			_cmd.Parameters.Add(paramEndDateCreated);
 
-			// Setup the date expiration param
-			if (!dtNull.Equals(BeginDateExpiration))
-			{
-				paramBeginDateExpiration = new SqlParameter("@" + TAG_BEGIN_DATE_EXPIRATION, BeginDateExpiration);
-			}
-			else
-			{
-				paramBeginDateExpiration = new SqlParameter("@" + TAG_BEGIN_DATE_EXPIRATION, DBNull.Value);
-			}
-			paramBeginDateExpiration.Direction = ParameterDirection.Input;
-			_cmd.Parameters.Add(paramBeginDateExpiration);
+				paramMajorNum = new SqlParameter("@" + TAG_MAJOR_NUM, MajorNum);
+				sbLog.Append(TAG_MAJOR_NUM + "=" + MajorNum + "\n");
+				paramMajorNum.Direction = ParameterDirection.Input;
+				_cmd.Parameters.Add(paramMajorNum);
 
-			if (!dtNull.Equals(EndDateExpiration))
-			{
-				paramEndDateExpiration = new SqlParameter("@" + TAG_END_DATE_EXPIRATION, EndDateExpiration);
-			}
-			else
-			{
-				paramEndDateExpiration = new SqlParameter("@" + TAG_END_DATE_EXPIRATION, DBNull.Value);
-			}
-			paramEndDateExpiration.Direction = ParameterDirection.Input;
-			_cmd.Parameters.Add(paramEndDateExpiration);
-
-				paramIsDisabled = new SqlParameter("@" + TAG_IS_DISABLED, IsDisabled);
-				sbLog.Append(TAG_IS_DISABLED + "=" + IsDisabled + "\n");
-				paramIsDisabled.Direction = ParameterDirection.Input;
-				_cmd.Parameters.Add(paramIsDisabled);
-			// Setup the token text param
-			if ( Token != null )
-			{
-				paramToken = new SqlParameter("@" + TAG_TOKEN, Token);
-				sbLog.Append(TAG_TOKEN + "=" + Token + "\n");
-			}
-			else
-			{
-				paramToken = new SqlParameter("@" + TAG_TOKEN, DBNull.Value);
-			}
-			paramToken.Direction = ParameterDirection.Input;
-			_cmd.Parameters.Add(paramToken);
+				paramMinorNum = new SqlParameter("@" + TAG_MINOR_NUM, MinorNum);
+				sbLog.Append(TAG_MINOR_NUM + "=" + MinorNum + "\n");
+				paramMinorNum.Direction = ParameterDirection.Input;
+				_cmd.Parameters.Add(paramMinorNum);
 
 			// Setup the notes text param
 			if ( Notes != null )

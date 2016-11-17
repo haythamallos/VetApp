@@ -15,15 +15,15 @@ namespace Vetapp.Engine.BusinessAccessLayer
 	/// Copyright (c) 2016 Haytham Allos.  San Diego, California, USA
 	/// All Rights Reserved
 	/// 
-	/// File:  BusApikey.cs
+	/// File:  BusDbversion.cs
 	/// History
 	/// ----------------------------------------------------
 	/// 001	HA	11/16/2016	Created
 	/// 
 	/// ----------------------------------------------------
-	/// Business Class for Apikey objects.
+	/// Business Class for Dbversion objects.
 	/// </summary>
-	public class BusApikey
+	public class BusDbversion
 	{
 		private SqlConnection _conn = null;
 		private bool _hasError = false;
@@ -34,10 +34,9 @@ namespace Vetapp.Engine.BusinessAccessLayer
 
 		private const String REGEXP_ISVALID_ID= BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
 		private const String REGEXP_ISVALID_DATE_CREATED = "";
-		private const String REGEXP_ISVALID_DATE_EXPIRATION = "";
-		private const String REGEXP_ISVALID_IS_DISABLED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-		private const String REGEXP_ISVALID_TOKEN = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
-		private const String REGEXP_ISVALID_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+		private const String REGEXP_ISVALID_MAJOR_NUM = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
+		private const String REGEXP_ISVALID_MINOR_NUM = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
+		private const String REGEXP_ISVALID_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
 
 		public string SP_ENUM_NAME = null;
 
@@ -47,105 +46,103 @@ namespace Vetapp.Engine.BusinessAccessLayer
 /*********************** CUSTOM NON-META END *********************/
 
 
-		/// <summary>BusApikey constructor takes SqlConnection object</summary>
-		public BusApikey()
+		/// <summary>BusDbversion constructor takes SqlConnection object</summary>
+		public BusDbversion()
 		{
 		}
-		/// <summary>BusApikey constructor takes SqlConnection object</summary>
-		public BusApikey(SqlConnection conn)
+		/// <summary>BusDbversion constructor takes SqlConnection object</summary>
+		public BusDbversion(SqlConnection conn)
 		{
 			_conn = conn;
 		}
 
 	 /// <summary>
-	///     Gets all Apikey objects
+	///     Gets all Dbversion objects
 	///     <remarks>   
-	///         No parameters. Returns all Apikey objects 
+	///         No parameters. Returns all Dbversion objects 
 	///     </remarks>   
-	///     <retvalue>ArrayList containing all Apikey objects</retvalue>
+	///     <retvalue>ArrayList containing all Dbversion objects</retvalue>
 	/// </summary>
 	public ArrayList Get()
 	{
-		return (Get(0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), false, null, null));
+		return (Get(0, new DateTime(), new DateTime(), 0, 0, null));
 	}
 
 	 /// <summary>
-	///     Gets all Apikey objects
+	///     Gets all Dbversion objects
 	///     <remarks>   
-	///         No parameters. Returns all Apikey objects 
+	///         No parameters. Returns all Dbversion objects 
 	///     </remarks>   
-	///     <retvalue>ArrayList containing all Apikey objects</retvalue>
+	///     <retvalue>ArrayList containing all Dbversion objects</retvalue>
 	/// </summary>
-	public ArrayList Get(long lApikeyID)
+	public ArrayList Get(long lDbversionID)
 	{
-		return (Get(lApikeyID , new DateTime(), new DateTime(), new DateTime(), new DateTime(), false, null, null));
+		return (Get(lDbversionID , new DateTime(), new DateTime(), 0, 0, null));
 	}
 
         /// <summary>
-        ///     Gets all Apikey objects
+        ///     Gets all Dbversion objects
         ///     <remarks>   
         ///         Returns ArrayList containing object passed in 
         ///     </remarks>   
-        ///     <param name="o">Apikey to be returned</param>
-        ///     <retvalue>ArrayList containing Apikey object</retvalue>
+        ///     <param name="o">Dbversion to be returned</param>
+        ///     <retvalue>ArrayList containing Dbversion object</retvalue>
         /// </summary>
-	public ArrayList Get(Apikey o)
+	public ArrayList Get(Dbversion o)
 	{	
-		return (Get( o.ApikeyID, o.DateCreated, o.DateCreated, o.DateExpiration, o.DateExpiration, o.IsDisabled, o.Token, o.Notes	));
+		return (Get( o.DbversionID, o.DateCreated, o.DateCreated, o.MajorNum, o.MinorNum, o.Notes	));
 	}
 
         /// <summary>
-        ///     Gets all Apikey objects
+        ///     Gets all Dbversion objects
         ///     <remarks>   
         ///         Returns ArrayList containing object passed in 
         ///     </remarks>   
-        ///     <param name="o">Apikey to be returned</param>
-        ///     <retvalue>ArrayList containing Apikey object</retvalue>
+        ///     <param name="o">Dbversion to be returned</param>
+        ///     <retvalue>ArrayList containing Dbversion object</retvalue>
         /// </summary>
-	public ArrayList Get(EnumApikey o)
+	public ArrayList Get(EnumDbversion o)
 	{	
-		return (Get( o.ApikeyID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateExpiration, o.EndDateExpiration, o.IsDisabled, o.Token, o.Notes	));
+		return (Get( o.DbversionID, o.BeginDateCreated, o.EndDateCreated, o.MajorNum, o.MinorNum, o.Notes	));
 	}
 
 		/// <summary>
-		///     Gets all Apikey objects
+		///     Gets all Dbversion objects
 		///     <remarks>   
-		///         Returns Apikey objects in an array list 
+		///         Returns Dbversion objects in an array list 
 		///         using the given criteria 
 		///     </remarks>   
-		///     <retvalue>ArrayList containing Apikey object</retvalue>
+		///     <retvalue>ArrayList containing Dbversion object</retvalue>
 		/// </summary>
-		public ArrayList Get( long pLngApikeyID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateExpiration, DateTime pDtEndDateExpiration, bool? pBolIsDisabled, string pStrToken, string pStrNotes)
+		public ArrayList Get( long pLngDbversionID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, long pLngMajorNum, long pLngMinorNum, string pStrNotes)
 		{
-			Apikey data = null;
+			Dbversion data = null;
 			_arrlstEntities = new ArrayList();
-			EnumApikey enumApikey = new EnumApikey(_conn);
-			 enumApikey.SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enumApikey.SP_ENUM_NAME;
-			enumApikey.ApikeyID = pLngApikeyID;
-			enumApikey.BeginDateCreated = pDtBeginDateCreated;
-			enumApikey.EndDateCreated = pDtEndDateCreated;
-			enumApikey.BeginDateExpiration = pDtBeginDateExpiration;
-			enumApikey.EndDateExpiration = pDtEndDateExpiration;
-			enumApikey.IsDisabled = pBolIsDisabled;
-			enumApikey.Token = pStrToken;
-			enumApikey.Notes = pStrNotes;
-			enumApikey.EnumData();
-			while (enumApikey.hasMoreElements())
+			EnumDbversion enumDbversion = new EnumDbversion(_conn);
+			 enumDbversion.SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enumDbversion.SP_ENUM_NAME;
+			enumDbversion.DbversionID = pLngDbversionID;
+			enumDbversion.BeginDateCreated = pDtBeginDateCreated;
+			enumDbversion.EndDateCreated = pDtEndDateCreated;
+			enumDbversion.MajorNum = pLngMajorNum;
+			enumDbversion.MinorNum = pLngMinorNum;
+			enumDbversion.Notes = pStrNotes;
+			enumDbversion.EnumData();
+			while (enumDbversion.hasMoreElements())
 			{
-				data = (Apikey) enumApikey.nextElement();
+				data = (Dbversion) enumDbversion.nextElement();
 				_arrlstEntities.Add(data);
 			}
-			enumApikey = null;
+			enumDbversion = null;
 			ArrayList.ReadOnly(_arrlstEntities);
 			return _arrlstEntities;
 		}
 
         /// <summary>
-        ///     Saves Apikey object to database
-        ///     <param name="o">Apikey to be saved.</param>
+        ///     Saves Dbversion object to database
+        ///     <param name="o">Dbversion to be saved.</param>
         ///     <retvalue>void</retvalue>
         /// </summary>
-		public void Save(Apikey o)
+		public void Save(Dbversion o)
 		{
 			if ( o != null )
 			{
@@ -158,11 +155,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Dbversion object to database
+		///     <param name="o">Dbversion to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Update(Apikey o)
+		public void Update(Dbversion o)
 		{
 			if ( o != null )
 			{
@@ -175,11 +172,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Dbversion object to database
+		///     <param name="o">Dbversion to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Load(Apikey o)
+		public void Load(Dbversion o)
 		{
 			if ( o != null )
 			{
@@ -192,11 +189,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Modify Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Modify Dbversion object to database
+		///     <param name="o">Dbversion to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public void Delete(Apikey o)
+		public void Delete(Dbversion o)
 		{
 			if ( o != null )
 			{
@@ -209,11 +206,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		}
 
 		/// <summary>
-		///     Exist Apikey object to database
-		///     <param name="o">Apikey to be modified.</param>
+		///     Exist Dbversion object to database
+		///     <param name="o">Dbversion to be modified.</param>
 		///     <retvalue>void</retvalue>
 		/// </summary>
-		public bool Exist(Apikey o)
+		public bool Exist(Dbversion o)
 		{
 			bool bExist = false;
 			if ( o != null )
@@ -242,23 +239,23 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		{
 			get{return _arrlstColumnErrors;}
 		}
-		/// <summary>Property returns an ArrayList containing Apikey objects</summary>
-		public ArrayList Apikeys 
+		/// <summary>Property returns an ArrayList containing Dbversion objects</summary>
+		public ArrayList Dbversions 
 		{
 			get
 			{
 				if ( _arrlstEntities == null )
 				{
-					Apikey data = null;
+					Dbversion data = null;
 					_arrlstEntities = new ArrayList();
-					EnumApikey enumApikey = new EnumApikey(_conn);
-					enumApikey.EnumData();
-					while (enumApikey.hasMoreElements())
+					EnumDbversion enumDbversion = new EnumDbversion(_conn);
+					enumDbversion.EnumData();
+					while (enumDbversion.hasMoreElements())
 					{
-						data = (Apikey) enumApikey.nextElement();
+						data = (Dbversion) enumDbversion.nextElement();
 						_arrlstEntities.Add(data);
 					}
-					enumApikey = null;
+					enumDbversion = null;
 					ArrayList.ReadOnly(_arrlstEntities);
 				}
 				return _arrlstEntities;
@@ -272,7 +269,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     </remarks>   
 		///     <retvalue>true if object has valid entries, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValid(Apikey pRefApikey)
+		public bool IsValid(Dbversion pRefDbversion)
 		{
 			bool isValid = true;
 			bool isValidTmp = true;
@@ -280,33 +277,28 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			_arrlstColumnErrors = null;
 			_arrlstColumnErrors = new ArrayList();
 
-			isValidTmp = IsValidApikeyID(pRefApikey.ApikeyID);
+			isValidTmp = IsValidDbversionID(pRefDbversion.DbversionID);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidDateCreated(pRefApikey.DateCreated);
+			isValidTmp = IsValidDateCreated(pRefDbversion.DateCreated);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidDateExpiration(pRefApikey.DateExpiration);
+			isValidTmp = IsValidMajorNum(pRefDbversion.MajorNum);
 			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidIsDisabled(pRefApikey.IsDisabled);
-			if (!isValidTmp && pRefApikey.IsDisabled != null)
+			isValidTmp = IsValidMinorNum(pRefDbversion.MinorNum);
+			if (!isValidTmp)
 			{
 				isValid = false;
 			}
-			isValidTmp = IsValidToken(pRefApikey.Token);
-			if (!isValidTmp && pRefApikey.Token != null)
-			{
-				isValid = false;
-			}
-			isValidTmp = IsValidNotes(pRefApikey.Notes);
-			if (!isValidTmp && pRefApikey.Notes != null)
+			isValidTmp = IsValidNotes(pRefDbversion.Notes);
+			if (!isValidTmp && pRefDbversion.Notes != null)
 			{
 				isValid = false;
 			}
@@ -317,7 +309,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidApikeyID(long pLngData)
+		public bool IsValidDbversionID(long pLngData)
 		{
 			bool isValid = true;
             
@@ -327,7 +319,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_ID;
+				clm.ColumnName = Dbversion.DB_FIELD_ID;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -348,7 +340,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_DATE_CREATED;
+				clm.ColumnName = Dbversion.DB_FIELD_DATE_CREATED;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -359,17 +351,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidDateExpiration(DateTime pDtData)
+		public bool IsValidMajorNum(long pLngData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = (new Regex(REGEXP_ISVALID_DATE_EXPIRATION)).IsMatch(pDtData.ToString());
+			isValid = (new Regex(REGEXP_ISVALID_MAJOR_NUM)).IsMatch(pLngData.ToString());
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_DATE_EXPIRATION;
+				clm.ColumnName = Dbversion.DB_FIELD_MAJOR_NUM;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -380,38 +372,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
 		///     Checks to make sure value is valid
 		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
 		/// </summary>
-		public bool IsValidIsDisabled(bool? pBolData)
+		public bool IsValidMinorNum(long pLngData)
 		{
 			bool isValid = true;
             
 			// do some validation
-			isValid = (new Regex(REGEXP_ISVALID_IS_DISABLED)).IsMatch(pBolData.ToString());
+			isValid = (new Regex(REGEXP_ISVALID_MINOR_NUM)).IsMatch(pLngData.ToString());
 			if ( !isValid )
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_IS_DISABLED;
-				clm.HasError = true;
-				_arrlstColumnErrors.Add(clm);
-				_hasInvalid = true;
-			}
-			return isValid;
-		}
-		/// <summary>
-		///     Checks to make sure value is valid
-		///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-		/// </summary>
-		public bool IsValidToken(string pStrData)
-		{
-			bool isValid = true;
-            
-			// do some validation
-			isValid = !(new Regex(REGEXP_ISVALID_TOKEN)).IsMatch(pStrData);
-			if ( !isValid )
-			{
-				Column clm = null;
-				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_TOKEN;
+				clm.ColumnName = Dbversion.DB_FIELD_MINOR_NUM;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;
@@ -432,7 +403,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
 			{
 				Column clm = null;
 				clm = new Column();
-				clm.ColumnName = Apikey.DB_FIELD_NOTES;
+				clm.ColumnName = Dbversion.DB_FIELD_NOTES;
 				clm.HasError = true;
 				_arrlstColumnErrors.Add(clm);
 				_hasInvalid = true;

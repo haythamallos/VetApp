@@ -29,7 +29,7 @@ namespace MainSite.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
 
-            UserService userService = new UserService(_settings.DefaultService, _settings.ClientKey);
+            UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
             var userServiceTask = userService.Load(UserID);
             UserProxy userProxy = userServiceTask.Result;
             userServiceTask = userService.Save(userProxy);
