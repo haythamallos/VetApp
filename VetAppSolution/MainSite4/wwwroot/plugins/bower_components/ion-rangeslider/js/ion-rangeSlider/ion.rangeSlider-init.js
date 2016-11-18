@@ -51,3 +51,5 @@ $("#range_22").ionRangeSlider({
     grid: true
 });
 
+
+

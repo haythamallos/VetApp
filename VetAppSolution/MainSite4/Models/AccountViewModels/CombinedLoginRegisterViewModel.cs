@@ -10,5 +10,7 @@ namespace MainSite.Models.AccountViewModels
         public LoginViewModel Login { get; set; }
         public RegisterViewModel Register { get; set; }
         public RecoverViewModel Recover { get; set; }
+        public EvaluationViewModel Evaluation { get; set; }
+
     }
 }

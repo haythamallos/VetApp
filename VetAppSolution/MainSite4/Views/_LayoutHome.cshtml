@@ -9,12 +9,18 @@
     <title>Valued Veteran Consulting Services</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Slider CSS -->
+    <link href="~/lib/bootstrap-slider/slider.css" rel="stylesheet">
     <!-- animation CSS -->
     <link href="~/css/animate.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="~/css/colors/blue.css" id="theme" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/css/style.css" rel="stylesheet">
+
+    <!--Range slider CSS -->
+    <link href="~/plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="~/plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.skinSimple.css" rel="stylesheet">
 
     @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
 </head>
@@ -48,31 +54,37 @@
                 </div>
             </div>
         </div><!--/header_top-->
-        </header>
+    </header>
 
 
-        @RenderBody()
+    @RenderBody()
 
-        <!-- jQuery -->
-        <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- Menu Plugin JavaScript -->
-        <script src="~/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!-- jQuery -->
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Slider JavaScript -->
+    <script src="~/lib/bootstrap-slider/bootstrap-slider.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="~/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 
-        <!--slimscroll JavaScript -->
-        <script src="~/js/jquery.slimscroll.js"></script>
-        <!--Wave Effects -->
-        <script src="~/js/waves.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="~/js/custom.min.js"></script>
-        <!--Style Switcher -->
-        <script src="~/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="~/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/js/custom.min.js"></script>
+    <!-- Range slider  -->
+    <script src="~/plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="~/plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
+    <!--Style Switcher -->
+    <script src="~/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="~/js/site.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/js/site.js"></script>
 
-        @RenderSection("scripts", required: false)
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 

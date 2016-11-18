@@ -143,5 +143,15 @@ namespace MainSite.Controllers
             catch { bSuccess = false; }
             return bSuccess;
         }
+
+        [HttpPost]
+        public IActionResult Evaluation(CombinedLoginRegisterViewModel model)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
+            }
+            return RedirectToAction(nameof(HomeController.Index), "Index");
+        }
     }
 }

@@ -44,7 +44,6 @@ namespace MainSite.Controllers
             return View();
         }
 
-
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
