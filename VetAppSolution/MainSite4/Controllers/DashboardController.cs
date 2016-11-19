@@ -29,10 +29,13 @@ namespace MainSite.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
 
-            UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
-            var userServiceTask = userService.Load(UserID);
-            UserProxy userProxy = userServiceTask.Result;
-            userServiceTask = userService.Save(userProxy);
+            //UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
+            //var userServiceTask = userService.Load(UserID);
+            //UserProxy userProxy = userServiceTask.Result;
+            //userServiceTask = userService.Save(userProxy);
+
+
+
             //string sessionKey = Constants.sessionKeyIsFirstTime;
             //var connection = HttpContext.Session.GetString(Constants.sessionKeyConnection);
             //var isFirstTime = HttpContext.Session.GetString(Constants.sessionKeyIsFirstTime);

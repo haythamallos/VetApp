@@ -1,13 +1,12 @@
 ﻿using Vetapp.Engine.DataAccessLayer.Data;
-using RESTAPI.Models;
-
+using Vetapp.Client.ProxyCore;
 namespace RESTAPI.Utils
 {
     public class DataToModelConverter
     {
-        public static UserModel ConvertToModel(User pUser)
+        public static UserProxy ConvertToModel(User pUser)
         {
-            UserModel model = new UserModel()
+            UserProxy model = new UserProxy()
             {
                 UserID = pUser.UserID,
                 AuthUserid = pUser.AuthUserid,

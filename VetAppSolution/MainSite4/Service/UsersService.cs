@@ -16,7 +16,7 @@ namespace MainSite.Service
             ClientKey = pStrClientKey;  
         }
 
-        public async Task<UserProxy> Save(UserProxy pUserProxy)
+        public async Task<UserProxy> Create(UserProxy pUserProxy)
         {
             UserProxy userProxy = new UserProxy();
             try
@@ -72,6 +72,39 @@ namespace MainSite.Service
                 ErrorStacktrace = ex.StackTrace;
             }
             return userProxy;
+        }
+
+        public async Task<bool> ExistByEmail(string pStrEmail)
+        {
+            bool bExist = true;
+            try
+            {
+                HttpClient client = new HttpClient();
+                string apiext = "/api/users/find";
+                KeyValuePair<string, string>[] keyValuePair = new KeyValuePair<string, string>[]{
+                    new KeyValuePair<string, string>("email", pStrEmail)
+                };
+                string geturl = BuildGet(client, apiext, keyValuePair);
+
+                HttpResponseMessage result = client.GetAsync(geturl).Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    string payload = await result.Content.ReadAsStringAsync();
+                    List<UserProxy> lstUserProxy = JsonConvert.DeserializeObject<List<UserProxy>>(payload);
+                    if (lstUserProxy.Count == 0)
+                    {
+                        bExist = false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                HasError = true;
+                ErrorMessage = ex.Message;
+                ErrorStacktrace = ex.StackTrace;
+            }
+            return bExist;
         }
     }
 }

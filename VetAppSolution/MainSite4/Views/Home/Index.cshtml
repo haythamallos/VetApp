@@ -9,102 +9,6 @@
 <section id="wrapper" class="login-register">
     <div class="login-box login-sidebar">
         <div class="white-box">
-            @*<div id="evaluationcapturediv" class="">
-                    <form id="evaluationcaptureform" asp-controller="Account" asp-action="Evaluation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material">
-                        <h1>Free Evaluation</h1>
-                        <p>Simply provide the info below to immediately see if you qualify for an increase in VA benefits</p>
-                        <input asp-for="@Model.Evaluation.Rating" type="hidden" id="slidervalue" />
-                        <label class="control-label">Is this your first time filing?</label>
-                        <div class="radio-list">
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.IsFirstTimeFiling" type="radio" value="true"> Yes
-                            </label>
-
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.IsFirstTimeFiling" type="radio" value="false" checked=""> No
-                            </label>
-                        </div>
-
-                        <label class="control-label">Do you have a claim with the VA?</label>
-                        <div class="radio-list">
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasVAClaim" type="radio" value="true"> Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasVAClaim" type="radio" value="false" checked=""> No
-                            </label>
-                        </div>
-
-
-                        <label class="control-label">Do you have an active appeal?</label>
-                        <div class="radio-list">
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasActiveAppeal" type="radio" value="true"> Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasActiveAppeal" type="radio" value="false" checked=""> No
-                            </label>
-                        </div>
-
-                        <label class="control-label">Do you currently have a rating by the VA?</label>
-                        <div class="radio-list">
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasRating" type="radio" value="true" onclick="$('#ratingsliderdiv').removeClass('hidden'); $('#ratingsliderdiv').show();"> Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input asp-for="@Model.Evaluation.HasRating" type="radio" value="false" checked="" onclick="$('#ratingsliderdiv').hide();"> No
-                            </label>
-                        </div>
-
-                        <div id="ratingsliderdiv" class="hidden">
-                            <h3 class="box-title">What is your current rating?</h3>
-                            <div id="range_rating"></div>
-                        </div>
-
-                        <div class="form-group text-center m-t-20">
-                            <div class="col-xs-12">
-                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" onclick="javascript:void(0)" id="evaluationcapture-to-results">Submit</button>
-                                <a href="javascript:void(0)" id="capture-to-results" class="text-primary m-l-5"><b>Submit</b></a>
-                            </div>
-                        </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-sm-12 text-center">
-                                <p>Already have an account? <a href="javascript:void(0)" id="evaluationcaptureform-to-loginform" class="text-primary m-l-5"><b>Sign In</b></a></p>
-                                <p>Don't have an account? <a href="javascript:void(0)" id="evaluationcaptureform-to-registerform" class="text-primary m-l-5"><b>Sign Up</b></a></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-                <div id="evaluationresultsdiv" class="hidden">
-                    <form id="evaluationresultsform" asp-controller="Account" asp-action="Recover" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material">
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <h3>Your Free Evaluation Results</h3>
-                                <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <input asp-for="@Model.Recover.Email" class="form-control" type="text" required="" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group text-center m-t-20">
-                            <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
-                            </div>
-                        </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-sm-12 text-center">
-                                <p>Already have an account? <a href="javascript:void(0)" id="recoverform-to-loginform" class="text-primary m-l-5"><b>Sign In</b></a></p>
-                                <p>Don't have an account? <a href="javascript:void(0)" id="recoverform-to-registerform" class="text-primary m-l-5"><b>Sign Up</b></a></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>*@
-
-
             <form id="captureform" asp-controller="Account" asp-action="Evaluation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal form-material">
                 <div id="captureformdiv" class="">
                     <h1>Free Evaluation</h1>
@@ -230,7 +134,7 @@
                     <div class="form-group m-t-40">
                         <label class="control-label">Create a free account to get started</label>
                         <div class="col-xs-12">
-                            <input asp-for="@Model.Login.Username" class="form-control" type="text" required="" placeholder="Email Address">
+                            <input asp-for="@Model.Register.Email" class="form-control" type="text" required="" placeholder="Email">
                         </div>
                         <div class="col-xs-12">
                             <input asp-for="@Model.Register.Password" class="form-control" type="password" required="" placeholder="Password">
@@ -352,11 +256,6 @@
                     <h1>Valued Veteran Consulting Services</h1>
                     <p>Helping veterans increase disability benefits</p>
                     <h3 class="box-title m-t-40 m-b-0">Register Now</h3><small>Create your account and enjoy</small>
-                    @*<div class="form-group m-t-20">
-                        <div class="col-xs-12">
-                            <input asp-for="@Model.Register.Name" class="form-control" type="text" required="" placeholder="Name">
-                        </div>
-                    </div>*@
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input asp-for="@Model.Register.Email" class="form-control" type="text" required="" placeholder="Email">
@@ -372,14 +271,6 @@
                             <input asp-for="@Model.Register.ConfirmPassword" class="form-control" type="password" required="" placeholder="Confirm Password">
                         </div>
                     </div>
-                    @*<div class="form-group">
-                        <div class="col-md-12">
-                            <div class="checkbox checkbox-primary p-t-0">
-                                <input asp-for="@Model.Register.IsTermsAgreement" type="checkbox">
-                                <label for="checkbox-signup"> I agree to all <a href="/Home/Terms">Terms</a></label>
-                            </div>
-                        </div>
-                    </div>*@
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
                             <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>

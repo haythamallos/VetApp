@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using RESTUtilLib;
 using System.Net;
-using Vetapp.Client.Proxy;
+//using Vetapp.Client.Proxy;
 
 namespace TesterClient
 {
@@ -48,11 +38,11 @@ namespace TesterClient
 
         private void userCreateButton_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder parameters = new StringBuilder();
-            string url = this.serviceUrlTextBox.Text.Trim() + "/api/user";
+            //StringBuilder parameters = new StringBuilder();
+            //string url = this.serviceUrlTextBox.Text.Trim() + "/api/user";
 
-            UserProxy useritem = new UserProxy() { Firstname = "Haytham" };
-            string jsonBody = ToJson(useritem, useritem.GetType());
+            //UserProxy useritem = new UserProxy() { Firstname = "Haytham" };
+            //string jsonBody = ToJson(useritem, useritem.GetType());
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserItemID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "UserID", "");
             //RESTUtil.EncodeAndAddItem(ref parameters, "FirstName", "Haytham");
@@ -60,15 +50,15 @@ namespace TesterClient
             //RESTUtil.EncodeAndAddItem(ref parameters, "LastName", "Allos");
             //RESTUtil.EncodeAndAddItem(ref parameters, "Email", "haytham.allos@gmail.com");
 
-            var Headers = new List<KeyValuePair<string, string>>();
-            Headers.Add(new KeyValuePair<string, string>("user-key", this.userKeyTextBox.Text.Trim()));
-            HttpWebRequest request = RESTUtil.createPostRequest(url, jsonBody, "POST", Headers);
+            //var Headers = new List<KeyValuePair<string, string>>();
+            //Headers.Add(new KeyValuePair<string, string>("user-key", this.userKeyTextBox.Text.Trim()));
+            //HttpWebRequest request = RESTUtil.createPostRequest(url, jsonBody, "POST", Headers);
 
-            string responseBody = null;
-            string responseStatusCode = null;
-            HttpWebResponse response = RESTUtil.ExecuteAction(request, ref responseBody, ref responseStatusCode);
-            this.responseRichTextBox.AppendText(responseBody + Environment.NewLine);
-            this.responseStatusCodeTextBox.Text = responseStatusCode;
+            //string responseBody = null;
+            //string responseStatusCode = null;
+            //HttpWebResponse response = RESTUtil.ExecuteAction(request, ref responseBody, ref responseStatusCode);
+            //this.responseRichTextBox.AppendText(responseBody + Environment.NewLine);
+            //this.responseStatusCodeTextBox.Text = responseStatusCode;
 
         }
 

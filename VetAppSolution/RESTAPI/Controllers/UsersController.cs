@@ -6,6 +6,8 @@ using Microsoft.Extensions.Options;
 using Vetapp.Client.ProxyCore;
 using RESTAPI.Utils;
 using Vetapp.Engine.DataAccessLayer.Data;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace RESTAPI.Controllers
 {
@@ -29,14 +31,14 @@ namespace RESTAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            Apilog apilog = _cutils.logAPIRequest(HttpContext);
+            //Apilog apilog = _cutils.logAPIRequest(HttpContext);
 
             UserProxy item = new UserProxy() { AuthUserid = id };
-            //if (item == null)
-            //{
-            //    return NotFound();
-            //}
-            _cutils.logAPIResponse(HttpContext, apilog);
+            ////if (item == null)
+            ////{
+            ////    return NotFound();
+            ////}
+            //_cutils.logAPIResponse(HttpContext, apilog);
             return new ObjectResult(item);
         }
 
@@ -57,6 +59,33 @@ namespace RESTAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpGet]
+        [Route("Find")]
+        public IActionResult Find()
+        {
+            try
+            {
+                Apilog apilog = _cutils.logAPIRequest(HttpContext);
+                UserControllerReply reply = new UserControllerReply(_settings);
+                var data = reply.Find(HttpContext.Request.Query);
+                if (!reply.HasError)
+                {
+                    _cutils.logAPIResponse(reply, 200, apilog);
+                    return Ok(data);
+                }
+                else
+                {
+                    _cutils.logAPIResponse(reply, 400, apilog);
+                    return BadRequest(reply.StatusErrorMessage);
+                }
+            }
+            catch
+            {
+                return BadRequest("Fatal Error");
+            }
+
         }
     }
 }

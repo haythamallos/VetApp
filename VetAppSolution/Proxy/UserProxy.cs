@@ -1,5 +1,5 @@
 ﻿namespace Vetapp.Client.Proxy
-{
+{  
     public class UserProxy
     {
         public long UserID { get; set; }

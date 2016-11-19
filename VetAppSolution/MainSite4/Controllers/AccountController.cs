@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MainSite.Models;
 using MainSite.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
-using System.Security.Claims;
-using Auth0.AuthenticationApi;
-using Auth0.AuthenticationApi.Models;
 using MainSite.Utils;
 using System.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using MainSite.Service;
+using Vetapp.Client.ProxyCore;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,10 +19,12 @@ namespace MainSite.Controllers
     public class AccountController : Controller
     {
         private readonly Auth0Settings _auth0Settings;
+        private readonly AppSettings _settings;
 
-        public AccountController(IOptions<Auth0Settings> auth0Settings)
+        public AccountController(IOptions<Auth0Settings> auth0Settings, IOptions<AppSettings> settings)
         {
             _auth0Settings = auth0Settings.Value;
+            _settings = settings.Value;
         }
 
         //[HttpGet]
@@ -147,10 +144,31 @@ namespace MainSite.Controllers
         [HttpPost]
         public IActionResult Evaluation(CombinedLoginRegisterViewModel model)
         {
-            if (User.Identity.IsAuthenticated)
+            // check if user exists
+            UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
+            var bUserExist = userService.ExistByEmail(model.Register.Email);
+            if (bUserExist.Result)
             {
-                return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
+                // user exists already
             }
+            else
+            {
+                // proceed with creating the user
+                UserProxy userProxy = new UserProxy() { EmailAddress = model.Register.Email };
+            }
+            
+            return RedirectToAction(nameof(HomeController.Index), "Index");
+        }
+
+        [HttpPost]
+        public IActionResult Recover(CombinedLoginRegisterViewModel model)
+        {
+            return RedirectToAction(nameof(HomeController.Index), "Index");
+        }
+
+        [HttpPost]
+        public IActionResult Login(CombinedLoginRegisterViewModel model)
+        {
             return RedirectToAction(nameof(HomeController.Index), "Index");
         }
     }

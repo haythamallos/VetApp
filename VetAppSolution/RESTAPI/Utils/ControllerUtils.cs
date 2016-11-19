@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.DataAccessLayer.Data;
+using Microsoft.AspNetCore.Http;
+using RESTAPI.Reply;
 
 namespace RESTAPI.Utils
 {
@@ -18,7 +18,7 @@ namespace RESTAPI.Utils
             _defaultConnection = defaultConnection;
         }
 
-        public Apilog logAPIRequest(Microsoft.AspNetCore.Http.HttpContext context)
+        public Apilog logAPIRequest(HttpContext context)
         {
             Apilog apilog = null;
             try
@@ -28,6 +28,10 @@ namespace RESTAPI.Utils
 
                 var host = $"{context.Request.Scheme}://{context.Request.Host}";
                 apilog.Reqtxt = context.Request.Path;
+                if (context.Request.QueryString != null)
+                {
+                    apilog.Reqtxt += context.Request.QueryString.ToString();
+                }
                 apilog.InProgress = true;
                 apilog.Msgsource = context.Request.Method;
                 apilog.CallStartTime = DateTime.UtcNow;
@@ -36,7 +40,7 @@ namespace RESTAPI.Utils
             return apilog;
         }
 
-        public void logAPIResponse(Microsoft.AspNetCore.Http.HttpContext context, Apilog pApilog, string pStrPostData = null, string pSearchText = null, string pAuthUserID = null)
+        public void logAPIResponse(ReplyBase reply, int StatusCode, Apilog pApilog, string pStrPostData = null, string pSearchText = null, string pAuthUserID = null)
         {
 
             try
@@ -52,36 +56,19 @@ namespace RESTAPI.Utils
                             pApilog.CallEndTime = DateTime.UtcNow;
                             pApilog.DurationInMs = (long)pApilog.CallEndTime.Subtract(pApilog.CallStartTime).TotalMilliseconds;
 
-                            //pApilog.Resptxt = response.StatusCode.ToString();
                             pApilog.IsSuccess = false;
-                            if (context.Response.StatusCode == 200)
+                            pApilog.HttpStatusStr = StatusCode.ToString();
+                            if (StatusCode == 200)
                             {
-                                pApilog.IsSuccess = true;
-                            }
-
-                            pApilog.InProgress = false;
-                            if ((!string.IsNullOrEmpty(context.Response.StatusCode.ToString())) && (context.Response.StatusCode.ToString() == "OK"))
-                            {
-                                pApilog.HttpStatusStr = context.Response.StatusCode.ToString();
                                 pApilog.IsSuccess = true;
                             }
                             else
                             {
-                                pApilog.HttpStatusStr = context.Response.StatusCode.ToString();
+                                pApilog.Trace = "<<" + reply.StatusErrorMessage + ">>" + "<<" + reply.ErrorMessage + ">>" + "<<" + reply.ErrorStacktrace + ">>";
                             }
 
-                            if (!string.IsNullOrEmpty(pStrPostData))
-                            {
-                                pApilog.Trace = pStrPostData;
-                            }
-
-                            //if (pApiLogType != null)
-                            //{
-                            //    pApilog.Searchtext = pSearchText;
-                            //    pApilog.Accesstoken = pAccessToken;
-                            //    pApilog.ApilogTypeID = pApiLogType.ApilogTypeID;
-                            //}
-
+                            pApilog.InProgress = false;
+                       
                             long lID = busFacCore.ApilogCreateOrModify(pApilog);
                         }
                     }
