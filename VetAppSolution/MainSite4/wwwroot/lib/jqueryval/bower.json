@@ -1,0 +1,27 @@
+{
+  "name": "jqueryval",
+  "description": "",
+  "main": "index.js",
+  "moduleType": [],
+  "keywords": [
+    "jquery",
+    "validate",
+    "unobtrusive"
+  ],
+  "authors": [
+    "Vasyl Prystoynyy"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-validation": "~1.15.0",
+    "jquery-validation-unobtrusive": "~3.2.6"
+  }
+}

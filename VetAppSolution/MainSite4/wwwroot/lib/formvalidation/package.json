@@ -1,0 +1,22 @@
+{
+    "name": "formvalidation",
+    "title": "formvalidation",
+    "version": "1.2.0",
+    "author": {
+        "name": "Maksim Chemerisuk"
+    },
+    "description": "HTML5 forms polyfill",
+    "readmeFilename": "README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chemerisuk/formvalidation.js"
+    },
+    "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-contrib-jshint": "0.4.3",
+        "grunt-contrib-watch": "0.3.1"
+    },
+    "scripts": {
+        "test": "grunt travis"
+    }
+}

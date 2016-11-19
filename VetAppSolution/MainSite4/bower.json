@@ -3,6 +3,7 @@
 	"private": true,
   "dependencies": {
     "bootstrap": "~3.3.7",
-    "bootstrap-slider": "*"
+    "bootstrap-slider": "*",
+    "jqueryval": "~0.0.3"
   }
 }

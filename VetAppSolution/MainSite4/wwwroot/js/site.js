@@ -123,6 +123,3 @@ $("#range_rating").ionRangeSlider({
     //    console.log("onUpdate");
     //}
 });
-
-
-

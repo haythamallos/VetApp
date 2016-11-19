@@ -1,0 +1,11 @@
+{
+    "browser": true,     
+    "indent": 4,        
+    "quotmark": "double",
+    "eqeqeq": true,
+    "expr": true,
+    "undef": true,
+    "globals": {
+        "module": true
+    }
+}

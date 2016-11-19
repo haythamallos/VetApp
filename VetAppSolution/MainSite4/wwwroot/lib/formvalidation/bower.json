@@ -1,0 +1,5 @@
+{
+    "name": "formvalidation",
+    "version": "1.2.0",
+    "main": ["formvalidation.js", "formvalidation.css"]
+}

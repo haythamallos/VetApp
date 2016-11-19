@@ -1,0 +1,37 @@
+{
+  "name": "jqueryval",
+  "description": "",
+  "main": "index.js",
+  "moduleType": [],
+  "keywords": [
+    "jquery",
+    "validate",
+    "unobtrusive"
+  ],
+  "authors": [
+    "Vasyl Prystoynyy"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/prystoynyy/jqueryval",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-validation": "~1.15.0",
+    "jquery-validation-unobtrusive": "~3.2.6"
+  },
+  "version": "0.0.3",
+  "_release": "0.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.3",
+    "commit": "4efffab2900685caf1dc49ae58ad9f4ab4dbee5e"
+  },
+  "_source": "https://github.com/prystoynyy/jqueryval.git",
+  "_target": "~0.0.3",
+  "_originalSource": "jqueryval"
+}
