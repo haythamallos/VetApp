@@ -28,7 +28,8 @@
     "Microsoft.Extensions.Caching.Memory": "1.0.0",
     "System.Collections.Immutable": "1.2.0",
     "ProxyCore": "1.0.0-*",
-    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0"
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0"
   },
 
   "tools": {

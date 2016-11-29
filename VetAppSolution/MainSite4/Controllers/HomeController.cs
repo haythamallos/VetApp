@@ -17,11 +17,11 @@ namespace MainSite.Controllers
             // The view being returned is calculated based on the name of the
             // controller (Home) and the name of the action method (Index).
             // So in this case, the view returned is /Views/Home/Index.cshtml.
-            ViewData["ReturnUrl"] = "/";
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
-            }
+            //ViewData["ReturnUrl"] = "/";
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
+            //}
 
             return View();
 

@@ -7,6 +7,7 @@ using Vetapp.Client.ProxyCore;
 using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.DataAccessLayer.Enumeration;
+using Vetapp.Engine.Common;
 using RESTAPI.Utils;
 
 namespace RESTAPI.Reply
@@ -17,6 +18,79 @@ namespace RESTAPI.Reply
         {
             _settings = settings;
         }
+
+        public UserProxy Create(UserProxy bodyUserProxy)
+        {
+            UserProxy userProxy = null;
+            try
+            {
+                if ( (!string.IsNullOrEmpty(bodyUserProxy.Username)) && (!string.IsNullOrEmpty(bodyUserProxy.Passwd)))
+                {
+                    BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
+                    bool bExist = Exist(bodyUserProxy.Username);
+                    if (!bExist)
+                    {
+                        string encryptedPasswd = UtilsSecurity.encrypt(bodyUserProxy.Passwd);
+                        User user = new User() { Username = bodyUserProxy.Username, Passwd = encryptedPasswd, UserRoleID = 1, IsDisabled = false };
+                        long UserID = busFacCore.UserCreateOrModify(user);
+                        if ((!busFacCore.HasError) && (UserID > 0))
+                        {
+                            //successfully created user
+                            user = busFacCore.UserGet(UserID);
+                            userProxy = DataToModelConverter.ConvertToProxy(user);
+                        }
+                        else
+                        {
+                            HasError = true;
+                            ErrorMessage = "Error in create new user.";
+                        }
+                    }
+                    else
+                    {
+                        HasError = true;
+                        ErrorMessage = "User exists.";
+                    }
+                }
+                else
+                {
+                    HasError = true;
+                    ErrorMessage = "Username in input parameter not specified";
+                }
+            }
+            catch (Exception ex)
+            {
+                HasError = true;
+                ErrorStacktrace = ex.StackTrace;
+                ErrorMessage = ex.Message;
+            }
+            return userProxy;
+        }
+
+        public UserProxy Authenticate(UserProxy bodyUserProxy)
+        {
+            UserProxy userProxy = null;
+            try
+            {
+                if ((!string.IsNullOrEmpty(bodyUserProxy.Username)) && (!string.IsNullOrEmpty(bodyUserProxy.Passwd)))
+                {
+                    BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
+                   
+                }
+                else
+                {
+                    HasError = true;
+                    ErrorMessage = "Username in input parameter not specified";
+                }
+            }
+            catch (Exception ex)
+            {
+                HasError = true;
+                ErrorStacktrace = ex.StackTrace;
+                ErrorMessage = ex.Message;
+            }
+            return userProxy;
+        }
+
         //public UserModel Create(UserModel bodyUserModel)
         //{
         //    UserModel userModel = null;
@@ -74,16 +148,24 @@ namespace RESTAPI.Reply
         //    return userModel;
         //}
 
-        public List<UserProxy> Find(IQueryCollection queryString)
+        public bool Exist(string username)
+        {
+            bool bExist = true;
+            List<UserProxy> lstUserProxy = Find(username);
+            if ((!HasError) && (lstUserProxy.Count == 0))
+            {
+                bExist = false;
+            }
+            return bExist;
+        }
+        public List<UserProxy> Find(string username)
         {
             List<UserProxy> lstUserProxy = new List<UserProxy>();
             try
             {
-                string email = queryString.FirstOrDefault(x => x.Key == "email").Value;
-                string authuserid = queryString.FirstOrDefault(x => x.Key == "authuserid").Value;
-                if ((!string.IsNullOrEmpty(email)) || (!string.IsNullOrEmpty(authuserid)))
+                if ((!string.IsNullOrEmpty(username)))
                 {
-                    EnumUser enumUser = new EnumUser() { EmailAddress = email, AuthUserid = authuserid};
+                    EnumUser enumUser = new EnumUser() { Username = username };
                     BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
                     ArrayList arUser = busFacCore.UserGetList(enumUser);
                     if ((arUser != null) && (arUser.Count > 0))
@@ -91,10 +173,15 @@ namespace RESTAPI.Reply
                         UserProxy userProxy = null;
                         foreach(User user in arUser)
                         {
-                            userProxy = DataToModelConverter.ConvertToModel(user);
+                            userProxy = DataToModelConverter.ConvertToProxy(user);
                             lstUserProxy.Add(userProxy);
                         }
                     }
+                }
+                else
+                {
+                    HasError = true;
+                    StatusErrorMessage = "Username is null";
                 }
             }
             catch (Exception ex)

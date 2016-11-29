@@ -50,6 +50,41 @@ ELSE
 
 go
 
+/*******************************************************************************
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/26/16		HA		Created
+*******************************************************************************/
+IF EXISTS (SELECT *
+           FROM   sysobjects
+           WHERE  type = 'U'
+                  AND name = 'user_role')
+  BEGIN
+      PRINT 'Dropping Table user_role'
+
+      DROP TABLE user_role
+  END
+
+go
+
+CREATE TABLE user_role
+  (
+     user_role_id NUMERIC(10) NOT NULL PRIMARY KEY,
+     date_created    DATETIME NULL,
+     code            NVARCHAR(255) NULL,
+     [description]     NVARCHAR(255) NULL,
+     visible_code    NVARCHAR(255) NULL
+  )
+
+go
+
+IF Object_id('user_role') IS NOT NULL
+  PRINT '<<< CREATED TABLE user_role >>>'
+ELSE
+  PRINT '<<< FAILED CREATING TABLE user_role >>>'
+go
+
 
 /*******************************************************************************
 **		Change History
@@ -72,24 +107,18 @@ go
 CREATE TABLE [user]
   (
      user_id        NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
-     AuthUserid        NVARCHAR(255) NULL,
-     AuthConnection        NVARCHAR(255) NULL,
-     AuthProvider        NVARCHAR(255) NULL,
-     AuthAccessToken        NVARCHAR(255) NULL,
-     AuthIdToken        NVARCHAR(1024) NULL,
+	 user_role_id [numeric](10, 0) NULL,
      date_created      DATETIME NULL,
      date_modified     DATETIME NULL,
      firstname        NVARCHAR(255) NULL,
      middlename        NVARCHAR(255) NULL,
      lastname        NVARCHAR(255) NULL,
      phone_number        NVARCHAR(255) NULL,
-	 email_address        NVARCHAR(255) NULL,
-     profileimageurl        NVARCHAR(255) NULL,
-	 is_disabled                   BIT NULL,
-	 can_text_msg                   BIT NULL,
-     date_text_msg_approved      DATETIME NULL,
-      AuthName        NVARCHAR(255) NULL,
-     AuthNickname        NVARCHAR(255) NULL
+	 username        NVARCHAR(255) NULL,
+	 passwd        NVARCHAR(255) NULL,
+     picture_url        NVARCHAR(255) NULL,
+	 picture           VARBINARY(max) NULL,
+	 is_disabled                   BIT NULL
  )
 
 go
@@ -246,6 +275,11 @@ INSERT INTO apikey (apikey_id, date_created, token, notes) VALUES (3, GETDATE(),
 INSERT INTO apikey (apikey_id, date_created, token, notes) VALUES (4, GETDATE(), '7b6a27958fef4ddd99d652e432e564a7', '');
 INSERT INTO apikey (apikey_id, date_created, token, notes) VALUES (5, GETDATE(), '5d1c6e75feff40b08ed5966d28df0db9', '');
 GO
+
+delete from user_role
+INSERT INTO user_role (user_role_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), 'USER_ROLE_REGULAR', 'User role regular', 'User role regular')
+INSERT INTO user_role (user_role_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), 'USER_ROLE_MANAGER', 'User role manager', 'User role manager')
+INSERT INTO user_role (user_role_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), 'USER_ROLE_ADMIN', 'User role admin', 'User role admin')
 
 delete from dbversion
 INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (1, GETDATE(), 1, 0,'Inital database')

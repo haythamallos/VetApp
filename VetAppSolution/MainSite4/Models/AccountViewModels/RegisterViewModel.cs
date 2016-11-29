@@ -9,10 +9,10 @@ namespace MainSite.Models.AccountViewModels
         public string Email { get; set; }
         [Required]
         [MinLength(6)]
-        [Compare("ConfirmPassword")]
+        //[Compare("ConfirmPassword")]
         public string Password { get; set; }
-        [Required]
-        [MinLength(6)]
-        public string ConfirmPassword { get; set; }
+        //[Required]
+        //[MinLength(6)]
+        //public string ConfirmPassword { get; set; }
     }
 }

@@ -22,7 +22,9 @@
     <link href="~/plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet">
     <link href="~/plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.skinSimple.css" rel="stylesheet">
 
-    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <!--alerts CSS -->
+    <link href="~/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"> 
+
 </head>
 <body>
     <header id="header">
@@ -31,13 +33,16 @@
             <!--header_top-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-9">
+
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
                                 <li><a href="#"><i class="fa fa-phone"></i> 619-822-2070</a></li>
                                 <li><a href="#"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>
                                 <li><a href="/Home"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="/Home"><i class="fa fa-info-circle"></i> Free Evaluation</a></li>
+                                <li><a href="#" onclick="showform('captureformdiv');"><i class="fa fa-star"></i> Free Evaluation</a></li>
+                                <li><a href="#" onclick="showform('loginformdiv');" ><i class="fa fa-sign-in"></i> Sign in</a></li>
+                                <li><a href="#" onclick="showform('registerformdiv');"><i class="fa fa-long-arrow-up"></i> Sign Up</a></li>
                             </ul>
                         </div>
                     </div>
@@ -61,6 +66,8 @@
 
     <!-- jQuery -->
     <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
@@ -77,6 +84,10 @@
     <!--Wave Effects -->
     <script src="~/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
+
+    <script src="~/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+    <script src="~/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+
     <script src="~/js/custom.min.js"></script>
     <!-- Range slider  -->
     <script src="~/plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
@@ -86,6 +97,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="~/js/site.js"></script>
+
+    <!-- Sweet-Alert  -->
+    <script src="~/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+    <script src="~/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+
 
     @RenderSection("scripts", required: false)
 </body>

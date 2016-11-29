@@ -10,7 +10,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApikeyExist
 (
@@ -47,7 +47,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApikeyLoad
 (
@@ -83,7 +83,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApikeyUpdate
 (
@@ -129,7 +129,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApikeyDelete
 (
@@ -163,7 +163,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApikeyInsert
 (
@@ -224,7 +224,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 
 
@@ -281,7 +281,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApilogExist
 (
@@ -318,7 +318,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApilogLoad
 (
@@ -354,7 +354,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApilogUpdate
 (
@@ -424,7 +424,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApilogDelete
 (
@@ -458,7 +458,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spApilogInsert
 (
@@ -553,7 +553,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 
 
@@ -636,7 +636,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spDbversionExist
 (
@@ -673,7 +673,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spDbversionLoad
 (
@@ -709,7 +709,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spDbversionUpdate
 (
@@ -753,7 +753,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spDbversionDelete
 (
@@ -787,7 +787,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spDbversionInsert
 (
@@ -845,7 +845,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 
 
@@ -898,7 +898,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spSyslogExist
 (
@@ -935,7 +935,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spSyslogLoad
 (
@@ -971,7 +971,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spSyslogUpdate
 (
@@ -1019,7 +1019,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spSyslogDelete
 (
@@ -1053,7 +1053,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spSyslogInsert
 (
@@ -1112,7 +1112,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 
 
@@ -1171,7 +1171,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserExist
 (
@@ -1208,7 +1208,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserLoad
 (
@@ -1219,7 +1219,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname] 
+SELECT  [user_id], [user_role_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [picture_url], [picture], [is_disabled] 
 FROM [user] 
 WHERE user_id = @UserID
 RETURN 0
@@ -1244,28 +1244,22 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserUpdate
 (
 	@UserID                    NUMERIC(10) = 0,
-	@AuthUserid                NVARCHAR(255) = NULL,
-	@AuthConnection            NVARCHAR(255) = NULL,
-	@AuthProvider              NVARCHAR(255) = NULL,
-	@AuthAccessToken           NVARCHAR(255) = NULL,
-	@AuthIdToken               NVARCHAR(1024) = NULL,
+	@UserRoleID                NUMERIC(10) = 0,
 	@DateModified              DATETIME = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
 	@PhoneNumber               NVARCHAR(255) = NULL,
-	@EmailAddress              NVARCHAR(255) = NULL,
-	@Profileimageurl           NVARCHAR(255) = NULL,
+	@Username                  NVARCHAR(255) = NULL,
+	@Passwd                    NVARCHAR(255) = NULL,
+	@PictureUrl                NVARCHAR(255) = NULL,
+	@Picture                   VARBINARY(MAX) = NULL,
 	@IsDisabled                NUMERIC(1,0) = 0,
-	@CanTextMsg                NUMERIC(1,0) = 0,
-	@DateTextMsgApproved       DATETIME = NULL,
-	@AuthName                  NVARCHAR(255) = NULL,
-	@AuthNickname              NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -1274,23 +1268,17 @@ SET NOCOUNT ON
    -- Update record wth NUMERIC(10) value
 
 UPDATE [user] SET 
-	[AuthUserid] = @AuthUserid,
-	[AuthConnection] = @AuthConnection,
-	[AuthProvider] = @AuthProvider,
-	[AuthAccessToken] = @AuthAccessToken,
-	[AuthIdToken] = @AuthIdToken,
+	[user_role_id] = @UserRoleID,
 	[date_modified] = @DateModified,
 	[firstname] = @Firstname,
 	[middlename] = @Middlename,
 	[lastname] = @Lastname,
 	[phone_number] = @PhoneNumber,
-	[email_address] = @EmailAddress,
-	[profileimageurl] = @Profileimageurl,
-	[is_disabled] = @IsDisabled,
-	[can_text_msg] = @CanTextMsg,
-	[date_text_msg_approved] = @DateTextMsgApproved,
-	[AuthName] = @AuthName,
-	[AuthNickname] = @AuthNickname
+	[username] = @Username,
+	[passwd] = @Passwd,
+	[picture_url] = @PictureUrl,
+	[picture] = @Picture,
+	[is_disabled] = @IsDisabled
 WHERE user_id = @UserID
 
 -- return ID for updated record
@@ -1316,7 +1304,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserDelete
 (
@@ -1350,28 +1338,22 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserInsert
 (
 	@UserID                    NUMERIC(10) = 0,
-	@AuthUserid                NVARCHAR(255) = NULL,
-	@AuthConnection            NVARCHAR(255) = NULL,
-	@AuthProvider              NVARCHAR(255) = NULL,
-	@AuthAccessToken           NVARCHAR(255) = NULL,
-	@AuthIdToken               NVARCHAR(1024) = NULL,
+	@UserRoleID                NUMERIC(10) = 0,
 	@DateCreated               DATETIME = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
 	@PhoneNumber               NVARCHAR(255) = NULL,
-	@EmailAddress              NVARCHAR(255) = NULL,
-	@Profileimageurl           NVARCHAR(255) = NULL,
+	@Username                  NVARCHAR(255) = NULL,
+	@Passwd                    NVARCHAR(255) = NULL,
+	@PictureUrl                NVARCHAR(255) = NULL,
+	@Picture                   VARBINARY(MAX) = NULL,
 	@IsDisabled                NUMERIC(1,0) = 0,
-	@CanTextMsg                NUMERIC(1,0) = 0,
-	@DateTextMsgApproved       DATETIME = NULL,
-	@AuthName                  NVARCHAR(255) = NULL,
-	@AuthNickname              NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -1381,43 +1363,31 @@ SET NOCOUNT ON
 
 INSERT INTO [user]
 (
-	[AuthUserid],
-	[AuthConnection],
-	[AuthProvider],
-	[AuthAccessToken],
-	[AuthIdToken],
+	[user_role_id],
 	[date_created],
 	[firstname],
 	[middlename],
 	[lastname],
 	[phone_number],
-	[email_address],
-	[profileimageurl],
-	[is_disabled],
-	[can_text_msg],
-	[date_text_msg_approved],
-	[AuthName],
-	[AuthNickname]
+	[username],
+	[passwd],
+	[picture_url],
+	[picture],
+	[is_disabled]
 )
  VALUES 
 (
-	@AuthUserid,
-	@AuthConnection,
-	@AuthProvider,
-	@AuthAccessToken,
-	@AuthIdToken,
+	@UserRoleID,
 	@DateCreated,
 	@Firstname,
 	@Middlename,
 	@Lastname,
 	@PhoneNumber,
-	@EmailAddress,
-	@Profileimageurl,
-	@IsDisabled,
-	@CanTextMsg,
-	@DateTextMsgApproved,
-	@AuthName,
-	@AuthNickname
+	@Username,
+	@Passwd,
+	@PictureUrl,
+	@Picture,
+	@IsDisabled
 )
 
 
@@ -1445,7 +1415,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		11/16/2016		HA		Created
+**		11/28/2016		HA		Created
 *******************************************************************************/
 
 
@@ -1453,11 +1423,7 @@ GO
 
 CREATE PROCEDURE spUserEnum
 	@UserID                    NUMERIC(10) = 0,
-	@AuthUserid                NVARCHAR(255) = NULL,
-	@AuthConnection            NVARCHAR(255) = NULL,
-	@AuthProvider              NVARCHAR(255) = NULL,
-	@AuthAccessToken           NVARCHAR(255) = NULL,
-	@AuthIdToken               NVARCHAR(1024) = NULL,
+	@UserRoleID                NUMERIC(10) = 0,
     	@BeginDateCreated          DATETIME = NULL,
     	@EndDateCreated            DATETIME = NULL,
     	@BeginDateModified         DATETIME = NULL,
@@ -1466,28 +1432,21 @@ CREATE PROCEDURE spUserEnum
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
 	@PhoneNumber               NVARCHAR(255) = NULL,
-	@EmailAddress              NVARCHAR(255) = NULL,
-	@Profileimageurl           NVARCHAR(255) = NULL,
+	@Username                  NVARCHAR(255) = NULL,
+	@Passwd                    NVARCHAR(255) = NULL,
+	@PictureUrl                NVARCHAR(255) = NULL,
+	@Picture                   VARBINARY(MAX) = NULL,
 	@IsDisabled                NUMERIC(1,0) = NULL,
-	@CanTextMsg                NUMERIC(1,0) = NULL,
-    	@BeginDateTextMsgApproved  DATETIME = NULL,
-    	@EndDateTextMsgApproved    DATETIME = NULL,
-	@AuthName                  NVARCHAR(255) = NULL,
-	@AuthNickname              NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname]
+      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [picture_url], [picture], [is_disabled]
       FROM [user] 
       WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
-      AND ((@AuthUserid IS NULL) OR ([AuthUserid] LIKE @AuthUserid))
-      AND ((@AuthConnection IS NULL) OR ([AuthConnection] LIKE @AuthConnection))
-      AND ((@AuthProvider IS NULL) OR ([AuthProvider] LIKE @AuthProvider))
-      AND ((@AuthAccessToken IS NULL) OR ([AuthAccessToken] LIKE @AuthAccessToken))
-      AND ((@AuthIdToken IS NULL) OR ([AuthIdToken] LIKE @AuthIdToken))
+      AND ((@UserRoleID = 0) OR ([user_role_id] LIKE @UserRoleID))
       AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
       AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
       AND ((@BeginDateModified IS NULL) OR ([date_modified] >= @BeginDateModified))
@@ -1496,14 +1455,11 @@ AS
       AND ((@Middlename IS NULL) OR ([middlename] LIKE @Middlename))
       AND ((@Lastname IS NULL) OR ([lastname] LIKE @Lastname))
       AND ((@PhoneNumber IS NULL) OR ([phone_number] LIKE @PhoneNumber))
-      AND ((@EmailAddress IS NULL) OR ([email_address] LIKE @EmailAddress))
-      AND ((@Profileimageurl IS NULL) OR ([profileimageurl] LIKE @Profileimageurl))
+      AND ((@Username IS NULL) OR ([username] LIKE @Username))
+      AND ((@Passwd IS NULL) OR ([passwd] LIKE @Passwd))
+      AND ((@PictureUrl IS NULL) OR ([picture_url] LIKE @PictureUrl))
+      AND ((@Picture IS NULL) OR ([picture] LIKE @Picture))
       AND ((@IsDisabled IS NULL) OR ([is_disabled] LIKE @IsDisabled))
-      AND ((@CanTextMsg IS NULL) OR ([can_text_msg] LIKE @CanTextMsg))
-      AND ((@BeginDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] >= @BeginDateTextMsgApproved))
-      AND ((@EndDateTextMsgApproved IS NULL) OR ([date_text_msg_approved] <= @EndDateTextMsgApproved))
-      AND ((@AuthName IS NULL) OR ([AuthName] LIKE @AuthName))
-      AND ((@AuthNickname IS NULL) OR ([AuthNickname] LIKE @AuthNickname))
  ORDER BY [user_id] ASC
 
 
@@ -1518,48 +1474,255 @@ ELSE
 PRINT '<<< Failed Creating Stored Procedure spUserEnum >>>'
 GO
 
-
-/*********************** CUSTOM  BEGIN *********************/
-IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnumByAuthUserid]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	PRINT '<<<< Dropping Stored Procedure spUserEnumByAuthUserid >>>>'
-	DROP PROCEDURE [spUserEnumByAuthUserid]
+	PRINT '<<<< Dropping Stored Procedure spUserRoleExist >>>>'
+	DROP PROCEDURE [spUserRoleExist]
 END
 GO
 
-CREATE PROCEDURE spUserEnumByAuthUserid
-		@UserID                    NUMERIC(10) = 0,
-	@AuthUserid                NVARCHAR(255) = NULL,
-	@AuthConnection            NVARCHAR(255) = NULL,
-	@AuthProvider              NVARCHAR(255) = NULL,
-	@AuthAccessToken           NVARCHAR(255) = NULL,
-	@AuthIdToken               NVARCHAR(1024) = NULL,
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleExist
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spUserRoleExist
+(
+@UserRoleID        NUMERIC(10) = 0,
+@COUNT          INT = 0 OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+SELECT @COUNT = COUNT(user_role_id) 
+FROM [user_role] 
+WHERE user_role_id = @UserRoleID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleExist >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spUserRoleExist >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spUserRoleLoad >>>>'
+	DROP PROCEDURE [spUserRoleLoad]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleLoad
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spUserRoleLoad
+(
+@UserRoleID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- select record(s) with specified id
+
+SELECT  [user_role_id], [date_created], [code], [description], [visible_code] 
+FROM [user_role] 
+WHERE user_role_id = @UserRoleID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleLoad >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spUserRoleLoad >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spUserRoleUpdate >>>>'
+	DROP PROCEDURE [spUserRoleUpdate]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleUpdate
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spUserRoleUpdate
+(
+	@UserRoleID                NUMERIC(10) = 0,
+	@Code                      NVARCHAR(255) = NULL,
+	@Description               NVARCHAR(255) = NULL,
+	@VisibleCode               NVARCHAR(255) = NULL,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+UPDATE [user_role] SET 
+	[code] = @Code,
+	[description] = @Description,
+	[visible_code] = @VisibleCode
+WHERE user_role_id = @UserRoleID
+
+-- return ID for updated record
+SELECT @PKID = @UserRoleID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleUpdate >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spUserRoleUpdate >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spUserRoleDelete >>>>'
+	DROP PROCEDURE [spUserRoleDelete]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleDelete
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spUserRoleDelete
+(
+@UserRoleID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+DELETE FROM [user_role] 
+WHERE user_role_id = @UserRoleID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleDelete >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spUserRoleDelete >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spUserRoleInsert >>>>'
+	DROP PROCEDURE [spUserRoleInsert]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleInsert
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spUserRoleInsert
+(
+	@UserRoleID                NUMERIC(10) = 0,
+	@DateCreated               DATETIME = NULL,
+	@Code                      NVARCHAR(255) = NULL,
+	@Description               NVARCHAR(255) = NULL,
+	@VisibleCode               NVARCHAR(255) = NULL,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+INSERT INTO [user_role]
+(
+	[user_role_id],
+	[date_created],
+	[code],
+	[description],
+	[visible_code]
+)
+ VALUES 
+(
+	@UserRoleID,
+	@DateCreated,
+	@Code,
+	@Description,
+	@VisibleCode
+)
+
+
+-- return ID for new record
+SELECT @PKID = @UserRoleID
+
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleInsert >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spUserRoleInsert >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spUserRoleEnum >>>>'
+	DROP PROCEDURE [spUserRoleEnum]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spUserRoleEnum
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/28/2016		HA		Created
+*******************************************************************************/
+
+
+
+
+CREATE PROCEDURE spUserRoleEnum
+	@UserRoleID                NUMERIC(10) = 0,
     	@BeginDateCreated          DATETIME = NULL,
     	@EndDateCreated            DATETIME = NULL,
-    	@BeginDateModified         DATETIME = NULL,
-    	@EndDateModified           DATETIME = NULL,
-	@Firstname                 NVARCHAR(255) = NULL,
-	@Middlename                NVARCHAR(255) = NULL,
-	@Lastname                  NVARCHAR(255) = NULL,
-	@PhoneNumber               NVARCHAR(255) = NULL,
-	@EmailAddress              NVARCHAR(255) = NULL,
-	@Profileimageurl           NVARCHAR(255) = NULL,
-	@IsDisabled                NUMERIC(1,0) = NULL,
-	@CanTextMsg                NUMERIC(1,0) = NULL,
-    	@BeginDateTextMsgApproved  DATETIME = NULL,
-    	@EndDateTextMsgApproved    DATETIME = NULL,
-	@AuthName                  NVARCHAR(255) = NULL,
-	@AuthNickname              NVARCHAR(255) = NULL,
+	@Code                      NVARCHAR(255) = NULL,
+	@Description               NVARCHAR(255) = NULL,
+	@VisibleCode               NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [AuthUserid], [AuthConnection], [AuthProvider], [AuthAccessToken], [AuthIdToken], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [email_address], [profileimageurl], [is_disabled], [can_text_msg], [date_text_msg_approved], [AuthName], [AuthNickname]
-      FROM [user] 
-      WHERE [AuthUserid]=@AuthUserid
- ORDER BY [user_id] ASC
+      SELECT  [user_role_id], [date_created], [code], [description], [visible_code]
+      FROM [user_role] 
+      WHERE ((@UserRoleID = 0) OR ([user_role_id] LIKE @UserRoleID))
+      AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
+      AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
+      AND ((@Code IS NULL) OR ([code] LIKE @Code))
+      AND ((@Description IS NULL) OR ([description] LIKE @Description))
+      AND ((@VisibleCode IS NULL) OR ([visible_code] LIKE @VisibleCode))
+ ORDER BY [user_role_id] ASC
 
 
       SELECT @COUNT=@@rowcount 
@@ -1567,12 +1730,9 @@ AS
     	RETURN 0
 
 GO
-
-IF EXISTS (select * from sysobjects where id = object_id(N'[spUserEnumByAuthUserid]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-PRINT '<<<< Created Stored Procedure spUserEnumByAuthUserid >>>>'
+IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spUserRoleEnum >>>>'
 ELSE
-PRINT '<<< Failed Creating Stored Procedure spUserEnumByAuthUserid >>>'
+PRINT '<<< Failed Creating Stored Procedure spUserRoleEnum >>>'
 GO
-/*********************** CUSTOM  END *********************/
-
 

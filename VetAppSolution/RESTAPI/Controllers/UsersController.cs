@@ -8,6 +8,7 @@ using RESTAPI.Utils;
 using Vetapp.Engine.DataAccessLayer.Data;
 using System;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace RESTAPI.Controllers
 {
@@ -29,11 +30,11 @@ namespace RESTAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult Get(long userid)
         {
             //Apilog apilog = _cutils.logAPIRequest(HttpContext);
 
-            UserProxy item = new UserProxy() { AuthUserid = id };
+            UserProxy item = new UserProxy() { UserID = userid };
             ////if (item == null)
             ////{
             ////    return NotFound();
@@ -44,9 +45,55 @@ namespace RESTAPI.Controllers
 
         // POST api/users
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post([FromBody] UserProxy userBodyProxy)
         {
-            return Ok();
+            try
+            {
+                Apilog apilog = _cutils.logAPIRequest(HttpContext);
+                UserControllerReply reply = new UserControllerReply(_settings);
+                var data = reply.Create(userBodyProxy);
+                if (!reply.HasError)
+                {
+                    _cutils.logAPIResponse(reply, 200, apilog);
+                    return Ok(data);
+                }
+                else
+                {
+                    _cutils.logAPIResponse(reply, 400, apilog);
+                    return BadRequest(reply.StatusErrorMessage);
+                }
+            }
+            catch
+            {
+                return BadRequest("Fatal Error");
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Authenticate([FromBody] UserProxy userBodyProxy)
+        {
+            try
+            {
+                Apilog apilog = _cutils.logAPIRequest(HttpContext);
+                UserControllerReply reply = new UserControllerReply(_settings);
+                var data = reply.Authenticate(userBodyProxy);
+                if (!reply.HasError)
+                {
+                    _cutils.logAPIResponse(reply, 200, apilog);
+                    return Ok(data);
+                }
+                else
+                {
+                    _cutils.logAPIResponse(reply, 400, apilog);
+                    return BadRequest(reply.StatusErrorMessage);
+                }
+            }
+            catch
+            {
+                return BadRequest("Fatal Error");
+            }
+
         }
 
         // PUT api/users/5
@@ -69,7 +116,8 @@ namespace RESTAPI.Controllers
             {
                 Apilog apilog = _cutils.logAPIRequest(HttpContext);
                 UserControllerReply reply = new UserControllerReply(_settings);
-                var data = reply.Find(HttpContext.Request.Query);
+                string username = HttpContext.Request.Query.FirstOrDefault(x => x.Key == "username").Value;
+                var data = reply.Find(username);
                 if (!reply.HasError)
                 {
                     _cutils.logAPIResponse(reply, 200, apilog);

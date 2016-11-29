@@ -12,7 +12,6 @@ using MainSite.Service;
 
 namespace MainSite.Controllers
 {
-    [Authorize]
     public class DashboardController : Controller
     {
         private readonly AppSettings _settings;

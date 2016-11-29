@@ -7,16 +7,6 @@ namespace Vetapp.Client.ProxyCore
     {
         [DataMember(Name = "UserID")]
         public long UserID { get; set; }
-        [DataMember(Name = "AuthUserid")]
-        public string AuthUserid { get; set; }
-        [DataMember(Name = "AuthConnection")]
-        public string AuthConnection { get; set; }
-        [DataMember(Name = "AuthProvider")]
-        public string AuthProvider { get; set; }
-        [DataMember(Name = "AuthAccessToken")]
-        public string AuthAccessToken { get; set; }
-        [DataMember(Name = "AuthIdToken")]
-        public string AuthIdToken { get; set; }
         [DataMember(Name = "Firstname")]
         public string Firstname { get; set; }
         [DataMember(Name = "Middlename")]
@@ -25,17 +15,15 @@ namespace Vetapp.Client.ProxyCore
         public string Lastname { get; set; }
         [DataMember(Name = "PhoneNumber")]
         public string PhoneNumber { get; set; }
-        [DataMember(Name = "EmailAddress")]
-        public string EmailAddress { get; set; }
-        [DataMember(Name = "Profileimageurl")]
-        public string Profileimageurl { get; set; }
+        [DataMember(Name = "Username")]
+        public string Username { get; set; }
+        [DataMember(Name = "Passwd")]
+        public string Passwd { get; set; }
+        [DataMember(Name = "PictureUrl")]
+        public string PictureUrl { get; set; }
         [DataMember(Name = "IsDisabled")]
         public bool IsDisabled { get; set; }
-        [DataMember(Name = "CanTextMsg")]
-        public bool CanTextMsg { get; set; }
-        [DataMember(Name = "AuthName")]
-        public string AuthName { get; set; }
-        [DataMember(Name = "AuthNickname")]
-        public string AuthNickname { get; set; }
+        [DataMember(Name = "Picture")]
+        public byte[] Picture { get; set; }
     }
 }

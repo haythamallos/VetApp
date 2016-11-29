@@ -79,29 +79,29 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
         /*********************** CUSTOM BEGIN *********************/
-        public User UserEnumByAuthUserid(string pStrUserid)
-        {
-            User user = null;
-            bool bConn = false;
-            SqlConnection conn = getDBConnection();
-            if (conn != null)
-            {
-                ArrayList items = null;
-                BusUser busUser = null;
-                busUser = new BusUser(conn);
-                busUser.SP_ENUM_NAME = "spUserEnumByAuthUserid";
-                EnumUser enumUser = new EnumUser() { AuthUserid = pStrUserid };
-                items = busUser.Get(enumUser);
-                // close the db connection
-                bConn = CloseConnection(conn);
-                _hasError = busUser.HasError;
-                if ((items != null) && (items.Count > 0))
-                {
-                    user = (User) items[items.Count - 1];
-                }
-            }
-            return user;
-        }
+        //public User UserEnumByAuthUserid(string pStrUserid)
+        //{
+        //    User user = null;
+        //    bool bConn = false;
+        //    SqlConnection conn = getDBConnection();
+        //    if (conn != null)
+        //    {
+        //        ArrayList items = null;
+        //        BusUser busUser = null;
+        //        busUser = new BusUser(conn);
+        //        busUser.SP_ENUM_NAME = "spUserEnumByAuthUserid";
+        //        EnumUser enumUser = new EnumUser() { AuthUserid = pStrUserid };
+        //        items = busUser.Get(enumUser);
+        //        // close the db connection
+        //        bConn = CloseConnection(conn);
+        //        _hasError = busUser.HasError;
+        //        if ((items != null) && (items.Count > 0))
+        //        {
+        //            user = (User) items[items.Count - 1];
+        //        }
+        //    }
+        //    return user;
+        //}
         /*********************** CUSTOM END *********************/
 
 
@@ -674,11 +674,121 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+        //------------------------------------------
+        /// <summary>
+        /// UserRoleCreateOrModify
+        /// </summary>
+        /// <param name="">pUserRole</param>
+        /// <returns>long</returns>
+        /// 
+        public long UserRoleCreateOrModify(UserRole pUserRole)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusUserRole busUserRole = null;
+                busUserRole = new BusUserRole(conn);
+                busUserRole.Save(pUserRole);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pUserRole.UserRoleID;
+                _hasError = busUserRole.HasError;
+                if (busUserRole.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
 
+        /// <summary>
+        /// UserRoleGetList
+        /// </summary>
+        /// <param name="">pEnumUserRole</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList UserRoleGetList(EnumUserRole pEnumUserRole)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusUserRole busUserRole = null;
+                busUserRole = new BusUserRole(conn);
+                items = busUserRole.Get(pEnumUserRole);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busUserRole.HasError;
+                if (busUserRole.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
 
+        /// <summary>
+        /// UserRoleGet
+        /// </summary>
+        /// <param name="">pLngUserRoleID</param>
+        /// <returns>UserRole</returns>
+        /// 
+        public UserRole UserRoleGet(long pLngUserRoleID)
+        {
+            UserRole user_role = new UserRole() { UserRoleID = pLngUserRoleID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusUserRole busUserRole = null;
+                busUserRole = new BusUserRole(conn);
+                busUserRole.Load(user_role);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busUserRole.HasError;
+                if (busUserRole.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return user_role;
+        }
 
+        /// <summary>
+        /// UserRoleRemove
+        /// </summary>
+        /// <param name="">pUserRoleID</param>
+        /// <returns>void</returns>
+        /// 
+        public void UserRoleRemove(long pUserRoleID)
+        {
+            bool bConn = false;
 
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                UserRole user_role = new UserRole();
+                user_role.UserRoleID = pUserRoleID;
+                BusUserRole bus = null;
+                bus = new BusUserRole(conn);
+                bus.Delete(user_role);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
 
 
     }
