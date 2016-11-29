@@ -278,4 +278,11 @@ $("#btnLogin").click(function () {
 $("#btnTestSmallModal").click(function () {
     //$('#myModal').modal('show');
     $('#smallmodal').modal('show');
+    $('#contactformmodal').modal('show');
+});
+
+$("#btnContactFormModal").click(function () {
+    //$('#myModal').modal('show');
+    //$('#smallmodal').modal('show');
+    $('#contactformmodal').modal('show');
 });
