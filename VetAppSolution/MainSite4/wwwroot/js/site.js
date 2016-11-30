@@ -20,6 +20,125 @@ function showform(target) {
     document.getElementById(target).style.display = 'block';
 }
 
+$('#captureform-to-resultsform').click(function () {
+    showform('resultsformdiv');
+
+    var results1div = document.getElementById('results1div');
+    var results2div = document.getElementById('results2div');
+    var results3div = document.getElementById('results3div');
+    var results4div = document.getElementById('results4div');
+    var slider = document.getElementById('slidervalue');
+
+    results1div.setAttribute('class', 'hidden');
+    results2div.setAttribute('class', 'hidden');
+    results3div.setAttribute('class', 'hidden');
+    results4div.setAttribute('class', 'hidden');
+
+    if (slider.value <= 50) {
+        results1div.setAttribute('class', 'visible');
+    }
+    else if ((slider.value > 50) && (slider.value <= 70)) {
+        results2div.setAttribute('class', 'visible');
+    }
+    else if ((slider.value > 70) && (slider.value <= 90)) {
+        results3div.setAttribute('class', 'visible');
+    }
+    else {
+        results4div.setAttribute('class', 'visible');
+    }
+});
+
+$("#range_rating").ionRangeSlider({
+    type: "single",
+    grid: true,
+    min: 10,
+    max: 100,
+    prefix: "Rating ",
+    postfix: "%",
+    values: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    onChange: function (data) {
+        //console.log(data.from);
+        var realslidervalue = (data.from + 1) * 10;
+        $('#slidervalue').val(realslidervalue);
+    }
+    //onFinish: function (data) {
+    //    console.log("onFinish");
+    //},
+    //onUpdate: function (data) {
+    //    console.log("onUpdate");
+    //}
+});
+
+$("#btnRegisterEvaluation").click(function () {
+
+    var oForm = document.forms["resultsform"];
+
+    var usernameval = oForm.elements["Register.Email"].value;
+    var passwordval = oForm.elements["Register.Password"].value;
+    var isfirsttimefilingval = $('input[name=isfirsttimefiling]:checked').val();
+    var hasclaimwithvaval = $('input[name=hasclaimwithva]:checked').val();
+    var hasactiveappealval = $('input[name=hasactiveappeal]:checked').val();
+    var hasratingval = $('input[name=hasrating]:checked').val();
+    var slidervalueval = document.forms["captureform"].elements["slidervalue"].value;;
+
+    var status = $("#divStatusRegisterEvaluation"); //DIV object to display the status message
+    status.html("Processing ....") //While our Thread works, we will show some message to indicate the progress
+
+    //jQuery AJAX Post request
+    $.post("/Account/RegisterEvaluation", { username: usernameval, password: passwordval, isfirsttimefiling: isfirsttimefilingval, hasclaimwithva: hasclaimwithvaval, hasactiveappeal: hasactiveappealval, hasratingval: hasratingval, slidervalue: slidervalueval },
+        function (data) {
+            if (data == "true") {
+                status.html(name + " is available!");
+            } else {
+                status.html("It seems you have an account with us already!");
+            }
+        });
+});
+
+$("#btnRegister").click(function () {
+    var oForm = document.forms["registerform"];
+
+    var usernameval = oForm.elements["Register.Username"].value;
+    var passwordval = oForm.elements["Register.Password"].value;
+    
+    //jQuery AJAX Post request
+    $.post("/Account/Register", { username: usernameval, password: passwordval },
+        function (data) {
+            console.log("data is: " + data);
+            if (!data) {
+                $('#smallmodaluserexist').modal('show');
+            } else {
+                $('#smallmodalerror').modal('show');
+            }
+        });
+});
+
+$("#btnLogin").click(function () {
+    var oForm = document.forms["loginform"];
+
+    var usernameval = oForm.elements["Login.Username"].value;
+    var passwordval = oForm.elements["Login.Password"].value;
+
+    //jQuery AJAX Post request
+    $.post("/Account/Login", { username: usernameval, password: passwordval },
+        function (data) {
+            if (!data) {
+                $('#smallmodalinvalidlogin').modal('show');
+            }
+        });
+});
+
+$("#btnTestSmallModal").click(function () {
+    $('#smallmodaluserexist').modal('show');
+});
+
+//$("#btnContactFormModal").click(function () {
+//    //$('#myModal').modal('show');
+//    //$('#smallmodal').modal('show');
+//    $('#contactformmodal').modal('show');
+//});
+
+
 //function showform(target) {
 //    hideform('captureform');
 //    document.getElementById(target).setAttribute('class', 'visible');
@@ -159,130 +278,3 @@ function showform(target) {
 //    $("#loginform").slideUp();
 //    $("#recoverform").fadeIn();
 //});
-
-$('#captureform-to-resultsform').click(function () {
-    showform('resultsformdiv');
-
-    var results1div = document.getElementById('results1div');
-    var results2div = document.getElementById('results2div');
-    var results3div = document.getElementById('results3div');
-    var results4div = document.getElementById('results4div');
-    var slider = document.getElementById('slidervalue');
-
-    results1div.setAttribute('class', 'hidden');
-    results2div.setAttribute('class', 'hidden');
-    results3div.setAttribute('class', 'hidden');
-    results4div.setAttribute('class', 'hidden');
-
-    if (slider.value <= 50) {
-        results1div.setAttribute('class', 'visible');
-    }
-    else if ((slider.value > 50) && (slider.value <= 70)) {
-        results2div.setAttribute('class', 'visible');
-    }
-    else if ((slider.value > 70) && (slider.value <= 90)) {
-        results3div.setAttribute('class', 'visible');
-    }
-    else {
-        results4div.setAttribute('class', 'visible');
-    }
-});
-
-$("#range_rating").ionRangeSlider({
-    type: "single",
-    grid: true,
-    min: 10,
-    max: 100,
-    prefix: "Rating ",
-    postfix: "%",
-    values: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-    onChange: function (data) {
-        //console.log(data.from);
-        var realslidervalue = (data.from + 1) * 10;
-        $('#slidervalue').val(realslidervalue);
-    }
-    //onFinish: function (data) {
-    //    console.log("onFinish");
-    //},
-    //onUpdate: function (data) {
-    //    console.log("onUpdate");
-    //}
-});
-
-$("#btnRegisterEvaluation").click(function () {
-
-    var oForm = document.forms["resultsform"];
-
-    var usernameval = oForm.elements["Register.Email"].value;
-    var passwordval = oForm.elements["Register.Password"].value;
-    var isfirsttimefilingval = $('input[name=isfirsttimefiling]:checked').val();
-    var hasclaimwithvaval = $('input[name=hasclaimwithva]:checked').val();
-    var hasactiveappealval = $('input[name=hasactiveappeal]:checked').val();
-    var hasratingval = $('input[name=hasrating]:checked').val();
-    var slidervalueval = document.forms["captureform"].elements["slidervalue"].value;;
-
-    var status = $("#divStatusRegisterEvaluation"); //DIV object to display the status message
-    status.html("Processing ....") //While our Thread works, we will show some message to indicate the progress
-
-    //jQuery AJAX Post request
-    $.post("/Account/RegisterEvaluation", { username: usernameval, password: passwordval, isfirsttimefiling: isfirsttimefilingval, hasclaimwithva: hasclaimwithvaval, hasactiveappeal: hasactiveappealval, hasratingval: hasratingval, slidervalue: slidervalueval },
-        function (data) {
-            if (data == "true") {
-                status.html(name + " is available!");
-            } else {
-                status.html("It seems you have an account with us already!");
-            }
-        });
-});
-
-$("#btnRegister").click(function () {
-    var oForm = document.forms["registerform"];
-
-    var usernameval = oForm.elements["Register.Email"].value;
-    var passwordval = oForm.elements["Register.Password"].value;
-    
-    var status = $("#divStatusRegister"); //DIV object to display the status message
-    status.html("Processing ....") //While our Thread works, we will show some message to indicate the progress
-
-    //jQuery AJAX Post request
-    $.post("/Account/Register", { username: usernameval, password: passwordval },
-        function (data) {
-            if (data == "true") {
-                //status.html(name + " is available!");
-            } else {
-                status.html("It seems you have an account with us already!");
-            }
-        });
-});
-
-$("#btnLogin").click(function () {
-    var oForm = document.forms["loginform"];
-
-    var usernameval = oForm.elements["Register.Email"].value;
-    var passwordval = oForm.elements["Register.Password"].value;
-
-    var status = $("#divStatusLogin"); //DIV object to display the status message
-    status.html("Processing ....") //While our Thread works, we will show some message to indicate the progress
-
-    //jQuery AJAX Post request
-    $.post("/Account/Register", { username: usernameval, password: passwordval },
-        function (data) {
-            if (data == "true") {
-                //status.html(name + " is available!");
-            } else {
-                status.html("Could not sign in.  Please try again!");
-            }
-        });
-});
-
-$("#btnTestSmallModal").click(function () {
-    //$('#myModal').modal('show');
-    $('#smallmodal').modal('show');
-    $('#contactformmodal').modal('show');
-});
-
-$("#btnContactFormModal").click(function () {
-    //$('#myModal').modal('show');
-    //$('#smallmodal').modal('show');
-    $('#contactformmodal').modal('show');
-});

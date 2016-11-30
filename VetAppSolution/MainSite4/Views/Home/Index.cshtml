@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade bs-example-modal-sm" id="smallmodaluserexist" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,14 +39,41 @@
     <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade bs-example-modal-sm" id="smallmodalerror" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> Encountered error in registeration.  Our support team is on it. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
-
+<div class="modal fade bs-example-modal-sm" id="smallmodalinvalidlogin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> Invalid sign in credentials. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 <section id="wrapper" class="login-register">
-
-    @*<div class="top-left-part"><a class="logo" href="index.html"><b><img src="~/plugins/images2/banner-462x150.png" alt="home" class="dark-logo" /></b></a></div>*@
-
-    <div class="top-left"><a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a></div>
+    <div class="top-left">
+        <a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a>
+        <div class="col-sm-3">
+            <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Get Started video</a>>
+        </div>
+    </div>
     <div class="login-box login-sidebar">
         <div class="white-box">
 
@@ -178,8 +205,8 @@
                     <div class="form-group m-t-40">
                         <label class="control-label">Create a free account to get started</label>
                         <div class="col-xs-12">
-                            <input asp-for="Register.Email" class="form-control" type="text" placeholder="Email">
-                            <span asp-validation-for="Register.Email" class="text-danger"></span>
+                            <input asp-for="Register.Username" class="form-control" type="text" placeholder="Email">
+                            <span asp-validation-for="Register.Username" class="text-danger"></span>
                         </div>
                         <div class="col-xs-12">
                             <input asp-for="Register.Password" class="form-control" type="password" required="" placeholder="Password">
@@ -250,8 +277,8 @@
                     <h3 class="box-title m-t-40 m-b-0">Register Now</h3><small>Create your account and enjoy</small>
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input asp-for="Register.Email" class="form-control" type="text" required="" placeholder="Email">
-                            <span asp-validation-for="Register.Email" class="text-danger"></span>
+                            <input asp-for="Register.Username" class="form-control" type="text" required="" placeholder="Email">
+                            <span asp-validation-for="Register.Username" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group ">

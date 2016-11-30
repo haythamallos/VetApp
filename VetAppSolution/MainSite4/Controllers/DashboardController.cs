@@ -25,8 +25,8 @@ namespace MainSite.Controllers
         public IActionResult Index()
         {
             // get user claims if social connection
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
+            //var claimsIdentity = User.Identity as ClaimsIdentity;
+            //string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
 
             //UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
             //var userServiceTask = userService.Load(UserID);

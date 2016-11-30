@@ -74,7 +74,20 @@ namespace RESTAPI.Reply
                 if ((!string.IsNullOrEmpty(bodyUserProxy.Username)) && (!string.IsNullOrEmpty(bodyUserProxy.Passwd)))
                 {
                     BusFacCore busFacCore = new BusFacCore(_settings.DefaultConnection);
-                   
+                    string encryptedPassword = UtilsSecurity.encrypt(bodyUserProxy.Passwd);
+                    EnumUser enumUser = new EnumUser() { Username = bodyUserProxy.Username, Passwd = encryptedPassword };
+                    ArrayList arUser = busFacCore.UserGetList(enumUser);
+                    if ((arUser != null) && (arUser.Count == 1))
+                    {
+                        // user is authenticated
+                        User user = (User) arUser[0];
+                        userProxy = DataToModelConverter.ConvertToProxy(user);
+                    }
+                    else
+                    {
+                        HasError = true;
+                        ErrorMessage = "Error in retrieving user accounts";
+                    }
                 }
                 else
                 {

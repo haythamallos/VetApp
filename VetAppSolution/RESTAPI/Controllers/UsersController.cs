@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace RESTAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class UsersController : Controller
     {
         private readonly AppSettings _settings;
@@ -24,12 +24,14 @@ namespace RESTAPI.Controllers
             _cutils = new ControllerUtils(_settings.DefaultConnection);
         }
         [HttpGet]
+        [ActionName("Get")]
         public IActionResult Get()
         {
             return Ok();
         }
 
         [HttpGet("{id}")]
+        [ActionName("Get")]
         public IActionResult Get(long userid)
         {
             //Apilog apilog = _cutils.logAPIRequest(HttpContext);
@@ -45,6 +47,7 @@ namespace RESTAPI.Controllers
 
         // POST api/users
         [HttpPost]
+        [ActionName("Post")]
         public IActionResult Post([FromBody] UserProxy userBodyProxy)
         {
             try
@@ -71,6 +74,7 @@ namespace RESTAPI.Controllers
         }
 
         [HttpPost]
+        [ActionName("Authenticate")]
         public IActionResult Authenticate([FromBody] UserProxy userBodyProxy)
         {
             try
@@ -98,12 +102,14 @@ namespace RESTAPI.Controllers
 
         // PUT api/users/5
         [HttpPut("{id}")]
+        [ActionName("Put")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
+        [ActionName("Delete")]
         public void Delete(int id)
         {
         }

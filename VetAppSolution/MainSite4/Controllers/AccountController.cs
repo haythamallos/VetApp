@@ -1,18 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using MainSite.Models.AccountViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using MainSite.Utils;
-using System.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using MainSite.Service;
 using Vetapp.Client.ProxyCore;
-using MainSite.Models;
-using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,7 +20,7 @@ namespace MainSite.Controllers
             _settings = settings.Value;
         }
 
-        private bool InitializeSession(string pStrConnection)
+        private bool InitializeSession(UserProxy userProxy)
         {
             bool bSuccess = true;
             try
@@ -36,8 +29,10 @@ namespace MainSite.Controllers
                 DateTime dateFirstSeen;
                 dateFirstSeen = DateTime.Now;
                 var serializedDate = JsonConvert.SerializeObject(dateFirstSeen);
+                var serializedUser = JsonConvert.SerializeObject(userProxy);
                 HttpContext.Session.SetString(Constants.sessionKeyStartDate, serializedDate);
-                HttpContext.Session.SetString(Constants.sessionKeyConnection, pStrConnection);
+                HttpContext.Session.SetString(Constants.sessionKeyConnection, serializedUser);
+              
             }
             catch { bSuccess = false; }
             return bSuccess;
@@ -68,13 +63,16 @@ namespace MainSite.Controllers
         public JsonResult Register(string username, string password)
         {
             bool bResult = false;
-            UserProxy userProxy = doRegister(username, password);
-            if ((userProxy != null) && (userProxy.UserID > 0))
+            bool bExist = doCheckUsername(username);
+            if (!bExist)
             {
-                // successfull created user
-                SetLoggedIn(userProxy);
+                UserProxy userProxy = doRegister(username, password);
+                if ((userProxy != null) && (userProxy.UserID > 0))
+                {
+                    // successfull created user
+                    SetLoggedIn(userProxy);
+                }
             }
-
             return Json(bResult);
         }
 
@@ -86,6 +84,7 @@ namespace MainSite.Controllers
             {
                 // successfull created user
                 SetLoggedIn(userProxy);
+                bResult = true;
             }
 
             return Json(bResult);
@@ -125,9 +124,9 @@ namespace MainSite.Controllers
             return bResult;
         }
 
-        private void SetLoggedIn(UserProxy userProxy)
+        private IActionResult SetLoggedIn(UserProxy userProxy)
         {
-
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
