@@ -65,15 +65,15 @@ namespace MainSite
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
 
             services.AddDistributedMemoryCache();
-            services.AddSession(options => {
+            services.AddSession(options =>
+            {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.CookieName = ".VVCS.Session";
+                options.CookieName = ".VeteranApp.Session";
             });
 
             //using Dependency Injection
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

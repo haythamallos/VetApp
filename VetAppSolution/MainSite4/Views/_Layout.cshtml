@@ -7,6 +7,7 @@
     <meta name="description" content="@ViewData["Description"]" />
     <title>Valued Veteran Consulting Services</title>
 
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="~/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
@@ -18,10 +19,9 @@
     <link href="~/css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="~/css/colors/default-dark.css" id="theme" rel="stylesheet">
-    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
 </head>
 <body>
-    <!-- Preloader -->
+        <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
     </div>
@@ -123,7 +123,7 @@
                     </li>
                     <!-- /.dropdown -->
 
-                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/account/LogOut"><i class="icon-logout"></i></a></li>
+                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Account/LogOut"><i class="icon-logout"></i></a></li>
                     <!-- /.dropdown -->
                 </ul>
             </div>
@@ -176,10 +176,9 @@
             </ul>
         </div>
     </div>
-    <!-- Left navbar-header end -->
-
-
+    <!-- Left navbar-header en
     @RenderBody()
+  
     <!-- jQuery -->
     <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -207,7 +206,7 @@
 
     <!--Style Switcher -->
     <script src="~/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sitedashboard.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

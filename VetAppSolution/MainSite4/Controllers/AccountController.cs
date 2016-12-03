@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MainSite.Utils;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using MainSite.Service;
 using Vetapp.Client.ProxyCore;
+using MainSite.Extensions;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,22 +20,10 @@ namespace MainSite.Controllers
             _settings = settings.Value;
         }
 
-        private bool InitializeSession(UserProxy userProxy)
+        private void InitializeSession(UserProxy userProxy)
         {
-            bool bSuccess = true;
-            try
-            {
-                HttpContext.Session.Clear();
-                DateTime dateFirstSeen;
-                dateFirstSeen = DateTime.Now;
-                var serializedDate = JsonConvert.SerializeObject(dateFirstSeen);
-                var serializedUser = JsonConvert.SerializeObject(userProxy);
-                HttpContext.Session.SetString(Constants.sessionKeyStartDate, serializedDate);
-                HttpContext.Session.SetString(Constants.sessionKeyConnection, serializedUser);
-              
-            }
-            catch { bSuccess = false; }
-            return bSuccess;
+            HttpContext.Session.Clear();
+            HttpContext.Session.SetObjectAsJson(Constants.sessionKeyUser, userProxy);
         }
 
         public JsonResult CheckUsername(string username)
@@ -43,6 +31,51 @@ namespace MainSite.Controllers
             bool bResult = false;
             bResult = doCheckUsername(username);
             return Json(bResult);
+        }
+
+        public JsonResult Authenticate(string username, string password)
+        {
+            bool bResult = false;
+            UserProxy userProxy = doAuthenticate(username, password);
+            if ((userProxy != null) && (userProxy.UserID > 0))
+            {
+                bResult = true;
+            }
+            return Json(bResult);
+        }
+        [HttpGet]
+        public ActionResult Login(string username, string password)
+        {
+            try
+            {
+                UserProxy userProxy = doAuthenticate(username, password);
+                if ((userProxy != null) && (userProxy.UserID > 0))
+                {
+                    InitializeSession(userProxy);
+                    return Json(new { ok = true, newurl = "/Dashboard" });
+                }
+            }
+            catch {}
+            return Json(new { ok = false, newurl = "" });
+        }
+        [HttpGet]
+        public ActionResult Register(string username, string password)
+        {
+            bool bExist = doCheckUsername(username);
+            if (!bExist)
+            {
+                UserProxy userProxy = doRegister(username, password);
+                if ((userProxy != null) && (userProxy.UserID > 0))
+                {
+                    // successfull created user
+                    return Login(username, password);
+                }
+            }
+            else
+            {
+                return Json(new { ok = false, newurl = "" });
+            }
+            return Json(new { ok = false, newurl = "" });
         }
 
         public JsonResult RegisterEvaluation(string username, string password, bool isfirsttimefiling, bool hasclaimwithva, bool hasactiveappeal, bool hasratingval, int slidervalue)
@@ -54,42 +87,20 @@ namespace MainSite.Controllers
                 // successfull created user
                 // track evaluation with user
                 SaveEvaluation(userProxy, isfirsttimefiling, hasclaimwithva, hasactiveappeal, hasratingval, slidervalue);
-                SetLoggedIn(userProxy);
             }
 
             return Json(bResult);
         }
 
-        public JsonResult Register(string username, string password)
+        public IActionResult LogOut()
         {
-            bool bResult = false;
-            bool bExist = doCheckUsername(username);
-            if (!bExist)
+            try
             {
-                UserProxy userProxy = doRegister(username, password);
-                if ((userProxy != null) && (userProxy.UserID > 0))
-                {
-                    // successfull created user
-                    SetLoggedIn(userProxy);
-                }
+                HttpContext.Session.Clear();
             }
-            return Json(bResult);
+            catch { }
+            return RedirectToAction("Index", "Home");
         }
-
-        public JsonResult Login(string username, string password)
-        {
-            bool bResult = false;
-            UserProxy userProxy = doAuthenticate(username, password);
-            if ((userProxy != null) && (userProxy.UserID > 0))
-            {
-                // successfull created user
-                SetLoggedIn(userProxy);
-                bResult = true;
-            }
-
-            return Json(bResult);
-        }
-
         public JsonResult SaveEvaluation(UserProxy userProxy, bool isfirsttimefiling, bool hasclaimwithva, bool hasactiveappeal, bool hasratingval, int slidervalue)
         {
             bool bResult = false;
@@ -124,148 +135,5 @@ namespace MainSite.Controllers
             return bResult;
         }
 
-        private IActionResult SetLoggedIn(UserProxy userProxy)
-        {
-            return RedirectToAction("Index", "Dashboard");
-        }
     }
 }
-
-
-//private readonly Auth0Settings _auth0Settings;
-
-//public AccountController(IOptions<Auth0Settings> auth0Settings, IOptions<AppSettings> settings)
-//{
-//    //_auth0Settings = auth0Settings.Value;
-//    _settings = settings.Value;
-//}
-
-//[HttpGet]
-//public IActionResult Login(string returnUrl = "/")
-//{
-//    ViewData["ReturnUrl"] = returnUrl;
-//    return View();
-//}
-
-//[HttpPost]
-//public IActionResult Register(CombinedLoginRegisterViewModel model)
-//{
-//    //string url = $"https://{_auth0Settings.Domain}/dbconnections/signup";
-//    //RESTUtil apiutil = new RESTUtil();
-//    //dynamic dynamicJson = new ExpandoObject();
-//    //dynamicJson.email = model.Register.Email;
-//    //dynamicJson.password = model.Register.Password;
-//    //apiutil.POSTreq(url, dynamicJson);
-
-//    return View(model);
-//}
-
-
-
-//[HttpPost]
-//public async Task<IActionResult> Login(CombinedLoginRegisterViewModel model, string returnUrl = null)
-//{
-//    if (ModelState.IsValid)
-//    {
-//        try
-//        {
-//            AuthenticationApiClient client = new AuthenticationApiClient(new Uri($"https://{_auth0Settings.Domain}/"));
-
-//            var result = await client.AuthenticateAsync(new AuthenticationRequest
-//            {
-//                ClientId = _auth0Settings.ClientId,
-//                Scope = "openid",
-//                Connection = "Username-Password-Authentication", // Specify the correct name of your DB connection
-//                Username = model.Login.Username,
-//                Password = model.Login.Password
-//            });
-
-//            // Get user info from token
-//            var user = await client.GetTokenInfoAsync(result.IdToken);
-
-//            // Create claims principal
-//            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new[]
-//            {
-//                  new Claim(ClaimTypes.NameIdentifier, user.UserId),
-//                  new Claim(ClaimTypes.Name, user.FullName)
-
-//            }, CookieAuthenticationDefaults.AuthenticationScheme));
-
-//            // Sign user into cookie middleware
-//            await HttpContext.Authentication.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-
-//            return RedirectToLocal(returnUrl);
-//        }
-//        catch (Exception e)
-//        {
-//            ModelState.AddModelError("", e.Message);
-//        }
-//    }
-
-//    return View(model);
-//}
-
-//[Authorize]
-//public IActionResult Logout()
-//{
-//    HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-//    return RedirectToAction("Index", "Home");
-//}
-
-//[HttpGet]
-//public IActionResult LoginExternal(string connection, string returnUrl = "/")
-//{
-//    var properties = new AuthenticationProperties() { RedirectUri = returnUrl };
-//    if (!string.IsNullOrEmpty(connection))
-//    {
-//        properties.Items.Add("connection", connection);
-//        InitializeSession(connection);
-//    }
-
-//    return new ChallengeResult("Auth0", properties);
-//}
-
-//private IActionResult RedirectToLocal(string returnUrl)
-//{
-//    if (Url.IsLocalUrl(returnUrl))
-//    {
-//        return Redirect(returnUrl);
-//    }
-//    else
-//    {
-//        return RedirectToAction(nameof(HomeController.Index), "Home");
-//    }
-//}
-
-//[HttpPost]
-//public PartialViewResult  Evaluation(CombinedLoginRegisterViewModel model)
-//{
-//    // check if user exists
-//    UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
-//    var bUserExist = userService.ExistByUsername(model.Register.Email);
-//    if (bUserExist.Result)
-//    {
-//        // user exists already
-//    }
-//    else
-//    {
-//        // proceed with creating the user
-//        //UserProxy userProxy = new UserProxy() { EmailAddress = model.Register.Email };
-//    }
-
-//    //return View(model);
-//    return PartialView(model);
-//}
-
-//[HttpPost]
-//public IActionResult Recover(CombinedLoginRegisterViewModel model)
-//{
-//    return RedirectToAction(nameof(HomeController.Index), "Index");
-//}
-
-//[HttpPost]
-//public IActionResult Login(CombinedLoginRegisterViewModel model)
-//{
-//    return RedirectToAction(nameof(HomeController.Index), "Index");
-//}

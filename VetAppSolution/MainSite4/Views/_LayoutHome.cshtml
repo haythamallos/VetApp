@@ -82,7 +82,20 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
- 
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="smallmodalphone" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+                </div>
+                <div class="modal-body"> Please call us at <h1>619-822-2070</h1> to get personal assistance on how you can increase your VA benefits. </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
     <header id="header">
@@ -96,7 +109,7 @@
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
                                 <li><a href="/Home"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i> 619-822-2070</a></li>
+                                <li><a href="javascript:void(0)" id="btnPhoneFormModal"><i class="fa fa-phone"></i> 619-822-2070</a></li>
                                 <li><a href="javascript:void(0)" id="btnContactFormModal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>
                                 <li><a href="#" onclick="showform('captureformdiv');"><i class="fa fa-star"></i> Free Evaluation</a></li>
                                 <li><a href="#" onclick="showform('loginformdiv');"><i class="fa fa-sign-in"></i> Sign in</a></li>
@@ -107,10 +120,10 @@
                     <div class="col-sm-6">
                         <div class="social-icons pull-right">
                             <ul class="nav navbar-nav">
-                                @if (User.Identity.IsAuthenticated)
+                                @*@if (User.Identity.IsAuthenticated)
                                 {
                                     <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                                }
+                                }*@
                             </ul>
                         </div>
                     </div>

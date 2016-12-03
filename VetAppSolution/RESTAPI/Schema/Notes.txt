@@ -1,0 +1,13 @@
+﻿Main server:  devvetdbserver.database.windows.net
+Username:  Work
+Pass: Mondavi1
+
+-- Explanation to create user in azure db
+-- http://stackoverflow.com/questions/19094970/how-do-i-create-a-new-user-in-a-sql-azure-database
+-- use master
+--CREATE LOGIN vetdbuser WITH password='telkaif01!';
+
+-- switch to db
+CREATE USER vetdbuser FROM LOGIN vetdbuser;
+EXEC sp_addrolemember N'db_owner', N'vetdbuser'
+GO

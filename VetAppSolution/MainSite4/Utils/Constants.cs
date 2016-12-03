@@ -7,8 +7,7 @@ namespace MainSite.Utils
 {
     public class Constants
     {
-        public static readonly string sessionKeyIsFirstTime = "IsFirstTime";
-        public static readonly string sessionKeyConnection = "Connection";
+        public static readonly string sessionKeyUser = "User";
         public static readonly string sessionKeyStartDate = "SessionStartDate";
         public static readonly string sessionKeyEndDate = "SessionEndDate";
     }

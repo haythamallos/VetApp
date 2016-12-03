@@ -23,7 +23,7 @@ namespace MainSite.Service
             {
                 HttpClient client = new HttpClient();
                 BuildKeyHeader(client);            
-                Uri requestUri = new Uri(ApiUrl + "/api/users");
+                Uri requestUri = new Uri(ApiUrl + "/api/users/create");
                 string json = JsonConvert.SerializeObject(pUserProxy);
                 HttpResponseMessage response = await client.PostAsync(requestUri, new StringContent(json, Encoding.UTF8, "application/json"));
                 if (response.IsSuccessStatusCode)

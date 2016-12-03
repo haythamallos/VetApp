@@ -47,8 +47,8 @@ namespace RESTAPI.Controllers
 
         // POST api/users
         [HttpPost]
-        [ActionName("Post")]
-        public IActionResult Post([FromBody] UserProxy userBodyProxy)
+        [ActionName("Create")]
+        public IActionResult Create([FromBody] UserProxy userBodyProxy)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace RESTAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Find")]
+        [ActionName("Find")]
         public IActionResult Find()
         {
             try

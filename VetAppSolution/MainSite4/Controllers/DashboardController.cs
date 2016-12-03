@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using MainSite.Utils;
-using System.Security.Claims;
-using System.Linq;
 using Microsoft.Extensions.Options;
 using Vetapp.Client.ProxyCore;
-using MainSite.Service;
+using MainSite.Extensions;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,39 +19,19 @@ namespace MainSite.Controllers
             _settings = settings.Value;
         }
 
-        [HttpGet]
+
         public IActionResult Index()
         {
-            // get user claims if social connection
-            //var claimsIdentity = User.Identity as ClaimsIdentity;
-            //string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
+            UserProxy userProxy = HttpContext.Session.GetObjectFromJson<UserProxy>(Constants.sessionKeyUser);
 
-            //UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
-            //var userServiceTask = userService.Load(UserID);
-            //UserProxy userProxy = userServiceTask.Result;
-            //userServiceTask = userService.Save(userProxy);
-
-
-
-            //string sessionKey = Constants.sessionKeyIsFirstTime;
-            //var connection = HttpContext.Session.GetString(Constants.sessionKeyConnection);
-            //var isFirstTime = HttpContext.Session.GetString(Constants.sessionKeyIsFirstTime);
-            //if (string.IsNullOrEmpty(isFirstTime))
-            //{
-            //    //First time login
-            //    HttpContext.Session.SetString(Constants.sessionKeyIsFirstTime, "false");
-
-            //    string claimType = null;
-            //    string claimValue = null;
-            //    foreach (var claim in User.Claims)
-            //    {
-            //        claimType = claim.Type;
-            //        claimValue = claim.Value;
-            //    }
-            //}
-
+            if (userProxy == null)
+            {
+                // invalid redirect home
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
+
         [HttpGet]
         public IActionResult Gallery()
         {
@@ -61,3 +39,33 @@ namespace MainSite.Controllers
         }
     }
 }
+
+
+// get user claims if social connection
+//var claimsIdentity = User.Identity as ClaimsIdentity;
+//string UserID = claimsIdentity?.Claims.FirstOrDefault(c => c.Type == "user_id")?.Value;
+
+//UsersService userService = new UsersService(_settings.DefaultService, _settings.ClientKey);
+//var userServiceTask = userService.Load(UserID);
+//UserProxy userProxy = userServiceTask.Result;
+//userServiceTask = userService.Save(userProxy);
+
+
+
+//string sessionKey = Constants.sessionKeyIsFirstTime;
+//var connection = HttpContext.Session.GetString(Constants.sessionKeyConnection);
+//var isFirstTime = HttpContext.Session.GetString(Constants.sessionKeyIsFirstTime);
+//if (string.IsNullOrEmpty(isFirstTime))
+//{
+//    //First time login
+//    HttpContext.Session.SetString(Constants.sessionKeyIsFirstTime, "false");
+
+//    string claimType = null;
+//    string claimValue = null;
+//    foreach (var claim in User.Claims)
+//    {
+//        claimType = claim.Type;
+//        claimValue = claim.Value;
+//    }
+//}
+

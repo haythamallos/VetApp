@@ -10,7 +10,7 @@ function showform(target) {
     var registerformdiv = document.getElementById('registerformdiv');
     var loginformdiv = document.getElementById('loginformdiv');
     var recoverformdiv = document.getElementById('recoverformdiv');
-    
+
     captureformdiv.style.display = 'none';
     resultsformdiv.style.display = 'none';
     registerformdiv.style.display = 'none';
@@ -69,75 +69,111 @@ $("#range_rating").ionRangeSlider({
     //}
 });
 
-$("#btnRegisterEvaluation").click(function () {
 
-    var oForm = document.forms["resultsform"];
-
-    var usernameval = oForm.elements["Register.Email"].value;
-    var passwordval = oForm.elements["Register.Password"].value;
-    var isfirsttimefilingval = $('input[name=isfirsttimefiling]:checked').val();
-    var hasclaimwithvaval = $('input[name=hasclaimwithva]:checked').val();
-    var hasactiveappealval = $('input[name=hasactiveappeal]:checked').val();
-    var hasratingval = $('input[name=hasrating]:checked').val();
-    var slidervalueval = document.forms["captureform"].elements["slidervalue"].value;;
-
-    var status = $("#divStatusRegisterEvaluation"); //DIV object to display the status message
-    status.html("Processing ....") //While our Thread works, we will show some message to indicate the progress
+function login(usernameval, passwordval) {
 
     //jQuery AJAX Post request
-    $.post("/Account/RegisterEvaluation", { username: usernameval, password: passwordval, isfirsttimefiling: isfirsttimefilingval, hasclaimwithva: hasclaimwithvaval, hasactiveappeal: hasactiveappealval, hasratingval: hasratingval, slidervalue: slidervalueval },
-        function (data) {
-            if (data == "true") {
-                status.html(name + " is available!");
-            } else {
-                status.html("It seems you have an account with us already!");
-            }
-        });
-});
-
-$("#btnRegister").click(function () {
-    var oForm = document.forms["registerform"];
-
-    var usernameval = oForm.elements["Register.Username"].value;
-    var passwordval = oForm.elements["Register.Password"].value;
-    
-    //jQuery AJAX Post request
-    $.post("/Account/Register", { username: usernameval, password: passwordval },
-        function (data) {
-            console.log("data is: " + data);
-            if (!data) {
-                $('#smallmodaluserexist').modal('show');
-            } else {
-                $('#smallmodalerror').modal('show');
-            }
-        });
-});
-
-$("#btnLogin").click(function () {
-    var oForm = document.forms["loginform"];
-
-    var usernameval = oForm.elements["Login.Username"].value;
-    var passwordval = oForm.elements["Login.Password"].value;
-
-    //jQuery AJAX Post request
-    $.post("/Account/Login", { username: usernameval, password: passwordval },
+    $.post("/Account/Authenticate", { username: usernameval, password: passwordval },
         function (data) {
             if (!data) {
                 $('#smallmodalinvalidlogin').modal('show');
             }
+            else {
+                $.ajax({
+                    type: "GET",
+                    url: "/Account/Login",
+                    data: { username: usernameval, password: passwordval },
+                    datatype: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (returndata) {
+                        if (returndata.ok)
+                            window.location = returndata.newurl;
+                        else
+                            $('#smallmodalinvalidlogin').modal('show');
+                    }
+                });
+            }
         });
+}
+
+function register(usernameval, passwordval) {
+    //jQuery AJAX Post request
+    $.get("/Account/Register", { username: usernameval, password: passwordval },
+        function (data) {
+            if (!data.ok) {
+                $('#smallmodaluserexist').modal('show');
+            } else {
+                //$('#smallmodalerror').modal('show');
+                window.location = data.newurl;
+            }
+        });
+}
+
+$("#btnRegisterEvaluation").click(function () {
+
+    var oForm = document.forms["resultsform"];
+
+    var usernameval = oForm.elements["Register.Username"].value;
+    var passwordval = oForm.elements["Register.Password"].value;
+    //var isfirsttimefilingval = $('input[name=isfirsttimefiling]:checked').val();
+    //var hasclaimwithvaval = $('input[name=hasclaimwithva]:checked').val();
+    //var hasactiveappealval = $('input[name=hasactiveappeal]:checked').val();
+    //var hasratingval = $('input[name=hasrating]:checked').val();
+    //var slidervalueval = document.forms["captureform"].elements["slidervalue"].value;;
+
+  
+    register(usernameval, passwordval);
+
+    //jQuery AJAX Post request
+    //$.post("/Account/RegisterEvaluation", { username: usernameval, password: passwordval, isfirsttimefiling: isfirsttimefilingval, hasclaimwithva: hasclaimwithvaval, hasactiveappeal: hasactiveappealval, hasratingval: hasratingval, slidervalue: slidervalueval },
+    //    function (data) {
+    //        if (data) {
+    //            status.html(name + " is available!");
+    //        } else {
+    //            status.html("It seems you have an account with us already!");
+    //        }
+    //    });
 });
+
+$("#btnRegister").click(function () {
+    var oForm = document.forms["registerform"];
+    var usernameval = oForm.elements["Register.Username"].value;
+    var passwordval = oForm.elements["Register.Password"].value;
+    register(usernameval, passwordval);
+});
+
+$("#btnLogin").click(function () {
+    var oForm = document.forms["loginform"];
+    var usernameval = oForm.elements["Login.Username"].value;
+    var passwordval = oForm.elements["Login.Password"].value;
+    login(usernameval, passwordval);
+});
+//$.post("/Account/Login", { username: usernameval, password: passwordval },
+//     function (data) {
+//         console.log("url is:  " + returndata.newurl);
+//         if (data.ok) {
+//             window.location = data.newurl;
+//         }
+//         else
+//         {
+//             $('#smallmodalinvalidlogin').modal('show');
+//         }
+//     }
+//     );
+
+
 
 $("#btnTestSmallModal").click(function () {
     $('#smallmodaluserexist').modal('show');
 });
 
-//$("#btnContactFormModal").click(function () {
-//    //$('#myModal').modal('show');
-//    //$('#smallmodal').modal('show');
-//    $('#contactformmodal').modal('show');
-//});
+$("#btnContactFormModal").click(function () {
+    $('#contactformmodal').modal('show');
+});
 
+$("#btnPhoneFormModal").click(function () {
+    $('#smallmodalphone').modal('show');
+});
 
 //function showform(target) {
 //    hideform('captureform');
