@@ -37,6 +37,12 @@ namespace MainSite.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Bodymap()
+        {
+            return View();
+        }
     }
 }
 
