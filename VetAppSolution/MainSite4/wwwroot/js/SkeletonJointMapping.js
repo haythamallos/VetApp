@@ -142,10 +142,15 @@ function buildAreas() {
 
 function buildToolTipArea(name, fullName) {
     return $('<div id="' + name + '_divID"><div>' + fullName + '</div><div>' +
-        '<div><input id="tt_' + name + '_swol" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Swelling</span></div>' +
-        '<div><input id="tt_' + name + '_tend" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Tender</span></div></div></div>');
-}
+        '<div><input id="tt_' + name + '_swol" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Pain</span></div>' +
+        '</div></div>');
+    }
 
+//function buildToolTipArea(name, fullName) {
+//    return $('<div id="' + name + '_divID"><div>' + fullName + '</div><div>' +
+//        '<div><input id="tt_' + name + '_swol" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Swelling</span></div>' +
+//        '<div><input id="tt_' + name + '_tend" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Tender</span></div></div></div>');
+//}
 default_options =
     {
         fillOpacity: 0.5,
@@ -193,6 +198,10 @@ function loadPreselectedItems() {
 
 loadPreselectedItems();
 
+function deleteRowFunction() {
+    document.getElementById("selectedareastable").deleteRow(1);
+}
+
 function creatRowFunction(name, isswelling, istender) {
     var table = document.getElementById("selectedareastable");
     var row = table.insertRow(1);
@@ -203,9 +212,6 @@ function creatRowFunction(name, isswelling, istender) {
     cell1.innerHTML = name;
     cell2.innerHTML = "<div class=\"col-sm-6 col-md-4 col-lg-3\"><i class=\"fa fa-check\"></i></div>";
     cell3.innerHTML = "<div class=\"col-sm-6 col-md-4 col-lg-3\"><i class=\"fa fa-check\"></i></div>";
-    cell4.innerHTML = "<a href=\"#\" data-toggle=\"tooltip\" data-original-title=\"Close\"> <i class=\"fa fa-close text-danger\"></i> </a>";
+    cell4.innerHTML = "<a href=\"#\" onclick=\"deleteRowFunction(); return false;\" data-toggle=\"tooltip\" data-original-title=\"Close\"> <i class=\"fa fa-close text-danger\" ></i> </a>";
 }
 
-function deleteRowFunction() {
-    document.getElementById("selectedareastable").deleteRow(0);
-}
