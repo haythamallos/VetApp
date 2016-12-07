@@ -22,26 +22,25 @@
                     <span><i class="ion-upload m-r-5"></i>Save</span>
 
                 </div>
-                <div class="table-responsive">
-                    <table id="selectedareastable" class="table table-bordered">
+                <div class="table-responsive" style="height:600px;overflow:auto;">
+                    <table id="selectedareastable" class="table table-bordered fixed-table-scroll-outer">
                         <thead>
                             <tr>
-                                <th>Area</th>
-                                <th>Swelling</th>
-                                <th>Tender</th>
-                                <th class="text-nowrap">Action</th>
+                                <th>Selected Pain Area</th>
+                                @*<th class="text-nowrap">Action</th>*@
                             </tr>
                         </thead>
-                        <tbody>
-                            @*<tr>
+             
+                        @*<tbody>
+                            <tr>
                                 <td>Right TMJ</td>
                                 <td><div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-check"></i></div></td>
                                 <td><div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-check"></i></div></td>
                                 <td class="text-nowrap">
                                     <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
                                 </td>
-                            </tr>*@
-                        </tbody>
+                            </tr>
+                        </tbody>*@
                     </table>
                 </div>
 
@@ -221,3 +220,9 @@
               shape="poly" coords="499,699,506,697,507,701,506,703,508,706,500,707,500,704" />
     </map>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#selectedareastable').DataTable();
+    });
+</script>

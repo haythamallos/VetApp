@@ -1,9 +1,43 @@
 ﻿var $jointlist, $joint_map, default_options, mapsterConfigured;
 
-
 //$toolTipList = $('#hidden_divs');
 $jointlist = $('#jointlist');
 $joint_map = $('#body_hand_foot_image');
+
+function findRows(table, column, searchText) {
+    var rows = table.rows,
+        r = 0,
+        found = false,
+        anyFound = false;
+
+    for (; r < rows.length; r += 1) {
+        row = rows.item(r);
+        found = (row.cells.item(column).textContent.indexOf(searchText) !== -1);
+        anyFound = anyFound || found;
+    }
+
+    return found;
+}
+
+function findRowIndex(table, column, searchText) {
+    var rows = table.rows,
+        r = 0,
+        found = false,
+        index = -1,
+        anyFound = false;
+
+    for (; r < rows.length; r += 1) {
+        row = rows.item(r);
+        found = (row.cells.item(column).textContent.indexOf(searchText) !== -1);
+        anyFound = anyFound || found;
+        if (found)
+        {
+            index = r;
+            break;
+        };
+    }
+    return (index);
+}
 
 function getFullCheckBoxID(item) {
 
@@ -27,11 +61,25 @@ function setMapsterArea(selectedInputs, name) {
 function doCheckBoxAreaAction(chkBox, checked) {
     var fullID = getFullCheckBoxID(chkBox);
     var checkBoxName = chkBox.attr('name');
+    var fullname = chkBox.attr('fullname');
     var listCheckbox = $jointlist.find('#jl_' + fullID);
     listCheckbox.attr('checked', checked);
 
     setMapsterArea($('#' + checkBoxName + '_divID').find('input:checked'), checkBoxName);
-    creatRowFunction(checkBoxName, '', '');
+    if (checked)
+    {
+        creatRowFunction(checkBoxName, fullID, fullname);
+    }
+    else
+    {
+        var table = document.getElementById("selectedareastable");
+        //var index = findRowIndex(table, 0, checkBoxName, fullname);
+        var index = findRowIndex(table, 0, fullname);
+        if (index > 0)
+        {           
+            deleteRowFunction(index);
+        }
+    }
 
 }
 
@@ -142,9 +190,9 @@ function buildAreas() {
 
 function buildToolTipArea(name, fullName) {
     return $('<div id="' + name + '_divID"><div>' + fullName + '</div><div>' +
-        '<div><input id="tt_' + name + '_swol" type="checkbox" name="' + name + '" /><span class="sel" key="' + name + '">Pain</span></div>' +
+        '<div><input id="tt_' + name + '_swol" type="checkbox" name="' + name + '" fullname="' + fullName + '" /><span class="sel" key="' + name + '">Pain</span></div>' +
         '</div></div>');
-    }
+}
 
 //function buildToolTipArea(name, fullName) {
 //    return $('<div id="' + name + '_divID"><div>' + fullName + '</div><div>' +
@@ -198,20 +246,22 @@ function loadPreselectedItems() {
 
 loadPreselectedItems();
 
-function deleteRowFunction() {
-    document.getElementById("selectedareastable").deleteRow(1);
+
+function deleteRowFunction(index) {
+    document.getElementById("selectedareastable").deleteRow(index);
 }
 
-function creatRowFunction(name, isswelling, istender) {
+function creatRowFunction(name, fullID, fullname) {
     var table = document.getElementById("selectedareastable");
-    var row = table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    cell1.innerHTML = name;
-    cell2.innerHTML = "<div class=\"col-sm-6 col-md-4 col-lg-3\"><i class=\"fa fa-check\"></i></div>";
-    cell3.innerHTML = "<div class=\"col-sm-6 col-md-4 col-lg-3\"><i class=\"fa fa-check\"></i></div>";
-    cell4.innerHTML = "<a href=\"#\" onclick=\"deleteRowFunction(); return false;\" data-toggle=\"tooltip\" data-original-title=\"Close\"> <i class=\"fa fa-close text-danger\" ></i> </a>";
+    var exist = findRows(table, 0, name);
+    if (!exist)
+    {
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = fullname;
+        //var cell2 = row.insertCell(1);
+        //cell1.innerHTML = name;
+        //cell2.innerHTML = "<a href=\"#\" onclick=\"deleteRowFunction(" + (table.rows.length - 1) + ",'" + name + "'); return false;\" data-toggle=\"tooltip\" data-original-title=\"Close\"> <i class=\"fa fa-close text-danger\" ></i> </a>";
+    }
 }
 
