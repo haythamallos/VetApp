@@ -94,6 +94,14 @@
                     {
                         <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
                     }
+                    if (Model.isLowerBilateral)
+                    {
+                        <h6>Lower Bilateral Factor Active</h6>
+                    }
+                    if (Model.isUpperBilateral)
+                    {
+                        <h6>Upper Bilateral Factor Active</h6>
+                    }
                 }
              
             </div>
