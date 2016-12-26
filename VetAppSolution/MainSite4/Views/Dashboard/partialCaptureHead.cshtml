@@ -1,0 +1,39 @@
+﻿<div role="tabpanel" class="tab-pane active" id="head">
+    <div class="col-md-12">
+        <h3>Input the info below for the head disability</h3>
+        <!--/row-->
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">Do you currently have a rating by the VA for this disability?</label>
+                <div class="radio-list">
+                    <label class="radio-inline">
+                        <input id="headratingtrue" name="headratingrdo" type="radio" value="true" onclick="$('#headratingdiv').removeClass('hidden'); $('#headratingdiv').show(); $('#headincreasediv').show();"> Yes
+                    </label>
+                    <label class="radio-inline">
+                        <input id="headratingfalse" name="headratingrdo" type="radio" value="false" checked="" onclick="$('#headratingdiv').hide(); $('#headincreasediv').hide();"> No
+                    </label>
+                </div>
+                <div id="headratingdiv" class="form-group hidden col-md-4">
+                    <label>Current Rating</label>
+                    <select id="headratingselect" data-header="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'headincreasediv', '30')">
+                        <option value="0">--Select rating--</option>
+                        <option value="0">0</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
+            </div>
+            <div id="headincreasediv" class="col-md-6">
+              
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+@*<label>Max Rating For This Disability</label>
+<div class="progress progress-lg">
+    <div class="progress-bar progress-bar-success" style="width: 30%;" role="progressbar">30%</div>
+</div>*@
+

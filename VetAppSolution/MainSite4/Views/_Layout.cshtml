@@ -7,10 +7,10 @@
     <meta name="description" content="@ViewData["Description"]" />
     <title>Valued Veteran Consulting Services</title>
 
-
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Wizard CSS -->
-    <link href="~/plugins/bower_components/jquery-wizard-master/css/wizard.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+
     <!-- Menu CSS -->
     <link href="~/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- morris CSS -->
@@ -24,6 +24,10 @@
     @*<link href="~/css/colors/default-dark.css" id="theme" rel="stylesheet">*@
     <link href="~/css/colors/blue.css" id="theme" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href="~/css/site.css" rel="stylesheet">
+
+
 </head>
 <body>
     <!-- Preloader -->
@@ -32,15 +36,17 @@
     </div>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <nav class="navbar navbar-default">
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
                 <div class="top-left-part"><a class="logo" href="index.html"><b><span>VeteranApp</span></b></a></div>
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
-                    <li>
-                        <div class="drop-title">Thank Your For Serving Our Country</div>
-                    </li>
+                    @*<li>
+                        <div class="drop-title"><a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a></div>
+                    </li>*@
+
+
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li class="right-side-toggle"> <a class="waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
@@ -193,6 +199,8 @@
     <script src="~/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
     <script src="~/js/siteauth.js" asp-append-version="true"></script>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
     @RenderSection("scripts", required: false)
 
 </body>

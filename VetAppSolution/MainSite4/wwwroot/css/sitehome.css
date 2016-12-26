@@ -9,3 +9,9 @@
   background-color:  transparent;
   
 }
+
+
+.box { position: relative; width: 200px; height: 250px;}
+		#box_1 { background-color: transparent; }
+		#box_2 { background-color: transparent;  left: 200px; }
+		#box_3 { background-color: transparent; left: 400px;}

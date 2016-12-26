@@ -1,8 +1,10 @@
-﻿$('#exampleBasic').wizard({
-    onFinish: function () {
-        alert('finish');
-    }
-});
+﻿$('#tab a[href="#home"]').tab('show');
+
+//$('#exampleBasic').wizard({
+//    onFinish: function () {
+//        alert('finish');
+//    }
+//});
 
 
 var themes = {
@@ -123,3 +125,60 @@ $('.accordion').find('.accordion-toggle').click(function () {
 $('.accordion-toggle').on('click', function () {
     $(this).toggleClass('active').siblings().removeClass('active');
 });
+
+
+//function eval_ratingselect_1(ratingselectvalue, divname, ismaxval) {
+//    var resultstr = "";
+//    switch (ratingselectvalue) {
+//        case '0':
+//            resultstr = "high chance";
+//            break;
+//        case '10':
+//            resultstr = "medium chance";
+//            break;
+//        case '20':
+//            resultstr = "low chance";
+//            break;
+//        case '30':
+//            resultstr = "no chance";
+//            break;
+//    }
+
+//    alert("resultstr: " + resultstr + " Value: " + ratingselectvalue + " Div: " + divname + " ismaxval: " + ismaxval);
+//}
+
+function eval_ratingselect_1(ratingselect, divname, maxval) {
+    var helpstr = "";
+    var selectedText = ratingselect.options[ratingselect.selectedIndex].innerHTML;
+    var selectedValue = ratingselect.value;
+    switch (selectedValue) {
+        case '0':
+            helpstr = "high chance";
+            break;
+        case '10':
+            helpstr = "medium chance";
+            break;
+        case '20':
+            helpstr = "low chance";
+            break;
+        case '30':
+            helpstr = "no chance";
+            break;
+        case '40':
+            helpstr = "no chance";
+            break;
+    }
+
+    //alert("Selected Text: " + selectedText + " Value: " + selectedValue + " Div: " + divname);
+    if (maxval != selectedValue)
+    {
+        resultstr = "<div class=\"text-right\"><span class=\"text-muted\"> We have a " + helpstr + " of increasing your VA for this disability to</span><h1><sup><i class=\"ti-arrow-up text-success\"></i></sup> " + maxval + "%</h1></div>";
+    }
+    else
+    {
+        resultstr = "<div class=\"text-right\"><span class=\"text-muted\">You are at max with this rating.  We have a " + helpstr + " of increasing your VA benefit for this disability.</span></div>";
+    }
+
+    document.getElementById(divname).innerHTML = resultstr;
+
+}
