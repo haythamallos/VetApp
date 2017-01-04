@@ -1,19 +1,20 @@
 ﻿<div role="tabpanel" class="tab-pane" id="back">
     <div class="col-md-12">
-        <h3>Input the info below for the back disability</h3>
+        @Html.Partial("partialMaxDisability_40")
+
         <!--/row-->
         <div class="row">
             <div class="col-md-6">
                 <label class="control-label">Do you currently have a rating by the VA for this disability?</label>
                 <div class="radio-list">
                     <label class="radio-inline">
-                        <input id="backratingtrue" name="backratingrdo" type="radio" value="true" onclick="$('#backratingdiv').removeClass('hidden'); $('#backratingdiv').show();"> Yes
+                        <input id="backratingtrue" name="backratingrdo" type="radio" value="true" onclick="$('#backratingdiv').removeClass('hidden'); $('#backratingdiv').show(); $('#backincreasediv').show();"> Yes
                     </label>
                     <label class="radio-inline">
                         <input id="backratingfalse" name="backratingrdo" type="radio" value="false" checked="" onclick="$('#backratingdiv').hide(); $('#backincreasediv').hide();"> No
                     </label>
                 </div>
-                <div id="backratingdiv" class="form-group hidden col-md-4">
+                <div id="backratingdiv" class="form-group hidden col-md-8">
                     <label>Current Rating</label>
                     <select id="backratingselect" data-backer="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'backincreasediv', '40')">
                         <option value="0">--Select rating--</option>

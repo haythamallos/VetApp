@@ -1,13 +1,14 @@
 ﻿<div role="tabpanel" class="tab-pane" id="shoulder">
     <div class="col-md-12">
-        <h3>Input the info below for the shoulder disability</h3>
+        @Html.Partial("partialMaxDisability_30")
+
         <!--/row-->
         <div class="row">
             <div class="col-md-6">
                 <label class="control-label">Do you currently have a rating by the VA for this disability?</label>
                 <div class="radio-list">
                     <label class="radio-inline">
-                        <input id="shoulderratingtrue" name="shoulderratingrdo" type="radio" value="true" onclick="$('#shoulderratingdiv').removeClass('hidden'); $('#shoulderratingdiv').show();"> Yes
+                        <input id="shoulderratingtrue" name="shoulderratingrdo" type="radio" value="true" onclick="$('#shoulderratingdiv').removeClass('hidden'); $('#shoulderratingdiv').show(); $('#shoulderincreasediv').show();"> Yes
                     </label>
                     <label class="radio-inline">
                         <input id="shoulderratingfalse" name="shoulderratingrdo" type="radio" value="false" checked="" onclick="$('#shoulderratingdiv').hide(); $('#shoulderincreasediv').hide();"> No

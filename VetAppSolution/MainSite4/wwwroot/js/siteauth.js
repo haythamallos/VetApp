@@ -153,32 +153,37 @@ function eval_ratingselect_1(ratingselect, divname, maxval) {
     var selectedValue = ratingselect.value;
     switch (selectedValue) {
         case '0':
-            helpstr = "high chance";
+            helpstr = "<span class=\"label label-success label-rounded\">high chance</span>";
             break;
         case '10':
-            helpstr = "medium chance";
+            helpstr = "<span class=\"label label-warning label-rounded\">medium chance</span>";
             break;
         case '20':
-            helpstr = "low chance";
+            helpstr = "<span class=\"label label-warning label-rounded\">low chance</span>";
             break;
         case '30':
-            helpstr = "no chance";
+            helpstr = "<span class=\"label label-danger label-rounded\">no chance</span>";
             break;
         case '40':
-            helpstr = "no chance";
+            helpstr = "<span class=\"label label-danger label-rounded\">no chance</span>";
             break;
     }
-
     //alert("Selected Text: " + selectedText + " Value: " + selectedValue + " Div: " + divname);
     if (maxval != selectedValue)
     {
-        resultstr = "<div class=\"text-right\"><span class=\"text-muted\"> We have a " + helpstr + " of increasing your VA for this disability to</span><h1><sup><i class=\"ti-arrow-up text-success\"></i></sup> " + maxval + "%</h1></div>";
+        resultstr = "<div class=\"text-left\"><span class=\"text-muted\"> We have a " + helpstr + " of increasing your VA for this disability to</span><h1><sup><i class=\"ti-arrow-up text-success\"></i></sup> " + maxval + "%</h1></div>";
     }
     else
     {
-        resultstr = "<div class=\"text-right\"><span class=\"text-muted\">You are at max with this rating.  We have a " + helpstr + " of increasing your VA benefit for this disability.</span></div>";
+        resultstr = "<div class=\"text-left\"><span class=\"text-muted\">You are at max with this rating.  We have " + helpstr + " of increasing your VA benefit for this disability.</span></div>";
     }
 
     document.getElementById(divname).innerHTML = resultstr;
 
 }
+
+$('.progress .progress-bar').css("width",
+               function () {
+                   return $(this).attr("aria-valuenow") + "%";
+               }
+       )
