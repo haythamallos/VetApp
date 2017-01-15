@@ -2,72 +2,12 @@
 
 @{
     Layout = "~/Views/_LayoutHome.cshtml";
-    ViewData["Title"] = "Valued Veteran";
-    ViewData["Description"] = "Valued Veteran";
+    ViewData["Title"] = "Veteranpp";
+    ViewData["Description"] = "Veteranapp";
 }
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade bs-example-modal-sm" id="smallmodaluserexist" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
-            </div>
-            <div class="modal-body"> It looks like you have an account with us already.  Please sign in. </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="smallmodalerror" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
-            </div>
-            <div class="modal-body"> Encountered error in registeration.  Our support team is on it. </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="smallmodalinvalidlogin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
-            </div>
-            <div class="modal-body"> Invalid sign in credentials. </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-
+@Html.Partial("partialModalsHome")
 
 <section id="wrapper" class="login-register">
     <div class="container-fluid">
@@ -75,8 +15,8 @@
         <div class="top-right">
             <a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a>
             @*<div class="col-sm-3">
-                <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Get Started video</a>>
-            </div>*@
+                    <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Get Started video</a>>
+                </div>*@
         </div>
         <div class="login-box login-sidebar">
             <div class="white-box">
@@ -145,7 +85,8 @@
                                 @*<p>Already have an account? <a href="#"  class="text-primary m-l-5"><b>Sign In</b></a></p>
                                     <p>Don't have an account? <a href="javascript:void(0)" id="showform" class="text-primary m-l-5" value="signup"><b>Sign Up</b></a></p>*@
                                 @*<a href="javascript:void(0)" id="btnTestSmallModal" class="text-primary m-l-5"><b>Show Modal</b></a>*@
-                            </div>
+                                <a href="/Home/Testimonials" class="btn btn-info" role="button">Testimonials</a>
+                           </div>
                         </div>
                     </form>
                 </div>
@@ -343,44 +284,45 @@
 
         <!-- /.container-fluid -->
         @*<footer class="footer  text-center"> 2016 &copy; Pixel Admin brought to you by themedesigner.in </footer>*@
-        @*<div class="bottom">
-                <div class="col-md-3 col-xs-12 col-sm-6">
-                    <img class="img-responsive" alt="user" src="../plugins/images/big/img1.jpg">
-                    <div class="white-box">
-                        <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
-                        <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
-                        <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
-                        <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
-                    </div>
+        @*<div class="footer">
+
+            <div class="col-md-3 col-xs-12 col-sm-6">
+                <img class="img-responsive" alt="user" src="../plugins/images/big/img1.jpg">
+                <div class="white-box">
+                    <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
+                    <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
+                    <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
+                    <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
                 </div>
-                <div class="col-md-3 col-xs-12 col-sm-6">
-                    <img class="img-responsive" alt="user" src="../plugins/images/big/img2.jpg">
-                    <div class="white-box">
-                        <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
-                        <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
-                        <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
-                        <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
-                    </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+                <img class="img-responsive" alt="user" src="../plugins/images/big/img2.jpg">
+                <div class="white-box">
+                    <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
+                    <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
+                    <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
+                    <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
                 </div>
-                <div class="col-md-3 col-xs-12 col-sm-6">
-                    <img class="img-responsive" alt="user" src="../plugins/images/big/img3.jpg">
-                    <div class="white-box">
-                        <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
-                        <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
-                        <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
-                        <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
-                    </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+                <img class="img-responsive" alt="user" src="../plugins/images/big/img3.jpg">
+                <div class="white-box">
+                    <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
+                    <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
+                    <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
+                    <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
                 </div>
-                <div class="col-md-3 col-xs-12 col-sm-6">
-                    <img class="img-responsive" alt="user" src="../plugins/images/big/img3.jpg">
-                    <div class="white-box">
-                        <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
-                        <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
-                        <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
-                        <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
-                    </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+                <img class="img-responsive" alt="user" src="../plugins/images/big/img3.jpg">
+                <div class="white-box">
+                    <div class="text-muted"><span class="m-r-10">May 16</span> <a class="text-muted m-l-10" href="#"><i class="fa fa-heart-o"></i> 38</a></div>
+                    <h3 class="m-t-20 m-b-20">Top 20 Models are on the ramp</h3>
+                    <p>Titudin venenatis ipsum ac feugiat. Vestibulum ullamcorper quam.</p>
+                    <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
                 </div>
-            </div>*@
+            </div>
+                    </div>*@
     </div>
 
 </section>

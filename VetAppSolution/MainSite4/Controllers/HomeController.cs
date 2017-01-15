@@ -23,10 +23,19 @@ namespace MainSite.Controllers
             //    return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
             //}
 
+            //return this.View(new HomeViewModel { Name = "Index" });
+            ViewData["ShowBenefitsFooter"] = true;
             return View();
 
         }
-
+        public IActionResult Testimonials()
+        {
+            return View();
+        }
+        public IActionResult Benefits()
+        {
+            return View();
+        }
         public IActionResult About()
         {
             // Creates a model and passes it on to the view.

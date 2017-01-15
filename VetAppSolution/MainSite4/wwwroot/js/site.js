@@ -206,11 +206,22 @@ $("#btnPhoneFormModal").click(function () {
     $('#smallmodalphone').modal('show');
 });
 
+function showform(target) {
+    hideform('captureform');
+    document.getElementById(target).setAttribute('class', 'visible');
+}
 
-//function showform(target) {
-//    hideform('captureform');
-//    document.getElementById(target).setAttribute('class', 'visible');
-//}
+$(function () {
+    $('#benefit1').click(function () {
+        window.location = '/home/benefits'
+    });
+    $('#benefit2').click(function () {
+        window.location = '/home/benefits'
+    });
+    $('#benefit3').click(function () {
+        window.location = '/home/benefits'
+    });
+});
 
 //function hideform(target) {
 //    document.getElementById(target).setAttribute('class', 'hidden');
