@@ -8,23 +8,12 @@
     <title>Valued Veteran Consulting Services</title>
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
-
-    <!-- Menu CSS -->
     <link href="~/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- morris CSS -->
     <link href="~/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
-    <!-- animation CSS -->
     <link href="~/css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="~/css/style.css" rel="stylesheet">
-    <!-- color CSS -->
-    @*<link href="~/css/colors/default-dark.css" id="theme" rel="stylesheet">*@
-    @*<link href="~/css/colors/default-dark.css" id="theme" rel="stylesheet">*@
     <link href="~/css/colors/blue.css" id="theme" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="~/css/site.css" rel="stylesheet">
 
 
@@ -49,7 +38,7 @@
 
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                    @*<li class="right-side-toggle"> <a class="waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>*@
                     @*<li class="dropdown">
                             <a href="#" class="dropdown-toggle pen-btn" data-toggle="dropdown">Theme<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -105,7 +94,7 @@
                     </ul>
                 </li>
                 <li class="nav-small-cap m-t-10">--- Main Menu</li>
-                <li><a href="/Dashboard" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
+                <li><a href="/Dashboard/MainMenu" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
                 @*<li><a href="/Dashboard/Bodymap" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Body Map </span></a></li>*@
                 <li><a href="/Account/LogOut" class="waves-effect"><i class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
                 @*<li class="nav-small-cap">--- Support</li>
@@ -119,7 +108,7 @@
     </div>
     <!-- Left navbar-header end -->
     <!-- .right-sidebar -->
-    <div class="right-sidebar">
+    @*<div class="right-sidebar">
         <div class="slimscrollright">
             <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
             <div class="r-panel-body">
@@ -163,10 +152,12 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@
     <!-- /.right-sidebar -->
     @RenderBody()
 
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2016 &copy; Veterapp </footer>
 
     <!-- jQuery -->
     <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>

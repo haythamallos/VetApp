@@ -22,13 +22,13 @@ namespace MainSite.Controllers
 
         public IActionResult Index()
         {
-            UserProxy userProxy = HttpContext.Session.GetObjectFromJson<UserProxy>(Constants.sessionKeyUser);
+            //UserProxy userProxy = HttpContext.Session.GetObjectFromJson<UserProxy>(Constants.sessionKeyUser);
 
-            if (userProxy == null)
-            {
-                // invalid redirect home
-                return RedirectToAction("Index", "Home");
-            }
+            //if (userProxy == null)
+            //{
+            //    // invalid redirect home
+            //    return RedirectToAction("Index", "Home");
+            //}
             return View();
         }
 
@@ -37,7 +37,16 @@ namespace MainSite.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult MainMenu()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Preliminary()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult Bodymap()
         {

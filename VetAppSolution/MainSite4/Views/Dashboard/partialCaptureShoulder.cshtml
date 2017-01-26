@@ -1,34 +1,22 @@
-﻿<div role="tabpanel" class="tab-pane" id="shoulder">
-    <div class="col-md-12">
-        @Html.Partial("partialMaxDisability_30")
-
-        <!--/row-->
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label">Do you currently have a rating by the VA for this disability?</label>
-                <div class="radio-list">
-                    <label class="radio-inline">
-                        <input id="shoulderratingtrue" name="shoulderratingrdo" type="radio" value="true" onclick="$('#shoulderratingdiv').removeClass('hidden'); $('#shoulderratingdiv').show(); $('#shoulderincreasediv').show();"> Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input id="shoulderratingfalse" name="shoulderratingrdo" type="radio" value="false" checked="" onclick="$('#shoulderratingdiv').hide(); $('#shoulderincreasediv').hide();"> No
-                    </label>
-                </div>
-                <div id="shoulderratingdiv" class="form-group hidden col-md-4">
-                    <label>Current Rating</label>
-                    <select id="shoulderratingselect" data-shoulderer="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'shoulderincreasediv', '30')">
-                        <option value="0">--Select rating--</option>
-                        <option value="0">0</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                    </select>
-                </div>
-            </div>
-            <div id="shoulderincreasediv" class="col-md-6">
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
+﻿@Html.Partial("partialMaxDisability_30")
+<label class="control-label">Do you currently have a rating by the VA for this disability?</label>
+<div class="radio-list">
+    <label class="radio-inline">
+        <input id="shoulderratingtrue" name="shoulderratingrdo" type="radio" value="true" onclick="$('#shoulderratingdiv').removeClass('hidden'); $('#shoulderratingdiv').show(); $('#shoulderincreasediv').show();"> Yes
+    </label>
+    <label class="radio-inline">
+        <input id="shoulderratingfalse" name="shoulderratingrdo" type="radio" value="false" checked="" onclick="$('#shoulderratingdiv').hide(); $('#shoulderincreasediv').hide();"> No
+    </label>
+</div><div id="backratingdiv" class="form-group hidden col-md-8">
+    <label>Current Rating</label>
+    <select id="backratingselect" data-backer="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'backincreasediv', '40')">
+        <option value="0">--Select rating--</option>
+        <option value="0">0</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+    </select>
 </div>
+
+
 

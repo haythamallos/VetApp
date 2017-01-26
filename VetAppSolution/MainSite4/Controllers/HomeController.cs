@@ -36,6 +36,21 @@ namespace MainSite.Controllers
         {
             return View();
         }
+        public IActionResult Register2()
+        {
+            ViewData["ShowBenefitsFooter"] = true;
+            return View();
+        }
+        public IActionResult Login2()
+        {
+            ViewData["ShowBenefitsFooter"] = true;
+            return View();
+        }
+        public IActionResult RegisterCode()
+        {
+            ViewData["RegisterCode"] = true;
+            return View();
+        }
         public IActionResult About()
         {
             // Creates a model and passes it on to the view.

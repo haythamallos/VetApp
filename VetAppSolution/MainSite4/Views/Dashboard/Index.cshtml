@@ -8,97 +8,32 @@
 
 
 <div id="page-wrapper">
-   
     <div class="col-md-12 col-lg-12 col-xs-12">
         <div class="progress skill-bar ">
             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                 <span class="skill">Your Potential VA Rating Increase <i class="val">100%</i></span>
             </div>
         </div>
-        <div class="row">
-            <h3 class="box-title m-b-20">Enter the information for each disability from your e-benefits and will determine the potential increase</h3>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-            <button type="button" class="btn btn-default">Start Over</button>
-        </div>
-        <div class="white-box">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#head" aria-controls="head" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-head"></i></span><span class="hidden-xs"> Head</span></a></li>
-                <li role="presentation" class=""><a href="#neck" aria-controls="neck" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-neck"></i></span> <span class="hidden-xs">Neck</span></a></li>
-                <li role="presentation" class=""><a href="#shoulder" aria-controls="shoulder" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-shoulder"></i></span> <span class="hidden-xs">Shoulder</span></a></li>
-                <li role="presentation" class=""><a href="#back" aria-controls="back" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-back"></i></span> <span class="hidden-xs">Back</span></a></li>
-                @*<li role="presentation" class=""><a href="#elbow" aria-controls="elbow" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-elbow"></i></span> <span class="hidden-xs">Elbow</span></a></li>
-                <li role="presentation" class=""><a href="#wrist" aria-controls="wrist" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-wrist"></i></span> <span class="hidden-xs">Wrist</span></a></li>
-                <li role="presentation" class=""><a href="#hip" aria-controls="hip" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-hip"></i></span> <span class="hidden-xs">Hip</span></a></li>
-                <li role="presentation" class=""><a href="#knee" aria-controls="knee" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-knee"></i></span> <span class="hidden-xs">Knee</span></a></li>
-                <li role="presentation" class=""><a href="#ankle" aria-controls="ankle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-ankle"></i></span> <span class="hidden-xs">Ankle</span></a></li>
-                <li role="presentation" class=""><a href="#foot" aria-controls="foot" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-foot"></i></span> <span class="hidden-xs">Foot</span></a></li>
-                <li role="presentation" class=""><a href="#sleep" aria-controls="sleep" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-sleep"></i></span> <span class="hidden-xs">Sleep Apnea</span></a></li>
-                <li role="presentation" class=""><a href="#headache" aria-controls="headache" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-headache"></i></span> <span class="hidden-xs">Headache</span></a></li>*@
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                @Html.Partial("partialCaptureHead")
-                @Html.Partial("partialCaptureNeck")
-                @Html.Partial("partialCaptureShoulder")
-                @Html.Partial("partialCaptureBack")
-            </div>
- 
-            @*<div role="tabpanel" class="tab-pane fade" id="elbow">
-                <div class="col-md-6">
-                    <h3>elbow</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="wrist">
-                <div class="col-md-6">
-                    <h3>wrist</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="hip">
-                <div class="col-md-6">
-                    <h3>hip</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="knee">
-                <div class="col-md-6">
-                    <h3>knee</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="ankle">
-                <div class="col-md-6">
-                    <h3>ankle</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="foot">
-                <div class="col-md-6">
-                    <h3>foot</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="sleep">
-                <div class="col-md-6">
-                    <h3>sleep</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="headache">
-                <div class="col-md-6">
-                    <h3>headache</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>*@
+        <div class="login-box">
+            <div class="white-box">
+                <form class="form-horizontal form-material" id="loginform" action="/Dashboard/MainMenu">
+                    <h3 class="box-title m-t-40 m-b-0">Free Evaluation Results</h3><small>Our results show we can increase your monthly income</small>
 
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button id="btnEmailSent" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Get Started</button>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0)" class="text-center db"><img src="~/plugins/images2/banner-308x100.png" alt="Home" /></a>
+
+                </form>
+            </div>
         </div>
+
+
     </div>
 </div>
-</div>
+
 
 
 @*<div class="container-fluid">*@
