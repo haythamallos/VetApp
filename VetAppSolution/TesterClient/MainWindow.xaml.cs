@@ -4,6 +4,9 @@ using System.Text;
 using System.Windows;
 using RESTUtilLib;
 using System.Net;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Collections;
 //using Vetapp.Client.Proxy;
 
 namespace TesterClient
@@ -65,6 +68,25 @@ namespace TesterClient
         public string ToJson(object Obj, Type ObjType)
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(Obj);
+        }
+
+        private void pdfTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            string pdfDir = System.AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + "Pdf";
+            String pathin = pdfDir + System.IO.Path.DirectorySeparatorChar + "back.pdf";
+            String pathout = pdfDir + System.IO.Path.DirectorySeparatorChar + "back_out.pdf";
+
+            PdfReader reader = new PdfReader(pathin);
+            PdfStamper stamper = new PdfStamper(reader, new FileStream(pathout, FileMode.Create));
+
+            AcroFields af = stamper.AcroFields;
+
+            foreach (var entry in af.Fields)
+            {
+                Console.WriteLine(entry.Key + " " + entry.Value);
+            }
+            stamper.Close();
+            reader.Close();
         }
     }
 }

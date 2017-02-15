@@ -1,0 +1,29 @@
+﻿@Html.Partial("partialMaxDisability_40")
+<h3>Please Answer The Question Below</h3>
+<label class="control-label">Do you currently have a rating by the VA for this disability?</label>
+<div class="radio-list">
+    <label class="radio-inline">
+        <input id="backratingtrue" name="backratingrdo" type="radio" value="true" onclick="$('#backratingdiv').removeClass('hidden');$('#backratingdiv').show()"> Yes
+    </label>
+    <label class="radio-inline">
+        <input id="backratingfalse" name="backratingrdo" type="radio" value="false" checked="" onclick="$('#backratingdiv').hide();"> No
+    </label>
+</div>
+<div id="backratingdiv" class="form-group hidden">
+    <label>Current Rating</label>
+    <select id="backratingselect" data-backer="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'backincreasediv', '40')">
+        <option value="0">--Select rating--</option>
+        <option value="0">0</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+    </select>
+</div>
+<div id="backincreasediv" class="col-md-12"></div>
+<div id="defaultstartdiv" class="">
+    <div class="col-xs-12\"><button id="formbackbutton" onclick="window.location='/Dashboard/FormQBack'" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"><b>Start Now</b></button></div>
+</div>
+
+
+
+

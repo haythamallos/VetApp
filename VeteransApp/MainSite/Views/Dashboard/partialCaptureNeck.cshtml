@@ -1,0 +1,22 @@
+﻿@Html.Partial("partialMaxDisability_30")
+<label class="control-label">Do you currently have a rating by the VA for this disability?</label>
+<div class="radio-list">
+    <label class="radio-inline">
+        <input id="neckratingtrue" name="neckratingrdo" type="radio" value="true" onclick="$('#neckratingdiv').removeClass('hidden'); $('#neckratingdiv').show(); $('#neckincreasediv').show();"> Yes
+    </label>
+    <label class="radio-inline">
+        <input id="neckratingfalse" name="neckratingrdo" type="radio" value="false" checked="" onclick="$('#neckratingdiv').hide(); $('#neckincreasediv').hide();"> No
+    </label>
+</div>
+<div id="neckratingdiv" class="form-group hidden col-md-8">
+    <label>Current Rating</label>
+    <select id="neckratingselect" data-necker="--Select current rating--" class="form-control" onchange="eval_ratingselect_1(this, 'neckincreasediv', '30')">
+        <option value="0">--Select rating--</option>
+        <option value="0">0</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+    </select>
+</div>
+
+

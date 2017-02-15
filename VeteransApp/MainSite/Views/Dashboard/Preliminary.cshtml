@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Preliminary";
+    ViewData["Description"] = "Preliminary";
+}
+
+
+<div id="page-wrapper">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+
+        @*<div class="form-actions">
+                <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                <button type="button" class="btn btn-default">Start Over</button>
+            </div>*@
+
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="white-box">
+                <h3 class="box-title">Tell Us About Your Injuries</h3>
+                <p class="text-muted m-b-30">Select and fill out each body part form individually to receive an evaluation</p>
+                <div class="vtabs">
+                    <ul class="nav tabs-vertical">
+                        <li class="tab active"><a data-toggle="tab" href="#back" aria-expanded="true"> <span class="visible-xs"></i></span> <span class="hidden-xs">Back</span> </a> </li>
+                        <li class="tab"><a data-toggle="tab" href="#shoulder" aria-expanded="false"> <span class="visible-xs"></i></span> <span class="hidden-xs">Shoulder</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#neck"> <span class="visible-xs"></i></span> <span class="hidden-xs">Neck</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#elbow"> <span class="visible-xs"></i></span> <span class="hidden-xs">Elbow</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#wrist"> <span class="visible-xs"></i></span> <span class="hidden-xs">Wrist</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Hip</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Knee</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Ankle</span> </a> </li>
+                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Foot</span> </a> </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="back" class="tab-pane active">
+                            <div class="col-md-3">
+                                <h3>Do You Have a Back Injury?</h3>
+                                <img src="~/Images/back-pain.jpg" alt="back pain" width="150">
+                                <p />
+                                <a href="javascript:void(0)" id="">How Do I Know?</a>
+                            </div>
+                            <div class="col-md-8 pull-right">
+                                @Html.Partial("partialCaptureBack")
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="shoulder" class="tab-pane">
+                            <div class="col-md-4">
+                                <h3>Shoulder</h3>
+                                <h4>Injury Image Here</h4>
+                            </div>
+                            <div class="col-md-7 pull-right">
+                                @Html.Partial("partialCaptureShoulder")
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="neck" class="tab-pane">
+                            <div class="col-md-4">
+                                <h3>Neck</h3>
+                                <h4>Injury Image Here</h4>
+                            </div>
+                            <div class="col-md-7 pull-right">
+                                @Html.Partial("partialCaptureNeck")
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

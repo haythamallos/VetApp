@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - MainSite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@ViewData["Description"]" />
+    <title>Veteran App</title>
+
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+                <div class="top-left-part"><a class="logo" href="index.html"><b><span>VeteranApp</span></b></a></div>
+                <ul class="nav navbar-top-links navbar-left hidden-xs">
+                    <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+                    @*<li>
+                            <div class="drop-title"><a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a></div>
+                        </li>*@
+
+
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut"><i class="icon-logout"></i></a></li>
+                    <!-- /.dropdown -->
+                </ul>
+
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+    </div>
+    <!-- /#wrapper -->
+    <!-- Left navbar-header -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+                    <!-- input-group -->
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li class="user-pro">
+                    <a href="#" class="waves-effect">
+                        <img src="~/Images/john.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> Steve Gection<span class="fa arrow"></span></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+                        <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
+                        <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+                        <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-small-cap m-t-10">--- Main Menu</li>
+                <li><a href="/Dashboard/MainMenu" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
+                <li><a href="/Dashboard/LogOut" class="waves-effect"><i class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Left navbar-header end -->
+
+    @RenderBody()
+
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2017 &copy; Veterapp </footer>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/site")
+@RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+

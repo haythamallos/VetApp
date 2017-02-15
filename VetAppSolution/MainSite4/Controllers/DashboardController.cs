@@ -48,6 +48,11 @@ namespace MainSite.Controllers
             return View();
         }
         [HttpGet]
+        public IActionResult FormBack()
+        {
+            return PartialView("~/Views/partialFormBack.cshtml");
+        }
+        [HttpGet]
         public IActionResult Bodymap()
         {
             return View();

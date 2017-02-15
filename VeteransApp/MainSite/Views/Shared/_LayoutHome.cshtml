@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - VeteransApp</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    @Html.Partial("partialModalsHome")
+
+    <header id="header">
+        <div class="header_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="/Home"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="javascript:void(0)" id="btnPhoneFormModal"><i class="fa fa-phone"></i> 619-822-2070</a></li>
+                                @*<li><a href="javascript:void(0)" data-toggle="modal" data-target="#contactformmodal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>*@
+                                <li><a href="javascript:void(0)" id="btnContactFormModal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>
+                                <li><a href="/Home"><i class="fa fa-star"></i> Free Evaluation</a></li>
+                                <li><a href="javascript:void(0)" id="btnTestimonialsModal"><i class="fa fa-heart"></i> Testimonials</a></li>
+                                <li><a href="/Home/Login2"><i class="fa fa-sign-in"></i> Sign in</a></li>
+                                <li><a href="/Home/Register2"><i class="fa fa-long-arrow-up"></i> Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                @*@if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                    }*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+  
+
+    @RenderBody()
+
+    @if (ViewData["ShowBenefitsFooter"] == null)
+    {
+        <div id="footerdiv" class="footer">
+
+            <div class="row myrow">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Try Yourself or VSO
+                        </div>
+                        <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                                <ul class="list-icons">
+                                    <li><i class="fa fa-caret-right text-info"></i> Low Chance of Getting Increase</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> Overwhelming Paperwork</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> No Step-by-Step Directions</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> Complicated Procees</li>
+                                </ul>
+                                <div class="spacer10"></div>
+                                <div class="text-center">
+                                    <button id="benefit1" class="btn btn-danger btn-rounded waves-effect waves-light m-t-20">Read more</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Use Your Doctor
+                        </div>
+                        <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                                <ul class="list-icons">
+                                    <li><i class="fa fa-caret-right text-info"></i> Moderate Chance of Getting Increase</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> High Rate of Form Rejection by VA</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> Doctors Have Limited Form Knowledge</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> Limited Support and/or Instructions</li>
+                                    <li><i class="fa fa-caret-right text-info"></i> No Step-by-Step Instructions</li>
+                                </ul>
+                                <div class="text-center">
+                                    <button id="benefit2" class="btn btn-info btn-rounded waves-effect waves-light m-t-20">Read more</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Use Our App
+                        </div>
+                        <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                                <ul class="list-icons">
+                                    <li><i class="fa fa-check text-success"></i> High Chance of Getting Increaase</li>
+                                    <li><i class="fa fa-check text-success"></i> High Chance of Getting Increaase</li>
+                                    <li><i class="fa fa-check text-success"></i> Free Estimation of Benefits</li>
+                                    <li><i class="fa fa-check text-success"></i> Special VA Calculator</li>
+                                    <li><i class="fa fa-check text-success"></i> Simplified Forms</li>
+                                </ul>
+                                <div class="spacer100"></div>
+                                <div class="spacer10 text-center">
+                                </div>
+                                <div class="text-center">
+                                    <button id="benefit3" class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Read more</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

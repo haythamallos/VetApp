@@ -41,7 +41,7 @@ $(document).ready(function () {
     $("#addrowrating").on("click", function () {
         var newRow = $("<tr>");
         var cols = "";
-        
+
         cols += '<td>';
         cols += '<select class="selectpicker">';
         cols += '<optgroup label="Primary Disabilities">';
@@ -169,12 +169,11 @@ function eval_ratingselect_1(ratingselect, divname, maxval) {
             break;
     }
     //alert("Selected Text: " + selectedText + " Value: " + selectedValue + " Div: " + divname);
-    if (maxval != selectedValue)
-    {
+    if (maxval != selectedValue) {
         resultstr = "<div class=\"text-left\"><span class=\"text-muted\"> We have a " + helpstr + " of increasing your VA for this disability to</span><h1><sup><i class=\"ti-arrow-up text-success\"></i></sup> " + maxval + "%</h1></div>";
+        resultstr = resultstr + "<div class=\"col-xs-12\"><button id=\"formbackbutton\" class=\"btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light\"><b>Start Now</b></button></div>";
     }
-    else
-    {
+    else {
         resultstr = "<div class=\"text-left\"><span class=\"text-muted\">You are at max with this rating.  We have " + helpstr + " of increasing your VA benefit for this disability.</span></div>";
     }
 
@@ -187,3 +186,7 @@ $('.progress .progress-bar').css("width",
                    return $(this).attr("aria-valuenow") + "%";
                }
        )
+
+$('#formbackbutton').click(function () {
+    $("#backformdiv").load('@Url.Action("FormBack","Dashboard")');
+});

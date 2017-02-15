@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Preliminary";
+    ViewData["Description"] = "Preliminary";
+}
+
+@model MainSite.Models.BackModel
+<div id="page-wrapper">
+    <div class="white-box">
+        <form id="formqback" action="/Dashboard/BackPDF">
+
+            <div class="form-group m-t-20">
+                <div class="col-xs-12">
+                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Name Of Patient">
+                </div>
+            </div>
+            <div class="form-group m-t-20">
+                <div class="col-xs-12">
+                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security">
+                </div>
+            </div>
+            <div class="form-group m-t-20">
+                <div class="col-xs-12">
+                    <input id="BackDiagnosis" name="BackDiagnosis" class="form-control" type="text" required="" placeholder="What is the diagnosis of your back?">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>
+                        <input type="checkbox"> Does not have current diagnosis
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>
+                        <input type="checkbox"> Mechanical back pain syndrome
+                    </label>
+                </div>
+                <div class="col-3">
+                    <select id="icdcode" data-backer="--Select ICD Code--" class="form-control">
+                        <option value="0">--Select ICD Code--</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder=".col-4">
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <h3 class="box-title">What is the diagnosis of your back? (Check all that apply)</h3>
+                <select id="diagnosisselect" data-backer="--Select diagnosis--" class="form-control">
+                    <option value="0">--Select diagnosis--</option>
+                    <option value="1">Does not have current diagnosis</option>
+                    <option value="2">Mechanical back pain syndrome</option>
+                    <option value="3">Lumbosacral sprain/strain</option>
+                </select>
+                <input class="form-control" type="text" required="" placeholder="ICD Code">
+                <input class="form-control" type="text" required="" placeholder="Date of diagnosis">
+            </div>*@
+
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Generate PDF</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Dashboard";
+    ViewData["Description"] = "The dashboard page";
+}
+
+
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-9 col-lg-9 col-sm-7">
+                <div class="panel panel-info">
+                    <div class="panel-heading"> Dashboard </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table product-overview">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td width="550">
+                                                <h2 class="font-500">Start Your Application</h2>
+                                            </td>
+                                            <td align="center">
+                                                <button onclick="window.location='/Dashboard/Preliminary'" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="550">
+                                                <h2 class="font-500">Saved DBQs</h2>
+                                            </td>
+                                            <td align="center">
+                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="550">
+                                                <h2 class="font-500">Unfinished DBQs</h2>
+                                            </td>
+                                            <td align="center">
+                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="550">
+                                                <h2 class="font-500">Resource Links</h2>
+                                            </td>
+                                            <td align="center">
+                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="550">
+                                                <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
+                                                <p>Please contact us if you have any question</p>
+                                            </td>
+
+                                        </tr>
+                                        @*<tr>
+                                                <td><img src="../plugins/images/chair2.jpg" alt="iMac" width="80"></td>
+                                                <td><h5 class="font-500">Rounded Chair</h5> <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look</p></td>
+
+                                                <td>$153</td>
+                                                <td><input type="text" class="form-control" placeholder="1"></td>
+                                                <td class="font-500" align="center">$153</td>
+                                                <td align="center"><a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="../plugins/images/chair3.jpg" alt="iMac" width="80"></td>
+                                                <td><h5 class="font-500">Rounded Chair</h5> <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look</p> </td>
+
+                                                <td>$153</td>
+                                                <td><input type="text" class="form-control" placeholder="1"></td>
+                                                <td class="font-500" align="center">$153</td>
+                                                <td align="center"><a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="../plugins/images/chair4.jpg" alt="iMac" width="80"></td>
+                                                <td><h5 class="font-500">Rounded Chair</h5> <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look</p></td>
+
+                                                <td>$153</td>
+                                                <td><input type="text" class="form-control" placeholder="1"></td>
+                                                <td class="font-500" align="center">$153</td>
+                                                <td align="center"><a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i></a></td>
+                                            </tr>*@
+                                    </tbody>
+                                </table>
+                                @*<hr>
+                                    <button class="btn btn-danger pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                                    <button class="btn btn-default btn-outline"><i class="fa fa-arrow-left"></i> Continue shopping</button>*@
+                            </div>
+                            @*<div class="col-md-3 col-lg-3 col-sm-5">
+                                    <div class="white-box">
+                                        <h3 class="box-title">For Any Support</h3>
+                                        <hr>
+
+                                        <h4><i class="ti-mobile"></i> 619-822-2070 </h4>
+                                        <small>Please contact with us if you have any questions.</small>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-5">
+                <div class="white-box">
+                    <h3 class="box-title">Free Evaluation Results</h3>
+                    <hr>
+                    <small>Current VA Rating</small>
+                    <h2>20%</h2>
+                    <hr>
+                    <small>Potential VA Rating</small>
+                    <h2>50%</h2>
+                    <hr>
+                    <small>Amount Incease Per Month</small>
+                    <h2>$500</h2>
+                    <hr>
+                    <small>Your Total Per Month After Increase</small>
+                    <h2>$1500</h2>
+                    <hr>
+
+                    <button class="btn btn-success">Start Your Application</button>
+                    @*<button class="btn btn-default btn-outline">Cancel</button>*@
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<!-- /#page-wrapper -->

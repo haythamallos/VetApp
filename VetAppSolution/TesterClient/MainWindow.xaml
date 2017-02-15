@@ -22,6 +22,7 @@
         <TextBox x:Name="responseStatusCodeTextBox" Height="23" Margin="96,398,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy" Content="Status Code" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
         <Button x:Name="userCreateButton" Content="User Create" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="124" Click="userCreateButton_Click"/>
+        <Button x:Name="pdfTestButton" Content="Pdf Test" HorizontalAlignment="Left" Height="31" Margin="10,118,0,0" VerticalAlignment="Top" Width="124" Click="pdfTestButton_Click"/>
 
     </Grid>
 </Window>

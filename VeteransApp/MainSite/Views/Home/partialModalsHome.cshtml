@@ -1,0 +1,210 @@
+﻿@*@Html.Partial("partialModalsHome")*@
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodaluserexist" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> It looks like you have an account with us already.  Please sign in. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodalerror" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> Encountered error in registeration.  Our support team is on it. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodalinvalidlogin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> Invalid sign in credentials. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="modalEmailSent" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> We've Sent You An Email </h4>
+            </div>
+            <div class="modal-body"> Please check your email and enter the code below </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <input class="form-control" type="text" required="" placeholder="Enter Code">
+                </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-warning btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Resend Email</button>
+                </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Get Started</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodalphone" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Your Personal Assistant </h4>
+            </div>
+            <div class="modal-body"> Please call us at <h1>619-822-2070</h1> to get personal assistance on how you can increase your VA benefits. </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="contactformmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> Contact Us </h4>
+            </div>
+            <div class="modal-body"> Please fill out the form and hit submit.  We will respond promptly. </div>
+            <div class="white-box">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-12">Your Name</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="your name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12" for="example-email">Email <span class="help"> e.g. "example@gmail.com"</span></label>
+                        <div class="col-md-12">
+                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Phone (Optional)</label>
+                        <div class="col-md-12">
+                            <input type="email" id="phone" name="phone" class="form-control" placeholder="Phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">How Can We Help You?</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                    <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                </form>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodaltestimonials" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="mySmallModalLabel"> People We've Helped </h4>
+            </div>
+            <div class="white-box">
+                <h3 class="box-title">Testimonials</h3>
+                <div id="gallery">
+
+                    <div id="gallery-content">
+                        <div class="media">
+                            <div class="media-left"> <a href="javascript:void(0)"> <img alt="64x64" class="media-object" src="~/Images/box1.png" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Thank You Veterapp</h4>
+                                This website helped me increase my disability rating from 20%, up to 70%. I highly recommend Veteranapp.
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left"> <a href="javascript:void(0)"> <img alt="64x64" class="media-object" src="~/Images/box2.png" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Veteranapp Increased My Monthly Income</h4>
+                                This website helped me increase my disability rating from 20%, up to 70%. I highly recommend Veteranapp.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="smallmodalemailsent" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="mySmallModalLabel"> Email Verification Sent </h4>
+            </div>
+            <form class="form-horizontal" action="/Dashboard/MainMenu">
+                <div class="modal-body"> We've sent you an email. Please click the link provided to validate your user account.  In the mean time, click continue to get started.</div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Continue</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

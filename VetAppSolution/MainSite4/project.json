@@ -32,12 +32,10 @@
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0"
   },
-
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
   },
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
