@@ -1,0 +1,107 @@
+1.  F[0].Page_1[0].Yes3[0] - CheckBox - Export Value: 1
+2.  F[0].Page_1[0].Pulsating[0] - CheckBox - Export Value: 1
+3.  F[0].Page_1[0].PainLocalized[0] - CheckBox - Export Value: 1
+4.  F[0].Page_1[0].PainBoth[0] - CheckBox - Export Value: 1
+5.  F[0].Page_1[0].PainWorsens[0] - CheckBox - Export Value: 1
+6.  F[0].Page_1[0].OtherDescribe[0] - CheckBox - Export Value: 1
+7.  F[0].Page_1[0].No3[0] - CheckBox - Export Value: 1
+8.  F[0].Page_1[0].DateOfDiagnosis[0] - TextField
+9.  F[0].Page_1[0].ICDCode[0] - TextField
+10.  F[0].Page_1[0].Specify[0] - TextField
+11.  F[0].Page_1[0].DateOfDiagnosis[1] - TextField
+12.  F[0].Page_1[0].ICDCode[1] - TextField
+13.  F[0].Page_1[0].DateOfDiagnosis[2] - TextField
+14.  F[0].Page_1[0].Diagnosis1[0] - TextField
+15.  F[0].Page_1[0].DescribeOther[0] - TextField
+16.  F[0].Page_1[0].ICDCode[2] - TextField
+17.  F[0].Page_1[0].DateOfDiagnosis[3] - TextField
+18.  F[0].Page_1[0].DateOfDiagnosis[4] - TextField
+19.  F[0].Page_1[0].DateOfDiagnosis[5] - TextField
+20.  F[0].Page_1[0].ICDCode[3] - TextField
+21.  F[0].Page_1[0].ICDCode[4] - TextField
+22.  F[0].Page_1[0].ICDCode[5] - TextField
+23.  F[0].Page_1[0].Tension[0] - CheckBox - Export Value: 1
+24.  F[0].Page_1[0].Cluster[0] - CheckBox - Export Value: 1
+25.  F[0].Page_1[0].Other[0] - CheckBox - Export Value: 1
+26.  F[0].Page_1[0].Constant[0] - CheckBox - Export Value: 1
+27.  F[0].Page_1[0].Diagnosis1[1] - TextField
+28.  F[0].Page_1[0].Additional[0] - TextField
+29.  F[0].Page_1[0].DescribeHistory[0] - TextField
+30.  F[0].Page_1[0].DescribeHistory[1] - TextField
+31.  F[0].Page_1[0].No1[0] - CheckBox - Export Value: 1
+32.  F[0].Page_1[0].Yes2[0] - CheckBox - Export Value: 1
+33.  F[0].Page_1[0].No2[0] - CheckBox - Export Value: 1
+34.  F[0].Page_1[0].Yes1[0] - CheckBox - Export Value: 1
+35.  F[0].Page_1[0].Migraine[0] - CheckBox - Export Value: 1
+36.  F[0].Page_1[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0] - TextField
+37.  F[0].Page_1[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0] - TextField
+38.  F[0].Page_1[0].VeteransSocialSecurityNumber_LastFourNumbers[0] - TextField
+39.  F[0].Page_1[0].VeteransFirstName[0] - TextField
+40.  F[0].Page_1[0].VeteransLastName[0] - TextField
+41.  F[0].Page_1[0].VeteransMiddleInitial[0] - TextField
+42.  F[0].Page_2[0].D4[0] - CheckBox - Export Value: 1
+43.  F[0].Page_2[0].D3[0] - CheckBox - Export Value: 1
+44.  F[0].Page_2[0].D2[0] - CheckBox - Export Value: 1
+45.  F[0].Page_2[0].D1[0] - CheckBox - Export Value: 1
+46.  F[0].Page_2[0].Yes7[0] - CheckBox - Export Value: 1
+47.  F[0].Page_2[0].No7[0] - CheckBox - Export Value: 1
+48.  F[0].Page_2[0].Yes8[0] - CheckBox - Export Value: 1
+49.  F[0].Page_2[0].No8[0] - CheckBox - Export Value: 1
+50.  F[0].Page_2[0].Yes9[0] - CheckBox - Export Value: 1
+51.  F[0].Page_2[0].No9[0] - CheckBox - Export Value: 1
+52.  F[0].Page_2[0].Yes10[0] - CheckBox - Export Value: 1
+53.  F[0].Page_2[0].No10[0] - CheckBox - Export Value: 1
+54.  F[0].Page_2[0].B1[0] - CheckBox - Export Value: 1
+55.  F[0].Page_2[0].B2[0] - CheckBox - Export Value: 1
+56.  F[0].Page_2[0].A1[0] - CheckBox - Export Value: 1
+57.  F[0].Page_2[0].A2[0] - CheckBox - Export Value: 1
+58.  F[0].Page_2[0].A3[0] - CheckBox - Export Value: 1
+59.  F[0].Page_2[0].A4[0] - CheckBox - Export Value: 1
+60.  F[0].Page_2[0].B3[0] - CheckBox - Export Value: 1
+61.  F[0].Page_2[0].B4[0] - CheckBox - Export Value: 1
+62.  F[0].Page_2[0].DescribeOther[0] - TextField
+63.  F[0].Page_2[0].C4[0] - CheckBox - Export Value: 1
+64.  F[0].Page_2[0].C3[0] - CheckBox - Export Value: 1
+65.  F[0].Page_2[0].C2[0] - CheckBox - Export Value: 1
+66.  F[0].Page_2[0].C1[0] - CheckBox - Export Value: 1
+67.  F[0].Page_2[0].DescribeOther[1] - TextField
+68.  F[0].Page_2[0].Vomiting[0] - CheckBox - Export Value: 1
+69.  F[0].Page_2[0].Sensitivitytolight[0] - CheckBox - Export Value: 1
+70.  F[0].Page_2[0].Sensitivitytosound[0] - CheckBox - Export Value: 1
+71.  F[0].Page_2[0].ChangesinVision[0] - CheckBox - Export Value: 1
+72.  F[0].Page_2[0].SensoryChanges[0] - CheckBox - Export Value: 1
+73.  F[0].Page_2[0].OtherDescribe[0] - CheckBox - Export Value: 1
+74.  F[0].Page_2[0].DescribeOther[2] - TextField
+75.  F[0].Page_2[0].Nausea[0] - CheckBox - Export Value: 1
+76.  F[0].Page_2[0].No4[0] - CheckBox - Export Value: 1
+77.  F[0].Page_2[0].Yes4[0] - CheckBox - Export Value: 1
+78.  F[0].Page_2[0].No12[0] - CheckBox - Export Value: 1
+79.  F[0].Page_2[0].Yes12[0] - CheckBox - Export Value: 1
+80.  F[0].Page_2[0].No13[0] - CheckBox - Export Value: 1
+81.  F[0].Page_2[0].Yes13[0] - CheckBox - Export Value: 1
+82.  F[0].Page_2[0].DescribeOther[3] - TextField
+83.  F[0].Page_2[0].DescribeOther[4] - TextField
+84.  F[0].Page_2[0].DescribeOther[5] - TextField
+85.  F[0].Page_2[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0] - TextField
+86.  F[0].Page_2[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0] - TextField
+87.  F[0].Page_2[0].VeteransSocialSecurityNumber_LastFourNumbers[0] - TextField
+88.  F[0].Page_3[0].Describe[0] - TextField
+89.  F[0].Page_3[0].No11[0] - CheckBox - Export Value: 1
+90.  F[0].Page_3[0].Yes11[0] - CheckBox - Export Value: 1
+91.  F[0].Page_3[0].FaxNumber[0] - TextField
+92.  F[0].Page_3[0].DateSigned[0] - TextField
+93.  F[0].Page_3[0].PrintedName[0] - TextField
+94.  F[0].Page_3[0].Signature[0] - TextField
+95.  F[0].Page_3[0].Remarks[0] - TextField
+96.  F[0].Page_3[0].Describe[1] - TextField
+97.  F[0].Page_3[0].Yes56[0] - CheckBox - Export Value: 1
+98.  F[0].Page_3[0].No56[0] - CheckBox - Export Value: 1
+99.  F[0].Page_3[0].Yes52[0] - CheckBox - Export Value: 1
+100.  F[0].Page_3[0].No52[0] - CheckBox - Export Value: 1
+101.  F[0].Page_3[0].IFYes6A[0] - TextField
+102.  F[0].Page_3[0].LicenseNumber[0] - TextField
+103.  F[0].Page_3[0].Address[0] - TextField
+104.  F[0].Page_3[0].Phoneandfaxno\.[0] - TextField
+105.  F[0].Page_3[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0] - TextField
+106.  F[0].Page_3[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0] - TextField
+107.  F[0].Page_3[0].VeteransSocialSecurityNumber_LastFourNumbers[0] - TextField

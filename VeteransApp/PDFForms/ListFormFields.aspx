@@ -18,6 +18,9 @@
         &nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate Sample PDF" 
             onclick="btnGeneratePDF_Click" />
+                &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnSerializeFields" runat="server" Text="Serialize Form Fields" OnClick="btnSerializeFields_Click"  />
+
     </p>
     <hr />
 

@@ -1,0 +1,70 @@
+1.  F[0].Page_1[0].No1[0] - CheckBox - Export Value: 1
+2.  F[0].Page_1[0].Yes1[0] - CheckBox - Export Value: 1
+3.  F[0].Page_1[0].B4[0] - CheckBox - Export Value: 1
+4.  F[0].Page_1[0].B3[0] - CheckBox - Export Value: 1
+5.  F[0].Page_1[0].B2[0] - CheckBox - Export Value: 1
+6.  F[0].Page_1[0].B1[0] - CheckBox - Export Value: 1
+7.  F[0].Page_1[0].Dateofdiagnosis5[0] - TextField
+8.  F[0].Page_1[0].Dateofdiagnosis5[1] - TextField
+9.  F[0].Page_1[0].ICDCode5[0] - TextField
+10.  F[0].Page_1[0].Specify[0] - TextField
+11.  F[0].Page_1[0].Specify[1] - TextField
+12.  F[0].Page_1[0].Dateofdiagnosis5[2] - TextField
+13.  F[0].Page_1[0].ICDCode5[1] - TextField
+14.  F[0].Page_1[0].ICDCode5[2] - TextField
+15.  F[0].Page_1[0].Dateofdiagnosis5[3] - TextField
+16.  F[0].Page_1[0].ICDCode5[3] - TextField
+17.  F[0].Page_1[0].DescribeHistory[0] - TextField
+18.  F[0].Page_1[0].Additional[0] - TextField
+19.  F[0].Page_1[0].IfYes2C[0] - TextField
+20.  F[0].Page_1[0].Yes2C[0] - CheckBox - Export Value: 1
+21.  F[0].Page_1[0].No2C[0] - CheckBox - Export Value: 1
+22.  F[0].Page_1[0].No2B[0] - CheckBox - Export Value: 1
+23.  F[0].Page_1[0].Yes2B[0] - CheckBox - Export Value: 1
+24.  F[0].Page_1[0].No3[0] - CheckBox - Export Value: 1
+25.  F[0].Page_1[0].Yes3[0] - CheckBox - Export Value: 1
+26.  F[0].Page_1[0].A5[0] - CheckBox - Export Value: 1
+27.  F[0].Page_1[0].A4[0] - CheckBox - Export Value: 1
+28.  F[0].Page_1[0].A3[0] - CheckBox - Export Value: 1
+29.  F[0].Page_1[0].A2[0] - CheckBox - Export Value: 1
+30.  F[0].Page_1[0].A1[0] - CheckBox - Export Value: 1
+31.  F[0].Page_1[0].No4A1[0] - CheckBox - Export Value: 1
+32.  F[0].Page_1[0].Yes4A1[0] - CheckBox - Export Value: 1
+33.  F[0].Page_1[0].No4A[0] - CheckBox - Export Value: 1
+34.  F[0].Page_1[0].Yes4A[0] - CheckBox - Export Value: 1
+35.  F[0].Page_1[0].IfYes4B[0] - TextField
+36.  F[0].Page_1[0].No4B[0] - CheckBox - Export Value: 1
+37.  F[0].Page_1[0].Yes4B[0] - CheckBox - Export Value: 1
+38.  F[0].Page_1[0].DescribeTreatment[0] - TextField
+39.  F[0].Page_1[0].DescribeTreatment[1] - TextField
+40.  F[0].Page_1[0].DescribeTreatment[2] - TextField
+41.  F[0].Page_1[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0] - TextField
+42.  F[0].Page_1[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0] - TextField
+43.  F[0].Page_1[0].VeteransSocialSecurityNumber_LastFourNumbers[0] - TextField
+44.  F[0].Page_1[0].VeteransFirstName[0] - TextField
+45.  F[0].Page_1[0].VeteransLastName[0] - TextField
+46.  F[0].Page_1[0].VeteransMiddleInitial[0] - TextField
+47.  F[0].Page_2[0].Yes5B[0] - CheckBox - Export Value: 1
+48.  F[0].Page_2[0].No5B[0] - CheckBox - Export Value: 1
+49.  F[0].Page_2[0].Yes5A1[0] - CheckBox - Export Value: 1
+50.  F[0].Page_2[0].No5A1[0] - CheckBox - Export Value: 1
+51.  F[0].Page_2[0].No5A[0] - CheckBox - Export Value: 1
+52.  F[0].Page_2[0].Yes5A[0] - CheckBox - Export Value: 1
+53.  F[0].Page_2[0].NAME[0] - TextField
+54.  F[0].Page_2[0].RESULTS[0] - TextField
+55.  F[0].Page_2[0].Date[0] - TextField
+56.  F[0].Page_2[0].IfYes5B[0] - TextField
+57.  F[0].Page_2[0].IfYes11[0] - TextField
+58.  F[0].Page_2[0].No10[0] - CheckBox - Export Value: 1
+59.  F[0].Page_2[0].Yes10[0] - CheckBox - Export Value: 1
+60.  F[0].Page_2[0].REMARKSIfany[0] - TextField
+61.  F[0].Page_2[0].VARegionalOfficeFAXNo\.[0] - TextField
+62.  F[0].Page_2[0].TextField1[0] - TextField
+63.  F[0].Page_2[0].C\.DATESIGNED[0] - TextField
+64.  F[0].Page_2[0].phyprintname[0] - TextField
+65.  F[0].Page_2[0].phymedlicno[0] - TextField
+66.  F[0].Page_2[0].Physiciansphoneandfaxnumber[0] - TextField
+67.  F[0].Page_2[0].A\.PHYSICIANSSIGNATURE[0] - TextField
+68.  F[0].Page_2[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0] - TextField
+69.  F[0].Page_2[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0] - TextField
+70.  F[0].Page_2[0].VeteransSocialSecurityNumber_LastFourNumbers[0] - TextField

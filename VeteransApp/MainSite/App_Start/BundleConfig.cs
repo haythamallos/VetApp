@@ -16,6 +16,7 @@ namespace MainSite
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datepicker.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
@@ -26,6 +27,7 @@ namespace MainSite
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker.min.css",
                       "~/Content/sidebar-nav.css",
                       "~/Content/site.css"));
 

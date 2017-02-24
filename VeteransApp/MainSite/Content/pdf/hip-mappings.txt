@@ -1,0 +1,487 @@
+1.  form1[0].#subform[0].SideR2[0] - CheckBox - Export Value: 1
+2.  form1[0].#subform[0].SideR4[0] - CheckBox - Export Value: 1
+3.  form1[0].#subform[0].SideR6[0] - CheckBox - Export Value: 1
+4.  form1[0].#subform[0].SideR8[0] - CheckBox - Export Value: 1
+5.  form1[0].#subform[0].SideR12[0] - CheckBox - Export Value: 1
+6.  form1[0].#subform[0].SideR14[0] - CheckBox - Export Value: 1
+7.  form1[0].#subform[0].SideL14[0] - CheckBox - Export Value: 1
+8.  form1[0].#subform[0].SideB14[0] - CheckBox - Export Value: 1
+9.  form1[0].#subform[0].ICDCode14[0] - TextField
+10.  form1[0].#subform[0].DateOfDiagnosis14[0] - TextField
+11.  form1[0].#subform[0].DateOfDiagnosis13[0] - TextField
+12.  form1[0].#subform[0].ICDCode13[0] - TextField
+13.  form1[0].#subform[0].SideB13[0] - CheckBox - Export Value: 1
+14.  form1[0].#subform[0].SideL13[0] - CheckBox - Export Value: 1
+15.  form1[0].#subform[0].SideR13[0] - CheckBox - Export Value: 1
+16.  form1[0].#subform[0].SideL12[0] - CheckBox - Export Value: 1
+17.  form1[0].#subform[0].SideB12[0] - CheckBox - Export Value: 1
+18.  form1[0].#subform[0].ICDCode12[0] - TextField
+19.  form1[0].#subform[0].DateOfDiagnosis12[0] - TextField
+20.  form1[0].#subform[0].SideL8[0] - CheckBox - Export Value: 1
+21.  form1[0].#subform[0].SideB8[0] - CheckBox - Export Value: 1
+22.  form1[0].#subform[0].ICDCode8[0] - TextField
+23.  form1[0].#subform[0].DateOfDiagnosis8[0] - TextField
+24.  form1[0].#subform[0].DateOfDiagnosis7[0] - TextField
+25.  form1[0].#subform[0].ICDCode7[0] - TextField
+26.  form1[0].#subform[0].SideB7[0] - CheckBox - Export Value: 1
+27.  form1[0].#subform[0].SideL7[0] - CheckBox - Export Value: 1
+28.  form1[0].#subform[0].SideR7[0] - CheckBox - Export Value: 1
+29.  form1[0].#subform[0].SideL6[0] - CheckBox - Export Value: 1
+30.  form1[0].#subform[0].SideB6[0] - CheckBox - Export Value: 1
+31.  form1[0].#subform[0].ICDCode6[0] - TextField
+32.  form1[0].#subform[0].DateOfDiagnosis6[0] - TextField
+33.  form1[0].#subform[0].DateOfDiagnosis5[0] - TextField
+34.  form1[0].#subform[0].ICDCode5[0] - TextField
+35.  form1[0].#subform[0].SideB5[0] - CheckBox - Export Value: 1
+36.  form1[0].#subform[0].SideL5[0] - CheckBox - Export Value: 1
+37.  form1[0].#subform[0].SideR5[0] - CheckBox - Export Value: 1
+38.  form1[0].#subform[0].SideL4[0] - CheckBox - Export Value: 1
+39.  form1[0].#subform[0].SideB4[0] - CheckBox - Export Value: 1
+40.  form1[0].#subform[0].ICDCode4[0] - TextField
+41.  form1[0].#subform[0].DateOfDiagnosis4[0] - TextField
+42.  form1[0].#subform[0].DateOfDiagnosis3[0] - TextField
+43.  form1[0].#subform[0].ICDCode3[0] - TextField
+44.  form1[0].#subform[0].SideB3[0] - CheckBox - Export Value: 1
+45.  form1[0].#subform[0].SideL3[0] - CheckBox - Export Value: 1
+46.  form1[0].#subform[0].SideR3[0] - CheckBox - Export Value: 1
+47.  form1[0].#subform[0].SideL2[0] - CheckBox - Export Value: 1
+48.  form1[0].#subform[0].SideB2[0] - CheckBox - Export Value: 1
+49.  form1[0].#subform[0].ICDCode2[0] - TextField
+50.  form1[0].#subform[0].DateOfDiagnosis2[0] - TextField
+51.  form1[0].#subform[0].DateOfDiagnosis1[0] - TextField
+52.  form1[0].#subform[0].ICDCode1[0] - TextField
+53.  form1[0].#subform[0].No1[0] - CheckBox - Export Value: 1
+54.  form1[0].#subform[0].Yes1[0] - CheckBox - Export Value: 1
+55.  form1[0].#subform[0].AllRecords1[0] - CheckBox - Export Value: 1
+56.  form1[0].#subform[0].AllRecords2[0] - CheckBox - Export Value: 2
+57.  form1[0].#subform[0].AllRecords3[0] - CheckBox - Export Value: 1
+58.  form1[0].#subform[0].AllRecords4[0] - CheckBox - Export Value: 1
+59.  form1[0].#subform[0].AllRecords5[0] - CheckBox - Export Value: 1
+60.  form1[0].#subform[0].AllRecords6[0] - CheckBox - Export Value: 1
+61.  form1[0].#subform[0].AllRecords7[0] - CheckBox - Export Value: 1
+62.  form1[0].#subform[0].AllRecords8[0] - CheckBox - Export Value: 1
+63.  form1[0].#subform[0].AllRecords9[0] - CheckBox - Export Value: 1
+64.  form1[0].#subform[0].NoRecords[0] - CheckBox - Export Value: 1
+65.  form1[0].#subform[0].AllRecords10[0] - CheckBox - Export Value: 1
+66.  form1[0].#subform[0].NoDiagnoses[0] - CheckBox - Export Value: 1
+67.  form1[0].#subform[0].Diagnoses1[0] - CheckBox - Export Value: 1
+68.  form1[0].#subform[0].Diagnoses2[0] - CheckBox - Export Value: 1
+69.  form1[0].#subform[0].Diagnoses3[0] - CheckBox - Export Value: 1
+70.  form1[0].#subform[0].Diagnoses4[0] - CheckBox - Export Value: 1
+71.  form1[0].#subform[0].Diagnoses5[0] - CheckBox - Export Value: 1
+72.  form1[0].#subform[0].Diagnoses6[0] - CheckBox - Export Value: 1
+73.  form1[0].#subform[0].Diagnoses7[0] - CheckBox - Export Value: 1
+74.  form1[0].#subform[0].Diagnoses8[0] - CheckBox - Export Value: 1
+75.  form1[0].#subform[0].Diagnoses9[0] - CheckBox - Export Value: 1
+76.  form1[0].#subform[0].SSN[0] - TextField
+77.  form1[0].#subform[0].NameOfVeteran[0] - TextField
+78.  form1[0].#subform[0].Records[0] - TextField
+79.  form1[0].#subform[0].Records[1] - TextField
+80.  form1[0].#subform[0].OtherRecord[0] - TextField
+81.  form1[0].#subform[0].SideB1[0] - CheckBox - Export Value: 1
+82.  form1[0].#subform[0].SideL1[0] - CheckBox - Export Value: 1
+83.  form1[0].#subform[0].SideR1[0] - CheckBox - Export Value: 1
+84.  form1[0].#subform[0].OtherDiagnosis3[0] - TextField
+85.  form1[0].#subform[0].OtherDiagnosis2[0] - TextField
+86.  form1[0].#subform[0].OtherDiagnosis1[0] - TextField
+87.  form1[0].#subform[0].Code128BarCode1[0] - TextField
+88.  form1[0].#subform[0].Code128BarCode2[0] - TextField
+89.  form1[0].#subform[0].Describe[0] - TextField
+90.  form1[0].#subform[1].Describe[1] - TextField
+91.  form1[0].#subform[1].Describe1[0] - TextField
+92.  form1[0].#subform[1].Describe2[0] - TextField
+93.  form1[0].#subform[1].YesNo3[0] - CheckBox - Export Value: 1
+94.  form1[0].#subform[1].YesNo3[1] - CheckBox - Export Value: 2
+95.  form1[0].#subform[1].YesNo2[0] - CheckBox - Export Value: 2
+96.  form1[0].#subform[1].YesNo2[1] - CheckBox - Export Value: 1
+97.  form1[0].#subform[1].Opinion[0] - CheckBox - Export Value: 3
+98.  form1[0].#subform[1].Opinion[1] - CheckBox - Export Value: 2
+99.  form1[0].#subform[1].Opinion[2] - CheckBox - Export Value: 1
+100.  form1[0].#subform[1].ExplainWhy[0] - TextField
+101.  form1[0].#subform[1].ExplainWhy[1] - TextField
+102.  form1[0].#subform[1].ExplainWhy[2] - TextField
+103.  form1[0].#subform[1].ROM11[0] - TextField
+104.  form1[0].#subform[1].Right_External[0] - CheckBox - Export Value: 2
+105.  form1[0].#subform[1].Right_CannotCross[0] - CheckBox - Export Value: 1
+106.  form1[0].#subform[1].Right_CannotCross[1] - CheckBox - Export Value: 2
+107.  form1[0].#subform[1].Right_Internal[0] - CheckBox - Export Value: 1
+108.  form1[0].#subform[1].Right_Internal[1] - CheckBox - Export Value: 2
+109.  form1[0].#subform[1].ROM12[0] - TextField
+110.  form1[0].#subform[1].Right_External[1] - CheckBox - Export Value: 1
+111.  form1[0].#subform[1].Right_AllNormal[0] - Other
+112.  form1[0].#subform[1].Right_Flexion[0] - CheckBox - Export Value: 1
+113.  form1[0].#subform[1].ROM8[0] - TextField
+114.  form1[0].#subform[1].ROM9[0] - TextField
+115.  form1[0].#subform[1].Right_Abduction[0] - CheckBox - Export Value: 1
+116.  form1[0].#subform[1].Right_Abduction[1] - CheckBox - Export Value: 2
+117.  form1[0].#subform[1].ROM10[0] - TextField
+118.  form1[0].#subform[1].Right_Adduction[0] - CheckBox - Export Value: 1
+119.  form1[0].#subform[1].Right_Adduction[1] - CheckBox - Export Value: 2
+120.  form1[0].#subform[1].Right_Extension[0] - CheckBox - Export Value: 2
+121.  form1[0].#subform[1].Right_Extension[1] - CheckBox - Export Value: 1
+122.  form1[0].#subform[1].Right_Flexion[1] - CheckBox - Export Value: 2
+123.  form1[0].#subform[1].ROM7[0] - TextField
+124.  form1[0].#subform[1].ExplainWhy[3] - TextField
+125.  form1[0].#subform[1].ExplainWhy[4] - TextField
+126.  form1[0].#subform[1].ExplainWhy[5] - TextField
+127.  form1[0].#subform[2].Explain3C[0] - TextField
+128.  form1[0].#subform[2].Describe3[0] - TextField
+129.  form1[0].#subform[2].YesNo4[0] - CheckBox - Export Value: 2
+130.  form1[0].#subform[2].YesNo4[1] - CheckBox - Export Value: 1
+131.  form1[0].#subform[2].ExplainWhy[6] - TextField
+132.  form1[0].#subform[2].ExplainWhy[7] - TextField
+133.  form1[0].#subform[2].ExplainWhy[8] - TextField
+134.  form1[0].#subform[2].ROM5[0] - TextField
+135.  form1[0].#subform[2].Left_External[0] - CheckBox - Export Value: 2
+136.  form1[0].#subform[2].Left_CannotCross[0] - CheckBox - Export Value: 1
+137.  form1[0].#subform[2].Left_CannotCross[1] - CheckBox - Export Value: 2
+138.  form1[0].#subform[2].Left_Internal[0] - CheckBox - Export Value: 1
+139.  form1[0].#subform[2].Left_Internal[1] - CheckBox - Export Value: 2
+140.  form1[0].#subform[2].ROM6[0] - TextField
+141.  form1[0].#subform[2].Left_External[1] - CheckBox - Export Value: 1
+142.  form1[0].#subform[2].Left_AllNormal[0] - Other
+143.  form1[0].#subform[2].Left_Flexion[0] - CheckBox - Export Value: 1
+144.  form1[0].#subform[2].ROM2[0] - TextField
+145.  form1[0].#subform[2].ROM3[0] - TextField
+146.  form1[0].#subform[2].Left_Abduction[0] - CheckBox - Export Value: 1
+147.  form1[0].#subform[2].Left_Abduction[1] - CheckBox - Export Value: 2
+148.  form1[0].#subform[2].ROM4[0] - TextField
+149.  form1[0].#subform[2].Left_Adduction[0] - CheckBox - Export Value: 1
+150.  form1[0].#subform[2].Left_Adduction[1] - CheckBox - Export Value: 2
+151.  form1[0].#subform[2].Left_Extension[0] - CheckBox - Export Value: 2
+152.  form1[0].#subform[2].Left_Extension[1] - CheckBox - Export Value: 1
+153.  form1[0].#subform[2].Left_Flexion[1] - CheckBox - Export Value: 2
+154.  form1[0].#subform[2].ROM1[0] - TextField
+155.  form1[0].#subform[2].ExplainWhy[9] - TextField
+156.  form1[0].#subform[2].ExplainWhy[10] - TextField
+157.  form1[0].#subform[2].ExplainWhy[11] - TextField
+158.  form1[0].#subform[2].PostROM8[0] - TextField
+159.  form1[0].#subform[2].PostROM7[0] - TextField
+160.  form1[0].#subform[2].PostROM9[0] - TextField
+161.  form1[0].#subform[2].PostROM10[0] - TextField
+162.  form1[0].#subform[2].Right_Perform[0] - CheckBox - Export Value: 1
+163.  form1[0].#subform[2].Right_Perform[1] - CheckBox - Export Value: 2
+164.  form1[0].#subform[2].Right_Limitation[0] - CheckBox - Export Value: 2
+165.  form1[0].#subform[2].Right_Limitation[1] - CheckBox - Export Value: 1
+166.  form1[0].#subform[2].Describe5[0] - TextField
+167.  form1[0].#subform[2].PostROM11[0] - TextField
+168.  form1[0].#subform[2].PostROM12[0] - TextField
+169.  form1[0].#subform[2].Right_CannotCross1[0] - CheckBox - Export Value: 2
+170.  form1[0].#subform[2].Right_CannotCross1[1] - CheckBox - Export Value: 1
+171.  form1[0].#subform[3].Describe6[0] - TextField
+172.  form1[0].#subform[3].YesNo5[0] - CheckBox - Export Value: 2
+173.  form1[0].#subform[3].YesNo5[1] - CheckBox - Export Value: 1
+174.  form1[0].#subform[3].Explain[0] - TextField
+175.  form1[0].#subform[3].Left_Pain1[0] - CheckBox - Export Value: 1
+176.  form1[0].#subform[3].Left_FunctionalLoss1[0] - CheckBox - Export Value: 2
+177.  form1[0].#subform[3].Left_FunctionalLoss1[1] - CheckBox - Export Value: 1
+178.  form1[0].#subform[3].Left_Pain1[1] - CheckBox - Export Value: 2
+179.  form1[0].#subform[3].Right_Painful[0] - CheckBox - Export Value: 1
+180.  form1[0].#subform[3].Right_Painful[1] - CheckBox - Export Value: 2
+181.  form1[0].#subform[3].Right_FunctionalLoss[0] - CheckBox - Export Value: 1
+182.  form1[0].#subform[3].Right_FunctionalLoss[1] - CheckBox - Export Value: 2
+183.  form1[0].#subform[3].Explain[1] - TextField
+184.  form1[0].#subform[3].Left_Tender[0] - CheckBox - Export Value: 2
+185.  form1[0].#subform[3].Left_Tender[1] - CheckBox - Export Value: 1
+186.  form1[0].#subform[3].Explain[2] - TextField
+187.  form1[0].#subform[3].Comments[0] - TextField
+188.  form1[0].#subform[3].PostROM4[0] - TextField
+189.  form1[0].#subform[3].PostROM5[0] - TextField
+190.  form1[0].#subform[3].PostROM6[0] - TextField
+191.  form1[0].#subform[3].PostROM3[0] - TextField
+192.  form1[0].#subform[3].Describe4[0] - TextField
+193.  form1[0].#subform[3].Left_Limitation[0] - CheckBox - Export Value: 1
+194.  form1[0].#subform[3].Left_Limitation[1] - CheckBox - Export Value: 2
+195.  form1[0].#subform[3].Left_Perform[0] - CheckBox - Export Value: 2
+196.  form1[0].#subform[3].Left_Perform[1] - CheckBox - Export Value: 1
+197.  form1[0].#subform[3].PostROM1[0] - TextField
+198.  form1[0].#subform[3].PostROM2[0] - TextField
+199.  form1[0].#subform[3].Left_CannotCross1[0] - CheckBox - Export Value: 2
+200.  form1[0].#subform[3].Left_CannotCross1[1] - CheckBox - Export Value: 1
+201.  form1[0].#subform[3].Left_Painful[0] - CheckBox - Export Value: 2
+202.  form1[0].#subform[3].Left_FunctionalLoss[0] - CheckBox - Export Value: 1
+203.  form1[0].#subform[3].Left_FunctionalLoss[1] - CheckBox - Export Value: 2
+204.  form1[0].#subform[3].Left_Painful[1] - CheckBox - Export Value: 1
+205.  form1[0].#subform[3].Explain[3] - TextField
+206.  form1[0].#subform[3].Explain[4] - TextField
+207.  form1[0].#subform[3].Right_FunctionalLoss1[0] - CheckBox - Export Value: 2
+208.  form1[0].#subform[3].Right_FunctionalLoss1[1] - CheckBox - Export Value: 1
+209.  form1[0].#subform[3].Right_Pain1[0] - CheckBox - Export Value: 2
+210.  form1[0].#subform[3].Right_Pain1[1] - CheckBox - Export Value: 1
+211.  form1[0].#subform[3].Right_Tender[0] - CheckBox - Export Value: 1
+212.  form1[0].#subform[3].Right_Tender[1] - CheckBox - Export Value: 2
+213.  form1[0].#subform[3].Explain[5] - TextField
+214.  form1[0].#subform[4].ContributingFactor4[0] - CheckBox - Export Value: 1
+215.  form1[0].#subform[4].ContributingFactor3[0] - CheckBox - Export Value: 1
+216.  form1[0].#subform[4].NoLoss_Right[0] - CheckBox - Export Value: 1
+217.  form1[0].#subform[4].ContributingFactor1[0] - CheckBox - Export Value: 1
+218.  form1[0].#subform[4].SideAffected1[0] - CheckBox - Export Value: 1
+219.  form1[0].#subform[4].SideAffected3[0] - CheckBox - Export Value: 1
+220.  form1[0].#subform[4].SideAffected5[0] - CheckBox - Export Value: 1
+221.  form1[0].#subform[4].SideAffected7[0] - CheckBox - Export Value: 1
+222.  form1[0].#subform[4].SideAffected9[0] - CheckBox - Export Value: 1
+223.  form1[0].#subform[4].ContributingFactor10[0] - CheckBox - Export Value: 1
+224.  form1[0].#subform[4].SideAffected11[0] - CheckBox - Export Value: 1
+225.  form1[0].#subform[4].ContributingFactor12[0] - CheckBox - Export Value: 1
+226.  form1[0].#subform[4].SideAffected13[0] - CheckBox - Export Value: 1
+227.  form1[0].#subform[4].SideAffected13[1] - CheckBox - Export Value: 2
+228.  form1[0].#subform[4].SideAffected13[2] - CheckBox - Export Value: 3
+229.  form1[0].#subform[4].ContributingFactor13[0] - CheckBox - Export Value: 1
+230.  form1[0].#subform[4].SideAffected12[0] - CheckBox - Export Value: 3
+231.  form1[0].#subform[4].SideAffected12[1] - CheckBox - Export Value: 2
+232.  form1[0].#subform[4].SideAffected12[2] - CheckBox - Export Value: 1
+233.  form1[0].#subform[4].SideAffected11[1] - CheckBox - Export Value: 2
+234.  form1[0].#subform[4].SideAffected11[2] - CheckBox - Export Value: 3
+235.  form1[0].#subform[4].ContributingFactor11[0] - CheckBox - Export Value: 1
+236.  form1[0].#subform[4].SideAffected10[0] - CheckBox - Export Value: 3
+237.  form1[0].#subform[4].SideAffected10[1] - CheckBox - Export Value: 2
+238.  form1[0].#subform[4].SideAffected10[2] - CheckBox - Export Value: 1
+239.  form1[0].#subform[4].SideAffected9[1] - CheckBox - Export Value: 2
+240.  form1[0].#subform[4].SideAffected9[2] - CheckBox - Export Value: 3
+241.  form1[0].#subform[4].SideAffected8[0] - CheckBox - Export Value: 3
+242.  form1[0].#subform[4].SideAffected8[1] - CheckBox - Export Value: 2
+243.  form1[0].#subform[4].SideAffected8[2] - CheckBox - Export Value: 1
+244.  form1[0].#subform[4].SideAffected7[1] - CheckBox - Export Value: 2
+245.  form1[0].#subform[4].SideAffected7[2] - CheckBox - Export Value: 3
+246.  form1[0].#subform[4].SideAffected6[0] - CheckBox - Export Value: 3
+247.  form1[0].#subform[4].SideAffected6[1] - CheckBox - Export Value: 2
+248.  form1[0].#subform[4].SideAffected6[2] - CheckBox - Export Value: 1
+249.  form1[0].#subform[4].SideAffected5[1] - CheckBox - Export Value: 2
+250.  form1[0].#subform[4].SideAffected5[2] - CheckBox - Export Value: 3
+251.  form1[0].#subform[4].SideAffected4[0] - CheckBox - Export Value: 3
+252.  form1[0].#subform[4].SideAffected4[1] - CheckBox - Export Value: 2
+253.  form1[0].#subform[4].SideAffected4[2] - CheckBox - Export Value: 1
+254.  form1[0].#subform[4].SideAffected3[1] - CheckBox - Export Value: 2
+255.  form1[0].#subform[4].SideAffected3[2] - CheckBox - Export Value: 3
+256.  form1[0].#subform[4].SideAffected2[0] - CheckBox - Export Value: 3
+257.  form1[0].#subform[4].SideAffected2[1] - CheckBox - Export Value: 2
+258.  form1[0].#subform[4].SideAffected2[2] - CheckBox - Export Value: 1
+259.  form1[0].#subform[4].SideAffected1[1] - CheckBox - Export Value: 2
+260.  form1[0].#subform[4].SideAffected1[2] - CheckBox - Export Value: 3
+261.  form1[0].#subform[4].ContributingFactor2[0] - CheckBox - Export Value: 1
+262.  form1[0].#subform[4].NoLoss_Left[0] - CheckBox - Export Value: 1
+263.  form1[0].#subform[4].DescribeOther[0] - TextField
+264.  form1[0].#subform[4].ContributingFactor14[0] - CheckBox - Export Value: 1
+265.  form1[0].#subform[4].ContributingFactor9[0] - CheckBox - Export Value: 1
+266.  form1[0].#subform[4].ContributingFactor8[0] - CheckBox - Export Value: 1
+267.  form1[0].#subform[4].ContributingFactor7[0] - CheckBox - Export Value: 1
+268.  form1[0].#subform[4].ContributingFactor6[0] - CheckBox - Export Value: 1
+269.  form1[0].#subform[4].ContributingFactor5[0] - CheckBox - Export Value: 1
+270.  form1[0].#subform[4].YesNo6[0] - CheckBox - Export Value: 2
+271.  form1[0].#subform[4].YesNo6[1] - CheckBox - Export Value: 1
+272.  form1[0].#subform[4].ROM21[0] - TextField
+273.  form1[0].#subform[4].ROM23[0] - TextField
+274.  form1[0].#subform[4].Right_NotFeasible6[0] - CheckBox - Export Value: 1
+275.  form1[0].#subform[4].ROM24[0] - TextField
+276.  form1[0].#subform[4].Right_NotFeasible5[0] - CheckBox - Export Value: 1
+277.  form1[0].#subform[4].Right_NotFeasible4[0] - CheckBox - Export Value: 1
+278.  form1[0].#subform[4].ROM22[0] - TextField
+279.  form1[0].#subform[4].Right_NotFeasible3[0] - CheckBox - Export Value: 1
+280.  form1[0].#subform[4].Right_NotFeasible1[0] - CheckBox - Export Value: 1
+281.  form1[0].#subform[4].Right_NotFeasible2[0] - CheckBox - Export Value: 1
+282.  form1[0].#subform[4].ROM19[0] - TextField
+283.  form1[0].#subform[4].ROM20[0] - TextField
+284.  form1[0].#subform[4].Right_Limit[0] - CheckBox - Export Value: 1
+285.  form1[0].#subform[4].Right_Limit[1] - CheckBox - Export Value: 2
+286.  form1[0].#subform[4].DescribeFunctionalLoss[0] - TextField
+287.  form1[0].#subform[5].IfYesDescribe[0] - TextField
+288.  form1[0].#subform[5].Right_Loss[0] - CheckBox - Export Value: 1
+289.  form1[0].#subform[5].Right_Loss[1] - CheckBox - Export Value: 2
+290.  form1[0].#subform[5].Left_Loss[0] - CheckBox - Export Value: 2
+291.  form1[0].#subform[5].Left_Loss[1] - CheckBox - Export Value: 1
+292.  form1[0].#subform[5].IfYesDescribe[1] - TextField
+293.  form1[0].#subform[5].Right_Strength2[0] - TextField
+294.  form1[0].#subform[5].Right_Strength3[0] - TextField
+295.  form1[0].#subform[5].Right_Strength1[0] - TextField
+296.  form1[0].#subform[5].IfYesDescribe[2] - TextField
+297.  form1[0].#subform[5].AllNormal_Right[0] - Other
+298.  form1[0].#subform[5].Right_Reduction[0] - CheckBox - Export Value: 1
+299.  form1[0].#subform[5].Right_Reduction[1] - CheckBox - Export Value: 2
+300.  form1[0].#subform[5].Right_Reduction1[0] - CheckBox - Export Value: 2
+301.  form1[0].#subform[5].Right_Reduction1[1] - CheckBox - Export Value: 1
+302.  form1[0].#subform[5].YesNo7[0] - CheckBox - Export Value: 1
+303.  form1[0].#subform[5].YesNo7[1] - CheckBox - Export Value: 2
+304.  form1[0].#subform[5].YesNo8[0] - CheckBox - Export Value: 1
+305.  form1[0].#subform[5].YesNo8[1] - CheckBox - Export Value: 2
+306.  form1[0].#subform[5].Rationale3[0] - TextField
+307.  form1[0].#subform[5].Circumference[0] - TextField
+308.  form1[0].#subform[5].Circumference[1] - TextField
+309.  form1[0].#subform[5].Location[0] - TextField
+310.  form1[0].#subform[5].RightLowerExtremity[0] - CheckBox - Export Value: 1
+311.  form1[0].#subform[5].ROM15[0] - TextField
+312.  form1[0].#subform[5].ROM16[0] - TextField
+313.  form1[0].#subform[5].ROM14[0] - TextField
+314.  form1[0].#subform[5].Left_NotFeasible2[0] - CheckBox - Export Value: 1
+315.  form1[0].#subform[5].Left_NotFeasible3[0] - CheckBox - Export Value: 1
+316.  form1[0].#subform[5].Left_NotFeasible6[0] - CheckBox - Export Value: 1
+317.  form1[0].#subform[5].ROM18[0] - TextField
+318.  form1[0].#subform[5].ROM17[0] - TextField
+319.  form1[0].#subform[5].Left_NotFeasible5[0] - CheckBox - Export Value: 1
+320.  form1[0].#subform[5].Left_NotFeasible4[0] - CheckBox - Export Value: 1
+321.  form1[0].#subform[5].Left_NotFeasible1[0] - CheckBox - Export Value: 1
+322.  form1[0].#subform[5].ROM13[0] - TextField
+323.  form1[0].#subform[5].Left_Limit[0] - CheckBox - Export Value: 2
+324.  form1[0].#subform[5].Left_Limit[1] - CheckBox - Export Value: 1
+325.  form1[0].#subform[5].DescribeFunctionalLoss[1] - TextField
+326.  form1[0].#subform[5].Left_Strength2[0] - TextField
+327.  form1[0].#subform[5].Left_Strength3[0] - TextField
+328.  form1[0].#subform[5].IfYesDescribe[3] - TextField
+329.  form1[0].#subform[5].AllNormal_Left[0] - Other
+330.  form1[0].#subform[5].Left_Reduction1[0] - CheckBox - Export Value: 1
+331.  form1[0].#subform[5].Left_Reduction1[1] - CheckBox - Export Value: 2
+332.  form1[0].#subform[5].Left_Reduction[0] - CheckBox - Export Value: 2
+333.  form1[0].#subform[5].Left_Reduction[1] - CheckBox - Export Value: 1
+334.  form1[0].#subform[5].Left_Strength1[0] - TextField
+335.  form1[0].#subform[5].Circumference[2] - TextField
+336.  form1[0].#subform[5].Location[1] - TextField
+337.  form1[0].#subform[5].Circumference[3] - TextField
+338.  form1[0].#subform[5].LeftLowerExtremity[0] - CheckBox - Export Value: 1
+339.  form1[0].#subform[6].Comments[1] - TextField
+340.  form1[0].#subform[6].Comments[2] - TextField
+341.  form1[0].#subform[6].Comments[3] - TextField
+342.  form1[0].#subform[6].RAnkylosis3[0] - CheckBox - Export Value: 1
+343.  form1[0].#subform[6].LAnkylosis4[0] - CheckBox - Export Value: 1
+344.  form1[0].#subform[6].RAnkylosis4[0] - CheckBox - Export Value: 1
+345.  form1[0].#subform[6].RAnkylosis2[0] - CheckBox - Export Value: 1
+346.  form1[0].#subform[6].RAnkylosis1[0] - CheckBox - Export Value: 1
+347.  form1[0].#subform[6].ElbowAffected1[0] - CheckBox - Export Value: 1
+348.  form1[0].#subform[6].Condition2[0] - CheckBox - Export Value: 1
+349.  form1[0].#subform[6].ElbowAffected3[0] - CheckBox - Export Value: 1
+350.  form1[0].#subform[6].Condition4[0] - CheckBox - Export Value: 1
+351.  form1[0].#subform[6].ElbowAffected5[0] - CheckBox - Export Value: 1
+352.  form1[0].#subform[6].ElbowAffected7[0] - CheckBox - Export Value: 1
+353.  form1[0].#subform[6].ElbowAffected7[1] - CheckBox - Export Value: 3
+354.  form1[0].#subform[6].Left_Length[0] - CheckBox - Export Value: 1
+355.  form1[0].#subform[6].Left_Length[1] - CheckBox - Export Value: 2
+356.  form1[0].#subform[6].Right_Length[0] - CheckBox - Export Value: 1
+357.  form1[0].#subform[6].Right_Length[1] - CheckBox - Export Value: 2
+358.  form1[0].#subform[6].ElbowAffected7[2] - CheckBox - Export Value: 2
+359.  form1[0].#subform[6].ElbowAffected6[0] - CheckBox - Export Value: 2
+360.  form1[0].#subform[6].ElbowAffected6[1] - CheckBox - Export Value: 3
+361.  form1[0].#subform[6].ElbowAffected6[2] - CheckBox - Export Value: 1
+362.  form1[0].#subform[6].ElbowAffected5[1] - CheckBox - Export Value: 3
+363.  form1[0].#subform[6].ElbowAffected5[2] - CheckBox - Export Value: 2
+364.  form1[0].#subform[6].Condition8[0] - CheckBox - Export Value: 1
+365.  form1[0].#subform[6].Condition9[0] - CheckBox - Export Value: 1
+366.  form1[0].#subform[6].Condition6[0] - CheckBox - Export Value: 1
+367.  form1[0].#subform[6].Condition7[0] - CheckBox - Export Value: 1
+368.  form1[0].#subform[6].Condition5[0] - CheckBox - Export Value: 1
+369.  form1[0].#subform[6].ElbowAffected4[0] - CheckBox - Export Value: 2
+370.  form1[0].#subform[6].ElbowAffected4[1] - CheckBox - Export Value: 3
+371.  form1[0].#subform[6].ElbowAffected4[2] - CheckBox - Export Value: 1
+372.  form1[0].#subform[6].ElbowAffected3[1] - CheckBox - Export Value: 3
+373.  form1[0].#subform[6].ElbowAffected3[2] - CheckBox - Export Value: 2
+374.  form1[0].#subform[6].Condition3[0] - CheckBox - Export Value: 1
+375.  form1[0].#subform[6].ElbowAffected2[0] - CheckBox - Export Value: 2
+376.  form1[0].#subform[6].ElbowAffected2[1] - CheckBox - Export Value: 3
+377.  form1[0].#subform[6].ElbowAffected2[2] - CheckBox - Export Value: 1
+378.  form1[0].#subform[6].ElbowAffected1[1] - CheckBox - Export Value: 3
+379.  form1[0].#subform[6].ElbowAffected1[2] - CheckBox - Export Value: 2
+380.  form1[0].#subform[6].YesNo10[0] - CheckBox - Export Value: 1
+381.  form1[0].#subform[6].Condition1[0] - CheckBox - Export Value: 1
+382.  form1[0].#subform[6].YesNo10[1] - CheckBox - Export Value: 2
+383.  form1[0].#subform[6].Length[0] - TextField
+384.  form1[0].#subform[6].Length[1] - TextField
+385.  form1[0].#subform[6].Comments[4] - TextField
+386.  form1[0].#subform[6].LAnkylosis1[0] - CheckBox - Export Value: 1
+387.  form1[0].#subform[6].LAnkylosis2[0] - CheckBox - Export Value: 1
+388.  form1[0].#subform[6].LAnkylosis3[0] - CheckBox - Export Value: 1
+389.  form1[0].#subform[7].LeftSide[0] - CheckBox - Export Value: 1
+390.  form1[0].#subform[7].LeftSide[1] - CheckBox - Export Value: 1
+391.  form1[0].#subform[7].Residuals[0] - CheckBox - Export Value: 1
+392.  form1[0].#subform[7].Residuals[1] - CheckBox - Export Value: 1
+393.  form1[0].#subform[7].Residuals[2] - CheckBox - Export Value: 1
+394.  form1[0].#subform[7].Residuals[3] - CheckBox - Export Value: 1
+395.  form1[0].#subform[7].LeftSide[2] - CheckBox - Export Value: 1
+396.  form1[0].#subform[7].Residuals[4] - CheckBox - Export Value: 1
+397.  form1[0].#subform[7].DateOfSurgery[0] - TextField
+398.  form1[0].#subform[7].DateOfSurgery[1] - TextField
+399.  form1[0].#subform[7].OtherDescribe[0] - TextField
+400.  form1[0].#subform[7].OtherDescribe[1] - TextField
+401.  form1[0].#subform[7].TypeofSurgery[0] - TextField
+402.  form1[0].#subform[7].Comments[5] - TextField
+403.  form1[0].#subform[7].Rationale5[0] - TextField
+404.  form1[0].#subform[7].YesNo14[0] - CheckBox - Export Value: 1
+405.  form1[0].#subform[7].YesNo14[1] - CheckBox - Export Value: 2
+406.  form1[0].#subform[7].YesNo15[0] - CheckBox - Export Value: 1
+407.  form1[0].#subform[7].YesNo15[1] - CheckBox - Export Value: 2
+408.  form1[0].#subform[7].YesNo16[0] - CheckBox - Export Value: 1
+409.  form1[0].#subform[7].YesNo16[1] - CheckBox - Export Value: 2
+410.  form1[0].#subform[7].YesNo13[0] - CheckBox - Export Value: 2
+411.  form1[0].#subform[7].YesNo13[1] - CheckBox - Export Value: 1
+412.  form1[0].#subform[7].Location[2] - TextField
+413.  form1[0].#subform[7].Length[2] - TextField
+414.  form1[0].#subform[7].Length[3] - TextField
+415.  form1[0].#subform[7].Comments[6] - TextField
+416.  form1[0].#subform[7].YesNo18[0] - CheckBox - Export Value: 1
+417.  form1[0].#subform[7].YesNo18[1] - CheckBox - Export Value: 2
+418.  form1[0].#subform[7].Brace[0] - CheckBox - Export Value: 1
+419.  form1[0].#subform[7].Cane[0] - CheckBox - Export Value: 1
+420.  form1[0].#subform[7].FrequencyofUse5[0] - CheckBox - Export Value: 3
+421.  form1[0].#subform[7].FrequencyofUse5[1] - CheckBox - Export Value: 2
+422.  form1[0].#subform[7].FrequencyofUse5[2] - CheckBox - Export Value: 1
+423.  form1[0].#subform[7].Walker[0] - CheckBox - Export Value: 1
+424.  form1[0].#subform[7].FrequencyofUse4[0] - CheckBox - Export Value: 1
+425.  form1[0].#subform[7].FrequencyofUse4[1] - CheckBox - Export Value: 2
+426.  form1[0].#subform[7].FrequencyofUse4[2] - CheckBox - Export Value: 3
+427.  form1[0].#subform[7].FrequencyofUse3[0] - CheckBox - Export Value: 3
+428.  form1[0].#subform[7].FrequencyofUse3[1] - CheckBox - Export Value: 2
+429.  form1[0].#subform[7].FrequencyofUse3[2] - CheckBox - Export Value: 1
+430.  form1[0].#subform[7].Crutches[0] - CheckBox - Export Value: 1
+431.  form1[0].#subform[7].FrequencyofUse1[0] - CheckBox - Export Value: 3
+432.  form1[0].#subform[7].FrequencyofUse1[1] - CheckBox - Export Value: 2
+433.  form1[0].#subform[7].FrequencyofUse1[2] - CheckBox - Export Value: 1
+434.  form1[0].#subform[7].Wheelchair[0] - CheckBox - Export Value: 1
+435.  form1[0].#subform[7].Other[0] - CheckBox - Export Value: 1
+436.  form1[0].#subform[7].FrequencyofUse2[0] - CheckBox - Export Value: 1
+437.  form1[0].#subform[7].FrequencyofUse6[0] - CheckBox - Export Value: 3
+438.  form1[0].#subform[7].FrequencyofUse6[1] - CheckBox - Export Value: 2
+439.  form1[0].#subform[7].FrequencyofUse6[2] - CheckBox - Export Value: 1
+440.  form1[0].#subform[7].FrequencyofUse2[1] - CheckBox - Export Value: 2
+441.  form1[0].#subform[7].FrequencyofUse2[2] - CheckBox - Export Value: 3
+442.  form1[0].#subform[7].DescribeOther1[0] - TextField
+443.  form1[0].#subform[7].TypeofSurgery[1] - TextField
+444.  form1[0].#subform[7].OtherDescribe[2] - TextField
+445.  form1[0].#subform[7].OtherDescribe[3] - TextField
+446.  form1[0].#subform[7].DateOfSurgery[2] - TextField
+447.  form1[0].#subform[7].DateOfSurgery[3] - TextField
+448.  form1[0].#subform[7].Residuals[5] - CheckBox - Export Value: 1
+449.  form1[0].#subform[7].LeftSide[3] - CheckBox - Export Value: 1
+450.  form1[0].#subform[7].Residuals[6] - CheckBox - Export Value: 1
+451.  form1[0].#subform[7].Residuals[7] - CheckBox - Export Value: 1
+452.  form1[0].#subform[7].Residuals[8] - CheckBox - Export Value: 1
+453.  form1[0].#subform[7].LeftSide[4] - CheckBox - Export Value: 1
+454.  form1[0].#subform[7].LeftSide[5] - CheckBox - Export Value: 1
+455.  form1[0].#subform[7].Residuals[9] - CheckBox - Export Value: 1
+456.  form1[0].#subform[8].Comments[7] - TextField
+457.  form1[0].#subform[8].RightLower[0] - CheckBox - Export Value: 1
+458.  form1[0].#subform[8].LeftLower[0] - CheckBox - Export Value: 1
+459.  form1[0].#subform[8].YesNo19[0] - CheckBox - Export Value: 2
+460.  form1[0].#subform[8].YesNo19[1] - CheckBox - Export Value: 1
+461.  form1[0].#subform[8].IndicateAnkle2[0] - CheckBox - Export Value: 1
+462.  form1[0].#subform[8].YesNo23[0] - CheckBox - Export Value: 2
+463.  form1[0].#subform[8].YesNo23[1] - CheckBox - Export Value: 1
+464.  form1[0].#subform[8].IndicateAnkle2[1] - CheckBox - Export Value: 3
+465.  form1[0].#subform[8].IndicateAnkle2[2] - CheckBox - Export Value: 2
+466.  form1[0].#subform[8].IndicateAnkle[0] - CheckBox - Export Value: 2
+467.  form1[0].#subform[8].IndicateAnkle[1] - CheckBox - Export Value: 3
+468.  form1[0].#subform[8].YesNo21[0] - CheckBox - Export Value: 1
+469.  form1[0].#subform[8].YesNo21[1] - CheckBox - Export Value: 2
+470.  form1[0].#subform[8].YesNo22[0] - CheckBox - Export Value: 1
+471.  form1[0].#subform[8].YesNo22[1] - CheckBox - Export Value: 2
+472.  form1[0].#subform[8].YesNo20[0] - CheckBox - Export Value: 2
+473.  form1[0].#subform[8].YesNo20[1] - CheckBox - Export Value: 1
+474.  form1[0].#subform[8].IndicateAnkle[2] - CheckBox - Export Value: 1
+475.  form1[0].#subform[8].Comments5[0] - TextField
+476.  form1[0].#subform[8].Comments[8] - TextField
+477.  form1[0].#subform[8].Comments6[0] - TextField
+478.  form1[0].#subform[8].YesNo24[0] - CheckBox - Export Value: 2
+479.  form1[0].#subform[8].YesNo24[1] - CheckBox - Export Value: 1
+480.  form1[0].#subform[9].Comments[9] - TextField
+481.  form1[0].#subform[9].FaxNumber[0] - TextField
+482.  form1[0].#subform[9].Address[0] - TextField
+483.  form1[0].#subform[9].DateSigned[0] - TextField
+484.  form1[0].#subform[9].PrintedName[0] - TextField
+485.  form1[0].#subform[9].LicenseNumber[0] - TextField
+486.  form1[0].#subform[9].Phone[0] - TextField
+487.  form1[0].#subform[9].Signature1[0] - TextField
