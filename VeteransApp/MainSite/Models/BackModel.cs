@@ -26,8 +26,27 @@ namespace MainSite.Models
         public bool S7 { get; set; }
         public bool S6 { get; set; }
         public bool S56 { get; set; }
-        public bool S62 { get; set; }
+        public string S62 { get; set; }
         public string S60 { get; set; }
+
+        public string S96 { get; set; }
+        public bool S95 { get; set; }
+
+        public string S86 { get; set; }
+        public bool S93 { get; set; }
+
+        public string S90 { get; set; }
+        public bool S92 { get; set; }
+
+        public string S87 { get; set; }
+        public bool S89 { get; set; }
+
+        public string S82 { get; set; }
+        public bool S81 { get; set; }
+
+        public string S78 { get; set; }
+        public bool S79 { get; set; }
+
     }
 
 

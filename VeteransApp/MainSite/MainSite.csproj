@@ -121,6 +121,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Defaults.cs" />
+    <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Utils\PDFFile.cs" />
     <Compile Include="Utils\PDFTextFieldType.cs" />
     <Compile Include="Utils\PDFOtherFieldType.cs" />
@@ -210,6 +212,8 @@
     </Content>
     <Content Include="Images\back-pain.jpg" />
     <Content Include="Images\banner-308x100.png" />
+    <Content Include="Images\body-movements-75p.jpg" />
+    <Content Include="Images\body-movements.jpg" />
     <Content Include="Images\box1.png" />
     <Content Include="Images\box2.png" />
     <Content Include="Images\john.jpg" />
