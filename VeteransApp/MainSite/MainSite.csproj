@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Defaults.cs" />
+    <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusUser.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="DB\BusinessAccessLayer\BusValidationExpressions.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacCore.cs" />
     <Compile Include="DB\Common\Column.cs" />
+    <Compile Include="DB\Common\Config.cs" />
     <Compile Include="DB\Common\ErrorCode.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
@@ -137,6 +139,9 @@
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUser.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUserRole.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\EvaluationModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\PDFFile.cs" />
     <Compile Include="Utils\PDFTextFieldType.cs" />
     <Compile Include="Utils\PDFOtherFieldType.cs" />
@@ -516,9 +521,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
-    <Content Include="Views\Home\partialModalsHome.cshtml" />
-    <Content Include="Views\Home\Register2.cshtml" />
-    <Content Include="Views\Home\Login2.cshtml" />
+    <Content Include="Views\Shared\partialModalsHome.cshtml" />
+    <Content Include="Views\Shared\Register2.cshtml" />
+    <Content Include="Views\Shared\Login2.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\MainMenu.cshtml" />
     <Content Include="Views\Dashboard\Preliminary.cshtml" />
@@ -533,6 +538,7 @@
     <Content Include="Views\Dashboard\FormQBack.cshtml" />
     <Content Include="Views\Dashboard\BackPDF.cshtml" />
     <Content Include="Views\Home\RegisterCode.cshtml" />
+    <Content Include="Views\Dashboard\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

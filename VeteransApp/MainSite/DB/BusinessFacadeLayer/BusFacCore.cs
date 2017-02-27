@@ -77,6 +77,82 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         }
 
         /*********************** CUSTOM BEGIN *********************/
+        public bool Exist(string username)
+        {
+            bool bExist = true;
+            ArrayList arUser = Find(username);
+            if ((!HasError) && (arUser.Count == 0))
+            {
+                bExist = false;
+            }
+            return bExist;
+        }
+        public ArrayList Find(string username)
+        {
+            ArrayList arUser = null;
+            try
+            {
+                if ((!string.IsNullOrEmpty(username)))
+                {
+                    EnumUser enumUser = new EnumUser() { Username = username };
+                    arUser = UserGetList(enumUser);
+                }
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+            return arUser;
+        }
+
+        public User UserCreate(string username, string password)
+        {
+            User user = null;
+            try
+            {
+                string passwordEncrypted = UtilsSecurity.encrypt(password);
+                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1 };
+                long lID = UserCreateOrModify(userTmp);
+                if (lID > 0)
+                {
+                    user = UserGet(lID);
+                }
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return user;
+        }
+
+        public User UserAuthenticate(string username, string password, long userroleid = 1)
+        {
+            User user = null;
+            try
+            {
+                string passwordEncrypted = UtilsSecurity.encrypt(password);
+                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted, UserRoleID = userroleid };
+                ArrayList arUser = UserGetList(enumUser);
+                if ((arUser != null) && (arUser.Count == 1))
+                {
+                    user = (User)arUser[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return user;
+        }
+
         //public User UserEnumByAuthUserid(string pStrUserid)
         //{
         //    User user = null;

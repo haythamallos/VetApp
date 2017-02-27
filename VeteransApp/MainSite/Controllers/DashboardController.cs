@@ -3,7 +3,6 @@ using MainSite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MainSite.Utils;
 using System.IO;
@@ -11,22 +10,48 @@ using iTextSharp.text;
 using System.Text;
 using MainSite.Classes;
 
+using Vetapp.Engine.BusinessFacadeLayer;
+using Vetapp.Engine.Common;
+using Vetapp.Engine.DataAccessLayer.Data;
+using Vetapp.Engine.BusinessAccessLayer;
+
 namespace MainSite.Controllers
 {
     public class DashboardController : Controller
     {
+        private Config _config = null;
+
         public DashboardController()
         {
+            _config = new Config();
+
             var MovementList90Deg = new SelectList(new[] { 90, 55, 25 });
             ViewBag.MovementList90Deg = MovementList90Deg;
 
             var MovementList30Deg = new SelectList(new[] { 30, 20, 10 });
             ViewBag.MovementList30Deg = MovementList30Deg;
+
         }
         // GET: Dashboard
         public ActionResult Index()
         {
-            return View();
+            DashboardModel dashboardModel = new DashboardModel();
+            if (IsAuthenticated())
+            {
+                EvaluationModel evaluation = (EvaluationModel)Session["Evaluation"];
+                dashboardModel.evaluationResults.CurrentRating = evaluation.CurrentRating;
+            }
+            else
+            {
+                LogOut();
+            }
+            return View(dashboardModel);
+
+        }
+        private bool IsAuthenticated()
+        {
+            bool b = (bool)Session["Authenticated"];
+            return b;
         }
         public ActionResult MainMenu()
         {
@@ -40,19 +65,121 @@ namespace MainSite.Controllers
         {
             return View();
         }
-        public ActionResult BackPDF(BackModel back)
+        public ActionResult Profile()
+        {
+            User user = (User)Session["User"];
+           
+            UserModel userModel = new UserModel() { Username = user.Username, Password = user.Passwd };
+            return View();
+        }
+        public ActionResult Evaluation(EvaluationModel evaluationModel)
+        {
+            Session["Evaluation"] = evaluationModel;
+            return View("Register2");
+        }
+        public ActionResult Authenticate(UserModel userModel)
+        {
+            try
+            {
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusUser busUser = new BusUser();
+                if ((busUser.IsValidUsername(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
+                {
+                    bool UserExist = busFacCore.Exist(userModel.Username);
+                    if (UserExist)
+                    {
+                        User user = busFacCore.UserAuthenticate(userModel.Username, userModel.Password);
+                        if ((user != null) && (user.UserID > 0))
+                        {
+                            Session["Authenticated"] = true;
+                            Session["User"] = user;
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ViewData["InvalidCredentials"] = true;
+                        }
+                    }
+                    else
+                    {
+                        ViewData["UserExist"] = false;
+                    }
+
+                }
+                else
+                {
+                    ViewData["InvalidCredentials"] = true;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ViewData["HasError"] = true;
+            }
+            return View("Login2");
+        }
+        public ActionResult Register(UserModel userModel)
+        {
+            try
+            {
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusUser busUser = new BusUser();
+                if ((busUser.IsValidUsername(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
+                {
+                    if (!(userModel.Password.Equals(userModel.ConfirmPassword, StringComparison.Ordinal)))
+                    {
+                        ViewData["PasswordMatch"] = true;
+                    }
+                    else
+                    {
+                        bool UserExist = busFacCore.Exist(userModel.Username);
+                        if (!UserExist)
+                        {
+                            User user = busFacCore.UserCreate(userModel.Username, userModel.Password);
+                            if ((user != null) && (user.UserID > 0))
+                            {
+                                Session["Authenticated"] = true;
+                                Session["User"] = user;
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                ViewData["HasError"] = true;
+                            }
+                        }
+                        else
+                        {
+                            ViewData["UserExist"] = true;
+                        }
+                    }
+                }
+                else
+                {
+                    ViewData["InvalidCredentials"] = true;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ViewData["HasError"] = true;
+            }
+            return View("Register2");
+        }
+        public ActionResult BackPDF(BackModel backModel)
         {
             try
             {
                 string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                byte[] form = generateDBQBack(pdfTemplatePath, back);
+                byte[] form = generateDBQBack(pdfTemplatePath, backModel);
                 PDFHelper.ReturnPDF(form, "back-dbq.pdf");
             }
             catch (Exception ex)
             {
 
             }
-            return View(back);
+            return View(backModel);
         }
 
         public ActionResult LogOut()

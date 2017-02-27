@@ -4,29 +4,31 @@
     ViewData["Description"] = "Veteranapp Login";
 }
 
+@model MainSite.Models.UserModel
+
 <section id="wrapper" class="login-register">
     <div class="login-box login-sidebar">
 
         <div class="white-box">
-            <form class="form-horizontal form-material" id="loginform" action="index.html">
-                <a href="javascript:void(0)" class="text-center db"><img src="~/plugins/images2/banner-308x100.png" alt="Home" /></a>
+            <form class="form-horizontal form-material" id="loginform" action="/Dashboard/Authenticate">
+                <a href="javascript:void(0)" class="text-center db"><img src="~/Images/banner-308x100.png" alt="Home" /></a>
 
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Username">
+                        <input id="Username" name="Username" class="form-control" type="text" required="" placeholder="Username">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="password" required="" placeholder="Password">
+                        <input id="Password" name="Password" class="form-control" type="password" required="" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                        @*<div class="checkbox checkbox-primary pull-left p-t-0">
                             <input id="checkbox-signup" type="checkbox">
                             <label for="checkbox-signup"> Remember me </label>
-                        </div>
+                        </div>*@
                         <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
                     </div>
                 </div>
@@ -64,6 +66,33 @@
                     </div>
                 </div>
             </form>
+            @if (ViewData["UserExist"] != null)
+            {
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Your Attempt to Login</h4>
+                        <p class="card-text">It seems the user does not exist.  Are you sure you have an account with us?</p>
+                    </div>
+                </div>
+            }
+            else if (ViewData["HasError"] != null)
+            {
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Encountered an Error</h4>
+                        <p class="card-text">We are temporarily unable to process your request.</p>
+                    </div>
+                </div>
+            }
+            else if (ViewData["InvalidCredentials"] != null)
+            {
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Invalid Username or Password</h4>
+                        <p class="card-text">Please avoid using non-standard characters for username or password</p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </section>

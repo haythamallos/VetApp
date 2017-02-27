@@ -11,6 +11,7 @@
     ViewData["Description"] = "The dashboard page";
 }
 
+@model MainSite.Models.DashboardModel
 
 <!-- Page Content -->
 <div id="page-wrapper">
@@ -121,7 +122,7 @@
                     <h3 class="box-title">Free Evaluation Results</h3>
                     <hr>
                     <small>Current VA Rating</small>
-                    <h2>20%</h2>
+                    <h2>@Model.evaluationResults.CurrentRating %</h2>
                     <hr>
                     <small>Potential VA Rating</small>
                     <h2>50%</h2>

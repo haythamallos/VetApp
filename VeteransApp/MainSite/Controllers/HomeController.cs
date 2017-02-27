@@ -8,6 +8,11 @@ namespace MainSite.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+            var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 });
+            ViewBag.CurrentRatingsList = CurrentRatingsList;
+        }
         public ActionResult Index()
         {
             return View();
