@@ -9,6 +9,8 @@ using Vetapp.Engine.Common;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.DataAccessLayer.Enumeration;
 
+using MainSite.Models;
+
 namespace Vetapp.Engine.BusinessFacadeLayer
 {
     public class BusFacCore
@@ -153,6 +155,46 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return user;
         }
 
+        public long EvaluationCreate(EvaluationModel evaluationModel, long userid)
+        {
+            long lID = 0;
+            try
+            {
+                Evaluation evaluation = new Evaluation()
+                {
+                    HasAClaim = evaluationModel.HasAClaim,
+                    HasActiveAppeal = evaluationModel.HasActiveAppeal,
+                    IsFirsttimeFiling = evaluationModel.IsFirstTimeFiling,
+                    CurrentRating = evaluationModel.CurrentRating,
+                    UserID = userid
+                };
+                lID = EvaluationCreateOrModify(evaluation);
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return lID;
+        }
+
+        public Evaluation EvaluationGet(User user)
+        {
+            Evaluation evaluation = null;
+            if ((user != null) && (user.UserID > 0))
+            {
+                EnumEvaluation enumEvaluation = new EnumEvaluation() { UserID = user.UserID };
+                ArrayList arEvaluation = EvaluationGetList(enumEvaluation);
+                if ((arEvaluation != null) && (arEvaluation.Count > 0))
+                {
+                    evaluation = (Evaluation)arEvaluation[arEvaluation.Count - 1];
+                }
+            }
+            return evaluation;
+        }
+
         //public User UserEnumByAuthUserid(string pStrUserid)
         //{
         //    User user = null;
@@ -180,6 +222,234 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
 
 
+        //------------------------------------------
+        /// <summary>
+        /// DbversionCreateOrModify
+        /// </summary>
+        /// <param name="">pDbversion</param>
+        /// <returns>long</returns>
+        /// 
+        public long DbversionCreateOrModify(Dbversion pDbversion)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                busDbversion.Save(pDbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pDbversion.DbversionID;
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// DbversionGetList
+        /// </summary>
+        /// <param name="">pEnumDbversion</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList DbversionGetList(EnumDbversion pEnumDbversion)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                items = busDbversion.Get(pEnumDbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// DbversionGet
+        /// </summary>
+        /// <param name="">pLngDbversionID</param>
+        /// <returns>Dbversion</returns>
+        /// 
+        public Dbversion DbversionGet(long pLngDbversionID)
+        {
+            Dbversion dbversion = new Dbversion() { DbversionID = pLngDbversionID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusDbversion busDbversion = null;
+                busDbversion = new BusDbversion(conn);
+                busDbversion.Load(dbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busDbversion.HasError;
+                if (busDbversion.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return dbversion;
+        }
+
+        /// <summary>
+        /// DbversionRemove
+        /// </summary>
+        /// <param name="">pDbversionID</param>
+        /// <returns>void</returns>
+        /// 
+        public void DbversionRemove(long pDbversionID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Dbversion dbversion = new Dbversion();
+                dbversion.DbversionID = pDbversionID;
+                BusDbversion bus = null;
+                bus = new BusDbversion(conn);
+                bus.Delete(dbversion);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
+        //------------------------------------------
+        /// <summary>
+        /// EvaluationCreateOrModify
+        /// </summary>
+        /// <param name="">pEvaluation</param>
+        /// <returns>long</returns>
+        /// 
+        public long EvaluationCreateOrModify(Evaluation pEvaluation)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusEvaluation busEvaluation = null;
+                busEvaluation = new BusEvaluation(conn);
+                busEvaluation.Save(pEvaluation);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pEvaluation.EvaluationID;
+                _hasError = busEvaluation.HasError;
+                if (busEvaluation.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// EvaluationGetList
+        /// </summary>
+        /// <param name="">pEnumEvaluation</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList EvaluationGetList(EnumEvaluation pEnumEvaluation)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusEvaluation busEvaluation = null;
+                busEvaluation = new BusEvaluation(conn);
+                items = busEvaluation.Get(pEnumEvaluation);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busEvaluation.HasError;
+                if (busEvaluation.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// EvaluationGet
+        /// </summary>
+        /// <param name="">pLngEvaluationID</param>
+        /// <returns>Evaluation</returns>
+        /// 
+        public Evaluation EvaluationGet(long pLngEvaluationID)
+        {
+            Evaluation evaluation = new Evaluation() { EvaluationID = pLngEvaluationID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusEvaluation busEvaluation = null;
+                busEvaluation = new BusEvaluation(conn);
+                busEvaluation.Load(evaluation);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busEvaluation.HasError;
+                if (busEvaluation.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return evaluation;
+        }
+
+        /// <summary>
+        /// EvaluationRemove
+        /// </summary>
+        /// <param name="">pEvaluationID</param>
+        /// <returns>void</returns>
+        /// 
+        public void EvaluationRemove(long pEvaluationID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Evaluation evaluation = new Evaluation();
+                evaluation.EvaluationID = pEvaluationID;
+                BusEvaluation bus = null;
+                bus = new BusEvaluation(conn);
+                bus.Delete(evaluation);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
         //------------------------------------------
         /// <summary>
         /// SyslogCreateOrModify
@@ -521,7 +791,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
 
 
     }

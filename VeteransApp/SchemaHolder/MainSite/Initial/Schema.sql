@@ -74,6 +74,7 @@ CREATE TABLE [user]
 	 user_role_id [numeric](10, 0) NULL,
      date_created      DATETIME NULL,
      date_modified     DATETIME NULL,
+     fullname        NVARCHAR(255) NULL,
      firstname        NVARCHAR(255) NULL,
      middlename        NVARCHAR(255) NULL,
      lastname        NVARCHAR(255) NULL,
@@ -89,7 +90,9 @@ CREATE TABLE [user]
      validationlink  NVARCHAR(255) NULL,
      isvalidated  BIT NULL,
      welcome_email_sent_date  DATETIME NULL,
-     last_login_date  DATETIME NULL
+     last_login_date  DATETIME NULL,
+	 internal_notes        NVARCHAR(255) NULL,
+	 user_message        NVARCHAR(255) NULL
 
  )
 
@@ -139,6 +142,46 @@ ELSE
   PRINT '<<< FAILED CREATING TABLE syslog >>>'
 
 go
+
+/*******************************************************************************
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		11/16/16		HA		Created
+*******************************************************************************/
+IF EXISTS (SELECT *
+           FROM   sysobjects
+           WHERE  type = 'U'
+                  AND name = 'evaluation')
+  BEGIN
+      PRINT 'Dropping Table evaluation'
+
+      DROP TABLE evaluation
+  END
+
+go
+
+CREATE TABLE evaluation
+  (
+     evaluation_id      NUMERIC(10) NOT NULL PRIMARY KEY IDENTITY,
+     [user_id] NUMERIC(10) NULL,
+     date_created   DATETIME NULL,
+     date_modified  DATETIME NULL,
+	 is_firsttime_filing	BIT NULL,
+	 has_a_claim	BIT NULL,
+	 has_active_appeal	BIT NULL,
+	 current_rating	int default 0
+  )
+
+go
+
+IF Object_id('dbo.evaluation') IS NOT NULL
+  PRINT '<<< CREATED TABLE evaluation >>>'
+ELSE
+  PRINT '<<< FAILED CREATING TABLE evaluation >>>'
+
+go
+
 
 /******************************************************************************
 **		Name:  Lookup Data

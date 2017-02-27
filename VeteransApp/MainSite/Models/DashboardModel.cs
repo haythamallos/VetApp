@@ -8,9 +8,9 @@ namespace MainSite.Models
     public class DashboardModel
     {
         public EvaluationResults evaluationResults { get; set; }
+        public EvaluationModel evaluationModel { get; set; }
         public DashboardModel()
         {
-            evaluationResults = new EvaluationResults();
         }
     }
 

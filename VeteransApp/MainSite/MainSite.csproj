@@ -124,6 +124,8 @@
     <Compile Include="Classes\Defaults.cs" />
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusDbversion.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusEvaluation.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusUser.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusUserRole.cs" />
@@ -133,9 +135,13 @@
     <Compile Include="DB\Common\Config.cs" />
     <Compile Include="DB\Common\ErrorCode.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\Dbversion.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\Evaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
     <Compile Include="DB\DataAccessLayer\Data\User.cs" />
     <Compile Include="DB\DataAccessLayer\Data\UserRole.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumDbversion.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumEvaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUser.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUserRole.cs" />
@@ -538,7 +544,7 @@
     <Content Include="Views\Dashboard\FormQBack.cshtml" />
     <Content Include="Views\Dashboard\BackPDF.cshtml" />
     <Content Include="Views\Home\RegisterCode.cshtml" />
-    <Content Include="Views\Dashboard\Profile.cshtml" />
+    <Content Include="Views\Dashboard\ProfileUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

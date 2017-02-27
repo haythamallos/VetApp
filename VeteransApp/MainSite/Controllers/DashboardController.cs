@@ -21,6 +21,13 @@ namespace MainSite.Controllers
     {
         private Config _config = null;
 
+        private void Auth()
+        {
+            if (!IsAuthenticated())
+            {
+                LogOut();
+            }
+        }
         public DashboardController()
         {
             _config = new Config();
@@ -35,16 +42,20 @@ namespace MainSite.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            Auth();
+            User user = (User)Session["User"];
             DashboardModel dashboardModel = new DashboardModel();
-            if (IsAuthenticated())
+            BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+            Evaluation evaluation = busFacCore.EvaluationGet(user);
+            if (evaluation != null)
             {
-                EvaluationModel evaluation = (EvaluationModel)Session["Evaluation"];
-                dashboardModel.evaluationResults.CurrentRating = evaluation.CurrentRating;
+                dashboardModel.evaluationResults = new EvaluationResults();
+                dashboardModel.evaluationModel = new EvaluationModel();
+
+                dashboardModel.evaluationModel.HasEvaluation = true;
+                dashboardModel.evaluationResults.CurrentRating = (int)evaluation.CurrentRating;
             }
-            else
-            {
-                LogOut();
-            }
+
             return View(dashboardModel);
 
         }
@@ -65,11 +76,14 @@ namespace MainSite.Controllers
         {
             return View();
         }
-        public ActionResult Profile()
+        public ActionResult ProfileUpdate()
         {
+            Auth();
+
             User user = (User)Session["User"];
            
-            UserModel userModel = new UserModel() { Username = user.Username, Password = user.Passwd };
+            UserModel userModel = new UserModel() { Username = user.Username, Password = user.Passwd, FullName = user.Fullname, PhoneNumber = user.PhoneNumber,
+             Message = user.UserMessage};
             return View();
         }
         public ActionResult Evaluation(EvaluationModel evaluationModel)
@@ -93,6 +107,7 @@ namespace MainSite.Controllers
                         {
                             Session["Authenticated"] = true;
                             Session["User"] = user;
+                            AssociateEvaluationWithUser();
                             return RedirectToAction("Index");
                         }
                         else
@@ -104,13 +119,11 @@ namespace MainSite.Controllers
                     {
                         ViewData["UserExist"] = false;
                     }
-
                 }
                 else
                 {
                     ViewData["InvalidCredentials"] = true;
                 }
-
 
             }
             catch (Exception ex)
@@ -118,6 +131,16 @@ namespace MainSite.Controllers
                 ViewData["HasError"] = true;
             }
             return View("Login2");
+        }
+        private void AssociateEvaluationWithUser()
+        {
+            EvaluationModel evaluation = (EvaluationModel)Session["Evaluation"];
+            User user = (User)Session["User"];
+            if ((evaluation != null) && (user != null))
+            {
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                long lID = busFacCore.EvaluationCreate(evaluation, user.UserID);
+            }
         }
         public ActionResult Register(UserModel userModel)
         {
@@ -141,6 +164,7 @@ namespace MainSite.Controllers
                             {
                                 Session["Authenticated"] = true;
                                 Session["User"] = user;
+                                AssociateEvaluationWithUser();
                                 return RedirectToAction("Index");
                             }
                             else

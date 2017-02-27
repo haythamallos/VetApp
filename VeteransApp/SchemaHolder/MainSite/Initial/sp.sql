@@ -1,4 +1,546 @@
-﻿IF EXISTS (select * from sysobjects where id = object_id(N'[spSyslogExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+﻿IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionExist >>>>'
+	DROP PROCEDURE [spDbversionExist]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionExist
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spDbversionExist
+(
+@DbversionID        NUMERIC(10) = 0,
+@COUNT          INT = 0 OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+SELECT @COUNT = COUNT(dbversion_id) 
+FROM [dbversion] 
+WHERE dbversion_id = @DbversionID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionExist >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionExist >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionLoad >>>>'
+	DROP PROCEDURE [spDbversionLoad]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionLoad
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spDbversionLoad
+(
+@DbversionID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- select record(s) with specified id
+
+SELECT  [dbversion_id], [date_created], [major_num], [minor_num], [notes] 
+FROM [dbversion] 
+WHERE dbversion_id = @DbversionID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionLoad >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionLoad >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionUpdate >>>>'
+	DROP PROCEDURE [spDbversionUpdate]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionUpdate
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spDbversionUpdate
+(
+	@DbversionID               NUMERIC(10) = 0,
+	@MajorNum                  NUMERIC(10,0) = 0,
+	@MinorNum                  NUMERIC(10,0) = 0,
+	@Notes                     TEXT = NULL,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+UPDATE [dbversion] SET 
+	[major_num] = @MajorNum,
+	[minor_num] = @MinorNum,
+	[notes] = @Notes
+WHERE dbversion_id = @DbversionID
+
+-- return ID for updated record
+SELECT @PKID = @DbversionID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionUpdate >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionUpdate >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionDelete >>>>'
+	DROP PROCEDURE [spDbversionDelete]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionDelete
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spDbversionDelete
+(
+@DbversionID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+DELETE FROM [dbversion] 
+WHERE dbversion_id = @DbversionID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionDelete >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionDelete >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionInsert >>>>'
+	DROP PROCEDURE [spDbversionInsert]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionInsert
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spDbversionInsert
+(
+	@DbversionID               NUMERIC(10) = 0,
+	@DateCreated               DATETIME = NULL,
+	@MajorNum                  NUMERIC(10,0) = 0,
+	@MinorNum                  NUMERIC(10,0) = 0,
+	@Notes                     TEXT = NULL,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+INSERT INTO [dbversion]
+(
+	[dbversion_id],
+	[date_created],
+	[major_num],
+	[minor_num],
+	[notes]
+)
+ VALUES 
+(
+	@DbversionID,
+	@DateCreated,
+	@MajorNum,
+	@MinorNum,
+	@Notes
+)
+
+
+-- return ID for new record
+SELECT @PKID = @DbversionID
+
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionInsert >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionInsert >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spDbversionEnum >>>>'
+	DROP PROCEDURE [spDbversionEnum]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spDbversionEnum
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+
+
+
+
+CREATE PROCEDURE spDbversionEnum
+	@DbversionID               NUMERIC(10) = 0,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+	@MajorNum                  NUMERIC(10,0) = 0,
+	@MinorNum                  NUMERIC(10,0) = 0,
+	@Notes                     TEXT = NULL,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
+AS
+    	SET NOCOUNT ON
+
+
+      SELECT  [dbversion_id], [date_created], [major_num], [minor_num], [notes]
+      FROM [dbversion] 
+      WHERE ((@DbversionID = 0) OR ([dbversion_id] LIKE @DbversionID))
+      AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
+      AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
+      AND ((@MajorNum = 0) OR ([major_num] LIKE @MajorNum))
+      AND ((@MinorNum = 0) OR ([minor_num] LIKE @MinorNum))
+      AND ((@Notes IS NULL) OR ([notes] LIKE @Notes))
+ ORDER BY [dbversion_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
+GO
+IF EXISTS (select * from sysobjects where id = object_id(N'[spDbversionEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spDbversionEnum >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spDbversionEnum >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationExist >>>>'
+	DROP PROCEDURE [spEvaluationExist]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationExist
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spEvaluationExist
+(
+@EvaluationID        NUMERIC(10) = 0,
+@COUNT          INT = 0 OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+SELECT @COUNT = COUNT(evaluation_id) 
+FROM [evaluation] 
+WHERE evaluation_id = @EvaluationID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationExist >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationExist >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationLoad >>>>'
+	DROP PROCEDURE [spEvaluationLoad]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationLoad
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spEvaluationLoad
+(
+@EvaluationID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- select record(s) with specified id
+
+SELECT  [evaluation_id], [user_id], [date_created], [date_modified], [is_firsttime_filing], [has_a_claim], [has_active_appeal], [current_rating] 
+FROM [evaluation] 
+WHERE evaluation_id = @EvaluationID
+RETURN 0
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationLoad]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationLoad >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationLoad >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationUpdate >>>>'
+	DROP PROCEDURE [spEvaluationUpdate]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationUpdate
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spEvaluationUpdate
+(
+	@EvaluationID              NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
+	@DateModified              DATETIME = NULL,
+	@IsFirsttimeFiling         NUMERIC(1,0) = 0,
+	@HasAClaim                 NUMERIC(1,0) = 0,
+	@HasActiveAppeal           NUMERIC(1,0) = 0,
+	@CurrentRating             NUMERIC(10,0) = 0,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+UPDATE [evaluation] SET 
+	[user_id] = @UserID,
+	[date_modified] = @DateModified,
+	[is_firsttime_filing] = @IsFirsttimeFiling,
+	[has_a_claim] = @HasAClaim,
+	[has_active_appeal] = @HasActiveAppeal,
+	[current_rating] = @CurrentRating
+WHERE evaluation_id = @EvaluationID
+
+-- return ID for updated record
+SELECT @PKID = @EvaluationID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationUpdate]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationUpdate >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationUpdate >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationDelete >>>>'
+	DROP PROCEDURE [spEvaluationDelete]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationDelete
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spEvaluationDelete
+(
+@EvaluationID        NUMERIC(10) = 0
+)
+AS
+SET NOCOUNT ON
+
+-- check if a record with the specified id exists
+
+DELETE FROM [evaluation] 
+WHERE evaluation_id = @EvaluationID
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationDelete >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationDelete >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationInsert >>>>'
+	DROP PROCEDURE [spEvaluationInsert]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationInsert
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+CREATE PROCEDURE spEvaluationInsert
+(
+	@EvaluationID              NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
+	@DateCreated               DATETIME = NULL,
+	@IsFirsttimeFiling         NUMERIC(1,0) = 0,
+	@HasAClaim                 NUMERIC(1,0) = 0,
+	@HasActiveAppeal           NUMERIC(1,0) = 0,
+	@CurrentRating             NUMERIC(10,0) = 0,
+	@PKID                      NUMERIC(10) OUTPUT
+)
+AS
+SET NOCOUNT ON
+
+   -- Update record wth NUMERIC(10) value
+
+INSERT INTO [evaluation]
+(
+	[user_id],
+	[date_created],
+	[is_firsttime_filing],
+	[has_a_claim],
+	[has_active_appeal],
+	[current_rating]
+)
+ VALUES 
+(
+	@UserID,
+	@DateCreated,
+	@IsFirsttimeFiling,
+	@HasAClaim,
+	@HasActiveAppeal,
+	@CurrentRating
+)
+
+
+-- return ID for new record
+SELECT @PKID = SCOPE_IDENTITY()
+
+------------------------------------------------
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationInsert]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationInsert >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationInsert >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spEvaluationEnum >>>>'
+	DROP PROCEDURE [spEvaluationEnum]
+END
+GO
+
+/*******************************************************************************
+**		PROCEDURE NAME: spEvaluationEnum
+**		Change History
+*******************************************************************************
+**		Date:		Author:		Description:
+**		2/27/2017		HA		Created
+*******************************************************************************/
+
+
+
+
+CREATE PROCEDURE spEvaluationEnum
+	@EvaluationID              NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+    	@BeginDateModified         DATETIME = NULL,
+    	@EndDateModified           DATETIME = NULL,
+	@IsFirsttimeFiling         NUMERIC(1,0) = NULL,
+	@HasAClaim                 NUMERIC(1,0) = NULL,
+	@HasActiveAppeal           NUMERIC(1,0) = NULL,
+	@CurrentRating             NUMERIC(10,0) = 0,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
+AS
+    	SET NOCOUNT ON
+
+
+      SELECT  [evaluation_id], [user_id], [date_created], [date_modified], [is_firsttime_filing], [has_a_claim], [has_active_appeal], [current_rating]
+      FROM [evaluation] 
+      WHERE ((@EvaluationID = 0) OR ([evaluation_id] LIKE @EvaluationID))
+      AND ((@UserID = 0) OR ([user_id] LIKE @UserID))
+      AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
+      AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
+      AND ((@BeginDateModified IS NULL) OR ([date_modified] >= @BeginDateModified))
+      AND ((@EndDateModified IS NULL) OR ([date_modified] <= @EndDateModified))
+      AND ((@IsFirsttimeFiling IS NULL) OR ([is_firsttime_filing] LIKE @IsFirsttimeFiling))
+      AND ((@HasAClaim IS NULL) OR ([has_a_claim] LIKE @HasAClaim))
+      AND ((@HasActiveAppeal IS NULL) OR ([has_active_appeal] LIKE @HasActiveAppeal))
+      AND ((@CurrentRating = 0) OR ([current_rating] LIKE @CurrentRating))
+ ORDER BY [evaluation_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
+GO
+IF EXISTS (select * from sysobjects where id = object_id(N'[spEvaluationEnum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spEvaluationEnum >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spEvaluationEnum >>>'
+GO
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spSyslogExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
 	PRINT '<<<< Dropping Stored Procedure spSyslogExist >>>>'
 	DROP PROCEDURE [spSyslogExist]
@@ -331,7 +873,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [user_id], [user_role_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date] 
+SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message] 
 FROM [user] 
 WHERE user_id = @UserID
 RETURN 0
@@ -363,6 +905,7 @@ CREATE PROCEDURE spUserUpdate
 	@UserID                    NUMERIC(10) = 0,
 	@UserRoleID                NUMERIC(10) = 0,
 	@DateModified              DATETIME = NULL,
+	@Fullname                  NVARCHAR(255) = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
@@ -379,6 +922,8 @@ CREATE PROCEDURE spUserUpdate
 	@Isvalidated               NUMERIC(1,0) = 0,
 	@WelcomeEmailSentDate      DATETIME = NULL,
 	@LastLoginDate             DATETIME = NULL,
+	@InternalNotes             NVARCHAR(255) = NULL,
+	@UserMessage               NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -389,6 +934,7 @@ SET NOCOUNT ON
 UPDATE [user] SET 
 	[user_role_id] = @UserRoleID,
 	[date_modified] = @DateModified,
+	[fullname] = @Fullname,
 	[firstname] = @Firstname,
 	[middlename] = @Middlename,
 	[lastname] = @Lastname,
@@ -404,7 +950,9 @@ UPDATE [user] SET
 	[validationlink] = @Validationlink,
 	[isvalidated] = @Isvalidated,
 	[welcome_email_sent_date] = @WelcomeEmailSentDate,
-	[last_login_date] = @LastLoginDate
+	[last_login_date] = @LastLoginDate,
+	[internal_notes] = @InternalNotes,
+	[user_message] = @UserMessage
 WHERE user_id = @UserID
 
 -- return ID for updated record
@@ -471,6 +1019,7 @@ CREATE PROCEDURE spUserInsert
 	@UserID                    NUMERIC(10) = 0,
 	@UserRoleID                NUMERIC(10) = 0,
 	@DateCreated               DATETIME = NULL,
+	@Fullname                  NVARCHAR(255) = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
@@ -487,6 +1036,8 @@ CREATE PROCEDURE spUserInsert
 	@Isvalidated               NUMERIC(1,0) = 0,
 	@WelcomeEmailSentDate      DATETIME = NULL,
 	@LastLoginDate             DATETIME = NULL,
+	@InternalNotes             NVARCHAR(255) = NULL,
+	@UserMessage               NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -498,6 +1049,7 @@ INSERT INTO [user]
 (
 	[user_role_id],
 	[date_created],
+	[fullname],
 	[firstname],
 	[middlename],
 	[lastname],
@@ -513,12 +1065,15 @@ INSERT INTO [user]
 	[validationlink],
 	[isvalidated],
 	[welcome_email_sent_date],
-	[last_login_date]
+	[last_login_date],
+	[internal_notes],
+	[user_message]
 )
  VALUES 
 (
 	@UserRoleID,
 	@DateCreated,
+	@Fullname,
 	@Firstname,
 	@Middlename,
 	@Lastname,
@@ -534,7 +1089,9 @@ INSERT INTO [user]
 	@Validationlink,
 	@Isvalidated,
 	@WelcomeEmailSentDate,
-	@LastLoginDate
+	@LastLoginDate,
+	@InternalNotes,
+	@UserMessage
 )
 
 
@@ -575,6 +1132,7 @@ CREATE PROCEDURE spUserEnum
     	@EndDateCreated            DATETIME = NULL,
     	@BeginDateModified         DATETIME = NULL,
     	@EndDateModified           DATETIME = NULL,
+	@Fullname                  NVARCHAR(255) = NULL,
 	@Firstname                 NVARCHAR(255) = NULL,
 	@Middlename                NVARCHAR(255) = NULL,
 	@Lastname                  NVARCHAR(255) = NULL,
@@ -593,13 +1151,15 @@ CREATE PROCEDURE spUserEnum
     	@EndWelcomeEmailSentDate   DATETIME = NULL,
     	@BeginLastLoginDate        DATETIME = NULL,
     	@EndLastLoginDate          DATETIME = NULL,
+	@InternalNotes             NVARCHAR(255) = NULL,
+	@UserMessage               NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date]
+      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message]
       FROM [user] 
       WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
       AND ((@UserRoleID = 0) OR ([user_role_id] LIKE @UserRoleID))
@@ -607,6 +1167,7 @@ AS
       AND ((@EndDateCreated IS NULL) OR ([date_created] <= @EndDateCreated))
       AND ((@BeginDateModified IS NULL) OR ([date_modified] >= @BeginDateModified))
       AND ((@EndDateModified IS NULL) OR ([date_modified] <= @EndDateModified))
+      AND ((@Fullname IS NULL) OR ([fullname] LIKE @Fullname))
       AND ((@Firstname IS NULL) OR ([firstname] LIKE @Firstname))
       AND ((@Middlename IS NULL) OR ([middlename] LIKE @Middlename))
       AND ((@Lastname IS NULL) OR ([lastname] LIKE @Lastname))
@@ -625,6 +1186,8 @@ AS
       AND ((@EndWelcomeEmailSentDate IS NULL) OR ([welcome_email_sent_date] <= @EndWelcomeEmailSentDate))
       AND ((@BeginLastLoginDate IS NULL) OR ([last_login_date] >= @BeginLastLoginDate))
       AND ((@EndLastLoginDate IS NULL) OR ([last_login_date] <= @EndLastLoginDate))
+      AND ((@InternalNotes IS NULL) OR ([internal_notes] LIKE @InternalNotes))
+      AND ((@UserMessage IS NULL) OR ([user_message] LIKE @UserMessage))
  ORDER BY [user_id] ASC
 
 
@@ -638,8 +1201,6 @@ PRINT '<<<< Created Stored Procedure spUserEnum >>>>'
 ELSE
 PRINT '<<< Failed Creating Stored Procedure spUserEnum >>>'
 GO
-
-
 
 IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
