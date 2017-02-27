@@ -12,13 +12,30 @@ namespace MainSite.Controllers
         {
             return View();
         }
+        public ActionResult Testimonials()
+        {
+            return View();
+        }
+        public ActionResult Benefits()
+        {
+            return View();
+        }
         public ActionResult Login2()
         {
             return View();
         }
+        public ActionResult RegisterCode()
+        {
+            ViewData["RegisterCode"] = true;
+            return View();
+        }
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            return View();
+        }
+
+        public ActionResult Terms()
+        {
             return View();
         }
 
@@ -31,6 +48,17 @@ namespace MainSite.Controllers
         public ActionResult Register2()
         {
             return View();
+        }
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
         }
     }
 }

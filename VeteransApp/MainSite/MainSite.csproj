@@ -123,6 +123,20 @@
   <ItemGroup>
     <Compile Include="Classes\Defaults.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusUser.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusUserRole.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusValidationExpressions.cs" />
+    <Compile Include="DB\BusinessFacadeLayer\BusFacCore.cs" />
+    <Compile Include="DB\Common\Column.cs" />
+    <Compile Include="DB\Common\ErrorCode.cs" />
+    <Compile Include="DB\Common\UtilsSecurity.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\User.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\UserRole.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumUser.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumUserRole.cs" />
     <Compile Include="Utils\PDFFile.cs" />
     <Compile Include="Utils\PDFTextFieldType.cs" />
     <Compile Include="Utils\PDFOtherFieldType.cs" />
@@ -440,6 +454,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pdf\back.pdf" />
+    <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\Veteransapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -24,9 +24,9 @@ $("#btnIndexTestimonialsModal").click(function () {
     $('#smallmodaltestimonials').modal('show');
 });
 
-$("#btnEmailSent").click(function () {
-    $('#smallmodalemailsent').modal('show');
-});
+//$("#btnEmailSent").click(function () {
+//    $('#smallmodalemailsent').modal('show');
+//});
 
 
 // SITEAUTH.js

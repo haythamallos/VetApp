@@ -1,0 +1,1 @@
+﻿INSERT INTO postalcodelookup ([postalcodelookup_id],[date_created],[postal_code],[postal_type],[primary_city],[state],[area_codes],[latitude],[longitude],[estimated_population]) VALUES (<REPLACE_1>, GETDATE(), '<REPLACE_2>', '<REPLACE_3>', '<REPLACE_4>', '<REPLACE_5>', '<REPLACE_6>', <REPLACE_7>, <REPLACE_8>, <REPLACE_9>)

@@ -1,0 +1,114 @@
+﻿ //------------------------------------------
+        /// <summary>
+        /// <<REPLACE_1>>CreateOrModify
+        /// </summary>
+        /// <param name="">p<<REPLACE_1>></param>
+        /// <returns>long</returns>
+        /// 
+        public long <<REPLACE_1>>CreateOrModify(<<REPLACE_1>> p<<REPLACE_1>>)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
+                bus<<REPLACE_1>>.Save(p<<REPLACE_1>>);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = p<<REPLACE_1>>.<<REPLACE_1>>ID;
+                _hasError = bus<<REPLACE_1>>.HasError;
+                if (bus<<REPLACE_1>>.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// <<REPLACE_1>>GetList
+        /// </summary>
+        /// <param name="">pEnum<<REPLACE_1>></param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList <<REPLACE_1>>GetList(Enum<<REPLACE_1>> pEnum<<REPLACE_1>>)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
+                items = bus<<REPLACE_1>>.Get(pEnum<<REPLACE_1>>);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus<<REPLACE_1>>.HasError;
+                if (bus<<REPLACE_1>>.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }       
+
+		/// <summary>
+        /// <<REPLACE_1>>Get
+        /// </summary>
+        /// <param name="">pLng<<REPLACE_1>>ID</param>
+        /// <returns><<REPLACE_1>></returns>
+        /// 
+        public <<REPLACE_1>> <<REPLACE_1>>Get(long pLng<<REPLACE_1>>ID)
+        {
+            <<REPLACE_1>> <<REPLACE_2>> = new <<REPLACE_1>>() { <<REPLACE_1>>ID = pLng<<REPLACE_1>>ID };
+			bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Bus<<REPLACE_1>> bus<<REPLACE_1>> = null;
+                bus<<REPLACE_1>> = new Bus<<REPLACE_1>>(conn);
+                bus<<REPLACE_1>>.Load(<<REPLACE_2>>);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus<<REPLACE_1>>.HasError;
+                if (bus<<REPLACE_1>>.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return <<REPLACE_2>>;
+        }
+
+        /// <summary>
+        /// <<REPLACE_1>>Remove
+        /// </summary>
+        /// <param name="">p<<REPLACE_1>>ID</param>
+        /// <returns>void</returns>
+        /// 
+        public void <<REPLACE_1>>Remove(long p<<REPLACE_1>>ID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                <<REPLACE_1>> <<REPLACE_2>> = new <<REPLACE_1>>();
+                <<REPLACE_2>>.<<REPLACE_1>>ID = p<<REPLACE_1>>ID;
+                Bus<<REPLACE_1>> bus = null;
+                bus = new Bus<<REPLACE_1>>(conn);
+                bus.Delete(<<REPLACE_2>>);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }

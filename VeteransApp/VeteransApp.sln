@@ -26,6 +26,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PDFForms", "PDFForms\", "{8
 		SlnRelativePath = "PDFForms\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaHolder", "SchemaHolder\SchemaHolder.csproj", "{C9F384BA-E304-4FE4-A771-BE60E47C4A80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator", "Generator\CodeGenerator.csproj", "{442D6DFB-17D2-4954-B19C-D729501EDB37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{88AF252A-9D94-40C0-A645-0AA85DD1ABA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88AF252A-9D94-40C0-A645-0AA85DD1ABA7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{88AF252A-9D94-40C0-A645-0AA85DD1ABA7}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C9F384BA-E304-4FE4-A771-BE60E47C4A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F384BA-E304-4FE4-A771-BE60E47C4A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F384BA-E304-4FE4-A771-BE60E47C4A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F384BA-E304-4FE4-A771-BE60E47C4A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

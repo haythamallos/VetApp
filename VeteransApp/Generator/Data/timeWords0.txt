@@ -1,0 +1,310 @@
+abruptly
+after
+after a few days
+after a long time
+after a short time
+after a while
+after that
+afternoon
+afterward
+afterwards
+alarm clock
+all at once
+all of the time
+all the while
+always
+am
+analog clock
+annual
+ante meridian
+anytime
+april
+as long as
+as soon as
+at first
+at last
+at length
+at present
+at that onset
+at that time
+at the beginning
+at the end
+at the end of the day
+at the onset
+at the same time
+at this moment
+at times
+august
+bedtime
+before
+before hand
+begin
+belated
+bell
+bicentennial
+biennial
+by now
+calendar
+calendar year
+century
+chronological
+chronology
+chronometer
+clock
+clock face
+commence
+commencing
+concurrently
+consequently
+continually
+coordinated universal time
+cuckoo clock
+currently
+cyclically
+day
+daylight
+daylight savings time
+days of the week
+daytime
+decade
+december
+decennium
+delay
+delayed
+dial
+digital clock
+directly
+dst
+during
+earlier
+early
+embark
+eon
+epoch
+era
+evening
+eventually
+every time
+everyday
+february
+final
+finally
+first
+fiscal year
+following
+following that
+former
+formerly
+fortnight
+frequently
+friday
+from this point
+from time to time
+future
+galactic year
+generally
+geologic time
+gnomon
+gradual
+gradually
+grandfather clock
+greenwich mean time
+half
+hands
+henceforth
+hereafter
+heretofore
+high noon
+horology
+hour
+hour hand
+hourglass
+idl
+immediately
+in an instant
+in awhile
+in conclusion
+in frequently
+in the end
+in the first place
+in the future
+in the last place
+in the meantime
+in the past
+in the second place
+in time
+in turn
+initial
+instantaneously
+instantly
+intermittent
+international date line
+january
+jiffy
+jubilee
+july
+june
+just then
+last
+last of all
+lastly
+late
+later
+later on
+later that day
+leap second
+leap year
+little by little
+lunar month
+march
+may
+meanwhile
+meridian
+microsecond
+midafternoon
+midmorning
+midnight
+millennium
+millisecond
+minute
+minute hand
+moment
+momentarily
+monday
+month
+morning
+nanosecond
+never
+next
+night
+nighttime
+noon
+not at all
+not long after
+not long ago
+november
+now
+o'clock
+occasionally
+october
+of late
+often
+often time
+on the next occasion
+on time
+once
+once upon a time
+overtime
+past
+pendulum clock
+per annum
+per diem
+period
+periodically
+picosecond
+pm
+pocket watch
+post meridian
+preceding
+premature
+present
+presently
+previously
+prime meridian
+prior to
+promptly
+punctual
+quarter hour
+quartz clock
+quaver
+quick
+rarely
+recently
+repeatedly
+right after
+right away
+saturday
+schedule
+season
+second
+second hand
+seldom
+semester
+semiquaver
+september
+sequentially
+shift
+shortly
+shorty
+sidereal time
+simultaneously
+since
+slow
+so far
+some of the time
+some time
+someday
+sometime
+soon
+soon after
+soon afterward
+sporadically
+starting with
+stopwatch
+subsequently
+suddenly
+sunday
+sundial
+sunrise
+sunset
+synchronized
+tardy
+tempo
+temporary
+the final
+the latter
+the next
+then
+then tomorrow
+thereafter
+third
+this instant
+thursday
+time
+time zone
+timekeeper
+timepiece
+timer
+timetable
+to begin
+to begin with
+to conclude
+to finish
+today
+tomorrow
+tonight
+triennium
+trimester
+tuesday
+twice
+twilight
+ultimately
+uncommon
+until
+until now
+up until that time
+usually
+utc
+watch
+water clock
+wednesday
+week
+when
+while
+wristwatch
+year
+yesterday
+yesteryear
+yet
+zone
+zulu time
