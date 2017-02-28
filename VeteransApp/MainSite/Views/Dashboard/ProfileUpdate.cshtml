@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label class="col-md-12">Anything you want us to know that would help evaluate you for VA increase?  Tell us your story.</label>
                         <div class="col-md-12">
-                            <textarea id="Message" name="Message" value="@Model.Message"  rows="5" class="form-control form-control-line"></textarea>
+                            <textarea id="Message" name="Message" value=""  rows="5" placeholder="enter your story here ..." class="form-control form-control-line">@Model.Message</textarea>
                         </div>
                     </div>
                     <br />
@@ -58,15 +58,30 @@
                             <button class="btn btn-success">Update Profile</button>
                         </div>
                     </div>
+
                     @if (ViewData["IsSaved"] != null)
                     {
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">Successfully Updated</h4>
-                                <p class="card-text">Your profile was successfully updated</p>
+                        if ((bool)ViewData["IsSaved"])
+                        {
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Successfully Updated</h4>
+                                    <p class="card-text">Your profile was successfully updated</p>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else if ((bool)ViewData["IsSaved"])
+                        {
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Error In Updating Your Profile</h4>
+                                    <p class="card-text">We are encountering a problem in saving your data.  The issue is being looke at.  Thank you for your patience.</p>
+                                </div>
+                            </div>
+                        }
                     }
+                   
+
                 </form>
             </div>
         </div>

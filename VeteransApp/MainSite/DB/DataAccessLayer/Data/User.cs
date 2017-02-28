@@ -71,6 +71,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private string _strUserMessage = null;
         /// <summary>CookieID Attribute type String</summary>
         private string _strCookieID = null;
+        /// <summary>CurrentRating Attribute type String</summary>
+        private long _lCurrentRating = 0;
+        /// <summary>SecurityQuestion Attribute type String</summary>
+        private string _strSecurityQuestion = null;
+        /// <summary>SecurityAnswer Attribute type String</summary>
+        private string _strSecurityAnswer = null;
+        /// <summary>NumberOfVisits Attribute type String</summary>
+        private long _lNumberOfVisits = 0;
+        /// <summary>PreviousVisitDate Attribute type String</summary>
+        private DateTime _dtPreviousVisitDate = dtNull;
+        /// <summary>LastVisitDate Attribute type String</summary>
+        private DateTime _dtLastVisitDate = dtNull;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -128,6 +140,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_USER_MESSAGE = "user_message"; //Table UserMessage field name
                                                                               /// <summary>cookie_id Database field </summary>
         public static readonly string DB_FIELD_COOKIE_ID = "cookie_id"; //Table CookieID field name
+                                                                        /// <summary>current_rating Database field </summary>
+        public static readonly string DB_FIELD_CURRENT_RATING = "current_rating"; //Table CurrentRating field name
+                                                                                  /// <summary>security_question Database field </summary>
+        public static readonly string DB_FIELD_SECURITY_QUESTION = "security_question"; //Table SecurityQuestion field name
+                                                                                        /// <summary>security_answer Database field </summary>
+        public static readonly string DB_FIELD_SECURITY_ANSWER = "security_answer"; //Table SecurityAnswer field name
+                                                                                    /// <summary>number_of_visits Database field </summary>
+        public static readonly string DB_FIELD_NUMBER_OF_VISITS = "number_of_visits"; //Table NumberOfVisits field name
+                                                                                      /// <summary>previous_visit_date Database field </summary>
+        public static readonly string DB_FIELD_PREVIOUS_VISIT_DATE = "previous_visit_date"; //Table PreviousVisitDate field name
+                                                                                            /// <summary>last_visit_date Database field </summary>
+        public static readonly string DB_FIELD_LAST_VISIT_DATE = "last_visit_date"; //Table LastVisitDate field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -178,6 +202,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_USER_MESSAGE = "UserMessage"; //Table UserMessage field name
                                                                         /// <summary>CookieID Attribute type string</summary>
         public static readonly string TAG_COOKIE_ID = "CookieID"; //Table CookieID field name
+                                                                  /// <summary>CurrentRating Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING = "CurrentRating"; //Table CurrentRating field name
+                                                                            /// <summary>SecurityQuestion Attribute type string</summary>
+        public static readonly string TAG_SECURITY_QUESTION = "SecurityQuestion"; //Table SecurityQuestion field name
+                                                                                  /// <summary>SecurityAnswer Attribute type string</summary>
+        public static readonly string TAG_SECURITY_ANSWER = "SecurityAnswer"; //Table SecurityAnswer field name
+                                                                              /// <summary>NumberOfVisits Attribute type string</summary>
+        public static readonly string TAG_NUMBER_OF_VISITS = "NumberOfVisits"; //Table NumberOfVisits field name
+                                                                               /// <summary>PreviousVisitDate Attribute type string</summary>
+        public static readonly string TAG_PREVIOUS_VISIT_DATE = "PreviousVisitDate"; //Table PreviousVisitDate field name
+                                                                                     /// <summary>LastVisitDate Attribute type string</summary>
+        public static readonly string TAG_LAST_VISIT_DATE = "LastVisitDate"; //Table LastVisitDate field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spUserInsert"; //Insert sp name
@@ -331,6 +367,42 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _strCookieID; }
             set { _strCookieID = value; }
         }
+        /// <summary>CurrentRating is a Property in the User Class of type long</summary>
+        public long CurrentRating
+        {
+            get { return _lCurrentRating; }
+            set { _lCurrentRating = value; }
+        }
+        /// <summary>SecurityQuestion is a Property in the User Class of type String</summary>
+        public string SecurityQuestion
+        {
+            get { return _strSecurityQuestion; }
+            set { _strSecurityQuestion = value; }
+        }
+        /// <summary>SecurityAnswer is a Property in the User Class of type String</summary>
+        public string SecurityAnswer
+        {
+            get { return _strSecurityAnswer; }
+            set { _strSecurityAnswer = value; }
+        }
+        /// <summary>NumberOfVisits is a Property in the User Class of type long</summary>
+        public long NumberOfVisits
+        {
+            get { return _lNumberOfVisits; }
+            set { _lNumberOfVisits = value; }
+        }
+        /// <summary>PreviousVisitDate is a Property in the User Class of type DateTime</summary>
+        public DateTime PreviousVisitDate
+        {
+            get { return _dtPreviousVisitDate; }
+            set { _dtPreviousVisitDate = value; }
+        }
+        /// <summary>LastVisitDate is a Property in the User Class of type DateTime</summary>
+        public DateTime LastVisitDate
+        {
+            get { return _dtLastVisitDate; }
+            set { _dtLastVisitDate = value; }
+        }
 
 
         /*********************** CUSTOM NON-META BEGIN *********************/
@@ -455,6 +527,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append(TAG_INTERNAL_NOTES + ":  " + InternalNotes + "\n");
             sbReturn.Append(TAG_USER_MESSAGE + ":  " + UserMessage + "\n");
             sbReturn.Append(TAG_COOKIE_ID + ":  " + CookieID + "\n");
+            sbReturn.Append(TAG_CURRENT_RATING + ":  " + CurrentRating + "\n");
+            sbReturn.Append(TAG_SECURITY_QUESTION + ":  " + SecurityQuestion + "\n");
+            sbReturn.Append(TAG_SECURITY_ANSWER + ":  " + SecurityAnswer + "\n");
+            sbReturn.Append(TAG_NUMBER_OF_VISITS + ":  " + NumberOfVisits + "\n");
+            if (!dtNull.Equals(PreviousVisitDate))
+            {
+                sbReturn.Append(TAG_PREVIOUS_VISIT_DATE + ":  " + PreviousVisitDate.ToString() + "\n");
+            }
+            else
+            {
+                sbReturn.Append(TAG_PREVIOUS_VISIT_DATE + ":\n");
+            }
+            if (!dtNull.Equals(LastVisitDate))
+            {
+                sbReturn.Append(TAG_LAST_VISIT_DATE + ":  " + LastVisitDate.ToString() + "\n");
+            }
+            else
+            {
+                sbReturn.Append(TAG_LAST_VISIT_DATE + ":\n");
+            }
 
             return sbReturn.ToString();
         }
@@ -517,6 +609,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<" + TAG_INTERNAL_NOTES + ">" + InternalNotes + "</" + TAG_INTERNAL_NOTES + ">\n");
             sbReturn.Append("<" + TAG_USER_MESSAGE + ">" + UserMessage + "</" + TAG_USER_MESSAGE + ">\n");
             sbReturn.Append("<" + TAG_COOKIE_ID + ">" + CookieID + "</" + TAG_COOKIE_ID + ">\n");
+            sbReturn.Append("<" + TAG_CURRENT_RATING + ">" + CurrentRating + "</" + TAG_CURRENT_RATING + ">\n");
+            sbReturn.Append("<" + TAG_SECURITY_QUESTION + ">" + SecurityQuestion + "</" + TAG_SECURITY_QUESTION + ">\n");
+            sbReturn.Append("<" + TAG_SECURITY_ANSWER + ">" + SecurityAnswer + "</" + TAG_SECURITY_ANSWER + ">\n");
+            sbReturn.Append("<" + TAG_NUMBER_OF_VISITS + ">" + NumberOfVisits + "</" + TAG_NUMBER_OF_VISITS + ">\n");
+            if (!dtNull.Equals(PreviousVisitDate))
+            {
+                sbReturn.Append("<" + TAG_PREVIOUS_VISIT_DATE + ">" + PreviousVisitDate.ToString() + "</" + TAG_PREVIOUS_VISIT_DATE + ">\n");
+            }
+            else
+            {
+                sbReturn.Append("<" + TAG_PREVIOUS_VISIT_DATE + "></" + TAG_PREVIOUS_VISIT_DATE + ">\n");
+            }
+            if (!dtNull.Equals(LastVisitDate))
+            {
+                sbReturn.Append("<" + TAG_LAST_VISIT_DATE + ">" + LastVisitDate.ToString() + "</" + TAG_LAST_VISIT_DATE + ">\n");
+            }
+            else
+            {
+                sbReturn.Append("<" + TAG_LAST_VISIT_DATE + "></" + TAG_LAST_VISIT_DATE + ">\n");
+            }
             sbReturn.Append("</User>" + "\n");
 
             return sbReturn.ToString();
@@ -779,6 +891,64 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 xResultNode = null;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING);
+                CurrentRating = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRating = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_SECURITY_QUESTION);
+                SecurityQuestion = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_SECURITY_ANSWER);
+                SecurityAnswer = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_NUMBER_OF_VISITS);
+                NumberOfVisits = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                NumberOfVisits = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PREVIOUS_VISIT_DATE);
+                PreviousVisitDate = DateTime.Parse(xResultNode.InnerText);
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_LAST_VISIT_DATE);
+                LastVisitDate = DateTime.Parse(xResultNode.InnerText);
+            }
+            catch
+            {
+            }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with user_id equal to the current object's UserID </summary>
         public void Load(SqlConnection conn)
@@ -965,6 +1135,36 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(User.TAG_COOKIE_ID + ":  ");
                 CookieID = Console.ReadLine();
 
+                Console.WriteLine(User.TAG_CURRENT_RATING + ":  ");
+                CurrentRating = (long)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_SECURITY_QUESTION + ":  ");
+                SecurityQuestion = Console.ReadLine();
+
+                Console.WriteLine(User.TAG_SECURITY_ANSWER + ":  ");
+                SecurityAnswer = Console.ReadLine();
+
+                Console.WriteLine(User.TAG_NUMBER_OF_VISITS + ":  ");
+                NumberOfVisits = (long)Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    Console.WriteLine(User.TAG_PREVIOUS_VISIT_DATE + ":  ");
+                    PreviousVisitDate = DateTime.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    PreviousVisitDate = new DateTime();
+                }
+                try
+                {
+                    Console.WriteLine(User.TAG_LAST_VISIT_DATE + ":  ");
+                    LastVisitDate = DateTime.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    LastVisitDate = new DateTime();
+                }
+
             }
             catch (Exception e)
             {
@@ -1000,6 +1200,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramInternalNotes = null;
             SqlParameter paramUserMessage = null;
             SqlParameter paramCookieID = null;
+            SqlParameter paramCurrentRating = null;
+            SqlParameter paramSecurityQuestion = null;
+            SqlParameter paramSecurityAnswer = null;
+            SqlParameter paramNumberOfVisits = null;
+            SqlParameter paramPreviousVisitDate = null;
+            SqlParameter paramLastVisitDate = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1128,6 +1334,46 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramCookieID.Size = 255;
             paramCookieID.Direction = ParameterDirection.Input;
 
+            paramCurrentRating = new SqlParameter("@" + TAG_CURRENT_RATING, CurrentRating);
+            paramCurrentRating.DbType = DbType.Int32;
+            paramCurrentRating.Direction = ParameterDirection.Input;
+
+            paramSecurityQuestion = new SqlParameter("@" + TAG_SECURITY_QUESTION, SecurityQuestion);
+            paramSecurityQuestion.DbType = DbType.String;
+            paramSecurityQuestion.Size = 255;
+            paramSecurityQuestion.Direction = ParameterDirection.Input;
+
+            paramSecurityAnswer = new SqlParameter("@" + TAG_SECURITY_ANSWER, SecurityAnswer);
+            paramSecurityAnswer.DbType = DbType.String;
+            paramSecurityAnswer.Size = 255;
+            paramSecurityAnswer.Direction = ParameterDirection.Input;
+
+            paramNumberOfVisits = new SqlParameter("@" + TAG_NUMBER_OF_VISITS, NumberOfVisits);
+            paramNumberOfVisits.DbType = DbType.Int32;
+            paramNumberOfVisits.Direction = ParameterDirection.Input;
+
+            if (!dtNull.Equals(PreviousVisitDate))
+            {
+                paramPreviousVisitDate = new SqlParameter("@" + TAG_PREVIOUS_VISIT_DATE, PreviousVisitDate);
+            }
+            else
+            {
+                paramPreviousVisitDate = new SqlParameter("@" + TAG_PREVIOUS_VISIT_DATE, DBNull.Value);
+            }
+            paramPreviousVisitDate.DbType = DbType.DateTime;
+            paramPreviousVisitDate.Direction = ParameterDirection.Input;
+
+            if (!dtNull.Equals(LastVisitDate))
+            {
+                paramLastVisitDate = new SqlParameter("@" + TAG_LAST_VISIT_DATE, LastVisitDate);
+            }
+            else
+            {
+                paramLastVisitDate = new SqlParameter("@" + TAG_LAST_VISIT_DATE, DBNull.Value);
+            }
+            paramLastVisitDate.DbType = DbType.DateTime;
+            paramLastVisitDate.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1157,6 +1403,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramInternalNotes);
             cmd.Parameters.Add(paramUserMessage);
             cmd.Parameters.Add(paramCookieID);
+            cmd.Parameters.Add(paramCurrentRating);
+            cmd.Parameters.Add(paramSecurityQuestion);
+            cmd.Parameters.Add(paramSecurityAnswer);
+            cmd.Parameters.Add(paramNumberOfVisits);
+            cmd.Parameters.Add(paramPreviousVisitDate);
+            cmd.Parameters.Add(paramLastVisitDate);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1189,6 +1441,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramInternalNotes = null;
             paramUserMessage = null;
             paramCookieID = null;
+            paramCurrentRating = null;
+            paramSecurityQuestion = null;
+            paramSecurityAnswer = null;
+            paramNumberOfVisits = null;
+            paramPreviousVisitDate = null;
+            paramLastVisitDate = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1260,6 +1518,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramInternalNotes = null;
             SqlParameter paramUserMessage = null;
             SqlParameter paramCookieID = null;
+            SqlParameter paramCurrentRating = null;
+            SqlParameter paramSecurityQuestion = null;
+            SqlParameter paramSecurityAnswer = null;
+            SqlParameter paramNumberOfVisits = null;
+            SqlParameter paramPreviousVisitDate = null;
+            SqlParameter paramLastVisitDate = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1393,6 +1657,46 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramCookieID.Size = 255;
             paramCookieID.Direction = ParameterDirection.Input;
 
+            paramCurrentRating = new SqlParameter("@" + TAG_CURRENT_RATING, CurrentRating);
+            paramCurrentRating.DbType = DbType.Int32;
+            paramCurrentRating.Direction = ParameterDirection.Input;
+
+            paramSecurityQuestion = new SqlParameter("@" + TAG_SECURITY_QUESTION, SecurityQuestion);
+            paramSecurityQuestion.DbType = DbType.String;
+            paramSecurityQuestion.Size = 255;
+            paramSecurityQuestion.Direction = ParameterDirection.Input;
+
+            paramSecurityAnswer = new SqlParameter("@" + TAG_SECURITY_ANSWER, SecurityAnswer);
+            paramSecurityAnswer.DbType = DbType.String;
+            paramSecurityAnswer.Size = 255;
+            paramSecurityAnswer.Direction = ParameterDirection.Input;
+
+            paramNumberOfVisits = new SqlParameter("@" + TAG_NUMBER_OF_VISITS, NumberOfVisits);
+            paramNumberOfVisits.DbType = DbType.Int32;
+            paramNumberOfVisits.Direction = ParameterDirection.Input;
+
+            if (!dtNull.Equals(PreviousVisitDate))
+            {
+                paramPreviousVisitDate = new SqlParameter("@" + TAG_PREVIOUS_VISIT_DATE, PreviousVisitDate);
+            }
+            else
+            {
+                paramPreviousVisitDate = new SqlParameter("@" + TAG_PREVIOUS_VISIT_DATE, DBNull.Value);
+            }
+            paramPreviousVisitDate.DbType = DbType.DateTime;
+            paramPreviousVisitDate.Direction = ParameterDirection.Input;
+
+            if (!dtNull.Equals(LastVisitDate))
+            {
+                paramLastVisitDate = new SqlParameter("@" + TAG_LAST_VISIT_DATE, LastVisitDate);
+            }
+            else
+            {
+                paramLastVisitDate = new SqlParameter("@" + TAG_LAST_VISIT_DATE, DBNull.Value);
+            }
+            paramLastVisitDate.DbType = DbType.DateTime;
+            paramLastVisitDate.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1423,6 +1727,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramInternalNotes);
             cmd.Parameters.Add(paramUserMessage);
             cmd.Parameters.Add(paramCookieID);
+            cmd.Parameters.Add(paramCurrentRating);
+            cmd.Parameters.Add(paramSecurityQuestion);
+            cmd.Parameters.Add(paramSecurityAnswer);
+            cmd.Parameters.Add(paramNumberOfVisits);
+            cmd.Parameters.Add(paramPreviousVisitDate);
+            cmd.Parameters.Add(paramLastVisitDate);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1455,6 +1765,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramInternalNotes = null;
             paramUserMessage = null;
             paramCookieID = null;
+            paramCurrentRating = null;
+            paramSecurityQuestion = null;
+            paramSecurityAnswer = null;
+            paramNumberOfVisits = null;
+            paramPreviousVisitDate = null;
+            paramLastVisitDate = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1631,6 +1947,40 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 this.CookieID = rdr[DB_FIELD_COOKIE_ID].ToString().Trim();
             }
             catch { }
+            try
+            {
+                this.CurrentRating = Convert.ToInt32(rdr[DB_FIELD_CURRENT_RATING].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.SecurityQuestion = rdr[DB_FIELD_SECURITY_QUESTION].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.SecurityAnswer = rdr[DB_FIELD_SECURITY_ANSWER].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.NumberOfVisits = Convert.ToInt32(rdr[DB_FIELD_NUMBER_OF_VISITS].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.PreviousVisitDate = DateTime.Parse(rdr[DB_FIELD_PREVIOUS_VISIT_DATE].ToString());
+            }
+            catch
+            {
+            }
+            try
+            {
+                this.LastVisitDate = DateTime.Parse(rdr[DB_FIELD_LAST_VISIT_DATE].ToString());
+            }
+            catch
+            {
+            }
         }
 
     }

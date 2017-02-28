@@ -3,13 +3,19 @@ using System.Web;
 using System.Web.Mvc;
 
 using MainSite.Classes;
+using Vetapp.Engine.BusinessFacadeLayer;
+using Vetapp.Engine.DataAccessLayer.Data;
+using Vetapp.Engine.Common;
 
 namespace MainSite.Controllers
 {
     public class HomeController : Controller
     {
+        private Config _config = null;
+
         public HomeController()
         {
+            _config = new Config();
             var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
          
@@ -89,6 +95,18 @@ namespace MainSite.Controllers
                     int nCount = Convert.ToInt32(cookie[CookieManager.COOKIE_FIELD_VISIT_COUNT]);
                     nCount++;
                     cookie[CookieManager.COOKIE_FIELD_VISIT_COUNT] = Convert.ToString(nCount);
+                    string userguid = cookie[CookieManager.COOKIE_FIELD_USER_GUID];
+                    if (!string.IsNullOrEmpty(userguid))
+                    {
+                        BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                        User user = busFacCore.UserGet(userguid);
+                        if ((user != null) && (user.UserID > 0))
+                        {
+                            user.NumberOfVisits = nCount;
+                            user.LastVisitDate = DateTime.UtcNow;
+                            busFacCore.UserCreateOrModify(user);
+                        }
+                    }
                 }
                 Response.Cookies.Add(cookie);
                 isSuccess = true;

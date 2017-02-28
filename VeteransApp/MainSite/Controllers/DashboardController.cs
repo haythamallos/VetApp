@@ -68,12 +68,28 @@ namespace MainSite.Controllers
                     dashboardModel.evaluationResults = new EvaluationResults();
                     dashboardModel.evaluationModel = new EvaluationModel();
 
-                    dashboardModel.evaluationResults.CurrentRating = (int)evaluation.CurrentRating;
+                    int currentRating = 0;
+                    if (user.CurrentRating > 0)
+                    {
+                        currentRating = (int) user.CurrentRating;
+                    }
+                    else
+                    {
+                        currentRating = (int)evaluation.CurrentRating;
+                    }
+                    dashboardModel.evaluationResults.CurrentRating = currentRating;
+
                     int projectionFactor = 3;
-                    dashboardModel.evaluationResults.PotentialVARating = dashboardModel.evaluationResults.CurrentRating + (10 * projectionFactor);
+                    int delta = (100 - currentRating) /10;
+                    if ( delta < projectionFactor)
+                    {
+                        projectionFactor = delta;
+                    }
+
+                    dashboardModel.evaluationResults.PotentialVARating = currentRating + (10 * projectionFactor);
                     int amountIncreasePerMonth = 0;
                     int cnt = 0;
-                    for (int i = dashboardModel.evaluationResults.CurrentRating + 10; i <= 100; i += 10)
+                    for (int i = currentRating + 10; i <= 100; i += 10)
                     {
                         cnt++;
                         if (cnt <= projectionFactor)
@@ -91,7 +107,7 @@ namespace MainSite.Controllers
                     dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
                 }
             }
- 
+
 
             return View(dashboardModel);
 
@@ -109,42 +125,73 @@ namespace MainSite.Controllers
         {
             return View();
         }
+        private UserModel UserToModel(User user)
+        {
+            UserModel userModel = null;
+            userModel = new UserModel()
+            {
+                Username = user.Username,
+                Password = user.Passwd,
+                FullName = user.Fullname,
+                PhoneNumber = user.PhoneNumber,
+                Message = user.UserMessage,
+                SSN = user.Ssn
+            };
+            int currentRating = 0;
+            if (user.CurrentRating > 0)
+            {
+                currentRating = (int) user.CurrentRating;
+            }
+            else
+            {
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                Evaluation evaluation = busFacCore.EvaluationGet(user);
+                if (evaluation != null)
+                {
+                    currentRating = (int)evaluation.CurrentRating;
+                }
+            }
+            userModel.CurrentRating = currentRating;
+            return userModel;
+        }
         public ActionResult ProfileUpdate()
         {
             User user = Auth();
-
-            UserModel userModel = new UserModel() { Username = user.Username, Password = user.Passwd, FullName = user.Fullname, PhoneNumber = user.PhoneNumber,
-             Message = user.UserMessage, SSN = user.Ssn};
-            BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
-            Evaluation evaluation = busFacCore.EvaluationGet(user);
-            if (evaluation != null)
-            {
-                userModel.CurrentRating = (int) evaluation.CurrentRating;
-            }
+            UserModel userModel = UserToModel(user);
             return View(userModel);
         }
         public ActionResult ProfileUpdateAction(UserModel userModel)
         {
             User user = Auth();
 
-            //BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
-            //user.Fullname = userModel.FullName;
-            //user.Username = userModel.Username;
+            try
+            {
+                user.Fullname = userModel.FullName;
+                user.Username = userModel.Username;
+                user.Ssn = userModel.SSN;
+                user.PhoneNumber = userModel.PhoneNumber;
+                if (!user.Passwd.Equals(userModel.Password))
+                {
+                    user.Passwd = UtilsSecurity.encrypt(userModel.Password);
+                }
+                user.UserMessage = userModel.Message;
+                user.CurrentRating = userModel.CurrentRating;
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                long lID = busFacCore.UserCreateOrModify(user);
+   
+                if (lID > 0)
+                {
+                    ViewData["IsSaved"] = true;
+                    user = busFacCore.UserGet(lID);
+                    userModel = UserToModel(user);
+                }
+                else
+                {
+                    ViewData["IsSaved"] = false;
+                }
+            }
+            catch (Exception ex) { }
 
-            //UserModel userModel = new UserModel()
-            //{
-            //    Username = user.Username,
-            //    Password = user.Passwd,
-            //    FullName = user.Fullname,
-            //    PhoneNumber = user.PhoneNumber,
-            //    Message = user.UserMessage,
-            //    SSN = user.Ssn
-            //};
-            //Evaluation evaluation = busFacCore.EvaluationGet(user);
-            //if (evaluation != null)
-            //{
-            //    userModel.CurrentRating = (int)evaluation.CurrentRating;
-            //}
             return View("ProfileUpdate", userModel);
         }
         public ActionResult Evaluation(EvaluationModel evaluationModel)
@@ -201,7 +248,7 @@ namespace MainSite.Controllers
             try
             {
                 string IsNewEval = GetCookieFieldValue(CookieManager.COOKIE_FIELD_ISNEW_EVAL);
-                if (!string.IsNullOrEmpty(IsNewEval) &&(IsNewEval == "true"))
+                if (!string.IsNullOrEmpty(IsNewEval) && (IsNewEval == "true"))
                 {
                     EvaluationModel evaluationModel = new EvaluationModel();
                     evaluationModel.CurrentRating = Convert.ToInt32(GetCookieFieldValue(CookieManager.COOKIE_FIELD_CURRENT_RATING));
@@ -235,6 +282,7 @@ namespace MainSite.Controllers
                         bool UserExist = busFacCore.Exist(userModel.Username);
                         if (!UserExist)
                         {
+                            
                             User user = busFacCore.UserCreate(userModel.Username, userModel.Password);
                             if ((user != null) && (user.UserID > 0))
                             {
@@ -338,7 +386,7 @@ namespace MainSite.Controllers
                 }
             }
             catch { }
-            
+
             return isSuccess;
         }
         private byte[] generateDBQBack(string pdfTemplatePath, BackModel back)

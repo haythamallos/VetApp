@@ -873,7 +873,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id] 
+SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id], [current_rating], [security_question], [security_answer], [number_of_visits], [previous_visit_date], [last_visit_date] 
 FROM [user] 
 WHERE user_id = @UserID
 RETURN 0
@@ -925,6 +925,12 @@ CREATE PROCEDURE spUserUpdate
 	@InternalNotes             TEXT = NULL,
 	@UserMessage               TEXT = NULL,
 	@CookieID                  NVARCHAR(255) = NULL,
+	@CurrentRating             NUMERIC(10,0) = 0,
+	@SecurityQuestion          NVARCHAR(255) = NULL,
+	@SecurityAnswer            NVARCHAR(255) = NULL,
+	@NumberOfVisits            NUMERIC(10,0) = 0,
+	@PreviousVisitDate         DATETIME = NULL,
+	@LastVisitDate             DATETIME = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -954,7 +960,13 @@ UPDATE [user] SET
 	[last_login_date] = @LastLoginDate,
 	[internal_notes] = @InternalNotes,
 	[user_message] = @UserMessage,
-	[cookie_id] = @CookieID
+	[cookie_id] = @CookieID,
+	[current_rating] = @CurrentRating,
+	[security_question] = @SecurityQuestion,
+	[security_answer] = @SecurityAnswer,
+	[number_of_visits] = @NumberOfVisits,
+	[previous_visit_date] = @PreviousVisitDate,
+	[last_visit_date] = @LastVisitDate
 WHERE user_id = @UserID
 
 -- return ID for updated record
@@ -1041,6 +1053,12 @@ CREATE PROCEDURE spUserInsert
 	@InternalNotes             TEXT = NULL,
 	@UserMessage               TEXT = NULL,
 	@CookieID                  NVARCHAR(255) = NULL,
+	@CurrentRating             NUMERIC(10,0) = 0,
+	@SecurityQuestion          NVARCHAR(255) = NULL,
+	@SecurityAnswer            NVARCHAR(255) = NULL,
+	@NumberOfVisits            NUMERIC(10,0) = 0,
+	@PreviousVisitDate         DATETIME = NULL,
+	@LastVisitDate             DATETIME = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -1071,7 +1089,13 @@ INSERT INTO [user]
 	[last_login_date],
 	[internal_notes],
 	[user_message],
-	[cookie_id]
+	[cookie_id],
+	[current_rating],
+	[security_question],
+	[security_answer],
+	[number_of_visits],
+	[previous_visit_date],
+	[last_visit_date]
 )
  VALUES 
 (
@@ -1096,7 +1120,13 @@ INSERT INTO [user]
 	@LastLoginDate,
 	@InternalNotes,
 	@UserMessage,
-	@CookieID
+	@CookieID,
+	@CurrentRating,
+	@SecurityQuestion,
+	@SecurityAnswer,
+	@NumberOfVisits,
+	@PreviousVisitDate,
+	@LastVisitDate
 )
 
 
@@ -1159,13 +1189,21 @@ CREATE PROCEDURE spUserEnum
 	@InternalNotes             TEXT = NULL,
 	@UserMessage               TEXT = NULL,
 	@CookieID                  NVARCHAR(255) = NULL,
+	@CurrentRating             NUMERIC(10,0) = 0,
+	@SecurityQuestion          NVARCHAR(255) = NULL,
+	@SecurityAnswer            NVARCHAR(255) = NULL,
+	@NumberOfVisits            NUMERIC(10,0) = 0,
+    	@BeginPreviousVisitDate    DATETIME = NULL,
+    	@EndPreviousVisitDate      DATETIME = NULL,
+    	@BeginLastVisitDate        DATETIME = NULL,
+    	@EndLastVisitDate          DATETIME = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id]
+      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id], [current_rating], [security_question], [security_answer], [number_of_visits], [previous_visit_date], [last_visit_date]
       FROM [user] 
       WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
       AND ((@UserRoleID = 0) OR ([user_role_id] LIKE @UserRoleID))
@@ -1195,6 +1233,14 @@ AS
       AND ((@InternalNotes IS NULL) OR ([internal_notes] LIKE @InternalNotes))
       AND ((@UserMessage IS NULL) OR ([user_message] LIKE @UserMessage))
       AND ((@CookieID IS NULL) OR ([cookie_id] LIKE @CookieID))
+      AND ((@CurrentRating = 0) OR ([current_rating] LIKE @CurrentRating))
+      AND ((@SecurityQuestion IS NULL) OR ([security_question] LIKE @SecurityQuestion))
+      AND ((@SecurityAnswer IS NULL) OR ([security_answer] LIKE @SecurityAnswer))
+      AND ((@NumberOfVisits = 0) OR ([number_of_visits] LIKE @NumberOfVisits))
+      AND ((@BeginPreviousVisitDate IS NULL) OR ([previous_visit_date] >= @BeginPreviousVisitDate))
+      AND ((@EndPreviousVisitDate IS NULL) OR ([previous_visit_date] <= @EndPreviousVisitDate))
+      AND ((@BeginLastVisitDate IS NULL) OR ([last_visit_date] >= @BeginLastVisitDate))
+      AND ((@EndLastVisitDate IS NULL) OR ([last_visit_date] <= @EndLastVisitDate))
  ORDER BY [user_id] ASC
 
 

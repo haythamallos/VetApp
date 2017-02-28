@@ -93,7 +93,13 @@ CREATE TABLE [user]
      last_login_date  DATETIME NULL,
 	 internal_notes        text NULL,
 	 user_message        text NULL,
-	 cookie_id  NVARCHAR(255) NULL
+	 cookie_id  NVARCHAR(255) NULL,
+	 current_rating	int default 0,
+	 security_question  NVARCHAR(255) NULL,
+     security_answer  NVARCHAR(255) NULL,
+	 number_of_visits	int default 0,
+	 previous_visit_date     DATETIME NULL,
+	 last_visit_date     DATETIME NULL
  )
 
 go

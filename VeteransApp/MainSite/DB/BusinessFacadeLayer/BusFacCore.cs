@@ -115,7 +115,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             try
             {
                 string passwordEncrypted = UtilsSecurity.encrypt(password);
-                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1, CookieID = Guid.NewGuid().ToString() };
+                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1, CookieID = Guid.NewGuid().ToString(), NumberOfVisits = 1 };
                 long lID = UserCreateOrModify(userTmp);
                 if (lID > 0)
                 {
