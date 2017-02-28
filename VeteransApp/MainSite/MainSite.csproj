@@ -121,9 +121,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CookieManager.cs" />
     <Compile Include="Classes\Defaults.cs" />
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
+    <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusDbversion.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusEvaluation.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
@@ -242,6 +244,7 @@
     <Content Include="Images\box1.png" />
     <Content Include="Images\box2.png" />
     <Content Include="Images\john.jpg" />
+    <Content Include="Images\soldier-avatar.jpg" />
     <Content Include="less\icons\font-awesome\.gitignore" />
     <Content Include="less\icons\font-awesome\css\font-awesome.css" />
     <Content Include="less\icons\font-awesome\css\font-awesome.min.css" />

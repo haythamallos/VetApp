@@ -14,6 +14,7 @@ using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.Common;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.BusinessAccessLayer;
+using System.Web;
 
 namespace MainSite.Controllers
 {
@@ -21,12 +22,23 @@ namespace MainSite.Controllers
     {
         private Config _config = null;
 
-        private void Auth()
+        private User Auth()
         {
-            if (!IsAuthenticated())
+            User user = null;
+            if (!IsCookieEnabled())
             {
                 LogOut();
             }
+            else
+            {
+                string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
+                if (!string.IsNullOrEmpty(userguid))
+                {
+                    BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                    user = busFacCore.UserGet(userguid);
+                }
+            }
+            return user;
         }
         public DashboardController()
         {
@@ -38,32 +50,53 @@ namespace MainSite.Controllers
             var MovementList30Deg = new SelectList(new[] { 30, 20, 10 });
             ViewBag.MovementList30Deg = MovementList30Deg;
 
+            var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
+            ViewBag.CurrentRatingsList = CurrentRatingsList;
+
         }
         // GET: Dashboard
         public ActionResult Index()
         {
-            Auth();
-            User user = (User)Session["User"];
+            User user = Auth();
             DashboardModel dashboardModel = new DashboardModel();
-            BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
-            Evaluation evaluation = busFacCore.EvaluationGet(user);
-            if (evaluation != null)
+            if (user != null)
             {
-                dashboardModel.evaluationResults = new EvaluationResults();
-                dashboardModel.evaluationModel = new EvaluationModel();
+                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                Evaluation evaluation = busFacCore.EvaluationGet(user);
+                if (evaluation != null)
+                {
+                    dashboardModel.evaluationResults = new EvaluationResults();
+                    dashboardModel.evaluationModel = new EvaluationModel();
 
-                dashboardModel.evaluationModel.HasEvaluation = true;
-                dashboardModel.evaluationResults.CurrentRating = (int)evaluation.CurrentRating;
+                    dashboardModel.evaluationResults.CurrentRating = (int)evaluation.CurrentRating;
+                    int projectionFactor = 3;
+                    dashboardModel.evaluationResults.PotentialVARating = dashboardModel.evaluationResults.CurrentRating + (10 * projectionFactor);
+                    int amountIncreasePerMonth = 0;
+                    int cnt = 0;
+                    for (int i = dashboardModel.evaluationResults.CurrentRating + 10; i <= 100; i += 10)
+                    {
+                        cnt++;
+                        if (cnt <= projectionFactor)
+                        {
+                            amountIncreasePerMonth += RatingProjections.RatingTable_1[i].DeltaFromPrevious;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    dashboardModel.evaluationResults.AmountIncreasePerMonth = amountIncreasePerMonth;
+                    dashboardModel.evaluationResults.AmountIncreasePerYear = amountIncreasePerMonth * 12;
+                    dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
+                }
             }
+ 
 
             return View(dashboardModel);
 
         }
-        private bool IsAuthenticated()
-        {
-            bool b = (bool)Session["Authenticated"];
-            return b;
-        }
+
         public ActionResult MainMenu()
         {
             return View();
@@ -78,17 +111,49 @@ namespace MainSite.Controllers
         }
         public ActionResult ProfileUpdate()
         {
-            Auth();
+            User user = Auth();
 
-            User user = (User)Session["User"];
-           
             UserModel userModel = new UserModel() { Username = user.Username, Password = user.Passwd, FullName = user.Fullname, PhoneNumber = user.PhoneNumber,
-             Message = user.UserMessage};
-            return View();
+             Message = user.UserMessage, SSN = user.Ssn};
+            BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+            Evaluation evaluation = busFacCore.EvaluationGet(user);
+            if (evaluation != null)
+            {
+                userModel.CurrentRating = (int) evaluation.CurrentRating;
+            }
+            return View(userModel);
+        }
+        public ActionResult ProfileUpdateAction(UserModel userModel)
+        {
+            User user = Auth();
+
+            //BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+            //user.Fullname = userModel.FullName;
+            //user.Username = userModel.Username;
+
+            //UserModel userModel = new UserModel()
+            //{
+            //    Username = user.Username,
+            //    Password = user.Passwd,
+            //    FullName = user.Fullname,
+            //    PhoneNumber = user.PhoneNumber,
+            //    Message = user.UserMessage,
+            //    SSN = user.Ssn
+            //};
+            //Evaluation evaluation = busFacCore.EvaluationGet(user);
+            //if (evaluation != null)
+            //{
+            //    userModel.CurrentRating = (int)evaluation.CurrentRating;
+            //}
+            return View("ProfileUpdate", userModel);
         }
         public ActionResult Evaluation(EvaluationModel evaluationModel)
         {
-            Session["Evaluation"] = evaluationModel;
+            bool b = SetCookieField(CookieManager.COOKIE_FIELD_CURRENT_RATING, evaluationModel.CurrentRating.ToString());
+            b = SetCookieField(CookieManager.COOKIE_FIELD_HAS_A_CLAIM, evaluationModel.HasAClaim.ToString());
+            b = SetCookieField(CookieManager.COOKIE_FIELD_HAS_ACTIVE_APPEAL, evaluationModel.HasActiveAppeal.ToString());
+            b = SetCookieField(CookieManager.COOKIE_FIELD_IS_FIRST_TIME_FILING, evaluationModel.IsFirstTimeFiling.ToString());
+            b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "true");
             return View("Register2");
         }
         public ActionResult Authenticate(UserModel userModel)
@@ -105,9 +170,8 @@ namespace MainSite.Controllers
                         User user = busFacCore.UserAuthenticate(userModel.Username, userModel.Password);
                         if ((user != null) && (user.UserID > 0))
                         {
-                            Session["Authenticated"] = true;
-                            Session["User"] = user;
-                            AssociateEvaluationWithUser();
+                            AssociateEvaluationWithUser(user);
+                            bool b = SetCookieField(CookieManager.COOKIE_FIELD_USER_GUID, user.CookieID);
                             return RedirectToAction("Index");
                         }
                         else
@@ -132,15 +196,27 @@ namespace MainSite.Controllers
             }
             return View("Login2");
         }
-        private void AssociateEvaluationWithUser()
+        private void AssociateEvaluationWithUser(User user)
         {
-            EvaluationModel evaluation = (EvaluationModel)Session["Evaluation"];
-            User user = (User)Session["User"];
-            if ((evaluation != null) && (user != null))
+            try
             {
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
-                long lID = busFacCore.EvaluationCreate(evaluation, user.UserID);
+                string IsNewEval = GetCookieFieldValue(CookieManager.COOKIE_FIELD_ISNEW_EVAL);
+                if (!string.IsNullOrEmpty(IsNewEval) &&(IsNewEval == "true"))
+                {
+                    EvaluationModel evaluationModel = new EvaluationModel();
+                    evaluationModel.CurrentRating = Convert.ToInt32(GetCookieFieldValue(CookieManager.COOKIE_FIELD_CURRENT_RATING));
+                    evaluationModel.HasAClaim = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_A_CLAIM));
+                    evaluationModel.HasActiveAppeal = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_ACTIVE_APPEAL));
+                    evaluationModel.IsFirstTimeFiling = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_IS_FIRST_TIME_FILING));
+                    BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                    long lID = busFacCore.EvaluationCreate(evaluationModel, user.UserID);
+                    if (lID > 0)
+                    {
+                        bool b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "false");
+                    }
+                }
             }
+            catch { }
         }
         public ActionResult Register(UserModel userModel)
         {
@@ -162,9 +238,8 @@ namespace MainSite.Controllers
                             User user = busFacCore.UserCreate(userModel.Username, userModel.Password);
                             if ((user != null) && (user.UserID > 0))
                             {
-                                Session["Authenticated"] = true;
-                                Session["User"] = user;
-                                AssociateEvaluationWithUser();
+                                AssociateEvaluationWithUser(user);
+                                bool b = SetCookieField(CookieManager.COOKIE_FIELD_USER_GUID, user.CookieID);
                                 return RedirectToAction("Index");
                             }
                             else
@@ -208,14 +283,64 @@ namespace MainSite.Controllers
 
         public ActionResult LogOut()
         {
-            try
-            {
-                HttpContext.Session.Clear();
-            }
-            catch { }
+            //try
+            //{
+            //    HttpCookie cookie = new HttpCookie(CookieManager.COOKIENAME);
+            //    if (cookie != null)
+            //    {
+            //        cookie.Expires = DateTime.Now.AddDays(-1);
+            //        Response.Cookies.Add(cookie);
+            //    }
+            //}
+            //catch { }
             return RedirectToAction("Index", "Home");
         }
 
+        public string GetCookieFieldValue(string fieldName)
+        {
+            string value = null;
+            try
+            {
+                HttpCookie cookie = Request.Cookies[CookieManager.COOKIENAME];
+                value = cookie[fieldName];
+            }
+            catch { }
+            return value;
+        }
+
+        public bool IsCookieEnabled()
+        {
+            bool isSuccess = false;
+            try
+            {
+                HttpCookie cookie = Request.Cookies[CookieManager.COOKIENAME];
+                if (cookie != null)
+                {
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex) { }
+
+            return isSuccess;
+        }
+
+        public bool SetCookieField(string fieldName, string fieldValue)
+        {
+            bool isSuccess = false;
+            try
+            {
+                HttpCookie cookie = Request.Cookies[CookieManager.COOKIENAME];
+                if (cookie != null)
+                {
+                    cookie[fieldName] = fieldValue;
+                    isSuccess = true;
+                    Response.Cookies.Add(cookie);
+                }
+            }
+            catch { }
+            
+            return isSuccess;
+        }
         private byte[] generateDBQBack(string pdfTemplatePath, BackModel back)
         {
             byte[] form = null;

@@ -19,8 +19,26 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-md-9 col-lg-9 col-sm-7">
+                @if (Model.evaluationResults != null)
+                {
+                    <div class="user-btm-box">
+                        <div class="col-md-4 col-sm-4 text-center">
+                            <p class="text-purple">More $ Month</p>
+                            <h1>$@Model.evaluationResults.AmountIncreasePerMonth</h1>
+                        </div>
+                        <div class="col-md-4 col-sm-4 text-center">
+                            <p class="text-blue">More $ Year</p>
+                            <h1>$@Model.evaluationResults.AmountIncreasePerYear</h1>
+                        </div>
+                        <div class="col-md-4 col-sm-4 text-center">
+                            <p class="text-danger">Potential Rating</p>
+                            <h1>@Model.evaluationResults.PotentialVARating%</h1>
+                        </div>
+                    </div>
+                }
+                
                 <div class="panel panel-info">
-                    <div class="panel-heading"> Dashboard </div>
+                    <div class="panel-heading"> Start Your Application Today To Earn Your Potential Rating</div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -40,7 +58,7 @@
                                                 <button onclick="window.location='/Dashboard/Preliminary'" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        @*<tr>
                                             <td width="550">
                                                 <h2 class="font-500">Saved DBQs</h2>
                                             </td>
@@ -63,11 +81,11 @@
                                             <td align="center">
                                                 <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
                                             </td>
-                                        </tr>
+                                        </tr>*@
                                         <tr>
                                             <td width="550">
                                                 <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
-                                                <p>Please contact us if you have any question</p>
+                                                <p>Please contact us if you have any questions</p>
                                             </td>
 
                                         </tr>
@@ -88,13 +106,10 @@
                         <h2>@Model.evaluationResults.CurrentRating %</h2>
                         <hr>
                         <small>Potential VA Rating</small>
-                        <h2>50%</h2>
-                        <hr>
-                        <small>Amount Incease Per Month</small>
-                        <h2>$500</h2>
+                        <h2>@Model.evaluationResults.PotentialVARating%</h2>
                         <hr>
                         <small>Your Total Per Month After Increase</small>
-                        <h2>$1500</h2>
+                        <h2>$@Model.evaluationResults.TotalPerMonthAfterIncrease</h2>
                         <hr>
 
                         <button class="btn btn-success">Start Your Application</button>

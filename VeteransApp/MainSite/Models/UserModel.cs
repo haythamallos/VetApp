@@ -13,5 +13,7 @@ namespace MainSite.Models
         public string PhoneNumber { get; set; }
         public string FullName { get; set; }
         public string Message { get; set; }
+        public int CurrentRating { get; set; }
+        public string SSN { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace MainSite.Models
         public int PotentialVARating { get; set; }
         public int AmountIncreasePerMonth { get; set; }
         public int TotalPerMonthAfterIncrease { get; set; }
+        public int AmountIncreasePerYear { get; set; }
 
     }
 }

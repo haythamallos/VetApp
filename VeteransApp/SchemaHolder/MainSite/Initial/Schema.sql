@@ -91,9 +91,9 @@ CREATE TABLE [user]
      isvalidated  BIT NULL,
      welcome_email_sent_date  DATETIME NULL,
      last_login_date  DATETIME NULL,
-	 internal_notes        NVARCHAR(255) NULL,
-	 user_message        NVARCHAR(255) NULL
-
+	 internal_notes        text NULL,
+	 user_message        text NULL,
+	 cookie_id  NVARCHAR(255) NULL
  )
 
 go

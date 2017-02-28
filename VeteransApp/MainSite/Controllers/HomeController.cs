@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
+using MainSite.Classes;
 
 namespace MainSite.Controllers
 {
@@ -10,11 +10,17 @@ namespace MainSite.Controllers
     {
         public HomeController()
         {
-            var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 });
+            var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
+         
         }
         public ActionResult Index()
         {
+            bool bCookiesEnabled = SetInitialCookie();
+            if (!bCookiesEnabled)
+            {
+                ViewData["CookiesEnabled"] = false;
+            }
             return View();
         }
         public ActionResult Testimonials()
@@ -64,6 +70,32 @@ namespace MainSite.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+        }
+
+        public bool SetInitialCookie()
+        {
+            bool isSuccess = false;
+            try
+            {
+                HttpCookie cookie = Request.Cookies[CookieManager.COOKIENAME];
+                if (cookie == null)
+                {
+                    cookie = new HttpCookie(CookieManager.COOKIENAME);
+                    cookie.Expires = DateTime.Now.AddYears(1);
+                    cookie[CookieManager.COOKIE_FIELD_VISIT_COUNT] = "1";
+                }
+                else
+                {
+                    int nCount = Convert.ToInt32(cookie[CookieManager.COOKIE_FIELD_VISIT_COUNT]);
+                    nCount++;
+                    cookie[CookieManager.COOKIE_FIELD_VISIT_COUNT] = Convert.ToString(nCount);
+                }
+                Response.Cookies.Add(cookie);
+                isSuccess = true;
+            }
+            catch (Exception ex) { }
+
+            return isSuccess;
         }
     }
 }

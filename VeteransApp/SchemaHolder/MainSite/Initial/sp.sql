@@ -825,7 +825,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserExist
 (
@@ -862,7 +862,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserLoad
 (
@@ -873,7 +873,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message] 
+SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id] 
 FROM [user] 
 WHERE user_id = @UserID
 RETURN 0
@@ -898,7 +898,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserUpdate
 (
@@ -922,8 +922,9 @@ CREATE PROCEDURE spUserUpdate
 	@Isvalidated               NUMERIC(1,0) = 0,
 	@WelcomeEmailSentDate      DATETIME = NULL,
 	@LastLoginDate             DATETIME = NULL,
-	@InternalNotes             NVARCHAR(255) = NULL,
-	@UserMessage               NVARCHAR(255) = NULL,
+	@InternalNotes             TEXT = NULL,
+	@UserMessage               TEXT = NULL,
+	@CookieID                  NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -952,7 +953,8 @@ UPDATE [user] SET
 	[welcome_email_sent_date] = @WelcomeEmailSentDate,
 	[last_login_date] = @LastLoginDate,
 	[internal_notes] = @InternalNotes,
-	[user_message] = @UserMessage
+	[user_message] = @UserMessage,
+	[cookie_id] = @CookieID
 WHERE user_id = @UserID
 
 -- return ID for updated record
@@ -978,7 +980,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserDelete
 (
@@ -1012,7 +1014,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spUserInsert
 (
@@ -1036,8 +1038,9 @@ CREATE PROCEDURE spUserInsert
 	@Isvalidated               NUMERIC(1,0) = 0,
 	@WelcomeEmailSentDate      DATETIME = NULL,
 	@LastLoginDate             DATETIME = NULL,
-	@InternalNotes             NVARCHAR(255) = NULL,
-	@UserMessage               NVARCHAR(255) = NULL,
+	@InternalNotes             TEXT = NULL,
+	@UserMessage               TEXT = NULL,
+	@CookieID                  NVARCHAR(255) = NULL,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -1067,7 +1070,8 @@ INSERT INTO [user]
 	[welcome_email_sent_date],
 	[last_login_date],
 	[internal_notes],
-	[user_message]
+	[user_message],
+	[cookie_id]
 )
  VALUES 
 (
@@ -1091,7 +1095,8 @@ INSERT INTO [user]
 	@WelcomeEmailSentDate,
 	@LastLoginDate,
 	@InternalNotes,
-	@UserMessage
+	@UserMessage,
+	@CookieID
 )
 
 
@@ -1119,7 +1124,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		2/27/2017		HA		Created
+**		2/28/2017		HA		Created
 *******************************************************************************/
 
 
@@ -1151,15 +1156,16 @@ CREATE PROCEDURE spUserEnum
     	@EndWelcomeEmailSentDate   DATETIME = NULL,
     	@BeginLastLoginDate        DATETIME = NULL,
     	@EndLastLoginDate          DATETIME = NULL,
-	@InternalNotes             NVARCHAR(255) = NULL,
-	@UserMessage               NVARCHAR(255) = NULL,
+	@InternalNotes             TEXT = NULL,
+	@UserMessage               TEXT = NULL,
+	@CookieID                  NVARCHAR(255) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message]
+      SELECT  [user_id], [user_role_id], [date_created], [date_modified], [fullname], [firstname], [middlename], [lastname], [phone_number], [username], [passwd], [ssn], [picture_url], [picture], [is_disabled], [welcome_email_sent], [validationtoken], [validationlink], [isvalidated], [welcome_email_sent_date], [last_login_date], [internal_notes], [user_message], [cookie_id]
       FROM [user] 
       WHERE ((@UserID = 0) OR ([user_id] LIKE @UserID))
       AND ((@UserRoleID = 0) OR ([user_role_id] LIKE @UserRoleID))
@@ -1188,6 +1194,7 @@ AS
       AND ((@EndLastLoginDate IS NULL) OR ([last_login_date] <= @EndLastLoginDate))
       AND ((@InternalNotes IS NULL) OR ([internal_notes] LIKE @InternalNotes))
       AND ((@UserMessage IS NULL) OR ([user_message] LIKE @UserMessage))
+      AND ((@CookieID IS NULL) OR ([cookie_id] LIKE @CookieID))
  ORDER BY [user_id] ASC
 
 
@@ -1201,6 +1208,8 @@ PRINT '<<<< Created Stored Procedure spUserEnum >>>>'
 ELSE
 PRINT '<<< Failed Creating Stored Procedure spUserEnum >>>'
 GO
+
+
 
 IF EXISTS (select * from sysobjects where id = object_id(N'[spUserRoleExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN

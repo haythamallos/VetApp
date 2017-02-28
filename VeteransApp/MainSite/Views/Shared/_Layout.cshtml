@@ -61,20 +61,21 @@
                     </div>
                     <!-- /input-group -->
                 </li>
-                <li class="user-pro">
+                @*<li class="user-pro">
                     <a href="#" class="waves-effect">
-                        <img src="~/Images/john.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> Steve Gection<span class="fa arrow"></span></span>
+                        <img src="~/Images/soldier-avatar.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> @ViewData["DisplayName"]<span class="fa arrow"></span></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a href="/Dashboard/Profile"><i class="ti-user"></i> My Profile</a></li>
-                        @*<li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
+                        <li><a href="/Dashboard/ProfileUpdate"><i class="ti-user"></i> My Profile</a></li>
+                        <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
                         <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
                         <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-                        <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>*@
+                        <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
                     </ul>
-                </li>
+                </li>*@
                 <li class="nav-small-cap m-t-10">--- Main Menu</li>
-                <li><a href="/Dashboard/MainMenu" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
+                <li><a href="/Dashboard/Index" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
+                <li><a href="/Dashboard/ProfileUpdate" class="waves-effect"><i class="ti-user fa-fw"></i> <span class="hide-menu">My Profile</span></a></li>
                 <li><a href="/Dashboard/LogOut" class="waves-effect"><i class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
             </ul>
         </div>

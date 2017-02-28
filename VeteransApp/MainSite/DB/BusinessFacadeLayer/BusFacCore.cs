@@ -115,7 +115,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             try
             {
                 string passwordEncrypted = UtilsSecurity.encrypt(password);
-                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1 };
+                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1, CookieID = Guid.NewGuid().ToString() };
                 long lID = UserCreateOrModify(userTmp);
                 if (lID > 0)
                 {
@@ -195,6 +195,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return evaluation;
         }
 
+        public User UserGet(string cookieid)
+        {
+            User user = null;
+            if (!string.IsNullOrEmpty(cookieid))
+            {
+                EnumUser enumUser = new EnumUser() { CookieID = cookieid };
+                ArrayList arUser = UserGetList(enumUser);
+                if ((arUser != null) && (arUser.Count == 1))
+                {
+                    user = (User)arUser[0];
+                }
+            }
+            return user;
+        }
         //public User UserEnumByAuthUserid(string pStrUserid)
         //{
         //    User user = null;
