@@ -99,6 +99,8 @@ namespace MainSite.Controllers
                     dashboardModel.evaluationResults.AmountIncreasePerMonth = amountIncreasePerMonth;
                     dashboardModel.evaluationResults.AmountIncreasePerYear = amountIncreasePerMonth * 12;
                     dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
+
+                    //ViewData["FormsSaved"] = "1";
                 }
             }
 
@@ -399,6 +401,14 @@ namespace MainSite.Controllers
             return isSuccess;
         }
 
+        public ActionResult SavedForm()
+        {
+            return View();
+        }
+        public ActionResult PurchasedForm()
+        {
+            return View();
+        }
 
         //private byte[] GeneratePDF_2(string pdfTemplatePath, StringBuilder sb)
         //{
@@ -536,6 +546,8 @@ namespace MainSite.Controllers
 
         //}
     }
+
+
 }
 
 //GeneratePDF_1(pdfTemplatePath, back);

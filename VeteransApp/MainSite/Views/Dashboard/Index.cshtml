@@ -24,11 +24,11 @@
                     <div class="user-btm-box">
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-purple">More $ Month</p>
-                            <h1>$@Model.evaluationResults.AmountIncreasePerMonth</h1>
+                            <h1>@string.Format("{0:c}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-blue">More $ Year</p>
-                            <h1>$@Model.evaluationResults.AmountIncreasePerYear</h1>
+                            <h1>@string.Format("{0:c}", Model.evaluationResults.AmountIncreasePerYear)</h1>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-danger">Potential Rating</p>
@@ -109,7 +109,7 @@
                         <h2>@Model.evaluationResults.PotentialVARating%</h2>
                         <hr>
                         <small>Your Total Per Month After Increase</small>
-                        <h2>$@Model.evaluationResults.TotalPerMonthAfterIncrease</h2>
+                        <h2>@string.Format("{0:c}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h2>
                         <hr>
 
                         <button class="btn btn-success">Start Your Application</button>

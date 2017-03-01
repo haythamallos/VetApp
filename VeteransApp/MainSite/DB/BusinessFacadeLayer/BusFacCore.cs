@@ -209,29 +209,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             }
             return user;
         }
-        //public User UserEnumByAuthUserid(string pStrUserid)
-        //{
-        //    User user = null;
-        //    bool bConn = false;
-        //    SqlConnection conn = getDBConnection();
-        //    if (conn != null)
-        //    {
-        //        ArrayList items = null;
-        //        BusUser busUser = null;
-        //        busUser = new BusUser(conn);
-        //        busUser.SP_ENUM_NAME = "spUserEnumByAuthUserid";
-        //        EnumUser enumUser = new EnumUser() { AuthUserid = pStrUserid };
-        //        items = busUser.Get(enumUser);
-        //        // close the db connection
-        //        bConn = CloseConnection(conn);
-        //        _hasError = busUser.HasError;
-        //        if ((items != null) && (items.Count > 0))
-        //        {
-        //            user = (User) items[items.Count - 1];
-        //        }
-        //    }
-        //    return user;
-        //}
+       
+        public LayoutData GetLayoutData()
+        {
+            LayoutData layoutData = new LayoutData();
+
+            return layoutData;
+        }
+
+
+
         /*********************** CUSTOM END *********************/
 
 
@@ -1036,7 +1023,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+    }
 
+    public class LayoutData
+    {
+        public int NumSavedForms { get; set; }
+        public int NumPurchasedForms { get; set; }
+        public bool IsProfileComplete { get; set; }
     }
 }

@@ -556,6 +556,8 @@
     <Content Include="Views\Dashboard\BackForm.cshtml" />
     <Content Include="Views\Home\RegisterCode.cshtml" />
     <Content Include="Views\Dashboard\ProfileUpdate.cshtml" />
+    <Content Include="Views\Dashboard\SavedForm.cshtml" />
+    <Content Include="Views\Dashboard\PurchasedForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
