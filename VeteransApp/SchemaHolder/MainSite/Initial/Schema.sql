@@ -142,7 +142,7 @@ CREATE TABLE syslog
 
 go
 
-IF Object_id('dbo.syslog') IS NOT NULL
+IF Object_id('syslog') IS NOT NULL
   PRINT '<<< CREATED TABLE syslog >>>'
 ELSE
   PRINT '<<< FAILED CREATING TABLE syslog >>>'
@@ -181,7 +181,7 @@ CREATE TABLE evaluation
 
 go
 
-IF Object_id('dbo.evaluation') IS NOT NULL
+IF Object_id('evaluation') IS NOT NULL
   PRINT '<<< CREATED TABLE evaluation >>>'
 ELSE
   PRINT '<<< FAILED CREATING TABLE evaluation >>>'

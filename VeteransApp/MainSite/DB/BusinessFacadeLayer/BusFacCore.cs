@@ -19,7 +19,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         private string _errorMessage = null;
         private string _errorStacktrace = null;
 
-        private string _strConnectionString = null;
+        private Config _config = null;
 
         public bool HasError
         {
@@ -33,9 +33,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             get { return _errorMessage; }
         }
-        public BusFacCore(string pStrConnectionString)
+        public BusFacCore()
         {
-            _strConnectionString = pStrConnectionString;
+            _config = new Config();
         }
  
         public SqlConnection getDBConnection()
@@ -43,7 +43,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(_strConnectionString);
+                conn = new SqlConnection(_config.ConnectionString);
                 conn.Open();
             }
             catch (Exception ex)
@@ -805,8 +805,238 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
 
+        //------------------------------------------
+        /// <summary>
+        /// ContentCreateOrModify
+        /// </summary>
+        /// <param name="">pContent</param>
+        /// <returns>long</returns>
+        /// 
+        public long ContentCreateOrModify(Content pContent)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContent busContent = null;
+                busContent = new BusContent(conn);
+                busContent.Save(pContent);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pContent.ContentID;
+                _hasError = busContent.HasError;
+                if (busContent.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// ContentGetList
+        /// </summary>
+        /// <param name="">pEnumContent</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList ContentGetList(EnumContent pEnumContent)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContent busContent = null;
+                busContent = new BusContent(conn);
+                items = busContent.Get(pEnumContent);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContent.HasError;
+                if (busContent.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// ContentGet
+        /// </summary>
+        /// <param name="">pLngContentID</param>
+        /// <returns>Content</returns>
+        /// 
+        public Content ContentGet(long pLngContentID)
+        {
+            Content content = new Content() { ContentID = pLngContentID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContent busContent = null;
+                busContent = new BusContent(conn);
+                busContent.Load(content);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContent.HasError;
+                if (busContent.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return content;
+        }
+
+        /// <summary>
+        /// ContentRemove
+        /// </summary>
+        /// <param name="">pContentID</param>
+        /// <returns>void</returns>
+        /// 
+        public void ContentRemove(long pContentID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Content content = new Content();
+                content.ContentID = pContentID;
+                BusContent bus = null;
+                bus = new BusContent(conn);
+                bus.Delete(content);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
+
+
+        //------------------------------------------
+        /// <summary>
+        /// ContentTypeCreateOrModify
+        /// </summary>
+        /// <param name="">pContentType</param>
+        /// <returns>long</returns>
+        /// 
+        public long ContentTypeCreateOrModify(ContentType pContentType)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentType busContentType = null;
+                busContentType = new BusContentType(conn);
+                busContentType.Save(pContentType);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pContentType.ContentTypeID;
+                _hasError = busContentType.HasError;
+                if (busContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// ContentTypeGetList
+        /// </summary>
+        /// <param name="">pEnumContentType</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList ContentTypeGetList(EnumContentType pEnumContentType)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentType busContentType = null;
+                busContentType = new BusContentType(conn);
+                items = busContentType.Get(pEnumContentType);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContentType.HasError;
+                if (busContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// ContentTypeGet
+        /// </summary>
+        /// <param name="">pLngContentTypeID</param>
+        /// <returns>ContentType</returns>
+        /// 
+        public ContentType ContentTypeGet(long pLngContentTypeID)
+        {
+            ContentType content_type = new ContentType() { ContentTypeID = pLngContentTypeID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentType busContentType = null;
+                busContentType = new BusContentType(conn);
+                busContentType.Load(content_type);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContentType.HasError;
+                if (busContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return content_type;
+        }
+
+        /// <summary>
+        /// ContentTypeRemove
+        /// </summary>
+        /// <param name="">pContentTypeID</param>
+        /// <returns>void</returns>
+        /// 
+        public void ContentTypeRemove(long pContentTypeID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                ContentType content_type = new ContentType();
+                content_type.ContentTypeID = pContentTypeID;
+                BusContentType bus = null;
+                bus = new BusContentType(conn);
+                bus.Delete(content_type);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
 
     }
 }

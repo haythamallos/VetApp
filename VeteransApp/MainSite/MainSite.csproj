@@ -56,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,6 +127,8 @@
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusContent.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusContentType.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusDbversion.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusEvaluation.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
@@ -133,15 +136,21 @@
     <Compile Include="DB\BusinessAccessLayer\BusUserRole.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusValidationExpressions.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacCore.cs" />
+    <Compile Include="DB\BusinessFacadeLayer\BusFacPDF.cs" />
     <Compile Include="DB\Common\Column.cs" />
     <Compile Include="DB\Common\Config.cs" />
     <Compile Include="DB\Common\ErrorCode.cs" />
+    <Compile Include="DB\Common\JSONHelper.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\Content.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\ContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Dbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Evaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
     <Compile Include="DB\DataAccessLayer\Data\User.cs" />
     <Compile Include="DB\DataAccessLayer\Data\UserRole.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumContent.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumDbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumEvaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
@@ -544,8 +553,7 @@
     <Content Include="Views\Dashboard\partialMaxDisability_30.cshtml" />
     <Content Include="Views\Dashboard\partialMaxDisability_40.cshtml" />
     <Content Include="Views\Dashboard\partialModalEvalResult.cshtml" />
-    <Content Include="Views\Dashboard\FormQBack.cshtml" />
-    <Content Include="Views\Dashboard\BackPDF.cshtml" />
+    <Content Include="Views\Dashboard\BackForm.cshtml" />
     <Content Include="Views\Home\RegisterCode.cshtml" />
     <Content Include="Views\Dashboard\ProfileUpdate.cshtml" />
   </ItemGroup>

@@ -1,13 +1,7 @@
-﻿using iTextSharp.text.pdf;
-using MainSite.Models;
+﻿using MainSite.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using MainSite.Utils;
-using System.IO;
-using iTextSharp.text;
-using System.Text;
 using MainSite.Classes;
 
 using Vetapp.Engine.BusinessFacadeLayer;
@@ -34,7 +28,7 @@ namespace MainSite.Controllers
                 string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
                 if (!string.IsNullOrEmpty(userguid))
                 {
-                    BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                    BusFacCore busFacCore = new BusFacCore();
                     user = busFacCore.UserGet(userguid);
                 }
             }
@@ -61,7 +55,7 @@ namespace MainSite.Controllers
             DashboardModel dashboardModel = new DashboardModel();
             if (user != null)
             {
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusFacCore busFacCore = new BusFacCore();
                 Evaluation evaluation = busFacCore.EvaluationGet(user);
                 if (evaluation != null)
                 {
@@ -144,7 +138,7 @@ namespace MainSite.Controllers
             }
             else
             {
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusFacCore busFacCore = new BusFacCore();
                 Evaluation evaluation = busFacCore.EvaluationGet(user);
                 if (evaluation != null)
                 {
@@ -176,7 +170,7 @@ namespace MainSite.Controllers
                 }
                 user.UserMessage = userModel.Message;
                 user.CurrentRating = userModel.CurrentRating;
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
    
                 if (lID > 0)
@@ -207,7 +201,7 @@ namespace MainSite.Controllers
         {
             try
             {
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusFacCore busFacCore = new BusFacCore();
                 BusUser busUser = new BusUser();
                 if ((busUser.IsValidUsername(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
                 {
@@ -255,7 +249,7 @@ namespace MainSite.Controllers
                     evaluationModel.HasAClaim = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_A_CLAIM));
                     evaluationModel.HasActiveAppeal = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_ACTIVE_APPEAL));
                     evaluationModel.IsFirstTimeFiling = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_IS_FIRST_TIME_FILING));
-                    BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                    BusFacCore busFacCore = new BusFacCore();
                     long lID = busFacCore.EvaluationCreate(evaluationModel, user.UserID);
                     if (lID > 0)
                     {
@@ -269,7 +263,7 @@ namespace MainSite.Controllers
         {
             try
             {
-                BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                BusFacCore busFacCore = new BusFacCore();
                 BusUser busUser = new BusUser();
                 if ((busUser.IsValidUsername(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
                 {
@@ -314,13 +308,28 @@ namespace MainSite.Controllers
             }
             return View("Register2");
         }
-        public ActionResult BackPDF(BackModel backModel)
+        public ActionResult BackForm(BackModel backModel, string submitButton)
         {
             try
             {
+                BusFacPDF busFacPDF = new BusFacPDF();
                 string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                byte[] form = generateDBQBack(pdfTemplatePath, backModel);
-                PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+                User user = Auth();
+                switch (submitButton)
+                {
+                    case "Save":
+                        backModel.TemplatePath = pdfTemplatePath;
+                        backModel.UserID = user.UserID;
+                        long ContentID = busFacPDF.Save(backModel);
+                        break;
+                    case "Submit":
+                        break;
+                    case "PDF":
+                        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+                        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+                        break;
+                }
+
             }
             catch (Exception ex)
             {
@@ -389,423 +398,143 @@ namespace MainSite.Controllers
 
             return isSuccess;
         }
-        private byte[] generateDBQBack(string pdfTemplatePath, BackModel back)
-        {
-            byte[] form = null;
-
-            try
-            {
-                PdfReader pdfReader = new PdfReader(pdfTemplatePath);
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    PdfStamper pdfStamper = null;
-
-                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
-                    {
-                        // Get Reference to PDF Document Fields
-                        AcroFields pdfFormFields = pdfStamper.AcroFields;
-                        back.S60 = string.Empty;
-                        string dt = System.DateTime.Today.ToShortDateString();
-                        ICDCode icdcode = null;
-                        string diagnosis = null;
-                        if (!back.S47)
-                        {
-                            if (back.S48)
-                            {
-                                diagnosis = "Mechanical back pain syndrome";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses1[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis1[0]", dt);
-                                back.S60 += diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode1[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S49)
-                            {
-                                diagnosis = "Lumbosacral sprain/strain";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses2[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis2[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode2[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S50)
-                            {
-                                diagnosis = "Facet joint arthropathy";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses3[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis3[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode3[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S51)
-                            {
-                                diagnosis = "Degenerative disc disease";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses4[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis4[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode4[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S1)
-                            {
-                                diagnosis = "Degenerative scoliosis";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses16[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis16[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode16[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S52)
-                            {
-                                diagnosis = "Foraminal/lateral recess/central stenosis";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses5[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis5[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode5[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S53)
-                            {
-                                diagnosis = "Degenerative spondylolisthesis";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses6[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis6[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode6[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S54)
-                            {
-                                diagnosis = "Spondylolysis/isthmic spondylolisthesis";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses7[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis7[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode7[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S55)
-                            {
-                                diagnosis = "Intervertebral disc syndrome";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses8[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis8[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode8[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S13)
-                            {
-                                diagnosis = "Radiculopathy";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses9[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis9[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode9[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S12)
-                            {
-                                diagnosis = "Ankylosis of thoracolumbar spine";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses10[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis10[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode10[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S7)
-                            {
-                                diagnosis = "Ankylosing spondylitis of the thoracolumbar spine";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses11[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis11[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode11[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (back.S6)
-                            {
-                                diagnosis = "Vertebral fracture";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses15[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis15[0]", dt);
-                                back.S60 += ", " + diagnosis;
-                                if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                                {
-                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode15[0]", icdcode.RefNumber);
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(back.S62))
-                            {
-                                diagnosis = "Other";
-                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses12[0]", "1");
-                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis12[0]", dt);
-                                pdfFormFields.SetField("form1[0].#subform[0].OtherDiagnosis1[0]", back.S62);
-                                back.S60 += ", " + diagnosis;
-                            }
-
-                        }
-
-                        if (back.S60.Count() > 1)
-                        {
-                            if (back.S60.IndexOf(", ") == 0)
-                            {
-                                back.S60 = back.S60.Remove(0, 2);
-                            }
-                        }
-                        iTextSharp.text.Font normal = FontFactory.GetFont(FontFactory.COURIER, 6f, iTextSharp.text.Font.NORMAL);
-                        if (back.S60.Length > 255)
-                        {
-                            normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
-                        }
-                        //set the field to bold
-                        pdfFormFields.SetFieldProperty("form1[0].#subform[0].Records[1]", "textfont", normal.BaseFont, null);
-                        pdfFormFields.SetField("form1[0].#subform[0].Records[1]", back.S60);
-
-                        // Section 1D
-                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
-                        // Section 2A
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe[0]", Defaults.BACK_SECION_2A);
-                        // Section 2B
-                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", Defaults.BACK_SECION_2B);
-                        // Section 2C
-                        pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", Defaults.BACK_SECION_2C);
-
-                        if (back.S95)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].Forward_Flexion[1]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM1[0]", back.S96);
-                        }
-
-                        if (back.S93)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].Extension[0]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM2[0]", back.S86);
-                        }
-
-                        if (back.S92)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].RightLateral_Flexion[1]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM4[0]", back.S90);
-                        }
-
-                        if (back.S89)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].LeftLateral_Flexion[1]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM3[0]", back.S87);
-                        }
-
-                        if (back.S81)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].RightLateral_Rotation[1]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM6[0]", back.S82);
-                        }
-
-                        if (back.S79)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].LeftLateral_Rotation[0]", "2");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[1].ROM5[0]", back.S78);
-                        }
 
 
+        //private byte[] GeneratePDF_2(string pdfTemplatePath, StringBuilder sb)
+        //{
+        //    byte[] form = null;
 
-                    }
+        //    try
+        //    {
+        //        // Use iTextSharp PDF Reader, to get the fields and send to the 
+        //        //Stamper to set the fields in the document
+        //        PdfReader pdfReader = new PdfReader(pdfTemplatePath);
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+        //        using (MemoryStream ms = new MemoryStream())
+        //        {
+        //            PdfStamper pdfStamper = null;
 
-                    // close the pdf stamper
-                    pdfStamper.Close();
+        //            using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+        //            {
+        //                // Get Reference to PDF Document Fields
+        //                AcroFields pdfFormFields = pdfStamper.AcroFields;
 
-                    form = ms.ToArray();
+        //                var counter = 1;
+        //                PdfContentByte content = null;
+        //                var fieldInfo = new List<string>();
+        //                foreach (var entry in pdfFormFields.Fields)
+        //                {
+        //                    var formFieldType = PDFFieldType.GetPDFFieldType(pdfFormFields.GetFieldType(entry.Key.ToString()));
 
-                }
+        //                    if (formFieldType is PDFCheckBoxFieldType)
+        //                        fieldInfo.Add(string.Format("{0} - {1} - Export Value: {2}",
+        //                                                    entry.Key,
+        //                                                    formFieldType,
+        //                                                    PDFHelper.GetExportValue(entry.Value as AcroFields.Item)));
+        //                    else
+        //                        fieldInfo.Add(string.Format("{0} - {1}", entry.Key, formFieldType));
 
-            }
-            catch (Exception ex)
-            {
-            }
+        //                    Rectangle rectangle = pdfFormFields.GetFieldPositions(entry.Key)[0].position;
+        //                    int page = pdfFormFields.GetFieldPositions(entry.Key)[0].page;
+        //                    //put content over
+        //                    content = pdfStamper.GetOverContent(page);
+        //                    //Text over the existing page
+        //                    BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA,
+        //                            BaseFont.WINANSI, BaseFont.EMBEDDED);
+        //                    content.BeginText();
+        //                    content.SetFontAndSize(bf, 8);
+        //                    //content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Page No: " + i, 200, 15, 0);
+        //                    content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, counter.ToString(), rectangle.Left, rectangle.Bottom, 0);
+        //                    content.EndText();
+        //                    counter++;
+        //                }
 
-            return form;
-
-
-        }
-
-
-        private byte[] GeneratePDF_2(string pdfTemplatePath, StringBuilder sb)
-        {
-            byte[] form = null;
-
-            try
-            {
-                // Use iTextSharp PDF Reader, to get the fields and send to the 
-                //Stamper to set the fields in the document
-                PdfReader pdfReader = new PdfReader(pdfTemplatePath);
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    PdfStamper pdfStamper = null;
-
-                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
-                    {
-                        // Get Reference to PDF Document Fields
-                        AcroFields pdfFormFields = pdfStamper.AcroFields;
-
-                        var counter = 1;
-                        PdfContentByte content = null;
-                        var fieldInfo = new List<string>();
-                        foreach (var entry in pdfFormFields.Fields)
-                        {
-                            var formFieldType = PDFFieldType.GetPDFFieldType(pdfFormFields.GetFieldType(entry.Key.ToString()));
-
-                            if (formFieldType is PDFCheckBoxFieldType)
-                                fieldInfo.Add(string.Format("{0} - {1} - Export Value: {2}",
-                                                            entry.Key,
-                                                            formFieldType,
-                                                            PDFHelper.GetExportValue(entry.Value as AcroFields.Item)));
-                            else
-                                fieldInfo.Add(string.Format("{0} - {1}", entry.Key, formFieldType));
-
-                            Rectangle rectangle = pdfFormFields.GetFieldPositions(entry.Key)[0].position;
-                            int page = pdfFormFields.GetFieldPositions(entry.Key)[0].page;
-                            //put content over
-                            content = pdfStamper.GetOverContent(page);
-                            //Text over the existing page
-                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA,
-                                    BaseFont.WINANSI, BaseFont.EMBEDDED);
-                            content.BeginText();
-                            content.SetFontAndSize(bf, 8);
-                            //content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Page No: " + i, 200, 15, 0);
-                            content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, counter.ToString(), rectangle.Left, rectangle.Bottom, 0);
-                            content.EndText();
-                            counter++;
-                        }
-
-                        for (int i = 0; i < fieldInfo.Count; i++)
-                        {
-                            sb.Append((i + 1) + ".  " + fieldInfo[i] + Environment.NewLine);
-                        }
+        //                for (int i = 0; i < fieldInfo.Count; i++)
+        //                {
+        //                    sb.Append((i + 1) + ".  " + fieldInfo[i] + Environment.NewLine);
+        //                }
 
 
-                    }
+        //            }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+        //            // Set the flattening flag to true, so the document is not editable
+        //            pdfStamper.FormFlattening = false;
 
-                    // close the pdf stamper
-                    pdfStamper.Close();
+        //            // close the pdf stamper
+        //            pdfStamper.Close();
 
-                    form = ms.ToArray();
+        //            form = ms.ToArray();
 
-                }
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
 
-            return form;
-        }
-        private void GeneratePDF_1(string pdfTemplatePath, BackModel back)
-        {
-            PDFFile pdfile = new PDFFile(pdfTemplatePath);
+        //    return form;
+        //}
+        //private void GeneratePDF_1(string pdfTemplatePath, BackModel back)
+        //{
+        //    PDFFile pdfile = new PDFFile(pdfTemplatePath);
 
 
-            if ((!pdfile.HasError) && (pdfile.FieldInfoList.Count > 0))
-            {
-                List<byte[]> fileList = new List<byte[]>();
+        //    if ((!pdfile.HasError) && (pdfile.FieldInfoList.Count > 0))
+        //    {
+        //        List<byte[]> fileList = new List<byte[]>();
 
-                var counter = 1;
-                var counterChk = 1;
-                string oldval = null;
-                foreach (PDFFileField f in pdfile.FieldInfoList)
-                {
-                    if (f.IsCheckBox)
-                    {
-                        oldval = pdfile.formFieldMap[f.Key];
-                        pdfile.formFieldMap[f.Key] = f.ExportValue;
-                        pdfile.formFieldMap["form1[0].#subform[0].NameOfVeteran[0]"] = counter.ToString() + ":" + f.fieldinfo();
-                        var pdfContents = PDFHelper.GeneratePDF(pdfTemplatePath, pdfile.formFieldMap);
-                        fileList.Add(pdfContents);
-                        pdfile.formFieldMap[f.Key] = oldval;
-                        counterChk++;
-                    }
-                    counter++;
-                }
+        //        var counter = 1;
+        //        var counterChk = 1;
+        //        string oldval = null;
+        //        foreach (PDFFileField f in pdfile.FieldInfoList)
+        //        {
+        //            if (f.IsCheckBox)
+        //            {
+        //                oldval = pdfile.formFieldMap[f.Key];
+        //                pdfile.formFieldMap[f.Key] = f.ExportValue;
+        //                pdfile.formFieldMap["form1[0].#subform[0].NameOfVeteran[0]"] = counter.ToString() + ":" + f.fieldinfo();
+        //                var pdfContents = PDFHelper.GeneratePDF(pdfTemplatePath, pdfile.formFieldMap);
+        //                fileList.Add(pdfContents);
+        //                pdfile.formFieldMap[f.Key] = oldval;
+        //                counterChk++;
+        //            }
+        //            counter++;
+        //        }
 
-                using (MemoryStream msOutput = new MemoryStream())
-                {
-                    PdfReader pdfFile = new PdfReader(fileList[0]);
-                    Document doc = new Document();
-                    PdfWriter pCopy = new PdfSmartCopy(doc, msOutput);
+        //        using (MemoryStream msOutput = new MemoryStream())
+        //        {
+        //            PdfReader pdfFile = new PdfReader(fileList[0]);
+        //            Document doc = new Document();
+        //            PdfWriter pCopy = new PdfSmartCopy(doc, msOutput);
 
-                    doc.Open();
+        //            doc.Open();
 
-                    for (int k = 0; k < fileList.Count; k++)
-                    {
-                        for (int i = 1; i < pdfFile.NumberOfPages + 1; i++)
-                        {
-                            pdfFile = new PdfReader(fileList[k]);
-                            ((PdfSmartCopy)pCopy).AddPage(pCopy.GetImportedPage(pdfFile, i));
-                            pCopy.FreeReader(pdfFile);
-                        }
-                    }
+        //            for (int k = 0; k < fileList.Count; k++)
+        //            {
+        //                for (int i = 1; i < pdfFile.NumberOfPages + 1; i++)
+        //                {
+        //                    pdfFile = new PdfReader(fileList[k]);
+        //                    ((PdfSmartCopy)pCopy).AddPage(pCopy.GetImportedPage(pdfFile, i));
+        //                    pCopy.FreeReader(pdfFile);
+        //                }
+        //            }
 
-                    pdfFile.Close();
-                    pCopy.Close();
-                    doc.Close();
-                    fileList.Clear();
+        //            pdfFile.Close();
+        //            pCopy.Close();
+        //            doc.Close();
+        //            fileList.Clear();
 
-                    byte[] form = msOutput.ToArray();
-                    PDFHelper.ReturnPDF(form, "back-merged.pdf");
-                    //using (FileStream fileSteam = new FileStream(@"C:\Temp\Merged.pdf", FileMode.Create))
-                    //{
-                    //    fileStream.Write(form, 0, form.Length);
-                    //}
-                }
+        //            byte[] form = msOutput.ToArray();
+        //            PDFHelper.ReturnPDF(form, "back-merged.pdf");
+        //            //using (FileStream fileSteam = new FileStream(@"C:\Temp\Merged.pdf", FileMode.Create))
+        //            //{
+        //            //    fileStream.Write(form, 0, form.Length);
+        //            //}
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
     }
 }
 

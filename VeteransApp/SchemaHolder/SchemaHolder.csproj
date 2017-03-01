@@ -44,9 +44,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="MainSite\Initial\Schema.sql" />
+    <Content Include="MainSite\Initial\schema.sql" />
     <Content Include="MainSite\Initial\sp.sql" />
     <Content Include="MainSite\Notes.txt" />
+    <Content Include="MainSite\Upgrade-1\schema.sql" />
+    <Content Include="MainSite\Upgrade-1\sp.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

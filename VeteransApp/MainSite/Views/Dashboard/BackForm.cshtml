@@ -8,8 +8,19 @@
 <div id="page-wrapper">
     <div class="col-xs-6">
         <div class="white-box">
-            <form id="formqback" action="/Dashboard/BackPDF">
-
+            <form id="formqback" action="/Dashboard/BackForm">
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
+                    </div>
+                </div>
+                <br />
                 @*<div class="form-group m-t-20">
                         <div class="col-xs-4">
                             <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Name Of Patient">
@@ -23,8 +34,8 @@
                     <br />*@
 
                 <h2>Please fill the form below regarding your back condition</h2>
-                <span>It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov" data-toggle="tab">eBenefits</a></span>
-                <div class="form-check form-check-inline panel panel-primary">
+                <span>It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a></span>
+               <div class="form-check form-check-inline panel panel-primary">
                     <div class="panel-heading">What is the diagnosis of your back? (Check all that apply)</div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label font-normal">
@@ -153,11 +164,11 @@
                 </div>
             
 
-                <div class="form-group text-center m-t-20 row">
+                @*<div class="form-group text-center m-t-20 row">
                     <div class="col-xs-3">
                         <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Generate Form</button>
                     </div>
-                </div>
+                </div>*@
             </form>
         </div>
     </div>

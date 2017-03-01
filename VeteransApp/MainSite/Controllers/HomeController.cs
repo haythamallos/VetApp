@@ -98,7 +98,7 @@ namespace MainSite.Controllers
                     string userguid = cookie[CookieManager.COOKIE_FIELD_USER_GUID];
                     if (!string.IsNullOrEmpty(userguid))
                     {
-                        BusFacCore busFacCore = new BusFacCore(_config.ConnectionString);
+                        BusFacCore busFacCore = new BusFacCore();
                         User user = busFacCore.UserGet(userguid);
                         if ((user != null) && (user.UserID > 0))
                         {
