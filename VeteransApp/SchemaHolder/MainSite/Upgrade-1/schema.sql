@@ -88,6 +88,6 @@ INSERT INTO content_type (content_type_id, date_created, code, [description], vi
 INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (7, GETDATE(), 'SHOULDER', 'Shoulder content type', 'Shoulder content type')
 INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (8, GETDATE(), 'WRIST', 'Wrist content type', 'Wrist content type')
 
-INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (2, GETDATE(), 2, 0,'Upgrade-1')
+INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (2, GETDATE(), 1, 1,'Upgrade-1')
 GO
 

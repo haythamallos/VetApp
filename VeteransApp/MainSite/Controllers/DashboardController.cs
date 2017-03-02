@@ -164,7 +164,10 @@ namespace MainSite.Controllers
             {
                 user.Fullname = userModel.FullName;
                 user.Username = userModel.Username;
-                user.Ssn = userModel.SSN;
+                if (!user.Ssn.Equals(userModel.SSN))
+                {
+                    user.Ssn = UtilsSecurity.encrypt(userModel.SSN);
+                }
                 user.PhoneNumber = userModel.PhoneNumber;
                 if (!user.Passwd.Equals(userModel.Password))
                 {
