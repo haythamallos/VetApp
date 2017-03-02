@@ -1,5 +1,7 @@
 ﻿@{
-    Vetapp.Engine.BusinessFacadeLayer.LayoutData data = (new Vetapp.Engine.BusinessFacadeLayer.BusFacCore()).GetLayoutData();
+    HttpCookie cookie = Request.Cookies[MainSite.Classes.CookieManager.COOKIENAME];
+    string userguid = cookie[MainSite.Classes.CookieManager.COOKIE_FIELD_USER_GUID];
+    Vetapp.Engine.BusinessFacadeLayer.LayoutData data = (new Vetapp.Engine.BusinessFacadeLayer.BusFacCore()).GetLayoutData(userguid);
 }
 <!DOCTYPE html>
 <html>
@@ -95,7 +97,7 @@
     @RenderBody()
 
     <!-- /.container-fluid -->
-    <footer class="footer text-center"> 2017 &copy; Veteranapp </footer>
+    @*<footer class="footer text-center"> 2017 &copy; Veteranapp </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

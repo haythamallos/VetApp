@@ -18,17 +18,111 @@
     <div class="container-fluid">
         <!-- /.row -->
         <div class="row">
-            <div class="col-md-9 col-lg-9 col-sm-7">
+            <div class="col-sm-3">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Easily Qualify For More VA Benefits</h3>
+                    <p class="text-muted m-b-20">
+                        Answer a few questions and will generate the complicated forms
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Benefit</th>
+                                    <th>Progress</th>
+                                    <th class="text-nowrap">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Back</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-danger" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="/Dashboard/BackForm" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Shoulder</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-warning" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Ankle</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-success" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> </td>
+                                </tr>
+                                <tr>
+                                    <td>Elbow</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-primary" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Foot</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-primary" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Hip</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-warning" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Knee</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-warning" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Wrist</td>
+                                    <td>
+                                        <div class="progress progress-xs margin-vertical-10 ">
+                                            <div class="progress-bar progress-bar-warning" style="width: 5%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><a href="#" data-toggle="tooltip" data-original-title="Start Application"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-7">
                 @if (Model.evaluationResults != null)
                 {
                     <div class="user-btm-box">
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-purple">More $ Month</p>
-                            <h1>@string.Format("{0:c}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
+                            <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-blue">More $ Year</p>
-                            <h1>@string.Format("{0:c}", Model.evaluationResults.AmountIncreasePerYear)</h1>
+                            <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-danger">Potential Rating</p>
@@ -109,7 +203,7 @@
                         <h2>@Model.evaluationResults.PotentialVARating%</h2>
                         <hr>
                         <small>Your Total Per Month After Increase</small>
-                        <h2>@string.Format("{0:c}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h2>
+                        <h2>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h2>
                         <hr>
 
                         <button class="btn btn-success">Start Your Application</button>

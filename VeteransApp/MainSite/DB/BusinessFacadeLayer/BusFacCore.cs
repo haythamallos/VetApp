@@ -210,10 +210,42 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return user;
         }
        
-        public LayoutData GetLayoutData()
+        public LayoutData GetLayoutData(string userguid)
         {
             LayoutData layoutData = new LayoutData();
+            if (!string.IsNullOrEmpty(userguid))
+            {
+                User user = UserGet(userguid);
+                if (user != null)
+                {
+                    BusFacCore busFacCore = new BusFacCore();
+                    EnumContent enumContent = null;
 
+                    enumContent = new EnumContent();
+                    enumContent.UserID = user.UserID;
+                    enumContent.IsDraft = true;
+                    enumContent.IsDisabled = false;
+                    ArrayList arContent = busFacCore.ContentGetList(enumContent);
+                    if (arContent != null)
+                    {
+                        layoutData.NumSavedForms = arContent.Count;
+                    }
+                    enumContent = null;
+
+                    enumContent = new EnumContent();
+                    enumContent.UserID = user.UserID;
+                    enumContent.IsSubmitted = true;
+                    enumContent.IsDisabled = false;
+                    enumContent.IsDraft = false;
+                    arContent = busFacCore.ContentGetList(enumContent);
+                    if (arContent != null)
+                    {
+                        layoutData.NumPurchasedForms = arContent.Count;
+                    }
+                    enumContent = null;
+
+                }
+            }
             return layoutData;
         }
 
