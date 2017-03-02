@@ -313,6 +313,173 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[1].ROM5[0]", back.S78);
                         }
 
+                        bool isAllSame = true;
+                        if (!string.IsNullOrEmpty(back.S112))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", back.S112);
+                            if (back.S112 != back.S96)
+                            {
+                                isAllSame = false;
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(back.S111))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", back.S111);
+                            if (back.S111 != back.S86)
+                            {
+                                isAllSame = false;
+                            }
+
+                        }
+                        if (!string.IsNullOrEmpty(back.S113))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", back.S113);
+                            if (back.S113 != back.S90)
+                            {
+                                isAllSame = false;
+                            }
+
+                        }
+                        if (!string.IsNullOrEmpty(back.S114))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S114);
+                            if (back.S114 != back.S87)
+                            {
+                                isAllSame = false;
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(back.S120))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S120);
+                            if (back.S120 != back.S82)
+                            {
+                                isAllSame = false;
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(back.S121))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S121);
+                            if (back.S121 != back.S78)
+                            {
+                                isAllSame = false;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(back.S120))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", back.S120);
+                        }
+                        if (!string.IsNullOrEmpty(back.S121))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", back.S121);
+                        }
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Perform[0]", "1");
+                        if (isAllSame)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[0]", "2");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1");
+                        }
+
+
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_Painful[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Pain1[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_FunctionalLoss1[1]", "1");
+
+                        if (back.S135Tenderness)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Tender[0]", "1");
+                            pdfFormFields.SetField("form1[0].#subform[2].Explain[2]", "Mild TTP Lumbar Paraspinal.");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Tender[1]", "2");
+                        }
+
+
+                        if ((back.S145MuscleSpasm) || (back.S145Guarding))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[1]", "1");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[0]", "2");
+                        }
+
+                        if ((!back.S145MuscleSpasmQuestion) && (!back.S145GuardingQuestion))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Gait[0]", "1");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Gait[1]", "2");
+                            if ((back.S145MuscleSpasm) && (back.S145MuscleSpasmQuestion))
+                            {
+                                pdfFormFields.SetField("form1[0].#subform[3].DueTo[0]", "1");
+                            }
+                            if ((back.S145Guarding) && (back.S145GuardingQuestion))
+                            {
+                                pdfFormFields.SetField("form1[0].#subform[3].DueTo[1]", "2");
+                            }
+                        }
+
+                        pdfFormFields.SetField("form1[0].#subform[3].SpinalContour[1]", "1");
+
+                        if (back.S159)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor1[0]", "1");
+                        }
+                        if (back.S164)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor2[0]", "1");
+                        }
+                        if (back.S158)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor3[0]", "1");
+                        }
+                        if (back.S157)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor4[0]", "1");
+                        }
+                        if (back.S171)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor5[0]", "1");
+                        }
+                        if (back.S170)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor6[0]", "1");
+                        }
+                        if (back.S169)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor7[0]", "1");
+                        }
+                        if (back.S168)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor8[0]", "1");
+                        }
+                        if (back.S167)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor9[0]", "1");
+                        }
+                        if (back.S160)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor10[0]", "1");
+                        }
+                        if (back.S163)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor11[0]", "1");
+                        }
+                        if (back.S161)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor12[0]", "1");
+                        }
+                        if (back.S162)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor13[0]", "1");
+                        }
 
 
                     }

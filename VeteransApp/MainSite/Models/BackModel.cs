@@ -50,6 +50,35 @@ namespace MainSite.Models
         public string S78 { get; set; }
         public bool S79 { get; set; }
 
+        public string S112 { get; set; }
+        public string S111 { get; set; }
+        public string S113 { get; set; }
+        public string S114 { get; set; }
+        public string S120 { get; set; }
+        public string S121 { get; set; }
+
+        public bool S135Tenderness { get; set; }
+
+        public bool S145MuscleSpasmQuestion { get; set; }
+        public bool S145GuardingQuestion { get; set; }
+        public bool S145MuscleSpasm { get; set; }
+        public bool S145Guarding { get; set; }
+
+        public bool S159 { get; set; }
+        public bool S164 { get; set; }
+        public bool S158 { get; set; }
+        public bool S157 { get; set; }
+        public bool S171 { get; set; }
+        public bool S170 { get; set; }
+        public bool S169 { get; set; }
+        public bool S168 { get; set; }
+        public bool S167 { get; set; }
+        public bool S160 { get; set; }
+        public bool S163 { get; set; }
+        public bool S161 { get; set; }
+        public bool S162 { get; set; }
+
+
     }
 
 
