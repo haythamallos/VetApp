@@ -129,37 +129,31 @@
                     <span>Forward Flexion (normal endpoint = 90 degrees)Image part (d)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S96, (SelectList)ViewBag.MovementList90Deg)
-                    @*@Html.EditorFor(x => x.S95) Not able to perform*@
 
                     <br />
                     <span>Extension (normal endpoint = 30 degrees)Image part (d)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S86, (SelectList)ViewBag.MovementList30Deg)
-                    @*@Html.EditorFor(x => x.S93) Not able to perform*@
 
                     <br />
                     <span>Right Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S90, (SelectList)ViewBag.MovementList30Deg)
-                    @*@Html.EditorFor(x => x.S92) Not able to perform*@
 
                     <br />
                     <span>Left Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S87, (SelectList)ViewBag.MovementList30Deg)
-                    @*@Html.EditorFor(x => x.S89) Not able to perform*@
 
                     <br />
                     <span>Right Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S82, (SelectList)ViewBag.MovementList30Deg)
-                    @*@Html.EditorFor(x => x.S81) Not able to perform*@
 
                     <br />
                     <span>Left Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
                     <br />
                     @Html.DropDownListFor(model => model.S78, (SelectList)ViewBag.MovementList30Deg)
-                    @*@Html.EditorFor(x => x.S79) Not able to perform*@
 
                 </div>
 
@@ -253,6 +247,118 @@
                     <br />
                     @Html.EditorFor(x => x.S162)Interference with standing 
                     <br />
+
+
+                    @*Turn off this section if all the same*@
+                   
+                    <label class="font-bold">
+                        Contributing factors of disability
+                    </label>
+
+                    <div class="form-check form-check-inline panel panel-primary">
+                        <div class="panel-heading">Joint Movement</div>
+                        <span>Forward Flexion (normal endpoint = 90 degrees)Image part (d)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S184, (SelectList)ViewBag.MovementList90Deg)
+                        <br />
+                        <span>Extension (normal endpoint = 30 degrees)Image part (d)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S185, (SelectList)ViewBag.MovementList30Deg)
+                        <br />
+                        <span>Right Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S174, (SelectList)ViewBag.MovementList30Deg)
+                        <br />
+                        <span>Left Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S180, (SelectList)ViewBag.MovementList30Deg)
+                        <br />
+                        <span>Right Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S175, (SelectList)ViewBag.MovementList30Deg)
+                        <br />
+                        <span>Left Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
+                        <br />
+                        @Html.DropDownListFor(model => model.S177, (SelectList)ViewBag.MovementList30Deg)
+
+                    </div>
+
+                    <label class="font-bold">
+                        Do you have Radiculopathy?
+                    </label>
+                    @Html.EditorFor(x => x.S316) Yes
+                    <br />
+                    <label class="font-bold">
+                        If you have Radiculopathy, is it left, right or both legs?
+                    </label>
+                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "Left") Left
+                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "Right") Right
+                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "Both") Both
+                    <hr />
+                    <label class="font-bold">
+                        Do you have CONSTANT pain?
+                    </label>
+                    @Html.EditorFor(x => x.SRadiculopathyConstantPainLevelAnswer) Yes
+                    <br />
+                    <label class="font-bold">
+                        If you have CONSTANT pain, is it:
+                    </label>
+                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MILD") mild
+                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MODERATE") moderate
+                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "SEVERE") severe
+                    <hr />
+
+                    <label class="font-bold">
+                        Do you have INTERMITTENT pain?
+                    </label>
+                    @Html.EditorFor(x => x.SRadiculopathyIntermittentPainLevelAnswer) Yes
+                    <br />
+                   <label class="font-bold">
+                        If you have INTERMITTENT pain, is it:
+                    </label>
+                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MILD") mild
+                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MODERATE") moderate
+                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "SEVERE") severe
+
+                    <hr />
+                    <label class="font-bold">
+                        Do you have DULL pain?
+                    </label>
+                    @Html.EditorFor(x => x.SRadiculopathyDullPainLevelAnswer) Yes
+                    <br />
+                    <label class="font-bold">
+                        If you have DULL pain, is it:
+                    </label>
+                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MILD") mild
+                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MODERATE") moderate
+                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "SEVERE") severe
+                    <hr />
+                   <label class="font-bold">
+                        Do you have Tingling or loss of sensation pain?
+                    </label>
+                    @Html.EditorFor(x => x.SRadiculopathyTinglingPainLevelAnswer) Yes
+                    <br />
+                    <label class="font-bold">
+                        If you have Tingling or loss of sensation pain, is it:
+                    </label>
+                    <br />
+                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MILD") mild
+                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MODERATE") moderate
+                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "SEVERE") severe
+                    <hr />
+
+                    <label class="font-bold">
+                        Do you have NUMBNESS pain?
+                    </label>
+                    @Html.EditorFor(x => x.SRadiculopathyNumbnessPainLevelAnswer) Yes
+                    <br />
+                   <label class="font-bold">
+                        If you have NUMBNESS pain, is it:
+                    </label>
+                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MILD") mild
+                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MODERATE") moderate
+                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "SEVERE") severe
+
 
                 </div>
 

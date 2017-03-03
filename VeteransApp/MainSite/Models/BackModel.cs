@@ -78,6 +78,28 @@ namespace MainSite.Models
         public bool S161 { get; set; }
         public bool S162 { get; set; }
 
+        public string S184 { get; set; }
+        public string S185 { get; set; }
+        public string S174 { get; set; }
+        public string S180 { get; set; }
+        public string S175 { get; set; }
+        public string S177 { get; set; }
+
+        public bool S316 { get; set; }
+
+        public string SRadiculopathyLegSide { get; set; }
+        public string SRadiculopathyConstantPainLevel { get; set; }
+        public string SRadiculopathyIntermittentPainLevel { get; set; }
+        public string SRadiculopathyDullPainLevel { get; set; }
+        public string SRadiculopathyTinglingPainLevel { get; set; }
+        public string SRadiculopathyNumbnessPainLevel { get; set; }
+
+        public bool SRadiculopathyLegSideAnswer { get; set; }
+        public bool SRadiculopathyConstantPainLevelAnswer { get; set; }
+        public bool SRadiculopathyIntermittentPainLevelAnswer { get; set; }
+        public bool SRadiculopathyDullPainLevelAnswer { get; set; }
+        public bool SRadiculopathyTinglingPainLevelAnswer { get; set; }
+        public bool SRadiculopathyNumbnessPainLevelAnswer { get; set; }
 
     }
 

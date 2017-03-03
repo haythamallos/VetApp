@@ -76,6 +76,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
+
+                        // defaults
+                        //form1[0].#subform[9].YesNo22[1]
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo5[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Loss[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].SeverityAnkylosis[0]", "4");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo12[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo13A[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo13[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo19[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo20[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo25[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo22[1]", "2");
+
+
                         if (!back.S47)
                         {
                             if (back.S48)
@@ -316,7 +333,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         bool isAllSame = true;
                         if (!string.IsNullOrEmpty(back.S112))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", back.S112);
                             if (back.S112 != back.S96)
                             {
                                 isAllSame = false;
@@ -324,7 +340,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (!string.IsNullOrEmpty(back.S111))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", back.S111);
                             if (back.S111 != back.S86)
                             {
                                 isAllSame = false;
@@ -333,7 +348,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (!string.IsNullOrEmpty(back.S113))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", back.S113);
                             if (back.S113 != back.S90)
                             {
                                 isAllSame = false;
@@ -342,7 +356,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (!string.IsNullOrEmpty(back.S114))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S114);
                             if (back.S114 != back.S87)
                             {
                                 isAllSame = false;
@@ -350,7 +363,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (!string.IsNullOrEmpty(back.S120))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S120);
                             if (back.S120 != back.S82)
                             {
                                 isAllSame = false;
@@ -358,28 +370,36 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (!string.IsNullOrEmpty(back.S121))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S121);
                             if (back.S121 != back.S78)
                             {
                                 isAllSame = false;
                             }
                         }
 
-                        if (!string.IsNullOrEmpty(back.S120))
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", back.S120);
-                        }
-                        if (!string.IsNullOrEmpty(back.S121))
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", back.S121);
-                        }
+                        //if (!string.IsNullOrEmpty(back.S120))
+                        //{
+                        //    pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", back.S120);
+                        //}
+                        //if (!string.IsNullOrEmpty(back.S121))
+                        //{
+                        //    pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", back.S121);
+                        //}
                         pdfFormFields.SetField("form1[0].#subform[2].Right_Perform[0]", "1");
+
+
                         if (isAllSame)
                         {
                             pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[0]", "2");
                         }
                         else
                         {
+                            // insert values
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", back.S112);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", back.S111);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", back.S113);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S114);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S120);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S121);
                             pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1");
                         }
 
@@ -481,6 +501,62 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor13[0]", "1");
                         }
 
+                        if (back.S184 != back.S112)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (back.S185 != back.S111)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (back.S174 != back.S113)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (back.S180 != back.S114)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (back.S175 != back.S120)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (back.S177 != back.S121)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (!isAllSame)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM19[0]", back.S184);
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM20[0]", back.S185);
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM21[0]", back.S174);
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM22[0]", back.S180);
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM23[0]", back.S175);
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM24[0]", back.S177);
+
+                            pdfFormFields.SetField("form1[0].#subform[4].YesNo6[1]", "1");
+                            pdfFormFields.SetField("form1[0].#subform[4].Right_Limit[0]", "1");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[4].YesNo6[0]", "2");
+                            pdfFormFields.SetField("form1[0].#subform[4].Right_Limit[1]", "2");
+                        }
+
+                        if (back.S316)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[0]", "1");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2");
+                        }
 
                     }
 
