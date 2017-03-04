@@ -101,6 +101,21 @@ namespace MainSite.Models
         public bool SRadiculopathyTinglingPainLevelAnswer { get; set; }
         public bool SRadiculopathyNumbnessPainLevelAnswer { get; set; }
 
+        public string SRadiculopathySeverityLevel { get; set; }
+        public string S15C { get; set; }
+
+        public bool S414 { get; set; }
+
+        public bool S416 { get; set; }
+        public bool S428 { get; set; }
+        public bool S417 { get; set; }
+        public bool S421 { get; set; }
+
+        public string S416Choice { get; set; }
+        public string S428Choice { get; set; }
+        public string S417Choice { get; set; }
+        public string S421Choice { get; set; }
+
     }
 
 

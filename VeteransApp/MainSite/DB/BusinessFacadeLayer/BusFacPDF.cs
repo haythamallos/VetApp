@@ -47,7 +47,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 lID = busFacCore.ContentCreateOrModify(content);
                 _hasError = busFacCore.HasError;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _hasError = true;
                 _errorMessage = ex.Message;
@@ -552,10 +552,46 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         if (back.S316)
                         {
                             pdfFormFields.SetField("form1[0].#subform[6].YesNo11[0]", "1");
+
+                            SetField_SRadiculopathyConstantPainLevelAnswer(back, pdfFormFields);
+                            SetField_SRadiculopathyIntermittentPainLevelAnswer(back, pdfFormFields);
+                            SetField_SRadiculopathyDullPainLevelAnswer(back, pdfFormFields);
+                            SetField_SRadiculopathyTinglingPainLevelAnswer(back, pdfFormFields);
+                            SetField_SRadiculopathyNumbnessPainLevelAnswer(back, pdfFormFields);
+                            SetField_SRadiculopathySeverityLevel(back, pdfFormFields);
+
                         }
                         else
                         {
                             pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2");
+                        }
+
+                        if (back.S55)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[0]", "3");
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[7].YesNo14A[1]", "2");
+                        }
+
+                        if (!string.IsNullOrEmpty(back.S15C))
+                        {
+                            SetField_S15C(back, pdfFormFields);
+                        }
+
+                        if (back.S414)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[8].YesNo18[0]", "1");
+                            SetField_S17ABrace(back, pdfFormFields);
+                            SetField_S17ACrutches(back, pdfFormFields);
+                            SetField_S17ACane(back, pdfFormFields);
+                            SetField_S17AWalker(back, pdfFormFields);
+
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[8].YesNo18[1]", "2");
                         }
 
                     }
@@ -580,6 +616,452 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
             return form;
 
+        }
+
+        /// <summary>
+        /// Constant pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyConstantPainLevelAnswer(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.SRadiculopathyConstantPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].ConstantPain[0]", "1");
+                switch (back.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Left(back, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Left(back, pdfFormFields);
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_SRadiculopathyConstantPainLevelAnswer_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyConstantPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[0]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyConstantPainLevelAnswer_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyConstantPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[3]", "4");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Intermittent pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.SRadiculopathyIntermittentPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].IntermittentPain[2]", "1");
+                switch (back.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(back, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(back, pdfFormFields);
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyIntermittentPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[3]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyIntermittentPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[0]", "4");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Dull pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyDullPainLevelAnswer(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.SRadiculopathyDullPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].DullPain[0]", "1");
+                switch (back.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Left(back, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Left(back, pdfFormFields);
+                        SetField_SRadiculopathyDullPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyDullPainLevelAnswer_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyDullPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[0]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyDullPainLevelAnswer_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyDullPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[3]", "4");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Tingling pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.SRadiculopathyTinglingPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[7].Paresthesias[0]", "1");
+                switch (back.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Left(back, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Left(back, pdfFormFields);
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyTinglingPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[0]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyTinglingPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[3]", "4");
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// Numbness pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.SRadiculopathyNumbnessPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[7].Numbness[2]", "1");
+                switch (back.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(back, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(back, pdfFormFields);
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(back, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyNumbnessPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[3]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyNumbnessPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[0]", "4");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Numbness pain SRadiculopathySeverityLevel
+        /// </summary>
+        private void SetField_SRadiculopathySeverityLevel(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathyLegSide)
+            {
+                case "LEFT":
+                    SetField_SRadiculopathySeverityLevel_Left(back, pdfFormFields);
+                    break;
+                case "RIGHT":
+                    SetField_SRadiculopathySeverityLevel_Right(back, pdfFormFields);
+                    break;
+                case "BOTH":
+                    SetField_SRadiculopathySeverityLevel_Left(back, pdfFormFields);
+                    SetField_SRadiculopathySeverityLevel_Right(back, pdfFormFields);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void SetField_SRadiculopathySeverityLevel_Left(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathySeverityLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[2]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[3]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[0]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathySeverityLevel_Right(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.SRadiculopathySeverityLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[1]", "2");
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[0]", "3");
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[3]", "4");
+                    break;
+            }
+        }
+
+        private void SetField_S15C(BackModel back, AcroFields pdfFormFields)
+        {
+            switch (back.S15C)
+            {
+                case "ONEWEEK":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[0]", "1");
+                    break;
+                case "TWOWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[4]", "2");
+                    break;
+                case "FOURWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[1]", "3");
+                    break;
+                case "SIXWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[2]", "4");
+                    break;
+                case "SIXWEEKSPLUS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[3]", "5");
+                    break;
+            }
+        }
+
+        private void SetField_S17ABrace(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.S416)
+            {
+                switch (back.S416Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[0]", "1");
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[1]", "2");
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[2]", "3");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17ACrutches(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.S428)
+            {
+                switch (back.S428Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[2]", "1");
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[1]", "2");
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[0]", "3");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17ACane(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.S417)
+            {
+                switch (back.S417Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[0]", "1");
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[1]", "2");
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[2]", "3");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17AWalker(BackModel back, AcroFields pdfFormFields)
+        {
+            if (back.S421)
+            {
+                switch (back.S421Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[2]", "1");
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[1]", "2");
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[0]", "3");
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

@@ -225,4 +225,147 @@ $('#formbackbutton').click(function () {
     $("#backformdiv").load('@Url.Action("FormBack","Dashboard")');
 });
 
+$('#S316').change(function () {
 
+    if (this.checked) {
+
+        $('#divRadiculopathySection').show();
+        $('#divRadiculopathy').show();
+    }
+    else {
+        $('#divRadiculopathySection').hide();
+        $('#divRadiculopathy').hide();
+    }
+});
+
+$('#SRadiculopathyConstantPainLevelAnswer').change(function () {
+
+    if (this.checked) {
+
+        $('#divConstant').show();
+    }
+    else {
+        $('#divConstant').hide();
+    }
+});
+
+$('#SRadiculopathyIntermittentPainLevelAnswer').change(function () {
+
+    if (this.checked) {
+
+        $('#divIntermittent').show();
+    }
+    else {
+        $('#divIntermittent').hide();
+    }
+});
+
+$('#SRadiculopathyDullPainLevelAnswer').change(function () {
+
+    if (this.checked) {
+
+        $('#divDull').show();
+    }
+    else {
+        $('#divDull').hide();
+    }
+});
+
+$('#SRadiculopathyTinglingPainLevelAnswer').change(function () {
+
+    if (this.checked) {
+
+        $('#divTingling').show();
+    }
+    else {
+        $('#divTingling').hide();
+    }
+});
+
+$('#SRadiculopathyNumbnessPainLevelAnswer').change(function () {
+
+    if (this.checked) {
+
+        $('#divNumbness').show();
+    }
+    else {
+        $('#divNumbness').hide();
+    }
+});
+
+$('#S145MuscleSpasm').change(function () {
+
+    if (this.checked) {
+
+        $('#divMuscleSpasm').show();
+    }
+    else {
+        $('#divMuscleSpasm').hide();
+    }
+});
+
+$('#S55').change(function () {
+
+    if (this.checked) {
+
+        $('#div15C').show();
+    }
+    else {
+        $('#div15C').hide();
+    }
+});
+
+$('#S414').change(function () {
+
+    if (this.checked) {
+
+        $('#div17A').show();
+    }
+    else {
+        $('#div17A').hide();
+    }
+});
+
+$('#S416').change(function () {
+
+    if (this.checked) {
+
+        $('#div17ABrace').show();
+    }
+    else {
+        $('#div17ABrace').hide();
+    }
+});
+
+$('#S428').change(function () {
+
+    if (this.checked) {
+
+        $('#div17ACrutches').show();
+    }
+    else {
+        $('#div17ACrutches').hide();
+    }
+});
+
+$('#S417').change(function () {
+
+    if (this.checked) {
+
+        $('#div17ACane').show();
+    }
+    else {
+        $('#div17ACane').hide();
+    }
+});
+
+$('#S421').change(function () {
+
+    if (this.checked) {
+
+        $('#div17AWalker').show();
+    }
+    else {
+        $('#div17AWalker').hide();
+    }
+});
