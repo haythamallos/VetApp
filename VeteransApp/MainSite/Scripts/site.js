@@ -148,13 +148,13 @@ function calculateGrandTotal() {
     $("#grandtotal").text(grandTotal.toFixed(2));
 }
 
-$('.accordion').find('.accordion-toggle').click(function () {
-    $(this).next().slideToggle('600');
-    $(".accordion-content").not($(this).next()).slideUp('600');
-});
-$('.accordion-toggle').on('click', function () {
-    $(this).toggleClass('active').siblings().removeClass('active');
-});
+//$('.accordion').find('.accordion-toggle').click(function () {
+//    $(this).next().slideToggle('600');
+//    $(".accordion-content").not($(this).next()).slideUp('600');
+//});
+//$('.accordion-toggle').on('click', function () {
+//    $(this).toggleClass('active').siblings().removeClass('active');
+//});
 
 
 //function eval_ratingselect_1(ratingselectvalue, divname, ismaxval) {
@@ -368,4 +368,186 @@ $('#S421').change(function () {
     else {
         $('#div17AWalker').hide();
     }
+});
+
+
+//$('#exampleBasic').wizard({
+//    onFinish: function () {
+//        alert('finish');
+//    }
+//});
+//$('#exampleBasic2').wizard({
+//    onFinish: function () {
+//        alert('finish');
+//    }
+//});
+//$('#exampleValidator').wizard({
+//    onInit: function () {
+//        $('#validation').formValidation({
+//            framework: 'bootstrap',
+//            fields: {
+//                username: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The username is required'
+//                        },
+//                        stringLength: {
+//                            min: 6,
+//                            max: 30,
+//                            message: 'The username must be more than 6 and less than 30 characters long'
+//                        },
+//                        regexp: {
+//                            regexp: /^[a-zA-Z0-9_\.]+$/,
+//                            message: 'The username can only consist of alphabetical, number, dot and underscore'
+//                        }
+//                    }
+//                },
+//                email: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The email address is required'
+//                        },
+//                        emailAddress: {
+//                            message: 'The input is not a valid email address'
+//                        }
+//                    }
+//                },
+//                password: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The password is required'
+//                        },
+//                        different: {
+//                            field: 'username',
+//                            message: 'The password cannot be the same as username'
+//                        }
+//                    }
+//                }
+//            }
+//        });
+//    },
+//    validator: function () {
+//        var fv = $('#validation').data('formValidation');
+
+//        var $this = $(this);
+
+//        // Validate the container
+//        fv.validateContainer($this);
+
+//        var isValidStep = fv.isValidContainer($this);
+//        if (isValidStep === false || isValidStep === null) {
+//            return false;
+//        }
+
+//        return true;
+//    },
+//    onFinish: function () {
+//        $('#validation').submit();
+//        alert('finish');
+//    }
+//});
+
+//$('#accordion').wizard({
+//    step: '[data-toggle="collapse"]',
+
+//    buttonsAppendTo: '.panel-collapse',
+
+//    templates: {
+//        buttons: function () {
+//            var options = this.options;
+//            return '<div class="panel-footer"><ul class="pager">' +
+//                '<li class="previous">' +
+//                    '<a href="#' + this.id + '" data-wizard="back" role="button">' + options.buttonLabels.back + '</a>' +
+//                '</li>' +
+//                '<li class="next">' +
+//                '<a href="#' + this.id + '" data-wizard="next"  role="button">' + options.buttonLabels.next + '</a>' +
+//                //'<button name="submitButton" value="PDF" class="btn btn-success">PDF</button>' +
+//                //'<button name="submitButton" value="PDF" class="btn btn-success"><a href="#" name="submitButton" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a></button>' +
+//                //'<a name="submitButton" type="submit" value="PDF" href="#' + this.id + '" data-wizard="finish" class="btn btn-success">' + options.buttonLabels.finish + '</a>' +
+//                //'<a href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' +
+//                '<a href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' +
+//                '</li>' +
+//            '</ul></div>';
+//        }
+//    },
+
+//    onBeforeShow: function (step) {
+//        step.$pane.collapse('show');
+//    },
+
+//    onBeforeHide: function (step) {
+//        step.$pane.collapse('hide');
+//    },
+
+//    onFinish: function () {
+//        formqback.submit();
+//        //alert('finish');
+        
+//    }
+//});
+
+
+
+
+
+
+
+
+
+
+
+//Default Buttons
+$("#defaultNextBtn").on("click", function () {
+    $("#collapsePrimary").collapse('show');
+    $("#collapseDefault").collapse('hide');
+});
+
+//Primary Buttons
+$("#primaryNextBtn").on("click", function () {
+    $("#collapseSuccess").collapse('show');
+    $("#collapsePrimary").collapse('hide');
+});
+
+$("#primaryPrevBtn").on("click", function () {
+    $("#collapseDefault").collapse('show');
+    $("#collapsePrimary").collapse('hide');
+});
+
+//Success Buttons
+$("#successNextBtn").on("click", function () {
+    $("#collapseInfo").collapse('show');
+    $("#collapseSuccess").collapse('hide');
+});
+
+$("#successPrevBtn").on("click", function () {
+    $("#collapsePrimary").collapse('show');
+    $("#collapseSuccess").collapse('hide');
+});
+
+//Info Buttons
+$("#infoNextBtn").on("click", function () {
+    $("#collapseWarning").collapse('show');
+    $("#collapseInfo").collapse('hide');
+});
+
+$("#infoPrevBtn").on("click", function () {
+    $("#collapseSuccess").collapse('show');
+    $("#collapseInfo").collapse('hide');
+});
+
+//Warning Buttons
+$("#warningNextBtn").on("click", function () {
+    $("#collapseDanger").collapse('show');
+    $("#collapseWarning").collapse('hide');
+});
+
+$("#warningPrevBtn").on("click", function () {
+    $("#collapseInfo").collapse('show');
+    $("#collapseWarning").collapse('hide');
+});
+
+//DangerButtons
+$("#dangerPrevBtn").on("click", function () {
+    $("#collapseWarning").collapse('show');
+    $("#collapseDanger").collapse('hide');
 });

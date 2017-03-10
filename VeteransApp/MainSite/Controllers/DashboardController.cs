@@ -164,10 +164,18 @@ namespace MainSite.Controllers
             {
                 user.Fullname = userModel.FullName;
                 user.Username = userModel.Username;
-                if (!user.Ssn.Equals(userModel.SSN))
+                if (!string.IsNullOrEmpty(userModel.SSN))
                 {
-                    user.Ssn = UtilsSecurity.encrypt(userModel.SSN);
+                    if (!user.Ssn.Equals(userModel.SSN))
+                    {
+                        user.Ssn = UtilsSecurity.encrypt(userModel.SSN);
+                    }
                 }
+                else
+                {
+                    user.Ssn = null;
+                }
+
                 user.PhoneNumber = userModel.PhoneNumber;
                 if (!user.Passwd.Equals(userModel.Password))
                 {
@@ -313,27 +321,88 @@ namespace MainSite.Controllers
             }
             return View("Register2");
         }
-        public ActionResult BackForm(BackModel backModel, string submitButton)
+
+        public ActionResult BackFormGet(BackModel backModel)
         {
             try
             {
                 BusFacPDF busFacPDF = new BusFacPDF();
                 string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
                 User user = Auth();
-                switch (submitButton)
-                {
-                    case "Save":
-                        backModel.TemplatePath = pdfTemplatePath;
-                        backModel.UserID = user.UserID;
-                        long ContentID = busFacPDF.Save(backModel);
-                        break;
-                    case "Submit":
-                        break;
-                    case "PDF":
-                        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
-                        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
-                        break;
-                }
+                backModel.NameOfPatient = user.Fullname;
+                backModel.SocialSecurity = user.Ssn;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("BackForm", backModel);
+        }
+        [HttpPost]
+        public ActionResult BackFormPost(BackModel backModel, string args)
+        {
+            try
+            {
+                BusFacPDF busFacPDF = new BusFacPDF();
+                string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                User user = Auth();
+                backModel.NameOfPatient = user.Fullname;
+                backModel.SocialSecurity = user.Ssn;
+
+                backModel.TemplatePath = pdfTemplatePath;
+                backModel.UserID = user.UserID;
+                long ContentID = busFacPDF.Save(backModel);
+
+                //switch (submitButton)
+                //{
+                //    case "Save":
+                //        backModel.TemplatePath = pdfTemplatePath;
+                //        backModel.UserID = user.UserID;
+                //        long ContentID = busFacPDF.Save(backModel);
+                //        break;
+                //    case "Submit":
+                //        break;
+                //    case "PDF":
+                //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+                //        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+                //        break;
+                //}
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("BackForm", backModel);
+        }
+        [HttpPost]
+        public ActionResult BackFormToPdf(BackModel backModel, string submitButton)
+        {
+            try
+            {
+                BusFacPDF busFacPDF = new BusFacPDF();
+                string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                User user = Auth();
+                backModel.NameOfPatient = user.Fullname;
+                backModel.SocialSecurity = user.Ssn;
+
+                byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+                PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+
+                //switch (submitButton)
+                //{
+                //    case "Save":
+                //        backModel.TemplatePath = pdfTemplatePath;
+                //        backModel.UserID = user.UserID;
+                //        long ContentID = busFacPDF.Save(backModel);
+                //        break;
+                //    case "Submit":
+                //        break;
+                //    case "PDF":
+                //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+                //        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+                //        break;
+                //}
 
             }
             catch (Exception ex)

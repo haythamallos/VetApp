@@ -240,6 +240,7 @@
     <Content Include="Content\spinners.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\wizard.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -253,6 +254,7 @@
     <Content Include="Images\box1.png" />
     <Content Include="Images\box2.png" />
     <Content Include="Images\john.jpg" />
+    <Content Include="Images\login-register-2.jpg" />
     <Content Include="Images\soldier-avatar.jpg" />
     <Content Include="less\icons\font-awesome\.gitignore" />
     <Content Include="less\icons\font-awesome\css\font-awesome.css" />
@@ -494,6 +496,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Scripts\jquery-wizard.js" />
+    <Content Include="Scripts\jquery-wizard.min.js" />
     <Content Include="Scripts\jquery.validate.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

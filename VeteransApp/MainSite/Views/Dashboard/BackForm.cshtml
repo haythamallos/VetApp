@@ -6,470 +6,551 @@
 
 @model MainSite.Models.BackModel
 <div id="page-wrapper">
+
+
+
+
+
+
+
     <div class="col-xs-12">
+        <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions</h2>
+        <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a></p>
+
+        <form id="formqback2" method="post" action="/Dashboard/BackFormPost">
+            <div class="panel-group col-lg-8" id="accordion">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapseDefault">Part 1</a>
+                        </h4>
+                    </div>
+                    <div id="collapseDefault" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <label class="col-md-3">Full Name</label>
+                                <div class="col-xs-4">
+                                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Full Name" value="@Model.NameOfPatient">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group m-t-20">
+                                <label class="col-md-3">Social Security Number</label>
+                                <div class="col-xs-4">
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                </div>
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">What is the diagnosis of your back? (Check all that apply)</label>
+                                <hr />
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S47) No current diagnosis
+                                        @*<input class="form-check-input" type="checkbox" name="checkboxNoDiagnosis" id="checkboxNoDiagnosis" value="@Model.checkboxNoDiagnosis"> No current diagnosis*@
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S48) Mechanical back pain syndrome
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S49) Lumbosacral sprain/strain
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S50) Facet joint arthropathy (degenerative joint disease of lumbosacral spine)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S51) Degenerative disc disease
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S1) Degenerative scoliosis
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S52) Foraminal/lateral recess/central stenosis
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S53) Degenerative spondylolisthesis
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S54) Spondylolysis/isthmic spondylolisthesis
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S55) Intervertebral disc syndrome
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S13) Radiculopathy
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S12) Ankylosis of thoracolumbar spine
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S7) Ankylosing spondylitis of the thoracolumbar spine (back)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S6) Vertebral fracture (vertebrae of the back)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S62) Other diagnosis
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="defaultNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div> <!-- default -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapsePrimary">Part 2</a>
+                        </h4>
+                    </div>
+                    <div id="collapsePrimary" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">Please perform the movement tests below and choose the answer that best reflects your ability for that movement.</label>
+                                <hr />
+                                <span>Forward Flexion (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(model => model.S96, (SelectList)ViewBag.MovementList90Deg)
+
+                                <hr />
+                                <span>Extension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S86, (SelectList)ViewBag.MovementList30Deg)
+
+                                <hr />
+                                <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S90, (SelectList)ViewBag.MovementList30Deg)
+
+                                <hr />
+                                <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S87, (SelectList)ViewBag.MovementList30Deg)
+
+                                <hr />
+                                <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S82, (SelectList)ViewBag.MovementList30Deg)
+
+                                <hr />
+                                <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S78, (SelectList)ViewBag.MovementList30Deg)
+
+                            </div>
+                            <hr />
+                            <label class="font-bold">Please perform the movement tests above again and choose the answer that best reflects your ability for that movement this second time.</label>
+                            <hr />
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <span>Forward Flexion (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(model => model.S112, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+                                <span>Extension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S111, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S113, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S114, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S120, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S121, (SelectList)ViewBag.MovementList30Deg)
+
+                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="primaryPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="primaryNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div> <!-- primary -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapseSuccess">Part 3</a>
+                        </h4>
+                    </div>
+                    <div id="collapseSuccess" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <span>Do you have tenderness?</span>
+                            @Html.EditorFor(x => x.S135Tenderness) Yes
+                            <br />
+                            <span> Do you have muscle spasms?</span>
+                            @Html.EditorFor(x => x.S145MuscleSpasm) Yes
+                            <div id="divMuscleSpasm" style="display: none">
+                                <span>If you have muscle spasms, does this affect your walking motion?</span>
+                                @Html.EditorFor(x => x.S145MuscleSpasmQuestion) Yes
+                            </div>
+                            <br />
+                            <span> Do you have guarding?</span>
+                            @Html.EditorFor(x => x.S145Guarding) Yes
+                            <div id="divGuarding" style="display: none">
+                                <span>If you have guarding, does this affect your walking motion?</span>
+                                @Html.EditorFor(x => x.S145GuardingQuestion) Yes
+                            </div>
+                            <hr />
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">Contributing Factors of Disability (Check All That Apply)</label>
+                                <hr />
+                                @Html.EditorFor(x => x.S159)Less movement than normal (due to ankylosis, limitation or blocking, adhesions, tendon-tie-ups, contracted scars, etc.)
+                                <br />
+                                @Html.EditorFor(x => x.S164)More movement than normal (from flail joints, resections, nonunion of fractures, relaxation of ligaments, etc.)
+                                <br />
+                                @Html.EditorFor(x => x.S158)Weakened movement (due to muscle injury, disease or injury of peripheral nerves, divided or lengthened tendons, etc.)
+                                <br />
+                                @Html.EditorFor(x => x.S157)Excess fatigability
+                                <br />
+                                @Html.EditorFor(x => x.S171)Incoordination, impaired ability to execute skilled movements smoothly
+                                <br />
+                                @Html.EditorFor(x => x.S170)Pain on movement
+                                <br />
+                                @Html.EditorFor(x => x.S169)Swelling
+                                <br />
+                                @Html.EditorFor(x => x.S168)Deformity
+                                <br />
+                                @Html.EditorFor(x => x.S167)Atrophy of disuse
+                                <br />
+                                @Html.EditorFor(x => x.S160)Instability of station
+                                <br />
+                                @Html.EditorFor(x => x.S163)Disturbance of locomotion
+                                <br />
+                                @Html.EditorFor(x => x.S161)Interference with sitting
+                                <br />
+                                @Html.EditorFor(x => x.S162)Interference with standing
+                                <br />
+
+
+                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="successPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="successNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div> <!-- success -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapseInfo">Part 4</a>
+                        </h4>
+                    </div>
+                    <div id="collapseInfo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">Please perform the joint movement tests again and select the answer</label>
+                                <hr />
+                                <span>Forward Flexion (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(model => model.S184, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+                                <span>Extension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S185, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S174, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S180, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S175, (SelectList)ViewBag.MovementList30Deg)
+                                <hr />
+                                <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(model => model.S177, (SelectList)ViewBag.MovementList30Deg)
+
+                            </div>
+                            <hr />
+                            <span> Do you have Radiculopathy?</span>
+                            @Html.EditorFor(x => x.S316) Yes
+                            <div id="divRadiculopathySection" style="display: none">
+                                <div id="divRadiculopathy" style="display: none">
+                                    <span>If you have Radiculopathy, is it left, right or both legs?</span>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "BOTH") Both
+                                </div>
+                                <hr />
+                                <span> Do you have CONSTANT pain?</span>
+                                @Html.EditorFor(x => x.SRadiculopathyConstantPainLevelAnswer) Yes
+                                <div id="divConstant" style="display: none">
+                                    <label class="font-bold">
+                                        If you have CONSTANT pain, is it:
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MILD") mild
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MODERATE") moderate
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "SEVERE") severe
+                                </div>
+                                <hr />
+                                <span>Do you have INTERMITTENT pain?</span>
+                                @Html.EditorFor(x => x.SRadiculopathyIntermittentPainLevelAnswer) Yes
+                                <div id="divIntermittent" style="display: none">
+                                    <span>If you have INTERMITTENT pain, is it:</span>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MILD") mild
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MODERATE") moderate
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "SEVERE") severe
+                                </div>
+                                <hr />
+                                <span>Do you have DULL pain?</span>
+                                @Html.EditorFor(x => x.SRadiculopathyDullPainLevelAnswer) Yes
+                                <div id="divDull" style="display: none">
+                                    <span>If you have DULL pain, is it:</span>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MILD") mild
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MODERATE") moderate
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "SEVERE") severe
+                                </div>
+                                <hr />
+                                <span>Do you have Tingling or loss of sensation pain?</span>
+                                @Html.EditorFor(x => x.SRadiculopathyTinglingPainLevelAnswer) Yes
+                                <div id="divTingling" style="display: none">
+                                    <span>If you have Tingling or loss of sensation pain, is it:</span>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MILD") mild
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MODERATE") moderate
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "SEVERE") severe
+                                </div>
+                                <hr />
+                                <span>Do you have NUMBNESS pain?</span>
+                                @Html.EditorFor(x => x.SRadiculopathyNumbnessPainLevelAnswer) Yes
+                                <div id="divNumbness" style="display: none">
+                                    <span>If you have NUMBNESS pain, is it:</span>
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MILD") mild
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MODERATE") moderate
+                                    @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "SEVERE") severe
+                                </div>
+
+                                <hr />
+                                <span> What is severity of your radiculopathy?</span>
+                                @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MILD") mild
+                                @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MODERATE") moderate
+                                @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "SEVERE") severe
+
+                            </div>
+                            <div id="div15C" style="display: none">
+                                <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>
+                                <br />
+                                <span>Disclaimer ....</span>
+                                <br />
+                                @Html.RadioButtonFor(x => x.S15C, "ONEWEEK") Less than 1 week
+                                <br />
+                                @Html.RadioButtonFor(x => x.S15C, "TWOWEEKS") At least 1 week but less than 2 weeks
+                                <br />
+                                @Html.RadioButtonFor(x => x.S15C, "FOURWEEKS") At least 2 weeks but less than 4 weeks
+                                <br />
+                                @Html.RadioButtonFor(x => x.S15C, "SIXWEEKS") At least 4 week but less than 6 weeks
+                                <br />
+                                @Html.RadioButtonFor(x => x.S15C, "SIXWEEKSPLUS") At least 6 weeks
+                            </div>
+
+                            <hr />
+                            <span>Do you use any assistive devices for walking?</span>
+                            @Html.EditorFor(x => x.S414) Yes
+                            <hr />
+                            <div id="div17A" style="display: none">
+                                <span> Brace</span>
+                                @Html.EditorFor(x => x.S416) Yes
+                                <div id="div17ABrace" style="display: none">
+                                    <span>Frequency of BRACE use:</span>
+                                    @Html.RadioButtonFor(x => x.S416Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S416Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S416Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span>Crutches</span>
+                                @Html.EditorFor(x => x.S428) Yes
+                                <div id="div17ACrutches" style="display: none">
+                                    <span>Frequency of CRUTCHES use:</span>
+                                    @Html.RadioButtonFor(x => x.S428Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S428Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S428Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span> Cane</span>
+                                @Html.EditorFor(x => x.S417) Yes
+                                <div id="div17ACane" style="display: none">
+                                    <span>Frequency of CANE use:</span>
+                                    @Html.RadioButtonFor(x => x.S417Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S417Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S417Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span> Walker</span>
+                                @Html.EditorFor(x => x.S421) Yes
+                                <div id="div17AWalker" style="display: none">
+                                    <span>Frequency of WALKER use:</span>
+                                    @Html.RadioButtonFor(x => x.S421Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S421Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S421Choice, "CONSTANT") Constant
+                                </div>
+                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="infoPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="infoNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div> <!-- info -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapseWarning">Part 5</a>
+                        </h4>
+                    </div>
+                    <div id="collapseWarning" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>Hello I am the panel body</p>
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="warningPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="warningNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div> <!-- warning -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-parent="accordion" href="#collapseDanger">Part 6</a>
+                        </h4>
+                    </div>
+                    <div id="collapseDanger" class="panel=collapse collapse">
+                        <div class="panel-body">
+                            <p>Hello I am the panel body</p>
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="dangerPrevBtn">Prev</button>
+                            <button class="btn btn-danger btn-md pull-right">Submit</button>
+                        </div>
+                    </div>
+                </div> <!-- danger -->
+            </div> <!-- accordion -->
+        </form>
+
+
+
+
+
+
         <div class="white-box">
-            <form id="formqback" action="/Dashboard/BackForm">
-                <div class="form-group">
-                    <div class="col-sm-3">
-                        <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
-                    </div>
-                    @*<div class="col-sm-3">
-                            <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
-                        </div>*@
-                    <div class="col-sm-6">
-                        <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
-                    </div>
-                </div>
-                <br />
-                @*<div class="form-group m-t-20">
-                        <div class="col-xs-4">
-                            <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Name Of Patient">
+
+            <form id="formqback" method="post" action="/Dashboard/BackFormPost">
+
+
+
+                <div class="panel-group wiz-aco" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Form Section 1
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group m-t-20">
-                        <div class="col-xs-4">
-                            <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Form Section 2
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+
+                            </div>
                         </div>
                     </div>
-                    <br />*@
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Form Section 3
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
 
-                <h2>Please answer the questions below regarding your back condition</h2>
-                <span>It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a></span>
-                <div class="form-check form-check-inline panel panel-primary">
-                    <div class="panel-heading">What is the diagnosis of your back? (Check all that apply)</div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S47) No current diagnosis
-                            @*<input class="form-check-input" type="checkbox" name="checkboxNoDiagnosis" id="checkboxNoDiagnosis" value="@Model.checkboxNoDiagnosis"> No current diagnosis*@
-                        </label>
-                    </div>
+                            </div>
+                        </div>
 
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S48) Mechanical back pain syndrome
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S49) Lumbosacral sprain/strain
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S50) Facet joint arthropathy (degenerative joint disease of lumbosacral spine)
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S51) Degenerative disc disease
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S1) Degenerative scoliosis
-                        </label>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        FORM SECTION 4
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="panel-body">
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S52) Foraminal/lateral recess/central stenosis
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S53) Degenerative spondylolisthesis
-                        </label>
-                    </div>
 
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S54) Spondylolysis/isthmic spondylolisthesis
-                        </label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S55) Intervertebral disc syndrome
-                        </label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S13) Radiculopathy
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S12) Ankylosis of thoracolumbar spine
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S7) Ankylosing spondylitis of the thoracolumbar spine (back)
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S6) Vertebral fracture (vertebrae of the back)
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label font-normal">
-                            @Html.EditorFor(x => x.S62) Other diagnosis
-                        </label>
-                    </div>
                 </div>
 
 
-                <label class="font-bold">
-                    Refer to the image on the right in answering questions about your body movement abilities.
-                </label>
-                <div class="form-check form-check-inline panel panel-primary">
-                    <div class="panel-heading">Joint Movement</div>
-                    <span>Forward Flexion (normal endpoint = 90 degrees)Image part (d)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S96, (SelectList)ViewBag.MovementList90Deg)
-
-                    <br />
-                    <span>Extension (normal endpoint = 30 degrees)Image part (d)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S86, (SelectList)ViewBag.MovementList30Deg)
-
-                    <br />
-                    <span>Right Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S90, (SelectList)ViewBag.MovementList30Deg)
-
-                    <br />
-                    <span>Left Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S87, (SelectList)ViewBag.MovementList30Deg)
-
-                    <br />
-                    <span>Right Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S82, (SelectList)ViewBag.MovementList30Deg)
-
-                    <br />
-                    <span>Left Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S78, (SelectList)ViewBag.MovementList30Deg)
-
-                </div>
-
-                <label class="font-bold">
-                    Please perform the tests repetitively ...
-                </label>
-
-                <div class="form-check form-check-inline panel panel-primary">
-                    <div class="panel-heading">Joint Movement</div>
-                    <span>Forward Flexion (normal endpoint = 90 degrees)Image part (d)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S112, (SelectList)ViewBag.MovementList90Deg)
-                    <br />
-                    <span>Extension (normal endpoint = 30 degrees)Image part (d)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S111, (SelectList)ViewBag.MovementList30Deg)
-                    <br />
-                    <span>Right Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S113, (SelectList)ViewBag.MovementList30Deg)
-                    <br />
-                    <span>Left Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S114, (SelectList)ViewBag.MovementList30Deg)
-                    <br />
-                    <span>Right Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S120, (SelectList)ViewBag.MovementList30Deg)
-                    <br />
-                    <span>Left Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                    <br />
-                    @Html.DropDownListFor(model => model.S121, (SelectList)ViewBag.MovementList30Deg)
-
-                </div>
-
-                <label class="font-bold">
-                    Do you have tenderness?
-                </label>
-                @Html.EditorFor(x => x.S135Tenderness) Yes
-
-                <br />
-                <label class="font-bold">
-                    Do you have muscle spasms?
-                </label>
-                @Html.EditorFor(x => x.S145MuscleSpasm) Yes
-                <div id="divMuscleSpasm" style="display: none">
-                    <label class="font-bold">
-                        If you have muscle spasms, does this affect your walking motion?
-                    </label>
-                    @Html.EditorFor(x => x.S145MuscleSpasmQuestion) Yes
-                </div>
-                <hr />
-                <label class="font-bold">
-                    Do you have guarding?
-                </label>
-                @Html.EditorFor(x => x.S145Guarding) Yes
-                <div id="divGuarding" style="display: none">
-                    <label class="font-bold">
-                        If you have guarding, does this affect your walking motion?
-                    </label>
-                    @Html.EditorFor(x => x.S145GuardingQuestion) Yes
-                </div>
-                <hr />
-                <div class="form-check form-check-inline panel panel-primary">
-                    <div class="panel-heading">Contributing Factors of Disability</div>
-                    <span></span>
-                    <br />
-                    @Html.EditorFor(x => x.S159)Less movement than normal (due to ankylosis, limitation or blocking, adhesions, tendon-tie-ups, contracted scars, etc.)
-                    <br />
-                    @Html.EditorFor(x => x.S164)More movement than normal (from flail joints, resections, nonunion of fractures, relaxation of ligaments, etc.)
-                    <br />
-                    @Html.EditorFor(x => x.S158)Weakened movement (due to muscle injury, disease or injury of peripheral nerves, divided or lengthened tendons, etc.)
-                    <br />
-                    @Html.EditorFor(x => x.S157)Excess fatigability
-                    <br />
-                    @Html.EditorFor(x => x.S171)Incoordination, impaired ability to execute skilled movements smoothly
-                    <br />
-                    @Html.EditorFor(x => x.S170)Pain on movement
-                    <br />
-                    @Html.EditorFor(x => x.S169)Swelling
-                    <br />
-                    @Html.EditorFor(x => x.S168)Deformity
-                    <br />
-                    @Html.EditorFor(x => x.S167)Atrophy of disuse
-                    <br />
-                    @Html.EditorFor(x => x.S160)Instability of station
-                    <br />
-                    @Html.EditorFor(x => x.S163)Disturbance of locomotion
-                    <br />
-                    @Html.EditorFor(x => x.S161)Interference with sitting
-                    <br />
-                    @Html.EditorFor(x => x.S162)Interference with standing
-                    <br />
 
 
-                    @*Turn off this section if all the same*@
 
-                    <label class="font-bold">
-                        Contributing factors of disability
-                    </label>
 
-                    <div class="form-check form-check-inline panel panel-primary">
-                        <div class="panel-heading">Joint Movement</div>
-                        <span>Forward Flexion (normal endpoint = 90 degrees)Image part (d)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S184, (SelectList)ViewBag.MovementList90Deg)
-                        <br />
-                        <span>Extension (normal endpoint = 30 degrees)Image part (d)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S185, (SelectList)ViewBag.MovementList30Deg)
-                        <br />
-                        <span>Right Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S174, (SelectList)ViewBag.MovementList30Deg)
-                        <br />
-                        <span>Left Lateral Flexion (normal endpoint = 30 degrees)Image part (f)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S180, (SelectList)ViewBag.MovementList30Deg)
-                        <br />
-                        <span>Right Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S175, (SelectList)ViewBag.MovementList30Deg)
-                        <br />
-                        <span>Left Lateral Rotation (normal endpoint = 30 degrees)Image part (f)</span>
-                        <br />
-                        @Html.DropDownListFor(model => model.S177, (SelectList)ViewBag.MovementList30Deg)
 
-                    </div>
 
-                    <label class="font-bold">
-                        Do you have Radiculopathy?
-                    </label>
-                    @Html.EditorFor(x => x.S316) Yes
-                    <div id="divRadiculopathySection" style="display: none">
-                        <div id="divRadiculopathy" style="display: none">
-                            <label class="font-bold">
-                                If you have Radiculopathy, is it left, right or both legs?
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "LEFT") Left
-                            @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "RIGHT") Right
-                            @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "BOTH") Both
+
+                @*<div class="form-group">
+                        <div class="col-sm-3">
+                            <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
                         </div>
-                        <hr />
-                        <label class="font-bold">
-                            Do you have CONSTANT pain?
-                        </label>
-                        @Html.EditorFor(x => x.SRadiculopathyConstantPainLevelAnswer) Yes
-                        <div id="divConstant" style="display: none">
-                            <label class="font-bold">
-                                If you have CONSTANT pain, is it:
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MILD") mild
-                            @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MODERATE") moderate
-                            @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "SEVERE") severe
+                        <div class="col-sm-3">
+                                <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
+                            </div>
+                        <div class="col-sm-9">
+                            <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
                         </div>
-                        <hr />
-                        <label class="font-bold">
-                            Do you have INTERMITTENT pain?
-                        </label>
-                        @Html.EditorFor(x => x.SRadiculopathyIntermittentPainLevelAnswer) Yes
-                        <div id="divIntermittent" style="display: none">
-                            <label class="font-bold">
-                                If you have INTERMITTENT pain, is it:
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MILD") mild
-                            @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MODERATE") moderate
-                            @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "SEVERE") severe
+                    </div>*@
+
+
+
+
+
+                @*<div class="form-group">
+                        <div class="col-sm-3">
+                            <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
                         </div>
-                        <hr />
-                        <label class="font-bold">
-                            Do you have DULL pain?
-                        </label>
-                        @Html.EditorFor(x => x.SRadiculopathyDullPainLevelAnswer) Yes
-                        <div id="divDull" style="display: none">
-                            <label class="font-bold">
-                                If you have DULL pain, is it:
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MILD") mild
-                            @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MODERATE") moderate
-                            @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "SEVERE") severe
+                        <div class="col-sm-3">
+                                <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
+                            </div>
+                        <div class="col-sm-6">
+                            <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
                         </div>
-                        <hr />
-                        <label class="font-bold">
-                            Do you have Tingling or loss of sensation pain?
-                        </label>
-                        @Html.EditorFor(x => x.SRadiculopathyTinglingPainLevelAnswer) Yes
-                        <div id="divTingling" style="display: none">
-                            <label class="font-bold">
-                                If you have Tingling or loss of sensation pain, is it:
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MILD") mild
-                            @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MODERATE") moderate
-                            @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "SEVERE") severe
-                        </div>
-                        <hr />
-                        <label class="font-bold">
-                            Do you have NUMBNESS pain?
-                        </label>
-                        @Html.EditorFor(x => x.SRadiculopathyNumbnessPainLevelAnswer) Yes
-                        <div id="divNumbness" style="display: none">
-                            <label class="font-bold">
-                                If you have NUMBNESS pain, is it:
-                            </label>
-                            @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MILD") mild
-                            @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MODERATE") moderate
-                            @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "SEVERE") severe
-                        </div>
-
-                        <hr />
-                        <label class="font-bold">
-                            What is severity of your radiculopathy?
-                        </label>
-                        @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MILD") mild
-                        @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MODERATE") moderate
-                        @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "SEVERE") severe
-
-                        <hr />
-                    </div>
-                    <div id="div15C" style="display: none">
-                        <label class="font-bold">
-                            What is the total duration of all incapacitating episodes over the past 12 months:
-                        </label>
-                        <br />
-                        <span>Disclaimer ....</span>
-                        <br />
-                        @Html.RadioButtonFor(x => x.S15C, "ONEWEEK") Less than 1 week
-                        <br />
-                        @Html.RadioButtonFor(x => x.S15C, "TWOWEEKS") At least 1 week but less than 2 weeks
-                        <br />
-                        @Html.RadioButtonFor(x => x.S15C, "FOURWEEKS") At least 2 weeks but less than 4 weeks
-                        <br />
-                        @Html.RadioButtonFor(x => x.S15C, "SIXWEEKS") At least 4 week but less than 6 weeks
-                        <br />
-                        @Html.RadioButtonFor(x => x.S15C, "SIXWEEKSPLUS") At least 6 weeks
-                        <hr />
-                    </div>
-
-                    <hr />
-                    <label class="font-bold">
-                        Do you use any assistive devices for walking?
-                    </label>
-                    @Html.EditorFor(x => x.S414) Yes
-                    <div id="div17A" style="display: none">
-
-                        <label class="font-bold">
-                            Brace
-                        </label>
-                        @Html.EditorFor(x => x.S416) Yes
-                        <div id="div17ABrace" style="display: none">
-                            <label class="font-bold">
-                                Frequency of BRACE use:
-                            </label>
-                            @Html.RadioButtonFor(x => x.S416Choice, "OCCASIONAL") Occasional
-                            @Html.RadioButtonFor(x => x.S416Choice, "REGULAR") Regular
-                            @Html.RadioButtonFor(x => x.S416Choice, "CONSTANT") Constant
-                        </div>
-                        <br />
-
-                        <label class="font-bold">
-                            Crutches
-                        </label>
-                        @Html.EditorFor(x => x.S428) Yes
-                        <div id="div17ACrutches" style="display: none">
-                            <label class="font-bold">
-                                Frequency of CRUTCHES use:
-                            </label>
-                            @Html.RadioButtonFor(x => x.S428Choice, "OCCASIONAL") Occasional
-                            @Html.RadioButtonFor(x => x.S428Choice, "REGULAR") Regular
-                            @Html.RadioButtonFor(x => x.S428Choice, "CONSTANT") Constant
-                        </div>
-                        <br />
-
-                        <label class="font-bold">
-                            Cane
-                        </label>
-                        @Html.EditorFor(x => x.S417) Yes
-                        <div id="div17ACane" style="display: none">
-                            <label class="font-bold">
-                                Frequency of CANE use:
-                            </label>
-                            @Html.RadioButtonFor(x => x.S417Choice, "OCCASIONAL") Occasional
-                            @Html.RadioButtonFor(x => x.S417Choice, "REGULAR") Regular
-                            @Html.RadioButtonFor(x => x.S417Choice, "CONSTANT") Constant
-                        </div>
-                        <br />
-
-                        <label class="font-bold">
-                            Walker
-                        </label>
-                        @Html.EditorFor(x => x.S421) Yes
-                        <div id="div17AWalker" style="display: none">
-                            <label class="font-bold">
-                                Frequency of WALKER use:
-                            </label>
-                            @Html.RadioButtonFor(x => x.S421Choice, "OCCASIONAL") Occasional
-                            @Html.RadioButtonFor(x => x.S421Choice, "REGULAR") Regular
-                            @Html.RadioButtonFor(x => x.S421Choice, "CONSTANT") Constant
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-3">
-                        <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
-                    </div>
-                    @*<div class="col-sm-3">
-                            <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
-                        </div>*@
-                    <div class="col-sm-6">
-                        <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
-                    </div>
-                </div>
-                <hr />
+                    </div>*@
             </form>
         </div>
     </div>
