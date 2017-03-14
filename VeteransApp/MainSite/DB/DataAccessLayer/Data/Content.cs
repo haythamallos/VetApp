@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  Content.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/1/2017	Created
+    /// 001	HA	3/11/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the Content database table.
@@ -27,6 +27,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private long _lContentID = 0;
         /// <summary>UserID Attribute type String</summary>
         private long _lUserID = 0;
+        /// <summary>PurchaseID Attribute type String</summary>
+        private long _lPurchaseID = 0;
+        /// <summary>ContentStateID Attribute type String</summary>
+        private long _lContentStateID = 0;
         /// <summary>ContentTypeID Attribute type String</summary>
         private long _lContentTypeID = 0;
         /// <summary>DateCreated Attribute type String</summary>
@@ -39,14 +43,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private byte[] _byteContentData = null;
         /// <summary>ContentMeta Attribute type String</summary>
         private string _strContentMeta = null;
-        /// <summary>IsSubmitted Attribute type String</summary>
-        private bool? _bIsSubmitted = null;
         /// <summary>IsDisabled Attribute type String</summary>
         private bool? _bIsDisabled = null;
-        /// <summary>IsDraft Attribute type String</summary>
-        private bool? _bIsDraft = null;
-        /// <summary>DateSubmitted Attribute type String</summary>
-        private DateTime _dtDateSubmitted = dtNull;
         /// <summary>Notes Attribute type String</summary>
         private string _strNotes = null;
 
@@ -62,7 +60,11 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_ID = "content_id"; //Table id field name
                                                                   /// <summary>user_id Database field </summary>
         public static readonly string DB_FIELD_USER_ID = "user_id"; //Table UserID field name
-                                                                    /// <summary>content_type_id Database field </summary>
+                                                                    /// <summary>purchase_id Database field </summary>
+        public static readonly string DB_FIELD_PURCHASE_ID = "purchase_id"; //Table PurchaseID field name
+                                                                            /// <summary>content_state_id Database field </summary>
+        public static readonly string DB_FIELD_CONTENT_STATE_ID = "content_state_id"; //Table ContentStateID field name
+                                                                                      /// <summary>content_type_id Database field </summary>
         public static readonly string DB_FIELD_CONTENT_TYPE_ID = "content_type_id"; //Table ContentTypeID field name
                                                                                     /// <summary>date_created Database field </summary>
         public static readonly string DB_FIELD_DATE_CREATED = "date_created"; //Table DateCreated field name
@@ -74,15 +76,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_CONTENT_DATA = "content_data"; //Table ContentData field name
                                                                               /// <summary>content_meta Database field </summary>
         public static readonly string DB_FIELD_CONTENT_META = "content_meta"; //Table ContentMeta field name
-                                                                              /// <summary>is_submitted Database field </summary>
-        public static readonly string DB_FIELD_IS_SUBMITTED = "is_submitted"; //Table IsSubmitted field name
                                                                               /// <summary>is_disabled Database field </summary>
         public static readonly string DB_FIELD_IS_DISABLED = "is_disabled"; //Table IsDisabled field name
-                                                                            /// <summary>is_draft Database field </summary>
-        public static readonly string DB_FIELD_IS_DRAFT = "is_draft"; //Table IsDraft field name
-                                                                      /// <summary>date_submitted Database field </summary>
-        public static readonly string DB_FIELD_DATE_SUBMITTED = "date_submitted"; //Table DateSubmitted field name
-                                                                                  /// <summary>notes Database field </summary>
+                                                                            /// <summary>notes Database field </summary>
         public static readonly string DB_FIELD_NOTES = "notes"; //Table Notes field name
 
         // Attribute variables
@@ -90,7 +86,11 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_ID = "ContentID"; //Attribute id  name
                                                             /// <summary>UserID Attribute type string</summary>
         public static readonly string TAG_USER_ID = "UserID"; //Table UserID field name
-                                                              /// <summary>ContentTypeID Attribute type string</summary>
+                                                              /// <summary>PurchaseID Attribute type string</summary>
+        public static readonly string TAG_PURCHASE_ID = "PurchaseID"; //Table PurchaseID field name
+                                                                      /// <summary>ContentStateID Attribute type string</summary>
+        public static readonly string TAG_CONTENT_STATE_ID = "ContentStateID"; //Table ContentStateID field name
+                                                                               /// <summary>ContentTypeID Attribute type string</summary>
         public static readonly string TAG_CONTENT_TYPE_ID = "ContentTypeID"; //Table ContentTypeID field name
                                                                              /// <summary>DateCreated Attribute type string</summary>
         public static readonly string TAG_DATE_CREATED = "DateCreated"; //Table DateCreated field name
@@ -102,15 +102,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_CONTENT_DATA = "ContentData"; //Table ContentData field name
                                                                         /// <summary>ContentMeta Attribute type string</summary>
         public static readonly string TAG_CONTENT_META = "ContentMeta"; //Table ContentMeta field name
-                                                                        /// <summary>IsSubmitted Attribute type string</summary>
-        public static readonly string TAG_IS_SUBMITTED = "IsSubmitted"; //Table IsSubmitted field name
                                                                         /// <summary>IsDisabled Attribute type string</summary>
         public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Table IsDisabled field name
-                                                                      /// <summary>IsDraft Attribute type string</summary>
-        public static readonly string TAG_IS_DRAFT = "IsDraft"; //Table IsDraft field name
-                                                                /// <summary>DateSubmitted Attribute type string</summary>
-        public static readonly string TAG_DATE_SUBMITTED = "DateSubmitted"; //Table DateSubmitted field name
-                                                                            /// <summary>Notes Attribute type string</summary>
+                                                                      /// <summary>Notes Attribute type string</summary>
         public static readonly string TAG_NOTES = "Notes"; //Table Notes field name
 
         // Stored procedure names
@@ -132,6 +126,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         {
             get { return _lUserID; }
             set { _lUserID = value; }
+        }
+        /// <summary>PurchaseID is a Property in the Content Class of type long</summary>
+        public long PurchaseID
+        {
+            get { return _lPurchaseID; }
+            set { _lPurchaseID = value; }
+        }
+        /// <summary>ContentStateID is a Property in the Content Class of type long</summary>
+        public long ContentStateID
+        {
+            get { return _lContentStateID; }
+            set { _lContentStateID = value; }
         }
         /// <summary>ContentTypeID is a Property in the Content Class of type long</summary>
         public long ContentTypeID
@@ -169,29 +175,11 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _strContentMeta; }
             set { _strContentMeta = value; }
         }
-        /// <summary>IsSubmitted is a Property in the Content Class of type bool</summary>
-        public bool? IsSubmitted
-        {
-            get { return _bIsSubmitted; }
-            set { _bIsSubmitted = value; }
-        }
         /// <summary>IsDisabled is a Property in the Content Class of type bool</summary>
         public bool? IsDisabled
         {
             get { return _bIsDisabled; }
             set { _bIsDisabled = value; }
-        }
-        /// <summary>IsDraft is a Property in the Content Class of type bool</summary>
-        public bool? IsDraft
-        {
-            get { return _bIsDraft; }
-            set { _bIsDraft = value; }
-        }
-        /// <summary>DateSubmitted is a Property in the Content Class of type DateTime</summary>
-        public DateTime DateSubmitted
-        {
-            get { return _dtDateSubmitted; }
-            set { _dtDateSubmitted = value; }
         }
         /// <summary>Notes is a Property in the Content Class of type String</summary>
         public string Notes
@@ -273,6 +261,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn = new StringBuilder();
             sbReturn.Append(TAG_ID + ":  " + ContentID.ToString() + "\n");
             sbReturn.Append(TAG_USER_ID + ":  " + UserID + "\n");
+            sbReturn.Append(TAG_PURCHASE_ID + ":  " + PurchaseID + "\n");
+            sbReturn.Append(TAG_CONTENT_STATE_ID + ":  " + ContentStateID + "\n");
             sbReturn.Append(TAG_CONTENT_TYPE_ID + ":  " + ContentTypeID + "\n");
             if (!dtNull.Equals(DateCreated))
             {
@@ -293,17 +283,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append(TAG_CONTENT_URL + ":  " + ContentUrl + "\n");
             sbReturn.Append(TAG_CONTENT_DATA + ":  " + ContentData + "\n");
             sbReturn.Append(TAG_CONTENT_META + ":  " + ContentMeta + "\n");
-            sbReturn.Append(TAG_IS_SUBMITTED + ":  " + IsSubmitted + "\n");
             sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
-            sbReturn.Append(TAG_IS_DRAFT + ":  " + IsDraft + "\n");
-            if (!dtNull.Equals(DateSubmitted))
-            {
-                sbReturn.Append(TAG_DATE_SUBMITTED + ":  " + DateSubmitted.ToString() + "\n");
-            }
-            else
-            {
-                sbReturn.Append(TAG_DATE_SUBMITTED + ":\n");
-            }
             sbReturn.Append(TAG_NOTES + ":  " + Notes + "\n");
 
             return sbReturn.ToString();
@@ -317,6 +297,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<Content>\n");
             sbReturn.Append("<" + TAG_ID + ">" + ContentID + "</" + TAG_ID + ">\n");
             sbReturn.Append("<" + TAG_USER_ID + ">" + UserID + "</" + TAG_USER_ID + ">\n");
+            sbReturn.Append("<" + TAG_PURCHASE_ID + ">" + PurchaseID + "</" + TAG_PURCHASE_ID + ">\n");
+            sbReturn.Append("<" + TAG_CONTENT_STATE_ID + ">" + ContentStateID + "</" + TAG_CONTENT_STATE_ID + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_TYPE_ID + ">" + ContentTypeID + "</" + TAG_CONTENT_TYPE_ID + ">\n");
             if (!dtNull.Equals(DateCreated))
             {
@@ -337,17 +319,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<" + TAG_CONTENT_URL + ">" + ContentUrl + "</" + TAG_CONTENT_URL + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_DATA + ">" + ContentData + "</" + TAG_CONTENT_DATA + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_META + ">" + ContentMeta + "</" + TAG_CONTENT_META + ">\n");
-            sbReturn.Append("<" + TAG_IS_SUBMITTED + ">" + IsSubmitted + "</" + TAG_IS_SUBMITTED + ">\n");
             sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
-            sbReturn.Append("<" + TAG_IS_DRAFT + ">" + IsDraft + "</" + TAG_IS_DRAFT + ">\n");
-            if (!dtNull.Equals(DateSubmitted))
-            {
-                sbReturn.Append("<" + TAG_DATE_SUBMITTED + ">" + DateSubmitted.ToString() + "</" + TAG_DATE_SUBMITTED + ">\n");
-            }
-            else
-            {
-                sbReturn.Append("<" + TAG_DATE_SUBMITTED + "></" + TAG_DATE_SUBMITTED + ">\n");
-            }
             sbReturn.Append("<" + TAG_NOTES + ">" + Notes + "</" + TAG_NOTES + ">\n");
             sbReturn.Append("</Content>" + "\n");
 
@@ -407,6 +379,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
 
             try
             {
+                xResultNode = xNode.SelectSingleNode(TAG_PURCHASE_ID);
+                PurchaseID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                PurchaseID = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CONTENT_STATE_ID);
+                ContentStateID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                ContentStateID = 0;
+            }
+
+            try
+            {
                 xResultNode = xNode.SelectSingleNode(TAG_CONTENT_TYPE_ID);
                 ContentTypeID = (long)Convert.ToInt32(xResultNode.InnerText);
             }
@@ -456,41 +448,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_IS_SUBMITTED);
-                IsSubmitted = Convert.ToBoolean(xResultNode.InnerText);
-            }
-            catch
-            {
-                IsSubmitted = false;
-            }
-
-            try
-            {
                 xResultNode = xNode.SelectSingleNode(TAG_IS_DISABLED);
                 IsDisabled = Convert.ToBoolean(xResultNode.InnerText);
             }
             catch
             {
                 IsDisabled = false;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_IS_DRAFT);
-                IsDraft = Convert.ToBoolean(xResultNode.InnerText);
-            }
-            catch
-            {
-                IsDraft = false;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_DATE_SUBMITTED);
-                DateSubmitted = DateTime.Parse(xResultNode.InnerText);
-            }
-            catch
-            {
             }
 
             try
@@ -600,6 +563,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(Content.TAG_USER_ID + ":  ");
                 UserID = (long)Convert.ToInt32(Console.ReadLine());
 
+                Console.WriteLine(Content.TAG_PURCHASE_ID + ":  ");
+                PurchaseID = (long)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine(Content.TAG_CONTENT_STATE_ID + ":  ");
+                ContentStateID = (long)Convert.ToInt32(Console.ReadLine());
+
                 Console.WriteLine(Content.TAG_CONTENT_TYPE_ID + ":  ");
                 ContentTypeID = (long)Convert.ToInt32(Console.ReadLine());
                 try
@@ -628,23 +597,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(Content.TAG_CONTENT_META + ":  ");
                 ContentMeta = Console.ReadLine();
 
-                Console.WriteLine(Content.TAG_IS_SUBMITTED + ":  ");
-                IsSubmitted = Convert.ToBoolean(Console.ReadLine());
-
                 Console.WriteLine(Content.TAG_IS_DISABLED + ":  ");
                 IsDisabled = Convert.ToBoolean(Console.ReadLine());
-
-                Console.WriteLine(Content.TAG_IS_DRAFT + ":  ");
-                IsDraft = Convert.ToBoolean(Console.ReadLine());
-                try
-                {
-                    Console.WriteLine(Content.TAG_DATE_SUBMITTED + ":  ");
-                    DateSubmitted = DateTime.Parse(Console.ReadLine());
-                }
-                catch
-                {
-                    DateSubmitted = new DateTime();
-                }
 
                 Console.WriteLine(Content.TAG_NOTES + ":  ");
                 Notes = Console.ReadLine();
@@ -663,15 +617,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         {
             SqlCommand cmd = null;
             SqlParameter paramUserID = null;
+            SqlParameter paramPurchaseID = null;
+            SqlParameter paramContentStateID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramDateCreated = null;
             SqlParameter paramContentUrl = null;
             SqlParameter paramContentData = null;
             SqlParameter paramContentMeta = null;
-            SqlParameter paramIsSubmitted = null;
             SqlParameter paramIsDisabled = null;
-            SqlParameter paramIsDraft = null;
-            SqlParameter paramDateSubmitted = null;
             SqlParameter paramNotes = null;
             SqlParameter paramPKID = null;
 
@@ -688,6 +641,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramUserID = new SqlParameter("@" + TAG_USER_ID, UserID);
             paramUserID.DbType = DbType.Int32;
             paramUserID.Direction = ParameterDirection.Input;
+
+            paramPurchaseID = new SqlParameter("@" + TAG_PURCHASE_ID, PurchaseID);
+            paramPurchaseID.DbType = DbType.Int32;
+            paramPurchaseID.Direction = ParameterDirection.Input;
+
+            paramContentStateID = new SqlParameter("@" + TAG_CONTENT_STATE_ID, ContentStateID);
+            paramContentStateID.DbType = DbType.Int32;
+            paramContentStateID.Direction = ParameterDirection.Input;
 
             paramContentTypeID = new SqlParameter("@" + TAG_CONTENT_TYPE_ID, ContentTypeID);
             paramContentTypeID.DbType = DbType.Int32;
@@ -712,28 +673,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramContentMeta.DbType = DbType.String;
             paramContentMeta.Direction = ParameterDirection.Input;
 
-            paramIsSubmitted = new SqlParameter("@" + TAG_IS_SUBMITTED, IsSubmitted);
-            paramIsSubmitted.DbType = DbType.Boolean;
-            paramIsSubmitted.Direction = ParameterDirection.Input;
-
             paramIsDisabled = new SqlParameter("@" + TAG_IS_DISABLED, IsDisabled);
             paramIsDisabled.DbType = DbType.Boolean;
             paramIsDisabled.Direction = ParameterDirection.Input;
-
-            paramIsDraft = new SqlParameter("@" + TAG_IS_DRAFT, IsDraft);
-            paramIsDraft.DbType = DbType.Boolean;
-            paramIsDraft.Direction = ParameterDirection.Input;
-
-            if (!dtNull.Equals(DateSubmitted))
-            {
-                paramDateSubmitted = new SqlParameter("@" + TAG_DATE_SUBMITTED, DateSubmitted);
-            }
-            else
-            {
-                paramDateSubmitted = new SqlParameter("@" + TAG_DATE_SUBMITTED, DBNull.Value);
-            }
-            paramDateSubmitted.DbType = DbType.DateTime;
-            paramDateSubmitted.Direction = ParameterDirection.Input;
 
             paramNotes = new SqlParameter("@" + TAG_NOTES, Notes);
             paramNotes.DbType = DbType.String;
@@ -747,15 +689,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             //Add parameters to command, which
             //will be passed to the stored procedure
             cmd.Parameters.Add(paramUserID);
+            cmd.Parameters.Add(paramPurchaseID);
+            cmd.Parameters.Add(paramContentStateID);
             cmd.Parameters.Add(paramContentTypeID);
             cmd.Parameters.Add(paramDateCreated);
             cmd.Parameters.Add(paramContentUrl);
             cmd.Parameters.Add(paramContentData);
             cmd.Parameters.Add(paramContentMeta);
-            cmd.Parameters.Add(paramIsSubmitted);
             cmd.Parameters.Add(paramIsDisabled);
-            cmd.Parameters.Add(paramIsDraft);
-            cmd.Parameters.Add(paramDateSubmitted);
             cmd.Parameters.Add(paramNotes);
             cmd.Parameters.Add(paramPKID);
 
@@ -768,15 +709,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
 
             // cleanup to help GC
             paramUserID = null;
+            paramPurchaseID = null;
+            paramContentStateID = null;
             paramContentTypeID = null;
             paramDateCreated = null;
             paramContentUrl = null;
             paramContentData = null;
             paramContentMeta = null;
-            paramIsSubmitted = null;
             paramIsDisabled = null;
-            paramIsDraft = null;
-            paramDateSubmitted = null;
             paramNotes = null;
             paramPKID = null;
             cmd = null;
@@ -828,15 +768,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlCommand cmd = null;
             SqlParameter paramContentID = null;
             SqlParameter paramUserID = null;
+            SqlParameter paramPurchaseID = null;
+            SqlParameter paramContentStateID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramDateModified = null;
             SqlParameter paramContentUrl = null;
             SqlParameter paramContentData = null;
             SqlParameter paramContentMeta = null;
-            SqlParameter paramIsSubmitted = null;
             SqlParameter paramIsDisabled = null;
-            SqlParameter paramIsDraft = null;
-            SqlParameter paramDateSubmitted = null;
             SqlParameter paramNotes = null;
             SqlParameter paramPKID = null;
 
@@ -858,6 +797,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramUserID = new SqlParameter("@" + TAG_USER_ID, UserID);
             paramUserID.DbType = DbType.Int32;
             paramUserID.Direction = ParameterDirection.Input;
+
+            paramPurchaseID = new SqlParameter("@" + TAG_PURCHASE_ID, PurchaseID);
+            paramPurchaseID.DbType = DbType.Int32;
+            paramPurchaseID.Direction = ParameterDirection.Input;
+
+            paramContentStateID = new SqlParameter("@" + TAG_CONTENT_STATE_ID, ContentStateID);
+            paramContentStateID.DbType = DbType.Int32;
+            paramContentStateID.Direction = ParameterDirection.Input;
 
             paramContentTypeID = new SqlParameter("@" + TAG_CONTENT_TYPE_ID, ContentTypeID);
             paramContentTypeID.DbType = DbType.Int32;
@@ -882,28 +829,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramContentMeta.DbType = DbType.String;
             paramContentMeta.Direction = ParameterDirection.Input;
 
-            paramIsSubmitted = new SqlParameter("@" + TAG_IS_SUBMITTED, IsSubmitted);
-            paramIsSubmitted.DbType = DbType.Boolean;
-            paramIsSubmitted.Direction = ParameterDirection.Input;
-
             paramIsDisabled = new SqlParameter("@" + TAG_IS_DISABLED, IsDisabled);
             paramIsDisabled.DbType = DbType.Boolean;
             paramIsDisabled.Direction = ParameterDirection.Input;
-
-            paramIsDraft = new SqlParameter("@" + TAG_IS_DRAFT, IsDraft);
-            paramIsDraft.DbType = DbType.Boolean;
-            paramIsDraft.Direction = ParameterDirection.Input;
-
-            if (!dtNull.Equals(DateSubmitted))
-            {
-                paramDateSubmitted = new SqlParameter("@" + TAG_DATE_SUBMITTED, DateSubmitted);
-            }
-            else
-            {
-                paramDateSubmitted = new SqlParameter("@" + TAG_DATE_SUBMITTED, DBNull.Value);
-            }
-            paramDateSubmitted.DbType = DbType.DateTime;
-            paramDateSubmitted.Direction = ParameterDirection.Input;
 
             paramNotes = new SqlParameter("@" + TAG_NOTES, Notes);
             paramNotes.DbType = DbType.String;
@@ -918,15 +846,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             //will be passed to the stored procedure
             cmd.Parameters.Add(paramContentID);
             cmd.Parameters.Add(paramUserID);
+            cmd.Parameters.Add(paramPurchaseID);
+            cmd.Parameters.Add(paramContentStateID);
             cmd.Parameters.Add(paramContentTypeID);
             cmd.Parameters.Add(paramDateModified);
             cmd.Parameters.Add(paramContentUrl);
             cmd.Parameters.Add(paramContentData);
             cmd.Parameters.Add(paramContentMeta);
-            cmd.Parameters.Add(paramIsSubmitted);
             cmd.Parameters.Add(paramIsDisabled);
-            cmd.Parameters.Add(paramIsDraft);
-            cmd.Parameters.Add(paramDateSubmitted);
             cmd.Parameters.Add(paramNotes);
             cmd.Parameters.Add(paramPKID);
 
@@ -939,15 +866,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             // cleanup
             paramContentID = null;
             paramUserID = null;
+            paramPurchaseID = null;
+            paramContentStateID = null;
             paramContentTypeID = null;
             paramDateModified = null;
             paramContentUrl = null;
             paramContentData = null;
             paramContentMeta = null;
-            paramIsSubmitted = null;
             paramIsDisabled = null;
-            paramIsDraft = null;
-            paramDateSubmitted = null;
             paramNotes = null;
             paramPKID = null;
             cmd = null;
@@ -1006,6 +932,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch { }
             try
             {
+                this.PurchaseID = Convert.ToInt32(rdr[DB_FIELD_PURCHASE_ID].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.ContentStateID = Convert.ToInt32(rdr[DB_FIELD_CONTENT_STATE_ID].ToString().Trim());
+            }
+            catch { }
+            try
+            {
                 this.ContentTypeID = Convert.ToInt32(rdr[DB_FIELD_CONTENT_TYPE_ID].ToString().Trim());
             }
             catch { }
@@ -1043,26 +979,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch { }
             try
             {
-                this.IsSubmitted = Convert.ToBoolean(rdr[DB_FIELD_IS_SUBMITTED].ToString().Trim());
-            }
-            catch { }
-            try
-            {
                 this.IsDisabled = Convert.ToBoolean(rdr[DB_FIELD_IS_DISABLED].ToString().Trim());
             }
             catch { }
-            try
-            {
-                this.IsDraft = Convert.ToBoolean(rdr[DB_FIELD_IS_DRAFT].ToString().Trim());
-            }
-            catch { }
-            try
-            {
-                this.DateSubmitted = DateTime.Parse(rdr[DB_FIELD_DATE_SUBMITTED].ToString());
-            }
-            catch
-            {
-            }
             try
             {
                 this.Notes = rdr[DB_FIELD_NOTES].ToString().Trim();

@@ -488,66 +488,49 @@ $('#S421').change(function () {
 
 
 
+//$("#partOneNextBtn").on("click", function () {
+//    $("#collapsePrimary").collapse('show');
+//    $("#collapseDefault").collapse('hide');
 
+//    var model=$('#formqback').serialize();
+//    // Serialize model for Posting model 
+//    $.ajax({
+//        url: '@Url.ActionLink(BackFormSave,Dashboard)',
+//        type:'POST',
+//        data: model,  // Pass Model to Controller Using Ajax Call
+//        success:function(data)
+//        {
+//            // Show Data
+//        }
+//    });
+//});
 
+//$("#partTwoNextBtn").on("click", function () {
+//    $("#collapseSuccess").collapse('show');
+//    $("#collapsePrimary").collapse('hide');
+//});
 
+//$("#partTwoPrevBtn").on("click", function () {
+//    $("#collapseDefault").collapse('show');
+//    $("#collapsePrimary").collapse('hide');
+//});
 
+//$("#partThreeNextBtn").on("click", function () {
+//    $("#collapseInfo").collapse('show');
+//    $("#collapseSuccess").collapse('hide');
+//});
 
+//$("#partThreePrevBtn").on("click", function () {
+//    $("#collapsePrimary").collapse('show');
+//    $("#collapseSuccess").collapse('hide');
+//});
 
+//$("#partFourNextBtn").on("click", function () {
+//    $("#collapseWarning").collapse('show');
+//    $("#collapseInfo").collapse('hide');
+//});
 
-
-//Default Buttons
-$("#defaultNextBtn").on("click", function () {
-    $("#collapsePrimary").collapse('show');
-    $("#collapseDefault").collapse('hide');
-});
-
-//Primary Buttons
-$("#primaryNextBtn").on("click", function () {
-    $("#collapseSuccess").collapse('show');
-    $("#collapsePrimary").collapse('hide');
-});
-
-$("#primaryPrevBtn").on("click", function () {
-    $("#collapseDefault").collapse('show');
-    $("#collapsePrimary").collapse('hide');
-});
-
-//Success Buttons
-$("#successNextBtn").on("click", function () {
-    $("#collapseInfo").collapse('show');
-    $("#collapseSuccess").collapse('hide');
-});
-
-$("#successPrevBtn").on("click", function () {
-    $("#collapsePrimary").collapse('show');
-    $("#collapseSuccess").collapse('hide');
-});
-
-//Info Buttons
-$("#infoNextBtn").on("click", function () {
-    $("#collapseWarning").collapse('show');
-    $("#collapseInfo").collapse('hide');
-});
-
-$("#infoPrevBtn").on("click", function () {
-    $("#collapseSuccess").collapse('show');
-    $("#collapseInfo").collapse('hide');
-});
-
-//Warning Buttons
-$("#warningNextBtn").on("click", function () {
-    $("#collapseDanger").collapse('show');
-    $("#collapseWarning").collapse('hide');
-});
-
-$("#warningPrevBtn").on("click", function () {
-    $("#collapseInfo").collapse('show');
-    $("#collapseWarning").collapse('hide');
-});
-
-//DangerButtons
-$("#dangerPrevBtn").on("click", function () {
-    $("#collapseWarning").collapse('show');
-    $("#collapseDanger").collapse('hide');
-});
+//$("#partFourPrevBtn").on("click", function () {
+//    $("#collapseSuccess").collapse('show');
+//    $("#collapseInfo").collapse('hide');
+//});

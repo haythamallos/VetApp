@@ -219,37 +219,110 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 if (user != null)
                 {
                     BusFacCore busFacCore = new BusFacCore();
-                    EnumContent enumContent = null;
-
-                    enumContent = new EnumContent();
-                    enumContent.UserID = user.UserID;
-                    enumContent.IsDraft = true;
-                    enumContent.IsDisabled = false;
+                    EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false};
+                    enumContent.SP_ENUM_NAME = "spContentEnum1";
                     ArrayList arContent = busFacCore.ContentGetList(enumContent);
                     if (arContent != null)
                     {
-                        layoutData.NumSavedForms = arContent.Count;
+                        int cntSaved = 0;
+                        int cntPurchased = 0;
+                        foreach (Content c in arContent)
+                        {
+                            if (c.ContentStateID <= 6)
+                            {
+                                cntSaved++;
+                            }
+                            if (c.ContentStateID == 7)
+                            {
+                                cntPurchased++;
+                            }
+                        }
+                        layoutData.NumSavedForms = cntSaved;
+                        layoutData.NumPurchasedForms = cntPurchased;
                     }
                     enumContent = null;
-
-                    enumContent = new EnumContent();
-                    enumContent.UserID = user.UserID;
-                    enumContent.IsSubmitted = true;
-                    enumContent.IsDisabled = false;
-                    enumContent.IsDraft = false;
-                    arContent = busFacCore.ContentGetList(enumContent);
-                    if (arContent != null)
-                    {
-                        layoutData.NumPurchasedForms = arContent.Count;
-                    }
-                    enumContent = null;
-
                 }
             }
             return layoutData;
         }
 
+        public Dictionary<long, ContentDashboard> GetContentDashboard(string userguid)
+        {
+            Dictionary<long, ContentDashboard> contentDashboardDictionary = new Dictionary<long, ContentDashboard>();
+            if (!string.IsNullOrEmpty(userguid))
+            {
+                User user = UserGet(userguid);
+                if (user != null)
+                {
+                    BusFacCore busFacCore = new BusFacCore();
+                    EnumContentType enumContentType = enumContentType = new EnumContentType();
+                    ArrayList arContentType = busFacCore.ContentTypeGetList(enumContentType);
+                    if (arContentType != null)
+                    {
+                        ContentDashboard contentDashboard = null;
+                        foreach (ContentType ct in arContentType)
+                        {
+                            if (!contentDashboardDictionary.ContainsKey(ct.ContentTypeID))
+                            {
+                                contentDashboard = new ContentDashboard() { contentType = ct };
+                                contentDashboardDictionary.Add(ct.ContentTypeID, contentDashboard);
+                            }
+                        }
 
+                        EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false };
+                        enumContent.SP_ENUM_NAME = "spContentEnum1";
+                        ArrayList arContent = busFacCore.ContentGetList(enumContent);
+                        if (arContent != null)
+                        {
+                            Content content = null;
+                            for(int i = 0; i < arContent.Count; i++)
+                            {
+                                content = (Content)arContent[i];
+                                if (contentDashboardDictionary.ContainsKey(content.ContentTypeID))
+                                {
+                                    contentDashboardDictionary[content.ContentTypeID].content = content;
+                                    switch (content.ContentStateID)
+                                    {
+                                        case 0:
+                                            contentDashboardDictionary[content.ContentTypeID].ActionText = "Apply";
+                                            break;
+                                        case 1:
+                                            contentDashboardDictionary[content.ContentTypeID].ActionText = "Start";
+                                            break;
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                            contentDashboardDictionary[content.ContentTypeID].ActionText = "Finish";
+                                            break;
+                                        case 6:
+                                            contentDashboardDictionary[content.ContentTypeID].ActionText = "Buy";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                        enumContent = null;
+                    }
+                }
+            }
+            return contentDashboardDictionary;
+        }
+
+        public Content ContentGetLatest(long UserID, long ContentTypeID)
+        {
+            Content content = null;
+            EnumContent enumContent = new EnumContent() { UserID = UserID, ContentTypeID = ContentTypeID };
+            BusFacCore busFacCore = new BusFacCore();
+            ArrayList arContent = busFacCore.ContentGetList(enumContent);
+            if ((arContent != null) && (arContent.Count > 0))
+            {
+                content = (Content) arContent[arContent.Count - 1];
+            }
+            return content;
+        }
 
         /*********************** CUSTOM END *********************/
 
@@ -1056,6 +1129,121 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 }
             }
         }
+
+        //------------------------------------------
+        /// <summary>
+        /// ContentStateCreateOrModify
+        /// </summary>
+        /// <param name="">pContentState</param>
+        /// <returns>long</returns>
+        /// 
+        public long ContentStateCreateOrModify(ContentState pContentState)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentState busContentState = null;
+                busContentState = new BusContentState(conn);
+                busContentState.Save(pContentState);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pContentState.ContentStateID;
+                _hasError = busContentState.HasError;
+                if (busContentState.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// ContentStateGetList
+        /// </summary>
+        /// <param name="">pEnumContentState</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList ContentStateGetList(EnumContentState pEnumContentState)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentState busContentState = null;
+                busContentState = new BusContentState(conn);
+                items = busContentState.Get(pEnumContentState);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContentState.HasError;
+                if (busContentState.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// ContentStateGet
+        /// </summary>
+        /// <param name="">pLngContentStateID</param>
+        /// <returns>ContentState</returns>
+        /// 
+        public ContentState ContentStateGet(long pLngContentStateID)
+        {
+            ContentState content_state = new ContentState() { ContentStateID = pLngContentStateID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusContentState busContentState = null;
+                busContentState = new BusContentState(conn);
+                busContentState.Load(content_state);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busContentState.HasError;
+                if (busContentState.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return content_state;
+        }
+
+        /// <summary>
+        /// ContentStateRemove
+        /// </summary>
+        /// <param name="">pContentStateID</param>
+        /// <returns>void</returns>
+        /// 
+        public void ContentStateRemove(long pContentStateID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                ContentState content_state = new ContentState();
+                content_state.ContentStateID = pContentStateID;
+                BusContentState bus = null;
+                bus = new BusContentState(conn);
+                bus.Delete(content_state);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
     }
 
     public class LayoutData
@@ -1064,4 +1252,12 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         public int NumPurchasedForms { get; set; }
         public bool IsProfileComplete { get; set; }
     }
+
+    public class ContentDashboard
+    {
+        public Content content { get; set; }
+        public ContentType contentType { get; set; }
+        public string ActionText { get; set; }
+    }
+
 }

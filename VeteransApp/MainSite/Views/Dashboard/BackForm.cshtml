@@ -5,20 +5,19 @@
 }
 
 @model MainSite.Models.BackModel
+
+
 <div id="page-wrapper">
-
-
-
-
-
-
 
     <div class="col-xs-12">
         <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions</h2>
-        <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a></p>
+        <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
-        <form id="formqback2" method="post" action="/Dashboard/BackFormPost">
-            <div class="panel-group col-lg-8" id="accordion">
+        <form id="formqback" method="post" action="/Dashboard/BackFormSave?id=6">
+            <input id="ContentID" name="ContentID" class="form-control" type="hidden" value="@Model.ContentID">
+            <input id="ContentTypeID" name="ContentTypeID" class="form-control" type="hidden" value="@Model.ContentTypeID">
+            <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
+            <div class="panel-group col-lg-12" id="accordion">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -127,7 +126,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="defaultNextBtn">Next</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="partOneNextBtn">Next</button>
                         </div>
                     </div>
                 </div> <!-- default -->
@@ -188,8 +187,9 @@
                                 <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
                                 @Html.DropDownListFor(model => model.S121, (SelectList)ViewBag.MovementList30Deg)
 
-                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="primaryPrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="primaryNextBtn">Next</button>
+                            </div>
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="partTwoPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="partTwoNextBtn">Next</button>
                         </div>
                     </div>
                 </div> <!-- primary -->
@@ -249,8 +249,9 @@
                                 <br />
 
 
-                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="successPrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="successNextBtn">Next</button>
+                            </div>
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="partThreePrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="partThreeNextBtn">Next</button>
                         </div>
                     </div>
                 </div> <!-- success -->
@@ -405,158 +406,142 @@
                                     @Html.RadioButtonFor(x => x.S421Choice, "REGULAR") Regular
                                     @Html.RadioButtonFor(x => x.S421Choice, "CONSTANT") Constant
                                 </div>
-                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="infoPrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="infoNextBtn">Next</button>
-                        </div>
-                    </div>
-                </div> <!-- info -->
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapseWarning">Part 5</a>
-                        </h4>
-                    </div>
-                    <div id="collapseWarning" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <p>Hello I am the panel body</p>
-                            <button class="btn btn-warning btn-md pull-left" type="button" id="warningPrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="warningNextBtn">Next</button>
-                        </div>
-                    </div>
-                </div> <!-- warning -->
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-parent="accordion" href="#collapseDanger">Part 6</a>
-                        </h4>
-                    </div>
-                    <div id="collapseDanger" class="panel=collapse collapse">
-                        <div class="panel-body">
-                            <p>Hello I am the panel body</p>
-                            <button class="btn btn-warning btn-md pull-left" type="button" id="dangerPrevBtn">Prev</button>
-                            <button class="btn btn-danger btn-md pull-right">Submit</button>
-                        </div>
-                    </div>
-                </div> <!-- danger -->
-            </div> <!-- accordion -->
-        </form>
-
-
-
-
-
-
-        <div class="white-box">
-
-            <form id="formqback" method="post" action="/Dashboard/BackFormPost">
-
-
-
-                <div class="panel-group wiz-aco" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Form Section 1
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body">
-
+                                <hr />
                             </div>
+
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="partFourPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="submit" id="partFourNextBtn">Apply</button>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Form Section 2
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Form Section 3
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        FORM SECTION 4
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                <div class="panel-body">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
 
-
-
-
-
-
-
-
-
-                @*<div class="form-group">
-                        <div class="col-sm-3">
-                            <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
-                        </div>
-                        <div class="col-sm-3">
-                                <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
-                            </div>
-                        <div class="col-sm-9">
-                            <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
-                        </div>
-                    </div>*@
-
-
-
-
-
-                @*<div class="form-group">
-                        <div class="col-sm-3">
-                            <button name="submitButton" value="Save" class="btn btn-success">Save For Later</button>
-                        </div>
-                        <div class="col-sm-3">
-                                <button name="submitButton" value="Submit" class="btn btn-success">Submit</button>
-                            </div>
-                        <div class="col-sm-6">
-                            <button name="submitButton" value="PDF" class="btn btn-success">PDF</button>
-                        </div>
-                    </div>*@
-            </form>
-        </div>
+            </div> <!-- accordion -->
+        </form>
     </div>
-    @*<div class="col-xs-5">
-            <span>The image below is used as a reference in answering some questions.  The question will state the reference.</span>
-            <img src="~/Images/body-movements-75p.jpg" class="rounded float-left" alt="Joint Movement">
-        </div>*@
-
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $('document').ready(function () {
+
+        $("#partOneNextBtn").on("click", function () {
+            $("#collapsePrimary").collapse('show');
+            $("#collapseDefault").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=2',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        });
+
+        $("#partTwoNextBtn").on("click", function () {
+            $("#collapseSuccess").collapse('show');
+            $("#collapsePrimary").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=3',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#partTwoPrevBtn").on("click", function () {
+            $("#collapseDefault").collapse('show');
+            $("#collapsePrimary").collapse('hide');
+
+            
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#partThreeNextBtn").on("click", function () {
+            $("#collapseInfo").collapse('show');
+            $("#collapseSuccess").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=4',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#partThreePrevBtn").on("click", function () {
+            $("#collapsePrimary").collapse('show');
+            $("#collapseSuccess").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#partFourNextBtn").on("click", function () {
+            $("#collapseWarning").collapse('show');
+            $("#collapseInfo").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=6',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#partFourPrevBtn").on("click", function () {
+            $("#collapseSuccess").collapse('show');
+            $("#collapseInfo").collapse('hide');
+
+            var model = $('#formqback').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/BackFormSave?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        });
+
+    });
+</script>

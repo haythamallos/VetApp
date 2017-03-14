@@ -326,11 +326,32 @@ namespace MainSite.Controllers
         {
             try
             {
-                BusFacPDF busFacPDF = new BusFacPDF();
-                string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                // check if content exists
                 User user = Auth();
-                backModel.NameOfPatient = user.Fullname;
-                backModel.SocialSecurity = user.Ssn;
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, 1);
+                long ContentID = 0;
+                backModel.ContentTypeID = 1;
+                backModel.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = BackSave(backModel, 0);                    
+                }
+                else
+                {
+                    ContentID = content.ContentID;
+                }
+
+                backModel.ContentID = ContentID;
+
+                if (string.IsNullOrEmpty(backModel.NameOfPatient))
+                {
+                    backModel.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(backModel.SocialSecurity))
+                {
+                    backModel.SocialSecurity = user.Ssn;
+                }
             }
             catch (Exception ex)
             {
@@ -338,35 +359,27 @@ namespace MainSite.Controllers
             }
             return View("BackForm", backModel);
         }
+
+        private long BackSave(BackModel backModel, long contentStateID)
+        {
+            long ContentID = 0;
+            BusFacPDF busFacPDF = new BusFacPDF();
+            string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+            backModel.TemplatePath = pdfTemplatePath;
+            ContentID = busFacPDF.Save(backModel, contentStateID);
+            return ContentID;
+        }
         [HttpPost]
-        public ActionResult BackFormPost(BackModel backModel, string args)
+        public ActionResult BackFormSave(BackModel backModel, long contentStateID)
         {
             try
             {
-                BusFacPDF busFacPDF = new BusFacPDF();
-                string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                User user = Auth();
-                backModel.NameOfPatient = user.Fullname;
-                backModel.SocialSecurity = user.Ssn;
+                long ContentID = BackSave(backModel, contentStateID);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
 
-                backModel.TemplatePath = pdfTemplatePath;
-                backModel.UserID = user.UserID;
-                long ContentID = busFacPDF.Save(backModel);
-
-                //switch (submitButton)
-                //{
-                //    case "Save":
-                //        backModel.TemplatePath = pdfTemplatePath;
-                //        backModel.UserID = user.UserID;
-                //        long ContentID = busFacPDF.Save(backModel);
-                //        break;
-                //    case "Submit":
-                //        break;
-                //    case "PDF":
-                //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
-                //        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
-                //        break;
-                //}
 
             }
             catch (Exception ex)
@@ -389,21 +402,6 @@ namespace MainSite.Controllers
                 byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
                 PDFHelper.ReturnPDF(form, "back-dbq.pdf");
 
-                //switch (submitButton)
-                //{
-                //    case "Save":
-                //        backModel.TemplatePath = pdfTemplatePath;
-                //        backModel.UserID = user.UserID;
-                //        long ContentID = busFacPDF.Save(backModel);
-                //        break;
-                //    case "Submit":
-                //        break;
-                //    case "PDF":
-                //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
-                //        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
-                //        break;
-                //}
-
             }
             catch (Exception ex)
             {
@@ -414,16 +412,6 @@ namespace MainSite.Controllers
 
         public ActionResult LogOut()
         {
-            //try
-            //{
-            //    HttpCookie cookie = new HttpCookie(CookieManager.COOKIENAME);
-            //    if (cookie != null)
-            //    {
-            //        cookie.Expires = DateTime.Now.AddDays(-1);
-            //        Response.Cookies.Add(cookie);
-            //    }
-            //}
-            //catch { }
             return RedirectToAction("Index", "Home");
         }
 
@@ -481,142 +469,6 @@ namespace MainSite.Controllers
         {
             return View();
         }
-
-        //private byte[] GeneratePDF_2(string pdfTemplatePath, StringBuilder sb)
-        //{
-        //    byte[] form = null;
-
-        //    try
-        //    {
-        //        // Use iTextSharp PDF Reader, to get the fields and send to the 
-        //        //Stamper to set the fields in the document
-        //        PdfReader pdfReader = new PdfReader(pdfTemplatePath);
-
-        //        using (MemoryStream ms = new MemoryStream())
-        //        {
-        //            PdfStamper pdfStamper = null;
-
-        //            using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
-        //            {
-        //                // Get Reference to PDF Document Fields
-        //                AcroFields pdfFormFields = pdfStamper.AcroFields;
-
-        //                var counter = 1;
-        //                PdfContentByte content = null;
-        //                var fieldInfo = new List<string>();
-        //                foreach (var entry in pdfFormFields.Fields)
-        //                {
-        //                    var formFieldType = PDFFieldType.GetPDFFieldType(pdfFormFields.GetFieldType(entry.Key.ToString()));
-
-        //                    if (formFieldType is PDFCheckBoxFieldType)
-        //                        fieldInfo.Add(string.Format("{0} - {1} - Export Value: {2}",
-        //                                                    entry.Key,
-        //                                                    formFieldType,
-        //                                                    PDFHelper.GetExportValue(entry.Value as AcroFields.Item)));
-        //                    else
-        //                        fieldInfo.Add(string.Format("{0} - {1}", entry.Key, formFieldType));
-
-        //                    Rectangle rectangle = pdfFormFields.GetFieldPositions(entry.Key)[0].position;
-        //                    int page = pdfFormFields.GetFieldPositions(entry.Key)[0].page;
-        //                    //put content over
-        //                    content = pdfStamper.GetOverContent(page);
-        //                    //Text over the existing page
-        //                    BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA,
-        //                            BaseFont.WINANSI, BaseFont.EMBEDDED);
-        //                    content.BeginText();
-        //                    content.SetFontAndSize(bf, 8);
-        //                    //content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Page No: " + i, 200, 15, 0);
-        //                    content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, counter.ToString(), rectangle.Left, rectangle.Bottom, 0);
-        //                    content.EndText();
-        //                    counter++;
-        //                }
-
-        //                for (int i = 0; i < fieldInfo.Count; i++)
-        //                {
-        //                    sb.Append((i + 1) + ".  " + fieldInfo[i] + Environment.NewLine);
-        //                }
-
-
-        //            }
-
-        //            // Set the flattening flag to true, so the document is not editable
-        //            pdfStamper.FormFlattening = false;
-
-        //            // close the pdf stamper
-        //            pdfStamper.Close();
-
-        //            form = ms.ToArray();
-
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-
-        //    return form;
-        //}
-        //private void GeneratePDF_1(string pdfTemplatePath, BackModel back)
-        //{
-        //    PDFFile pdfile = new PDFFile(pdfTemplatePath);
-
-
-        //    if ((!pdfile.HasError) && (pdfile.FieldInfoList.Count > 0))
-        //    {
-        //        List<byte[]> fileList = new List<byte[]>();
-
-        //        var counter = 1;
-        //        var counterChk = 1;
-        //        string oldval = null;
-        //        foreach (PDFFileField f in pdfile.FieldInfoList)
-        //        {
-        //            if (f.IsCheckBox)
-        //            {
-        //                oldval = pdfile.formFieldMap[f.Key];
-        //                pdfile.formFieldMap[f.Key] = f.ExportValue;
-        //                pdfile.formFieldMap["form1[0].#subform[0].NameOfVeteran[0]"] = counter.ToString() + ":" + f.fieldinfo();
-        //                var pdfContents = PDFHelper.GeneratePDF(pdfTemplatePath, pdfile.formFieldMap);
-        //                fileList.Add(pdfContents);
-        //                pdfile.formFieldMap[f.Key] = oldval;
-        //                counterChk++;
-        //            }
-        //            counter++;
-        //        }
-
-        //        using (MemoryStream msOutput = new MemoryStream())
-        //        {
-        //            PdfReader pdfFile = new PdfReader(fileList[0]);
-        //            Document doc = new Document();
-        //            PdfWriter pCopy = new PdfSmartCopy(doc, msOutput);
-
-        //            doc.Open();
-
-        //            for (int k = 0; k < fileList.Count; k++)
-        //            {
-        //                for (int i = 1; i < pdfFile.NumberOfPages + 1; i++)
-        //                {
-        //                    pdfFile = new PdfReader(fileList[k]);
-        //                    ((PdfSmartCopy)pCopy).AddPage(pCopy.GetImportedPage(pdfFile, i));
-        //                    pCopy.FreeReader(pdfFile);
-        //                }
-        //            }
-
-        //            pdfFile.Close();
-        //            pCopy.Close();
-        //            doc.Close();
-        //            fileList.Clear();
-
-        //            byte[] form = msOutput.ToArray();
-        //            PDFHelper.ReturnPDF(form, "back-merged.pdf");
-        //            //using (FileStream fileSteam = new FileStream(@"C:\Temp\Merged.pdf", FileMode.Create))
-        //            //{
-        //            //    fileStream.Write(form, 0, form.Length);
-        //            //}
-        //        }
-
-        //    }
-
-        //}
     }
 
 
@@ -724,4 +576,212 @@ namespace MainSite.Controllers
 //// close the pdf stamper
 //pdfStamper.Close();
 
+//switch (submitButton)
+//{
+//    case "Save":
+//        backModel.TemplatePath = pdfTemplatePath;
+//        backModel.UserID = user.UserID;
+//        long ContentID = busFacPDF.Save(backModel);
+//        break;
+//    case "Submit":
+//        break;
+//    case "PDF":
+//        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+//        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+//        break;
+//}
 
+//[HttpPost]
+//public ActionResult BackFormSubmit(BackModel backModel)
+//{
+//    try
+//    {
+//        //BusFacPDF busFacPDF = new BusFacPDF();
+//        //backModel.TemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+//        //long ContentID = busFacPDF.Save(backModel, 0);
+
+//        //switch (submitButton)
+//        //{
+//        //    case "Save":
+//        //        backModel.TemplatePath = pdfTemplatePath;
+//        //        backModel.UserID = user.UserID;
+//        //        long ContentID = busFacPDF.Save(backModel);
+//        //        break;
+//        //    case "Submit":
+//        //        break;
+//        //    case "PDF":
+//        //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+//        //        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+//        //        break;
+//        //}
+
+//    }
+//    catch (Exception ex)
+//    {
+
+//    }
+//    return View("BackForm", backModel);
+//}
+
+//switch (submitButton)
+//{
+//    case "Save":
+//        backModel.TemplatePath = pdfTemplatePath;
+//        backModel.UserID = user.UserID;
+//        long ContentID = busFacPDF.Save(backModel);
+//        break;
+//    case "Submit":
+//        break;
+//    case "PDF":
+//        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+//        PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+//        break;
+//}
+
+
+//try
+//{
+//    HttpCookie cookie = new HttpCookie(CookieManager.COOKIENAME);
+//    if (cookie != null)
+//    {
+//        cookie.Expires = DateTime.Now.AddDays(-1);
+//        Response.Cookies.Add(cookie);
+//    }
+//}
+//catch { }
+
+//private byte[] GeneratePDF_2(string pdfTemplatePath, StringBuilder sb)
+//{
+//    byte[] form = null;
+
+//    try
+//    {
+//        // Use iTextSharp PDF Reader, to get the fields and send to the 
+//        //Stamper to set the fields in the document
+//        PdfReader pdfReader = new PdfReader(pdfTemplatePath);
+
+//        using (MemoryStream ms = new MemoryStream())
+//        {
+//            PdfStamper pdfStamper = null;
+
+//            using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+//            {
+//                // Get Reference to PDF Document Fields
+//                AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+//                var counter = 1;
+//                PdfContentByte content = null;
+//                var fieldInfo = new List<string>();
+//                foreach (var entry in pdfFormFields.Fields)
+//                {
+//                    var formFieldType = PDFFieldType.GetPDFFieldType(pdfFormFields.GetFieldType(entry.Key.ToString()));
+
+//                    if (formFieldType is PDFCheckBoxFieldType)
+//                        fieldInfo.Add(string.Format("{0} - {1} - Export Value: {2}",
+//                                                    entry.Key,
+//                                                    formFieldType,
+//                                                    PDFHelper.GetExportValue(entry.Value as AcroFields.Item)));
+//                    else
+//                        fieldInfo.Add(string.Format("{0} - {1}", entry.Key, formFieldType));
+
+//                    Rectangle rectangle = pdfFormFields.GetFieldPositions(entry.Key)[0].position;
+//                    int page = pdfFormFields.GetFieldPositions(entry.Key)[0].page;
+//                    //put content over
+//                    content = pdfStamper.GetOverContent(page);
+//                    //Text over the existing page
+//                    BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA,
+//                            BaseFont.WINANSI, BaseFont.EMBEDDED);
+//                    content.BeginText();
+//                    content.SetFontAndSize(bf, 8);
+//                    //content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Page No: " + i, 200, 15, 0);
+//                    content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, counter.ToString(), rectangle.Left, rectangle.Bottom, 0);
+//                    content.EndText();
+//                    counter++;
+//                }
+
+//                for (int i = 0; i < fieldInfo.Count; i++)
+//                {
+//                    sb.Append((i + 1) + ".  " + fieldInfo[i] + Environment.NewLine);
+//                }
+
+
+//            }
+
+//            // Set the flattening flag to true, so the document is not editable
+//            pdfStamper.FormFlattening = false;
+
+//            // close the pdf stamper
+//            pdfStamper.Close();
+
+//            form = ms.ToArray();
+
+//        }
+
+//    }
+//    catch (Exception ex)
+//    {
+//    }
+
+//    return form;
+//}
+//private void GeneratePDF_1(string pdfTemplatePath, BackModel back)
+//{
+//    PDFFile pdfile = new PDFFile(pdfTemplatePath);
+
+
+//    if ((!pdfile.HasError) && (pdfile.FieldInfoList.Count > 0))
+//    {
+//        List<byte[]> fileList = new List<byte[]>();
+
+//        var counter = 1;
+//        var counterChk = 1;
+//        string oldval = null;
+//        foreach (PDFFileField f in pdfile.FieldInfoList)
+//        {
+//            if (f.IsCheckBox)
+//            {
+//                oldval = pdfile.formFieldMap[f.Key];
+//                pdfile.formFieldMap[f.Key] = f.ExportValue;
+//                pdfile.formFieldMap["form1[0].#subform[0].NameOfVeteran[0]"] = counter.ToString() + ":" + f.fieldinfo();
+//                var pdfContents = PDFHelper.GeneratePDF(pdfTemplatePath, pdfile.formFieldMap);
+//                fileList.Add(pdfContents);
+//                pdfile.formFieldMap[f.Key] = oldval;
+//                counterChk++;
+//            }
+//            counter++;
+//        }
+
+//        using (MemoryStream msOutput = new MemoryStream())
+//        {
+//            PdfReader pdfFile = new PdfReader(fileList[0]);
+//            Document doc = new Document();
+//            PdfWriter pCopy = new PdfSmartCopy(doc, msOutput);
+
+//            doc.Open();
+
+//            for (int k = 0; k < fileList.Count; k++)
+//            {
+//                for (int i = 1; i < pdfFile.NumberOfPages + 1; i++)
+//                {
+//                    pdfFile = new PdfReader(fileList[k]);
+//                    ((PdfSmartCopy)pCopy).AddPage(pCopy.GetImportedPage(pdfFile, i));
+//                    pCopy.FreeReader(pdfFile);
+//                }
+//            }
+
+//            pdfFile.Close();
+//            pCopy.Close();
+//            doc.Close();
+//            fileList.Clear();
+
+//            byte[] form = msOutput.ToArray();
+//            PDFHelper.ReturnPDF(form, "back-merged.pdf");
+//            //using (FileStream fileSteam = new FileStream(@"C:\Temp\Merged.pdf", FileMode.Create))
+//            //{
+//            //    fileStream.Write(form, 0, form.Length);
+//            //}
+//        }
+
+//    }
+
+//}

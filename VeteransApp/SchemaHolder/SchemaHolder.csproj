@@ -47,8 +47,8 @@
     <Content Include="MainSite\Initial\schema.sql" />
     <Content Include="MainSite\Initial\sp.sql" />
     <Content Include="MainSite\Notes.txt" />
-    <Content Include="MainSite\Upgrade-1\schema.sql" />
-    <Content Include="MainSite\Upgrade-1\sp.sql" />
+    <Content Include="MainSite\Upgrade-1-DO-NOT-USE\schema.sql" />
+    <Content Include="MainSite\Upgrade-1-DO-NOT-USE\sp.sql" />
     <Content Include="MainSite\Upgrade-2\schema.sql" />
     <Content Include="MainSite\Upgrade-2\sp.sql" />
   </ItemGroup>

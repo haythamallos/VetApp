@@ -128,6 +128,7 @@
     <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusContent.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusContentState.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusContentType.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusDbversion.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusEvaluation.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="DB\Common\JSONHelper.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Content.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\ContentState.cs" />
     <Compile Include="DB\DataAccessLayer\Data\ContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Dbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Evaluation.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="DB\DataAccessLayer\Data\User.cs" />
     <Compile Include="DB\DataAccessLayer\Data\UserRole.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumContent.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumContentState.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumDbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumEvaluation.cs" />

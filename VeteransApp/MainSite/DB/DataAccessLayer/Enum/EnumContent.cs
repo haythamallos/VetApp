@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumContent.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/1/2017	Created
+    /// 001	HA	3/11/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -48,6 +48,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
         private long _lContentID = 0;
         private long _lUserID = 0;
+        private long _lPurchaseID = 0;
+        private long _lContentStateID = 0;
         private long _lContentTypeID = 0;
         private DateTime _dtBeginDateCreated = new DateTime();
         private DateTime _dtEndDateCreated = new DateTime();
@@ -56,11 +58,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private string _strContentUrl = null;
         private byte[] _byteContentData = null;
         private string _strContentMeta = null;
-        private bool? _bIsSubmitted = null;
         private bool? _bIsDisabled = null;
-        private bool? _bIsDraft = null;
-        private DateTime _dtBeginDateSubmitted = new DateTime();
-        private DateTime _dtEndDateSubmitted = new DateTime();
         private string _strNotes = null;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
@@ -71,7 +69,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_CONTENT_ID = "ContentID"; //Attribute ContentID  name
                                                                     /// <summary>UserID Attribute type string</summary>
         public static readonly string TAG_USER_ID = "UserID"; //Attribute UserID  name
-                                                              /// <summary>ContentTypeID Attribute type string</summary>
+                                                              /// <summary>PurchaseID Attribute type string</summary>
+        public static readonly string TAG_PURCHASE_ID = "PurchaseID"; //Attribute PurchaseID  name
+                                                                      /// <summary>ContentStateID Attribute type string</summary>
+        public static readonly string TAG_CONTENT_STATE_ID = "ContentStateID"; //Attribute ContentStateID  name
+                                                                               /// <summary>ContentTypeID Attribute type string</summary>
         public static readonly string TAG_CONTENT_TYPE_ID = "ContentTypeID"; //Attribute ContentTypeID  name
                                                                              /// <summary>DateCreated Attribute type string</summary>
         public static readonly string TAG_BEGIN_DATE_CREATED = "BeginDateCreated"; //Attribute DateCreated  name
@@ -87,17 +89,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_CONTENT_DATA = "ContentData"; //Attribute ContentData  name
                                                                         /// <summary>ContentMeta Attribute type string</summary>
         public static readonly string TAG_CONTENT_META = "ContentMeta"; //Attribute ContentMeta  name
-                                                                        /// <summary>IsSubmitted Attribute type string</summary>
-        public static readonly string TAG_IS_SUBMITTED = "IsSubmitted"; //Attribute IsSubmitted  name
                                                                         /// <summary>IsDisabled Attribute type string</summary>
         public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Attribute IsDisabled  name
-                                                                      /// <summary>IsDraft Attribute type string</summary>
-        public static readonly string TAG_IS_DRAFT = "IsDraft"; //Attribute IsDraft  name
-                                                                /// <summary>DateSubmitted Attribute type string</summary>
-        public static readonly string TAG_BEGIN_DATE_SUBMITTED = "BeginDateSubmitted"; //Attribute DateSubmitted  name
-                                                                                       /// <summary>EndDateSubmitted Attribute type string</summary>
-        public static readonly string TAG_END_DATE_SUBMITTED = "EndDateSubmitted"; //Attribute DateSubmitted  name
-                                                                                   /// <summary>Notes Attribute type string</summary>
+                                                                      /// <summary>Notes Attribute type string</summary>
         public static readonly string TAG_NOTES = "Notes"; //Attribute Notes  name
                                                            // Stored procedure name
         public string SP_ENUM_NAME = "spContentEnum"; //Enum sp name
@@ -119,6 +113,18 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _lUserID; }
             set { _lUserID = value; }
+        }
+        /// <summary>PurchaseID is a Property in the Content Class of type long</summary>
+        public long PurchaseID
+        {
+            get { return _lPurchaseID; }
+            set { _lPurchaseID = value; }
+        }
+        /// <summary>ContentStateID is a Property in the Content Class of type long</summary>
+        public long ContentStateID
+        {
+            get { return _lContentStateID; }
+            set { _lContentStateID = value; }
         }
         /// <summary>ContentTypeID is a Property in the Content Class of type long</summary>
         public long ContentTypeID
@@ -168,35 +174,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             get { return _strContentMeta; }
             set { _strContentMeta = value; }
         }
-        /// <summary>IsSubmitted is a Property in the Content Class of type bool</summary>
-        public bool? IsSubmitted
-        {
-            get { return _bIsSubmitted; }
-            set { _bIsSubmitted = value; }
-        }
         /// <summary>IsDisabled is a Property in the Content Class of type bool</summary>
         public bool? IsDisabled
         {
             get { return _bIsDisabled; }
             set { _bIsDisabled = value; }
-        }
-        /// <summary>IsDraft is a Property in the Content Class of type bool</summary>
-        public bool? IsDraft
-        {
-            get { return _bIsDraft; }
-            set { _bIsDraft = value; }
-        }
-        /// <summary>Property DateSubmitted. Type: DateTime</summary>
-        public DateTime BeginDateSubmitted
-        {
-            get { return _dtBeginDateSubmitted; }
-            set { _dtBeginDateSubmitted = value; }
-        }
-        /// <summary>Property DateSubmitted. Type: DateTime</summary>
-        public DateTime EndDateSubmitted
-        {
-            get { return _dtEndDateSubmitted; }
-            set { _dtEndDateSubmitted = value; }
         }
         /// <summary>Notes is a Property in the Content Class of type String</summary>
         public string Notes
@@ -355,6 +337,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn = new StringBuilder();
             sbReturn.Append(TAG_CONTENT_ID + ":  " + ContentID.ToString() + "\n");
             sbReturn.Append(TAG_USER_ID + ":  " + UserID + "\n");
+            sbReturn.Append(TAG_PURCHASE_ID + ":  " + PurchaseID + "\n");
+            sbReturn.Append(TAG_CONTENT_STATE_ID + ":  " + ContentStateID + "\n");
             sbReturn.Append(TAG_CONTENT_TYPE_ID + ":  " + ContentTypeID + "\n");
             if (!dtNull.Equals(BeginDateCreated))
             {
@@ -391,25 +375,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_CONTENT_URL + ":  " + ContentUrl + "\n");
             sbReturn.Append(TAG_CONTENT_DATA + ":  " + ContentData + "\n");
             sbReturn.Append(TAG_CONTENT_META + ":  " + ContentMeta + "\n");
-            sbReturn.Append(TAG_IS_SUBMITTED + ":  " + IsSubmitted + "\n");
             sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
-            sbReturn.Append(TAG_IS_DRAFT + ":  " + IsDraft + "\n");
-            if (!dtNull.Equals(BeginDateSubmitted))
-            {
-                sbReturn.Append(TAG_BEGIN_DATE_SUBMITTED + ":  " + BeginDateSubmitted.ToString() + "\n");
-            }
-            else
-            {
-                sbReturn.Append(TAG_BEGIN_DATE_SUBMITTED + ":\n");
-            }
-            if (!dtNull.Equals(EndDateSubmitted))
-            {
-                sbReturn.Append(TAG_END_DATE_SUBMITTED + ":  " + EndDateSubmitted.ToString() + "\n");
-            }
-            else
-            {
-                sbReturn.Append(TAG_END_DATE_SUBMITTED + ":\n");
-            }
             sbReturn.Append(TAG_NOTES + ":  " + Notes + "\n");
 
             return sbReturn.ToString();
@@ -423,6 +389,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + ENTITY_NAME + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_ID + ">" + ContentID + "</" + TAG_CONTENT_ID + ">\n");
             sbReturn.Append("<" + TAG_USER_ID + ">" + UserID + "</" + TAG_USER_ID + ">\n");
+            sbReturn.Append("<" + TAG_PURCHASE_ID + ">" + PurchaseID + "</" + TAG_PURCHASE_ID + ">\n");
+            sbReturn.Append("<" + TAG_CONTENT_STATE_ID + ">" + ContentStateID + "</" + TAG_CONTENT_STATE_ID + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_TYPE_ID + ">" + ContentTypeID + "</" + TAG_CONTENT_TYPE_ID + ">\n");
             if (!dtNull.Equals(BeginDateCreated))
             {
@@ -459,25 +427,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_CONTENT_URL + ">" + ContentUrl + "</" + TAG_CONTENT_URL + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_DATA + ">" + ContentData + "</" + TAG_CONTENT_DATA + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_META + ">" + ContentMeta + "</" + TAG_CONTENT_META + ">\n");
-            sbReturn.Append("<" + TAG_IS_SUBMITTED + ">" + IsSubmitted + "</" + TAG_IS_SUBMITTED + ">\n");
             sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
-            sbReturn.Append("<" + TAG_IS_DRAFT + ">" + IsDraft + "</" + TAG_IS_DRAFT + ">\n");
-            if (!dtNull.Equals(BeginDateSubmitted))
-            {
-                sbReturn.Append("<" + TAG_BEGIN_DATE_SUBMITTED + ">" + BeginDateSubmitted.ToString() + "</" + TAG_BEGIN_DATE_SUBMITTED + ">\n");
-            }
-            else
-            {
-                sbReturn.Append("<" + TAG_BEGIN_DATE_SUBMITTED + "></" + TAG_BEGIN_DATE_SUBMITTED + ">\n");
-            }
-            if (!dtNull.Equals(EndDateSubmitted))
-            {
-                sbReturn.Append("<" + TAG_END_DATE_SUBMITTED + ">" + EndDateSubmitted.ToString() + "</" + TAG_END_DATE_SUBMITTED + ">\n");
-            }
-            else
-            {
-                sbReturn.Append("<" + TAG_END_DATE_SUBMITTED + "></" + TAG_END_DATE_SUBMITTED + ">\n");
-            }
             sbReturn.Append("<" + TAG_NOTES + ">" + Notes + "</" + TAG_NOTES + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
@@ -533,6 +483,26 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             catch
             {
                 UserID = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PURCHASE_ID);
+                PurchaseID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                PurchaseID = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CONTENT_STATE_ID);
+                ContentStateID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                ContentStateID = 0;
             }
 
             try
@@ -608,50 +578,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_IS_SUBMITTED);
-                IsSubmitted = Convert.ToBoolean(xResultNode.InnerText);
-            }
-            catch
-            {
-                IsSubmitted = false;
-            }
-
-            try
-            {
                 xResultNode = xNode.SelectSingleNode(TAG_IS_DISABLED);
                 IsDisabled = Convert.ToBoolean(xResultNode.InnerText);
             }
             catch
             {
                 IsDisabled = false;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_IS_DRAFT);
-                IsDraft = Convert.ToBoolean(xResultNode.InnerText);
-            }
-            catch
-            {
-                IsDraft = false;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_BEGIN_DATE_SUBMITTED);
-                BeginDateSubmitted = DateTime.Parse(xResultNode.InnerText);
-            }
-            catch
-            {
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_END_DATE_SUBMITTED);
-                EndDateSubmitted = DateTime.Parse(xResultNode.InnerText);
-            }
-            catch
-            {
             }
 
             try
@@ -679,6 +611,26 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 catch
                 {
                     UserID = 0;
+                }
+
+                Console.WriteLine(TAG_PURCHASE_ID + ":  ");
+                try
+                {
+                    PurchaseID = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    PurchaseID = 0;
+                }
+
+                Console.WriteLine(TAG_CONTENT_STATE_ID + ":  ");
+                try
+                {
+                    ContentStateID = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    ContentStateID = 0;
                 }
 
                 Console.WriteLine(TAG_CONTENT_TYPE_ID + ":  ");
@@ -750,16 +702,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 {
                     ContentMeta = null;
                 }
-                Console.WriteLine(TAG_IS_SUBMITTED + ":  ");
-                try
-                {
-                    IsSubmitted = Convert.ToBoolean(Console.ReadLine());
-                }
-                catch
-                {
-                    IsSubmitted = false;
-                }
-
                 Console.WriteLine(TAG_IS_DISABLED + ":  ");
                 try
                 {
@@ -768,38 +710,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 catch
                 {
                     IsDisabled = false;
-                }
-
-                Console.WriteLine(TAG_IS_DRAFT + ":  ");
-                try
-                {
-                    IsDraft = Convert.ToBoolean(Console.ReadLine());
-                }
-                catch
-                {
-                    IsDraft = false;
-                }
-
-                Console.WriteLine(TAG_BEGIN_DATE_SUBMITTED + ":  ");
-                try
-                {
-                    string s = Console.ReadLine();
-                    BeginDateSubmitted = DateTime.Parse(s);
-                }
-                catch
-                {
-                    BeginDateSubmitted = new DateTime();
-                }
-
-                Console.WriteLine(TAG_END_DATE_SUBMITTED + ":  ");
-                try
-                {
-                    string s = Console.ReadLine();
-                    EndDateSubmitted = DateTime.Parse(s);
-                }
-                catch
-                {
-                    EndDateSubmitted = new DateTime();
                 }
 
 
@@ -849,6 +759,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             System.Text.StringBuilder sbLog = null;
             SqlParameter paramContentID = null;
             SqlParameter paramUserID = null;
+            SqlParameter paramPurchaseID = null;
+            SqlParameter paramContentStateID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramBeginDateCreated = null;
             SqlParameter paramEndDateCreated = null;
@@ -857,11 +769,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramContentUrl = null;
             SqlParameter paramContentData = null;
             SqlParameter paramContentMeta = null;
-            SqlParameter paramIsSubmitted = null;
             SqlParameter paramIsDisabled = null;
-            SqlParameter paramIsDraft = null;
-            SqlParameter paramBeginDateSubmitted = null;
-            SqlParameter paramEndDateSubmitted = null;
             SqlParameter paramNotes = null;
             DateTime dtNull = new DateTime();
 
@@ -875,6 +783,14 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_USER_ID + "=" + UserID + "\n");
             paramUserID.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramUserID);
+            paramPurchaseID = new SqlParameter("@" + TAG_PURCHASE_ID, PurchaseID);
+            sbLog.Append(TAG_PURCHASE_ID + "=" + PurchaseID + "\n");
+            paramPurchaseID.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramPurchaseID);
+            paramContentStateID = new SqlParameter("@" + TAG_CONTENT_STATE_ID, ContentStateID);
+            sbLog.Append(TAG_CONTENT_STATE_ID + "=" + ContentStateID + "\n");
+            paramContentStateID.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramContentStateID);
             paramContentTypeID = new SqlParameter("@" + TAG_CONTENT_TYPE_ID, ContentTypeID);
             sbLog.Append(TAG_CONTENT_TYPE_ID + "=" + ContentTypeID + "\n");
             paramContentTypeID.Direction = ParameterDirection.Input;
@@ -964,41 +880,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             paramContentMeta.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramContentMeta);
 
-            paramIsSubmitted = new SqlParameter("@" + TAG_IS_SUBMITTED, IsSubmitted);
-            sbLog.Append(TAG_IS_SUBMITTED + "=" + IsSubmitted + "\n");
-            paramIsSubmitted.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramIsSubmitted);
             paramIsDisabled = new SqlParameter("@" + TAG_IS_DISABLED, IsDisabled);
             sbLog.Append(TAG_IS_DISABLED + "=" + IsDisabled + "\n");
             paramIsDisabled.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramIsDisabled);
-            paramIsDraft = new SqlParameter("@" + TAG_IS_DRAFT, IsDraft);
-            sbLog.Append(TAG_IS_DRAFT + "=" + IsDraft + "\n");
-            paramIsDraft.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramIsDraft);
-            // Setup the date submitted param
-            if (!dtNull.Equals(BeginDateSubmitted))
-            {
-                paramBeginDateSubmitted = new SqlParameter("@" + TAG_BEGIN_DATE_SUBMITTED, BeginDateSubmitted);
-            }
-            else
-            {
-                paramBeginDateSubmitted = new SqlParameter("@" + TAG_BEGIN_DATE_SUBMITTED, DBNull.Value);
-            }
-            paramBeginDateSubmitted.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramBeginDateSubmitted);
-
-            if (!dtNull.Equals(EndDateSubmitted))
-            {
-                paramEndDateSubmitted = new SqlParameter("@" + TAG_END_DATE_SUBMITTED, EndDateSubmitted);
-            }
-            else
-            {
-                paramEndDateSubmitted = new SqlParameter("@" + TAG_END_DATE_SUBMITTED, DBNull.Value);
-            }
-            paramEndDateSubmitted.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramEndDateSubmitted);
-
             // Setup the notes text param
             if (Notes != null)
             {

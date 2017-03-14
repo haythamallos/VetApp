@@ -35,7 +35,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             _config = new Config();
         }
-        public long Save(BackModel backModel)
+        public long Save(BackModel backModel, long contentStateID)
         {
             long lID = 0;
             try
@@ -43,7 +43,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 string jsonModel = JSONHelper.Serialize<BackModel>(backModel);
 
                 BusFacCore busFacCore = new BusFacCore();
-                Content content = new Content() { UserID = backModel.UserID, ContentMeta = jsonModel, IsDraft = true, ContentTypeID = 1 };
+                Content content = null;
+                if (backModel.ContentID > 0)
+                {
+                    content = busFacCore.ContentGet(backModel.ContentID);
+                    if ((contentStateID >= content.ContentStateID) && (contentStateID != 9999))
+                    {
+                        content.ContentStateID = contentStateID;
+                    }
+                }
+                else
+                {
+                    content = new Content();
+                }
+                content.ContentMeta = jsonModel;
+                content.UserID = backModel.UserID;
+                content.ContentTypeID = backModel.ContentTypeID;
+
                 lID = busFacCore.ContentCreateOrModify(content);
                 _hasError = busFacCore.HasError;
             }

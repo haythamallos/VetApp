@@ -1,7 +1,16 @@
 ﻿@{
     HttpCookie cookie = Request.Cookies[MainSite.Classes.CookieManager.COOKIENAME];
-    string userguid = cookie[MainSite.Classes.CookieManager.COOKIE_FIELD_USER_GUID];
-    Vetapp.Engine.BusinessFacadeLayer.LayoutData data = (new Vetapp.Engine.BusinessFacadeLayer.BusFacCore()).GetLayoutData(userguid);
+    string userguid = null;
+    Vetapp.Engine.BusinessFacadeLayer.LayoutData data = null;
+    if (cookie != null)
+    {
+        userguid = cookie[MainSite.Classes.CookieManager.COOKIE_FIELD_USER_GUID];
+        data = (new Vetapp.Engine.BusinessFacadeLayer.BusFacCore()).GetLayoutData(userguid);
+    }
+    if (data == null)
+    {
+        data = new Vetapp.Engine.BusinessFacadeLayer.LayoutData();
+    }
 }
 <!DOCTYPE html>
 <html>

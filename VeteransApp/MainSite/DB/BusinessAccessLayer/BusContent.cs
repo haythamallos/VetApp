@@ -18,7 +18,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
     /// File:  BusContent.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/1/2017	Created
+    /// 001	HA	3/11/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Business Class for Content objects.
@@ -34,16 +34,15 @@ namespace Vetapp.Engine.BusinessAccessLayer
 
         private const String REGEXP_ISVALID_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_USER_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
+        private const String REGEXP_ISVALID_PURCHASE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
+        private const String REGEXP_ISVALID_CONTENT_STATE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_CONTENT_TYPE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_DATE_CREATED = "";
         private const String REGEXP_ISVALID_DATE_MODIFIED = "";
         private const String REGEXP_ISVALID_CONTENT_URL = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_CONTENT_DATA = "";
         private const String REGEXP_ISVALID_CONTENT_META = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
-        private const String REGEXP_ISVALID_IS_SUBMITTED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
         private const String REGEXP_ISVALID_IS_DISABLED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-        private const String REGEXP_ISVALID_IS_DRAFT = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-        private const String REGEXP_ISVALID_DATE_SUBMITTED = "";
         private const String REGEXP_ISVALID_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
 
         public string SP_ENUM_NAME = null;
@@ -73,7 +72,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, false, false, new DateTime(), new DateTime(), null));
+            return (Get(0, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null));
         }
 
         /// <summary>
@@ -85,7 +84,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lContentID)
         {
-            return (Get(lContentID, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, false, false, new DateTime(), new DateTime(), null));
+            return (Get(lContentID, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null));
         }
 
         /// <summary>
@@ -98,7 +97,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(Content o)
         {
-            return (Get(o.ContentID, o.UserID, o.ContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsSubmitted, o.IsDisabled, o.IsDraft, o.DateSubmitted, o.DateSubmitted, o.Notes));
+            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes));
         }
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumContent o)
         {
-            return (Get(o.ContentID, o.UserID, o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsSubmitted, o.IsDisabled, o.IsDraft, o.BeginDateSubmitted, o.EndDateSubmitted, o.Notes));
+            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes));
         }
 
         /// <summary>
@@ -122,7 +121,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing Content object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngContentID, long pLngUserID, long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrContentUrl, byte[] pBytContentData, string pStrContentMeta, bool? pBolIsSubmitted, bool? pBolIsDisabled, bool? pBolIsDraft, DateTime pDtBeginDateSubmitted, DateTime pDtEndDateSubmitted, string pStrNotes)
+        public ArrayList Get(long pLngContentID, long pLngUserID, long pLngPurchaseID, long pLngContentStateID, long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrContentUrl, byte[] pBytContentData, string pStrContentMeta, bool? pBolIsDisabled, string pStrNotes)
         {
             Content data = null;
             _arrlstEntities = new ArrayList();
@@ -130,6 +129,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumContent.SP_ENUM_NAME = (!string.IsNullOrEmpty(SP_ENUM_NAME)) ? SP_ENUM_NAME : enumContent.SP_ENUM_NAME;
             enumContent.ContentID = pLngContentID;
             enumContent.UserID = pLngUserID;
+            enumContent.PurchaseID = pLngPurchaseID;
+            enumContent.ContentStateID = pLngContentStateID;
             enumContent.ContentTypeID = pLngContentTypeID;
             enumContent.BeginDateCreated = pDtBeginDateCreated;
             enumContent.EndDateCreated = pDtEndDateCreated;
@@ -138,11 +139,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumContent.ContentUrl = pStrContentUrl;
             enumContent.ContentData = pBytContentData;
             enumContent.ContentMeta = pStrContentMeta;
-            enumContent.IsSubmitted = pBolIsSubmitted;
             enumContent.IsDisabled = pBolIsDisabled;
-            enumContent.IsDraft = pBolIsDraft;
-            enumContent.BeginDateSubmitted = pDtBeginDateSubmitted;
-            enumContent.EndDateSubmitted = pDtEndDateSubmitted;
             enumContent.Notes = pStrNotes;
             enumContent.EnumData();
             while (enumContent.hasMoreElements())
@@ -305,6 +302,16 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
+            isValidTmp = IsValidPurchaseID(pRefContent.PurchaseID);
+            if (!isValidTmp)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidContentStateID(pRefContent.ContentStateID);
+            if (!isValidTmp)
+            {
+                isValid = false;
+            }
             isValidTmp = IsValidContentTypeID(pRefContent.ContentTypeID);
             if (!isValidTmp)
             {
@@ -331,23 +338,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
-            isValidTmp = IsValidIsSubmitted(pRefContent.IsSubmitted);
-            if (!isValidTmp && pRefContent.IsSubmitted != null)
-            {
-                isValid = false;
-            }
             isValidTmp = IsValidIsDisabled(pRefContent.IsDisabled);
             if (!isValidTmp && pRefContent.IsDisabled != null)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidIsDraft(pRefContent.IsDraft);
-            if (!isValidTmp && pRefContent.IsDraft != null)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidDateSubmitted(pRefContent.DateSubmitted);
-            if (!isValidTmp)
             {
                 isValid = false;
             }
@@ -395,6 +387,48 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = Content.DB_FIELD_USER_ID;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidPurchaseID(long pLngData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_PURCHASE_ID)).IsMatch(pLngData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = Content.DB_FIELD_PURCHASE_ID;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidContentStateID(long pLngData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_CONTENT_STATE_ID)).IsMatch(pLngData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = Content.DB_FIELD_CONTENT_STATE_ID;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;
@@ -531,27 +565,6 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     Checks to make sure value is valid
         ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
         /// </summary>
-        public bool IsValidIsSubmitted(bool? pBolData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_IS_SUBMITTED)).IsMatch(pBolData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = Content.DB_FIELD_IS_SUBMITTED;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
         public bool IsValidIsDisabled(bool? pBolData)
         {
             bool isValid = true;
@@ -563,48 +576,6 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = Content.DB_FIELD_IS_DISABLED;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidIsDraft(bool? pBolData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_IS_DRAFT)).IsMatch(pBolData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = Content.DB_FIELD_IS_DRAFT;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidDateSubmitted(DateTime pDtData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_DATE_SUBMITTED)).IsMatch(pDtData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = Content.DB_FIELD_DATE_SUBMITTED;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;
