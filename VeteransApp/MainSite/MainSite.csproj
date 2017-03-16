@@ -159,8 +159,11 @@
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUser.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUserRole.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\EvaluationModel.cs" />
+    <Compile Include="Models\NeckModel.cs" />
+    <Compile Include="Models\ShoulderModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\PDFFile.cs" />
     <Compile Include="Utils\PDFTextFieldType.cs" />
@@ -565,6 +568,8 @@
     <Content Include="Views\Dashboard\ProfileUpdate.cshtml" />
     <Content Include="Views\Dashboard\SavedForm.cshtml" />
     <Content Include="Views\Dashboard\PurchasedForm.cshtml" />
+    <Content Include="Views\Dashboard\ShoulderForm.cshtml" />
+    <Content Include="Views\Dashboard\NeckForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

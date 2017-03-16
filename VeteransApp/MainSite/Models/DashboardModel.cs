@@ -1,7 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MainSite.Models
 {
@@ -9,6 +7,7 @@ namespace MainSite.Models
     {
         public EvaluationResults evaluationResults { get; set; }
         public EvaluationModel evaluationModel { get; set; }
+        public Dictionary<long, BenefitStatus> BenefitStatuses { get; set; }
         public DashboardModel()
         {
         }
@@ -21,5 +20,14 @@ namespace MainSite.Models
         public int AmountIncreasePerMonth { get; set; }
         public int TotalPerMonthAfterIncrease { get; set; }
         public int AmountIncreasePerYear { get; set; }
+    }
+
+    public class BenefitStatus
+    {
+        public long Key { get; set; }
+        public string Progress { get; set; }
+        public string ActionText { get; set; }
+        public string TooltipText { get; set; }
+        public string BenefitName { get; set; }
     }
 }

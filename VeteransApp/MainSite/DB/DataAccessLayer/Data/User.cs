@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  User.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	2/28/2017	Created
+    /// 001	HA	3/16/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the User database table.
@@ -83,6 +83,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private DateTime _dtPreviousVisitDate = dtNull;
         /// <summary>LastVisitDate Attribute type String</summary>
         private DateTime _dtLastVisitDate = dtNull;
+        /// <summary>CurrentRatingBack Attribute type String</summary>
+        private long _lCurrentRatingBack = 0;
+        /// <summary>CurrentRatingShoulder Attribute type String</summary>
+        private long _lCurrentRatingShoulder = 0;
+        /// <summary>CurrentRatingNeck Attribute type String</summary>
+        private long _lCurrentRatingNeck = 0;
+        /// <summary>HasRatingBack Attribute type String</summary>
+        private bool? _bHasRatingBack = null;
+        /// <summary>HasRatingShoulder Attribute type String</summary>
+        private bool? _bHasRatingShoulder = null;
+        /// <summary>HasRatingNeck Attribute type String</summary>
+        private bool? _bHasRatingNeck = null;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -152,6 +164,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_PREVIOUS_VISIT_DATE = "previous_visit_date"; //Table PreviousVisitDate field name
                                                                                             /// <summary>last_visit_date Database field </summary>
         public static readonly string DB_FIELD_LAST_VISIT_DATE = "last_visit_date"; //Table LastVisitDate field name
+                                                                                    /// <summary>current_rating_back Database field </summary>
+        public static readonly string DB_FIELD_CURRENT_RATING_BACK = "current_rating_back"; //Table CurrentRatingBack field name
+                                                                                            /// <summary>current_rating_shoulder Database field </summary>
+        public static readonly string DB_FIELD_CURRENT_RATING_SHOULDER = "current_rating_shoulder"; //Table CurrentRatingShoulder field name
+                                                                                                    /// <summary>current_rating_neck Database field </summary>
+        public static readonly string DB_FIELD_CURRENT_RATING_NECK = "current_rating_neck"; //Table CurrentRatingNeck field name
+                                                                                            /// <summary>has_rating_back Database field </summary>
+        public static readonly string DB_FIELD_HAS_RATING_BACK = "has_rating_back"; //Table HasRatingBack field name
+                                                                                    /// <summary>has_rating_shoulder Database field </summary>
+        public static readonly string DB_FIELD_HAS_RATING_SHOULDER = "has_rating_shoulder"; //Table HasRatingShoulder field name
+                                                                                            /// <summary>has_rating_neck Database field </summary>
+        public static readonly string DB_FIELD_HAS_RATING_NECK = "has_rating_neck"; //Table HasRatingNeck field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -214,6 +238,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_PREVIOUS_VISIT_DATE = "PreviousVisitDate"; //Table PreviousVisitDate field name
                                                                                      /// <summary>LastVisitDate Attribute type string</summary>
         public static readonly string TAG_LAST_VISIT_DATE = "LastVisitDate"; //Table LastVisitDate field name
+                                                                             /// <summary>CurrentRatingBack Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_BACK = "CurrentRatingBack"; //Table CurrentRatingBack field name
+                                                                                     /// <summary>CurrentRatingShoulder Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_SHOULDER = "CurrentRatingShoulder"; //Table CurrentRatingShoulder field name
+                                                                                             /// <summary>CurrentRatingNeck Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_NECK = "CurrentRatingNeck"; //Table CurrentRatingNeck field name
+                                                                                     /// <summary>HasRatingBack Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_BACK = "HasRatingBack"; //Table HasRatingBack field name
+                                                                             /// <summary>HasRatingShoulder Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_SHOULDER = "HasRatingShoulder"; //Table HasRatingShoulder field name
+                                                                                     /// <summary>HasRatingNeck Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_NECK = "HasRatingNeck"; //Table HasRatingNeck field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spUserInsert"; //Insert sp name
@@ -403,6 +439,42 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _dtLastVisitDate; }
             set { _dtLastVisitDate = value; }
         }
+        /// <summary>CurrentRatingBack is a Property in the User Class of type long</summary>
+        public long CurrentRatingBack
+        {
+            get { return _lCurrentRatingBack; }
+            set { _lCurrentRatingBack = value; }
+        }
+        /// <summary>CurrentRatingShoulder is a Property in the User Class of type long</summary>
+        public long CurrentRatingShoulder
+        {
+            get { return _lCurrentRatingShoulder; }
+            set { _lCurrentRatingShoulder = value; }
+        }
+        /// <summary>CurrentRatingNeck is a Property in the User Class of type long</summary>
+        public long CurrentRatingNeck
+        {
+            get { return _lCurrentRatingNeck; }
+            set { _lCurrentRatingNeck = value; }
+        }
+        /// <summary>HasRatingBack is a Property in the User Class of type bool</summary>
+        public bool? HasRatingBack
+        {
+            get { return _bHasRatingBack; }
+            set { _bHasRatingBack = value; }
+        }
+        /// <summary>HasRatingShoulder is a Property in the User Class of type bool</summary>
+        public bool? HasRatingShoulder
+        {
+            get { return _bHasRatingShoulder; }
+            set { _bHasRatingShoulder = value; }
+        }
+        /// <summary>HasRatingNeck is a Property in the User Class of type bool</summary>
+        public bool? HasRatingNeck
+        {
+            get { return _bHasRatingNeck; }
+            set { _bHasRatingNeck = value; }
+        }
 
 
         /*********************** CUSTOM NON-META BEGIN *********************/
@@ -547,6 +619,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 sbReturn.Append(TAG_LAST_VISIT_DATE + ":\n");
             }
+            sbReturn.Append(TAG_CURRENT_RATING_BACK + ":  " + CurrentRatingBack + "\n");
+            sbReturn.Append(TAG_CURRENT_RATING_SHOULDER + ":  " + CurrentRatingShoulder + "\n");
+            sbReturn.Append(TAG_CURRENT_RATING_NECK + ":  " + CurrentRatingNeck + "\n");
+            sbReturn.Append(TAG_HAS_RATING_BACK + ":  " + HasRatingBack + "\n");
+            sbReturn.Append(TAG_HAS_RATING_SHOULDER + ":  " + HasRatingShoulder + "\n");
+            sbReturn.Append(TAG_HAS_RATING_NECK + ":  " + HasRatingNeck + "\n");
 
             return sbReturn.ToString();
         }
@@ -629,6 +707,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 sbReturn.Append("<" + TAG_LAST_VISIT_DATE + "></" + TAG_LAST_VISIT_DATE + ">\n");
             }
+            sbReturn.Append("<" + TAG_CURRENT_RATING_BACK + ">" + CurrentRatingBack + "</" + TAG_CURRENT_RATING_BACK + ">\n");
+            sbReturn.Append("<" + TAG_CURRENT_RATING_SHOULDER + ">" + CurrentRatingShoulder + "</" + TAG_CURRENT_RATING_SHOULDER + ">\n");
+            sbReturn.Append("<" + TAG_CURRENT_RATING_NECK + ">" + CurrentRatingNeck + "</" + TAG_CURRENT_RATING_NECK + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_BACK + ">" + HasRatingBack + "</" + TAG_HAS_RATING_BACK + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_SHOULDER + ">" + HasRatingShoulder + "</" + TAG_HAS_RATING_SHOULDER + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_NECK + ">" + HasRatingNeck + "</" + TAG_HAS_RATING_NECK + ">\n");
             sbReturn.Append("</User>" + "\n");
 
             return sbReturn.ToString();
@@ -949,6 +1033,66 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch
             {
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_BACK);
+                CurrentRatingBack = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingBack = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_SHOULDER);
+                CurrentRatingShoulder = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingShoulder = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_NECK);
+                CurrentRatingNeck = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingNeck = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_BACK);
+                HasRatingBack = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingBack = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_SHOULDER);
+                HasRatingShoulder = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingShoulder = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_NECK);
+                HasRatingNeck = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingNeck = false;
+            }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with user_id equal to the current object's UserID </summary>
         public void Load(SqlConnection conn)
@@ -1165,6 +1309,24 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                     LastVisitDate = new DateTime();
                 }
 
+                Console.WriteLine(User.TAG_CURRENT_RATING_BACK + ":  ");
+                CurrentRatingBack = (long)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_CURRENT_RATING_SHOULDER + ":  ");
+                CurrentRatingShoulder = (long)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_CURRENT_RATING_NECK + ":  ");
+                CurrentRatingNeck = (long)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_HAS_RATING_BACK + ":  ");
+                HasRatingBack = Convert.ToBoolean(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_HAS_RATING_SHOULDER + ":  ");
+                HasRatingShoulder = Convert.ToBoolean(Console.ReadLine());
+
+                Console.WriteLine(User.TAG_HAS_RATING_NECK + ":  ");
+                HasRatingNeck = Convert.ToBoolean(Console.ReadLine());
+
             }
             catch (Exception e)
             {
@@ -1206,6 +1368,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramNumberOfVisits = null;
             SqlParameter paramPreviousVisitDate = null;
             SqlParameter paramLastVisitDate = null;
+            SqlParameter paramCurrentRatingBack = null;
+            SqlParameter paramCurrentRatingShoulder = null;
+            SqlParameter paramCurrentRatingNeck = null;
+            SqlParameter paramHasRatingBack = null;
+            SqlParameter paramHasRatingShoulder = null;
+            SqlParameter paramHasRatingNeck = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1374,6 +1542,30 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramLastVisitDate.DbType = DbType.DateTime;
             paramLastVisitDate.Direction = ParameterDirection.Input;
 
+            paramCurrentRatingBack = new SqlParameter("@" + TAG_CURRENT_RATING_BACK, CurrentRatingBack);
+            paramCurrentRatingBack.DbType = DbType.Int32;
+            paramCurrentRatingBack.Direction = ParameterDirection.Input;
+
+            paramCurrentRatingShoulder = new SqlParameter("@" + TAG_CURRENT_RATING_SHOULDER, CurrentRatingShoulder);
+            paramCurrentRatingShoulder.DbType = DbType.Int32;
+            paramCurrentRatingShoulder.Direction = ParameterDirection.Input;
+
+            paramCurrentRatingNeck = new SqlParameter("@" + TAG_CURRENT_RATING_NECK, CurrentRatingNeck);
+            paramCurrentRatingNeck.DbType = DbType.Int32;
+            paramCurrentRatingNeck.Direction = ParameterDirection.Input;
+
+            paramHasRatingBack = new SqlParameter("@" + TAG_HAS_RATING_BACK, HasRatingBack);
+            paramHasRatingBack.DbType = DbType.Boolean;
+            paramHasRatingBack.Direction = ParameterDirection.Input;
+
+            paramHasRatingShoulder = new SqlParameter("@" + TAG_HAS_RATING_SHOULDER, HasRatingShoulder);
+            paramHasRatingShoulder.DbType = DbType.Boolean;
+            paramHasRatingShoulder.Direction = ParameterDirection.Input;
+
+            paramHasRatingNeck = new SqlParameter("@" + TAG_HAS_RATING_NECK, HasRatingNeck);
+            paramHasRatingNeck.DbType = DbType.Boolean;
+            paramHasRatingNeck.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1409,6 +1601,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramNumberOfVisits);
             cmd.Parameters.Add(paramPreviousVisitDate);
             cmd.Parameters.Add(paramLastVisitDate);
+            cmd.Parameters.Add(paramCurrentRatingBack);
+            cmd.Parameters.Add(paramCurrentRatingShoulder);
+            cmd.Parameters.Add(paramCurrentRatingNeck);
+            cmd.Parameters.Add(paramHasRatingBack);
+            cmd.Parameters.Add(paramHasRatingShoulder);
+            cmd.Parameters.Add(paramHasRatingNeck);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1447,6 +1645,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramNumberOfVisits = null;
             paramPreviousVisitDate = null;
             paramLastVisitDate = null;
+            paramCurrentRatingBack = null;
+            paramCurrentRatingShoulder = null;
+            paramCurrentRatingNeck = null;
+            paramHasRatingBack = null;
+            paramHasRatingShoulder = null;
+            paramHasRatingNeck = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1524,6 +1728,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramNumberOfVisits = null;
             SqlParameter paramPreviousVisitDate = null;
             SqlParameter paramLastVisitDate = null;
+            SqlParameter paramCurrentRatingBack = null;
+            SqlParameter paramCurrentRatingShoulder = null;
+            SqlParameter paramCurrentRatingNeck = null;
+            SqlParameter paramHasRatingBack = null;
+            SqlParameter paramHasRatingShoulder = null;
+            SqlParameter paramHasRatingNeck = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1697,6 +1907,30 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramLastVisitDate.DbType = DbType.DateTime;
             paramLastVisitDate.Direction = ParameterDirection.Input;
 
+            paramCurrentRatingBack = new SqlParameter("@" + TAG_CURRENT_RATING_BACK, CurrentRatingBack);
+            paramCurrentRatingBack.DbType = DbType.Int32;
+            paramCurrentRatingBack.Direction = ParameterDirection.Input;
+
+            paramCurrentRatingShoulder = new SqlParameter("@" + TAG_CURRENT_RATING_SHOULDER, CurrentRatingShoulder);
+            paramCurrentRatingShoulder.DbType = DbType.Int32;
+            paramCurrentRatingShoulder.Direction = ParameterDirection.Input;
+
+            paramCurrentRatingNeck = new SqlParameter("@" + TAG_CURRENT_RATING_NECK, CurrentRatingNeck);
+            paramCurrentRatingNeck.DbType = DbType.Int32;
+            paramCurrentRatingNeck.Direction = ParameterDirection.Input;
+
+            paramHasRatingBack = new SqlParameter("@" + TAG_HAS_RATING_BACK, HasRatingBack);
+            paramHasRatingBack.DbType = DbType.Boolean;
+            paramHasRatingBack.Direction = ParameterDirection.Input;
+
+            paramHasRatingShoulder = new SqlParameter("@" + TAG_HAS_RATING_SHOULDER, HasRatingShoulder);
+            paramHasRatingShoulder.DbType = DbType.Boolean;
+            paramHasRatingShoulder.Direction = ParameterDirection.Input;
+
+            paramHasRatingNeck = new SqlParameter("@" + TAG_HAS_RATING_NECK, HasRatingNeck);
+            paramHasRatingNeck.DbType = DbType.Boolean;
+            paramHasRatingNeck.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1733,6 +1967,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramNumberOfVisits);
             cmd.Parameters.Add(paramPreviousVisitDate);
             cmd.Parameters.Add(paramLastVisitDate);
+            cmd.Parameters.Add(paramCurrentRatingBack);
+            cmd.Parameters.Add(paramCurrentRatingShoulder);
+            cmd.Parameters.Add(paramCurrentRatingNeck);
+            cmd.Parameters.Add(paramHasRatingBack);
+            cmd.Parameters.Add(paramHasRatingShoulder);
+            cmd.Parameters.Add(paramHasRatingNeck);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1771,6 +2011,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramNumberOfVisits = null;
             paramPreviousVisitDate = null;
             paramLastVisitDate = null;
+            paramCurrentRatingBack = null;
+            paramCurrentRatingShoulder = null;
+            paramCurrentRatingNeck = null;
+            paramHasRatingBack = null;
+            paramHasRatingShoulder = null;
+            paramHasRatingNeck = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1981,6 +2227,36 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch
             {
             }
+            try
+            {
+                this.CurrentRatingBack = Convert.ToInt32(rdr[DB_FIELD_CURRENT_RATING_BACK].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.CurrentRatingShoulder = Convert.ToInt32(rdr[DB_FIELD_CURRENT_RATING_SHOULDER].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.CurrentRatingNeck = Convert.ToInt32(rdr[DB_FIELD_CURRENT_RATING_NECK].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.HasRatingBack = Convert.ToBoolean(rdr[DB_FIELD_HAS_RATING_BACK].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.HasRatingShoulder = Convert.ToBoolean(rdr[DB_FIELD_HAS_RATING_SHOULDER].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.HasRatingNeck = Convert.ToBoolean(rdr[DB_FIELD_HAS_RATING_NECK].ToString().Trim());
+            }
+            catch { }
         }
 
     }

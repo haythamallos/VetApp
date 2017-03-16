@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Preliminary";
-    ViewData["Description"] = "Preliminary";
+    ViewData["Title"] = "Back";
+    ViewData["Description"] = "Back";
 }
 
 @model MainSite.Models.BackModel
@@ -14,8 +14,6 @@
         <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
         <form id="formqback" method="post" action="/Dashboard/BackFormSave?id=6">
-            <input id="ContentID" name="ContentID" class="form-control" type="hidden" value="@Model.ContentID">
-            <input id="ContentTypeID" name="ContentTypeID" class="form-control" type="hidden" value="@Model.ContentTypeID">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             <div class="panel-group col-lg-12" id="accordion">
                 <div class="panel panel-info">
@@ -142,27 +140,27 @@
                                 <label class="font-bold">Please perform the movement tests below and choose the answer that best reflects your ability for that movement.</label>
                                 <hr />
                                 <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(model => model.S96, (SelectList)ViewBag.MovementList90Deg)
+                                @Html.DropDownListFor(x => x.S96, (SelectList)ViewBag.MovementList90Deg)
 
                                 <hr />
                                 <span>Extension (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S86, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S86, (SelectList)ViewBag.MovementList30Deg)
 
                                 <hr />
                                 <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S90, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S90, (SelectList)ViewBag.MovementList30Deg)
 
                                 <hr />
                                 <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S87, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S87, (SelectList)ViewBag.MovementList30Deg)
 
                                 <hr />
                                 <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S82, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S82, (SelectList)ViewBag.MovementList30Deg)
 
                                 <hr />
                                 <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S78, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S78, (SelectList)ViewBag.MovementList30Deg)
 
                             </div>
                             <hr />
@@ -170,22 +168,22 @@
                             <hr />
                             <div class="form-check form-check-inline panel panel-primary">
                                 <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(model => model.S112, (SelectList)ViewBag.MovementList90Deg)
+                                @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList90Deg)
                                 <hr />
                                 <span>Extension (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S111, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S111, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S113, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S114, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S114, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S120, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S120, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S121, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S121, (SelectList)ViewBag.MovementList30Deg)
 
                             </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="partTwoPrevBtn">Prev</button>
@@ -267,22 +265,22 @@
                                 <label class="font-bold">Please perform the joint movement tests again and select the answer</label>
                                 <hr />
                                 <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(model => model.S184, (SelectList)ViewBag.MovementList90Deg)
+                                @Html.DropDownListFor(x => x.S184, (SelectList)ViewBag.MovementList90Deg)
                                 <hr />
                                 <span>Extension (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S185, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S185, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S174, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S174, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S180, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S180, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S175, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList30Deg)
                                 <hr />
                                 <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(model => model.S177, (SelectList)ViewBag.MovementList30Deg)
+                                @Html.DropDownListFor(x => x.S177, (SelectList)ViewBag.MovementList30Deg)
 
                             </div>
                             <hr />

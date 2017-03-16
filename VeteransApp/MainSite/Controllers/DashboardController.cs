@@ -56,6 +56,8 @@ namespace MainSite.Controllers
             if (user != null)
             {
                 BusFacCore busFacCore = new BusFacCore();
+                dashboardModel.BenefitStatuses = busFacCore.GetBenefitStatuses(user.UserID);
+
                 Evaluation evaluation = busFacCore.EvaluationGet(user);
                 if (evaluation != null)
                 {
@@ -321,73 +323,208 @@ namespace MainSite.Controllers
             }
             return View("Register2");
         }
-
-        public ActionResult BackFormGet(BackModel backModel)
+        private string GetTemplatePath(IBaseModel model)
         {
+            string path = null;
+            switch (model.GetType().Name)
+            {
+                case "BackModel":
+                    path = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                    break;
+                default:
+                    break;
+            }
+            return path;
+        }
+        public ActionResult FormGetBack()
+        {
+            string viewName = "BackForm";
+            BackModel model = new BackModel();
+            long contenttypeid = 1;
             try
             {
-                // check if content exists
+                string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
-                Content content = busFacCore.ContentGetLatest(user.UserID, 1);
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
-                backModel.ContentTypeID = 1;
-                backModel.UserID = user.UserID;
+                model.UserID = user.UserID;
                 if (content == null)
                 {
-                    ContentID = BackSave(backModel, 0);                    
+                    ContentID = FormSave(model, 0, contenttypeid);
+                    viewName = "Preliminary";
                 }
                 else
                 {
-                    ContentID = content.ContentID;
+                    model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
                 }
 
-                backModel.ContentID = ContentID;
-
-                if (string.IsNullOrEmpty(backModel.NameOfPatient))
+                if (string.IsNullOrEmpty(model.NameOfPatient))
                 {
-                    backModel.NameOfPatient = user.Fullname;
+                    model.NameOfPatient = user.Fullname;
                 }
-                if (string.IsNullOrEmpty(backModel.SocialSecurity))
+                if (string.IsNullOrEmpty(model.SocialSecurity))
                 {
-                    backModel.SocialSecurity = user.Ssn;
+                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
             {
 
             }
-            return View("BackForm", backModel);
+ 
+            return View(viewName, model);
         }
 
-        private long BackSave(BackModel backModel, long contentStateID)
-        {
-            long ContentID = 0;
-            BusFacPDF busFacPDF = new BusFacPDF();
-            string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-            backModel.TemplatePath = pdfTemplatePath;
-            ContentID = busFacPDF.Save(backModel, contentStateID);
-            return ContentID;
-        }
         [HttpPost]
-        public ActionResult BackFormSave(BackModel backModel, long contentStateID)
+        public ActionResult BackFormSave(BackModel model, long contentStateID)
         {
+            string viewName = "BackForm";
+
             try
             {
-                long ContentID = BackSave(backModel, contentStateID);
+                long ContentID = FormSave(model, contentStateID, 1);
                 if (contentStateID == 6)
                 {
                     // submit application
                 }
-
-
             }
             catch (Exception ex)
             {
 
             }
-            return View("BackForm", backModel);
+            return View(viewName, model);
         }
+
+        public ActionResult FormGetShoulder()
+        {
+            string viewName = "ShoulderForm";
+            ShoulderModel model = new ShoulderModel();
+            long contenttypeid = 2;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                    viewName = "Preliminary";
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult ShoulderFormSave(ShoulderModel model, long contentStateID)
+        {
+            string viewName = "ShoulderForm";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 2);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        public ActionResult FormGetNeck()
+        {
+            string viewName = "NeckForm";
+            NeckModel model = new NeckModel();
+            long contenttypeid = 3;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                    viewName = "Preliminary";
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<NeckModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult NeckFormSave(NeckModel model, long contentStateID)
+        {
+            string viewName = "NeckForm";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 3);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        private long FormSave(IBaseModel model, long contentStateID, long contentTypeID)
+        {
+            long ContentID = 0;
+            BusFacPDF busFacPDF = new BusFacPDF();
+            model.TemplatePath = GetTemplatePath(model);
+            ContentID = busFacPDF.Save(model, contentStateID, contentTypeID);
+            return ContentID;
+        }
+       
         [HttpPost]
         public ActionResult BackFormToPdf(BackModel backModel, string submitButton)
         {
@@ -784,4 +921,49 @@ namespace MainSite.Controllers
 
 //    }
 
+//}
+
+//public ActionResult BackFormGet(BackModel backModel)
+//{
+//    try
+//    {
+//        // check if content exists
+//        User user = Auth();
+//        BusFacCore busFacCore = new BusFacCore();
+//        Content content = busFacCore.ContentGetLatest(user.UserID, 1);
+//        long ContentID = 0;
+//        backModel.UserID = user.UserID;
+//        if (content == null)
+//        {
+//            ContentID = BackSave(backModel, 0);                    
+//        }
+//        else
+//        {
+//            backModel = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
+//        }
+
+//        if (string.IsNullOrEmpty(backModel.NameOfPatient))
+//        {
+//            backModel.NameOfPatient = user.Fullname;
+//        }
+//        if (string.IsNullOrEmpty(backModel.SocialSecurity))
+//        {
+//            backModel.SocialSecurity = user.Ssn;
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+
+//    }
+//    return View("BackForm", backModel);
+//}
+
+//private long BackSave(BackModel backModel, long contentStateID)
+//{
+//    long ContentID = 0;
+//    BusFacPDF busFacPDF = new BusFacPDF();
+//    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+//    backModel.TemplatePath = pdfTemplatePath;
+//    ContentID = busFacPDF.Save(backModel, contentStateID, 1);
+//    return ContentID;
 //}

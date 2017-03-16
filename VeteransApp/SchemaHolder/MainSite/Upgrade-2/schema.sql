@@ -157,25 +157,32 @@ go
 
 alter table content_type add price DECIMAL(10, 2)
 go
+alter table [user] add current_rating_back int default 0
+go
+alter table [user] add current_rating_shoulder int default 0
+go
+alter table [user] add current_rating_neck int default 0
+go
+alter table [user] add has_rating_back  BIT NULL
+go
+alter table [user] add has_rating_shoulder  BIT NULL
+go
+alter table [user] add has_rating_neck  BIT NULL
+go
 
 delete from content_state
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), 'CONTENT_STATE_0', 'Content state 0', 'Content state 0')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), 'CONTENT_STATE_25', 'Content state 25', 'Content state 25')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), 'CONTENT_STATE_50', 'Content state 50', 'Content state 50')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (4, GETDATE(), 'CONTENT_STATE_75', 'Content state 75', 'Content state 75')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (5, GETDATE(), 'CONTENT_STATE_100', 'Content state 100', 'Content state 100')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (6, GETDATE(), 'CONTENT_STATE_SUBMITTED', 'Content state submitted', 'Content state submitted')
-INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (7, GETDATE(), 'CONTENT_STATE_PURCHASED', 'Content state purchased', 'Content state purchased')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), '0', '0', '0')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), '25', '25', '25')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), '50', '50', '50')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (4, GETDATE(), '75', '75', '75')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (5, GETDATE(), '100', '100', '100')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (6, GETDATE(), 'SUBMITTED', 'Content state submitted', 'Content state submitted')
+INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (7, GETDATE(), 'PURCHASED', 'Content state purchased', 'Content state purchased')
 
 delete from content_type
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), 'BACK', 'Back content type', 'Back content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), 'ANKLE', 'Ankle content type', 'Ankle content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), 'ELBOW', 'Elbow content type', 'Elbow content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (4, GETDATE(), 'FOOT', 'Foot content type', 'Foot content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (5, GETDATE(), 'HIP', 'Hip content type', 'Hip content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (6, GETDATE(), 'KNEE', 'Knee content type', 'Knee content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (7, GETDATE(), 'SHOULDER', 'Shoulder content type', 'Shoulder content type')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (8, GETDATE(), 'WRIST', 'Wrist content type', 'Wrist content type')
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), 'BACK', 'Back', 'Back')
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), 'SHOULDER', 'Shoulder', 'Shoulder')
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), 'NECK', 'Neck', 'Neck')
 
 INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (3, GETDATE(), 1, 2,'Upgrade-2')
 GO

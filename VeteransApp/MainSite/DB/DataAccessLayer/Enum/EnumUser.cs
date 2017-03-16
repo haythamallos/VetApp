@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumUser.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	2/28/2017	Created
+    /// 001	HA	3/16/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -82,6 +82,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private DateTime _dtEndPreviousVisitDate = new DateTime();
         private DateTime _dtBeginLastVisitDate = new DateTime();
         private DateTime _dtEndLastVisitDate = new DateTime();
+        private long _lCurrentRatingBack = 0;
+        private long _lCurrentRatingShoulder = 0;
+        private long _lCurrentRatingNeck = 0;
+        private bool? _bHasRatingBack = null;
+        private bool? _bHasRatingShoulder = null;
+        private bool? _bHasRatingNeck = null;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -159,7 +165,19 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_BEGIN_LAST_VISIT_DATE = "BeginLastVisitDate"; //Attribute LastVisitDate  name
                                                                                         /// <summary>EndLastVisitDate Attribute type string</summary>
         public static readonly string TAG_END_LAST_VISIT_DATE = "EndLastVisitDate"; //Attribute LastVisitDate  name
-                                                                                    // Stored procedure name
+                                                                                    /// <summary>CurrentRatingBack Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_BACK = "CurrentRatingBack"; //Attribute CurrentRatingBack  name
+                                                                                     /// <summary>CurrentRatingShoulder Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_SHOULDER = "CurrentRatingShoulder"; //Attribute CurrentRatingShoulder  name
+                                                                                             /// <summary>CurrentRatingNeck Attribute type string</summary>
+        public static readonly string TAG_CURRENT_RATING_NECK = "CurrentRatingNeck"; //Attribute CurrentRatingNeck  name
+                                                                                     /// <summary>HasRatingBack Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_BACK = "HasRatingBack"; //Attribute HasRatingBack  name
+                                                                             /// <summary>HasRatingShoulder Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_SHOULDER = "HasRatingShoulder"; //Attribute HasRatingShoulder  name
+                                                                                     /// <summary>HasRatingNeck Attribute type string</summary>
+        public static readonly string TAG_HAS_RATING_NECK = "HasRatingNeck"; //Attribute HasRatingNeck  name
+                                                                             // Stored procedure name
         public string SP_ENUM_NAME = "spUserEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the User Class of type bool</summary>
@@ -383,6 +401,42 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _dtEndLastVisitDate; }
             set { _dtEndLastVisitDate = value; }
+        }
+        /// <summary>CurrentRatingBack is a Property in the User Class of type long</summary>
+        public long CurrentRatingBack
+        {
+            get { return _lCurrentRatingBack; }
+            set { _lCurrentRatingBack = value; }
+        }
+        /// <summary>CurrentRatingShoulder is a Property in the User Class of type long</summary>
+        public long CurrentRatingShoulder
+        {
+            get { return _lCurrentRatingShoulder; }
+            set { _lCurrentRatingShoulder = value; }
+        }
+        /// <summary>CurrentRatingNeck is a Property in the User Class of type long</summary>
+        public long CurrentRatingNeck
+        {
+            get { return _lCurrentRatingNeck; }
+            set { _lCurrentRatingNeck = value; }
+        }
+        /// <summary>HasRatingBack is a Property in the User Class of type bool</summary>
+        public bool? HasRatingBack
+        {
+            get { return _bHasRatingBack; }
+            set { _bHasRatingBack = value; }
+        }
+        /// <summary>HasRatingShoulder is a Property in the User Class of type bool</summary>
+        public bool? HasRatingShoulder
+        {
+            get { return _bHasRatingShoulder; }
+            set { _bHasRatingShoulder = value; }
+        }
+        /// <summary>HasRatingNeck is a Property in the User Class of type bool</summary>
+        public bool? HasRatingNeck
+        {
+            get { return _bHasRatingNeck; }
+            set { _bHasRatingNeck = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -653,6 +707,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 sbReturn.Append(TAG_END_LAST_VISIT_DATE + ":\n");
             }
+            sbReturn.Append(TAG_CURRENT_RATING_BACK + ":  " + CurrentRatingBack + "\n");
+            sbReturn.Append(TAG_CURRENT_RATING_SHOULDER + ":  " + CurrentRatingShoulder + "\n");
+            sbReturn.Append(TAG_CURRENT_RATING_NECK + ":  " + CurrentRatingNeck + "\n");
+            sbReturn.Append(TAG_HAS_RATING_BACK + ":  " + HasRatingBack + "\n");
+            sbReturn.Append(TAG_HAS_RATING_SHOULDER + ":  " + HasRatingShoulder + "\n");
+            sbReturn.Append(TAG_HAS_RATING_NECK + ":  " + HasRatingNeck + "\n");
 
             return sbReturn.ToString();
         }
@@ -783,6 +843,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 sbReturn.Append("<" + TAG_END_LAST_VISIT_DATE + "></" + TAG_END_LAST_VISIT_DATE + ">\n");
             }
+            sbReturn.Append("<" + TAG_CURRENT_RATING_BACK + ">" + CurrentRatingBack + "</" + TAG_CURRENT_RATING_BACK + ">\n");
+            sbReturn.Append("<" + TAG_CURRENT_RATING_SHOULDER + ">" + CurrentRatingShoulder + "</" + TAG_CURRENT_RATING_SHOULDER + ">\n");
+            sbReturn.Append("<" + TAG_CURRENT_RATING_NECK + ">" + CurrentRatingNeck + "</" + TAG_CURRENT_RATING_NECK + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_BACK + ">" + HasRatingBack + "</" + TAG_HAS_RATING_BACK + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_SHOULDER + ">" + HasRatingShoulder + "</" + TAG_HAS_RATING_SHOULDER + ">\n");
+            sbReturn.Append("<" + TAG_HAS_RATING_NECK + ">" + HasRatingNeck + "</" + TAG_HAS_RATING_NECK + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -1189,6 +1255,66 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             catch
             {
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_BACK);
+                CurrentRatingBack = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingBack = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_SHOULDER);
+                CurrentRatingShoulder = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingShoulder = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_CURRENT_RATING_NECK);
+                CurrentRatingNeck = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                CurrentRatingNeck = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_BACK);
+                HasRatingBack = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingBack = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_SHOULDER);
+                HasRatingShoulder = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingShoulder = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_HAS_RATING_NECK);
+                HasRatingNeck = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                HasRatingNeck = false;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -1500,6 +1626,66 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     EndLastVisitDate = new DateTime();
                 }
 
+                Console.WriteLine(TAG_CURRENT_RATING_BACK + ":  ");
+                try
+                {
+                    CurrentRatingBack = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    CurrentRatingBack = 0;
+                }
+
+                Console.WriteLine(TAG_CURRENT_RATING_SHOULDER + ":  ");
+                try
+                {
+                    CurrentRatingShoulder = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    CurrentRatingShoulder = 0;
+                }
+
+                Console.WriteLine(TAG_CURRENT_RATING_NECK + ":  ");
+                try
+                {
+                    CurrentRatingNeck = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    CurrentRatingNeck = 0;
+                }
+
+                Console.WriteLine(TAG_HAS_RATING_BACK + ":  ");
+                try
+                {
+                    HasRatingBack = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch
+                {
+                    HasRatingBack = false;
+                }
+
+                Console.WriteLine(TAG_HAS_RATING_SHOULDER + ":  ");
+                try
+                {
+                    HasRatingShoulder = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch
+                {
+                    HasRatingShoulder = false;
+                }
+
+                Console.WriteLine(TAG_HAS_RATING_NECK + ":  ");
+                try
+                {
+                    HasRatingNeck = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch
+                {
+                    HasRatingNeck = false;
+                }
+
 
             }
             catch (Exception e)
@@ -1574,6 +1760,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramEndPreviousVisitDate = null;
             SqlParameter paramBeginLastVisitDate = null;
             SqlParameter paramEndLastVisitDate = null;
+            SqlParameter paramCurrentRatingBack = null;
+            SqlParameter paramCurrentRatingShoulder = null;
+            SqlParameter paramCurrentRatingNeck = null;
+            SqlParameter paramHasRatingBack = null;
+            SqlParameter paramHasRatingShoulder = null;
+            SqlParameter paramHasRatingNeck = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -1967,6 +2159,33 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             paramEndLastVisitDate.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramEndLastVisitDate);
 
+            paramCurrentRatingBack = new SqlParameter("@" + TAG_CURRENT_RATING_BACK, CurrentRatingBack);
+            sbLog.Append(TAG_CURRENT_RATING_BACK + "=" + CurrentRatingBack + "\n");
+            paramCurrentRatingBack.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramCurrentRatingBack);
+
+            paramCurrentRatingShoulder = new SqlParameter("@" + TAG_CURRENT_RATING_SHOULDER, CurrentRatingShoulder);
+            sbLog.Append(TAG_CURRENT_RATING_SHOULDER + "=" + CurrentRatingShoulder + "\n");
+            paramCurrentRatingShoulder.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramCurrentRatingShoulder);
+
+            paramCurrentRatingNeck = new SqlParameter("@" + TAG_CURRENT_RATING_NECK, CurrentRatingNeck);
+            sbLog.Append(TAG_CURRENT_RATING_NECK + "=" + CurrentRatingNeck + "\n");
+            paramCurrentRatingNeck.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramCurrentRatingNeck);
+
+            paramHasRatingBack = new SqlParameter("@" + TAG_HAS_RATING_BACK, HasRatingBack);
+            sbLog.Append(TAG_HAS_RATING_BACK + "=" + HasRatingBack + "\n");
+            paramHasRatingBack.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramHasRatingBack);
+            paramHasRatingShoulder = new SqlParameter("@" + TAG_HAS_RATING_SHOULDER, HasRatingShoulder);
+            sbLog.Append(TAG_HAS_RATING_SHOULDER + "=" + HasRatingShoulder + "\n");
+            paramHasRatingShoulder.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramHasRatingShoulder);
+            paramHasRatingNeck = new SqlParameter("@" + TAG_HAS_RATING_NECK, HasRatingNeck);
+            sbLog.Append(TAG_HAS_RATING_NECK + "=" + HasRatingNeck + "\n");
+            paramHasRatingNeck.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramHasRatingNeck);
         }
 
     }

@@ -35,32 +35,42 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             _config = new Config();
         }
-        public long Save(BackModel backModel, long contentStateID)
+ 
+        public long Save(IBaseModel model, long contentStateID, long contentTypeID)
         {
             long lID = 0;
             try
             {
-                string jsonModel = JSONHelper.Serialize<BackModel>(backModel);
+                bool bAddID = false;
 
+       
                 BusFacCore busFacCore = new BusFacCore();
-                Content content = null;
-                if (backModel.ContentID > 0)
+                Content content = busFacCore.ContentGetLatest(model.UserID, contentTypeID);
+                if (content == null)
                 {
-                    content = busFacCore.ContentGet(backModel.ContentID);
-                    if ((contentStateID >= content.ContentStateID) && (contentStateID != 9999))
-                    {
-                        content.ContentStateID = contentStateID;
-                    }
+                    content = new Content() { UserID = model.UserID, ContentTypeID = contentTypeID };
+                    model.ContentTypeID = contentTypeID;
+                    bAddID = true;
                 }
                 else
                 {
-                    content = new Content();
+                    model.ContentID = content.ContentID;
                 }
-                content.ContentMeta = jsonModel;
-                content.UserID = backModel.UserID;
-                content.ContentTypeID = backModel.ContentTypeID;
 
+                model.ContentTypeID = contentTypeID;
+                if ((contentStateID >= content.ContentStateID) && (contentStateID != 9999))
+                {
+                    content.ContentStateID = contentStateID;
+                }
+                model.ContentStateID = content.ContentStateID;
+                content.ContentMeta = JSONHelper.Serialize<IBaseModel>(model);
                 lID = busFacCore.ContentCreateOrModify(content);
+                if (bAddID)
+                {
+                    model.ContentID = lID;
+                    content.ContentMeta = JSONHelper.Serialize<IBaseModel>(model);
+                    lID = busFacCore.ContentCreateOrModify(content);
+                }
                 _hasError = busFacCore.HasError;
             }
             catch (Exception ex)

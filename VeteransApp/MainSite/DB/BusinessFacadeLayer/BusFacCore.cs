@@ -324,6 +324,56 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return content;
         }
 
+        public Dictionary<long, BenefitStatus> GetBenefitStatuses(long UserID)
+        {
+            Dictionary<long, BenefitStatus> dictBenefitStatuses = new Dictionary<long, BenefitStatus>();
+            Dictionary<long, ContentState> dictContentStates = new Dictionary<long, ContentState>();
+
+            EnumContentType enumContentType = new EnumContentType();
+            ArrayList arContentType = ContentTypeGetList(enumContentType);
+
+            EnumContentState enumContentState = new EnumContentState();
+            ArrayList arContentState = ContentStateGetList(enumContentState);
+           
+            foreach(ContentState cs in arContentState)
+            {
+                dictContentStates.Add(cs.ContentStateID, cs);
+            }
+
+            BenefitStatus benefitStatus = null;
+            Content content = null;
+
+            foreach (ContentType ct in arContentType)
+            {
+                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode };
+                content = ContentGetLatest(UserID, ct.ContentTypeID);
+                if (content != null)
+                {
+                    if ((content.ContentStateID > 0) && (content.ContentStateID <= 5))
+                    {
+                        benefitStatus.ActionText = "Finish";
+                        benefitStatus.TooltipText = "Finish Application";
+                        benefitStatus.Progress = dictContentStates[content.ContentStateID].Code;
+                    }
+                    else if (content.ContentStateID == 6)
+                    {
+                        benefitStatus.ActionText = "Purchase";
+                        benefitStatus.TooltipText = "Purchase Form";
+                        benefitStatus.Progress = "100";
+                    }
+                    else if (content.ContentStateID == 7)
+                    {
+                        benefitStatus.ActionText = "Done";
+                        benefitStatus.TooltipText = "Form Purchased";
+                        benefitStatus.Progress = "100";
+                    }
+                }
+                dictBenefitStatuses.Add(ct.ContentTypeID, benefitStatus);
+            }
+            return dictBenefitStatuses;
+        }
+
+
         /*********************** CUSTOM END *********************/
 
 

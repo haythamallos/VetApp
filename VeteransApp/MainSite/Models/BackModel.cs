@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
+﻿
 namespace MainSite.Models
 {
-    public class BackModel
+    public class BackModel : IBaseModel
     {
         public long ContentID { get; set; }
         public long ContentTypeID { get; set; }
@@ -17,6 +12,7 @@ namespace MainSite.Models
 
         public string NameOfPatient { get; set; }
         public string SocialSecurity { get; set; }
+
         public string BackDiagnosis { get; set; }
         public bool S47 { get; set; }
         public bool S48 { get; set; }
