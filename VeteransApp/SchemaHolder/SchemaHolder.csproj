@@ -51,6 +51,8 @@
     <Content Include="MainSite\Upgrade-1-DO-NOT-USE\sp.sql" />
     <Content Include="MainSite\Upgrade-2\schema.sql" />
     <Content Include="MainSite\Upgrade-2\sp.sql" />
+    <Content Include="MainSite\Upgrade-3\schema.sql" />
+    <Content Include="MainSite\Upgrade-3\sp.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,8 +13,13 @@
         <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Back Disability</h2>
         <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
-        <form id="formqback" method="post" action="/Dashboard/BackFormSave?id=6">
+        <form id="formback" method="post" action="/Dashboard/BackFormSave?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
+            @if (Model.ContentStateID == 6)
+            {
+                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                <hr />
+            }
             <div class="panel-group col-lg-12" id="accordion">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -408,7 +413,7 @@
                             </div>
 
                             <button class="btn btn-warning btn-md pull-left" type="button" id="partFourPrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="submit" id="partFourNextBtn">Apply</button>
+                            <button class="btn btn-success btn-md pull-right" type="submit" id="partFourNextBtn">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -427,7 +432,7 @@
             $("#collapsePrimary").collapse('show');
             $("#collapseDefault").collapse('hide');
 
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=2',
@@ -443,7 +448,7 @@
             $("#collapseSuccess").collapse('show');
             $("#collapsePrimary").collapse('hide');
 
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=3',
@@ -461,7 +466,7 @@
             $("#collapsePrimary").collapse('hide');
 
             
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=9999',
@@ -478,7 +483,7 @@
             $("#collapseInfo").collapse('show');
             $("#collapseSuccess").collapse('hide');
 
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=4',
@@ -495,7 +500,7 @@
             $("#collapsePrimary").collapse('show');
             $("#collapseSuccess").collapse('hide');
 
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=9999',
@@ -508,28 +513,28 @@
 
         });
 
-        $("#partFourNextBtn").on("click", function () {
-            $("#collapseWarning").collapse('show');
-            $("#collapseInfo").collapse('hide');
+        //$("#partFourNextBtn").on("click", function () {
+        //    $("#collapseWarning").collapse('show');
+        //    $("#collapseInfo").collapse('hide');
 
-            var model = $('#formqback').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/BackFormSave?contentStateID=6',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+        //    var model = $('#formback').serialize();
+        //    // Serialize model for Posting model
+        //    $.ajax({
+        //        url: '/Dashboard/BackFormSave?contentStateID=6',
+        //        type: 'POST',
+        //        data: model,  // Pass Model to Controller Using Ajax Call
+        //        success: function (data) {
+        //            // Show Data
+        //        }
+        //    });
 
-        });
+        //});
 
         $("#partFourPrevBtn").on("click", function () {
             $("#collapseSuccess").collapse('show');
             $("#collapseInfo").collapse('hide');
 
-            var model = $('#formqback').serialize();
+            var model = $('#formback').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/BackFormSave?contentStateID=9999',

@@ -9,6 +9,7 @@ using Vetapp.Engine.Common;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.BusinessAccessLayer;
 using System.Web;
+using System.Drawing;
 
 namespace MainSite.Controllers
 {
@@ -240,9 +241,9 @@ namespace MainSite.Controllers
                 CurrentRatingBack = user.CurrentRatingBack,
                 CurrentRatingNeck = user.CurrentRatingNeck,
                 CurrentRatingShoulder = user.CurrentRatingShoulder,
-                HasRatingBack = (bool)user.HasRatingBack,
-                HasRatingNeck = (bool)user.HasRatingNeck,
-                HasRatingShoulder = (bool)user.HasRatingShoulder
+                HasRatingBack = (user.HasRatingBack == null) ? false : (bool)user.HasRatingBack,
+                HasRatingNeck = (user.HasRatingNeck == null) ? false : (bool)user.HasRatingNeck,
+                HasRatingShoulder = (user.HasRatingShoulder == null) ? false : (bool)user.HasRatingShoulder
             };
             int currentRating = 0;
             if (user.CurrentRating > 0)
@@ -496,21 +497,36 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult BackFormSave(BackModel model, long contentStateID)
         {
-            string viewName = "BackForm";
-
             try
             {
                 long ContentID = FormSave(model, contentStateID, 1);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Back(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        PurchaseReviewModel purchaseReviewModel = new PurchaseReviewModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("PurchaseReview", purchaseReviewModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
             {
 
             }
-            return View(viewName, model);
+            return View("BackForm", model);
         }
 
         public ActionResult FormGetShoulder()
@@ -737,6 +753,30 @@ namespace MainSite.Controllers
         public ActionResult PurchasedForm()
         {
             return View();
+        }
+        public ActionResult PurchaseReview(PurchaseReviewModel model)
+        {
+            try
+            {
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, model.ContentTypeID);
+                if (content != null)
+                {
+                    model.ContentTypeID = content.ContentTypeID;
+                    model.ContentID = content.ContentTypeID;
+                    content.UserID = user.UserID;
+                    ContentType contentType = busFacCore.ContentTypeGet(content.ContentTypeID);
+                    model.ProductName = contentType.VisibleCode;
+                    model.Price = "$99.00";
+                    model.ContentData = content.ContentData;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
     }
 

@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ABCpdf, Version=10.1.2.1, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
+      <HintPath>..\packages\ABCpdf.10.1.2.1\lib\net40\ABCpdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
@@ -142,6 +146,7 @@
     <Compile Include="DB\Common\Config.cs" />
     <Compile Include="DB\Common\ErrorCode.cs" />
     <Compile Include="DB\Common\JSONHelper.cs" />
+    <Compile Include="DB\Common\UtilsImage.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Content.cs" />
     <Compile Include="DB\DataAccessLayer\Data\ContentState.cs" />
@@ -164,6 +169,7 @@
     <Compile Include="Models\EvaluationModel.cs" />
     <Compile Include="Models\NeckModel.cs" />
     <Compile Include="Models\PreliminaryModel.cs" />
+    <Compile Include="Models\PurchaseReviewModel.cs" />
     <Compile Include="Models\ShoulderModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\PDFFile.cs" />
@@ -184,6 +190,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3DGlue10-32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="3DGlue10-64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ABCpdf10-32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ABCpdf10-64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-datepicker.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -324,6 +342,12 @@
     <Content Include="less\icons\weather-icons\less\css\variables-time.css" />
     <Content Include="less\icons\weather-icons\less\css\variables-wind-names.css" />
     <Content Include="less\spinners.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PrintHook32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PrintHook64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\bootstrap-datepicker.min.js">
@@ -511,6 +535,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pdf\back.pdf" />
+    <Content Include="ABCpdf.chm" />
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\Veteransapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js">
@@ -597,6 +622,7 @@
     <Content Include="Views\Dashboard\ShoulderForm.cshtml" />
     <Content Include="Views\Dashboard\NeckForm.cshtml" />
     <Content Include="Views\Dashboard\PreForm.cshtml" />
+    <Content Include="Views\Dashboard\PurchaseReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

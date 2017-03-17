@@ -101,14 +101,13 @@
                                     <tbody>
                                         <tr>
                                             <td width="550">
-                                                <h2 class="font-500">Start Your Application</h2>
+                                                <button id="btnStartApplication" onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light"><i class="fa fa fa-long-arrow-right"></i> Start Your Application </button>
+
+                                                @*<h2 class="font-500"><a href="" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].TooltipText"> Start Your Application </a></h2>*@
                                             </td>
-                                            <td align="center">
-                                                
-                                                @*<button onclick="window.location='/Dashboard/Preliminary'" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>*@
-                                                @*<button id="btnStartApplication" onclick="$('#startbenefitdiv').addClass('animated tada');" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>*@
+                                            @*<td align="center">                                                
                                                 <button id="btnStartApplication" onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
-                                            </td>
+                                            </td>*@
                                         </tr>
                                         @*<tr>
                                             <td width="550">

@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product Detail";
+    ViewData["Description"] = "Product Detail";
+}
+
+@using MainSite.Classes
+@model MainSite.Models.PurchaseReviewModel
+
+<div id="page-wrapper">
+    <div class="col-xs-12">
+        <form id="formsproductdetail" method="post" action="/Dashboard/Purchase">
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="white-box">
+                        <div class="">
+                            <h2 class="m-b-0 m-t-0">VA Form For @Model.ProductName (DBQ)</h2>
+                            <small class="text-muted db">Prepared VA form for rating increase</small>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="white-box text-center">
+                                        @*<img src="../plugins/images/chair.jpg" class="img-responsive" />*@
+                                        @*@Html.Image(Model.ContentData, "img-cls", new { width = "200", height = "200" })*@
+                                        <img src="data:image/jpeg;base64,@Model.ContentData" id="form-id" />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-9 col-md-9 col-sm-6">
+
+                                    <h4 class="box-title m-t-40">Product description</h4>
+                                    <p>
+                                        Prepared form for VA's "BACK (THORACOLUMBAR SPINE) CONDITIONS DISABILITY BENEFITS QUESTIONNAIRE" based on your service connected injury.  
+                                        This form will need to be signed by a doctor and submitted to the VA for rating increase to take place.
+                                    </p>
+                                    <h2 class="m-t-40">@Model.Price</h2>
+                                    <button class="btn btn-inverse btn-rounded m-r-5" data-toggle="tooltip" title="Add to cart"><i class="ti-shopping-cart"></i> </button><button class="btn btn-danger btn-rounded"> Buy Now </button>
+
+                                    <h3 class="box-title m-t-40">Key Highlights</h3>
+                                    <ul class="list-icons">
+                                        <li><i class="fa fa-check text-success"></i> ... </li>
+                                        <li><i class="fa fa-check text-success"></i> ... </li>
+                                        <li><i class="fa fa-check text-success"></i> ... </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--row -->
+        </form>
+    </div>
+</div>
+
+
+
