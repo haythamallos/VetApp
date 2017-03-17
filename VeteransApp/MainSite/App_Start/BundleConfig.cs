@@ -31,6 +31,7 @@ namespace MainSite
                       "~/Content/bootstrap-datepicker.min.css",
                       "~/Content/sidebar-nav.css",
                       "~/Content/wizard.css",
+                      "~/Content/animate.css",
                       "~/Content/site.css"));
 
             //bundles.Add(new ScriptBundle("~/bundles/site").Include(

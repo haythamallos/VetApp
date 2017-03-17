@@ -4,6 +4,7 @@
     ViewData["Description"] = "Preliminary";
 }
 
+@model MainSite.Models.PreliminaryModel
 
 <div id="page-wrapper">
     <div class="col-md-12 col-lg-12 col-xs-12">
@@ -19,9 +20,11 @@
                 <p class="text-muted m-b-30">Select a benefit and tell us about your current rating to help us evaluate you</p>
                 <div class="vtabs">
                     <ul class="nav tabs-vertical">
-                        <li class="tab active"><a data-toggle="tab" href="#back" aria-expanded="true"> <span class="visible-xs"></i></span> <span class="hidden-xs">Back</span> </a> </li>
-                        <li class="tab"><a data-toggle="tab" href="#shoulder" aria-expanded="false"> <span class="visible-xs"></i></span> <span class="hidden-xs">Shoulder</span> </a> </li>
-                        <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#neck"> <span class="visible-xs"></i></span> <span class="hidden-xs">Neck</span> </a> </li>
+                        <li class="tab @if (Model.ContentTypeID == 1) { <text>active</text>  }"><a data-toggle="tab" href="#back" aria-expanded="true"> <span class="visible-xs"></i></span> <span class="hidden-xs">Back</span> </a> </li>
+                        <li class="tab @if (Model.ContentTypeID == 2) { <text>active</text>  }"><a data-toggle="tab" href="#shoulder" aria-expanded="false"> <span class="visible-xs"></i></span> <span class="hidden-xs">Shoulder</span> </a> </li>
+                        <li class="tab @if (Model.ContentTypeID == 3) { <text>active</text>  }"><a aria-expanded="false" data-toggle="tab" href="#neck"> <span class="visible-xs"></i></span> <span class="hidden-xs">Neck</span> </a> </li>
+
+
                         @*<li class="tab"><a aria-expanded="false" data-toggle="tab" href="#elbow"> <span class="visible-xs"></i></span> <span class="hidden-xs">Elbow</span> </a> </li>
                         <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#wrist"> <span class="visible-xs"></i></span> <span class="hidden-xs">Wrist</span> </a> </li>
                         <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Hip</span> </a> </li>
@@ -30,7 +33,7 @@
                         <li class="tab"><a aria-expanded="false" data-toggle="tab" href="#hip"> <span class="visible-xs"></i></span> <span class="hidden-xs">Foot</span> </a> </li>*@
                     </ul>
                     <div class="tab-content">
-                        <div id="back" class="tab-pane active">
+                        <div id="back" class="tab-pane @if (Model.ContentTypeID == 1) { <text>active</text>  }">
                             <div class="col-md-3">
                                 <h3>Do You Have a Back Injury?</h3>
                                 <img src="~/Images/back-pain.jpg" alt="back pain" width="150">
@@ -42,7 +45,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div id="shoulder" class="tab-pane">
+                        <div id="shoulder" class="tab-pane @if (Model.ContentTypeID == 2) { <text>active</text>  }">
                             <div class="col-md-4">
                                 <h3>Shoulder</h3>
                                 <h4>Injury Image Here</h4>
@@ -52,7 +55,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div id="neck" class="tab-pane">
+                        <div id="neck" class="tab-pane @if (Model.ContentTypeID == 3) { <text>active</text>  }">
                             <div class="col-md-4">
                                 <h3>Neck</h3>
                                 <h4>Injury Image Here</h4>

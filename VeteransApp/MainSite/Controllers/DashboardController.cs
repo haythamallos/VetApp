@@ -67,7 +67,7 @@ namespace MainSite.Controllers
                     int currentRating = 0;
                     if (user.CurrentRating > 0)
                     {
-                        currentRating = (int) user.CurrentRating;
+                        currentRating = (int)user.CurrentRating;
                     }
                     else
                     {
@@ -76,8 +76,8 @@ namespace MainSite.Controllers
                     dashboardModel.evaluationResults.CurrentRating = currentRating;
 
                     int projectionFactor = 3;
-                    int delta = (100 - currentRating) /10;
-                    if ( delta < projectionFactor)
+                    int delta = (100 - currentRating) / 10;
+                    if (delta < projectionFactor)
                     {
                         projectionFactor = delta;
                     }
@@ -115,10 +115,113 @@ namespace MainSite.Controllers
         {
             return View();
         }
-        public ActionResult Preliminary()
+        public ActionResult PreForm(PreliminaryModel model)
         {
-            return View();
+            try
+            {
+                if (model.ContentTypeID > 0)
+                {
+                    BusFacCore busFacCore = new BusFacCore();
+                    model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+                    switch (model.ContentTypeID)
+                    {
+                        case 1:
+                            model.imageURL = "../Images/back-pain.jpg";
+                            break;
+                        case 2:
+                            model.imageURL = "../Images/shoulder-pain.jpg";
+                            break;
+                        case 3:
+                            model.imageURL = "../Images/neck-pain.jpg";
+                            break;
+                        default:
+                            break;
+                    }
+                    model.AskSide = (bool)model.contentType.HasSides;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult PreFormPost(PreliminaryModel model)
+        {
+            try
+            {
+                BusFacCore busFacCore = new BusFacCore();
+                model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+                switch (model.ContentTypeID)
+                {
+                    case 1:
+                        model.imageURL = "../Images/back-pain.jpg";
+                        break;
+                    case 2:
+                        model.imageURL = "../Images/shoulder-pain.jpg";
+                        break;
+                    case 3:
+                        model.imageURL = "../Images/neck-pain.jpg";
+                        break;
+                    default:
+                        break;
+                }
+                if (model.Rating >= model.contentType.MaxRating)
+                {
+                    model.HasError = true;
+                    model.ErrorTitle = "Max Rating Reached";
+                    model.ErrorMsg = "You are currently at maximum rating for this benefit.  Try other body areas.";
+                }
+                else if (((bool)model.contentType.HasSides) && (string.IsNullOrEmpty(model.Side)))
+                {
+                    model.HasError = true;
+                    model.ErrorTitle = "Info Needed";
+                    model.ErrorMsg = "Please choose the side of your disability.";
+                }
+
+                if ((!model.HasError) && (model.ContentTypeID > 0))
+                {
+                    User user = Auth();
+                    string actionName = null;
+                    switch (model.ContentTypeID)
+                    {
+                        case 1:
+                            user.HasRatingBack = true;
+                            user.CurrentRatingBack = model.Rating;
+                            actionName = "FormGetBack";
+                            break;
+                        case 2:
+                            user.HasRatingShoulder = true;
+                            user.CurrentRatingShoulder = model.Rating;
+                            actionName = "FormGetShoulder";
+                            TempData["Side"] = model.Side;
+                            break;
+                        case 3:
+                            user.HasRatingNeck = true;
+                            user.CurrentRatingNeck = model.Rating;
+                            actionName = "FormGetNeck";
+                            break;
+                        default:
+                            break;
+                    }
+                    long lID = busFacCore.UserCreateOrModify(user);
+                    return RedirectToAction(actionName);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("PreForm", model);
+        }
+        public ActionResult Preliminary(PreliminaryModel model)
+        {
+            return View(model);
+        }
+
         public ActionResult FormQBack()
         {
             return View();
@@ -133,12 +236,18 @@ namespace MainSite.Controllers
                 FullName = user.Fullname,
                 PhoneNumber = user.PhoneNumber,
                 Message = user.UserMessage,
-                SSN = user.Ssn
+                SSN = user.Ssn,
+                CurrentRatingBack = user.CurrentRatingBack,
+                CurrentRatingNeck = user.CurrentRatingNeck,
+                CurrentRatingShoulder = user.CurrentRatingShoulder,
+                HasRatingBack = (bool)user.HasRatingBack,
+                HasRatingNeck = (bool)user.HasRatingNeck,
+                HasRatingShoulder = (bool)user.HasRatingShoulder
             };
             int currentRating = 0;
             if (user.CurrentRating > 0)
             {
-                currentRating = (int) user.CurrentRating;
+                currentRating = (int)user.CurrentRating;
             }
             else
             {
@@ -185,9 +294,12 @@ namespace MainSite.Controllers
                 }
                 user.UserMessage = userModel.Message;
                 user.CurrentRating = userModel.CurrentRating;
+                user.CurrentRatingBack = userModel.CurrentRatingBack;
+                user.CurrentRatingShoulder = userModel.CurrentRatingShoulder;
+                user.CurrentRatingNeck = userModel.CurrentRatingNeck;
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
-   
+
                 if (lID > 0)
                 {
                     ViewData["IsSaved"] = true;
@@ -291,7 +403,7 @@ namespace MainSite.Controllers
                         bool UserExist = busFacCore.Exist(userModel.Username);
                         if (!UserExist)
                         {
-                            
+
                             User user = busFacCore.UserCreate(userModel.Username, userModel.Password);
                             if ((user != null) && (user.UserID > 0))
                             {
@@ -352,7 +464,6 @@ namespace MainSite.Controllers
                 if (content == null)
                 {
                     ContentID = FormSave(model, 0, contenttypeid);
-                    viewName = "Preliminary";
                 }
                 else
                 {
@@ -367,12 +478,18 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
+
+                if (!((bool)user.HasRatingBack))
+                {
+                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
+                    return RedirectToAction("PreForm", preliminaryModel);
+                }
             }
             catch (Exception ex)
             {
 
             }
- 
+
             return View(viewName, model);
         }
 
@@ -409,14 +526,19 @@ namespace MainSite.Controllers
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
+
                 if (content == null)
                 {
                     ContentID = FormSave(model, 0, contenttypeid);
-                    viewName = "Preliminary";
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
+                }
+
+                if (TempData["Side"] != null)
+                {
+                    model.Side = (string)TempData["Side"];
                 }
 
                 if (string.IsNullOrEmpty(model.NameOfPatient))
@@ -427,6 +549,12 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
+                if (!((bool)user.HasRatingShoulder))
+                {
+                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
+                    return RedirectToAction("PreForm", preliminaryModel);
+                }
+
             }
             catch (Exception ex)
             {
@@ -472,7 +600,6 @@ namespace MainSite.Controllers
                 if (content == null)
                 {
                     ContentID = FormSave(model, 0, contenttypeid);
-                    viewName = "Preliminary";
                 }
                 else
                 {
@@ -486,6 +613,11 @@ namespace MainSite.Controllers
                 if (string.IsNullOrEmpty(model.SocialSecurity))
                 {
                     model.SocialSecurity = user.Ssn;
+                }
+                if (!((bool)user.HasRatingNeck))
+                {
+                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                    return RedirectToAction("PreForm", preliminaryModel);
                 }
             }
             catch (Exception ex)
@@ -524,7 +656,7 @@ namespace MainSite.Controllers
             ContentID = busFacPDF.Save(model, contentStateID, contentTypeID);
             return ContentID;
         }
-       
+
         [HttpPost]
         public ActionResult BackFormToPdf(BackModel backModel, string submitButton)
         {

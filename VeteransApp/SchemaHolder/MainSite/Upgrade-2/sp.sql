@@ -377,7 +377,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spContentTypeExist
 (
@@ -414,7 +414,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spContentTypeLoad
 (
@@ -425,7 +425,7 @@ SET NOCOUNT ON
 
 -- select record(s) with specified id
 
-SELECT  [content_type_id], [date_created], [code], [description], [visible_code] 
+SELECT  [content_type_id], [date_created], [code], [description], [visible_code], [max_rating], [has_sides] 
 FROM [content_type] 
 WHERE content_type_id = @ContentTypeID
 RETURN 0
@@ -450,7 +450,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spContentTypeUpdate
 (
@@ -458,6 +458,8 @@ CREATE PROCEDURE spContentTypeUpdate
 	@Code                      NVARCHAR(255) = NULL,
 	@Description               NVARCHAR(255) = NULL,
 	@VisibleCode               NVARCHAR(255) = NULL,
+	@MaxRating                 NUMERIC(10,0) = 0,
+	@HasSides                  NUMERIC(1,0) = 0,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -468,7 +470,9 @@ SET NOCOUNT ON
 UPDATE [content_type] SET 
 	[code] = @Code,
 	[description] = @Description,
-	[visible_code] = @VisibleCode
+	[visible_code] = @VisibleCode,
+	[max_rating] = @MaxRating,
+	[has_sides] = @HasSides
 WHERE content_type_id = @ContentTypeID
 
 -- return ID for updated record
@@ -494,7 +498,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spContentTypeDelete
 (
@@ -528,7 +532,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 CREATE PROCEDURE spContentTypeInsert
 (
@@ -537,6 +541,8 @@ CREATE PROCEDURE spContentTypeInsert
 	@Code                      NVARCHAR(255) = NULL,
 	@Description               NVARCHAR(255) = NULL,
 	@VisibleCode               NVARCHAR(255) = NULL,
+	@MaxRating                 NUMERIC(10,0) = 0,
+	@HasSides                  NUMERIC(1,0) = 0,
 	@PKID                      NUMERIC(10) OUTPUT
 )
 AS
@@ -550,7 +556,9 @@ INSERT INTO [content_type]
 	[date_created],
 	[code],
 	[description],
-	[visible_code]
+	[visible_code],
+	[max_rating],
+	[has_sides]
 )
  VALUES 
 (
@@ -558,7 +566,9 @@ INSERT INTO [content_type]
 	@DateCreated,
 	@Code,
 	@Description,
-	@VisibleCode
+	@VisibleCode,
+	@MaxRating,
+	@HasSides
 )
 
 
@@ -586,7 +596,7 @@ GO
 **		Change History
 *******************************************************************************
 **		Date:		Author:		Description:
-**		3/1/2017		HA		Created
+**		3/16/2017		HA		Created
 *******************************************************************************/
 
 
@@ -599,13 +609,15 @@ CREATE PROCEDURE spContentTypeEnum
 	@Code                      NVARCHAR(255) = NULL,
 	@Description               NVARCHAR(255) = NULL,
 	@VisibleCode               NVARCHAR(255) = NULL,
+	@MaxRating                 NUMERIC(10,0) = 0,
+	@HasSides                  NUMERIC(1,0) = NULL,
  	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
 
 AS
     	SET NOCOUNT ON
 
 
-      SELECT  [content_type_id], [date_created], [code], [description], [visible_code]
+      SELECT  [content_type_id], [date_created], [code], [description], [visible_code], [max_rating], [has_sides]
       FROM [content_type] 
       WHERE ((@ContentTypeID = 0) OR ([content_type_id] LIKE @ContentTypeID))
       AND ((@BeginDateCreated IS NULL) OR ([date_created] >= @BeginDateCreated))
@@ -613,6 +625,8 @@ AS
       AND ((@Code IS NULL) OR ([code] LIKE @Code))
       AND ((@Description IS NULL) OR ([description] LIKE @Description))
       AND ((@VisibleCode IS NULL) OR ([visible_code] LIKE @VisibleCode))
+      AND ((@MaxRating = 0) OR ([max_rating] LIKE @MaxRating))
+      AND ((@HasSides IS NULL) OR ([has_sides] LIKE @HasSides))
  ORDER BY [content_type_id] ASC
 
 
@@ -626,6 +640,7 @@ PRINT '<<<< Created Stored Procedure spContentTypeEnum >>>>'
 ELSE
 PRINT '<<< Failed Creating Stored Procedure spContentTypeEnum >>>'
 GO
+
 
 
 IF EXISTS (select * from sysobjects where id = object_id(N'[spContentStateExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)

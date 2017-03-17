@@ -13,5 +13,7 @@ namespace MainSite.Models
         public string NameOfPatient { get; set; }
         public string SocialSecurity { get; set; }
 
+        public string Side { get; set; }
+
     }
 }

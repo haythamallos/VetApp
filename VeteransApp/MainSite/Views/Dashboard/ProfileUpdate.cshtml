@@ -21,6 +21,54 @@
                             <input id="Username" name="Username" value="@Model.Username" type="email" placeholder="johnathan@admin.com" class="form-control form-control-line">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3">Phone No</label>
+                        <div class="col-md-9">
+                            <input id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3">Current Overall VA Rating</label>
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
+                        </div>
+                    </div>
+                    @if (Model.HasRatingBack)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3">Current Back VA Rating</label>
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.CurrentRatingBack, (SelectList)ViewBag.CurrentRatingsList)
+                            </div>
+                        </div>
+                    }
+                    @if (Model.HasRatingShoulder)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3">Current Shoulder VA Rating</label>
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.CurrentRatingShoulder, (SelectList)ViewBag.CurrentRatingsList)
+                            </div>
+                        </div>
+                    }
+                    @if (Model.HasRatingNeck)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3">Current Neck VA Rating</label>
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.CurrentRatingNeck, (SelectList)ViewBag.CurrentRatingsList)
+                            </div>
+                        </div>
+                    }
+                    <hr />
+                    <div class="form-group">
+                        <label class="col-md-12">Anything you want us to know about your disabilities?  Tell us your story so we can assess if you are missing any potential benefits.</label>
+                        <div class="col-md-12">
+                            <textarea id="Message" name="Message" value=""  rows="5" placeholder="enter your story here ..." class="form-control form-control-line">@Model.Message</textarea>
+                        </div>
+                    </div>
+                    <br />
                     <div class="form-group">
                         <label class="col-md-3">Password</label>
                         <div class="col-md-9">
@@ -31,25 +79,6 @@
                         <label class="col-md-3">Social Security Number</label>
                         <div class="col-md-9">
                             <input id="SSN" name="SSN" value="@Model.SSN" type="password" placeholder="123 45 6789" class="form-control form-control-line">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3">Phone No</label>
-                        <div class="col-md-9">
-                            <input id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3">Current VA Rating</label>
-                        <div class="col-md-12">
-                            @Html.DropDownListFor(model => model.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-12">Anything you want us to know that would help evaluate you for VA increase?  Tell us your story.</label>
-                        <div class="col-md-12">
-                            <textarea id="Message" name="Message" value=""  rows="5" placeholder="enter your story here ..." class="form-control form-control-line">@Model.Message</textarea>
                         </div>
                     </div>
                     <br />

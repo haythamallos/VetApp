@@ -163,6 +163,7 @@
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\EvaluationModel.cs" />
     <Compile Include="Models\NeckModel.cs" />
+    <Compile Include="Models\PreliminaryModel.cs" />
     <Compile Include="Models\ShoulderModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\PDFFile.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-datepicker.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -253,15 +255,39 @@
     <Content Include="Content\Site.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\back-pain.jpg" />
-    <Content Include="Images\banner-308x100.png" />
-    <Content Include="Images\body-movements-75p.jpg" />
-    <Content Include="Images\body-movements.jpg" />
-    <Content Include="Images\box1.png" />
-    <Content Include="Images\box2.png" />
-    <Content Include="Images\john.jpg" />
-    <Content Include="Images\login-register-2.jpg" />
-    <Content Include="Images\soldier-avatar.jpg" />
+    <Content Include="Images\back-pain.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\banner-308x100.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\body-movements-75p.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\body-movements.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\box1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\box2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\john.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\login-register-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\neck-pain.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\shoulder-pain.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\soldier-avatar.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="less\icons\font-awesome\.gitignore" />
     <Content Include="less\icons\font-awesome\css\font-awesome.css" />
     <Content Include="less\icons\font-awesome\css\font-awesome.min.css" />
@@ -570,6 +596,7 @@
     <Content Include="Views\Dashboard\PurchasedForm.cshtml" />
     <Content Include="Views\Dashboard\ShoulderForm.cshtml" />
     <Content Include="Views\Dashboard\NeckForm.cshtml" />
+    <Content Include="Views\Dashboard\PreForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

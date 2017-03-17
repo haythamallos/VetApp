@@ -22,7 +22,9 @@ CREATE TABLE content_type
      date_created    DATETIME NULL,
      code            NVARCHAR(255) NULL,
      [description]     NVARCHAR(255) NULL,
-     visible_code    NVARCHAR(255) NULL
+     visible_code    NVARCHAR(255) NULL,
+	 max_rating      INT NULL,
+	 has_sides                   BIT NULL
   )
 
 go
@@ -157,6 +159,7 @@ go
 
 alter table content_type add price DECIMAL(10, 2)
 go
+
 alter table [user] add current_rating_back int default 0
 go
 alter table [user] add current_rating_shoulder int default 0
@@ -170,6 +173,7 @@ go
 alter table [user] add has_rating_neck  BIT NULL
 go
 
+
 delete from content_state
 INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), '0', '0', '0')
 INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), '25', '25', '25')
@@ -180,9 +184,9 @@ INSERT INTO content_state (content_state_id, date_created, code, [description], 
 INSERT INTO content_state (content_state_id, date_created, code, [description], visible_code) VALUES (7, GETDATE(), 'PURCHASED', 'Content state purchased', 'Content state purchased')
 
 delete from content_type
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (1, GETDATE(), 'BACK', 'Back', 'Back')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (2, GETDATE(), 'SHOULDER', 'Shoulder', 'Shoulder')
-INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code) VALUES (3, GETDATE(), 'NECK', 'Neck', 'Neck')
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides) VALUES (1, GETDATE(), 'BACK', 'Back', 'Back', 40, 0)
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides) VALUES (2, GETDATE(), 'SHOULDER', 'Shoulder', 'Shoulder', 30, 1)
+INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides) VALUES (3, GETDATE(), 'NECK', 'Neck', 'Neck', 30, 0)
 
 INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (3, GETDATE(), 1, 2,'Upgrade-2')
 GO
