@@ -9,7 +9,7 @@ using Vetapp.Engine.Common;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.BusinessAccessLayer;
 using System.Web;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace MainSite.Controllers
 {
@@ -513,8 +513,8 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PurchaseReviewModel purchaseReviewModel = new PurchaseReviewModel() { ContentTypeID = model.ContentTypeID };
-                        return RedirectToAction("PurchaseReview", purchaseReviewModel);
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
                     }
                     else
                     {
@@ -754,23 +754,104 @@ namespace MainSite.Controllers
         {
             return View();
         }
-        public ActionResult PurchaseReview(PurchaseReviewModel model)
+        public ActionResult Product(ProductModel model, string submitButton)
         {
             try
             {
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
+                ContentType contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
                 Content content = busFacCore.ContentGetLatest(user.UserID, model.ContentTypeID);
                 if (content != null)
                 {
-                    model.ContentTypeID = content.ContentTypeID;
-                    model.ContentID = content.ContentTypeID;
-                    content.UserID = user.UserID;
-                    ContentType contentType = busFacCore.ContentTypeGet(content.ContentTypeID);
-                    model.ProductName = contentType.VisibleCode;
-                    model.Price = "$99.00";
-                    model.ContentData = content.ContentData;
+                    if (submitButton == "ADDTOCART")
+                    {
+                        CartItem cartItem = null;
+                        cartItem = busFacCore.CartItemGet(user.UserID, content.ContentID);
+                        if (cartItem == null)
+                        {
+                            cartItem = new CartItem() { UserID = user.UserID, ContentID = content.ContentID, ContentTypeID = content.ContentTypeID };
+                            model.CartItemID = busFacCore.CartItemCreateOrModify(cartItem);
+                            model.AlertMessageTitle = "Item Added to Cart!";
+                            model.AlertMessageTitle = "Successfully added item to shopping cart.";
+                        }
+                        else
+                        {
+                            model.CartItemID = cartItem.CartItemID;
+                            model.AlertMessageTitle = "Item Already Added";
+                            model.AlertMessageTitle = "This item has already been added to the cart.";
+                        }
+                    }
+                    else if (submitButton == "CHECKOUT")
+                    {
+                        return RedirectToAction("ProductCart");
+                    }
+                    SetProductModel(model, content, user, contentType);
                 }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+        private ProductCartModel GetUserCart(User user)
+        {
+            BusFacCore busFacCore = new BusFacCore();
+            ProductCartModel productCartModel = new ProductCartModel();
+            List<CartItem> lstCartItem = busFacCore.CartItemPendingUserList(user.UserID);
+            ProductModel productModel = null;
+            productCartModel.TotalPrice = 0;
+            Content content = null;
+            ContentType contentType = null;
+            foreach (CartItem cartItem in lstCartItem)
+            {
+                productModel = new ProductModel();
+                content = busFacCore.ContentGet(cartItem.ContentID);
+                contentType = busFacCore.ContentTypeGet(cartItem.ContentTypeID);
+                SetProductModel(productModel, content, user, contentType);
+                productCartModel.TotalPrice += contentType.Price;
+                productCartModel.lstProductModel.Add(productModel);
+            }
+
+            return productCartModel;
+        }
+        private void SetProductModel(ProductModel productModel, Content content, User user, ContentType contentType)
+        {
+            BusFacCore busFacCore = new BusFacCore();
+            productModel.ContentTypeID = content.ContentTypeID;
+            productModel.ContentID = content.ContentTypeID;
+            content.UserID = user.UserID;
+            productModel.ProductName = contentType.VisibleCode;
+            productModel.Price = String.Format("{0:c2}", contentType.Price);
+            productModel.ImagePath = "../Images/" + contentType.Code + "/Png/0.png";
+            productModel.ProductRefName = contentType.ProductRefName;
+            productModel.ProductRefDescription = contentType.ProductRefDescription;
+            productModel.NumberOfPages = (int)contentType.NumberOfPages;
+        }
+
+        [HttpPost]
+        public ActionResult ProductCheckout(ProductCheckoutModel model)
+        {
+            try
+            {
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+     
+        public ActionResult ProductCart(string id)
+        {
+            ProductCartModel model = null;
+            try
+            {
+                User user = Auth();
+                model = GetUserCart(user);
             }
             catch (Exception ex)
             {

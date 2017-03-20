@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product Cart";
+    ViewData["Description"] = "Product Cart";
+}
+@using MainSite.Models
+@model MainSite.Models.ProductCartModel
+
+<div id="page-wrapper">
+    <div class="col-xs-12">
+        <form id="formsproductcart" method="post" action="/Dashboard/ProductCheckout">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-9 col-lg-9 col-sm-7">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"> Your Cart (@Model.lstProductModel.Count)</div>
+                        <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table product-overview">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Product info</th>
+                                                <th>Price</th>
+                                                @*<th>Quantity</th>
+                                                    <th style="text-align:center">Total</th>*@
+                                                <th style="text-align:center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (ProductModel productModel in Model.lstProductModel)
+                                                {
+                                                    <tr>
+                                                        <td width="150"><img src="@productModel.ImagePath" alt="iMac" width="80"></td>
+                                                        <td width="550"><h5 class="font-500">Rounded Chair</h5> <p>Prepared form for VA's "@productModel.ProductRefDescription" based on your service connected injury.</p></td>
+                                                        <td>$@productModel.Price</td>
+                                                        <td align="center"><button type="submit" name="id" value="@productModel.CartItemID" class="btn btn-inverse btn-rounded m-r-5" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i> </button></td>
+                                                    </tr>
+                                                }
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                    <button type="submit" name="submitButton" value="CHECKOUT" class="btn btn-danger pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                                    <button type="submit" name="submitButton" value="CONTINUE" class="btn btn-default btn-outline"><i class="fa fa-arrow-left"></i> Continue shopping</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-5">
+                    <div class="white-box">
+                        <h3 class="box-title">Cart Summary</h3>
+                        <hr>
+                        <small>Total Price</small>
+                        <h2>$612</h2>
+                        <hr>
+                        <button class="btn btn-success">Checkout</button> <button class="btn btn-default btn-outline">Cancel</button>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-5">
+                    <div class="white-box">
+                        <h3 class="box-title">For Any Support</h3>
+                        <hr>
+                        <h4><i class="ti-mobile"></i> 619-822-2070 (Toll Free)</h4>
+                        <small>Please contact with us if you have any questions.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!--row -->
+        </form>
+    </div>
+</div>
+

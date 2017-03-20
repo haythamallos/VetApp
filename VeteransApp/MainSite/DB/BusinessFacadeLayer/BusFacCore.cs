@@ -373,7 +373,34 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return dictBenefitStatuses;
         }
 
+        public CartItem CartItemGet(long UserID, long ContentID)
+        {
+            CartItem cartItem = null;
+            EnumCartItem enumCartItem = new EnumCartItem() { UserID = UserID, ContentID = ContentID, PurchaseID = 0 };
+            BusFacCore busFacCore = new BusFacCore();
+            ArrayList arCartItem = busFacCore.CartItemGetList(enumCartItem);
+            if ((arCartItem != null) && (arCartItem.Count > 0))
+            {
+                cartItem = (CartItem)arCartItem[arCartItem.Count - 1];
+            }
+            return cartItem;
+        }
 
+        public List<CartItem> CartItemPendingUserList(long UserID)
+        {
+            List<CartItem> lstCartItem = new List<CartItem>();
+            EnumCartItem enumCartItem = new EnumCartItem() { UserID = UserID, PurchaseID = 0 };
+            BusFacCore busFacCore = new BusFacCore();
+            ArrayList arCartItem = busFacCore.CartItemGetList(enumCartItem);
+            if ((arCartItem != null) && (arCartItem.Count > 0))
+            {
+                foreach (CartItem cartItem in arCartItem)
+                {
+                    lstCartItem.Add(cartItem);
+                }
+            }
+            return lstCartItem;
+        }
         /*********************** CUSTOM END *********************/
 
 
@@ -1293,7 +1320,122 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+
+        //------------------------------------------
+        /// <summary>
+        /// CartItemCreateOrModify
+        /// </summary>
+        /// <param name="">pCartItem</param>
+        /// <returns>long</returns>
+        /// 
+        public long CartItemCreateOrModify(CartItem pCartItem)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusCartItem busCartItem = null;
+                busCartItem = new BusCartItem(conn);
+                busCartItem.Save(pCartItem);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pCartItem.CartItemID;
+                _hasError = busCartItem.HasError;
+                if (busCartItem.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// CartItemGetList
+        /// </summary>
+        /// <param name="">pEnumCartItem</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList CartItemGetList(EnumCartItem pEnumCartItem)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusCartItem busCartItem = null;
+                busCartItem = new BusCartItem(conn);
+                items = busCartItem.Get(pEnumCartItem);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busCartItem.HasError;
+                if (busCartItem.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// CartItemGet
+        /// </summary>
+        /// <param name="">pLngCartItemID</param>
+        /// <returns>CartItem</returns>
+        /// 
+        public CartItem CartItemGet(long pLngCartItemID)
+        {
+            CartItem cart_item = new CartItem() { CartItemID = pLngCartItemID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusCartItem busCartItem = null;
+                busCartItem = new BusCartItem(conn);
+                busCartItem.Load(cart_item);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busCartItem.HasError;
+                if (busCartItem.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return cart_item;
+        }
+
+        /// <summary>
+        /// CartItemRemove
+        /// </summary>
+        /// <param name="">pCartItemID</param>
+        /// <returns>void</returns>
+        /// 
+        public void CartItemRemove(long pCartItemID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                CartItem cart_item = new CartItem();
+                cart_item.CartItemID = pCartItemID;
+                BusCartItem bus = null;
+                bus = new BusCartItem(conn);
+                bus.Delete(cart_item);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
     }
 
     public class LayoutData

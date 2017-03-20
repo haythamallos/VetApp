@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  ContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/16/2017	Created
+    /// 001	HA	3/20/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the ContentType database table.
@@ -37,6 +37,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private long _lMaxRating = 0;
         /// <summary>HasSides Attribute type String</summary>
         private bool? _bHasSides = null;
+        /// <summary>Price Attribute type String</summary>
+        private double _dPrice = 0;
+        /// <summary>ProductRefName Attribute type String</summary>
+        private string _strProductRefName = null;
+        /// <summary>ProductRefDescription Attribute type String</summary>
+        private string _strProductRefDescription = null;
+        /// <summary>NumberOfPages Attribute type String</summary>
+        private long _lNumberOfPages = 0;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -60,6 +68,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_MAX_RATING = "max_rating"; //Table MaxRating field name
                                                                           /// <summary>has_sides Database field </summary>
         public static readonly string DB_FIELD_HAS_SIDES = "has_sides"; //Table HasSides field name
+                                                                        /// <summary>price Database field </summary>
+        public static readonly string DB_FIELD_PRICE = "price"; //Table Price field name
+                                                                /// <summary>product_ref_name Database field </summary>
+        public static readonly string DB_FIELD_PRODUCT_REF_NAME = "product_ref_name"; //Table ProductRefName field name
+                                                                                      /// <summary>product_ref_description Database field </summary>
+        public static readonly string DB_FIELD_PRODUCT_REF_DESCRIPTION = "product_ref_description"; //Table ProductRefDescription field name
+                                                                                                    /// <summary>number_of_pages Database field </summary>
+        public static readonly string DB_FIELD_NUMBER_OF_PAGES = "number_of_pages"; //Table NumberOfPages field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -76,6 +92,14 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_MAX_RATING = "MaxRating"; //Table MaxRating field name
                                                                     /// <summary>HasSides Attribute type string</summary>
         public static readonly string TAG_HAS_SIDES = "HasSides"; //Table HasSides field name
+                                                                  /// <summary>Price Attribute type string</summary>
+        public static readonly string TAG_PRICE = "Price"; //Table Price field name
+                                                           /// <summary>ProductRefName Attribute type string</summary>
+        public static readonly string TAG_PRODUCT_REF_NAME = "ProductRefName"; //Table ProductRefName field name
+                                                                               /// <summary>ProductRefDescription Attribute type string</summary>
+        public static readonly string TAG_PRODUCT_REF_DESCRIPTION = "ProductRefDescription"; //Table ProductRefDescription field name
+                                                                                             /// <summary>NumberOfPages Attribute type string</summary>
+        public static readonly string TAG_NUMBER_OF_PAGES = "NumberOfPages"; //Table NumberOfPages field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spContentTypeInsert"; //Insert sp name
@@ -126,6 +150,30 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         {
             get { return _bHasSides; }
             set { _bHasSides = value; }
+        }
+        /// <summary>Price is a Property in the ContentType Class of type double</summary>
+        public double Price
+        {
+            get { return _dPrice; }
+            set { _dPrice = value; }
+        }
+        /// <summary>ProductRefName is a Property in the ContentType Class of type String</summary>
+        public string ProductRefName
+        {
+            get { return _strProductRefName; }
+            set { _strProductRefName = value; }
+        }
+        /// <summary>ProductRefDescription is a Property in the ContentType Class of type String</summary>
+        public string ProductRefDescription
+        {
+            get { return _strProductRefDescription; }
+            set { _strProductRefDescription = value; }
+        }
+        /// <summary>NumberOfPages is a Property in the ContentType Class of type long</summary>
+        public long NumberOfPages
+        {
+            get { return _lNumberOfPages; }
+            set { _lNumberOfPages = value; }
         }
 
 
@@ -213,6 +261,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append(TAG_VISIBLE_CODE + ":  " + VisibleCode + "\n");
             sbReturn.Append(TAG_MAX_RATING + ":  " + MaxRating + "\n");
             sbReturn.Append(TAG_HAS_SIDES + ":  " + HasSides + "\n");
+            sbReturn.Append(TAG_PRICE + ":  " + Price + "\n");
+            sbReturn.Append(TAG_PRODUCT_REF_NAME + ":  " + ProductRefName + "\n");
+            sbReturn.Append(TAG_PRODUCT_REF_DESCRIPTION + ":  " + ProductRefDescription + "\n");
+            sbReturn.Append(TAG_NUMBER_OF_PAGES + ":  " + NumberOfPages + "\n");
 
             return sbReturn.ToString();
         }
@@ -237,6 +289,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<" + TAG_VISIBLE_CODE + ">" + VisibleCode + "</" + TAG_VISIBLE_CODE + ">\n");
             sbReturn.Append("<" + TAG_MAX_RATING + ">" + MaxRating + "</" + TAG_MAX_RATING + ">\n");
             sbReturn.Append("<" + TAG_HAS_SIDES + ">" + HasSides + "</" + TAG_HAS_SIDES + ">\n");
+            sbReturn.Append("<" + TAG_PRICE + ">" + Price + "</" + TAG_PRICE + ">\n");
+            sbReturn.Append("<" + TAG_PRODUCT_REF_NAME + ">" + ProductRefName + "</" + TAG_PRODUCT_REF_NAME + ">\n");
+            sbReturn.Append("<" + TAG_PRODUCT_REF_DESCRIPTION + ">" + ProductRefDescription + "</" + TAG_PRODUCT_REF_DESCRIPTION + ">\n");
+            sbReturn.Append("<" + TAG_NUMBER_OF_PAGES + ">" + NumberOfPages + "</" + TAG_NUMBER_OF_PAGES + ">\n");
             sbReturn.Append("</ContentType>" + "\n");
 
             return sbReturn.ToString();
@@ -340,6 +396,46 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch
             {
                 HasSides = false;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRICE);
+                Price = Convert.ToSingle(xResultNode.InnerText);
+            }
+            catch
+            {
+                Price = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRODUCT_REF_NAME);
+                ProductRefName = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRODUCT_REF_DESCRIPTION);
+                ProductRefDescription = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_NUMBER_OF_PAGES);
+                NumberOfPages = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                NumberOfPages = 0;
             }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with content_type_id equal to the current object's ContentTypeID </summary>
@@ -471,6 +567,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(ContentType.TAG_HAS_SIDES + ":  ");
                 HasSides = Convert.ToBoolean(Console.ReadLine());
 
+                Console.WriteLine(ContentType.TAG_PRICE + ":  ");
+                Price = Convert.ToSingle(Console.ReadLine());
+
+                Console.WriteLine(ContentType.TAG_PRODUCT_REF_NAME + ":  ");
+                ProductRefName = Console.ReadLine();
+
+                Console.WriteLine(ContentType.TAG_PRODUCT_REF_DESCRIPTION + ":  ");
+                ProductRefDescription = Console.ReadLine();
+
+                Console.WriteLine(ContentType.TAG_NUMBER_OF_PAGES + ":  ");
+                NumberOfPages = (long)Convert.ToInt32(Console.ReadLine());
+
             }
             catch (Exception e)
             {
@@ -491,6 +599,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramVisibleCode = null;
             SqlParameter paramMaxRating = null;
             SqlParameter paramHasSides = null;
+            SqlParameter paramPrice = null;
+            SqlParameter paramProductRefName = null;
+            SqlParameter paramProductRefDescription = null;
+            SqlParameter paramNumberOfPages = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -533,6 +645,24 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramHasSides.DbType = DbType.Boolean;
             paramHasSides.Direction = ParameterDirection.Input;
 
+            paramPrice = new SqlParameter("@" + TAG_PRICE, Price);
+            paramPrice.DbType = DbType.Decimal;
+            paramPrice.Direction = ParameterDirection.Input;
+
+            paramProductRefName = new SqlParameter("@" + TAG_PRODUCT_REF_NAME, ProductRefName);
+            paramProductRefName.DbType = DbType.String;
+            paramProductRefName.Size = 255;
+            paramProductRefName.Direction = ParameterDirection.Input;
+
+            paramProductRefDescription = new SqlParameter("@" + TAG_PRODUCT_REF_DESCRIPTION, ProductRefDescription);
+            paramProductRefDescription.DbType = DbType.String;
+            paramProductRefDescription.Size = 255;
+            paramProductRefDescription.Direction = ParameterDirection.Input;
+
+            paramNumberOfPages = new SqlParameter("@" + TAG_NUMBER_OF_PAGES, NumberOfPages);
+            paramNumberOfPages.DbType = DbType.Int32;
+            paramNumberOfPages.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -547,6 +677,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramVisibleCode);
             cmd.Parameters.Add(paramMaxRating);
             cmd.Parameters.Add(paramHasSides);
+            cmd.Parameters.Add(paramPrice);
+            cmd.Parameters.Add(paramProductRefName);
+            cmd.Parameters.Add(paramProductRefDescription);
+            cmd.Parameters.Add(paramNumberOfPages);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -564,6 +698,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramVisibleCode = null;
             paramMaxRating = null;
             paramHasSides = null;
+            paramPrice = null;
+            paramProductRefName = null;
+            paramProductRefDescription = null;
+            paramNumberOfPages = null;
             paramPKID = null;
             cmd = null;
         }
@@ -618,6 +756,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramVisibleCode = null;
             SqlParameter paramMaxRating = null;
             SqlParameter paramHasSides = null;
+            SqlParameter paramPrice = null;
+            SqlParameter paramProductRefName = null;
+            SqlParameter paramProductRefDescription = null;
+            SqlParameter paramNumberOfPages = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -659,6 +801,24 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramHasSides.DbType = DbType.Boolean;
             paramHasSides.Direction = ParameterDirection.Input;
 
+            paramPrice = new SqlParameter("@" + TAG_PRICE, Price);
+            paramPrice.DbType = DbType.Decimal;
+            paramPrice.Direction = ParameterDirection.Input;
+
+            paramProductRefName = new SqlParameter("@" + TAG_PRODUCT_REF_NAME, ProductRefName);
+            paramProductRefName.DbType = DbType.String;
+            paramProductRefName.Size = 255;
+            paramProductRefName.Direction = ParameterDirection.Input;
+
+            paramProductRefDescription = new SqlParameter("@" + TAG_PRODUCT_REF_DESCRIPTION, ProductRefDescription);
+            paramProductRefDescription.DbType = DbType.String;
+            paramProductRefDescription.Size = 255;
+            paramProductRefDescription.Direction = ParameterDirection.Input;
+
+            paramNumberOfPages = new SqlParameter("@" + TAG_NUMBER_OF_PAGES, NumberOfPages);
+            paramNumberOfPages.DbType = DbType.Int32;
+            paramNumberOfPages.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -672,6 +832,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramVisibleCode);
             cmd.Parameters.Add(paramMaxRating);
             cmd.Parameters.Add(paramHasSides);
+            cmd.Parameters.Add(paramPrice);
+            cmd.Parameters.Add(paramProductRefName);
+            cmd.Parameters.Add(paramProductRefDescription);
+            cmd.Parameters.Add(paramNumberOfPages);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -687,6 +851,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramVisibleCode = null;
             paramMaxRating = null;
             paramHasSides = null;
+            paramPrice = null;
+            paramProductRefName = null;
+            paramProductRefDescription = null;
+            paramNumberOfPages = null;
             paramPKID = null;
             cmd = null;
         }
@@ -767,6 +935,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             try
             {
                 this.HasSides = Convert.ToBoolean(rdr[DB_FIELD_HAS_SIDES].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.Price = Convert.ToSingle(rdr[DB_FIELD_PRICE].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.ProductRefName = rdr[DB_FIELD_PRODUCT_REF_NAME].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.ProductRefDescription = rdr[DB_FIELD_PRODUCT_REF_DESCRIPTION].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.NumberOfPages = Convert.ToInt32(rdr[DB_FIELD_NUMBER_OF_PAGES].ToString().Trim());
             }
             catch { }
         }

@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/16/2017	Created
+    /// 001	HA	3/20/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -54,6 +54,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private string _strVisibleCode = null;
         private long _lMaxRating = 0;
         private bool? _bHasSides = null;
+        private double _dPrice = 0;
+        private double _dBeginPrice = 0;
+        private double _dEndPrice = 0;
+        private string _strProductRefName = null;
+        private string _strProductRefDescription = null;
+        private long _lNumberOfPages = 0;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -75,7 +81,15 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_MAX_RATING = "MaxRating"; //Attribute MaxRating  name
                                                                     /// <summary>HasSides Attribute type string</summary>
         public static readonly string TAG_HAS_SIDES = "HasSides"; //Attribute HasSides  name
-                                                                  // Stored procedure name
+                                                                  /// <summary>Price Attribute type string</summary>
+        public static readonly string TAG_PRICE = "Price"; //Attribute Price  name
+                                                           /// <summary>ProductRefName Attribute type string</summary>
+        public static readonly string TAG_PRODUCT_REF_NAME = "ProductRefName"; //Attribute ProductRefName  name
+                                                                               /// <summary>ProductRefDescription Attribute type string</summary>
+        public static readonly string TAG_PRODUCT_REF_DESCRIPTION = "ProductRefDescription"; //Attribute ProductRefDescription  name
+                                                                                             /// <summary>NumberOfPages Attribute type string</summary>
+        public static readonly string TAG_NUMBER_OF_PAGES = "NumberOfPages"; //Attribute NumberOfPages  name
+                                                                             // Stored procedure name
         public string SP_ENUM_NAME = "spContentTypeEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the ContentType Class of type bool</summary>
@@ -131,6 +145,42 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _bHasSides; }
             set { _bHasSides = value; }
+        }
+        /// <summary>Price is a Property in the ContentType Class of type double</summary>
+        public double Price
+        {
+            get { return _dPrice; }
+            set { _dPrice = value; }
+        }
+        /// <summary>Property Price. Type: double</summary>
+        public double BeginPrice
+        {
+            get { return _dBeginPrice; }
+            set { _dBeginPrice = value; }
+        }
+        /// <summary>Property Price. Type: double</summary>
+        public double EndPrice
+        {
+            get { return _dEndPrice; }
+            set { _dEndPrice = value; }
+        }
+        /// <summary>ProductRefName is a Property in the ContentType Class of type String</summary>
+        public string ProductRefName
+        {
+            get { return _strProductRefName; }
+            set { _strProductRefName = value; }
+        }
+        /// <summary>ProductRefDescription is a Property in the ContentType Class of type String</summary>
+        public string ProductRefDescription
+        {
+            get { return _strProductRefDescription; }
+            set { _strProductRefDescription = value; }
+        }
+        /// <summary>NumberOfPages is a Property in the ContentType Class of type long</summary>
+        public long NumberOfPages
+        {
+            get { return _lNumberOfPages; }
+            set { _lNumberOfPages = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -303,6 +353,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_VISIBLE_CODE + ":  " + VisibleCode + "\n");
             sbReturn.Append(TAG_MAX_RATING + ":  " + MaxRating + "\n");
             sbReturn.Append(TAG_HAS_SIDES + ":  " + HasSides + "\n");
+            sbReturn.Append(TAG_PRICE + ":  " + Price + "\n");
+            sbReturn.Append(TAG_PRODUCT_REF_NAME + ":  " + ProductRefName + "\n");
+            sbReturn.Append(TAG_PRODUCT_REF_DESCRIPTION + ":  " + ProductRefDescription + "\n");
+            sbReturn.Append(TAG_NUMBER_OF_PAGES + ":  " + NumberOfPages + "\n");
 
             return sbReturn.ToString();
         }
@@ -335,6 +389,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_VISIBLE_CODE + ">" + VisibleCode + "</" + TAG_VISIBLE_CODE + ">\n");
             sbReturn.Append("<" + TAG_MAX_RATING + ">" + MaxRating + "</" + TAG_MAX_RATING + ">\n");
             sbReturn.Append("<" + TAG_HAS_SIDES + ">" + HasSides + "</" + TAG_HAS_SIDES + ">\n");
+            sbReturn.Append("<" + TAG_PRICE + ">" + Price + "</" + TAG_PRICE + ">\n");
+            sbReturn.Append("<" + TAG_PRODUCT_REF_NAME + ">" + ProductRefName + "</" + TAG_PRODUCT_REF_NAME + ">\n");
+            sbReturn.Append("<" + TAG_PRODUCT_REF_DESCRIPTION + ">" + ProductRefDescription + "</" + TAG_PRODUCT_REF_DESCRIPTION + ">\n");
+            sbReturn.Append("<" + TAG_NUMBER_OF_PAGES + ">" + NumberOfPages + "</" + TAG_NUMBER_OF_PAGES + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -454,6 +512,50 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 HasSides = false;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRICE);
+                Price = Convert.ToSingle(xResultNode.InnerText);
+            }
+            catch
+            {
+                Price = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRODUCT_REF_NAME);
+                ProductRefName = xResultNode.InnerText;
+                if (ProductRefName.Trim().Length == 0)
+                    ProductRefName = null;
+            }
+            catch
+            {
+                ProductRefName = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRODUCT_REF_DESCRIPTION);
+                ProductRefDescription = xResultNode.InnerText;
+                if (ProductRefDescription.Trim().Length == 0)
+                    ProductRefDescription = null;
+            }
+            catch
+            {
+                ProductRefDescription = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_NUMBER_OF_PAGES);
+                NumberOfPages = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                NumberOfPages = 0;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -523,6 +625,40 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     HasSides = false;
                 }
 
+                Console.WriteLine(TAG_PRICE + ":  ");
+                try
+                {
+                    Price = Convert.ToSingle(Console.ReadLine());
+                }
+                catch
+                {
+                    Price = 0;
+                }
+
+
+                Console.WriteLine(TAG_PRODUCT_REF_NAME + ":  ");
+                ProductRefName = Console.ReadLine();
+                if (ProductRefName.Length == 0)
+                {
+                    ProductRefName = null;
+                }
+
+                Console.WriteLine(TAG_PRODUCT_REF_DESCRIPTION + ":  ");
+                ProductRefDescription = Console.ReadLine();
+                if (ProductRefDescription.Length == 0)
+                {
+                    ProductRefDescription = null;
+                }
+                Console.WriteLine(TAG_NUMBER_OF_PAGES + ":  ");
+                try
+                {
+                    NumberOfPages = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    NumberOfPages = 0;
+                }
+
 
             }
             catch (Exception e)
@@ -569,6 +705,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramVisibleCode = null;
             SqlParameter paramMaxRating = null;
             SqlParameter paramHasSides = null;
+            SqlParameter paramPrice = null;
+            SqlParameter paramProductRefName = null;
+            SqlParameter paramProductRefDescription = null;
+            SqlParameter paramNumberOfPages = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -648,6 +788,41 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_HAS_SIDES + "=" + HasSides + "\n");
             paramHasSides.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramHasSides);
+            paramPrice = new SqlParameter("@" + TAG_PRICE, Price);
+            sbLog.Append(TAG_PRICE + "=" + Price + "\n");
+            paramPrice.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramPrice);
+            // Setup the product ref name text param
+            if (ProductRefName != null)
+            {
+                paramProductRefName = new SqlParameter("@" + TAG_PRODUCT_REF_NAME, ProductRefName);
+                sbLog.Append(TAG_PRODUCT_REF_NAME + "=" + ProductRefName + "\n");
+            }
+            else
+            {
+                paramProductRefName = new SqlParameter("@" + TAG_PRODUCT_REF_NAME, DBNull.Value);
+            }
+            paramProductRefName.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramProductRefName);
+
+            // Setup the product ref description text param
+            if (ProductRefDescription != null)
+            {
+                paramProductRefDescription = new SqlParameter("@" + TAG_PRODUCT_REF_DESCRIPTION, ProductRefDescription);
+                sbLog.Append(TAG_PRODUCT_REF_DESCRIPTION + "=" + ProductRefDescription + "\n");
+            }
+            else
+            {
+                paramProductRefDescription = new SqlParameter("@" + TAG_PRODUCT_REF_DESCRIPTION, DBNull.Value);
+            }
+            paramProductRefDescription.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramProductRefDescription);
+
+            paramNumberOfPages = new SqlParameter("@" + TAG_NUMBER_OF_PAGES, NumberOfPages);
+            sbLog.Append(TAG_NUMBER_OF_PAGES + "=" + NumberOfPages + "\n");
+            paramNumberOfPages.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramNumberOfPages);
+
         }
 
     }

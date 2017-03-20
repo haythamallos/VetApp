@@ -6,7 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
-using WebSupergoo.ABCpdf10;
+
 
 namespace Vetapp.Engine.Common
 {
@@ -748,27 +748,7 @@ namespace Vetapp.Engine.Common
 
         public static void PdfToThumbnail(byte[] btImage)
         {
-            Doc theDoc = new Doc();
-            theDoc.Read(btImage);
-            //theDoc.Read(Server.MapPath("../Pdfreports/Procedure_Report_" + ReportId.ToString() + ".pdf"));
-            // set up the rendering parameters
-            theDoc.Rendering.ColorSpace =  XRendering.ColorSpaceType.Gray;
-            theDoc.Rendering.BitsPerChannel = 1;
-            theDoc.Rendering.DotsPerInchX = 200;
-            theDoc.Rendering.DotsPerInchY = 400;
-            // loop through the pages
-            int n = theDoc.PageCount;
-            for (int i = 1; i <= n; i++)
-            {
-                theDoc.PageNumber = i;
-                theDoc.Rect.String = theDoc.CropBox.String;
-                theDoc.Rendering.SaveAppend = (i != 1);
-                //theDoc.Rendering.SaveCompression = XRendering.Compression.G4;
-                theDoc.SetInfo(0, "ImageCompression", "4");
-                //theDoc.Rendering.Save(Server.MapPath("../Pdfreports/Procedure_Report_" + ReportId.ToString() + "_" + i.ToString() + ".tiff"));
-                //theDoc.Rendering.Save(Server.MapPath("../Pdfreports/Procedure_Report_" + ReportId.ToString() + "_" + i.ToString() + ".tiff"));
-            }
-            theDoc.Clear();
+          
         }
 
     }
