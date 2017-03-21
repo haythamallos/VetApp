@@ -12,6 +12,8 @@
         data = new Vetapp.Engine.BusinessFacadeLayer.LayoutData();
     }
 }
+@using MainSite.Models
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,10 +48,41 @@
                             <div class="drop-title"><a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a></div>
                         </li>*@
 
+                   
+                   
+
+
 
                 </ul>
-                <ul class="nav navbar-top-links navbar-right pull-right"></ul>
+                @*<ul class="nav navbar-top-links navbar-right pull-right">
+                   
+
+                </ul>*@
                 <ul class="nav navbar-top-links navbar-right pull-right">
+                    @if (data.UserCart.lstProductModel.Count > 0)
+                    {
+                        <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>
+
+                        @*<li class="dropdown">
+                            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+                                <i class="ti-shopping-cart"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-cart dropdown-tasks animated slideInUp">
+                                @foreach (ProductModel productModel in @data.UserCart.lstProductModel)
+                                {
+                                    <li>
+                                        <div class="cart-img"><img src="@productModel.ImagePath" width="50" /></div>
+                                        <div class="cart-content"><h5>@productModel.ProductName</h5><small>@productModel.Price</small></div>
+                                    </li>
+                                }
+                               
+                                <li class="divider"></li>
+                                <li> <a class="text-center" href="/Dashboard/ProductCart"> <strong>Checkout</strong> <i class="fa fa-angle-right"></i> </a> </li>
+                            </ul>
+                        </li>*@
+                    }
+
                     <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut"><i class="icon-logout"></i></a></li>
                     <!-- /.dropdown -->
                 </ul>

@@ -3,13 +3,12 @@ using System;
 using System.Web.Mvc;
 using MainSite.Utils;
 using MainSite.Classes;
-
 using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.Common;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.BusinessAccessLayer;
 using System.Web;
-using System.Collections.Generic;
+using Stripe;
 
 namespace MainSite.Controllers
 {
@@ -764,7 +763,7 @@ namespace MainSite.Controllers
                 Content content = busFacCore.ContentGetLatest(user.UserID, model.ContentTypeID);
                 if (content != null)
                 {
-                    if (submitButton == "ADDTOCART")
+                    if ((submitButton == "ADDTOCART") || (submitButton == "CHECKOUT"))
                     {
                         CartItem cartItem = null;
                         cartItem = busFacCore.CartItemGet(user.UserID, content.ContentID);
@@ -781,12 +780,13 @@ namespace MainSite.Controllers
                             model.AlertMessageTitle = "Item Already Added";
                             model.AlertMessageTitle = "This item has already been added to the cart.";
                         }
+
+                        if (submitButton == "CHECKOUT")
+                        {
+                            return RedirectToAction("ProductCart");
+                        }
                     }
-                    else if (submitButton == "CHECKOUT")
-                    {
-                        return RedirectToAction("ProductCart");
-                    }
-                    SetProductModel(model, content, user, contentType);
+                    busFacCore.SetProductModel(model, content, user, contentType);
                 }
             }
             catch (Exception ex)
@@ -795,70 +795,181 @@ namespace MainSite.Controllers
             }
             return View(model);
         }
-        private ProductCartModel GetUserCart(User user)
-        {
-            BusFacCore busFacCore = new BusFacCore();
-            ProductCartModel productCartModel = new ProductCartModel();
-            List<CartItem> lstCartItem = busFacCore.CartItemPendingUserList(user.UserID);
-            ProductModel productModel = null;
-            productCartModel.TotalPrice = 0;
-            Content content = null;
-            ContentType contentType = null;
-            foreach (CartItem cartItem in lstCartItem)
-            {
-                productModel = new ProductModel();
-                content = busFacCore.ContentGet(cartItem.ContentID);
-                contentType = busFacCore.ContentTypeGet(cartItem.ContentTypeID);
-                SetProductModel(productModel, content, user, contentType);
-                productCartModel.TotalPrice += contentType.Price;
-                productCartModel.lstProductModel.Add(productModel);
-            }
+        //private ProductCartModel GetUserCart(User user)
+        //{
+        //    BusFacCore busFacCore = new BusFacCore();
+        //    ProductCartModel productCartModel = new ProductCartModel();
+        //    List<CartItem> lstCartItem = busFacCore.CartItemPendingUserList(user.UserID);
+        //    ProductModel productModel = null;
+        //    productCartModel.TotalPrice = 0;
+        //    Content content = null;
+        //    ContentType contentType = null;
+        //    foreach (CartItem cartItem in lstCartItem)
+        //    {
+        //        productModel = new ProductModel();
+        //        productModel.CartItemID = cartItem.CartItemID;
+        //        content = busFacCore.ContentGet(cartItem.ContentID);
+        //        contentType = busFacCore.ContentTypeGet(cartItem.ContentTypeID);
+        //        SetProductModel(productModel, content, user, contentType);
+        //        productCartModel.TotalPrice += contentType.Price;
+        //        productCartModel.lstProductModel.Add(productModel);
+        //    }
+        //    productCartModel.TotalPriceText = String.Format("{0:c2}", productCartModel.TotalPrice);
+        //    return productCartModel;
+        //}
+        //private void SetProductModel(ProductModel productModel, Content content, User user, ContentType contentType)
+        //{
+        //    BusFacCore busFacCore = new BusFacCore();
+        //    productModel.ContentTypeID = content.ContentTypeID;
+        //    productModel.ContentID = content.ContentTypeID;
+        //    content.UserID = user.UserID;
+        //    productModel.ProductName = contentType.VisibleCode;
+        //    productModel.Price = String.Format("{0:c2}", contentType.Price);
+        //    productModel.ImagePath = "../Images/" + contentType.Code + "/Png/0.png";
+        //    productModel.ProductRefName = contentType.ProductRefName;
+        //    productModel.ProductRefDescription = contentType.ProductRefDescription;
+        //    productModel.NumberOfPages = (int)contentType.NumberOfPages;
+        //}
 
-            return productCartModel;
-        }
-        private void SetProductModel(ProductModel productModel, Content content, User user, ContentType contentType)
+        //[HttpPost]
+        //public ActionResult ProductCheckout(ProductCheckoutModel model)
+        //{
+        //    try
+        //    {
+        //        User user = Auth();
+        //        BusFacCore busFacCore = new BusFacCore();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return View(model);
+        //}
+
+        public ActionResult ProductCart(string id)
         {
+            ProductCartModel model = null;
             BusFacCore busFacCore = new BusFacCore();
-            productModel.ContentTypeID = content.ContentTypeID;
-            productModel.ContentID = content.ContentTypeID;
-            content.UserID = user.UserID;
-            productModel.ProductName = contentType.VisibleCode;
-            productModel.Price = String.Format("{0:c2}", contentType.Price);
-            productModel.ImagePath = "../Images/" + contentType.Code + "/Png/0.png";
-            productModel.ProductRefName = contentType.ProductRefName;
-            productModel.ProductRefDescription = contentType.ProductRefDescription;
-            productModel.NumberOfPages = (int)contentType.NumberOfPages;
+            try
+            {
+                User user = Auth();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (id == "CHECKOUT")
+                    {
+
+                    }
+                    else if (id == "CONTINUE")
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        long CartItemID = 0;
+                        if (long.TryParse(id, out CartItemID))
+                        {
+                            CartItem cartItem = busFacCore.CartItemGet(CartItemID);
+                            if ((cartItem != null) && (cartItem.CartItemID > 0))
+                            {
+                                if ((cartItem.UserID == user.UserID))
+                                {
+                                    busFacCore.CartItemRemove(cartItem.CartItemID);
+                                }
+                            }
+                        }
+
+                    }
+                }
+                model = busFacCore.GetUserCart(user);
+                model.StripeApiKey = _config.StripeApiKey;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult ProductCheckout(ProductCheckoutModel model)
+        public ActionResult Charge(string stripeToken)
         {
+            
+            ChargeModel model = new ChargeModel();
             try
             {
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
+                ProductCartModel cart = busFacCore.GetUserCart(user);
+
+                StripeConfiguration.SetApiKey(_config.StripeSecretKey);
+                var myCharge = new StripeChargeCreateOptions();
+
+                // always set these properties
+                // convert the amount to pennies
+                myCharge.Amount = (int)(cart.TotalPrice * 100);
+                myCharge.Currency = "usd";
+
+                // set this if you want to
+                myCharge.Description = "Veteransapp test charge for " + user.Username;
+
+                myCharge.SourceTokenOrExistingSourceId = stripeToken;
+
+                var chargeService = new StripeChargeService();
+                StripeCharge stripeCharge = chargeService.Create(myCharge);
+               
+            }
+            catch (StripeException exception)
+            {
+                switch (exception.StripeError.ErrorType)
+                {
+                    case "card_error":
+                        //do some stuff, set your lblError or something like this
+                        ModelState.AddModelError(exception.StripeError.Code, exception.StripeError.Message);
+
+                        // or better yet, handle based on error code: exception.StripeError.Code
+
+                        break;
+                    case "api_error":
+                        //do some stuff
+                        break;
+                    case "invalid_request_error":
+                        //do some stuff
+                        break;
+                    default:
+                        throw;
+                }
             }
             catch (Exception ex)
             {
 
             }
-            return View(model);
+            return View();
         }
-     
-        public ActionResult ProductCart(string id)
-        {
-            ProductCartModel model = null;
-            try
-            {
-                User user = Auth();
-                model = GetUserCart(user);
-            }
-            catch (Exception ex)
-            {
 
-            }
-            return View(model);
-        }
+        //[HttpPost]
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    //StripeConfiguration.SetApiKey()
+        //    var customers = new StripeCustomerService();
+        //    var charges = new StripeChargeService();
+
+        //    var customer = customers.Create(new StripeCustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
+
+        //    var charge = charges.Create(new StripeChargeCreateOptions
+        //    {
+        //        Amount = 500,
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
+
+        //    return View();
+        //}
+
     }
 
 

@@ -218,10 +218,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 User user = UserGet(userguid);
                 if (user != null)
                 {
-                    BusFacCore busFacCore = new BusFacCore();
                     EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false};
                     enumContent.SP_ENUM_NAME = "spContentEnum1";
-                    ArrayList arContent = busFacCore.ContentGetList(enumContent);
+                    ArrayList arContent = ContentGetList(enumContent);
                     if (arContent != null)
                     {
                         int cntSaved = 0;
@@ -241,6 +240,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         layoutData.NumPurchasedForms = cntPurchased;
                     }
                     enumContent = null;
+
+                    layoutData.UserCart = GetUserCart(user);
                 }
             }
             return layoutData;
@@ -401,6 +402,42 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             }
             return lstCartItem;
         }
+
+        public ProductCartModel GetUserCart(User user)
+        {
+            ProductCartModel productCartModel = new ProductCartModel();
+            List<CartItem> lstCartItem = CartItemPendingUserList(user.UserID);
+            ProductModel productModel = null;
+            productCartModel.TotalPrice = 0;
+            Content content = null;
+            ContentType contentType = null;
+            foreach (CartItem cartItem in lstCartItem)
+            {
+                productModel = new ProductModel();
+                productModel.CartItemID = cartItem.CartItemID;
+                content = ContentGet(cartItem.ContentID);
+                contentType = ContentTypeGet(cartItem.ContentTypeID);
+                SetProductModel(productModel, content, user, contentType);
+                productCartModel.TotalPrice += Convert.ToDecimal(contentType.Price);
+                productCartModel.lstProductModel.Add(productModel);
+            }
+            productCartModel.TotalPriceText = String.Format("{0:c2}", productCartModel.TotalPrice);
+            return productCartModel;
+        }
+        public void SetProductModel(ProductModel productModel, Content content, User user, ContentType contentType)
+        {
+            productModel.ContentTypeID = content.ContentTypeID;
+            productModel.ContentID = content.ContentTypeID;
+            content.UserID = user.UserID;
+            productModel.ProductName = contentType.VisibleCode;
+            productModel.Price = String.Format("{0:c2}", contentType.Price);
+            productModel.ImagePath = "../Images/" + contentType.Code + "/Png/0.png";
+            productModel.ProductRefName = contentType.ProductRefName;
+            productModel.ProductRefDescription = contentType.ProductRefDescription;
+            productModel.NumberOfPages = (int)contentType.NumberOfPages;
+        }
+
+
         /*********************** CUSTOM END *********************/
 
 
@@ -1443,6 +1480,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         public int NumSavedForms { get; set; }
         public int NumPurchasedForms { get; set; }
         public bool IsProfileComplete { get; set; }
+        public ProductCartModel UserCart { get; set; }
     }
 
     public class ContentDashboard

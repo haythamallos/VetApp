@@ -13,6 +13,9 @@ namespace Vetapp.Engine.Common
         private string _strMailFrom = null;
         private string _strMailSubject = null;
 
+        private string _strStripeApiKey = null;
+        private string _strStripeSecretKey = null;
+
         private static readonly string KEY_CONNECTION_STRING = "ConnectionString";
         private static readonly string KEY_SMTP_SERVER = "CredentialsEmailSmtpServer";
         private static readonly string KEY_SMTP_SERVER_PORT = "CredentialsEmailSmtpServerPort";
@@ -20,7 +23,20 @@ namespace Vetapp.Engine.Common
         private static readonly string KEY_SMTP_SERVER_PASSWORD = "CredentialsEmailSmtpServerPassword";
         private static readonly string KEY_MAIL_FROM = "CredentialsEmailFrom";
         private static readonly string KEY_MAIL_SUBJECT = "CredentialsEmailSubject";
+        private static readonly string KEY_STRIPE_API_KEY = "StripeApiKey";
+        private static readonly string KEY_STRIPE_SECRET_KEY = "StripeSecretKey";
 
+        public string StripeSecretKey
+        {
+            get { return _strStripeSecretKey; }
+            set { _strStripeSecretKey = value; }
+        }
+
+        public string StripeApiKey
+        {
+            get { return _strStripeApiKey; }
+            set { _strStripeApiKey = value; }
+        }
 
         public string MailSubject
         {
@@ -142,6 +158,24 @@ namespace Vetapp.Engine.Common
                 catch (Exception e)
                 {
                     MailSubject = null;
+                }
+
+                try
+                {
+                    StripeApiKey = (string)configurationAppSettings.GetValue(KEY_STRIPE_API_KEY, typeof(System.String));
+                }
+                catch (Exception e)
+                {
+                    StripeApiKey = null;
+                }
+
+                try
+                {
+                    StripeSecretKey = (string)configurationAppSettings.GetValue(KEY_STRIPE_SECRET_KEY, typeof(System.String));
+                }
+                catch (Exception e)
+                {
+                    StripeSecretKey = null;
                 }
 
             }

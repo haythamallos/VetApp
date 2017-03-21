@@ -1,14 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Dashboard";
-    ViewData["Description"] = "The dashboard page";
-}
-
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Dashboard";
-    ViewData["Description"] = "The dashboard page";
+    ViewData["Description"] = "Dashboard";
 }
 
 @model MainSite.Models.DashboardModel
@@ -20,9 +13,9 @@
         <div class="row">
             <div class="col-sm-3">
                 <div id="startbenefitdiv" class="white-box">
-                    <h3 class="box-title m-b-0">Start a Benefit</h3>
+                    <h3 class="box-title m-b-0">Start a VA Benefit</h3>
                     <p class="text-muted m-b-20">
-                        Easily qualify for VA benefits
+                        Easily qualify for service connected benefits
                     </p>
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -87,7 +80,7 @@
                 }
                 
                 <div class="panel panel-info">
-                    <div class="panel-heading"> Start Your Application Today To Earn Your Potential Rating</div>
+                    @*<div class="panel-heading"> Start Your Application Today To Earn Your Potential Rating</div>*@
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -102,37 +95,8 @@
                                         <tr>
                                             <td width="550">
                                                 <button id="btnStartApplication" onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light"><i class="fa fa fa-long-arrow-right"></i> Start Your Application </button>
-
-                                                @*<h2 class="font-500"><a href="" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].TooltipText"> Start Your Application </a></h2>*@
-                                            </td>
-                                            @*<td align="center">                                                
-                                                <button id="btnStartApplication" onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
-                                            </td>*@
-                                        </tr>
-                                        @*<tr>
-                                            <td width="550">
-                                                <h2 class="font-500">Saved DBQs</h2>
-                                            </td>
-                                            <td align="center">
-                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td width="550">
-                                                <h2 class="font-500">Unfinished DBQs</h2>
-                                            </td>
-                                            <td align="center">
-                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="550">
-                                                <h2 class="font-500">Resource Links</h2>
-                                            </td>
-                                            <td align="center">
-                                                <button class="btn btn-danger pull-right"><i class="fa fa fa-long-arrow-right"></i> Go</button>
-                                            </td>
-                                        </tr>*@
                                         <tr>
                                             <td width="550">
                                                 <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
