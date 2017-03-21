@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumContent.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/11/2017	Created
+    /// 001	HA	3/21/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -60,6 +60,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private string _strContentMeta = null;
         private bool? _bIsDisabled = null;
         private string _strNotes = null;
+        private string _strAuthtoken = null;
+        private long _lErrorPurchaseID = 0;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -93,7 +95,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Attribute IsDisabled  name
                                                                       /// <summary>Notes Attribute type string</summary>
         public static readonly string TAG_NOTES = "Notes"; //Attribute Notes  name
-                                                           // Stored procedure name
+                                                           /// <summary>Authtoken Attribute type string</summary>
+        public static readonly string TAG_AUTHTOKEN = "Authtoken"; //Attribute Authtoken  name
+                                                                   /// <summary>ErrorPurchaseID Attribute type string</summary>
+        public static readonly string TAG_ERROR_PURCHASE_ID = "ErrorPurchaseID"; //Attribute ErrorPurchaseID  name
+                                                                                 // Stored procedure name
         public string SP_ENUM_NAME = "spContentEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the Content Class of type bool</summary>
@@ -185,6 +191,18 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _strNotes; }
             set { _strNotes = value; }
+        }
+        /// <summary>Authtoken is a Property in the Content Class of type String</summary>
+        public string Authtoken
+        {
+            get { return _strAuthtoken; }
+            set { _strAuthtoken = value; }
+        }
+        /// <summary>ErrorPurchaseID is a Property in the Content Class of type long</summary>
+        public long ErrorPurchaseID
+        {
+            get { return _lErrorPurchaseID; }
+            set { _lErrorPurchaseID = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -377,6 +395,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_CONTENT_META + ":  " + ContentMeta + "\n");
             sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
             sbReturn.Append(TAG_NOTES + ":  " + Notes + "\n");
+            sbReturn.Append(TAG_AUTHTOKEN + ":  " + Authtoken + "\n");
+            sbReturn.Append(TAG_ERROR_PURCHASE_ID + ":  " + ErrorPurchaseID + "\n");
 
             return sbReturn.ToString();
         }
@@ -429,6 +449,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_CONTENT_META + ">" + ContentMeta + "</" + TAG_CONTENT_META + ">\n");
             sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
             sbReturn.Append("<" + TAG_NOTES + ">" + Notes + "</" + TAG_NOTES + ">\n");
+            sbReturn.Append("<" + TAG_AUTHTOKEN + ">" + Authtoken + "</" + TAG_AUTHTOKEN + ">\n");
+            sbReturn.Append("<" + TAG_ERROR_PURCHASE_ID + ">" + ErrorPurchaseID + "</" + TAG_ERROR_PURCHASE_ID + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -597,6 +619,28 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 Notes = null;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHTOKEN);
+                Authtoken = xResultNode.InnerText;
+                if (Authtoken.Trim().Length == 0)
+                    Authtoken = null;
+            }
+            catch
+            {
+                Authtoken = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_ERROR_PURCHASE_ID);
+                ErrorPurchaseID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                ErrorPurchaseID = 0;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -720,6 +764,23 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     Notes = null;
                 }
 
+                Console.WriteLine(TAG_AUTHTOKEN + ":  ");
+                Authtoken = Console.ReadLine();
+                if (Authtoken.Length == 0)
+                {
+                    Authtoken = null;
+                }
+                Console.WriteLine(TAG_ERROR_PURCHASE_ID + ":  ");
+                try
+                {
+                    ErrorPurchaseID = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    ErrorPurchaseID = 0;
+                }
+
+
             }
             catch (Exception e)
             {
@@ -771,6 +832,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramContentMeta = null;
             SqlParameter paramIsDisabled = null;
             SqlParameter paramNotes = null;
+            SqlParameter paramAuthtoken = null;
+            SqlParameter paramErrorPurchaseID = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -897,6 +960,23 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             paramNotes.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramNotes);
 
+            // Setup the authtoken text param
+            if (Authtoken != null)
+            {
+                paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, Authtoken);
+                sbLog.Append(TAG_AUTHTOKEN + "=" + Authtoken + "\n");
+            }
+            else
+            {
+                paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, DBNull.Value);
+            }
+            paramAuthtoken.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramAuthtoken);
+
+            paramErrorPurchaseID = new SqlParameter("@" + TAG_ERROR_PURCHASE_ID, ErrorPurchaseID);
+            sbLog.Append(TAG_ERROR_PURCHASE_ID + "=" + ErrorPurchaseID + "\n");
+            paramErrorPurchaseID.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramErrorPurchaseID);
         }
 
     }

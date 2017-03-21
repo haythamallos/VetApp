@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/20/2017	Created
+    /// 001	HA	3/21/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -54,12 +54,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private string _strVisibleCode = null;
         private long _lMaxRating = 0;
         private bool? _bHasSides = null;
-        private double _dPrice = 0;
-        private double _dBeginPrice = 0;
-        private double _dEndPrice = 0;
         private string _strProductRefName = null;
         private string _strProductRefDescription = null;
         private long _lNumberOfPages = 0;
+        private long _lPriceInPennies = 0;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -81,15 +79,15 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_MAX_RATING = "MaxRating"; //Attribute MaxRating  name
                                                                     /// <summary>HasSides Attribute type string</summary>
         public static readonly string TAG_HAS_SIDES = "HasSides"; //Attribute HasSides  name
-                                                                  /// <summary>Price Attribute type string</summary>
-        public static readonly string TAG_PRICE = "Price"; //Attribute Price  name
-                                                           /// <summary>ProductRefName Attribute type string</summary>
+                                                                  /// <summary>ProductRefName Attribute type string</summary>
         public static readonly string TAG_PRODUCT_REF_NAME = "ProductRefName"; //Attribute ProductRefName  name
                                                                                /// <summary>ProductRefDescription Attribute type string</summary>
         public static readonly string TAG_PRODUCT_REF_DESCRIPTION = "ProductRefDescription"; //Attribute ProductRefDescription  name
                                                                                              /// <summary>NumberOfPages Attribute type string</summary>
         public static readonly string TAG_NUMBER_OF_PAGES = "NumberOfPages"; //Attribute NumberOfPages  name
-                                                                             // Stored procedure name
+                                                                             /// <summary>PriceInPennies Attribute type string</summary>
+        public static readonly string TAG_PRICE_IN_PENNIES = "PriceInPennies"; //Attribute PriceInPennies  name
+                                                                               // Stored procedure name
         public string SP_ENUM_NAME = "spContentTypeEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the ContentType Class of type bool</summary>
@@ -146,24 +144,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             get { return _bHasSides; }
             set { _bHasSides = value; }
         }
-        /// <summary>Price is a Property in the ContentType Class of type double</summary>
-        public double Price
-        {
-            get { return _dPrice; }
-            set { _dPrice = value; }
-        }
-        /// <summary>Property Price. Type: double</summary>
-        public double BeginPrice
-        {
-            get { return _dBeginPrice; }
-            set { _dBeginPrice = value; }
-        }
-        /// <summary>Property Price. Type: double</summary>
-        public double EndPrice
-        {
-            get { return _dEndPrice; }
-            set { _dEndPrice = value; }
-        }
         /// <summary>ProductRefName is a Property in the ContentType Class of type String</summary>
         public string ProductRefName
         {
@@ -181,6 +161,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _lNumberOfPages; }
             set { _lNumberOfPages = value; }
+        }
+        /// <summary>PriceInPennies is a Property in the ContentType Class of type long</summary>
+        public long PriceInPennies
+        {
+            get { return _lPriceInPennies; }
+            set { _lPriceInPennies = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -353,10 +339,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_VISIBLE_CODE + ":  " + VisibleCode + "\n");
             sbReturn.Append(TAG_MAX_RATING + ":  " + MaxRating + "\n");
             sbReturn.Append(TAG_HAS_SIDES + ":  " + HasSides + "\n");
-            sbReturn.Append(TAG_PRICE + ":  " + Price + "\n");
             sbReturn.Append(TAG_PRODUCT_REF_NAME + ":  " + ProductRefName + "\n");
             sbReturn.Append(TAG_PRODUCT_REF_DESCRIPTION + ":  " + ProductRefDescription + "\n");
             sbReturn.Append(TAG_NUMBER_OF_PAGES + ":  " + NumberOfPages + "\n");
+            sbReturn.Append(TAG_PRICE_IN_PENNIES + ":  " + PriceInPennies + "\n");
 
             return sbReturn.ToString();
         }
@@ -389,10 +375,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_VISIBLE_CODE + ">" + VisibleCode + "</" + TAG_VISIBLE_CODE + ">\n");
             sbReturn.Append("<" + TAG_MAX_RATING + ">" + MaxRating + "</" + TAG_MAX_RATING + ">\n");
             sbReturn.Append("<" + TAG_HAS_SIDES + ">" + HasSides + "</" + TAG_HAS_SIDES + ">\n");
-            sbReturn.Append("<" + TAG_PRICE + ">" + Price + "</" + TAG_PRICE + ">\n");
             sbReturn.Append("<" + TAG_PRODUCT_REF_NAME + ">" + ProductRefName + "</" + TAG_PRODUCT_REF_NAME + ">\n");
             sbReturn.Append("<" + TAG_PRODUCT_REF_DESCRIPTION + ">" + ProductRefDescription + "</" + TAG_PRODUCT_REF_DESCRIPTION + ">\n");
             sbReturn.Append("<" + TAG_NUMBER_OF_PAGES + ">" + NumberOfPages + "</" + TAG_NUMBER_OF_PAGES + ">\n");
+            sbReturn.Append("<" + TAG_PRICE_IN_PENNIES + ">" + PriceInPennies + "</" + TAG_PRICE_IN_PENNIES + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -515,16 +501,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_PRICE);
-                Price = Convert.ToSingle(xResultNode.InnerText);
-            }
-            catch
-            {
-                Price = 0;
-            }
-
-            try
-            {
                 xResultNode = xNode.SelectSingleNode(TAG_PRODUCT_REF_NAME);
                 ProductRefName = xResultNode.InnerText;
                 if (ProductRefName.Trim().Length == 0)
@@ -555,6 +531,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             catch
             {
                 NumberOfPages = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_PRICE_IN_PENNIES);
+                PriceInPennies = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                PriceInPennies = 0;
             }
         }
         /// <summary>Prompt for values</summary>
@@ -625,16 +611,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     HasSides = false;
                 }
 
-                Console.WriteLine(TAG_PRICE + ":  ");
-                try
-                {
-                    Price = Convert.ToSingle(Console.ReadLine());
-                }
-                catch
-                {
-                    Price = 0;
-                }
-
 
                 Console.WriteLine(TAG_PRODUCT_REF_NAME + ":  ");
                 ProductRefName = Console.ReadLine();
@@ -657,6 +633,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 catch
                 {
                     NumberOfPages = 0;
+                }
+
+                Console.WriteLine(TAG_PRICE_IN_PENNIES + ":  ");
+                try
+                {
+                    PriceInPennies = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    PriceInPennies = 0;
                 }
 
 
@@ -705,10 +691,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramVisibleCode = null;
             SqlParameter paramMaxRating = null;
             SqlParameter paramHasSides = null;
-            SqlParameter paramPrice = null;
             SqlParameter paramProductRefName = null;
             SqlParameter paramProductRefDescription = null;
             SqlParameter paramNumberOfPages = null;
+            SqlParameter paramPriceInPennies = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -788,10 +774,6 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_HAS_SIDES + "=" + HasSides + "\n");
             paramHasSides.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramHasSides);
-            paramPrice = new SqlParameter("@" + TAG_PRICE, Price);
-            sbLog.Append(TAG_PRICE + "=" + Price + "\n");
-            paramPrice.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramPrice);
             // Setup the product ref name text param
             if (ProductRefName != null)
             {
@@ -822,6 +804,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_NUMBER_OF_PAGES + "=" + NumberOfPages + "\n");
             paramNumberOfPages.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramNumberOfPages);
+
+            paramPriceInPennies = new SqlParameter("@" + TAG_PRICE_IN_PENNIES, PriceInPennies);
+            sbLog.Append(TAG_PRICE_IN_PENNIES + "=" + PriceInPennies + "\n");
+            paramPriceInPennies.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramPriceInPennies);
 
         }
 

@@ -8,9 +8,10 @@
 
 <div id="page-wrapper">
     <div class="col-xs-12">
-        <form id="formsproductcart" method="post" action="/Dashboard/Charge">
-            <!-- /.row -->
-            <div class="row">
+        <!-- /.row -->
+        <div class="row">
+            <form id="formsproductcart" method="post" action="/Dashboard/ProductCart">
+
                 <div class="col-md-9 col-lg-9 col-sm-7">
                     <div class="panel panel-info">
                         <div class="panel-heading"> Your Cart (@Model.lstProductModel.Count)</div>
@@ -28,14 +29,14 @@
                                         </thead>
                                         <tbody>
                                             @foreach (ProductModel productModel in Model.lstProductModel)
-                                                {
-                                                    <tr>
-                                                        <td width="150"><img src="@productModel.ImagePath" alt="iMac" width="80"></td>
-                                                        <td width="550"><h5 class="font-500">@productModel.ProductName VA Filled Form</h5> <p>Prepared form for VA's "@productModel.ProductRefDescription" based on your service connected injury.</p></td>
-                                                        <td>@productModel.Price</td>
-                                                        <td align="center"><button type="submit" name="id" value="@productModel.CartItemID" class="btn btn-inverse btn-rounded m-r-5" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i> </button></td>
-                                                    </tr>
-                                                }
+                                            {
+                                                <tr>
+                                                    <td width="150"><img src="@productModel.ImagePath" alt="iMac" width="80"></td>
+                                                    <td width="550"><h5 class="font-500">@productModel.ProductName VA Filled Form</h5> <p>Prepared form for VA's "@productModel.ProductRefDescription" based on your service connected injury.</p></td>
+                                                    <td>@productModel.Price</td>
+                                                    <td align="center"><button type="submit" name="id" value="@productModel.CartItemID" class="btn btn-inverse btn-rounded m-r-5" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash text-dark"></i> </button></td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                     <hr>
@@ -49,8 +50,10 @@
                         </div>
                     </div>
                 </div>
-                @if (Model.lstProductModel.Count > 0)
-                {
+            </form>
+            @if (Model.lstProductModel.Count > 0)
+            {
+                <form id="formsproductcharge" method="post" action="/Dashboard/Charge">
                     <div class="col-md-3 col-lg-3 col-sm-5">
                         <div class="white-box">
                             <h3 class="box-title">Cart Summary</h3>
@@ -70,20 +73,20 @@
                             @*<button class="btn btn-success">Checkout</button> <button class="btn btn-default btn-outline">Cancel</button>*@
                         </div>
                     </div>
-                }
-                <div class="col-md-3 col-lg-3 col-sm-5">
-                    <div class="white-box">
-                        <h3 class="box-title">For Any Support</h3>
-                        <hr>
-                        <h4><i class="ti-mobile"></i> 619-822-2070 (Toll Free)</h4>
-                        <small>Please contact with us if you have any questions.</small>
-                    </div>
+                </form>
+            }
+            <div class="col-md-3 col-lg-3 col-sm-5">
+                <div class="white-box">
+                    <h3 class="box-title">For Any Support</h3>
+                    <hr>
+                    <h4><i class="ti-mobile"></i> 619-822-2070 (Toll Free)</h4>
+                    <small>Please contact with us if you have any questions.</small>
                 </div>
             </div>
+        </div>
 
-            <!--row -->
-        </form>
- 
+        <!--row -->
+
 
 
     </div>

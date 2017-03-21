@@ -18,7 +18,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
     /// File:  BusContent.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/11/2017	Created
+    /// 001	HA	3/21/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Business Class for Content objects.
@@ -44,6 +44,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
         private const String REGEXP_ISVALID_CONTENT_META = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
         private const String REGEXP_ISVALID_IS_DISABLED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
         private const String REGEXP_ISVALID_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
+        private const String REGEXP_ISVALID_AUTHTOKEN = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+        private const String REGEXP_ISVALID_ERROR_PURCHASE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
 
         public string SP_ENUM_NAME = null;
 
@@ -72,7 +74,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null));
+            return (Get(0, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null, null, 0));
         }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lContentID)
         {
-            return (Get(lContentID, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null));
+            return (Get(lContentID, 0, 0, 0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, null, null, 0));
         }
 
         /// <summary>
@@ -97,7 +99,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(Content o)
         {
-            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes));
+            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes, o.Authtoken, o.ErrorPurchaseID));
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumContent o)
         {
-            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes));
+            return (Get(o.ContentID, o.UserID, o.PurchaseID, o.ContentStateID, o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.ContentUrl, o.ContentData, o.ContentMeta, o.IsDisabled, o.Notes, o.Authtoken, o.ErrorPurchaseID));
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing Content object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngContentID, long pLngUserID, long pLngPurchaseID, long pLngContentStateID, long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrContentUrl, byte[] pBytContentData, string pStrContentMeta, bool? pBolIsDisabled, string pStrNotes)
+        public ArrayList Get(long pLngContentID, long pLngUserID, long pLngPurchaseID, long pLngContentStateID, long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrContentUrl, byte[] pBytContentData, string pStrContentMeta, bool? pBolIsDisabled, string pStrNotes, string pStrAuthtoken, long pLngErrorPurchaseID)
         {
             Content data = null;
             _arrlstEntities = new ArrayList();
@@ -141,6 +143,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumContent.ContentMeta = pStrContentMeta;
             enumContent.IsDisabled = pBolIsDisabled;
             enumContent.Notes = pStrNotes;
+            enumContent.Authtoken = pStrAuthtoken;
+            enumContent.ErrorPurchaseID = pLngErrorPurchaseID;
             enumContent.EnumData();
             while (enumContent.hasMoreElements())
             {
@@ -345,6 +349,16 @@ namespace Vetapp.Engine.BusinessAccessLayer
             }
             isValidTmp = IsValidNotes(pRefContent.Notes);
             if (!isValidTmp && pRefContent.Notes != null)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidAuthtoken(pRefContent.Authtoken);
+            if (!isValidTmp && pRefContent.Authtoken != null)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidErrorPurchaseID(pRefContent.ErrorPurchaseID);
+            if (!isValidTmp)
             {
                 isValid = false;
             }
@@ -597,6 +611,48 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = Content.DB_FIELD_NOTES;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidAuthtoken(string pStrData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = !(new Regex(REGEXP_ISVALID_AUTHTOKEN)).IsMatch(pStrData);
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = Content.DB_FIELD_AUTHTOKEN;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidErrorPurchaseID(long pLngData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_ERROR_PURCHASE_ID)).IsMatch(pLngData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = Content.DB_FIELD_ERROR_PURCHASE_ID;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;

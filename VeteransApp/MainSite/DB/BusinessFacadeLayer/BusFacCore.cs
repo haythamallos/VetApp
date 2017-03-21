@@ -37,7 +37,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             _config = new Config();
         }
- 
+
         public SqlConnection getDBConnection()
         {
             SqlConnection conn = null;
@@ -209,7 +209,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             }
             return user;
         }
-       
+
         public LayoutData GetLayoutData(string userguid)
         {
             LayoutData layoutData = new LayoutData();
@@ -218,7 +218,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 User user = UserGet(userguid);
                 if (user != null)
                 {
-                    EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false};
+                    EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false };
                     enumContent.SP_ENUM_NAME = "spContentEnum1";
                     ArrayList arContent = ContentGetList(enumContent);
                     if (arContent != null)
@@ -276,7 +276,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         if (arContent != null)
                         {
                             Content content = null;
-                            for(int i = 0; i < arContent.Count; i++)
+                            for (int i = 0; i < arContent.Count; i++)
                             {
                                 content = (Content)arContent[i];
                                 if (contentDashboardDictionary.ContainsKey(content.ContentTypeID))
@@ -320,7 +320,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             ArrayList arContent = busFacCore.ContentGetList(enumContent);
             if ((arContent != null) && (arContent.Count > 0))
             {
-                content = (Content) arContent[arContent.Count - 1];
+                content = (Content)arContent[arContent.Count - 1];
             }
             return content;
         }
@@ -335,8 +335,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
             EnumContentState enumContentState = new EnumContentState();
             ArrayList arContentState = ContentStateGetList(enumContentState);
-           
-            foreach(ContentState cs in arContentState)
+
+            foreach (ContentState cs in arContentState)
             {
                 dictContentStates.Add(cs.ContentStateID, cs);
             }
@@ -408,7 +408,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             ProductCartModel productCartModel = new ProductCartModel();
             List<CartItem> lstCartItem = CartItemPendingUserList(user.UserID);
             ProductModel productModel = null;
-            productCartModel.TotalPrice = 0;
+            productCartModel.TotalPriceInPennies = 0;
             Content content = null;
             ContentType contentType = null;
             foreach (CartItem cartItem in lstCartItem)
@@ -418,10 +418,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 content = ContentGet(cartItem.ContentID);
                 contentType = ContentTypeGet(cartItem.ContentTypeID);
                 SetProductModel(productModel, content, user, contentType);
-                productCartModel.TotalPrice += Convert.ToDecimal(contentType.Price);
+                productCartModel.TotalPriceInPennies += (int)contentType.PriceInPennies;
                 productCartModel.lstProductModel.Add(productModel);
             }
-            productCartModel.TotalPriceText = String.Format("{0:c2}", productCartModel.TotalPrice);
+            productCartModel.TotalPriceText = String.Format("{0:c2}", (productCartModel.TotalPriceInPennies / 100));
             return productCartModel;
         }
         public void SetProductModel(ProductModel productModel, Content content, User user, ContentType contentType)
@@ -430,7 +430,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             productModel.ContentID = content.ContentTypeID;
             content.UserID = user.UserID;
             productModel.ProductName = contentType.VisibleCode;
-            productModel.Price = String.Format("{0:c2}", contentType.Price);
+            productModel.Price = String.Format("{0:c2}", (contentType.PriceInPennies / 100));
             productModel.ImagePath = "../Images/" + contentType.Code + "/Png/0.png";
             productModel.ProductRefName = contentType.ProductRefName;
             productModel.ProductRefDescription = contentType.ProductRefDescription;
@@ -1472,7 +1472,122 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+
+        //------------------------------------------
+        /// <summary>
+        /// PurchaseCreateOrModify
+        /// </summary>
+        /// <param name="">pPurchase</param>
+        /// <returns>long</returns>
+        /// 
+        public long PurchaseCreateOrModify(Purchase pPurchase)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusPurchase busPurchase = null;
+                busPurchase = new BusPurchase(conn);
+                busPurchase.Save(pPurchase);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pPurchase.PurchaseID;
+                _hasError = busPurchase.HasError;
+                if (busPurchase.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// PurchaseGetList
+        /// </summary>
+        /// <param name="">pEnumPurchase</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList PurchaseGetList(EnumPurchase pEnumPurchase)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusPurchase busPurchase = null;
+                busPurchase = new BusPurchase(conn);
+                items = busPurchase.Get(pEnumPurchase);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busPurchase.HasError;
+                if (busPurchase.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// PurchaseGet
+        /// </summary>
+        /// <param name="">pLngPurchaseID</param>
+        /// <returns>Purchase</returns>
+        /// 
+        public Purchase PurchaseGet(long pLngPurchaseID)
+        {
+            Purchase purchase = new Purchase() { PurchaseID = pLngPurchaseID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusPurchase busPurchase = null;
+                busPurchase = new BusPurchase(conn);
+                busPurchase.Load(purchase);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busPurchase.HasError;
+                if (busPurchase.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return purchase;
+        }
+
+        /// <summary>
+        /// PurchaseRemove
+        /// </summary>
+        /// <param name="">pPurchaseID</param>
+        /// <returns>void</returns>
+        /// 
+        public void PurchaseRemove(long pPurchaseID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Purchase purchase = new Purchase();
+                purchase.PurchaseID = pPurchaseID;
+                BusPurchase bus = null;
+                bus = new BusPurchase(conn);
+                bus.Delete(purchase);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
     }
 
     public class LayoutData

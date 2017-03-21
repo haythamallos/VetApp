@@ -18,7 +18,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
     /// File:  BusContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/20/2017	Created
+    /// 001	HA	3/21/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Business Class for ContentType objects.
@@ -39,10 +39,10 @@ namespace Vetapp.Engine.BusinessAccessLayer
         private const String REGEXP_ISVALID_VISIBLE_CODE = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_MAX_RATING = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
         private const String REGEXP_ISVALID_HAS_SIDES = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-        private const String REGEXP_ISVALID_PRICE = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_PRODUCT_REF_NAME = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_PRODUCT_REF_DESCRIPTION = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_NUMBER_OF_PAGES = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
+        private const String REGEXP_ISVALID_PRICE_IN_PENNIES = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
 
         public string SP_ENUM_NAME = null;
 
@@ -71,7 +71,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, new DateTime(), new DateTime(), null, null, null, 0, false, 0, null, null, 0));
+            return (Get(0, new DateTime(), new DateTime(), null, null, null, 0, false, null, null, 0, 0));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lContentTypeID)
         {
-            return (Get(lContentTypeID, new DateTime(), new DateTime(), null, null, null, 0, false, 0, null, null, 0));
+            return (Get(lContentTypeID, new DateTime(), new DateTime(), null, null, null, 0, false, null, null, 0, 0));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(ContentType o)
         {
-            return (Get(o.ContentTypeID, o.DateCreated, o.DateCreated, o.Code, o.Description, o.VisibleCode, o.MaxRating, o.HasSides, o.Price, o.ProductRefName, o.ProductRefDescription, o.NumberOfPages));
+            return (Get(o.ContentTypeID, o.DateCreated, o.DateCreated, o.Code, o.Description, o.VisibleCode, o.MaxRating, o.HasSides, o.ProductRefName, o.ProductRefDescription, o.NumberOfPages, o.PriceInPennies));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumContentType o)
         {
-            return (Get(o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.Code, o.Description, o.VisibleCode, o.MaxRating, o.HasSides, o.Price, o.ProductRefName, o.ProductRefDescription, o.NumberOfPages));
+            return (Get(o.ContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.Code, o.Description, o.VisibleCode, o.MaxRating, o.HasSides, o.ProductRefName, o.ProductRefDescription, o.NumberOfPages, o.PriceInPennies));
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing ContentType object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, string pStrCode, string pStrDescription, string pStrVisibleCode, long pLngMaxRating, bool? pBolHasSides, double pDblPrice, string pStrProductRefName, string pStrProductRefDescription, long pLngNumberOfPages)
+        public ArrayList Get(long pLngContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, string pStrCode, string pStrDescription, string pStrVisibleCode, long pLngMaxRating, bool? pBolHasSides, string pStrProductRefName, string pStrProductRefDescription, long pLngNumberOfPages, long pLngPriceInPennies)
         {
             ContentType data = null;
             _arrlstEntities = new ArrayList();
@@ -134,10 +134,10 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumContentType.VisibleCode = pStrVisibleCode;
             enumContentType.MaxRating = pLngMaxRating;
             enumContentType.HasSides = pBolHasSides;
-            enumContentType.Price = pDblPrice;
             enumContentType.ProductRefName = pStrProductRefName;
             enumContentType.ProductRefDescription = pStrProductRefDescription;
             enumContentType.NumberOfPages = pLngNumberOfPages;
+            enumContentType.PriceInPennies = pLngPriceInPennies;
             enumContentType.EnumData();
             while (enumContentType.hasMoreElements())
             {
@@ -324,11 +324,6 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
-            isValidTmp = IsValidPrice(pRefContentType.Price);
-            if (!isValidTmp)
-            {
-                isValid = false;
-            }
             isValidTmp = IsValidProductRefName(pRefContentType.ProductRefName);
             if (!isValidTmp && pRefContentType.ProductRefName != null)
             {
@@ -340,6 +335,11 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 isValid = false;
             }
             isValidTmp = IsValidNumberOfPages(pRefContentType.NumberOfPages);
+            if (!isValidTmp)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidPriceInPennies(pRefContentType.PriceInPennies);
             if (!isValidTmp)
             {
                 isValid = false;
@@ -498,27 +498,6 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     Checks to make sure value is valid
         ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
         /// </summary>
-        public bool IsValidPrice(double pDblData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_PRICE)).IsMatch(pDblData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = ContentType.DB_FIELD_PRICE;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
         public bool IsValidProductRefName(string pStrData)
         {
             bool isValid = true;
@@ -572,6 +551,27 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = ContentType.DB_FIELD_NUMBER_OF_PAGES;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidPriceInPennies(long pLngData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_PRICE_IN_PENNIES)).IsMatch(pLngData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = ContentType.DB_FIELD_PRICE_IN_PENNIES;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;

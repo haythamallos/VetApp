@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  Content.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/11/2017	Created
+    /// 001	HA	3/21/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the Content database table.
@@ -47,6 +47,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private bool? _bIsDisabled = null;
         /// <summary>Notes Attribute type String</summary>
         private string _strNotes = null;
+        /// <summary>Authtoken Attribute type String</summary>
+        private string _strAuthtoken = null;
+        /// <summary>ErrorPurchaseID Attribute type String</summary>
+        private long _lErrorPurchaseID = 0;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -80,6 +84,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_IS_DISABLED = "is_disabled"; //Table IsDisabled field name
                                                                             /// <summary>notes Database field </summary>
         public static readonly string DB_FIELD_NOTES = "notes"; //Table Notes field name
+                                                                /// <summary>authtoken Database field </summary>
+        public static readonly string DB_FIELD_AUTHTOKEN = "authtoken"; //Table Authtoken field name
+                                                                        /// <summary>error_purchase_id Database field </summary>
+        public static readonly string DB_FIELD_ERROR_PURCHASE_ID = "error_purchase_id"; //Table ErrorPurchaseID field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -106,6 +114,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_IS_DISABLED = "IsDisabled"; //Table IsDisabled field name
                                                                       /// <summary>Notes Attribute type string</summary>
         public static readonly string TAG_NOTES = "Notes"; //Table Notes field name
+                                                           /// <summary>Authtoken Attribute type string</summary>
+        public static readonly string TAG_AUTHTOKEN = "Authtoken"; //Table Authtoken field name
+                                                                   /// <summary>ErrorPurchaseID Attribute type string</summary>
+        public static readonly string TAG_ERROR_PURCHASE_ID = "ErrorPurchaseID"; //Table ErrorPurchaseID field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spContentInsert"; //Insert sp name
@@ -186,6 +198,18 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         {
             get { return _strNotes; }
             set { _strNotes = value; }
+        }
+        /// <summary>Authtoken is a Property in the Content Class of type String</summary>
+        public string Authtoken
+        {
+            get { return _strAuthtoken; }
+            set { _strAuthtoken = value; }
+        }
+        /// <summary>ErrorPurchaseID is a Property in the Content Class of type long</summary>
+        public long ErrorPurchaseID
+        {
+            get { return _lErrorPurchaseID; }
+            set { _lErrorPurchaseID = value; }
         }
 
 
@@ -285,6 +309,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append(TAG_CONTENT_META + ":  " + ContentMeta + "\n");
             sbReturn.Append(TAG_IS_DISABLED + ":  " + IsDisabled + "\n");
             sbReturn.Append(TAG_NOTES + ":  " + Notes + "\n");
+            sbReturn.Append(TAG_AUTHTOKEN + ":  " + Authtoken + "\n");
+            sbReturn.Append(TAG_ERROR_PURCHASE_ID + ":  " + ErrorPurchaseID + "\n");
 
             return sbReturn.ToString();
         }
@@ -321,6 +347,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<" + TAG_CONTENT_META + ">" + ContentMeta + "</" + TAG_CONTENT_META + ">\n");
             sbReturn.Append("<" + TAG_IS_DISABLED + ">" + IsDisabled + "</" + TAG_IS_DISABLED + ">\n");
             sbReturn.Append("<" + TAG_NOTES + ">" + Notes + "</" + TAG_NOTES + ">\n");
+            sbReturn.Append("<" + TAG_AUTHTOKEN + ">" + Authtoken + "</" + TAG_AUTHTOKEN + ">\n");
+            sbReturn.Append("<" + TAG_ERROR_PURCHASE_ID + ">" + ErrorPurchaseID + "</" + TAG_ERROR_PURCHASE_ID + ">\n");
             sbReturn.Append("</Content>" + "\n");
 
             return sbReturn.ToString();
@@ -465,6 +493,26 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 xResultNode = null;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_AUTHTOKEN);
+                Authtoken = xResultNode.InnerText;
+            }
+            catch
+            {
+                xResultNode = null;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_ERROR_PURCHASE_ID);
+                ErrorPurchaseID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                ErrorPurchaseID = 0;
+            }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with content_id equal to the current object's ContentID </summary>
         public void Load(SqlConnection conn)
@@ -603,6 +651,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(Content.TAG_NOTES + ":  ");
                 Notes = Console.ReadLine();
 
+                Console.WriteLine(Content.TAG_AUTHTOKEN + ":  ");
+                Authtoken = Console.ReadLine();
+
+                Console.WriteLine(Content.TAG_ERROR_PURCHASE_ID + ":  ");
+                ErrorPurchaseID = (long)Convert.ToInt32(Console.ReadLine());
+
             }
             catch (Exception e)
             {
@@ -626,6 +680,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramContentMeta = null;
             SqlParameter paramIsDisabled = null;
             SqlParameter paramNotes = null;
+            SqlParameter paramAuthtoken = null;
+            SqlParameter paramErrorPurchaseID = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -681,6 +737,15 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramNotes.DbType = DbType.String;
             paramNotes.Direction = ParameterDirection.Input;
 
+            paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, Authtoken);
+            paramAuthtoken.DbType = DbType.String;
+            paramAuthtoken.Size = 255;
+            paramAuthtoken.Direction = ParameterDirection.Input;
+
+            paramErrorPurchaseID = new SqlParameter("@" + TAG_ERROR_PURCHASE_ID, ErrorPurchaseID);
+            paramErrorPurchaseID.DbType = DbType.Int32;
+            paramErrorPurchaseID.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -698,6 +763,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramContentMeta);
             cmd.Parameters.Add(paramIsDisabled);
             cmd.Parameters.Add(paramNotes);
+            cmd.Parameters.Add(paramAuthtoken);
+            cmd.Parameters.Add(paramErrorPurchaseID);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -718,6 +785,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramContentMeta = null;
             paramIsDisabled = null;
             paramNotes = null;
+            paramAuthtoken = null;
+            paramErrorPurchaseID = null;
             paramPKID = null;
             cmd = null;
         }
@@ -777,6 +846,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramContentMeta = null;
             SqlParameter paramIsDisabled = null;
             SqlParameter paramNotes = null;
+            SqlParameter paramAuthtoken = null;
+            SqlParameter paramErrorPurchaseID = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -837,6 +908,15 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramNotes.DbType = DbType.String;
             paramNotes.Direction = ParameterDirection.Input;
 
+            paramAuthtoken = new SqlParameter("@" + TAG_AUTHTOKEN, Authtoken);
+            paramAuthtoken.DbType = DbType.String;
+            paramAuthtoken.Size = 255;
+            paramAuthtoken.Direction = ParameterDirection.Input;
+
+            paramErrorPurchaseID = new SqlParameter("@" + TAG_ERROR_PURCHASE_ID, ErrorPurchaseID);
+            paramErrorPurchaseID.DbType = DbType.Int32;
+            paramErrorPurchaseID.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -855,6 +935,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramContentMeta);
             cmd.Parameters.Add(paramIsDisabled);
             cmd.Parameters.Add(paramNotes);
+            cmd.Parameters.Add(paramAuthtoken);
+            cmd.Parameters.Add(paramErrorPurchaseID);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -875,6 +957,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramContentMeta = null;
             paramIsDisabled = null;
             paramNotes = null;
+            paramAuthtoken = null;
+            paramErrorPurchaseID = null;
             paramPKID = null;
             cmd = null;
         }
@@ -985,6 +1069,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             try
             {
                 this.Notes = rdr[DB_FIELD_NOTES].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.Authtoken = rdr[DB_FIELD_AUTHTOKEN].ToString().Trim();
+            }
+            catch { }
+            try
+            {
+                this.ErrorPurchaseID = Convert.ToInt32(rdr[DB_FIELD_ERROR_PURCHASE_ID].ToString().Trim());
             }
             catch { }
         }

@@ -9,6 +9,7 @@ using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.BusinessAccessLayer;
 using System.Web;
 using Stripe;
+using System.Text;
 
 namespace MainSite.Controllers
 {
@@ -855,11 +856,7 @@ namespace MainSite.Controllers
                 User user = Auth();
                 if (!string.IsNullOrEmpty(id))
                 {
-                    if (id == "CHECKOUT")
-                    {
-
-                    }
-                    else if (id == "CONTINUE")
+                    if (id == "CONTINUE")
                     {
                         return RedirectToAction("Index");
                     }
@@ -893,47 +890,71 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult Charge(string stripeToken)
         {
-            
-            ChargeModel model = new ChargeModel();
+            // charge
+            ChargeModel chargeModel = new ChargeModel() { Authtoken = stripeToken };
+            BusFacCore busFacCore = new BusFacCore();
+            Purchase purchase = new Purchase() { IsError = true, IsSuccess = false };
+            StringBuilder sbError = new StringBuilder();
+            ProductCartModel cart = null;
+            chargeModel.HasError = true;
             try
             {
                 User user = Auth();
-                BusFacCore busFacCore = new BusFacCore();
-                ProductCartModel cart = busFacCore.GetUserCart(user);
+                cart = busFacCore.GetUserCart(user);
 
                 StripeConfiguration.SetApiKey(_config.StripeSecretKey);
                 var myCharge = new StripeChargeCreateOptions();
 
                 // always set these properties
                 // convert the amount to pennies
-                myCharge.Amount = (int)(cart.TotalPrice * 100);
+                myCharge.Amount = cart.TotalPriceInPennies;
                 myCharge.Currency = "usd";
 
                 // set this if you want to
                 myCharge.Description = "Veteransapp test charge for " + user.Username;
 
-                myCharge.SourceTokenOrExistingSourceId = stripeToken;
+                myCharge.SourceTokenOrExistingSourceId = chargeModel.Authtoken;
 
                 var chargeService = new StripeChargeService();
                 StripeCharge stripeCharge = chargeService.Create(myCharge);
-               
+                purchase.AmountInPennies = cart.TotalPriceInPennies;
+                purchase.Authtoken = chargeModel.Authtoken;
+                purchase.NumItemsInCart = cart.lstProductModel.Count;
+                purchase.ResponseJson = stripeCharge.StripeResponse.ResponseJson;
+
+                chargeModel.Amount = String.Format("{0:c2}", (cart.TotalPriceInPennies / 100));
+
+                if (stripeCharge.Status == "succeeded")
+                {
+                    purchase.IsSuccess = true;
+                    purchase.IsError = false;
+                    chargeModel.HasError = false;
+                }
+                else
+                {
+                    // error in charge
+                    purchase.IsSuccess = false;
+                    purchase.IsError = true;
+                    sbError.Append("STATUS_ERROR:  " + stripeCharge.Status + Environment.NewLine);
+                }
+
             }
             catch (StripeException exception)
             {
+                purchase.IsError = true;
                 switch (exception.StripeError.ErrorType)
                 {
                     case "card_error":
                         //do some stuff, set your lblError or something like this
                         ModelState.AddModelError(exception.StripeError.Code, exception.StripeError.Message);
-
+                        sbError.Append("CARD_ERROR:  " + exception.StripeError.Code + Environment.NewLine + exception.StripeError.Message + Environment.NewLine);
                         // or better yet, handle based on error code: exception.StripeError.Code
-
                         break;
                     case "api_error":
-                        //do some stuff
+                        sbError.Append("API_ERROR" + Environment.NewLine);
                         break;
                     case "invalid_request_error":
-                        //do some stuff
+                        sbError.Append("INVALID_REQUEST_ERROR" + Environment.NewLine);
                         break;
                     default:
                         throw;
@@ -941,9 +962,42 @@ namespace MainSite.Controllers
             }
             catch (Exception ex)
             {
+                sbError.Append("EXCEPTION:  " + ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine);
+            }
+            finally
+            {
+                if (sbError.Length > 0)
+                {
+                    purchase.ErrorTrace = sbError.ToString();
+                }
+                long lPurchaseID = busFacCore.PurchaseCreateOrModify(purchase);
+                CartItem cartItem = null;
+                Content content = null;
+                long lID = 0;
+                foreach (ProductModel p in cart.lstProductModel)
+                {
+                    cartItem = busFacCore.CartItemGet(p.CartItemID);
+                    cartItem.PurchaseID = lPurchaseID;
+                    lID = busFacCore.CartItemCreateOrModify(cartItem);
+
+                    content = busFacCore.ContentGet(p.ContentID);
+                    if ((bool) purchase.IsSuccess)
+                    {
+                        content.PurchaseID = lPurchaseID;
+                        content.ContentStateID = 7;
+                        content.Authtoken = stripeToken;
+                        content.IsDisabled = false;
+                    }
+                    else
+                    {
+                        content.ErrorPurchaseID = lPurchaseID;
+                    }
+                    lID = busFacCore.ContentCreateOrModify(content);
+                }
 
             }
-            return View();
+
+            return View(chargeModel); ;
         }
 
         //[HttpPost]
