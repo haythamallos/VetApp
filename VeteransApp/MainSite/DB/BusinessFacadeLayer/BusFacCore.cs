@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Vetapp.Engine.BusinessAccessLayer;
 using Vetapp.Engine.Common;
@@ -469,6 +470,39 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             }
             return purchasesModel;
         }
+
+        public List<ContentType> ContentTypeGetList()
+        {
+            List<ContentType> lstContentType = null;
+            EnumContentType enumContentType = new EnumContentType();
+            ArrayList arContentType = ContentTypeGetList(enumContentType);
+            if ((arContentType != null) && (arContentType.Count > 0))
+            {
+                lstContentType = arContentType.Cast<ContentType>().ToList();
+            }
+            else
+            {
+                lstContentType = new List<ContentType>();
+            }
+            return lstContentType;
+        }
+
+        public List<ContentType> ContentTypeGetList(User user)
+        {
+            List<ContentType> lstContentType = null;
+            EnumJctUserContentType enumJctUserContentType = new EnumJctUserContentType() { UserID = user.UserID };
+            ArrayList arJctUserContentType = JctUserContentTypeGetList(enumJctUserContentType);
+            if ((arJctUserContentType != null) && (arJctUserContentType.Count > 0))
+            {
+                lstContentType = arJctUserContentType.Cast<ContentType>().ToList();
+            }
+            else
+            {
+                lstContentType = new List<ContentType>();
+            }
+            return lstContentType;
+        }
+
         /*********************** CUSTOM END *********************/
 
 
@@ -1618,7 +1652,237 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+
+        //------------------------------------------
+        /// <summary>
+        /// JctUserContentTypeCreateOrModify
+        /// </summary>
+        /// <param name="">pJctUserContentType</param>
+        /// <returns>long</returns>
+        /// 
+        public long JctUserContentTypeCreateOrModify(JctUserContentType pJctUserContentType)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserContentType busJctUserContentType = null;
+                busJctUserContentType = new BusJctUserContentType(conn);
+                busJctUserContentType.Save(pJctUserContentType);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pJctUserContentType.JctUserContentTypeID;
+                _hasError = busJctUserContentType.HasError;
+                if (busJctUserContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// JctUserContentTypeGetList
+        /// </summary>
+        /// <param name="">pEnumJctUserContentType</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList JctUserContentTypeGetList(EnumJctUserContentType pEnumJctUserContentType)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserContentType busJctUserContentType = null;
+                busJctUserContentType = new BusJctUserContentType(conn);
+                items = busJctUserContentType.Get(pEnumJctUserContentType);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busJctUserContentType.HasError;
+                if (busJctUserContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// JctUserContentTypeGet
+        /// </summary>
+        /// <param name="">pLngJctUserContentTypeID</param>
+        /// <returns>JctUserContentType</returns>
+        /// 
+        public JctUserContentType JctUserContentTypeGet(long pLngJctUserContentTypeID)
+        {
+            JctUserContentType jct_user_content_type = new JctUserContentType() { JctUserContentTypeID = pLngJctUserContentTypeID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserContentType busJctUserContentType = null;
+                busJctUserContentType = new BusJctUserContentType(conn);
+                busJctUserContentType.Load(jct_user_content_type);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busJctUserContentType.HasError;
+                if (busJctUserContentType.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return jct_user_content_type;
+        }
+
+        /// <summary>
+        /// JctUserContentTypeRemove
+        /// </summary>
+        /// <param name="">pJctUserContentTypeID</param>
+        /// <returns>void</returns>
+        /// 
+        public void JctUserContentTypeRemove(long pJctUserContentTypeID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                JctUserContentType jct_user_content_type = new JctUserContentType();
+                jct_user_content_type.JctUserContentTypeID = pJctUserContentTypeID;
+                BusJctUserContentType bus = null;
+                bus = new BusJctUserContentType(conn);
+                bus.Delete(jct_user_content_type);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
+
+        //------------------------------------------
+        /// <summary>
+        /// SideCreateOrModify
+        /// </summary>
+        /// <param name="">pSide</param>
+        /// <returns>long</returns>
+        /// 
+        public long SideCreateOrModify(Side pSide)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSide busSide = null;
+                busSide = new BusSide(conn);
+                busSide.Save(pSide);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pSide.SideID;
+                _hasError = busSide.HasError;
+                if (busSide.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// SideGetList
+        /// </summary>
+        /// <param name="">pEnumSide</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList SideGetList(EnumSide pEnumSide)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSide busSide = null;
+                busSide = new BusSide(conn);
+                items = busSide.Get(pEnumSide);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busSide.HasError;
+                if (busSide.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// SideGet
+        /// </summary>
+        /// <param name="">pLngSideID</param>
+        /// <returns>Side</returns>
+        /// 
+        public Side SideGet(long pLngSideID)
+        {
+            Side side = new Side() { SideID = pLngSideID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusSide busSide = null;
+                busSide = new BusSide(conn);
+                busSide.Load(side);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busSide.HasError;
+                if (busSide.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return side;
+        }
+
+        /// <summary>
+        /// SideRemove
+        /// </summary>
+        /// <param name="">pSideID</param>
+        /// <returns>void</returns>
+        /// 
+        public void SideRemove(long pSideID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                Side side = new Side();
+                side.SideID = pSideID;
+                BusSide bus = null;
+                bus = new BusSide(conn);
+                bus.Delete(side);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
     }
 
     public class LayoutData

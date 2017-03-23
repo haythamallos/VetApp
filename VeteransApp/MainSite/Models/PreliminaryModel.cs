@@ -13,11 +13,9 @@ namespace MainSite.Models
         public bool HasRating { get; set; }
         public int Rating { get; set; }
         public string imageURL { get; set; }
-        public string Side { get; set; }
+        public long Side { get; set; }
         public bool AskSide { get; set; }
-        public bool HasError { get; set; }
-        public string ErrorMsg { get; set; }
-        public string ErrorTitle { get; set; }
+        public bool IsProfileFinished { get; set; }
 
         public PreliminaryModel()
         {

@@ -138,7 +138,9 @@
     <Compile Include="DB\BusinessAccessLayer\BusContentType.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusDbversion.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusEvaluation.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusJctUserContentType.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusPurchase.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusSide.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusSyslog.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusUser.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusUserRole.cs" />
@@ -157,7 +159,9 @@
     <Compile Include="DB\DataAccessLayer\Data\ContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Dbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Evaluation.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\JctUserContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Purchase.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\Side.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
     <Compile Include="DB\DataAccessLayer\Data\User.cs" />
     <Compile Include="DB\DataAccessLayer\Data\UserRole.cs" />
@@ -167,7 +171,9 @@
     <Compile Include="DB\DataAccessLayer\Enum\EnumContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumDbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumEvaluation.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumJctUserContentType.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumPurchase.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumSide.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUser.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumUserRole.cs" />
@@ -331,6 +337,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\box2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ebenefits.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\john.jpg">

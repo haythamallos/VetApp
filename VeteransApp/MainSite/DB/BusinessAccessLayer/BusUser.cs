@@ -18,7 +18,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
     /// File:  BusUser.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/16/2017	Created
+    /// 001	HA	3/23/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Business Class for User objects.
@@ -56,18 +56,15 @@ namespace Vetapp.Engine.BusinessAccessLayer
         private const String REGEXP_ISVALID_INTERNAL_NOTES = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
         private const String REGEXP_ISVALID_USER_MESSAGE = BusValidationExpressions.REGEX_TYPE_PATTERN_TEXT;
         private const String REGEXP_ISVALID_COOKIE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
+        private const String REGEXP_ISVALID_HAS_CURRENT_RATING = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
         private const String REGEXP_ISVALID_CURRENT_RATING = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
+        private const String REGEXP_ISVALID_INTERNAL_CALCULATED_RATING = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
         private const String REGEXP_ISVALID_SECURITY_QUESTION = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_SECURITY_ANSWER = BusValidationExpressions.REGEX_TYPE_PATTERN_NVARCHAR255;
         private const String REGEXP_ISVALID_NUMBER_OF_VISITS = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
         private const String REGEXP_ISVALID_PREVIOUS_VISIT_DATE = "";
         private const String REGEXP_ISVALID_LAST_VISIT_DATE = "";
-        private const String REGEXP_ISVALID_CURRENT_RATING_BACK = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
-        private const String REGEXP_ISVALID_CURRENT_RATING_SHOULDER = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
-        private const String REGEXP_ISVALID_CURRENT_RATING_NECK = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
-        private const String REGEXP_ISVALID_HAS_RATING_BACK = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-        private const String REGEXP_ISVALID_HAS_RATING_SHOULDER = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
-        private const String REGEXP_ISVALID_HAS_RATING_NECK = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
+        private const String REGEXP_ISVALID_IS_RATING_PROFILE_FINISHED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
 
         public string SP_ENUM_NAME = null;
 
@@ -96,7 +93,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, null, null, null, null, false, false, null, null, false, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, 0, null, null, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, false, false, false));
+            return (Get(0, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, null, null, null, null, false, false, null, null, false, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, 0, 0, null, null, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), false));
         }
 
         /// <summary>
@@ -108,7 +105,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lUserID)
         {
-            return (Get(lUserID, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, null, null, null, null, false, false, null, null, false, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, 0, null, null, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, false, false, false));
+            return (Get(lUserID, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, null, null, null, null, null, null, null, false, false, null, null, false, new DateTime(), new DateTime(), new DateTime(), new DateTime(), null, null, null, false, 0, 0, null, null, 0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), false));
         }
 
         /// <summary>
@@ -121,7 +118,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(User o)
         {
-            return (Get(o.UserID, o.UserRoleID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.Fullname, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.Username, o.Passwd, o.Ssn, o.PictureUrl, o.Picture, o.IsDisabled, o.WelcomeEmailSent, o.Validationtoken, o.Validationlink, o.Isvalidated, o.WelcomeEmailSentDate, o.WelcomeEmailSentDate, o.LastLoginDate, o.LastLoginDate, o.InternalNotes, o.UserMessage, o.CookieID, o.CurrentRating, o.SecurityQuestion, o.SecurityAnswer, o.NumberOfVisits, o.PreviousVisitDate, o.PreviousVisitDate, o.LastVisitDate, o.LastVisitDate, o.CurrentRatingBack, o.CurrentRatingShoulder, o.CurrentRatingNeck, o.HasRatingBack, o.HasRatingShoulder, o.HasRatingNeck));
+            return (Get(o.UserID, o.UserRoleID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.Fullname, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.Username, o.Passwd, o.Ssn, o.PictureUrl, o.Picture, o.IsDisabled, o.WelcomeEmailSent, o.Validationtoken, o.Validationlink, o.Isvalidated, o.WelcomeEmailSentDate, o.WelcomeEmailSentDate, o.LastLoginDate, o.LastLoginDate, o.InternalNotes, o.UserMessage, o.CookieID, o.HasCurrentRating, o.CurrentRating, o.InternalCalculatedRating, o.SecurityQuestion, o.SecurityAnswer, o.NumberOfVisits, o.PreviousVisitDate, o.PreviousVisitDate, o.LastVisitDate, o.LastVisitDate, o.IsRatingProfileFinished));
         }
 
         /// <summary>
@@ -134,7 +131,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumUser o)
         {
-            return (Get(o.UserID, o.UserRoleID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.Fullname, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.Username, o.Passwd, o.Ssn, o.PictureUrl, o.Picture, o.IsDisabled, o.WelcomeEmailSent, o.Validationtoken, o.Validationlink, o.Isvalidated, o.BeginWelcomeEmailSentDate, o.EndWelcomeEmailSentDate, o.BeginLastLoginDate, o.EndLastLoginDate, o.InternalNotes, o.UserMessage, o.CookieID, o.CurrentRating, o.SecurityQuestion, o.SecurityAnswer, o.NumberOfVisits, o.BeginPreviousVisitDate, o.EndPreviousVisitDate, o.BeginLastVisitDate, o.EndLastVisitDate, o.CurrentRatingBack, o.CurrentRatingShoulder, o.CurrentRatingNeck, o.HasRatingBack, o.HasRatingShoulder, o.HasRatingNeck));
+            return (Get(o.UserID, o.UserRoleID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.Fullname, o.Firstname, o.Middlename, o.Lastname, o.PhoneNumber, o.Username, o.Passwd, o.Ssn, o.PictureUrl, o.Picture, o.IsDisabled, o.WelcomeEmailSent, o.Validationtoken, o.Validationlink, o.Isvalidated, o.BeginWelcomeEmailSentDate, o.EndWelcomeEmailSentDate, o.BeginLastLoginDate, o.EndLastLoginDate, o.InternalNotes, o.UserMessage, o.CookieID, o.HasCurrentRating, o.CurrentRating, o.InternalCalculatedRating, o.SecurityQuestion, o.SecurityAnswer, o.NumberOfVisits, o.BeginPreviousVisitDate, o.EndPreviousVisitDate, o.BeginLastVisitDate, o.EndLastVisitDate, o.IsRatingProfileFinished));
         }
 
         /// <summary>
@@ -145,7 +142,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing User object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngUserID, long pLngUserRoleID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrFullname, string pStrFirstname, string pStrMiddlename, string pStrLastname, string pStrPhoneNumber, string pStrUsername, string pStrPasswd, string pStrSsn, string pStrPictureUrl, byte[] pBytPicture, bool? pBolIsDisabled, bool? pBolWelcomeEmailSent, string pStrValidationtoken, string pStrValidationlink, bool? pBolIsvalidated, DateTime pDtBeginWelcomeEmailSentDate, DateTime pDtEndWelcomeEmailSentDate, DateTime pDtBeginLastLoginDate, DateTime pDtEndLastLoginDate, string pStrInternalNotes, string pStrUserMessage, string pStrCookieID, long pLngCurrentRating, string pStrSecurityQuestion, string pStrSecurityAnswer, long pLngNumberOfVisits, DateTime pDtBeginPreviousVisitDate, DateTime pDtEndPreviousVisitDate, DateTime pDtBeginLastVisitDate, DateTime pDtEndLastVisitDate, long pLngCurrentRatingBack, long pLngCurrentRatingShoulder, long pLngCurrentRatingNeck, bool? pBolHasRatingBack, bool? pBolHasRatingShoulder, bool? pBolHasRatingNeck)
+        public ArrayList Get(long pLngUserID, long pLngUserRoleID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, string pStrFullname, string pStrFirstname, string pStrMiddlename, string pStrLastname, string pStrPhoneNumber, string pStrUsername, string pStrPasswd, string pStrSsn, string pStrPictureUrl, byte[] pBytPicture, bool? pBolIsDisabled, bool? pBolWelcomeEmailSent, string pStrValidationtoken, string pStrValidationlink, bool? pBolIsvalidated, DateTime pDtBeginWelcomeEmailSentDate, DateTime pDtEndWelcomeEmailSentDate, DateTime pDtBeginLastLoginDate, DateTime pDtEndLastLoginDate, string pStrInternalNotes, string pStrUserMessage, string pStrCookieID, bool? pBolHasCurrentRating, long pLngCurrentRating, long pLngInternalCalculatedRating, string pStrSecurityQuestion, string pStrSecurityAnswer, long pLngNumberOfVisits, DateTime pDtBeginPreviousVisitDate, DateTime pDtEndPreviousVisitDate, DateTime pDtBeginLastVisitDate, DateTime pDtEndLastVisitDate, bool? pBolIsRatingProfileFinished)
         {
             User data = null;
             _arrlstEntities = new ArrayList();
@@ -179,7 +176,9 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumUser.InternalNotes = pStrInternalNotes;
             enumUser.UserMessage = pStrUserMessage;
             enumUser.CookieID = pStrCookieID;
+            enumUser.HasCurrentRating = pBolHasCurrentRating;
             enumUser.CurrentRating = pLngCurrentRating;
+            enumUser.InternalCalculatedRating = pLngInternalCalculatedRating;
             enumUser.SecurityQuestion = pStrSecurityQuestion;
             enumUser.SecurityAnswer = pStrSecurityAnswer;
             enumUser.NumberOfVisits = pLngNumberOfVisits;
@@ -187,12 +186,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumUser.EndPreviousVisitDate = pDtEndPreviousVisitDate;
             enumUser.BeginLastVisitDate = pDtBeginLastVisitDate;
             enumUser.EndLastVisitDate = pDtEndLastVisitDate;
-            enumUser.CurrentRatingBack = pLngCurrentRatingBack;
-            enumUser.CurrentRatingShoulder = pLngCurrentRatingShoulder;
-            enumUser.CurrentRatingNeck = pLngCurrentRatingNeck;
-            enumUser.HasRatingBack = pBolHasRatingBack;
-            enumUser.HasRatingShoulder = pBolHasRatingShoulder;
-            enumUser.HasRatingNeck = pBolHasRatingNeck;
+            enumUser.IsRatingProfileFinished = pBolIsRatingProfileFinished;
             enumUser.EnumData();
             while (enumUser.hasMoreElements())
             {
@@ -460,7 +454,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
+            isValidTmp = IsValidHasCurrentRating(pRefUser.HasCurrentRating);
+            if (!isValidTmp && pRefUser.HasCurrentRating != null)
+            {
+                isValid = false;
+            }
             isValidTmp = IsValidCurrentRating(pRefUser.CurrentRating);
+            if (!isValidTmp)
+            {
+                isValid = false;
+            }
+            isValidTmp = IsValidInternalCalculatedRating(pRefUser.InternalCalculatedRating);
             if (!isValidTmp)
             {
                 isValid = false;
@@ -490,33 +494,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
-            isValidTmp = IsValidCurrentRatingBack(pRefUser.CurrentRatingBack);
-            if (!isValidTmp)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidCurrentRatingShoulder(pRefUser.CurrentRatingShoulder);
-            if (!isValidTmp)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidCurrentRatingNeck(pRefUser.CurrentRatingNeck);
-            if (!isValidTmp)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidHasRatingBack(pRefUser.HasRatingBack);
-            if (!isValidTmp && pRefUser.HasRatingBack != null)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidHasRatingShoulder(pRefUser.HasRatingShoulder);
-            if (!isValidTmp && pRefUser.HasRatingShoulder != null)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidHasRatingNeck(pRefUser.HasRatingNeck);
-            if (!isValidTmp && pRefUser.HasRatingNeck != null)
+            isValidTmp = IsValidIsRatingProfileFinished(pRefUser.IsRatingProfileFinished);
+            if (!isValidTmp && pRefUser.IsRatingProfileFinished != null)
             {
                 isValid = false;
             }
@@ -1031,6 +1010,27 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     Checks to make sure value is valid
         ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
         /// </summary>
+        public bool IsValidHasCurrentRating(bool? pBolData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_HAS_CURRENT_RATING)).IsMatch(pBolData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = User.DB_FIELD_HAS_CURRENT_RATING;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
         public bool IsValidCurrentRating(long pLngData)
         {
             bool isValid = true;
@@ -1042,6 +1042,27 @@ namespace Vetapp.Engine.BusinessAccessLayer
                 Column clm = null;
                 clm = new Column();
                 clm.ColumnName = User.DB_FIELD_CURRENT_RATING;
+                clm.HasError = true;
+                _arrlstColumnErrors.Add(clm);
+                _hasInvalid = true;
+            }
+            return isValid;
+        }
+        /// <summary>
+        ///     Checks to make sure value is valid
+        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
+        /// </summary>
+        public bool IsValidInternalCalculatedRating(long pLngData)
+        {
+            bool isValid = true;
+
+            // do some validation
+            isValid = (new Regex(REGEXP_ISVALID_INTERNAL_CALCULATED_RATING)).IsMatch(pLngData.ToString());
+            if (!isValid)
+            {
+                Column clm = null;
+                clm = new Column();
+                clm.ColumnName = User.DB_FIELD_INTERNAL_CALCULATED_RATING;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;
@@ -1157,122 +1178,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     Checks to make sure value is valid
         ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
         /// </summary>
-        public bool IsValidCurrentRatingBack(long pLngData)
+        public bool IsValidIsRatingProfileFinished(bool? pBolData)
         {
             bool isValid = true;
 
             // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_CURRENT_RATING_BACK)).IsMatch(pLngData.ToString());
+            isValid = (new Regex(REGEXP_ISVALID_IS_RATING_PROFILE_FINISHED)).IsMatch(pBolData.ToString());
             if (!isValid)
             {
                 Column clm = null;
                 clm = new Column();
-                clm.ColumnName = User.DB_FIELD_CURRENT_RATING_BACK;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidCurrentRatingShoulder(long pLngData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_CURRENT_RATING_SHOULDER)).IsMatch(pLngData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = User.DB_FIELD_CURRENT_RATING_SHOULDER;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidCurrentRatingNeck(long pLngData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_CURRENT_RATING_NECK)).IsMatch(pLngData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = User.DB_FIELD_CURRENT_RATING_NECK;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidHasRatingBack(bool? pBolData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_HAS_RATING_BACK)).IsMatch(pBolData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = User.DB_FIELD_HAS_RATING_BACK;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidHasRatingShoulder(bool? pBolData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_HAS_RATING_SHOULDER)).IsMatch(pBolData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = User.DB_FIELD_HAS_RATING_SHOULDER;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidHasRatingNeck(bool? pBolData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_HAS_RATING_NECK)).IsMatch(pBolData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = User.DB_FIELD_HAS_RATING_NECK;
+                clm.ColumnName = User.DB_FIELD_IS_RATING_PROFILE_FINISHED;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;

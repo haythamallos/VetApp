@@ -10,6 +10,8 @@ using Vetapp.Engine.BusinessAccessLayer;
 using System.Web;
 using Stripe;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MainSite.Controllers
 {
@@ -145,77 +147,77 @@ namespace MainSite.Controllers
             }
             return View(model);
         }
-        [HttpPost]
-        public ActionResult PreFormPost(PreliminaryModel model)
-        {
-            try
-            {
-                BusFacCore busFacCore = new BusFacCore();
-                model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
-                switch (model.ContentTypeID)
-                {
-                    case 1:
-                        model.imageURL = "../Images/back-pain.jpg";
-                        break;
-                    case 2:
-                        model.imageURL = "../Images/shoulder-pain.jpg";
-                        break;
-                    case 3:
-                        model.imageURL = "../Images/neck-pain.jpg";
-                        break;
-                    default:
-                        break;
-                }
-                if (model.Rating >= model.contentType.MaxRating)
-                {
-                    model.HasError = true;
-                    model.ErrorTitle = "Max Rating Reached";
-                    model.ErrorMsg = "You are currently at maximum rating for this benefit.  Try other body areas.";
-                }
-                else if (((bool)model.contentType.HasSides) && (string.IsNullOrEmpty(model.Side)))
-                {
-                    model.HasError = true;
-                    model.ErrorTitle = "Info Needed";
-                    model.ErrorMsg = "Please choose the side of your disability.";
-                }
+        //[HttpPost]
+        //public ActionResult PreFormPost(PreliminaryModel model)
+        //{
+        //    try
+        //    {
+        //        BusFacCore busFacCore = new BusFacCore();
+        //        model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+        //        switch (model.ContentTypeID)
+        //        {
+        //            case 1:
+        //                model.imageURL = "../Images/back-pain.jpg";
+        //                break;
+        //            case 2:
+        //                model.imageURL = "../Images/shoulder-pain.jpg";
+        //                break;
+        //            case 3:
+        //                model.imageURL = "../Images/neck-pain.jpg";
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        if (model.Rating >= model.contentType.MaxRating)
+        //        {
+        //            model.HasError = true;
+        //            model.ErrorTitle = "Max Rating Reached";
+        //            model.ErrorMsg = "You are currently at maximum rating for this benefit.  Try other body areas.";
+        //        }
+        //        else if (((bool)model.contentType.HasSides) && (string.IsNullOrEmpty(model.Side)))
+        //        {
+        //            model.HasError = true;
+        //            model.ErrorTitle = "Info Needed";
+        //            model.ErrorMsg = "Please choose the side of your disability.";
+        //        }
 
-                if ((!model.HasError) && (model.ContentTypeID > 0))
-                {
-                    User user = Auth();
-                    string actionName = null;
-                    switch (model.ContentTypeID)
-                    {
-                        case 1:
-                            user.HasRatingBack = true;
-                            user.CurrentRatingBack = model.Rating;
-                            actionName = "FormGetBack";
-                            break;
-                        case 2:
-                            user.HasRatingShoulder = true;
-                            user.CurrentRatingShoulder = model.Rating;
-                            actionName = "FormGetShoulder";
-                            TempData["Side"] = model.Side;
-                            break;
-                        case 3:
-                            user.HasRatingNeck = true;
-                            user.CurrentRatingNeck = model.Rating;
-                            actionName = "FormGetNeck";
-                            break;
-                        default:
-                            break;
-                    }
-                    long lID = busFacCore.UserCreateOrModify(user);
-                    return RedirectToAction(actionName);
-                }
+        //        if ((!model.HasError) && (model.ContentTypeID > 0))
+        //        {
+        //            User user = Auth();
+        //            string actionName = null;
+        //            switch (model.ContentTypeID)
+        //            {
+        //                case 1:
+        //                    user.HasRatingBack = true;
+        //                    user.CurrentRatingBack = model.Rating;
+        //                    actionName = "FormGetBack";
+        //                    break;
+        //                case 2:
+        //                    user.HasRatingShoulder = true;
+        //                    user.CurrentRatingShoulder = model.Rating;
+        //                    actionName = "FormGetShoulder";
+        //                    TempData["Side"] = model.Side;
+        //                    break;
+        //                case 3:
+        //                    user.HasRatingNeck = true;
+        //                    user.CurrentRatingNeck = model.Rating;
+        //                    actionName = "FormGetNeck";
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //            long lID = busFacCore.UserCreateOrModify(user);
+        //            return RedirectToAction(actionName);
+        //        }
 
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-            return View("PreForm", model);
-        }
+        //    }
+        //    return View("PreForm", model);
+        //}
         public ActionResult Preliminary(PreliminaryModel model)
         {
             return View(model);
@@ -236,12 +238,12 @@ namespace MainSite.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Message = user.UserMessage,
                 SSN = user.Ssn,
-                CurrentRatingBack = user.CurrentRatingBack,
-                CurrentRatingNeck = user.CurrentRatingNeck,
-                CurrentRatingShoulder = user.CurrentRatingShoulder,
-                HasRatingBack = (user.HasRatingBack == null) ? false : (bool)user.HasRatingBack,
-                HasRatingNeck = (user.HasRatingNeck == null) ? false : (bool)user.HasRatingNeck,
-                HasRatingShoulder = (user.HasRatingShoulder == null) ? false : (bool)user.HasRatingShoulder
+                //CurrentRatingBack = user.CurrentRatingBack,
+                //CurrentRatingNeck = user.CurrentRatingNeck,
+                //CurrentRatingShoulder = user.CurrentRatingShoulder,
+                //HasRatingBack = (user.HasRatingBack == null) ? false : (bool)user.HasRatingBack,
+                //HasRatingNeck = (user.HasRatingNeck == null) ? false : (bool)user.HasRatingNeck,
+                //HasRatingShoulder = (user.HasRatingShoulder == null) ? false : (bool)user.HasRatingShoulder
             };
             int currentRating = 0;
             if (user.CurrentRating > 0)
@@ -293,9 +295,9 @@ namespace MainSite.Controllers
                 }
                 user.UserMessage = userModel.Message;
                 user.CurrentRating = userModel.CurrentRating;
-                user.CurrentRatingBack = userModel.CurrentRatingBack;
-                user.CurrentRatingShoulder = userModel.CurrentRatingShoulder;
-                user.CurrentRatingNeck = userModel.CurrentRatingNeck;
+                //user.CurrentRatingBack = userModel.CurrentRatingBack;
+                //user.CurrentRatingShoulder = userModel.CurrentRatingShoulder;
+                //user.CurrentRatingNeck = userModel.CurrentRatingNeck;
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
 
@@ -478,11 +480,11 @@ namespace MainSite.Controllers
                     model.SocialSecurity = user.Ssn;
                 }
 
-                if (!((bool)user.HasRatingBack))
-                {
-                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
-                    return RedirectToAction("PreForm", preliminaryModel);
-                }
+                //if (!((bool)user.HasRatingBack))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
             }
             catch (Exception ex)
             {
@@ -563,11 +565,11 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                if (!((bool)user.HasRatingShoulder))
-                {
-                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
-                    return RedirectToAction("PreForm", preliminaryModel);
-                }
+                //if (!((bool)user.HasRatingShoulder))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
 
             }
             catch (Exception ex)
@@ -628,11 +630,11 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                if (!((bool)user.HasRatingNeck))
-                {
-                    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                    return RedirectToAction("PreForm", preliminaryModel);
-                }
+                //if (!((bool)user.HasRatingNeck))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
             }
             catch (Exception ex)
             {
@@ -748,7 +750,7 @@ namespace MainSite.Controllers
         {
             return View();
         }
- 
+
         public ActionResult Product(ProductModel model, string submitButton)
         {
             try
@@ -976,7 +978,7 @@ namespace MainSite.Controllers
                     lID = busFacCore.CartItemCreateOrModify(cartItem);
 
                     content = busFacCore.ContentGet(p.ContentID);
-                    if ((bool) purchase.IsSuccess)
+                    if ((bool)purchase.IsSuccess)
                     {
                         content.PurchaseID = lPurchaseID;
                         content.ContentStateID = 7;
@@ -1001,7 +1003,7 @@ namespace MainSite.Controllers
             try
             {
                 User user = Auth();
-               
+
             }
             catch (Exception ex)
             {
@@ -1017,73 +1019,113 @@ namespace MainSite.Controllers
 
         public ActionResult RatingsCapture(PreliminaryModel model)
         {
+            ContentType returnContentType = null;
             try
             {
-                if (model.ContentTypeID == 0)
+                User user = Auth();
+                if (!((bool)user.HasCurrentRating))
                 {
-                    model.ContentTypeID = 1;
+                    returnContentType = new ContentType();
                 }
-                if (model.ContentTypeID > 0)
+                else
                 {
                     BusFacCore busFacCore = new BusFacCore();
-                    model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
-                    switch (model.ContentTypeID)
+                    List<ContentType> lstContentType = busFacCore.ContentTypeGetList();
+                    List<ContentType> lstContentTypeOfUser = busFacCore.ContentTypeGetList(user);
+                    foreach (ContentType ct in lstContentType)
                     {
-                        case 1:
-                            model.imageURL = "../Images/back-pain.jpg";
+                        // does user have an entry?
+                        if (lstContentTypeOfUser.Any(x => x.ContentTypeID != ct.ContentTypeID))
+                        {
+                            returnContentType = ct;
+                            model.contentType = returnContentType;
+                            model.AskSide = (bool)model.contentType.HasSides;
                             break;
-                        case 2:
-                            model.imageURL = "../Images/shoulder-pain.jpg";
-                            break;
-                        case 3:
-                            model.imageURL = "../Images/neck-pain.jpg";
-                            break;
-                        default:
-                            break;
+                        }
                     }
-                    model.AskSide = (bool)model.contentType.HasSides;
+                    if (returnContentType == null)
+                    {
+                        user.IsRatingProfileFinished = true;
+                        long lUserID = busFacCore.UserCreateOrModify(user);
+                        model.IsProfileFinished = true;
+                    }
                 }
             }
             catch (Exception ex)
             {
 
             }
+            model.ContentTypeID = returnContentType.ContentTypeID;
+            model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
+
             return View(model);
         }
+
         [HttpPost]
-        public ActionResult RatingsCapturePost(PreliminaryModel model)
+        public ActionResult RatingsCapturePost(PreliminaryModel model, string submitID)
         {
             try
             {
+                long lParsedContentTypeID = 0;
+                User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
-                if (model.ContentTypeID == 0)
+                long lID = 0;
+                if (submitID == "SUBMITRATING")
                 {
-                    model.ContentTypeID = 1;
+                    user.HasCurrentRating = true;
+                    user.CurrentRating = model.Rating;
+                    lID = busFacCore.UserCreateOrModify(user);
                 }
-                model.ContentTypeID += 1;
-                model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
-                switch (model.ContentTypeID)
+                else if (submitID == "NORATING")
                 {
-                    case 1:
-                        model.imageURL = "../Images/back-pain.jpg";
-                        break;
-                    case 2:
-                        model.imageURL = "../Images/shoulder-pain.jpg";
-                        break;
-                    case 3:
-                        model.imageURL = "../Images/neck-pain.jpg";
-                        break;
-                    default:
-                        break;
+                    user.HasCurrentRating = true;
+                    user.CurrentRating = 0;
+                    lID = busFacCore.UserCreateOrModify(user);
                 }
-                model.AskSide = (bool)model.contentType.HasSides;
+                else if (long.TryParse(submitID, out lParsedContentTypeID))
+                {
+                    // Update user with content type
+                    ContentType contentType = busFacCore.ContentTypeGet(lParsedContentTypeID);
+                    List<ContentType> lstContentTypeOfUser = busFacCore.ContentTypeGetList(user);
+                    JctUserContentType jctUserContentType = null;
+                    if (lstContentTypeOfUser.Any(x => x.ContentTypeID != contentType.ContentTypeID))
+                    {
+                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side };
+                        long lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
 
             }
-            return View(model);
+            return RedirectToAction("RatingsCapture", model);
         }
+
+        private string GetContentTypeImageUrl(long contentTypeID)
+        {
+            string imageUrl = "../Images/";
+            switch (contentTypeID)
+            {
+                case 0:
+                    imageUrl += "ebenefits.jpg";
+                    break;
+                case 1:
+                    imageUrl += "back-pain.jpg";
+                    break;
+                case 2:
+                    imageUrl += "shoulder-pain.jpg";
+                    break;
+                case 3:
+                    imageUrl += "neck-pain.jpg";
+                    break;
+                default:
+                    break;
+            }
+            return imageUrl;
+        }
+
         //[HttpPost]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
