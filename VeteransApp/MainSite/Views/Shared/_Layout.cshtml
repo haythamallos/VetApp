@@ -44,43 +44,12 @@
                 <div class="top-left-part"><a class="logo" href="/Dashboard"><b><span>VeteranApp</span></b></a></div>
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
-                    @*<li>
-                            <div class="drop-title"><a class="logo" href="/Home"><b><img src="~/plugins/images2/banner-308x100.png" alt="home" /></b></a></div>
-                        </li>*@
-
-                   
-                   
-
-
-
                 </ul>
-                @*<ul class="nav navbar-top-links navbar-right pull-right">
-                   
-
-                </ul>*@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     @if (data.UserCart.lstProductModel.Count > 0)
                     {
                         <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>
-
-                        @*<li class="dropdown">
-                            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
-                                <i class="ti-shopping-cart"></i>
-                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-cart dropdown-tasks animated slideInUp">
-                                @foreach (ProductModel productModel in @data.UserCart.lstProductModel)
-                                {
-                                    <li>
-                                        <div class="cart-img"><img src="@productModel.ImagePath" width="50" /></div>
-                                        <div class="cart-content"><h5>@productModel.ProductName</h5><small>@productModel.Price</small></div>
-                                    </li>
-                                }
-                               
-                                <li class="divider"></li>
-                                <li> <a class="text-center" href="/Dashboard/ProductCart"> <strong>Checkout</strong> <i class="fa fa-angle-right"></i> </a> </li>
-                            </ul>
-                        </li>*@
+                        <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><h6><span class="label label-danger">@data.UserCart.lstProductModel.Count item - @data.UserCart.TotalPriceText</span></h6></a></li>
                     }
 
                     <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut"><i class="icon-logout"></i></a></li>
@@ -98,42 +67,16 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse slimscrollsidebar">
             <ul class="nav" id="side-menu">
-                @*<li class="sidebar-search hidden-sm hidden-md hidden-lg">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
-                        </span>
-                    </div>
-                </li>
-                <li class="user-pro">
-                        <a href="#" class="waves-effect">
-                            <img src="~/Images/soldier-avatar.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> @ViewData["DisplayName"]<span class="fa arrow"></span></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="/Dashboard/ProfileUpdate"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
-                        </ul>
-                    </li>*@
                 <li class="nav-small-cap m-t-10">--- Main Menu</li>
                 <li><a href="/Dashboard/Index" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a></li>
-                @*<li><a href="/Dashboard/ProfileUpdate" class="waves-effect"><i class="ti-user fa-fw"></i> <span class="hide-menu">My Profile<span class="label label-rouded label-danger pull-right"><i class="ti-alert fa-fw"></i></span></span></a></li>*@
                 <li><a href="/Dashboard/ProfileUpdate" class="waves-effect"><i class="ti-user fa-fw"></i> <span class="hide-menu">My Profile</span></a></li>
-                @*<li><a href="/Dashboard/SavedForm" class="waves-effect"><i class="ti-save fa-fw"></i> <span class="hide-menu">Saved Forms<span class="label label-rouded label-info pull-right">@data.NumSavedForms</span></span></a></li>*@
-                @if (data.NumPurchasedForms > 0)
+                @if (@data.NumPurchasedForms > 0)
                 {
-                    <li><a href="/Dashboard/PurchasedForm" class="waves-effect"><i class="ti-money fa-fw"></i> <span class="hide-menu">Purchased Forms<span class="label label-rouded label-info pull-right">data.NumPurchasedForms</span></span></a></li>
+                    <li><a href="/Dashboard/PurchasedForm" class="waves-effect"><i class="ti-money fa-fw"></i> <span class="hide-menu">Purchased Forms<span class="label label-rouded label-info pull-right"> @data.NumPurchasedForms</span></span></a></li>
                 }
-                @*<li><a href="" class="waves-effect"><i data-icon="&#xe00b;"  class="linea-icon  linea-basic  fa-fw"></i> <span class="hide-menu">Forms<span class="fa arrow"></span></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="">Purchased</a></li>
-                        <li><a href="">Saved<span class="label label-rouded label-info pull-right"></span></a> </li>
-                    </ul>
-               
-                </li>*@
-                <li><a href="/Dashboard/LogOut" class="waves-effect"><i data-icon="&#xe00b;"  class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
+                <li><a href="/Calculator" class="waves-effect"><i class="fa-calendar-times-o fa-fw"></i> <span class="hide-menu">Calculator</span></a></li>
+                <li><a href="/Dashboard/Support" class="waves-effect"><i class="ti-support fa-fw"></i> <span class="hide-menu">Support</span></a></li>
+                <li><a href="/Dashboard/LogOut" class="waves-effect"><i data-icon="&#xe00b;" class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
             </ul>
         </div>
     </div>

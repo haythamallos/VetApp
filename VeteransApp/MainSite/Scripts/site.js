@@ -41,8 +41,8 @@ $('#tab a[href="#home"]').tab('show');
 //});
 
 
-var themes = {
-    "default": "~/Scripts/bootstrap.js",
+//var themes = {
+    //"default": "~/Scripts/bootstrap.js",
     //"cerulean": "//bootswatch.com/cerulean/bootstrap.min.css",
     //"cosmo": "//bootswatch.com/cosmo/bootstrap.min.css",
     //"cyborg": "//bootswatch.com/cyborg/bootstrap.min.css",
@@ -53,17 +53,17 @@ var themes = {
     //"slate": "//bootswatch.com/slate/bootstrap.min.css",
     //"spacelab": "//bootswatch.com/spacelab/bootstrap.min.css",
     //"united": "//bootswatch.com/united/bootstrap.min.css"
-}
+//}
 
 //switches
-$(function () {
-    var themesheet = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
-    themesheet.appendTo('head');
-    $('.theme-link').click(function () {
-        var themeurl = themes[$(this).attr('data-theme')];
-        themesheet.attr('href', themeurl);
-    });
-});
+//$(function () {
+//    var themesheet = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
+//    themesheet.appendTo('head');
+//    $('.theme-link').click(function () {
+//        var themeurl = themes[$(this).attr('data-theme')];
+//        themesheet.attr('href', themeurl);
+//    });
+//});
 
 $(document).ready(function () {
     var counter = 0;
@@ -370,6 +370,40 @@ $('#S421').change(function () {
     }
 });
 
+// Morris donut chart
+Morris.Donut({
+    element: 'morris-donut-chart',
+    data: [{
+        label: "Current",
+        value: CurrentRating,
+
+    }, {
+        label: "Increase",
+        value: IncreaseRating,
+    }],
+    resize: true,
+    colors: ['#f75b36', '#00b5c2']
+});
+
+
+
+//function showAlert(x) {
+
+//    switch (x) {
+//        case 0:
+//            swal("Here's a message!");
+//            break;
+//        case 1:
+//            sweetAlert("Oops...", "Something went wrong!", "error");
+//            break;
+//        case 2:
+//            swal("Good job!", "You clicked the button!", "success");
+//            break;
+//        case 3:
+//            swal({ title: "Are you sure?", text: "Your will not be able to recover this imaginary file!", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!", cancelButtonText: "No, cancel plx!", closeOnConfirm: false, closeOnCancel: false }, function (isConfirm) { if (isConfirm) { swal("Deleted!", "Your imaginary file has been deleted.", "success"); } else { swal("Cancelled", "Your imaginary file is safe :)", "error"); } });
+//            break;
+//    }
+//}
 
 //$('#exampleBasic').wizard({
 //    onFinish: function () {

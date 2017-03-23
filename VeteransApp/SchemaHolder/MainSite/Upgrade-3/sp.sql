@@ -1,4 +1,109 @@
-﻿IF EXISTS (select * from sysobjects where id = object_id(N'[spContentTypeExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+﻿/*******************************************************************************
+**		CUSTOM SP BEGIN
+*******************************************************************************/
+IF EXISTS (select * from sysobjects where id = object_id(N'[spContentEnum1]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spContentEnum1 >>>>'
+	DROP PROCEDURE spContentEnum1
+END
+GO
+
+CREATE PROCEDURE spContentEnum1
+	@ContentID                 NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
+	@PurchaseID                NUMERIC(10) = 0,
+	@ContentStateID            NUMERIC(10) = 0,
+	@ContentTypeID             NUMERIC(10) = 0,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+    	@BeginDateModified         DATETIME = NULL,
+    	@EndDateModified           DATETIME = NULL,
+	@ContentUrl                NVARCHAR(255) = NULL,
+	@ContentData               VARBINARY(MAX) = NULL,
+	@ContentMeta               TEXT = NULL,
+	@IsDisabled                NUMERIC(1,0) = NULL,
+	@Notes                     TEXT = NULL,
+	@Authtoken                 NVARCHAR(255) = NULL,
+	@ErrorPurchaseID           NUMERIC(10) = 0,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
+AS
+    	SET NOCOUNT ON
+
+
+      SELECT  [content_id], [user_id], [purchase_id], [content_state_id], [content_type_id], [date_created], [date_modified], [content_url], [content_meta], [is_disabled], [notes], [authtoken], [error_purchase_id]
+      FROM [content] 
+      WHERE ([user_id] = @UserID) and ([is_disabled] = @IsDisabled)
+
+ ORDER BY [content_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
+GO
+IF EXISTS (select * from sysobjects where id = object_id(N'[spContentEnum1]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spContentEnum1 >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spContentEnum1 >>>'
+GO
+
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spContentEnum2]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN
+	PRINT '<<<< Dropping Stored Procedure spContentEnum2 >>>>'
+	DROP PROCEDURE spContentEnum2
+END
+GO
+
+CREATE PROCEDURE spContentEnum2
+	@ContentID                 NUMERIC(10) = 0,
+	@UserID                    NUMERIC(10) = 0,
+	@PurchaseID                NUMERIC(10) = 0,
+	@ContentStateID            NUMERIC(10) = 0,
+	@ContentTypeID             NUMERIC(10) = 0,
+    	@BeginDateCreated          DATETIME = NULL,
+    	@EndDateCreated            DATETIME = NULL,
+    	@BeginDateModified         DATETIME = NULL,
+    	@EndDateModified           DATETIME = NULL,
+	@ContentUrl                NVARCHAR(255) = NULL,
+	@ContentData               VARBINARY(MAX) = NULL,
+	@ContentMeta               TEXT = NULL,
+	@IsDisabled                NUMERIC(1,0) = NULL,
+	@Notes                     TEXT = NULL,
+	@Authtoken                 NVARCHAR(255) = NULL,
+	@ErrorPurchaseID           NUMERIC(10) = 0,
+ 	@COUNT                    NUMERIC(10,0) = 0 OUTPUT
+
+AS
+    	SET NOCOUNT ON
+
+
+      SELECT  [content_id], [user_id], [purchase_id], [content_state_id], [content_type_id], [date_created], [date_modified], [content_url], [content_meta], [is_disabled], [notes], [authtoken], [error_purchase_id]
+      FROM [content] 
+      WHERE ([user_id] = @UserID) and ([is_disabled] = @IsDisabled) and ([content_state_id] = 7 or [content_state_id] = 8)
+	  and ([purchase_id] > 0)
+
+ ORDER BY [content_id] ASC
+
+
+      SELECT @COUNT=@@rowcount 
+
+    	RETURN 0
+
+GO
+IF EXISTS (select * from sysobjects where id = object_id(N'[spContentEnum2]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+PRINT '<<<< Created Stored Procedure spContentEnum2 >>>>'
+ELSE
+PRINT '<<< Failed Creating Stored Procedure spContentEnum2 >>>'
+GO
+
+/*******************************************************************************
+**		CUSTOM SP END
+*******************************************************************************/
+
+IF EXISTS (select * from sysobjects where id = object_id(N'[spContentTypeExist]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
 	PRINT '<<<< Dropping Stored Procedure spContentTypeExist >>>>'
 	DROP PROCEDURE [spContentTypeExist]

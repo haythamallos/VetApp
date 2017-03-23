@@ -131,6 +131,7 @@
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
+    <Compile Include="Controllers\CalculatorController.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusCartItem.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusContent.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusContentState.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Models\ProductCartModel.cs" />
     <Compile Include="Models\ProductCheckoutModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\PurchasesModel.cs" />
     <Compile Include="Models\ShoulderModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\PDFFile.cs" />
@@ -197,6 +199,7 @@
     </Compile>
     <Compile Include="Models\BackModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CalculatorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -209,6 +212,7 @@
     <Content Include="Content\bootstrap.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\calculator.css" />
     <Content Include="Content\colors\blue-dark.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -257,13 +261,21 @@
     <Content Include="Content\icons\linea-icons\linea.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\morris.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\sidebar-nav.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\spinners.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\wizard.css" />
+    <Content Include="Content\sweetalert.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\wizard.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -593,6 +605,12 @@
     <Content Include="Scripts\modernizr-2.6.2.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\morris.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\raphael-min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\respond.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -603,6 +621,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\site.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sweetalert.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\_references.js">
@@ -649,6 +670,9 @@
     <Content Include="Views\Dashboard\ProductCheckout.cshtml" />
     <Content Include="Views\Dashboard\ProductCart.cshtml" />
     <Content Include="Views\Dashboard\Charge.cshtml" />
+    <Content Include="Views\Dashboard\Support.cshtml" />
+    <Content Include="Views\Calculator\Index.cshtml" />
+    <Content Include="Views\Dashboard\RatingsCapture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

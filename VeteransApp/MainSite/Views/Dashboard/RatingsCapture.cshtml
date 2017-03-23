@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Current Ratings";
+    ViewData["Description"] = "Ratings";
+}
+
+@model MainSite.Models.PreliminaryModel
+
+<div id="page-wrapper">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="white-box">
+                @if (Model.ContentTypeID > 0)
+                {
+                    <h3 class="box-title">@Model.contentType.VisibleCode Disability</h3>
+                    <div class="col-md-3">
+                        <img src="@Model.imageURL" alt="back pain" width="150">
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <form id="formpre" method="post" action="/Dashboard/RatingsCapturePost">
+                            <input id="ContentTypeID" name="ContentTypeID" class="form-control" type="hidden" value="@Model.ContentTypeID">
+                            <div class="text-left"><span class="text-muted"> We have a good chance of getting you the maximum VA rating for this @Model.contentType.VisibleCode injury</span><h1><sup><i class="ti-arrow-up text-success"></i></sup> @Model.contentType.MaxRating%</h1></div>
+                            <h3>Please Answer The Question(s) Below</h3>
+                            <hr />
+                            <label class="control-label">Do you currently have a rating by the VA for this @Model.contentType.VisibleCode disability?  If so, what is it?</label>
+                            <br />
+                            @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
+                            @if ((bool)Model.contentType.HasSides)
+                            {
+                                <br />
+                                <label class="control-label">Do you have pain on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
+                                <br />
+                                @Html.RadioButtonFor(x => x.Side, "LEFT")
+                                <span>Left</span>
+                                @Html.RadioButtonFor(x => x.Side, "RIGHT")
+                                <span>Right</span>
+                                @Html.RadioButtonFor(x => x.Side, "BOTH")
+                                <span>Both</span>
+                            }
+                            <hr />
+                            @if (Model.HasError)
+                            {
+                                <div class="alert alert-warning">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>@Model.ErrorTitle!</strong> @Model.ErrorMsg
+                                </div>
+                            }
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Apply To My Increase</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <h3 class="box-title">No benefit provide.</h3>
+                }
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

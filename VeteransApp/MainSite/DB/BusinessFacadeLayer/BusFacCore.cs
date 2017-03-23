@@ -192,6 +192,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     evaluation = (Evaluation)arEvaluation[arEvaluation.Count - 1];
                 }
             }
+            if (evaluation == null)
+            {
+                evaluation = new Evaluation() { UserID = user.UserID, CurrentRating = 0 };
+            }
             return evaluation;
         }
 
@@ -231,7 +235,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 cntSaved++;
                             }
-                            if (c.ContentStateID == 7)
+                            if ( (c.ContentStateID == 7) || (c.ContentStateID == 8))
                             {
                                 cntPurchased++;
                             }
@@ -437,7 +441,34 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             productModel.NumberOfPages = (int)contentType.NumberOfPages;
         }
 
+        public PurchasesModel GetPurchasedItems(string userguid)
+        {
+            PurchasesModel purchasesModel = new PurchasesModel();
 
+            LayoutData layoutData = new LayoutData();
+            if (!string.IsNullOrEmpty(userguid))
+            {
+                User user = UserGet(userguid);
+                if (user != null)
+                {
+                    EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false };
+                    enumContent.SP_ENUM_NAME = "spContentEnum1";
+                    ArrayList arContent = ContentGetList(enumContent);
+                    if (arContent != null)
+                    {
+                        foreach (Content c in arContent)
+                        {
+                            if ((c.ContentStateID == 7) || (c.ContentStateID == 8))
+                            {
+                            }
+                        }
+                    }
+                    enumContent = null;
+
+                }
+            }
+            return purchasesModel;
+        }
         /*********************** CUSTOM END *********************/
 
 

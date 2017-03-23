@@ -160,24 +160,24 @@ $(".collapseble").click(function () {
     $(".collapseblebox").fadeToggle(350);
 });
 // Sidebar
-$('.slimscrollright').slimScroll({
-    height: '100%'
-    , position: 'right'
-    , size: "5px"
-    , color: '#dcdcdc'
-, });
-$('.slimscrollsidebar').slimScroll({
-    height: '100%'
-    , position: 'right'
-    , size: "0px"
-    , color: '#dcdcdc'
-, });
-$('.chat-list').slimScroll({
-    height: '100%'
-    , position: 'right'
-    , size: "0px"
-    , color: '#dcdcdc'
-, });
+//$('.slimscrollright').slimScroll({
+//    height: '100%'
+//    , position: 'right'
+//    , size: "5px"
+//    , color: '#dcdcdc'
+//, });
+//$('.slimscrollsidebar').slimScroll({
+//    height: '100%'
+//    , position: 'right'
+//    , size: "0px"
+//    , color: '#dcdcdc'
+//, });
+//$('.chat-list').slimScroll({
+//    height: '100%'
+//    , position: 'right'
+//    , size: "0px"
+//    , color: '#dcdcdc'
+//, });
 // Resize all elements
 $("body").trigger("resize");
 // visited ul li

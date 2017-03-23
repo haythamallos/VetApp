@@ -1,8 +1,50 @@
 ﻿
 @{
-    ViewBag.Title = "PurchasedForm";
+    ViewBag.Title = "Purchased Forms";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PurchasedForm</h2>
+@model MainSite.Models.PurchasesModel
+<div id="page-wrapper">
+    <div class="col-xs-12">
+
+        <div class="row bg-title">
+            <!-- .page title -->
+            <div class="col-lg-12 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Purchased Forms Download</h4>
+            </div>
+            <!-- /.page title -->
+           
+        </div>
+       
+
+        <div class="white-box">
+            <form id="formpurchases" class="form-horizontal" action="/Dashboard/Download">
+                <h3 class="box-title m-b-0">Select form to download</h3>
+                <p class="text-muted m-b-20">
+                    Your purchased forms are available for download in PDF format.  Just click the download link.
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Form Description</th>
+                                <th>Date Purchased</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> Back - No ...</td>
+                                <td> @DateTime.UtcNow.ToShortDateString()</td>
+                                <td class="text-nowrap"><a href="/Dashboard/Download" data-toggle="tooltip" data-original-title="Download PDF"> Download </a>  </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 

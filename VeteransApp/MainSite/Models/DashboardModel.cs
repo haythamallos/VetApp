@@ -8,6 +8,9 @@ namespace MainSite.Models
         public EvaluationResults evaluationResults { get; set; }
         public EvaluationModel evaluationModel { get; set; }
         public Dictionary<long, BenefitStatus> BenefitStatuses { get; set; }
+        public UserModel userModel { get; set; }
+        public bool IsProfileComplete { get; set; }
+
         public DashboardModel()
         {
         }
@@ -17,6 +20,7 @@ namespace MainSite.Models
     {
         public int CurrentRating { get; set; }
         public int PotentialVARating { get; set; }
+        public int IncreaseRating { get; set; }
         public int AmountIncreasePerMonth { get; set; }
         public int TotalPerMonthAfterIncrease { get; set; }
         public int AmountIncreasePerYear { get; set; }

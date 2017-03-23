@@ -23,6 +23,9 @@ namespace MainSite
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                         "~/Scripts/sidebar-nav.js",
                         "~/Scripts/custom.js",
+                        "~/Scripts/sweetalert.min.js",
+                        "~/Scripts/raphael-min.js",
+                        "~/Scripts/morris.js",
                         "~/Scripts/site.js"));
 
 
@@ -32,6 +35,9 @@ namespace MainSite
                       "~/Content/sidebar-nav.css",
                       "~/Content/wizard.css",
                       "~/Content/animate.css",
+                      "~/Content/sweetalert.css",
+                      "~/Content/morris.css",
+                      "~/Content/calculator.css",
                       "~/Content/site.css"));
 
             //bundles.Add(new ScriptBundle("~/bundles/site").Include(

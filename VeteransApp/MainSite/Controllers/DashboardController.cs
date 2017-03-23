@@ -60,51 +60,49 @@ namespace MainSite.Controllers
                 dashboardModel.BenefitStatuses = busFacCore.GetBenefitStatuses(user.UserID);
 
                 Evaluation evaluation = busFacCore.EvaluationGet(user);
-                if (evaluation != null)
+                dashboardModel.evaluationResults = new EvaluationResults();
+                dashboardModel.evaluationModel = new EvaluationModel();
+                UserModel userModel = UserToModel(user);
+                dashboardModel.userModel = userModel;
+                int currentRating = 0;
+                if (user.CurrentRating > 0)
                 {
-                    dashboardModel.evaluationResults = new EvaluationResults();
-                    dashboardModel.evaluationModel = new EvaluationModel();
+                    currentRating = (int)user.CurrentRating;
+                }
+                else
+                {
+                    currentRating = (int)evaluation.CurrentRating;
+                }
+                dashboardModel.evaluationResults.CurrentRating = currentRating;
 
-                    int currentRating = 0;
-                    if (user.CurrentRating > 0)
+                int projectionFactor = 3;
+                int delta = (100 - currentRating) / 10;
+                if (delta < projectionFactor)
+                {
+                    projectionFactor = delta;
+                }
+
+                dashboardModel.evaluationResults.PotentialVARating = currentRating + (10 * projectionFactor);
+                int amountIncreasePerMonth = 0;
+                int cnt = 0;
+                for (int i = currentRating + 10; i <= 100; i += 10)
+                {
+                    cnt++;
+                    if (cnt <= projectionFactor)
                     {
-                        currentRating = (int)user.CurrentRating;
+                        amountIncreasePerMonth += RatingProjections.RatingTable_1[i].DeltaFromPrevious;
                     }
                     else
                     {
-                        currentRating = (int)evaluation.CurrentRating;
+                        break;
                     }
-                    dashboardModel.evaluationResults.CurrentRating = currentRating;
-
-                    int projectionFactor = 3;
-                    int delta = (100 - currentRating) / 10;
-                    if (delta < projectionFactor)
-                    {
-                        projectionFactor = delta;
-                    }
-
-                    dashboardModel.evaluationResults.PotentialVARating = currentRating + (10 * projectionFactor);
-                    int amountIncreasePerMonth = 0;
-                    int cnt = 0;
-                    for (int i = currentRating + 10; i <= 100; i += 10)
-                    {
-                        cnt++;
-                        if (cnt <= projectionFactor)
-                        {
-                            amountIncreasePerMonth += RatingProjections.RatingTable_1[i].DeltaFromPrevious;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-
-                    dashboardModel.evaluationResults.AmountIncreasePerMonth = amountIncreasePerMonth;
-                    dashboardModel.evaluationResults.AmountIncreasePerYear = amountIncreasePerMonth * 12;
-                    dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
-
-                    //ViewData["FormsSaved"] = "1";
                 }
+                dashboardModel.evaluationResults.IncreaseRating = dashboardModel.evaluationResults.PotentialVARating - dashboardModel.evaluationResults.CurrentRating;
+                dashboardModel.evaluationResults.AmountIncreasePerMonth = amountIncreasePerMonth;
+                dashboardModel.evaluationResults.AmountIncreasePerYear = amountIncreasePerMonth * 12;
+                dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
+
+                //ViewData["FormsSaved"] = "1";
             }
 
 
@@ -750,10 +748,7 @@ namespace MainSite.Controllers
         {
             return View();
         }
-        public ActionResult PurchasedForm()
-        {
-            return View();
-        }
+ 
         public ActionResult Product(ProductModel model, string submitButton)
         {
             try
@@ -1000,6 +995,95 @@ namespace MainSite.Controllers
             return View(chargeModel); ;
         }
 
+        public ActionResult PurchasedForm(PurchasesModel model)
+        {
+            BusFacCore busFacCore = new BusFacCore();
+            try
+            {
+                User user = Auth();
+               
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+
+        public ActionResult Support()
+        {
+            return View();
+        }
+
+        public ActionResult RatingsCapture(PreliminaryModel model)
+        {
+            try
+            {
+                if (model.ContentTypeID == 0)
+                {
+                    model.ContentTypeID = 1;
+                }
+                if (model.ContentTypeID > 0)
+                {
+                    BusFacCore busFacCore = new BusFacCore();
+                    model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+                    switch (model.ContentTypeID)
+                    {
+                        case 1:
+                            model.imageURL = "../Images/back-pain.jpg";
+                            break;
+                        case 2:
+                            model.imageURL = "../Images/shoulder-pain.jpg";
+                            break;
+                        case 3:
+                            model.imageURL = "../Images/neck-pain.jpg";
+                            break;
+                        default:
+                            break;
+                    }
+                    model.AskSide = (bool)model.contentType.HasSides;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult RatingsCapturePost(PreliminaryModel model)
+        {
+            try
+            {
+                BusFacCore busFacCore = new BusFacCore();
+                if (model.ContentTypeID == 0)
+                {
+                    model.ContentTypeID = 1;
+                }
+                model.ContentTypeID += 1;
+                model.contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+                switch (model.ContentTypeID)
+                {
+                    case 1:
+                        model.imageURL = "../Images/back-pain.jpg";
+                        break;
+                    case 2:
+                        model.imageURL = "../Images/shoulder-pain.jpg";
+                        break;
+                    case 3:
+                        model.imageURL = "../Images/neck-pain.jpg";
+                        break;
+                    default:
+                        break;
+                }
+                model.AskSide = (bool)model.contentType.HasSides;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
         //[HttpPost]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
