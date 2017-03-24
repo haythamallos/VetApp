@@ -14,20 +14,20 @@
     </script>
     <div class="col-md-12">
         <div class="col-md-9">
-            <div class="user-btm-box">
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-purple font-bold">More $ Month</p>
-                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-blue font-bold">More $ Year</p>
-                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-danger font-bold">Potential Rating</p>
-                    <h1>@Model.evaluationResults.PotentialVARating%</h1>
-                </div>
-            </div>
+            @*<div class="user-btm-box">
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-purple font-bold">More $ Month</p>
+                        <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-blue font-bold">More $ Year</p>
+                        <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-danger font-bold">Potential Rating</p>
+                        <h1>@Model.evaluationResults.PotentialVARating%</h1>
+                    </div>
+                </div>*@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box col-md-6">
@@ -44,86 +44,105 @@
                                 <h4 class="m-b-0">@Model.evaluationResults.IncreaseRating%</h4>
                             </li>
                         </ul>
+                        <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
+                        <p>Please contact us if you have any questions</p>
 
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">We Can Increase Your Rating</div>
-                            <div class="panel-wrapper collapse in">
-                                <div class="panel-body">
-                                    <p>You currently have a @Model.evaluationResults.CurrentRating% rating disability with the VA.  We can increase your rating to @Model.evaluationResults.PotentialVARating% which means another @string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth) in your pocket every month. </p>
-                                    <a href="/Dashboard/RatingsCapture" class="btn btn-custom m-t-10 collapseble">Get Started</a>
+                        @if (!Model.userModel.IsRatingProfileFinished)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">We Can Increase Your Rating</div>
+                                <div class="panel-wrapper collapse in">
+                                    <div class="panel-body">
+                                        <p>You currently have a @Model.evaluationResults.CurrentRating% rating disability with the VA.  We can increase your rating to @Model.evaluationResults.PotentialVARating% which means another @string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth) in your pocket every month. </p>
+                                        <a href="/Dashboard/RatingsCapture" class="btn btn-custom m-t-10 collapseble">Get Started</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="white-box">
+                                <h3 class="box-title m-b-0">APPLY FOR EACH DISABILITY TO RECEIVE YOUR INCREASE</h3>
+                                @*<p class="text-muted m-b-20">
+                                        Answer a few simple questions for each disability and will generate the complicated VA form ready to be signed by a doctor so you can receive the rating increase.
+                                    </p>*@
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Disability</th>
+                                                <th>Progress</th>
+                                                <th class="text-nowrap">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>@Model.BenefitStatuses[1].BenefitName</td>
+                                                <td>
+                                                    <div class="progress progress-xs margin-vertical-10 ">
+                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].Progress%" style="width: @Model.BenefitStatuses[1].Progress%"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-nowrap"><a href="/Dashboard/FormGetBack" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].TooltipText"> @Model.BenefitStatuses[1].ActionText </a>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td>@Model.BenefitStatuses[2].BenefitName</td>
+                                                <td>
+                                                    <div class="progress progress-xs margin-vertical-10 ">
+                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[2].Progress%" style="width: @Model.BenefitStatuses[2].Progress%"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-nowrap"><a href="/Dashboard/FormGetShoulder" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[2].TooltipText"> @Model.BenefitStatuses[2].ActionText </a>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td>@Model.BenefitStatuses[3].BenefitName</td>
+                                                <td>
+                                                    <div class="progress progress-xs margin-vertical-10 ">
+                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[3].Progress%" style="width: @Model.BenefitStatuses[3].Progress%"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-nowrap"><a href="/Dashboard/FormGetNeck" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[3].TooltipText"> @Model.BenefitStatuses[3].ActionText </a>  </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
                         @*<button id="btnStartApplication"  class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light"><i class="fa fa fa-long-arrow-right"></i> Get Started </button>*@
                     </div>
                 </div>
 
             </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 text-center">
-                    <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
-                    <p>Please contact us if you have any questions</p>
-                </div>
 
-            </div>
-
-
-
-            </div>
+        </div>
         <div class="col-md-3">
             @if (Model.evaluationResults != null)
             {
                 <div class="white-box">
                     <h3 class="box-title">Free Evaluation Results</h3>
+
+                    <hr>
+                    <p class="text-purple font-bold">More $ Month</p>
+                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
+                    <hr>
+                    <p class="text-purple font-bold">More $ Year</p>
+                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
+
                     <hr>
                     <small>Current VA Rating</small>
-                    <h2>@Model.evaluationResults.CurrentRating %</h2>
+                    <h2>@Model.evaluationResults.CurrentRating%</h2>
                     <hr>
                     <small>Potential VA Rating</small>
                     <h2>@Model.evaluationResults.PotentialVARating%</h2>
                     <hr>
-                    <small>Your Total Per Month After Increase</small>
-                    <h2>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h2>
-                    <hr>
-                    @*
-                        <button onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-success">Start Your Application</button><button onclick="$('#startbenefitdiv').removeClass('animated flash').animate({ 'nothing': null }, 1, function () { $(this).addClass('animated flash'); });" class="btn btn-success"></button>
-
-                    *@
+                    <p class="text-purple font-bold">Total Per Month After Increase</p>
+                    <h1>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h1>
                 </div>
             }
-            else
-            {
-                Model.evaluationModel = new MainSite.Models.EvaluationModel();
-                <div class="white-box">
-                    <div id="captureformdiv">
-                        <form id="captureform" class="form-horizontal" action="/Dashboard/Evaluation">
-                            <h2>Instant Free Evaluation</h2>
-                            <p>Simply provide the info below to immediately see if you qualify for an increase in VA benefits.</p>
-                            <label class="info">(Check all that apply)</label>
-                            <br />
-                            @Html.EditorFor(x => x.evaluationModel.IsFirstTimeFiling) First time filing
-                            <br />
-                            @Html.EditorFor(x => x.evaluationModel.HasAClaim) I have a claim with the VA
-                            <br />
-                            @Html.EditorFor(x => x.evaluationModel.HasActiveAppeal) I have an active appeal
-                            <br />
-                            @*<label class="control-label">Do you currently have a rating by the VA?</label>
-                                <br />*@<label class="control-label"></label>
-                            <br />
-                            <h3 class="box-title">What is your current rating?</h3>
-                            @Html.DropDownListFor(x => x.evaluationModel.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
-                            <div class="form-group text-center m-t-20">
-                                <div class="col-xs-12">
-                                    <button id="btnSubmit" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
 
-                </div>
-            }
         </div>
 
     </div>

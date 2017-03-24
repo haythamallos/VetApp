@@ -11,14 +11,7 @@
 
         <div class="col-lg-12 col-sm-12 col-xs-12">
             <div class="white-box">
-                @if (Model.IsProfileFinished)
-                {
-                    <script>
-                        swal("Good job!", "You have successfully completed your ratings profile.  Now let's begin getting you an increase rating.  Fill the forms shown in dashboard!", "success");
-                    </script>
-                    Response.Redirect("~/Dashboard/Index");
-                }
-                else if (Model.ContentTypeID == 0)
+                @if (Model.ContentTypeID == 0)
                 {
                     <h3 class="box-title">Overall VA Rating</h3>
                     <div class="col-md-3">
@@ -34,8 +27,8 @@
                             <br />
                             @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             <hr />
-                            <button id="submitID" value="SUBMITRATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                            <button id="submitID" value="NORATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
+                            <button name="submitID" value="SUBMITRATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
+                            <button name="submitID" value="NORATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
                         </form>
                     </div>
                 }
@@ -56,7 +49,7 @@
                             @if ((bool)Model.contentType.HasSides)
                             {
                                 <br />
-                                <label class="control-label">Do you have pain on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
+                                <label class="control-label">Do you have disability on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
                                 <br />
                                 @Html.RadioButtonFor(x => x.Side, 2)
                                 <span>Left</span>
@@ -66,8 +59,16 @@
                                 <span>Both</span>
                             }
                             <hr />
-                            <button id="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                            <button id="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have A Rating For This Disability</button>
+                            @if (!string.IsNullOrEmpty(Model.Message))
+                            {
+                                <div class="alert alert-warning">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>"Info Required"</strong> @Model.Message
+                                </div>
+                            }
+
+                            <button name="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
+                            <button name="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have A Rating For This Disability</button>
 
                         </form>
                     </div>

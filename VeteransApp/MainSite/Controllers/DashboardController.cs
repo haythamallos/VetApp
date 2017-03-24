@@ -66,17 +66,8 @@ namespace MainSite.Controllers
                 dashboardModel.evaluationModel = new EvaluationModel();
                 UserModel userModel = UserToModel(user);
                 dashboardModel.userModel = userModel;
-                int currentRating = 0;
-                if (user.CurrentRating > 0)
-                {
-                    currentRating = (int)user.CurrentRating;
-                }
-                else
-                {
-                    currentRating = (int)evaluation.CurrentRating;
-                }
+                int currentRating = (int)user.CurrentRating;
                 dashboardModel.evaluationResults.CurrentRating = currentRating;
-
                 int projectionFactor = 3;
                 int delta = (100 - currentRating) / 10;
                 if (delta < projectionFactor)
@@ -229,8 +220,7 @@ namespace MainSite.Controllers
         }
         private UserModel UserToModel(User user)
         {
-            UserModel userModel = null;
-            userModel = new UserModel()
+            UserModel userModel = new UserModel()
             {
                 Username = user.Username,
                 Password = user.Passwd,
@@ -238,28 +228,11 @@ namespace MainSite.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Message = user.UserMessage,
                 SSN = user.Ssn,
-                //CurrentRatingBack = user.CurrentRatingBack,
-                //CurrentRatingNeck = user.CurrentRatingNeck,
-                //CurrentRatingShoulder = user.CurrentRatingShoulder,
-                //HasRatingBack = (user.HasRatingBack == null) ? false : (bool)user.HasRatingBack,
-                //HasRatingNeck = (user.HasRatingNeck == null) ? false : (bool)user.HasRatingNeck,
-                //HasRatingShoulder = (user.HasRatingShoulder == null) ? false : (bool)user.HasRatingShoulder
+                InternalCalculatedRating = user.InternalCalculatedRating,
+                CurrentRating = (int) user.CurrentRating,
+                HasCurrentRating = (bool) user.HasCurrentRating,
+                IsRatingProfileFinished = (bool) user.IsRatingProfileFinished
             };
-            int currentRating = 0;
-            if (user.CurrentRating > 0)
-            {
-                currentRating = (int)user.CurrentRating;
-            }
-            else
-            {
-                BusFacCore busFacCore = new BusFacCore();
-                Evaluation evaluation = busFacCore.EvaluationGet(user);
-                if (evaluation != null)
-                {
-                    currentRating = (int)evaluation.CurrentRating;
-                }
-            }
-            userModel.CurrentRating = currentRating;
             return userModel;
         }
         public ActionResult ProfileUpdate()
@@ -295,9 +268,6 @@ namespace MainSite.Controllers
                 }
                 user.UserMessage = userModel.Message;
                 user.CurrentRating = userModel.CurrentRating;
-                //user.CurrentRatingBack = userModel.CurrentRatingBack;
-                //user.CurrentRatingShoulder = userModel.CurrentRatingShoulder;
-                //user.CurrentRatingNeck = userModel.CurrentRatingNeck;
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
 
@@ -383,6 +353,9 @@ namespace MainSite.Controllers
                     {
                         bool b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "false");
                     }
+                    user.CurrentRating = evaluationModel.CurrentRating;
+                    user.HasCurrentRating = true;
+                    lID = busFacCore.UserCreateOrModify(user);
                 }
             }
             catch { }
@@ -1019,45 +992,44 @@ namespace MainSite.Controllers
 
         public ActionResult RatingsCapture(PreliminaryModel model)
         {
-            ContentType returnContentType = null;
+            ContentType returnContentType = new ContentType(); ;
             try
             {
                 User user = Auth();
-                if (!((bool)user.HasCurrentRating))
-                {
-                    returnContentType = new ContentType();
-                }
-                else
+                if ((bool)user.HasCurrentRating)
                 {
                     BusFacCore busFacCore = new BusFacCore();
                     List<ContentType> lstContentType = busFacCore.ContentTypeGetList();
-                    List<ContentType> lstContentTypeOfUser = busFacCore.ContentTypeGetList(user);
+                    List<JctUserContentType> lstJctUserContentTypeOfUser = busFacCore.JctUserContentTypeGetList(user);
+                    bool bFound = false;
                     foreach (ContentType ct in lstContentType)
                     {
                         // does user have an entry?
-                        if (lstContentTypeOfUser.Any(x => x.ContentTypeID != ct.ContentTypeID))
+                        if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == ct.ContentTypeID)))
                         {
                             returnContentType = ct;
-                            model.contentType = returnContentType;
-                            model.AskSide = (bool)model.contentType.HasSides;
+                            model.AskSide = (bool)ct.HasSides;
+                            bFound = true;
                             break;
                         }
                     }
-                    if (returnContentType == null)
+                    if (!bFound)
                     {
                         user.IsRatingProfileFinished = true;
                         long lUserID = busFacCore.UserCreateOrModify(user);
-                        model.IsProfileFinished = true;
+                        return RedirectToAction("Index");
                     }
                 }
+                model.contentType = returnContentType;
+                model.ContentTypeID = returnContentType.ContentTypeID;
+                model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
+                model.Rating = 0;
+
             }
             catch (Exception ex)
             {
 
             }
-            model.ContentTypeID = returnContentType.ContentTypeID;
-            model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
-
             return View(model);
         }
 
@@ -1070,6 +1042,7 @@ namespace MainSite.Controllers
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = 0;
+                model.Message = null;
                 if (submitID == "SUBMITRATING")
                 {
                     user.HasCurrentRating = true;
@@ -1086,12 +1059,19 @@ namespace MainSite.Controllers
                 {
                     // Update user with content type
                     ContentType contentType = busFacCore.ContentTypeGet(lParsedContentTypeID);
-                    List<ContentType> lstContentTypeOfUser = busFacCore.ContentTypeGetList(user);
-                    JctUserContentType jctUserContentType = null;
-                    if (lstContentTypeOfUser.Any(x => x.ContentTypeID != contentType.ContentTypeID))
+                    if (((bool) contentType.HasSides) && (model.Side == 0))
                     {
-                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side };
-                        long lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                        model.Message = "Please choose which side is your disability.";
+                    }
+                    else
+                    {
+                        List<JctUserContentType> lstJctUserContentTypeOfUser = busFacCore.JctUserContentTypeGetList(user);
+                        JctUserContentType jctUserContentType = null;
+                        if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == contentType.ContentTypeID)))
+                        {
+                            jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side };
+                            long lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                        }
                     }
                 }
 

@@ -487,20 +487,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return lstContentType;
         }
 
-        public List<ContentType> ContentTypeGetList(User user)
+        public List<JctUserContentType> JctUserContentTypeGetList(User user)
         {
-            List<ContentType> lstContentType = null;
+            List<JctUserContentType> lstJctUserContentType = new List<JctUserContentType>();
             EnumJctUserContentType enumJctUserContentType = new EnumJctUserContentType() { UserID = user.UserID };
             ArrayList arJctUserContentType = JctUserContentTypeGetList(enumJctUserContentType);
             if ((arJctUserContentType != null) && (arJctUserContentType.Count > 0))
             {
-                lstContentType = arJctUserContentType.Cast<ContentType>().ToList();
+                lstJctUserContentType = arJctUserContentType.Cast<JctUserContentType>().ToList();
             }
-            else
-            {
-                lstContentType = new List<ContentType>();
-            }
-            return lstContentType;
+            return lstJctUserContentType;
         }
 
         /*********************** CUSTOM END *********************/

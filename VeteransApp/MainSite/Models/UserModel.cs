@@ -15,12 +15,8 @@ namespace MainSite.Models
         public string Message { get; set; }
         public int CurrentRating { get; set; }
         public string SSN { get; set; }
-        public long CurrentRatingBack { get; set; }
-        public long CurrentRatingShoulder { get; set; }
-        public long CurrentRatingNeck { get; set; }
-        public bool HasRatingBack { get; set; }
-        public bool HasRatingShoulder { get; set; }
-        public bool HasRatingNeck { get; set; }
-
+        public bool HasCurrentRating { get; set; }
+        public long InternalCalculatedRating { get; set; }
+        public bool IsRatingProfileFinished { get; set; }
     }
 }
