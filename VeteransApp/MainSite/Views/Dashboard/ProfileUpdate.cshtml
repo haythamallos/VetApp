@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model MainSite.Models.UserModel
+@model MainSite.Models.ProfileModel
     <div id="page-wrapper">
         <div class="col-xs-12">
             <div class="white-box">
@@ -12,26 +12,26 @@
                     <div class="form-group">
                         <label class="col-md-3">Full Name</label>
                         <div class="col-md-9">
-                            <input id="Fullname" name="Fullname" value="@Model.FullName" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                            <input id="Fullname" name="Fullname" value="@Model.userModel.FullName" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="example-email" class="col-md-3">Email</label>
                         <div class="col-md-9">
-                            <input id="Username" name="Username" value="@Model.Username" type="email" placeholder="johnathan@admin.com" class="form-control form-control-line">
+                            <input id="Username" name="Username" value="@Model.userModel.Username" type="email" placeholder="johnathan@admin.com" class="form-control form-control-line">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3">Phone No</label>
                         <div class="col-md-9">
-                            <input id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                            <input id="PhoneNumber" name="PhoneNumber" value="@Model.userModel.PhoneNumber" type="text" placeholder="123 456 7890" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3">Current Overall VA Rating</label>
                         <div class="col-md-12">
-                            @Html.DropDownListFor(model => model.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
+                            @Html.DropDownListFor(model => model.userModel.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
                         </div>
                     </div>
                     @*@if (Model.HasRatingBack)
@@ -65,20 +65,20 @@
                     <div class="form-group">
                         <label class="col-md-12">Anything you want us to know about your disabilities?  Tell us your story so we can assess if you are missing any potential benefits.</label>
                         <div class="col-md-12">
-                            <textarea id="Message" name="Message" value=""  rows="5" placeholder="enter your story here ..." class="form-control form-control-line">@Model.Message</textarea>
+                            <textarea id="Message" name="Message" value=""  rows="5" placeholder="enter your story here ..." class="form-control form-control-line">@Model.userModel.Message</textarea>
                         </div>
                     </div>
                     <br />
                     <div class="form-group">
                         <label class="col-md-3">Password</label>
                         <div class="col-md-9">
-                            <input id="Password" name="Password" value="@Model.Password" type="password" class="form-control form-control-line">
+                            <input id="Password" name="Password" value="@Model.userModel.Password" type="password" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3">Social Security Number</label>
                         <div class="col-md-9">
-                            <input id="SSN" name="SSN" value="@Model.SSN" type="password" placeholder="123 45 6789" class="form-control form-control-line">
+                            <input id="SSN" name="SSN" value="@Model.userModel.SSN" type="password" placeholder="123 45 6789" class="form-control form-control-line">
                         </div>
                     </div>
                     <br />

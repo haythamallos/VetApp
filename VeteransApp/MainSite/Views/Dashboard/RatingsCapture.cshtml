@@ -43,20 +43,29 @@
                             <div class="text-left"><span class="text-muted"> We have a good chance of getting you the maximum VA rating for this @Model.contentType.VisibleCode injury</span><h1><sup><i class="ti-arrow-up text-success"></i></sup> @Model.contentType.MaxRating%</h1></div>
                             <h3>Please Answer The Question(s) Below</h3>
                             <hr />
-                            <label class="control-label">Do you currently have a rating by the VA for this @Model.contentType.VisibleCode disability?  If so, what is it?</label>
-                            <br />
+                            @if (!((bool)Model.contentType.HasSides))
+                            {
+                                <label class="control-label">Do you currently have a rating by the VA for this @Model.contentType.VisibleCode disability?  If so, what is it?</label>
+                                <br />
+                            }
                             @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             @if ((bool)Model.contentType.HasSides)
                             {
+                                <label class="control-label">Do you currently have a rating by the VA for this <span>LEFT SIDE</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
-                                <label class="control-label">Do you have disability on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
+                                @Html.DropDownListFor(x => x.RatingLeftSide, (SelectList)ViewBag.CurrentRatingsList)
+                                <label class="control-label">Do you currently have a rating by the VA for this <span>RIGHT SIDE</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
-                                @Html.RadioButtonFor(x => x.Side, 2)
+                                @Html.DropDownListFor(x => x.RatingRightSide, (SelectList)ViewBag.CurrentRatingsList)
+
+                                @*<label class="control-label">Do you have disability on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
+                                <br />*@
+                                @*@Html.RadioButtonFor(x => x.Side, 2)
                                 <span>Left</span>
                                 @Html.RadioButtonFor(x => x.Side, 3)
                                 <span>Right</span>
                                 @Html.RadioButtonFor(x => x.Side, 4)
-                                <span>Both</span>
+                                <span>Both</span>*@
                             }
                             <hr />
                             @if (!string.IsNullOrEmpty(Model.Message))

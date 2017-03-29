@@ -94,7 +94,7 @@ namespace MainSite.Controllers
                 dashboardModel.evaluationResults.AmountIncreasePerMonth = amountIncreasePerMonth;
                 dashboardModel.evaluationResults.AmountIncreasePerYear = amountIncreasePerMonth * 12;
                 dashboardModel.evaluationResults.TotalPerMonthAfterIncrease = RatingProjections.RatingTable_1[dashboardModel.evaluationResults.PotentialVARating].TotalPerMonth;
-
+                dashboardModel.evaluationResults.PotentialDelta = 100 - dashboardModel.evaluationResults.IncreaseRating - dashboardModel.evaluationResults.CurrentRating;
                 //ViewData["FormsSaved"] = "1";
             }
 
@@ -229,31 +229,33 @@ namespace MainSite.Controllers
                 Message = user.UserMessage,
                 SSN = user.Ssn,
                 InternalCalculatedRating = user.InternalCalculatedRating,
-                CurrentRating = (int) user.CurrentRating,
-                HasCurrentRating = (bool) user.HasCurrentRating,
-                IsRatingProfileFinished = (bool) user.IsRatingProfileFinished
+                CurrentRating = (int)user.CurrentRating,
+                HasCurrentRating = (bool)user.HasCurrentRating,
+                IsRatingProfileFinished = (bool)user.IsRatingProfileFinished
             };
             return userModel;
         }
         public ActionResult ProfileUpdate()
         {
+            ProfileModel profileModel = new ProfileModel();
             User user = Auth();
             UserModel userModel = UserToModel(user);
-            return View(userModel);
+            profileModel.userModel = userModel;
+            return View(profileModel);
         }
-        public ActionResult ProfileUpdateAction(UserModel userModel)
+        public ActionResult ProfileUpdateAction(ProfileModel profileModel)
         {
             User user = Auth();
 
             try
             {
-                user.Fullname = userModel.FullName;
-                user.Username = userModel.Username;
-                if (!string.IsNullOrEmpty(userModel.SSN))
+                user.Fullname = profileModel.userModel.FullName;
+                user.Username = profileModel.userModel.Username;
+                if (!string.IsNullOrEmpty(profileModel.userModel.SSN))
                 {
-                    if (!user.Ssn.Equals(userModel.SSN))
+                    if (!user.Ssn.Equals(profileModel.userModel.SSN))
                     {
-                        user.Ssn = UtilsSecurity.encrypt(userModel.SSN);
+                        user.Ssn = UtilsSecurity.encrypt(profileModel.userModel.SSN);
                     }
                 }
                 else
@@ -261,13 +263,13 @@ namespace MainSite.Controllers
                     user.Ssn = null;
                 }
 
-                user.PhoneNumber = userModel.PhoneNumber;
-                if (!user.Passwd.Equals(userModel.Password))
+                user.PhoneNumber = profileModel.userModel.PhoneNumber;
+                if (!user.Passwd.Equals(profileModel.userModel.Password))
                 {
-                    user.Passwd = UtilsSecurity.encrypt(userModel.Password);
+                    user.Passwd = UtilsSecurity.encrypt(profileModel.userModel.Password);
                 }
-                user.UserMessage = userModel.Message;
-                user.CurrentRating = userModel.CurrentRating;
+                user.UserMessage = profileModel.userModel.Message;
+                user.CurrentRating = profileModel.userModel.CurrentRating;
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
 
@@ -275,7 +277,7 @@ namespace MainSite.Controllers
                 {
                     ViewData["IsSaved"] = true;
                     user = busFacCore.UserGet(lID);
-                    userModel = UserToModel(user);
+                    profileModel.userModel = UserToModel(user);
                 }
                 else
                 {
@@ -284,7 +286,7 @@ namespace MainSite.Controllers
             }
             catch (Exception ex) { }
 
-            return View("ProfileUpdate", userModel);
+            return View("ProfileUpdate", profileModel);
         }
         public ActionResult Evaluation(EvaluationModel evaluationModel)
         {
@@ -1022,7 +1024,17 @@ namespace MainSite.Controllers
                 }
                 model.contentType = returnContentType;
                 model.ContentTypeID = returnContentType.ContentTypeID;
-                model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
+                string imageUrl = "../Images/";
+                if (returnContentType.ContentTypeID == 0)
+                {
+                    imageUrl += "ebenefits.jpg";
+                }
+                else
+                {
+                    imageUrl += returnContentType.Code + ".jpg";
+                }
+                model.imageURL = imageUrl;
+                //model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
                 model.Rating = 0;
 
             }
@@ -1030,6 +1042,10 @@ namespace MainSite.Controllers
             {
 
             }
+
+            model.Rating = 0;
+            model.RatingLeftSide = 0;
+            model.RatingRightSide = 0;
             return View(model);
         }
 
@@ -1059,7 +1075,7 @@ namespace MainSite.Controllers
                 {
                     // Update user with content type
                     ContentType contentType = busFacCore.ContentTypeGet(lParsedContentTypeID);
-                    if (((bool) contentType.HasSides) && (model.Side == 0))
+                    if (((bool)contentType.HasSides) && (model.Side == 0))
                     {
                         model.Message = "Please choose which side is your disability.";
                     }
@@ -1069,7 +1085,20 @@ namespace MainSite.Controllers
                         JctUserContentType jctUserContentType = null;
                         if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == contentType.ContentTypeID)))
                         {
-                            jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side };
+                            if ((model.RatingLeftSide > 0) && (model.RatingRightSide > 0))
+                            {
+                                model.Side = 4;
+                            }
+                            else if (model.RatingLeftSide > 0)
+                            {
+                                model.Side = 2;
+                            }
+                            else
+                            {
+                                model.Side = 3;
+                            }
+
+                            jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side, RatingLeft = model.RatingLeftSide, RatingRight = model.RatingRightSide };
                             long lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
                         }
                     }
@@ -1080,31 +1109,47 @@ namespace MainSite.Controllers
             {
 
             }
+            model.Rating = 0;
+            model.RatingLeftSide = 0;
+            model.RatingRightSide = 0;
+
             return RedirectToAction("RatingsCapture", model);
         }
 
-        private string GetContentTypeImageUrl(long contentTypeID)
-        {
-            string imageUrl = "../Images/";
-            switch (contentTypeID)
-            {
-                case 0:
-                    imageUrl += "ebenefits.jpg";
-                    break;
-                case 1:
-                    imageUrl += "back-pain.jpg";
-                    break;
-                case 2:
-                    imageUrl += "shoulder-pain.jpg";
-                    break;
-                case 3:
-                    imageUrl += "neck-pain.jpg";
-                    break;
-                default:
-                    break;
-            }
-            return imageUrl;
-        }
+        //private string GetContentTypeImageUrl(long contentTypeID)
+        //{
+        //    string imageUrl = "../Images/";
+        //    switch (contentTypeID)
+        //    {
+        //        case 0:
+        //            imageUrl += "ebenefits.jpg";
+        //            break;
+        //        case 1:
+        //            imageUrl += "back.jpg";
+        //            break;
+        //        case 2:
+        //            imageUrl += "shoulder.jpg";
+        //            break;
+        //        case 3:
+        //            imageUrl += "neck.jpg";
+        //            break;
+        //        case 4:
+        //            imageUrl += "foot.jpg";
+        //            break;
+        //        case 5:
+        //            imageUrl += "sleepapnea.jpg";
+        //            break;
+        //        case 6:
+        //            imageUrl += "headache.jpg";
+        //            break;
+        //        case 7:
+        //            imageUrl += "ankle.jpg";
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    return imageUrl;
+        //}
 
         //[HttpPost]
         //public ActionResult Charge(string stripeEmail, string stripeToken)

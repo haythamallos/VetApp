@@ -11,23 +11,10 @@
     <script>
         var CurrentRating = @Model.evaluationResults.CurrentRating;
         var IncreaseRating = @Model.evaluationResults.IncreaseRating;
+        var PotentialDelta = @Model.evaluationResults.PotentialDelta;
     </script>
     <div class="col-md-12">
         <div class="col-md-9">
-            @*<div class="user-btm-box">
-                    <div class="col-md-4 col-sm-4 text-center">
-                        <p class="text-purple font-bold">More $ Month</p>
-                        <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
-                    </div>
-                    <div class="col-md-4 col-sm-4 text-center">
-                        <p class="text-blue font-bold">More $ Year</p>
-                        <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
-                    </div>
-                    <div class="col-md-4 col-sm-4 text-center">
-                        <p class="text-danger font-bold">Potential Rating</p>
-                        <h1>@Model.evaluationResults.PotentialVARating%</h1>
-                    </div>
-                </div>*@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box col-md-6">
@@ -42,6 +29,10 @@
                             <li class="p-r-20">
                                 <h5 class="text-muted"><i class="fa fa-circle" style="color: #00b5c2;"></i> Increase</h5>
                                 <h4 class="m-b-0">@Model.evaluationResults.IncreaseRating%</h4>
+                            </li>
+                            <li class="p-r-20">
+                                <h5 class="text-muted"><i class="fa fa-circle" style="color: #4F5467;"></i> Potential</h5>
+                                <h4 class="m-b-0">@Model.evaluationResults.PotentialDelta%</h4>
                             </li>
                         </ul>
                         <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
@@ -123,22 +114,20 @@
             {
                 <div class="white-box">
                     <h3 class="box-title">Free Evaluation Results</h3>
-
                     <hr>
-                    <p class="text-purple font-bold">More $ Month</p>
+                    <p class="text-blue font-bold">More $ Month</p>
                     <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
                     <hr>
-                    <p class="text-purple font-bold">More $ Year</p>
+                    <p class="text-blue font-bold">More $ Year</p>
                     <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
-
                     <hr>
-                    <small>Current VA Rating</small>
-                    <h2>@Model.evaluationResults.CurrentRating%</h2>
+                    <p class="text-blue font-bold">Current VA Rating</p>
+                    <h1>@Model.evaluationResults.CurrentRating%</h1>
                     <hr>
-                    <small>Potential VA Rating</small>
-                    <h2>@Model.evaluationResults.PotentialVARating%</h2>
+                    <p class="text-blue font-bold">Potential VA Rating</p>
+                    <h1>@Model.evaluationResults.PotentialVARating%</h1>
                     <hr>
-                    <p class="text-purple font-bold">Total Per Month After Increase</p>
+                    <p class="text-blue font-bold">Total Per Month After Increase</p>
                     <h1>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h1>
                 </div>
             }
@@ -147,29 +136,3 @@
 
     </div>
 </div>
-<!-- /#page-wrapper -->
-@*<h3 class="box-title m-b-0">Get started with your VA rating increase</h3>
-    <p class="text-muted m-b-20">
-        Tell us about your current VA ratings for each disability.  This will help us assess the full potential of your rating increase.
-    </p>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Disability</th>
-                    <th>Current VA Rating</th>
-                    <th class="text-nowrap"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.BenefitStatuses[1].BenefitName</td>
-                    <td>
-                        @Html.DropDownListFor(model => model.userModel.CurrentRatingBack, (SelectList)ViewBag.CurrentRatingsList)
-                    </td>
-                    <td class="text-nowrap"><a href="/Dashboard/FormGetBack" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].TooltipText"> Next </a>  </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>*@

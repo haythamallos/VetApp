@@ -6,17 +6,16 @@ namespace MainSite.Controllers
 {
     public class CalculatorController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(CalculatorViewModel model)
         {
-            CalculatorViewModel model = getModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult ProcessForm(string submit)
+        public ActionResult ProcessForm(CalculatorViewModel model, string submitVal)
         {
-            CalculatorViewModel model = getModel();
+            //CalculatorViewModel model = getModel();
 
-            switch (submit)
+            switch (submitVal)
             {
                 case "10":
                 case "20":
@@ -27,7 +26,7 @@ namespace MainSite.Controllers
                 case "70":
                 case "80":
                 case "90":
-                    model.workingItem.RatingID = Convert.ToInt32(submit);
+                    model.workingItem.RatingID = Convert.ToInt32(submitVal);
                     model.AddItem();
                     break;
                 case "Bilateral Upper Arms":
@@ -54,8 +53,12 @@ namespace MainSite.Controllers
                 default:
                     break;
             }
-            TempData["oCalcModel"] = model;
-            return View("Index", model);
+            (model.workingItemText = string.Empty;
+            if (model.workingItemText != null)
+            {
+                model.workingItemText = model.workingItem.ToString();
+            }
+            return RedirectToAction("Index", model);
         }
         
         public ActionResult RemoveItem(int id)

@@ -24,6 +24,7 @@ namespace MainSite.Models
         public int AmountIncreasePerMonth { get; set; }
         public int TotalPerMonthAfterIncrease { get; set; }
         public int AmountIncreasePerYear { get; set; }
+        public int PotentialDelta { get; set; }
     }
 
     public class BenefitStatus

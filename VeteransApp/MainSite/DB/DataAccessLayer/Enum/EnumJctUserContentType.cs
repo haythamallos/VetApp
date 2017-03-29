@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumJctUserContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/23/2017	Created
+    /// 001	HA	3/24/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -55,6 +55,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private long _lSideID = 0;
         private long _lContentTypeID = 0;
         private long _lRating = 0;
+        private long _lRatingLeft = 0;
+        private long _lRatingRight = 0;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -78,7 +80,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_CONTENT_TYPE_ID = "ContentTypeID"; //Attribute ContentTypeID  name
                                                                              /// <summary>Rating Attribute type string</summary>
         public static readonly string TAG_RATING = "Rating"; //Attribute Rating  name
-                                                             // Stored procedure name
+                                                             /// <summary>RatingLeft Attribute type string</summary>
+        public static readonly string TAG_RATINGLEFT = "RatingLeft"; //Attribute RatingLeft  name
+                                                                     /// <summary>RatingRight Attribute type string</summary>
+        public static readonly string TAG_RATINGRIGHT = "RatingRight"; //Attribute RatingRight  name
+                                                                       // Stored procedure name
         public string SP_ENUM_NAME = "spJctUserContentTypeEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the JctUserContentType Class of type bool</summary>
@@ -140,6 +146,18 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _lRating; }
             set { _lRating = value; }
+        }
+        /// <summary>RatingLeft is a Property in the JctUserContentType Class of type long</summary>
+        public long RatingLeft
+        {
+            get { return _lRatingLeft; }
+            set { _lRatingLeft = value; }
+        }
+        /// <summary>RatingRight is a Property in the JctUserContentType Class of type long</summary>
+        public long RatingRight
+        {
+            get { return _lRatingRight; }
+            set { _lRatingRight = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -327,6 +345,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_SIDE_ID + ":  " + SideID + "\n");
             sbReturn.Append(TAG_CONTENT_TYPE_ID + ":  " + ContentTypeID + "\n");
             sbReturn.Append(TAG_RATING + ":  " + Rating + "\n");
+            sbReturn.Append(TAG_RATINGLEFT + ":  " + RatingLeft + "\n");
+            sbReturn.Append(TAG_RATINGRIGHT + ":  " + RatingRight + "\n");
 
             return sbReturn.ToString();
         }
@@ -374,6 +394,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_SIDE_ID + ">" + SideID + "</" + TAG_SIDE_ID + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_TYPE_ID + ">" + ContentTypeID + "</" + TAG_CONTENT_TYPE_ID + ">\n");
             sbReturn.Append("<" + TAG_RATING + ">" + Rating + "</" + TAG_RATING + ">\n");
+            sbReturn.Append("<" + TAG_RATINGLEFT + ">" + RatingLeft + "</" + TAG_RATINGLEFT + ">\n");
+            sbReturn.Append("<" + TAG_RATINGRIGHT + ">" + RatingRight + "</" + TAG_RATINGRIGHT + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -495,6 +517,26 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 Rating = 0;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_RATINGLEFT);
+                RatingLeft = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                RatingLeft = 0;
+            }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_RATINGRIGHT);
+                RatingRight = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                RatingRight = 0;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -585,6 +627,26 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     Rating = 0;
                 }
 
+                Console.WriteLine(TAG_RATINGLEFT + ":  ");
+                try
+                {
+                    RatingLeft = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    RatingLeft = 0;
+                }
+
+                Console.WriteLine(TAG_RATINGRIGHT + ":  ");
+                try
+                {
+                    RatingRight = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    RatingRight = 0;
+                }
+
 
             }
             catch (Exception e)
@@ -632,6 +694,8 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramSideID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramRating = null;
+            SqlParameter paramRatingLeft = null;
+            SqlParameter paramRatingRight = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -702,6 +766,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_RATING + "=" + Rating + "\n");
             paramRating.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramRating);
+
+            paramRatingLeft = new SqlParameter("@" + TAG_RATINGLEFT, RatingLeft);
+            sbLog.Append(TAG_RATINGLEFT + "=" + RatingLeft + "\n");
+            paramRatingLeft.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramRatingLeft);
+
+            paramRatingRight = new SqlParameter("@" + TAG_RATINGRIGHT, RatingRight);
+            sbLog.Append(TAG_RATINGRIGHT + "=" + RatingRight + "\n");
+            paramRatingRight.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramRatingRight);
 
         }
 

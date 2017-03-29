@@ -1,9 +1,10 @@
-﻿@model MainSite.ViewModels.CalculatorViewModel
-@{
+﻿@{
     ViewBag.Title = "Caculator";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link rel="stylesheet" href="~/content/calculator.css">
 }
+
+@model MainSite.ViewModels.CalculatorViewModel
 
 <div id="page-wrapper">
     <div class="col-xs-12">
@@ -11,107 +12,71 @@
         <div class="white-box">
             <div class="row text-center">
                 <h4>VA Disability Ratings Calculator</h4>
-                @using (Html.BeginForm("ProcessForm", "Calculator", FormMethod.Post))
-                {
-
-                    <div class="col-lg-6">
-
-                        <div id="calculator">
-                            <label>Rating</label>
+                <div class="col-lg-6">
+                    <div id="calculator">
+                        <form id="formcalculator">
+                            <div class="inline-keys">
+                                <div id="screen">
+                                    <label style="color: white">@Model.workingItemText</label>
+                                    @*<label style="color: white">bla</label>*@
+                                </div>
+                            </div>
 
                             <div class="keys">
                                 <div class="inline-keys">
-                                    <input type="submit" name="submit" value="70" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="80" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="90" class="btn btn-success btn-lg" />
+                                    @for (int i = 70; i <= 90; i += 10)
+                                    {
+                                        <input type="button" value="@i" onclick="submitCalcValue(@i);" class="btn btn-success btn-lg" />
+                                    }
                                 </div>
+
                                 <div class="inline-keys">
-                                    <input type="submit" name="submit" value="40" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="50" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="60" class="btn btn-success btn-lg" />
+                                    @for (int i = 40; i <= 60; i += 10)
+                                    {
+                                        <input id="@i" type="button" value="@i" onclick="submitCalcValue(@i);" class="btn btn-success btn-lg" />
+                                    }
                                 </div>
+
                                 <div class="inline-keys">
-                                    <input type="submit" name="submit" value="10" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="20" class="btn btn-success btn-lg" />
-                                    <input type="submit" name="submit" value="30" class="btn btn-success btn-lg" />
+                                    @for (int i = 10; i <= 30; i += 10)
+                                    {
+                                        <input id="@i" type="button" value="@i" onclick="submitCalcValue(@i);" class="btn btn-success btn-lg" />
+                                    }
                                 </div>
+
                                 <div class="inline-keys">
-                                    <input type="submit" name="submit" value="Clear" class="btn btn-danger btn-lg" />
+                                    <input id="btnSubmitClear" type="button" value="Clear" onclick="submitCalcValue('Clear');" class="btn btn-danger btn-lg" />
                                 </div>
+
                                 <div class="keys">
                                     <label>Bilateral Facts</label>
 
                                     <div class="inline-keys">
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("1")" class="btn btn-primary" />
+                                        <input id="btnSubmitBil1" type="button" value="@Model.getBilateralFactorItem("1")" onclick="submitCalcValue('@Model.getBilateralFactorItem("1")');" class="btn btn-primary" />
                                     </div>
                                     <div class="inline-keys">
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("2")" class="btn btn-primary" />
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("3")" class="btn btn-primary" />
+                                        <input id="btnSubmitBil2" type="button" value="@Model.getBilateralFactorItem("2")" onclick="submitCalcValue('@Model.getBilateralFactorItem("2")');"  class="btn btn-primary" />
+                                        <input id="btnSubmitBil3" type="button" value="@Model.getBilateralFactorItem("3")" onclick="submitCalcValue('@Model.getBilateralFactorItem("3")');"  class="btn btn-primary" />
                                     </div>
                                     <div class="inline-keys">
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("4")" class="btn btn-primary" />
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("5")" class="btn btn-primary" />
+                                        <input id="btnSubmitBil4" type="button" value="@Model.getBilateralFactorItem("4")" onclick="submitCalcValue('@Model.getBilateralFactorItem("4")');"  class="btn btn-primary" />
+                                        <input id="btnSubmitBil5" type="button" value="@Model.getBilateralFactorItem("5")" onclick="submitCalcValue('@Model.getBilateralFactorItem("5")');"  class="btn btn-primary" />
                                     </div>
                                     <div class="inline-keys">
-                                        <input type="submit" name="submit" value="@Model.getBilateralFactorItem("6")" class="btn btn-primary" />
-                                    </div>
-                                    <div class="inline-keys">
-                                        <div id="screen">
-                                            <label style="color: white">@Model.workingItem.ToString()</label>
-                                        </div>
+                                        <input id="btnSubmitBil6" type="button" value="@Model.getBilateralFactorItem("6")" onclick="submitCalcValue('@Model.getBilateralFactorItem("6")');"  class="btn btn-primary" />
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
+                        </form>
                     </div>
-                    <div class="col-lg-4">
-                        <div id="calculator">
+                </div>
+                <div class="col-lg-3">
 
-                            <div class="keys">
-                                <div class="inline-keys">
-                                    <label>Combined Rating</label>
-                                    <div id="screen">
-                                        <label style="color: white">@Model.combinedRating</label>
-                                    </div>
+                </div>
+                <div class="col-lg-3">
 
-                                    <h6>All ratings listed in descending order</h6>
-                                </div>
-                            </div>
-                            @{
-                                int ind = 0;
-                                foreach (var item in Model.lstCalculatorItem)
-                                {
-                                    if (!item.isBilateralWorkingItem)
-                                    {
-                                        <div class="inline-keys">
-                                            <div id="screen">
-                                                <label style="color: white">@item.ToString()</label>
-                                            </div>
-                                            @Html.ActionLink("Remove", "RemoveItem", "Calculator", new { id = ind }, null)
-                                        </div>
-                                    }
-                                    ind++;
-                                }
-                                if (Model.hasBilateral)
-                                {
-                                    <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
-                                }
-                                if (Model.isLowerBilateral)
-                                {
-                                    <h6>Lower Bilateral Factor Active</h6>
-                                }
-                                if (Model.isUpperBilateral)
-                                {
-                                    <h6>Upper Bilateral Factor Active</h6>
-                                }
-                            }
+                </div>
 
-                        </div>
-
-                    </div>
-                                }
 
             </div>
 
@@ -119,5 +84,152 @@
         <!--row -->
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function submitCalcValue(id) {
+        var model = $('#formcalculator').serialize();
+        // Serialize model for Posting model
+        $.ajax({
+            url: '/Calculator/ProcessForm?submitVal=' + id,
+            type: 'POST',
+            data: model,  // Pass Model to Controller Using Ajax Call
+            success: function (data) {
+                // Show Data
+            }
+        });
+    }
+
+    //$('document').ready(function () {
+
+
+
+
+    //    $("#btnSubmit").on("click", function () {
+
+    //        var model = $('#formcalculator').serialize();
+    //        // Serialize model for Posting model
+    //        $.ajax({
+    //            url: '/Calculator/ProcessForm?submitVal=' + $(this).valueOf,
+    //            type: 'POST',
+    //            data: model,  // Pass Model to Controller Using Ajax Call
+    //            success: function (data) {
+    //            }
+    //        });
+    //    });
+    //});
+</script>
+
+@*@using (Html.BeginForm("ProcessForm", "Calculator", FormMethod.Post))
+        {
+
+            <div class="col-lg-4">
+
+                <div id="calculator">
+                    <label>Rating</label>
+
+                    <div class="keys">
+                        <div class="inline-keys">
+                            <input type="submit" name="submit" value="70" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="80" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="90" class="btn btn-success btn-lg" />
+                        </div>
+                        <div class="inline-keys">
+                            <input type="submit" name="submit" value="40" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="50" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="60" class="btn btn-success btn-lg" />
+                        </div>
+                        <div class="inline-keys">
+                            <input type="submit" name="submit" value="10" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="20" class="btn btn-success btn-lg" />
+                            <input type="submit" name="submit" value="30" class="btn btn-success btn-lg" />
+                        </div>
+                        <div class="inline-keys">
+                            <input type="submit" name="submit" value="Clear" class="btn btn-danger btn-lg" />
+                        </div>
+                        <div class="keys">
+                            <label>Bilateral Facts</label>
+
+                            <div class="inline-keys">
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("1")" class="btn btn-primary" />
+                            </div>
+                            <div class="inline-keys">
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("2")" class="btn btn-primary" />
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("3")" class="btn btn-primary" />
+                            </div>
+                            <div class="inline-keys">
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("4")" class="btn btn-primary" />
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("5")" class="btn btn-primary" />
+                            </div>
+                            <div class="inline-keys">
+                                <input type="submit" name="submit" value="@Model.getBilateralFactorItem("6")" class="btn btn-primary" />
+                            </div>
+                            <div class="inline-keys">
+                                <div id="screen">
+                                    <label style="color: white">@Model.workingItem.ToString()</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div id="calculator">
+
+                    <div class="keys">
+                        <div class="inline-keys">
+                            <label>Combined Rating</label>
+                            <div id="screen">
+                                <label style="color: white">@Model.combinedRating</label>
+                            </div>
+
+                            <h6>All ratings listed in descending order</h6>
+                        </div>
+                    </div>
+                    @{
+                        int ind = 0;
+                        foreach (var item in Model.lstCalculatorItem)
+                        {
+                            if (!item.isBilateralWorkingItem)
+                            {
+                                <div class="inline-keys">
+                                    <div id="screen">
+                                        <label style="color: white">@item.ToString()</label>
+                                    </div>
+                                    @Html.ActionLink("Remove", "RemoveItem", "Calculator", new { id = ind }, null)
+                                </div>
+                            }
+                            ind++;
+                        }
+                        if (Model.efficiencyRating > 0)
+                        {
+                            <h6>Efficiency:  @Model.efficiencyRating%</h6>
+                        }
+
+                        if (Model.hasBilateral)
+                        {
+                            <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
+                        }
+                        if (Model.isLowerBilateral)
+                        {
+                            <h6>Lower Bilateral Factor Active</h6>
+                        }
+                        if (Model.isUpperBilateral)
+                        {
+                            <h6>Upper Bilateral Factor Active</h6>
+                        }
+                    }
+
+    </div>
+
+        </div>
+                    }*@
+
+
+
+
 
 
