@@ -6,14 +6,16 @@ namespace MainSite.Controllers
 {
     public class CalculatorController : Controller
     {
-        public ActionResult Index(CalculatorViewModel model)
+        public ActionResult Index()
         {
+            CalculatorViewModel model = getModel();
             return View(model);
         }
+
         [HttpPost]
-        public ActionResult ProcessForm(CalculatorViewModel model, string submitVal)
+        public ActionResult ProcessForm(string submitVal)
         {
-            //CalculatorViewModel model = getModel();
+            CalculatorViewModel model = getModel();
 
             switch (submitVal)
             {
@@ -53,14 +55,11 @@ namespace MainSite.Controllers
                 default:
                     break;
             }
-            (model.workingItemText = string.Empty;
-            if (model.workingItemText != null)
-            {
-                model.workingItemText = model.workingItem.ToString();
-            }
-            return RedirectToAction("Index", model);
+
+            TempData["oCalcModel"] = model;
+            return View("Index", model);
         }
-        
+
         public ActionResult RemoveItem(int id)
         {
             CalculatorViewModel model = getModel();

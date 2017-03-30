@@ -7,26 +7,23 @@ namespace MainSite.ViewModels
     public class CalculatorViewModel
     {
         public List<CalculatorItem> lstCalculatorItem { get; set; }
-        public List<CalculatorItem> lstCalculatorItemUpperBilateral { get; set; }
-        public List<CalculatorItem> lstCalculatorItemLowerBilateral { get; set; }
         public CalculatorItem workingItem { get; set; }
         public string workingItemText { get; set; }
         public int combinedRating { get; set; }
+        public int combinedExactRating { get; set; }
         public int efficiencyRating { get; set; }
-        public CalculatorItem bilateralWorkingItem { get; set; }
+        public CalculatorWorkingItem bilateralWorkingItem { get; set; }
         public bool hasBilateral { get; set; }
         public bool isLowerBilateral = false;
         public bool isUpperBilateral = false;
+        public double bilateralFactorResult { get; set; }
 
         public CalculatorViewModel()
         {
             lstCalculatorItem = new List<CalculatorItem>();
-            lstCalculatorItemUpperBilateral = new List<CalculatorItem>();
-            lstCalculatorItemLowerBilateral = new List<CalculatorItem>();
             workingItem = new CalculatorItem();
-            bilateralWorkingItem = new CalculatorItem() { isBilateralWorkingItem = true };
-            combinedRating = 0;
-            hasBilateral = false;
+            bilateralWorkingItem = new CalculatorWorkingItem();
+            Clear();
         }
 
         public void AddItem()
@@ -35,7 +32,7 @@ namespace MainSite.ViewModels
             {
                 CalculatorItem item = new CalculatorItem() { RatingID = workingItem.RatingID, BilateralFactorID = workingItem.BilateralFactorID };
                 lstCalculatorItem.Add(item);
-                workingItem.Clear();
+                ClearActiveItems();
                 lstCalculatorItem = lstCalculatorItem.OrderByDescending(x => x.RatingID).ToList();
                 combinedRating = CalcCombinedRating();
             }
@@ -45,6 +42,7 @@ namespace MainSite.ViewModels
             if (index < lstCalculatorItem.Count)
             {
                 lstCalculatorItem.RemoveAt(index);
+                ClearActiveItems();
                 lstCalculatorItem = lstCalculatorItem.OrderByDescending(x => x.RatingID).ToList();
                 combinedRating = CalcCombinedRating();
             }
@@ -55,9 +53,96 @@ namespace MainSite.ViewModels
             workingItem.Clear();
             combinedRating = 0;
             efficiencyRating = 0;
+            combinedExactRating = 0;
             bilateralWorkingItem.Clear();
-            bilateralWorkingItem.isBilateralWorkingItem = true;
             hasBilateral = false;
+            isLowerBilateral = false;
+            isUpperBilateral = false;
+            bilateralFactorResult = 0;
+        }
+        public void ClearActiveItems()
+        {
+            workingItem.Clear();
+            combinedRating = 0;
+            efficiencyRating = 0;
+            combinedExactRating = 0;
+            bilateralWorkingItem.Clear();
+            hasBilateral = false;
+            isLowerBilateral = false;
+            isUpperBilateral = false;
+            bilateralFactorResult = 0;
+        }
+
+        private void DoBilateralPass()
+        {
+            CalculatorItem item = null;
+            for (int i = 0; i < lstCalculatorItem.Count; i++)
+            {
+                item = lstCalculatorItem[i];
+                item.isLowerBilateral = false;
+                item.isUpperBilateral = false;
+
+                if (string.IsNullOrEmpty(item.BilateralFactorID))
+                {
+                    continue;
+                }
+
+                if (item.BilateralFactorID == "1")
+                {
+                    item.isUpperBilateral = true;
+                }
+                else if (item.BilateralFactorID == "6")
+                {
+                    item.isLowerBilateral = true;
+                }
+                else if (item.BilateralFactorID == "2")
+                {
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "3"))
+                        || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "1")))
+                    {
+                        item.isUpperBilateral = true;
+                    }
+                }
+                else if (item.BilateralFactorID == "3")
+                {
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "2"))
+                        || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "1")))
+                    {
+                        item.isUpperBilateral = true;
+                    }
+                }
+                else if (item.BilateralFactorID == "4")
+                {
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "5"))
+                       || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "6")))
+
+                    {
+                        item.isLowerBilateral = true;
+                    }
+                }
+                else if (item.BilateralFactorID == "5")
+                {
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "4"))
+                       || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "6")))
+                    {
+                        item.isLowerBilateral = true;
+                    }
+                }
+
+                if ((item.isUpperBilateral) || (item.isLowerBilateral))
+                {
+                    hasBilateral = true;
+                    if (item.isLowerBilateral)
+                    {
+                        isLowerBilateral = true;
+                    }
+
+                    if (item.isUpperBilateral)
+                    {
+                        isUpperBilateral = true;
+                    }
+                }
+            }
         }
         public int CalcCombinedRating()
         {
@@ -69,18 +154,41 @@ namespace MainSite.ViewModels
             double curRating = 0;
             double roundedRating = 0;
 
+            DoBilateralPass();
+
             for (int i = 0; i < lstCalculatorItem.Count; i++)
             {
                 item = lstCalculatorItem[i];
-                tmpRating = (item.RatingID / 100.0) * curEfficiency;
-                tmpRating = Math.Round(tmpRating, MidpointRounding.AwayFromZero);
-                curEfficiency = curEfficiency - tmpRating;
-                curEfficiency = Math.Round(curEfficiency, MidpointRounding.AwayFromZero);
-                curRating = Math.Round((curRating + tmpRating), MidpointRounding.AwayFromZero);
+                if ((item.isLowerBilateral) || (item.isUpperBilateral))
+                {
+                    tmpRating = (item.RatingID / 100.0) * curEfficiency;
+                    tmpRating = Math.Round(tmpRating, MidpointRounding.AwayFromZero);
+                    curEfficiency = curEfficiency - tmpRating;
+                    curEfficiency = Math.Round(curEfficiency, MidpointRounding.AwayFromZero);
+                    curRating = Math.Round((curRating + tmpRating), MidpointRounding.AwayFromZero);
+                }
             }
-
             efficiencyRating = Convert.ToInt32(Math.Round(curRating, MidpointRounding.AwayFromZero));
-            roundedRating = RoundToTens(efficiencyRating);
+            bilateralFactorResult = 0.1 * efficiencyRating;
+            int efficiencyRatingWithBilateral = Convert.ToInt32(Math.Round(efficiencyRating + bilateralFactorResult, MidpointRounding.AwayFromZero));
+
+            curRating = 0;
+            for (int i = 0; i < lstCalculatorItem.Count; i++)
+            {
+                item = lstCalculatorItem[i];
+                if ((!item.isLowerBilateral) && (!item.isUpperBilateral))
+                {
+                    tmpRating = (item.RatingID / 100.0) * curEfficiency;
+                    tmpRating = Math.Round(tmpRating, MidpointRounding.AwayFromZero);
+                    curEfficiency = curEfficiency - tmpRating;
+                    curEfficiency = Math.Round(curEfficiency, MidpointRounding.AwayFromZero);
+                    curRating = Math.Round((curRating + tmpRating), MidpointRounding.AwayFromZero);
+                }
+            }
+            efficiencyRating = Convert.ToInt32(Math.Round(curRating, MidpointRounding.AwayFromZero));
+
+            combinedExactRating = efficiencyRatingWithBilateral + efficiencyRating;
+            roundedRating = RoundToTens(combinedExactRating);
             result = Convert.ToInt32(roundedRating);
 
             return result;
@@ -279,8 +387,8 @@ namespace MainSite.ViewModels
     {
         public int RatingID { get; set; }
         public string BilateralFactorID { get; set; }
-        public bool isBilateralWorkingItem { get; set; }
-        public bool skipLateralCalc { get; set; }
+        public bool isUpperBilateral { get; set; }
+        public bool isLowerBilateral { get; set; }
         public override string ToString()
         {
             string s = string.Empty;
@@ -298,8 +406,17 @@ namespace MainSite.ViewModels
         {
             BilateralFactorID = null;
             RatingID = 0;
-            isBilateralWorkingItem = false;
-            skipLateralCalc = false;
+        }
+    }
+
+    public class CalculatorWorkingItem
+    {
+        public int RatingID { get; set; }
+        public string BilateralFactorID { get; set; }
+        public void Clear()
+        {
+            BilateralFactorID = null;
+            RatingID = 0;
         }
     }
 }
