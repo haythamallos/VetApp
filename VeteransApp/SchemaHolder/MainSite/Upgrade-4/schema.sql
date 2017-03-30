@@ -7,9 +7,11 @@ INSERT INTO content_type (content_type_id, date_created, code, [description], vi
 INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides, price_in_pennies, product_ref_name, product_ref_description, number_of_pages) VALUES (9, GETDATE(), 'KNEE', 'Knee', 'Knee', 20, 1, 99.99, 'OMB Approved No. 2900-0813', 'KNEE AND LOWER LEG CONDITIONS DISABILITY BENEFITS QUESTIONNAIRE', 11)
 INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides, price_in_pennies, product_ref_name, product_ref_description, number_of_pages) VALUES (10, GETDATE(), 'HIP', 'Hip', 'Hip', 20, 1, 99.99, 'OMB Approved No. 2900-0811', 'HIP AND THIGH CONDITIONS DISABILITY BENEFITS QUESTIONNAIRE', 11)
 INSERT INTO content_type (content_type_id, date_created, code, [description], visible_code, max_rating, has_sides, price_in_pennies, product_ref_name, product_ref_description, number_of_pages) VALUES (11, GETDATE(), 'ELBOW', 'Elbow', 'Elbow', 20, 1, 99.99, 'OMB Approved No. 2900-0812', 'ELBOW AND FOREARM CONDITIONS DISABILITY BENEFITS QUESTIONNAIRE', 12)
+go
 
 alter table jct_user_content_type add RatingLeft INT NULL
 go
+
 alter table jct_user_content_type add RatingRight INT NULL
 go
 

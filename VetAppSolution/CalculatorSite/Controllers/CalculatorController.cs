@@ -13,12 +13,13 @@ namespace CalculatorSite.Controllers
             CalculatorViewModel model = getModel();
             return View(model);
         }
+
         [HttpPost]
-        public ActionResult ProcessForm(string submit)
+        public ActionResult ProcessForm(string submitVal)
         {
             CalculatorViewModel model = getModel();
 
-            switch (submit)
+            switch (submitVal)
             {
                 case "10":
                 case "20":
@@ -29,7 +30,7 @@ namespace CalculatorSite.Controllers
                 case "70":
                 case "80":
                 case "90":
-                    model.workingItem.RatingID = Convert.ToInt32(submit);
+                    model.workingItem.RatingID = Convert.ToInt32(submitVal);
                     model.AddItem();
                     break;
                 case "Bilateral Upper Arms":
@@ -56,10 +57,11 @@ namespace CalculatorSite.Controllers
                 default:
                     break;
             }
+
             TempData["oCalcModel"] = model;
             return View("Index", model);
         }
-        
+
         public ActionResult RemoveItem(int id)
         {
             CalculatorViewModel model = getModel();

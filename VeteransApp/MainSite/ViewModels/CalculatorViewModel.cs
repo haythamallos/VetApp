@@ -89,11 +89,21 @@ namespace MainSite.ViewModels
 
                 if (item.BilateralFactorID == "1")
                 {
-                    item.isUpperBilateral = true;
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "2"))
+                        || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "3")))
+                    {
+                        item.isUpperBilateral = true;
+                    }
+
                 }
                 else if (item.BilateralFactorID == "6")
                 {
-                    item.isLowerBilateral = true;
+                    if ((lstCalculatorItem.Exists(x => x.BilateralFactorID == "4"))
+                        || (lstCalculatorItem.Exists(x => x.BilateralFactorID == "5")))
+                    {
+                        item.isLowerBilateral = true;
+                    }
+
                 }
                 else if (item.BilateralFactorID == "2")
                 {

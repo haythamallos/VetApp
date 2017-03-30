@@ -5,109 +5,132 @@
     <link rel="stylesheet" href="~/content/calculator.css">
 }
 
-<div class="row text-center">
-    <h4>VA Disability Ratings Calculator</h4>
-    @using (Html.BeginForm("ProcessForm", "Calculator", FormMethod.Post))
-    {
- 
-        <div class="col-lg-7">
-           
-            <div id="calculator">
-                <label>Rating</label>
-               
-                <div class="keys">
-                    <div class="inline-keys">
-                        <input type="submit" name="submit" value="70" class="btn btn-success btn-lg" />
-                        <input type="submit" name="submit" value="80" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="90" class="btn btn-success btn-lg"/>
-                    </div>
-                    <div class="inline-keys">
-                        <input type="submit" name="submit" value="40" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="50" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="60" class="btn btn-success btn-lg"/>
-                    </div>
-                    <div class="inline-keys">
-                        <input type="submit" name="submit" value="10" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="20" class="btn btn-success btn-lg"/>
-                        <input type="submit" name="submit" value="30" class="btn btn-success btn-lg"/>
-                    </div>
-                    <div class="inline-keys">
-                        <input type="submit" name="submit" value="Clear" class="btn btn-danger btn-lg" />
-                    </div>
-                    <div class="keys">
-                        <label>Bilateral Facts</label>
+<div id="page-wrapper">
+    <div class="col-xs-12">
+        <!-- /.row -->
+        <div class="white-box">
+            <div class="row text-center">
+                <h4>VA Disability Ratings Calculator</h4>
+                <div class="col-lg-6">
+                    <div id="calculator">
 
-                        <div class="inline-keys">
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("1")" class="btn btn-primary" />
-                        </div>
-                        <div class="inline-keys">
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("2")" class="btn btn-primary" />
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("3")" class="btn btn-primary" />
-                        </div>
-                        <div class="inline-keys">
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("4")" class="btn btn-primary" />
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("5")" class="btn btn-primary" />
-                        </div>
-                         <div class="inline-keys">
-                            <input type="submit" name="submit" value="@Model.getBilateralFactorItem("6")" class="btn btn-primary" />
-                        </div>
-                        <div class="inline-keys">
-                            <div id="screen">
-                                <label style="color: white">@Model.workingItem.ToString()</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="col-lg-5">
-            <div id="calculator">
-                
-                <div class="keys">
-                    <div class="inline-keys">
-                        <label>Combined Rating</label>
-                        <div id="screen">
-                            <label style="color: white">@Model.combinedRating</label>
-                        </div>
-
-                        <h6>All ratings listed in descending order</h6>
-                    </div>
-                </div>
-                @{
-                    int ind = 0;
-                    foreach (var item in Model.lstCalculatorItem)
-                    {
-                        if (!item.isBilateralWorkingItem)
+                        @using (Html.BeginForm("ProcessForm", "Calculator", FormMethod.Post))
                         {
                             <div class="inline-keys">
                                 <div id="screen">
-                                    <label style="color: white">@item.ToString()</label>
+                                    <label style="color: white">@Model.workingItem.ToString()</label>
                                 </div>
-                                @Html.ActionLink("Remove", "RemoveItem", "Calculator", new { id = ind }, null)
+                            </div>
+
+                            <div class="keys">
+                                <div class="inline-keys">
+                                    @for (int i = 70; i <= 90; i += 10)
+                                    {
+                                        <input type="submit" value="@i" name="submitVal" class="btn btn-success btn-lg" />
+                                    }
+                                </div>
+
+                                <div class="inline-keys">
+                                    @for (int i = 40; i <= 60; i += 10)
+                                    {
+                                        <input type="submit" value="@i" name="submitVal" class="btn btn-success btn-lg" />
+                                    }
+                                </div>
+
+                                <div class="inline-keys">
+                                    @for (int i = 10; i <= 30; i += 10)
+                                    {
+                                        <input type="submit" value="@i" name="submitVal" class="btn btn-success btn-lg" />
+                                    }
+                                </div>
+
+                                <div class="inline-keys">
+                                    <input type="submit" value="Clear" name="submitVal" class="btn btn-danger btn-lg" />
+                                </div>
+
+                                <div class="keys">
+                                    <label>Bilateral Facts</label>
+
+                                    <div class="inline-keys">
+                                        <input type="submit" value="@Model.getBilateralFactorItem("1")" name="submitVal" class="btn btn-primary" />
+                                    </div>
+                                    <div class="inline-keys">
+                                        <input type="submit" value="@Model.getBilateralFactorItem("2")" name="submitVal" class="btn btn-primary" />
+                                        <input type="submit" value="@Model.getBilateralFactorItem("3")" name="submitVal" class="btn btn-primary" />
+                                    </div>
+                                    <div class="inline-keys">
+                                        <input type="submit" value="@Model.getBilateralFactorItem("4")" name="submitVal" class="btn btn-primary" />
+                                        <input type="submit" value="@Model.getBilateralFactorItem("5")" name="submitVal" class="btn btn-primary" />
+                                    </div>
+                                    <div class="inline-keys">
+                                        <input type="submit" value="@Model.getBilateralFactorItem("6")" name="submitVal" class="btn btn-primary" />
+                                    </div>
+                                </div>
                             </div>
                         }
-                        ind++;
-                    }
-                    if (Model.hasBilateral)
-                    {
-                        <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
-                    }
-                    if (Model.isLowerBilateral)
-                    {
-                        <h6>Lower Bilateral Factor Active</h6>
-                    }
-                    if (Model.isUpperBilateral)
-                    {
-                        <h6>Upper Bilateral Factor Active</h6>
-                    }
-                }
-             
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="calculator">
+
+                        <div class="keys">
+                            <div class="inline-keys">
+                                <label>Rating Result</label>
+                                <div id="screen">
+                                    <label style="color: white">@Model.combinedRating</label>
+                                </div>
+
+                                <h6>All ratings listed in descending order</h6>
+                            </div>
+                        </div>
+                        @{
+                            int ind = 0;
+                            foreach (var item in Model.lstCalculatorItem)
+                            {
+                                <div class="inline-keys">
+                                    <div id="screen">
+                                        <label style="color: white">@item.ToString()</label>
+                                    </div>
+                                    @Html.ActionLink("Remove", "RemoveItem", "Calculator", new { id = ind }, null)
+                                </div>
+                                ind++;
+                            }
+                            @*if (Model.efficiencyRating > 0)
+                                {
+                                    <h6>Efficiency:  @Model.efficiencyRating%</h6>
+                                }*@
+                        if (Model.combinedExactRating > 0)
+                        {
+                            <h6>Actual:  @Model.combinedExactRating%</h6>
+                        }
+                        if (Model.bilateralFactorResult > 0)
+                        {
+                            <h6>Applied Bilateral Factor:  @Model.bilateralFactorResult%</h6>
+                            }
+
+                            @*if (Model.hasBilateral)
+                                {
+                                    <h6>Rounded Bilateral (Combined+10%):  @Model.bilateralWorkingItem.RatingID%</h6>
+                                }*@
+                        if (Model.isLowerBilateral)
+                        {
+                            <h6>Lower Bilateral Factor Active</h6>
+                        }
+                        if (Model.isUpperBilateral)
+                        {
+                            <h6>Upper Bilateral Factor Active</h6>
+                            }
+                        }
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
-                    }
-
+        <!--row -->
+    </div>
 </div>
+
+
 
