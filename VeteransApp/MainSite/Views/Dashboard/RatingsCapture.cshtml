@@ -47,13 +47,14 @@
                             {
                                 <label class="control-label">Do you currently have a rating by the VA for this @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
+                                @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             }
-                            @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             @if ((bool)Model.contentType.HasSides)
                             {
                                 <label class="control-label">Do you currently have a rating by the VA for this <span>LEFT SIDE</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
                                 @Html.DropDownListFor(x => x.RatingLeftSide, (SelectList)ViewBag.CurrentRatingsList)
+                                <br />
                                 <label class="control-label">Do you currently have a rating by the VA for this <span>RIGHT SIDE</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
                                 @Html.DropDownListFor(x => x.RatingRightSide, (SelectList)ViewBag.CurrentRatingsList)

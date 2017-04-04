@@ -373,12 +373,12 @@ namespace MainSite.ViewModels
         }
         public static readonly IDictionary<string, string> BilateralFactorDictionary = new Dictionary<string, string>
         {
-             { "1", "Bilateral Upper Arms" }
-            , {"2",  "Right Upper Arm"}
-            , {"3",  "Left Upper Arm"}
-            , {"4",  "Left Lower Leg"}
-            , {"5",  "Right Lower Leg"}
-            , {"6",  "Bilateral Lower Leg"}
+             { "1", "Bilateral Upper" }
+            , {"2",  "Right Upper"}
+            , {"3",  "Left Upper"}
+            , {"4",  "Left Lower"}
+            , {"5",  "Right Lower"}
+            , {"6",  "Bilateral Lower"}
          };
 
         public string getBilateralFactorItem(string key)

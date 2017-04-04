@@ -24,6 +24,16 @@ $("#btnIndexTestimonialsModal").click(function () {
     $('#smallmodaltestimonials').modal('show');
 });
 
+$("#btnFreeEvaluation").click(function () {
+    $('#freeevaluation').modal('show');
+    $("#freeevaluation").on("hidden.bs.modal", function () {
+        window.location.href = '/home';
+    });
+    //window.location.href = '/home';
+});
+
+
+
 //$("#btnEmailSent").click(function () {
 //    $('#smallmodalemailsent').modal('show');
 //});

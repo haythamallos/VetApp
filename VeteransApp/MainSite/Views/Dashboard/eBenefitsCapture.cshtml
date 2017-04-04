@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "eBenefits";
+    ViewData["Description"] = "eBenefits";
+    CustomBrowser browser = new CustomBrowser();
+    string pageHtml = null;
+}
+@using MainSite.Classes
+@model MainSite.Models.EBenefitsModel
+
+<div id="page-wrapper">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="white-box">
+                @*<label class="control-label">Log In to your <a href="https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?execution=e1s1" target="_blank">eBenefits</a> account.</label>*@
+                <label class="control-label">Log In to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a> account.</label>
+                <br />
+                <label class="control-label">Disabilities <a href="https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities" target="_blank">eBenefits</a> rating disabilities.</label>
+                <br />
+                <form id="formebenefitscapture" method="post" action="/Dashboard/eBenefitsCapture">
+                    <button name="submitID" value="1" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
+                </form>
+                @*<button id="submitID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="button">Submit</button>*@
+                @*<iframe src="https://www.ebenefits.va.gov" height="600" width="800"></iframe>*@
+            </div>
+        </div>
+    </div>
+</div>
+@*@{
+    pageHtml = browser.GetWebpage("https://www.ebenefits.va.gov");
+
+    Response.Write(pageHtml);
+}*@
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $('document').ready(function () {
+
+
+        $("#submitID").on("click", function () {
+
+            // However to make it work, we are going to use the cors-anywhere free service to bypass this
+            //var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+            // Serialize model for Posting model
+            //$.ajax({
+            //    url: proxy + 'https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities',
+            //    type: 'GET',
+            //    success: function (data) {
+            //        alert("Data: " + data + "\nStatus: " + status);
+            //    }
+            //});
+
+            // In this example, if you make an ajax request to the following website
+            //var myUrl = 'https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities';
+            //  But if you make it from a browser, then it will work without problem ...
+
+            // However to make it work, we are going to use the cors-anywhere free service to bypass this
+            //var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+            //$.ajaxPrefilter(function (options) {
+            //    if (options.crossDomain && jQuery.support.cors) {
+            //        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+            //        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+            //        //options.url = "http://cors.corsproxy.io/url=" + options.url;
+            //    }
+            //});
+
+            //$.get(
+            //    myUrl,
+            //    function (response) {
+            //        console.log("> ", response);
+            //        $("#viewer").html(response);
+            //    });
+
+            //$.ajax({
+            //    // The proxy url expects as first URL parameter the URL to be bypassed
+            //    // https://cors-anywhere.herokuapp.com/{my-url-to-bypass}
+            //    url: proxy + myUrl,
+            //    complete: function (data) {
+            //        console.log(data);
+            //    }
+            //});
+        });
+
+
+        //$("#submitID").click(function () {
+        //    $.get("https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities", function (data, status) {
+        //        alert("Data: " + data + "\nStatus: " + status);
+        //    });
+        //});
+    });
+</script>

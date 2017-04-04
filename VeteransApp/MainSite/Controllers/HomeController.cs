@@ -27,6 +27,7 @@ namespace MainSite.Controllers
             {
                 ViewData["CookiesEnabled"] = false;
             }
+            //ViewData["ShowBenefitsFooter"] = "true";
             return View();
         }
         public ActionResult Testimonials()

@@ -55,6 +55,8 @@
     <Content Include="MainSite\Upgrade-3\sp.sql" />
     <Content Include="MainSite\Upgrade-4\schema.sql" />
     <Content Include="MainSite\Upgrade-4\sp.sql" />
+    <Content Include="MainSite\Upgrade-5\schema.sql" />
+    <Content Include="MainSite\Upgrade-5\sp.sql" />
     <Content Include="MainSite\Utils\cleanup.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

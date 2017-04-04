@@ -7,11 +7,15 @@
 @model MainSite.Models.UserModel
 
 <section id="wrapper" class="login-register">
+    <div class="top-left">
+        <a class="logo" href="/Home"><b><img src="~/Images/banner-462x150.png" alt="home" /></b></a>
+    </div>
+
     <div class="login-box login-sidebar">
 
         <div class="white-box">
             <form class="form-horizontal form-material" id="loginform" action="/Dashboard/Authenticate">
-                <a href="javascript:void(0)" class="text-center db"><img src="~/Images/banner-308x100.png" alt="Home" /></a>
+                @*<a href="javascript:void(0)" class="text-center db"><img src="~/Images/banner-308x100.png" alt="Home" /></a>*@
 
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">

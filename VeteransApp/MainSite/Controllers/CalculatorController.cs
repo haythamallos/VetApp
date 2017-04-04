@@ -31,22 +31,22 @@ namespace MainSite.Controllers
                     model.workingItem.RatingID = Convert.ToInt32(submitVal);
                     model.AddItem();
                     break;
-                case "Bilateral Upper Arms":
+                case "Bilateral Upper":
                     model.workingItem.BilateralFactorID = "1";
                     break;
-                case "Right Upper Arm":
+                case "Right Upper":
                     model.workingItem.BilateralFactorID = "2";
                     break;
-                case "Left Upper Arm":
+                case "Left Upper":
                     model.workingItem.BilateralFactorID = "3";
                     break;
-                case "Left Lower Leg":
+                case "Left Lower":
                     model.workingItem.BilateralFactorID = "4";
                     break;
-                case "Right Lower Leg":
+                case "Right Lower":
                     model.workingItem.BilateralFactorID = "5";
                     break;
-                case "Bilateral Lower Leg":
+                case "Bilateral Lower":
                     model.workingItem.BilateralFactorID = "6";
                     break;
                 case "Clear":

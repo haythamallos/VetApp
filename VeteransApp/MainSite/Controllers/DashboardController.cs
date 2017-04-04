@@ -11,7 +11,8 @@ using System.Web;
 using Stripe;
 using System.Text;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace MainSite.Controllers
 {
@@ -41,13 +42,13 @@ namespace MainSite.Controllers
         {
             _config = new Config();
 
-            var MovementList90Deg = new SelectList(new[] { 90, 55, 25 });
+            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 55, 25 });
             ViewBag.MovementList90Deg = MovementList90Deg;
 
-            var MovementList30Deg = new SelectList(new[] { 30, 20, 10 });
+            var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 20, 10 });
             ViewBag.MovementList30Deg = MovementList30Deg;
 
-            var CurrentRatingsList = new SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
+            var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
 
         }
@@ -356,7 +357,7 @@ namespace MainSite.Controllers
                         bool b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "false");
                     }
                     user.CurrentRating = evaluationModel.CurrentRating;
-                    user.HasCurrentRating = true;
+                    //user.HasCurrentRating = true;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
             }
@@ -1025,17 +1026,17 @@ namespace MainSite.Controllers
                 model.contentType = returnContentType;
                 model.ContentTypeID = returnContentType.ContentTypeID;
                 string imageUrl = "../Images/";
+                model.Rating = 0;
                 if (returnContentType.ContentTypeID == 0)
                 {
                     imageUrl += "ebenefits.jpg";
+                    model.Rating = user.CurrentRating;
                 }
                 else
                 {
                     imageUrl += returnContentType.Code + ".jpg";
                 }
                 model.imageURL = imageUrl;
-                //model.imageURL = GetContentTypeImageUrl(model.ContentTypeID);
-                model.Rating = 0;
 
             }
             catch (Exception ex)
@@ -1043,7 +1044,6 @@ namespace MainSite.Controllers
 
             }
 
-            model.Rating = 0;
             model.RatingLeftSide = 0;
             model.RatingRightSide = 0;
             return View(model);
@@ -1116,6 +1116,101 @@ namespace MainSite.Controllers
             return RedirectToAction("RatingsCapture", model);
         }
 
+        public ActionResult eBenefits(EBenefitsModel model)
+        {
+
+            return View("eBenefitsCapture", model);
+        }
+        [HttpPost]
+        public ActionResult eBenefitsCapture(EBenefitsModel model, string submitID)
+        {
+            try
+            {
+                //string loginPage = "https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?execution=e1s1";
+                string disabilitiesFramePage = "https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities";
+
+
+                try
+                {
+                    using (var client = GetAuthenticatedClient())
+                    {
+                        //var html = client.DownloadString("http://veteransapp.azurewebsites.net/Calculator");
+                        var html = client.DownloadString(disabilitiesFramePage);
+                        //do your stuff with received HTML here
+                    }
+
+                    //WebClient client = new WebClient();
+
+                    // Add a user agent header in case the 
+                    // requested URI contains a query.
+
+                    //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+                    //Stream data = client.OpenRead(disabilitiesFramePage);
+                    //StreamReader reader = new StreamReader(data);
+                    //string s = reader.ReadToEnd();
+                    //Console.WriteLine(s);
+                    //data.Close();
+                    //reader.Close();
+
+                    //IWebDriver driver = new OpenQA.Selenium.Chrome.ChromeDriver();
+                    //driver.Url = disabilitiesFramePage;
+
+                    // Download the data to a buffer.
+                    //WebClient client = new WebClient();
+
+                    //Byte[] pageData = client.DownloadData(disabilitiesFramePage);
+                    //string pageHtml = Encoding.ASCII.GetString(pageData);
+
+                    // Download the data to a file.
+                    //client.DownloadFile("http://www.contoso.com", "page.htm");
+
+
+                }
+                catch (WebException webEx)
+                {
+                }
+                //HtmlWeb web = new HtmlWeb();
+                //HtmlDocument document = web.Load(disabilitiesFramePage);
+
+
+
+                //WebRequest req = HttpWebRequest.Create(disabilitiesFramePage);
+                //req.Method = "GET";
+
+                //string source;
+                //using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                //{
+                //    source = reader.ReadToEnd();
+                //}
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("eBenefitsCapture", model);
+        }
+        protected CookieAwareWebClient GetAuthenticatedClient()
+        {
+            var client = new CookieAwareWebClient();
+
+            var loginData = new NameValueCollection
+                {
+                      { "userName", "joshua.smith3" },
+                      { "password-clear", "zaq1@WSXC" }
+                };
+            //var loginData = new NameValueCollection
+            //    {
+            //          { "Username", "h1@gmail.com" },
+            //          { "Password", "123" }
+            //    };
+
+            //client.Login("http://veteransapp.azurewebsites.net/Home/Login2", loginData);
+            client.Login("https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?gotoUrl=https://myaccess.dmdc.osd.mil/opensso/SAMLAwareServlet?TARGET=https://eauth.va.gov/ebenefits-portal", loginData);
+
+            return client;
+        }
         //private string GetContentTypeImageUrl(long contentTypeID)
         //{
         //    string imageUrl = "../Images/";

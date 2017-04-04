@@ -11,7 +11,7 @@ namespace MainSite.Models
         public ContentType contentType { get; set; }
         public long ContentTypeID { get; set; }
         public bool HasRating { get; set; }
-        public int Rating { get; set; }
+        public long Rating { get; set; }
         public int RatingLeftSide { get; set; }
         public int RatingRightSide { get; set; }
         public string imageURL { get; set; }
