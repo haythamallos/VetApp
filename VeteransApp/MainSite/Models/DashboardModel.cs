@@ -34,5 +34,6 @@ namespace MainSite.Models
         public string ActionText { get; set; }
         public string TooltipText { get; set; }
         public string BenefitName { get; set; }
+        public string BenefitCode { get; set; }
     }
 }

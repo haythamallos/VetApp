@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  JctUserContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/24/2017	Created
+    /// 001	HA	4/5/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the JctUserContentType database table.
@@ -37,10 +37,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private long _lContentTypeID = 0;
         /// <summary>Rating Attribute type String</summary>
         private long _lRating = 0;
-        /// <summary>RatingLeft Attribute type String</summary>
-        private long _lRatingLeft = 0;
-        /// <summary>RatingRight Attribute type String</summary>
-        private long _lRatingRight = 0;
+        /// <summary>IsConnected Attribute type String</summary>
+        private bool? _bIsConnected = null;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -64,10 +62,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_CONTENT_TYPE_ID = "content_type_id"; //Table ContentTypeID field name
                                                                                     /// <summary>rating Database field </summary>
         public static readonly string DB_FIELD_RATING = "rating"; //Table Rating field name
-                                                                  /// <summary>RatingLeft Database field </summary>
-        public static readonly string DB_FIELD_RATINGLEFT = "RatingLeft"; //Table RatingLeft field name
-                                                                          /// <summary>RatingRight Database field </summary>
-        public static readonly string DB_FIELD_RATINGRIGHT = "RatingRight"; //Table RatingRight field name
+                                                                  /// <summary>is_connected Database field </summary>
+        public static readonly string DB_FIELD_IS_CONNECTED = "is_connected"; //Table IsConnected field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -84,10 +80,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_CONTENT_TYPE_ID = "ContentTypeID"; //Table ContentTypeID field name
                                                                              /// <summary>Rating Attribute type string</summary>
         public static readonly string TAG_RATING = "Rating"; //Table Rating field name
-                                                             /// <summary>RatingLeft Attribute type string</summary>
-        public static readonly string TAG_RATINGLEFT = "RatingLeft"; //Table RatingLeft field name
-                                                                     /// <summary>RatingRight Attribute type string</summary>
-        public static readonly string TAG_RATINGRIGHT = "RatingRight"; //Table RatingRight field name
+                                                             /// <summary>IsConnected Attribute type string</summary>
+        public static readonly string TAG_IS_CONNECTED = "IsConnected"; //Table IsConnected field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spJctUserContentTypeInsert"; //Insert sp name
@@ -139,17 +133,11 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _lRating; }
             set { _lRating = value; }
         }
-        /// <summary>RatingLeft is a Property in the JctUserContentType Class of type long</summary>
-        public long RatingLeft
+        /// <summary>IsConnected is a Property in the JctUserContentType Class of type bool</summary>
+        public bool? IsConnected
         {
-            get { return _lRatingLeft; }
-            set { _lRatingLeft = value; }
-        }
-        /// <summary>RatingRight is a Property in the JctUserContentType Class of type long</summary>
-        public long RatingRight
-        {
-            get { return _lRatingRight; }
-            set { _lRatingRight = value; }
+            get { return _bIsConnected; }
+            set { _bIsConnected = value; }
         }
 
 
@@ -244,8 +232,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append(TAG_SIDE_ID + ":  " + SideID + "\n");
             sbReturn.Append(TAG_CONTENT_TYPE_ID + ":  " + ContentTypeID + "\n");
             sbReturn.Append(TAG_RATING + ":  " + Rating + "\n");
-            sbReturn.Append(TAG_RATINGLEFT + ":  " + RatingLeft + "\n");
-            sbReturn.Append(TAG_RATINGRIGHT + ":  " + RatingRight + "\n");
+            sbReturn.Append(TAG_IS_CONNECTED + ":  " + IsConnected + "\n");
 
             return sbReturn.ToString();
         }
@@ -277,8 +264,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             sbReturn.Append("<" + TAG_SIDE_ID + ">" + SideID + "</" + TAG_SIDE_ID + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_TYPE_ID + ">" + ContentTypeID + "</" + TAG_CONTENT_TYPE_ID + ">\n");
             sbReturn.Append("<" + TAG_RATING + ">" + Rating + "</" + TAG_RATING + ">\n");
-            sbReturn.Append("<" + TAG_RATINGLEFT + ">" + RatingLeft + "</" + TAG_RATINGLEFT + ">\n");
-            sbReturn.Append("<" + TAG_RATINGRIGHT + ">" + RatingRight + "</" + TAG_RATINGRIGHT + ">\n");
+            sbReturn.Append("<" + TAG_IS_CONNECTED + ">" + IsConnected + "</" + TAG_IS_CONNECTED + ">\n");
             sbReturn.Append("</JctUserContentType>" + "\n");
 
             return sbReturn.ToString();
@@ -385,22 +371,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_RATINGLEFT);
-                RatingLeft = (long)Convert.ToInt32(xResultNode.InnerText);
+                xResultNode = xNode.SelectSingleNode(TAG_IS_CONNECTED);
+                IsConnected = Convert.ToBoolean(xResultNode.InnerText);
             }
             catch
             {
-                RatingLeft = 0;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_RATINGRIGHT);
-                RatingRight = (long)Convert.ToInt32(xResultNode.InnerText);
-            }
-            catch
-            {
-                RatingRight = 0;
+                IsConnected = false;
             }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with jct_user_content_type_id equal to the current object's JctUserContentTypeID </summary>
@@ -527,11 +503,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(JctUserContentType.TAG_RATING + ":  ");
                 Rating = (long)Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine(JctUserContentType.TAG_RATINGLEFT + ":  ");
-                RatingLeft = (long)Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine(JctUserContentType.TAG_RATINGRIGHT + ":  ");
-                RatingRight = (long)Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(JctUserContentType.TAG_IS_CONNECTED + ":  ");
+                IsConnected = Convert.ToBoolean(Console.ReadLine());
 
             }
             catch (Exception e)
@@ -551,8 +524,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramSideID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramRating = null;
-            SqlParameter paramRatingLeft = null;
-            SqlParameter paramRatingRight = null;
+            SqlParameter paramIsConnected = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -586,13 +558,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramRating.DbType = DbType.Int32;
             paramRating.Direction = ParameterDirection.Input;
 
-            paramRatingLeft = new SqlParameter("@" + TAG_RATINGLEFT, RatingLeft);
-            paramRatingLeft.DbType = DbType.Int32;
-            paramRatingLeft.Direction = ParameterDirection.Input;
-
-            paramRatingRight = new SqlParameter("@" + TAG_RATINGRIGHT, RatingRight);
-            paramRatingRight.DbType = DbType.Int32;
-            paramRatingRight.Direction = ParameterDirection.Input;
+            paramIsConnected = new SqlParameter("@" + TAG_IS_CONNECTED, IsConnected);
+            paramIsConnected.DbType = DbType.Boolean;
+            paramIsConnected.Direction = ParameterDirection.Input;
 
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
@@ -606,8 +574,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramSideID);
             cmd.Parameters.Add(paramContentTypeID);
             cmd.Parameters.Add(paramRating);
-            cmd.Parameters.Add(paramRatingLeft);
-            cmd.Parameters.Add(paramRatingRight);
+            cmd.Parameters.Add(paramIsConnected);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -623,8 +590,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramSideID = null;
             paramContentTypeID = null;
             paramRating = null;
-            paramRatingLeft = null;
-            paramRatingRight = null;
+            paramIsConnected = null;
             paramPKID = null;
             cmd = null;
         }
@@ -679,8 +645,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramSideID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramRating = null;
-            SqlParameter paramRatingLeft = null;
-            SqlParameter paramRatingRight = null;
+            SqlParameter paramIsConnected = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -719,13 +684,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramRating.DbType = DbType.Int32;
             paramRating.Direction = ParameterDirection.Input;
 
-            paramRatingLeft = new SqlParameter("@" + TAG_RATINGLEFT, RatingLeft);
-            paramRatingLeft.DbType = DbType.Int32;
-            paramRatingLeft.Direction = ParameterDirection.Input;
-
-            paramRatingRight = new SqlParameter("@" + TAG_RATINGRIGHT, RatingRight);
-            paramRatingRight.DbType = DbType.Int32;
-            paramRatingRight.Direction = ParameterDirection.Input;
+            paramIsConnected = new SqlParameter("@" + TAG_IS_CONNECTED, IsConnected);
+            paramIsConnected.DbType = DbType.Boolean;
+            paramIsConnected.Direction = ParameterDirection.Input;
 
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
@@ -740,8 +701,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramSideID);
             cmd.Parameters.Add(paramContentTypeID);
             cmd.Parameters.Add(paramRating);
-            cmd.Parameters.Add(paramRatingLeft);
-            cmd.Parameters.Add(paramRatingRight);
+            cmd.Parameters.Add(paramIsConnected);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -757,8 +717,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramSideID = null;
             paramContentTypeID = null;
             paramRating = null;
-            paramRatingLeft = null;
-            paramRatingRight = null;
+            paramIsConnected = null;
             paramPKID = null;
             cmd = null;
         }
@@ -845,12 +804,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             catch { }
             try
             {
-                this.RatingLeft = Convert.ToInt32(rdr[DB_FIELD_RATINGLEFT].ToString().Trim());
-            }
-            catch { }
-            try
-            {
-                this.RatingRight = Convert.ToInt32(rdr[DB_FIELD_RATINGRIGHT].ToString().Trim());
+                this.IsConnected = Convert.ToBoolean(rdr[DB_FIELD_IS_CONNECTED].ToString().Trim());
             }
             catch { }
         }

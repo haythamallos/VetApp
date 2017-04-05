@@ -351,7 +351,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
             foreach (ContentType ct in arContentType)
             {
-                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode };
+                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode, BenefitCode = ct.Code };
                 content = ContentGetLatest(UserID, ct.ContentTypeID);
                 if (content != null)
                 {

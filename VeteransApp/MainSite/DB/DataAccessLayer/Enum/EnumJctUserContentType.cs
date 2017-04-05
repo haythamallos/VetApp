@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumJctUserContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/24/2017	Created
+    /// 001	HA	4/5/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -55,8 +55,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private long _lSideID = 0;
         private long _lContentTypeID = 0;
         private long _lRating = 0;
-        private long _lRatingLeft = 0;
-        private long _lRatingRight = 0;
+        private bool? _bIsConnected = null;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -80,11 +79,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_CONTENT_TYPE_ID = "ContentTypeID"; //Attribute ContentTypeID  name
                                                                              /// <summary>Rating Attribute type string</summary>
         public static readonly string TAG_RATING = "Rating"; //Attribute Rating  name
-                                                             /// <summary>RatingLeft Attribute type string</summary>
-        public static readonly string TAG_RATINGLEFT = "RatingLeft"; //Attribute RatingLeft  name
-                                                                     /// <summary>RatingRight Attribute type string</summary>
-        public static readonly string TAG_RATINGRIGHT = "RatingRight"; //Attribute RatingRight  name
-                                                                       // Stored procedure name
+                                                             /// <summary>IsConnected Attribute type string</summary>
+        public static readonly string TAG_IS_CONNECTED = "IsConnected"; //Attribute IsConnected  name
+                                                                        // Stored procedure name
         public string SP_ENUM_NAME = "spJctUserContentTypeEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the JctUserContentType Class of type bool</summary>
@@ -147,17 +144,11 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             get { return _lRating; }
             set { _lRating = value; }
         }
-        /// <summary>RatingLeft is a Property in the JctUserContentType Class of type long</summary>
-        public long RatingLeft
+        /// <summary>IsConnected is a Property in the JctUserContentType Class of type bool</summary>
+        public bool? IsConnected
         {
-            get { return _lRatingLeft; }
-            set { _lRatingLeft = value; }
-        }
-        /// <summary>RatingRight is a Property in the JctUserContentType Class of type long</summary>
-        public long RatingRight
-        {
-            get { return _lRatingRight; }
-            set { _lRatingRight = value; }
+            get { return _bIsConnected; }
+            set { _bIsConnected = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -345,8 +336,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append(TAG_SIDE_ID + ":  " + SideID + "\n");
             sbReturn.Append(TAG_CONTENT_TYPE_ID + ":  " + ContentTypeID + "\n");
             sbReturn.Append(TAG_RATING + ":  " + Rating + "\n");
-            sbReturn.Append(TAG_RATINGLEFT + ":  " + RatingLeft + "\n");
-            sbReturn.Append(TAG_RATINGRIGHT + ":  " + RatingRight + "\n");
+            sbReturn.Append(TAG_IS_CONNECTED + ":  " + IsConnected + "\n");
 
             return sbReturn.ToString();
         }
@@ -394,8 +384,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbReturn.Append("<" + TAG_SIDE_ID + ">" + SideID + "</" + TAG_SIDE_ID + ">\n");
             sbReturn.Append("<" + TAG_CONTENT_TYPE_ID + ">" + ContentTypeID + "</" + TAG_CONTENT_TYPE_ID + ">\n");
             sbReturn.Append("<" + TAG_RATING + ">" + Rating + "</" + TAG_RATING + ">\n");
-            sbReturn.Append("<" + TAG_RATINGLEFT + ">" + RatingLeft + "</" + TAG_RATINGLEFT + ">\n");
-            sbReturn.Append("<" + TAG_RATINGRIGHT + ">" + RatingRight + "</" + TAG_RATINGRIGHT + ">\n");
+            sbReturn.Append("<" + TAG_IS_CONNECTED + ">" + IsConnected + "</" + TAG_IS_CONNECTED + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -520,22 +509,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
 
             try
             {
-                xResultNode = xNode.SelectSingleNode(TAG_RATINGLEFT);
-                RatingLeft = (long)Convert.ToInt32(xResultNode.InnerText);
+                xResultNode = xNode.SelectSingleNode(TAG_IS_CONNECTED);
+                IsConnected = Convert.ToBoolean(xResultNode.InnerText);
             }
             catch
             {
-                RatingLeft = 0;
-            }
-
-            try
-            {
-                xResultNode = xNode.SelectSingleNode(TAG_RATINGRIGHT);
-                RatingRight = (long)Convert.ToInt32(xResultNode.InnerText);
-            }
-            catch
-            {
-                RatingRight = 0;
+                IsConnected = false;
             }
         }
         /// <summary>Prompt for values</summary>
@@ -627,24 +606,14 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     Rating = 0;
                 }
 
-                Console.WriteLine(TAG_RATINGLEFT + ":  ");
+                Console.WriteLine(TAG_IS_CONNECTED + ":  ");
                 try
                 {
-                    RatingLeft = (long)Convert.ToInt32(Console.ReadLine());
+                    IsConnected = Convert.ToBoolean(Console.ReadLine());
                 }
                 catch
                 {
-                    RatingLeft = 0;
-                }
-
-                Console.WriteLine(TAG_RATINGRIGHT + ":  ");
-                try
-                {
-                    RatingRight = (long)Convert.ToInt32(Console.ReadLine());
-                }
-                catch
-                {
-                    RatingRight = 0;
+                    IsConnected = false;
                 }
 
 
@@ -694,8 +663,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramSideID = null;
             SqlParameter paramContentTypeID = null;
             SqlParameter paramRating = null;
-            SqlParameter paramRatingLeft = null;
-            SqlParameter paramRatingRight = null;
+            SqlParameter paramIsConnected = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -767,16 +735,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             paramRating.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramRating);
 
-            paramRatingLeft = new SqlParameter("@" + TAG_RATINGLEFT, RatingLeft);
-            sbLog.Append(TAG_RATINGLEFT + "=" + RatingLeft + "\n");
-            paramRatingLeft.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramRatingLeft);
-
-            paramRatingRight = new SqlParameter("@" + TAG_RATINGRIGHT, RatingRight);
-            sbLog.Append(TAG_RATINGRIGHT + "=" + RatingRight + "\n");
-            paramRatingRight.Direction = ParameterDirection.Input;
-            _cmd.Parameters.Add(paramRatingRight);
-
+            paramIsConnected = new SqlParameter("@" + TAG_IS_CONNECTED, IsConnected);
+            sbLog.Append(TAG_IS_CONNECTED + "=" + IsConnected + "\n");
+            paramIsConnected.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramIsConnected);
         }
 
     }

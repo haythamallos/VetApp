@@ -11,8 +11,6 @@ using System.Web;
 using Stripe;
 using System.Text;
 using System.Collections.Generic;
-using System.Net;
-using System.Collections.Specialized;
 
 namespace MainSite.Controllers
 {
@@ -425,220 +423,7 @@ namespace MainSite.Controllers
             }
             return path;
         }
-        public ActionResult FormGetBack()
-        {
-            string viewName = "BackForm";
-            BackModel model = new BackModel();
-            long contenttypeid = 1;
-            try
-            {
-                string templatePath = GetTemplatePath(model);
-                User user = Auth();
-                BusFacCore busFacCore = new BusFacCore();
-                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
-                long ContentID = 0;
-                model.UserID = user.UserID;
-                if (content == null)
-                {
-                    ContentID = FormSave(model, 0, contenttypeid);
-                }
-                else
-                {
-                    model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
-                }
 
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
-                }
-
-                //if (!((bool)user.HasRatingBack))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return View(viewName, model);
-        }
-
-        [HttpPost]
-        public ActionResult BackFormSave(BackModel model, long contentStateID)
-        {
-            try
-            {
-                long ContentID = FormSave(model, contentStateID, 1);
-                if (contentStateID == 6)
-                {
-                    // submit application
-                    BusFacPDF busFacPDF = new BusFacPDF();
-                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                    User user = Auth();
-                    byte[] form = busFacPDF.Back(pdfTemplatePath, model);
-                    BusFacCore busFacCore = new BusFacCore();
-                    Content content = busFacCore.ContentGet(ContentID);
-                    content.ContentData = form;
-                    long lID = busFacCore.ContentCreateOrModify(content);
-                    if ((!busFacCore.HasError) && (lID > 0))
-                    {
-                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
-                        return RedirectToAction("Product", productModel);
-                    }
-                    else
-                    {
-                        // encountered an error
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View("BackForm", model);
-        }
-
-        public ActionResult FormGetShoulder()
-        {
-            string viewName = "ShoulderForm";
-            ShoulderModel model = new ShoulderModel();
-            long contenttypeid = 2;
-            try
-            {
-                string templatePath = GetTemplatePath(model);
-                User user = Auth();
-                BusFacCore busFacCore = new BusFacCore();
-                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
-                long ContentID = 0;
-                model.UserID = user.UserID;
-
-                if (content == null)
-                {
-                    ContentID = FormSave(model, 0, contenttypeid);
-                }
-                else
-                {
-                    model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
-                }
-
-                if (TempData["Side"] != null)
-                {
-                    model.Side = (string)TempData["Side"];
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
-                }
-                //if (!((bool)user.HasRatingShoulder))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return View(viewName, model);
-        }
-
-        [HttpPost]
-        public ActionResult ShoulderFormSave(ShoulderModel model, long contentStateID)
-        {
-            string viewName = "ShoulderForm";
-
-            try
-            {
-                long ContentID = FormSave(model, contentStateID, 2);
-                if (contentStateID == 6)
-                {
-                    // submit application
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(viewName, model);
-        }
-
-        public ActionResult FormGetNeck()
-        {
-            string viewName = "NeckForm";
-            NeckModel model = new NeckModel();
-            long contenttypeid = 3;
-            try
-            {
-                string templatePath = GetTemplatePath(model);
-                User user = Auth();
-                BusFacCore busFacCore = new BusFacCore();
-                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
-                long ContentID = 0;
-                model.UserID = user.UserID;
-                if (content == null)
-                {
-                    ContentID = FormSave(model, 0, contenttypeid);
-                }
-                else
-                {
-                    model = JSONHelper.Deserialize<NeckModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
-                }
-                //if (!((bool)user.HasRatingNeck))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return View(viewName, model);
-        }
-
-        [HttpPost]
-        public ActionResult NeckFormSave(NeckModel model, long contentStateID)
-        {
-            string viewName = "NeckForm";
-
-            try
-            {
-                long ContentID = FormSave(model, contentStateID, 3);
-                if (contentStateID == 6)
-                {
-                    // submit application
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(viewName, model);
-        }
 
         private long FormSave(IBaseModel model, long contentStateID, long contentTypeID)
         {
@@ -1059,49 +844,46 @@ namespace MainSite.Controllers
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = 0;
                 model.Message = null;
-                if (submitID == "SUBMITRATING")
+                ContentType contentType = busFacCore.ContentTypeGet(model.ContentTypeID);
+                JctUserContentType jctUserContentType = null;
+                long lJctUserContentTypeID = 0;
+
+                if (submitID == "OVERALLRATING_SUBMIT")
                 {
                     user.HasCurrentRating = true;
                     user.CurrentRating = model.Rating;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
-                else if (submitID == "NORATING")
+                else if (submitID == "OVERALLRATING_NONE")
                 {
                     user.HasCurrentRating = true;
                     user.CurrentRating = 0;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
+                else if (submitID == "NOT_CONNECTED")
+                {
+                    jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = false };
+                    lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                }
                 else if (long.TryParse(submitID, out lParsedContentTypeID))
                 {
-                    // Update user with content type
-                    ContentType contentType = busFacCore.ContentTypeGet(lParsedContentTypeID);
-                    if (((bool)contentType.HasSides) && (model.Side == 0))
+                    if (!(bool)contentType.HasSides)
                     {
-                        model.Message = "Please choose which side is your disability.";
+                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = true, Rating = model.Rating };
+                        lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
                     }
                     else
                     {
-                        List<JctUserContentType> lstJctUserContentTypeOfUser = busFacCore.JctUserContentTypeGetList(user);
-                        JctUserContentType jctUserContentType = null;
-                        if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == contentType.ContentTypeID)))
-                        {
-                            if ((model.RatingLeftSide > 0) && (model.RatingRightSide > 0))
-                            {
-                                model.Side = 4;
-                            }
-                            else if (model.RatingLeftSide > 0)
-                            {
-                                model.Side = 2;
-                            }
-                            else
-                            {
-                                model.Side = 3;
-                            }
+                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = true, Rating = model.RatingBothSide, SideID = 4 };
+                        lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
 
-                            jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = lParsedContentTypeID, Rating = model.Rating, SideID = model.Side, RatingLeft = model.RatingLeftSide, RatingRight = model.RatingRightSide };
-                            long lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
-                        }
-                    }
+                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = true, Rating = model.RatingLeftSide, SideID = 2 };
+                        lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+
+                        jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = true, Rating = model.RatingRightSide, SideID = 3 };
+                        lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+
+                    }                  
                 }
 
             }
@@ -1112,6 +894,7 @@ namespace MainSite.Controllers
             model.Rating = 0;
             model.RatingLeftSide = 0;
             model.RatingRightSide = 0;
+            model.RatingBothSide = 0;
 
             return RedirectToAction("RatingsCapture", model);
         }
@@ -1121,67 +904,136 @@ namespace MainSite.Controllers
 
             return View("eBenefitsCapture", model);
         }
-        [HttpPost]
-        public ActionResult eBenefitsCapture(EBenefitsModel model, string submitID)
+
+        /**************************************************************
+         * Back Form
+         * 
+         *************************************************************/
+        public ActionResult Back()
         {
+            string viewName = "Back";
+            BackModel model = new BackModel();
+            long contenttypeid = 1;
             try
             {
-                //string loginPage = "https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?execution=e1s1";
-                string disabilitiesFramePage = "https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities";
-
-
-                try
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
                 {
-                    using (var client = GetAuthenticatedClient())
-                    {
-                        //var html = client.DownloadString("http://veteransapp.azurewebsites.net/Calculator");
-                        var html = client.DownloadString(disabilitiesFramePage);
-                        //do your stuff with received HTML here
-                    }
-
-                    //WebClient client = new WebClient();
-
-                    // Add a user agent header in case the 
-                    // requested URI contains a query.
-
-                    //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-
-                    //Stream data = client.OpenRead(disabilitiesFramePage);
-                    //StreamReader reader = new StreamReader(data);
-                    //string s = reader.ReadToEnd();
-                    //Console.WriteLine(s);
-                    //data.Close();
-                    //reader.Close();
-
-                    //IWebDriver driver = new OpenQA.Selenium.Chrome.ChromeDriver();
-                    //driver.Url = disabilitiesFramePage;
-
-                    // Download the data to a buffer.
-                    //WebClient client = new WebClient();
-
-                    //Byte[] pageData = client.DownloadData(disabilitiesFramePage);
-                    //string pageHtml = Encoding.ASCII.GetString(pageData);
-
-                    // Download the data to a file.
-                    //client.DownloadFile("http://www.contoso.com", "page.htm");
-
-
+                    ContentID = FormSave(model, 0, contenttypeid);
                 }
-                catch (WebException webEx)
+                else
                 {
+                    model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
                 }
-                //HtmlWeb web = new HtmlWeb();
-                //HtmlDocument document = web.Load(disabilitiesFramePage);
 
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
 
-
-                //WebRequest req = HttpWebRequest.Create(disabilitiesFramePage);
-                //req.Method = "GET";
-
-                //string source;
-                //using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                //if (!((bool)user.HasRatingBack))
                 //{
-                //    source = reader.ReadToEnd();
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult BackPost(BackModel model, long contentStateID)
+        {
+            string viewName = "Back";
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 1);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Back(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Shoulder Form
+        * 
+        *************************************************************/
+        public ActionResult Shoulder()
+        {
+            string viewName = "Shoulder";
+            ShoulderModel model = new ShoulderModel();
+            long contenttypeid = 2;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
+                }
+
+                if (TempData["Side"] != null)
+                {
+                    model.Side = (string)TempData["Side"];
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+                //if (!((bool)user.HasRatingShoulder))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
                 //}
 
             }
@@ -1189,89 +1041,99 @@ namespace MainSite.Controllers
             {
 
             }
-            return View("eBenefitsCapture", model);
+
+            return View(viewName, model);
         }
-        protected CookieAwareWebClient GetAuthenticatedClient()
+
+        [HttpPost]
+        public ActionResult ShoulderPost(ShoulderModel model, long contentStateID)
         {
-            var client = new CookieAwareWebClient();
+            string viewName = "Shoulder";
 
-            var loginData = new NameValueCollection
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 2);
+                if (contentStateID == 6)
                 {
-                      { "userName", "joshua.smith3" },
-                      { "password-clear", "zaq1@WSXC" }
-                };
-            //var loginData = new NameValueCollection
-            //    {
-            //          { "Username", "h1@gmail.com" },
-            //          { "Password", "123" }
-            //    };
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
 
-            //client.Login("http://veteransapp.azurewebsites.net/Home/Login2", loginData);
-            client.Login("https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?gotoUrl=https://myaccess.dmdc.osd.mil/opensso/SAMLAwareServlet?TARGET=https://eauth.va.gov/ebenefits-portal", loginData);
-
-            return client;
+            }
+            return View(viewName, model);
         }
-        //private string GetContentTypeImageUrl(long contentTypeID)
-        //{
-        //    string imageUrl = "../Images/";
-        //    switch (contentTypeID)
-        //    {
-        //        case 0:
-        //            imageUrl += "ebenefits.jpg";
-        //            break;
-        //        case 1:
-        //            imageUrl += "back.jpg";
-        //            break;
-        //        case 2:
-        //            imageUrl += "shoulder.jpg";
-        //            break;
-        //        case 3:
-        //            imageUrl += "neck.jpg";
-        //            break;
-        //        case 4:
-        //            imageUrl += "foot.jpg";
-        //            break;
-        //        case 5:
-        //            imageUrl += "sleepapnea.jpg";
-        //            break;
-        //        case 6:
-        //            imageUrl += "headache.jpg";
-        //            break;
-        //        case 7:
-        //            imageUrl += "ankle.jpg";
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //    return imageUrl;
-        //}
 
-        //[HttpPost]
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    //StripeConfiguration.SetApiKey()
-        //    var customers = new StripeCustomerService();
-        //    var charges = new StripeChargeService();
+        /**************************************************************
+        * Neck Form
+        * 
+        *************************************************************/
+        public ActionResult Neck()
+        {
+            string viewName = "Neck";
+            NeckModel model = new NeckModel();
+            long contenttypeid = 3;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<NeckModel>(content.ContentMeta);
+                }
 
-        //    var customer = customers.Create(new StripeCustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+                //if (!((bool)user.HasRatingNeck))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
+            }
+            catch (Exception ex)
+            {
 
-        //    var charge = charges.Create(new StripeChargeCreateOptions
-        //    {
-        //        Amount = 500,
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
+            }
 
-        //    return View();
-        //}
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult NeckPost(NeckModel model, long contentStateID)
+        {
+            string viewName = "Neck";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 3);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
 
     }
-
 
 }
 
@@ -1630,4 +1492,153 @@ namespace MainSite.Controllers
 //    backModel.TemplatePath = pdfTemplatePath;
 //    ContentID = busFacPDF.Save(backModel, contentStateID, 1);
 //    return ContentID;
+//}
+
+//[HttpPost]
+//public ActionResult eBenefitsCapture(EBenefitsModel model, string submitID)
+//{
+//    try
+//    {
+//        //string loginPage = "https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?execution=e1s1";
+//        string disabilitiesFramePage = "https://eauth.va.gov/wssweb/wss-common-webparts/mvc/ebn/ratedDisabilities";
+
+
+//        try
+//        {
+//            using (var client = GetAuthenticatedClient())
+//            {
+//                //var html = client.DownloadString("http://veteransapp.azurewebsites.net/Calculator");
+//                var html = client.DownloadString(disabilitiesFramePage);
+//                //do your stuff with received HTML here
+//            }
+
+//            //WebClient client = new WebClient();
+
+//            // Add a user agent header in case the 
+//            // requested URI contains a query.
+
+//            //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+//            //Stream data = client.OpenRead(disabilitiesFramePage);
+//            //StreamReader reader = new StreamReader(data);
+//            //string s = reader.ReadToEnd();
+//            //Console.WriteLine(s);
+//            //data.Close();
+//            //reader.Close();
+
+//            //IWebDriver driver = new OpenQA.Selenium.Chrome.ChromeDriver();
+//            //driver.Url = disabilitiesFramePage;
+
+//            // Download the data to a buffer.
+//            //WebClient client = new WebClient();
+
+//            //Byte[] pageData = client.DownloadData(disabilitiesFramePage);
+//            //string pageHtml = Encoding.ASCII.GetString(pageData);
+
+//            // Download the data to a file.
+//            //client.DownloadFile("http://www.contoso.com", "page.htm");
+
+
+//        }
+//        catch (WebException webEx)
+//        {
+//        }
+//        //HtmlWeb web = new HtmlWeb();
+//        //HtmlDocument document = web.Load(disabilitiesFramePage);
+
+
+
+//        //WebRequest req = HttpWebRequest.Create(disabilitiesFramePage);
+//        //req.Method = "GET";
+
+//        //string source;
+//        //using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+//        //{
+//        //    source = reader.ReadToEnd();
+//        //}
+
+//    }
+//    catch (Exception ex)
+//    {
+
+//    }
+//    return View("eBenefitsCapture", model);
+//}
+//protected CookieAwareWebClient GetAuthenticatedClient()
+//{
+//    var client = new CookieAwareWebClient();
+
+//    var loginData = new NameValueCollection
+//        {
+//              { "userName", "joshua.smith3" },
+//              { "password-clear", "zaq1@WSXC" }
+//        };
+//    //var loginData = new NameValueCollection
+//    //    {
+//    //          { "Username", "h1@gmail.com" },
+//    //          { "Password", "123" }
+//    //    };
+
+//    //client.Login("http://veteransapp.azurewebsites.net/Home/Login2", loginData);
+//    client.Login("https://myaccess.dmdc.osd.mil/identitymanagement/authenticate.do?gotoUrl=https://myaccess.dmdc.osd.mil/opensso/SAMLAwareServlet?TARGET=https://eauth.va.gov/ebenefits-portal", loginData);
+
+//    return client;
+//}
+//private string GetContentTypeImageUrl(long contentTypeID)
+//{
+//    string imageUrl = "../Images/";
+//    switch (contentTypeID)
+//    {
+//        case 0:
+//            imageUrl += "ebenefits.jpg";
+//            break;
+//        case 1:
+//            imageUrl += "back.jpg";
+//            break;
+//        case 2:
+//            imageUrl += "shoulder.jpg";
+//            break;
+//        case 3:
+//            imageUrl += "neck.jpg";
+//            break;
+//        case 4:
+//            imageUrl += "foot.jpg";
+//            break;
+//        case 5:
+//            imageUrl += "sleepapnea.jpg";
+//            break;
+//        case 6:
+//            imageUrl += "headache.jpg";
+//            break;
+//        case 7:
+//            imageUrl += "ankle.jpg";
+//            break;
+//        default:
+//            break;
+//    }
+//    return imageUrl;
+//}
+
+//[HttpPost]
+//public ActionResult Charge(string stripeEmail, string stripeToken)
+//{
+//    //StripeConfiguration.SetApiKey()
+//    var customers = new StripeCustomerService();
+//    var charges = new StripeChargeService();
+
+//    var customer = customers.Create(new StripeCustomerCreateOptions
+//    {
+//        Email = stripeEmail,
+//        SourceToken = stripeToken
+//    });
+
+//    var charge = charges.Create(new StripeChargeCreateOptions
+//    {
+//        Amount = 500,
+//        Description = "Sample Charge",
+//        Currency = "usd",
+//        CustomerId = customer.Id
+//    });
+
+//    return View();
 //}

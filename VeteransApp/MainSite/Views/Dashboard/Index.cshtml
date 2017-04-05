@@ -48,7 +48,7 @@
                                     <div class="panel-body">
                                         <p>You currently have a @Model.evaluationResults.CurrentRating% rating disability with the VA.  We can increase your rating to @Model.evaluationResults.PotentialVARating% which means another @string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth) in your pocket every month. </p>
                                         <a href="/Dashboard/RatingsCapture" class="btn btn-custom m-t-10 collapseble">Get Started</a>
-                                        <a href="/Dashboard/eBenefits" class="btn btn-custom m-t-10 collapseble">eBenefits</a>
+                                        @*<a href="/Dashboard/eBenefits" class="btn btn-custom m-t-10 collapseble">eBenefits</a>*@
                                     </div>
                                 </div>
                             </div>
@@ -56,10 +56,7 @@
                         else
                         {
                             <div class="white-box">
-                                <h3 class="box-title m-b-0">APPLY FOR EACH DISABILITY TO RECEIVE YOUR INCREASE</h3>
-                                @*<p class="text-muted m-b-20">
-                                        Answer a few simple questions for each disability and will generate the complicated VA form ready to be signed by a doctor so you can receive the rating increase.
-                                    </p>*@
+                                <h3 class="box-title m-b-0">APPLY FOR EACH DISABILITY</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
@@ -70,34 +67,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>@Model.BenefitStatuses[1].BenefitName</td>
-                                                <td>
-                                                    <div class="progress progress-xs margin-vertical-10 ">
-                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].Progress%" style="width: @Model.BenefitStatuses[1].Progress%"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-nowrap"><a href="/Dashboard/FormGetBack" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[1].TooltipText"> @Model.BenefitStatuses[1].ActionText </a>  </td>
-                                            </tr>
-                                            <tr>
-                                                <td>@Model.BenefitStatuses[2].BenefitName</td>
-                                                <td>
-                                                    <div class="progress progress-xs margin-vertical-10 ">
-                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[2].Progress%" style="width: @Model.BenefitStatuses[2].Progress%"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-nowrap"><a href="/Dashboard/FormGetShoulder" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[2].TooltipText"> @Model.BenefitStatuses[2].ActionText </a>  </td>
-                                            </tr>
-                                            <tr>
-                                                <td>@Model.BenefitStatuses[3].BenefitName</td>
-                                                <td>
-                                                    <div class="progress progress-xs margin-vertical-10 ">
-                                                        <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[3].Progress%" style="width: @Model.BenefitStatuses[3].Progress%"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-nowrap"><a href="/Dashboard/FormGetNeck" data-toggle="tooltip" data-original-title="@Model.BenefitStatuses[3].TooltipText"> @Model.BenefitStatuses[3].ActionText </a>  </td>
-                                            </tr>
-
+                                            @foreach (var item in Model.BenefitStatuses)
+                                            {
+                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                <tr>
+                                                    <td>@item.Value.BenefitName</td>
+                                                    <td>
+                                                        <div class="progress progress-xs margin-vertical-10 ">
+                                                            <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap"><a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>  </td>
+                                                </tr>
+                                            }
+                                         
                                         </tbody>
                                     </table>
                                 </div>

@@ -14,6 +14,7 @@ namespace MainSite.Models
         public long Rating { get; set; }
         public int RatingLeftSide { get; set; }
         public int RatingRightSide { get; set; }
+        public int RatingBothSide { get; set; }
         public string imageURL { get; set; }
         public long Side { get; set; }
         public bool AskSide { get; set; }

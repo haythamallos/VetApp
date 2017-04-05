@@ -18,7 +18,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
     /// File:  BusJctUserContentType.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/24/2017	Created
+    /// 001	HA	4/5/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Business Class for JctUserContentType objects.
@@ -39,8 +39,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         private const String REGEXP_ISVALID_SIDE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_CONTENT_TYPE_ID = BusValidationExpressions.REGEX_TYPE_PATTERN_NUMERIC10;
         private const String REGEXP_ISVALID_RATING = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
-        private const String REGEXP_ISVALID_RATINGLEFT = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
-        private const String REGEXP_ISVALID_RATINGRIGHT = BusValidationExpressions.REGEX_TYPE_PATTERN_INT;
+        private const String REGEXP_ISVALID_IS_CONNECTED = BusValidationExpressions.REGEX_TYPE_PATTERN_BIT;
 
         public string SP_ENUM_NAME = null;
 
@@ -69,7 +68,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get()
         {
-            return (Get(0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, 0, 0, 0));
+            return (Get(0, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, 0, false));
         }
 
         /// <summary>
@@ -81,7 +80,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(long lJctUserContentTypeID)
         {
-            return (Get(lJctUserContentTypeID, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, 0, 0, 0));
+            return (Get(lJctUserContentTypeID, new DateTime(), new DateTime(), new DateTime(), new DateTime(), 0, 0, 0, 0, false));
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(JctUserContentType o)
         {
-            return (Get(o.JctUserContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.UserID, o.SideID, o.ContentTypeID, o.Rating, o.RatingLeft, o.RatingRight));
+            return (Get(o.JctUserContentTypeID, o.DateCreated, o.DateCreated, o.DateModified, o.DateModified, o.UserID, o.SideID, o.ContentTypeID, o.Rating, o.IsConnected));
         }
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         /// </summary>
         public ArrayList Get(EnumJctUserContentType o)
         {
-            return (Get(o.JctUserContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.UserID, o.SideID, o.ContentTypeID, o.Rating, o.RatingLeft, o.RatingRight));
+            return (Get(o.JctUserContentTypeID, o.BeginDateCreated, o.EndDateCreated, o.BeginDateModified, o.EndDateModified, o.UserID, o.SideID, o.ContentTypeID, o.Rating, o.IsConnected));
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     </remarks>   
         ///     <retvalue>ArrayList containing JctUserContentType object</retvalue>
         /// </summary>
-        public ArrayList Get(long pLngJctUserContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, long pLngUserID, long pLngSideID, long pLngContentTypeID, long pLngRating, long pLngRatingLeft, long pLngRatingRight)
+        public ArrayList Get(long pLngJctUserContentTypeID, DateTime pDtBeginDateCreated, DateTime pDtEndDateCreated, DateTime pDtBeginDateModified, DateTime pDtEndDateModified, long pLngUserID, long pLngSideID, long pLngContentTypeID, long pLngRating, bool? pBolIsConnected)
         {
             JctUserContentType data = null;
             _arrlstEntities = new ArrayList();
@@ -133,8 +132,7 @@ namespace Vetapp.Engine.BusinessAccessLayer
             enumJctUserContentType.SideID = pLngSideID;
             enumJctUserContentType.ContentTypeID = pLngContentTypeID;
             enumJctUserContentType.Rating = pLngRating;
-            enumJctUserContentType.RatingLeft = pLngRatingLeft;
-            enumJctUserContentType.RatingRight = pLngRatingRight;
+            enumJctUserContentType.IsConnected = pBolIsConnected;
             enumJctUserContentType.EnumData();
             while (enumJctUserContentType.hasMoreElements())
             {
@@ -321,13 +319,8 @@ namespace Vetapp.Engine.BusinessAccessLayer
             {
                 isValid = false;
             }
-            isValidTmp = IsValidRatingLeft(pRefJctUserContentType.RatingLeft);
-            if (!isValidTmp)
-            {
-                isValid = false;
-            }
-            isValidTmp = IsValidRatingRight(pRefJctUserContentType.RatingRight);
-            if (!isValidTmp)
+            isValidTmp = IsValidIsConnected(pRefJctUserContentType.IsConnected);
+            if (!isValidTmp && pRefJctUserContentType.IsConnected != null)
             {
                 isValid = false;
             }
@@ -485,38 +478,17 @@ namespace Vetapp.Engine.BusinessAccessLayer
         ///     Checks to make sure value is valid
         ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
         /// </summary>
-        public bool IsValidRatingLeft(long pLngData)
+        public bool IsValidIsConnected(bool? pBolData)
         {
             bool isValid = true;
 
             // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_RATINGLEFT)).IsMatch(pLngData.ToString());
+            isValid = (new Regex(REGEXP_ISVALID_IS_CONNECTED)).IsMatch(pBolData.ToString());
             if (!isValid)
             {
                 Column clm = null;
                 clm = new Column();
-                clm.ColumnName = JctUserContentType.DB_FIELD_RATINGLEFT;
-                clm.HasError = true;
-                _arrlstColumnErrors.Add(clm);
-                _hasInvalid = true;
-            }
-            return isValid;
-        }
-        /// <summary>
-        ///     Checks to make sure value is valid
-        ///     <retvalue>true if object has a valid entry, false otherwise</retvalue>
-        /// </summary>
-        public bool IsValidRatingRight(long pLngData)
-        {
-            bool isValid = true;
-
-            // do some validation
-            isValid = (new Regex(REGEXP_ISVALID_RATINGRIGHT)).IsMatch(pLngData.ToString());
-            if (!isValid)
-            {
-                Column clm = null;
-                clm = new Column();
-                clm.ColumnName = JctUserContentType.DB_FIELD_RATINGRIGHT;
+                clm.ColumnName = JctUserContentType.DB_FIELD_IS_CONNECTED;
                 clm.HasError = true;
                 _arrlstColumnErrors.Add(clm);
                 _hasInvalid = true;

@@ -15,7 +15,12 @@
                 {
                     <h3 class="box-title">Overall VA Rating</h3>
                     <div class="col-md-3">
-                        <img src="@Model.imageURL" alt="back pain" width="150">
+                        <a href="https://www.ebenefits.va.gov/" target="_blank">
+                            <img src="@Model.imageURL" alt="ebenefits" width="150">
+                            <div class="caption">
+                                <p>Check your disability ratings through eBenefits.</p>
+                            </div>
+                        </a>
                     </div>
                     <div class="col-md-8 pull-right">
                         <form id="formratingcaptureoverall" method="post" action="/Dashboard/RatingsCapturePost">
@@ -23,12 +28,13 @@
                             <div class="text-left"><span class="text-muted"> We have a good chance of getting you the maximum VA rating.</span></div>
                             <h3>Please Answer The Question Below To Get Started</h3>
                             <hr />
-                            <label class="control-label">Do you currently have an overall rating by the VA?  If so, what is it?  If you don't know, check your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a> account.</label>
+                            <label class="control-label">Do you currently have an overall rating by the VA?  If so, what is it?  Check your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a> account.</label>
                             <br />
                             @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             <hr />
-                            <button name="submitID" value="SUBMITRATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                            <button name="submitID" value="NORATING" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
+                            <button name="submitID" value="OVERALLRATING_SUBMIT" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
+                            <button name="submitID" value="OVERALLRATING_NONE" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
+                            <span class="text-muted"> These answers are stored as part of your profile and may be modified at anytime.</span>
                         </form>
                     </div>
                 }
@@ -36,10 +42,11 @@
                 {
                     <h3 class="box-title">@Model.contentType.VisibleCode Disability</h3>
                     <div class="col-md-3">
-                        <img src="@Model.imageURL" alt="back pain" width="150">
+                        <img src="@Model.imageURL" alt="@Model.contentType.VisibleCode" width="150">
                     </div>
                     <div class="col-md-8 pull-right">
                         <form id="formratingcapturedisability" method="post" action="/Dashboard/RatingsCapturePost">
+                            <input id="ContentTypeID" name="ContentTypeID" class="form-control" type="hidden" value="@Model.ContentTypeID">
                             <div class="text-left"><span class="text-muted"> We have a good chance of getting you the maximum VA rating for this @Model.contentType.VisibleCode injury</span><h1><sup><i class="ti-arrow-up text-success"></i></sup> @Model.contentType.MaxRating%</h1></div>
                             <h3>Please Answer The Question(s) Below</h3>
                             <hr />
@@ -51,6 +58,10 @@
                             }
                             @if ((bool)Model.contentType.HasSides)
                             {
+                                <label class="control-label">Do you currently have a rating by the VA for this <span>BOTH SIDES</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
+                                <br />
+                                @Html.DropDownListFor(x => x.RatingBothSide, (SelectList)ViewBag.CurrentRatingsList)
+                                <br />
                                 <label class="control-label">Do you currently have a rating by the VA for this <span>LEFT SIDE</span> of @Model.contentType.VisibleCode disability?  If so, what is it?</label>
                                 <br />
                                 @Html.DropDownListFor(x => x.RatingLeftSide, (SelectList)ViewBag.CurrentRatingsList)
@@ -77,12 +88,12 @@
                                 </div>
                             }
 
-                            <button name="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                            <button name="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have A Rating For This Disability</button>
-
+                            <button name="submitID" value="@Model.ContentTypeID" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit My Rating</button>
+                            <button name="submitID" value="NOT_CONNECTED" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I'm NOT Service Connected For This Disability</button>
+                            <hr />
+                            <span class="text-muted"> These answers are stored as part of your profile and may be modified at anytime.</span>
                         </form>
                     </div>
-
                 }
 
                 <div class="clearfix"></div>
