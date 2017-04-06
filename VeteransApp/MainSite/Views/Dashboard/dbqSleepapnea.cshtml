@@ -1,0 +1,218 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Sleepapnea";
+    ViewData["Description"] = "Sleepapnea";
+}
+
+@model MainSite.Models.SleepapneaModel
+
+
+<div id="page-wrapper">
+    <div class="col-xs-12">
+        <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Sleep Apnea Disability</h2>
+        <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
+
+        <form id="formsSleepapnea" method="post" action="/Dashboard/SleepapneaPost?id=6">
+            <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
+            @if (Model.ContentStateID == 6)
+            {
+                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                <hr />
+            }
+            <div class="panel-group col-lg-12" id="accordion">
+
+                <!-- Part 1 -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapse1">Part 1</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <label class="col-md-3">Full Name</label>
+                                <div class="col-xs-4">
+                                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Full Name" value="@Model.NameOfPatient">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group m-t-20">
+                                <label class="col-md-3">Social Security Number</label>
+                                <div class="col-xs-4">
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                </div>
+                            </div>
+                            <br />
+                            <hr />
+                            <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Part 1 -->
+                <!-- Part 2 -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapse2">Part 2</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Part 2 -->
+                <!-- Part 3 -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Part 3 -->
+                <!-- Part 4 -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="submit" id="part4NextBtn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Part 4 -->
+
+
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $('document').ready(function () {
+
+        $("#part1NextBtn").on("click", function () {
+            $("#collapse2").collapse('show');
+            $("#collapse1").collapse('hide');
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=2',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        });
+
+        $("#part2NextBtn").on("click", function () {
+            $("#collapse3").collapse('show');
+            $("#collapse2").collapse('hide');
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=3',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#part2PrevBtn").on("click", function () {
+            $("#collapse1").collapse('show');
+            $("#collapse2").collapse('hide');
+
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#part3NextBtn").on("click", function () {
+            $("#collapse4").collapse('show');
+            $("#collapse3").collapse('hide');
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=4',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#part3PrevBtn").on("click", function () {
+            $("#collapse2").collapse('show');
+            $("#collapse3").collapse('hide');
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+
+        });
+
+        $("#part4PrevBtn").on("click", function () {
+            $("#collapse3").collapse('show');
+            $("#collapse4").collapse('hide');
+
+            var model = $('#formsleepapnea').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/SleepapneaPost?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        });
+
+    });
+</script>
+
+

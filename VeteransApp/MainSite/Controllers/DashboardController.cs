@@ -911,7 +911,7 @@ namespace MainSite.Controllers
          *************************************************************/
         public ActionResult Back()
         {
-            string viewName = "Back";
+            string viewName = "dbqBack";
             BackModel model = new BackModel();
             long contenttypeid = 1;
             try
@@ -957,7 +957,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult BackPost(BackModel model, long contentStateID)
         {
-            string viewName = "Back";
+            string viewName = "dbqBack";
             try
             {
                 long ContentID = FormSave(model, contentStateID, 1);
@@ -996,7 +996,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Shoulder()
         {
-            string viewName = "Shoulder";
+            string viewName = "dbqShoulder";
             ShoulderModel model = new ShoulderModel();
             long contenttypeid = 2;
             try
@@ -1048,7 +1048,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult ShoulderPost(ShoulderModel model, long contentStateID)
         {
-            string viewName = "Shoulder";
+            string viewName = "dbqShoulder";
 
             try
             {
@@ -1071,7 +1071,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Neck()
         {
-            string viewName = "Neck";
+            string viewName = "dbqNeck";
             NeckModel model = new NeckModel();
             long contenttypeid = 3;
             try
@@ -1116,7 +1116,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult NeckPost(NeckModel model, long contentStateID)
         {
-            string viewName = "Neck";
+            string viewName = "dbqNeck";
 
             try
             {
@@ -1133,6 +1133,209 @@ namespace MainSite.Controllers
             return View(viewName, model);
         }
 
+        /**************************************************************
+         * Foot Form
+         * 
+         *************************************************************/
+        public ActionResult Foot()
+        {
+            string viewName = "dbqFoot";
+            FootModel model = new FootModel();
+            long contenttypeid = 3;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<FootModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+                //if (!((bool)user.HasRatingFoot))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult FootPost(FootModel model, long contentStateID)
+        {
+            string viewName = "dbqFoot";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 3);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+          * Sleepapnea Form
+          * 
+          *************************************************************/
+        public ActionResult Sleepapnea()
+        {
+            string viewName = "dbqSleepapnea";
+            SleepapneaModel model = new SleepapneaModel();
+            long contenttypeid = 3;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<SleepapneaModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+                //if (!((bool)user.HasRatingSleepapnea))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult SleepapneaPost(SleepapneaModel model, long contentStateID)
+        {
+            string viewName = "dbqSleepapnea";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 3);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+          * Headache Form
+          * 
+          *************************************************************/
+        public ActionResult Headache()
+        {
+            string viewName = "dbqHeadache";
+            HeadacheModel model = new HeadacheModel();
+            long contenttypeid = 3;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<HeadacheModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+                //if (!((bool)user.HasRatingHeadache))
+                //{
+                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
+                //    return RedirectToAction("PreForm", preliminaryModel);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult HeadachePost(HeadacheModel model, long contentStateID)
+        {
+            string viewName = "dbqHeadache";
+
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, 3);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
     }
 
 }

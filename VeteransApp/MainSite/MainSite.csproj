@@ -192,6 +192,9 @@
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\EBenefitsModel.cs" />
     <Compile Include="Models\EvaluationModel.cs" />
+    <Compile Include="Models\HeadacheModel.cs" />
+    <Compile Include="Models\SleepapneaModel.cs" />
+    <Compile Include="Models\FootModel.cs" />
     <Compile Include="Models\NeckModel.cs" />
     <Compile Include="Models\PreliminaryModel.cs" />
     <Compile Include="Models\ProductCartModel.cs" />
@@ -709,13 +712,13 @@
     <Content Include="Views\Dashboard\partialMaxDisability_30.cshtml" />
     <Content Include="Views\Dashboard\partialMaxDisability_40.cshtml" />
     <Content Include="Views\Dashboard\partialModalEvalResult.cshtml" />
-    <Content Include="Views\Dashboard\Back.cshtml" />
+    <Content Include="Views\Dashboard\dbqBack.cshtml" />
     <Content Include="Views\Home\RegisterCode.cshtml" />
     <Content Include="Views\Dashboard\ProfileUpdate.cshtml" />
     <Content Include="Views\Dashboard\SavedForm.cshtml" />
     <Content Include="Views\Dashboard\PurchasedForm.cshtml" />
-    <Content Include="Views\Dashboard\Shoulder.cshtml" />
-    <Content Include="Views\Dashboard\Neck.cshtml" />
+    <Content Include="Views\Dashboard\dbqShoulder.cshtml" />
+    <Content Include="Views\Dashboard\dbqNeck.cshtml" />
     <Content Include="Views\Dashboard\PreForm.cshtml" />
     <Content Include="Views\Dashboard\Product.cshtml" />
     <Content Include="Views\Dashboard\ProductCheckout.cshtml" />
@@ -725,6 +728,9 @@
     <Content Include="Views\Calculator\Index.cshtml" />
     <Content Include="Views\Dashboard\RatingsCapture.cshtml" />
     <Content Include="Views\Dashboard\eBenefitsCapture.cshtml" />
+    <Content Include="Views\Dashboard\dbqFoot.cshtml" />
+    <Content Include="Views\Dashboard\dbqSleepapnea.cshtml" />
+    <Content Include="Views\Dashboard\dbqHeadache.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

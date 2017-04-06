@@ -1,18 +1,18 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Shoulder";
-    ViewData["Description"] = "Shoulder";
+    ViewData["Title"] = "Foot";
+    ViewData["Description"] = "Foot";
 }
 
-@model MainSite.Models.ShoulderModel
+@model MainSite.Models.FootModel
 
 
 <div id="page-wrapper">
     <div class="col-xs-12">
-        <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Shoulder Disability</h2>
+        <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Foot Disability</h2>
         <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
-        <form id="formshoulder" method="post" action="/Dashboard/ShoulderPost?id=6">
+        <form id="formsfoot" method="post" action="/Dashboard/FootPost?id=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @if (Model.ContentStateID == 6)
             {
@@ -25,10 +25,10 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapseDefault">Part 1</a>
+                            <a class="info" data-parent="#accordion" href="#collapse1">Part 1</a>
                         </h4>
                     </div>
-                    <div id="collapseDefault" class="panel-collapse collapse in">
+                    <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Full Name</label>
@@ -46,55 +46,49 @@
                             <br />
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
-
                         </div>
                     </div>
                 </div>
                 <!-- Part 1 -->
-
-
                 <!-- Part 2 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapsePrimary">Part 2</a>
+                            <a class="info" data-parent="#accordion" href="#collapse2">Part 2</a>
                         </h4>
                     </div>
-                    <div id="collapsePrimary" class="panel-collapse collapse">
+                    <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
 
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <!-- Part 2 -->
-
                 <!-- Part 3 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapsePrimary">Part 3</a>
+                            <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
                         </h4>
                     </div>
-                    <div id="collapsePrimary" class="panel-collapse collapse">
+                    <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
                 </div>
                 <!-- Part 3 -->
-
                 <!-- Part 4 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapsePrimary">Part 4</a>
+                            <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
                         </h4>
                     </div>
-                    <div id="collapsePrimary" class="panel-collapse collapse">
+                    <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
 
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
@@ -118,13 +112,13 @@
     $('document').ready(function () {
 
         $("#part1NextBtn").on("click", function () {
-            $("#collapsePrimary").collapse('show');
-            $("#collapseDefault").collapse('hide');
+            $("#collapse2").collapse('show');
+            $("#collapse1").collapse('hide');
 
-            var model = $('#formshoulder').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/ShoulderPost?contentStateID=2',
+                url: '/Dashboard/FootPost?contentStateID=2',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -134,13 +128,13 @@
         });
 
         $("#part2NextBtn").on("click", function () {
-            $("#collapseSuccess").collapse('show');
-            $("#collapsePrimary").collapse('hide');
+            $("#collapse3").collapse('show');
+            $("#collapse2").collapse('hide');
 
-            var model = $('#formshoulder').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/ShoulderPost?contentStateID=3',
+                url: '/Dashboard/FootPost?contentStateID=3',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -151,14 +145,14 @@
         });
 
         $("#part2PrevBtn").on("click", function () {
-            $("#collapseDefault").collapse('show');
-            $("#collapsePrimary").collapse('hide');
+            $("#collapse1").collapse('show');
+            $("#collapse2").collapse('hide');
 
 
-            var model = $('#formshoulder').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/ShoulderPost?contentStateID=9999',
+                url: '/Dashboard/FootPost?contentStateID=9999',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -169,13 +163,13 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            $("#collapseInfo").collapse('show');
-            $("#collapseSuccess").collapse('hide');
+            $("#collapse4").collapse('show');
+            $("#collapse3").collapse('hide');
 
-            var model = $('#formshoulder').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/ShoulderPost?contentStateID=4',
+                url: '/Dashboard/FootPost?contentStateID=4',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -186,13 +180,13 @@
         });
 
         $("#part3PrevBtn").on("click", function () {
-            $("#collapsePrimary").collapse('show');
-            $("#collapseSuccess").collapse('hide');
+            $("#collapse2").collapse('show');
+            $("#collapse3").collapse('hide');
 
-            var model = $('#formshoulder').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/ShoulderPost?contentStateID=9999',
+                url: '/Dashboard/FootPost?contentStateID=9999',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -203,13 +197,13 @@
         });
 
         $("#part4PrevBtn").on("click", function () {
-            $("#collapseSuccess").collapse('show');
-            $("#collapseInfo").collapse('hide');
+            $("#collapse3").collapse('show');
+            $("#collapse4").collapse('hide');
 
-            var model = $('#formback').serialize();
+            var model = $('#formsfoot').serialize();
             // Serialize model for Posting model
             $.ajax({
-                url: '/Dashboard/BackPost?contentStateID=9999',
+                url: '/Dashboard/FootPost?contentStateID=9999',
                 type: 'POST',
                 data: model,  // Pass Model to Controller Using Ajax Call
                 success: function (data) {
@@ -220,4 +214,5 @@
 
     });
 </script>
+
 
