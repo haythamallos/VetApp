@@ -958,9 +958,10 @@ namespace MainSite.Controllers
         public ActionResult BackPost(BackModel model, long contentStateID)
         {
             string viewName = "dbqBack";
+            long contenttypeid = 1;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 1);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
@@ -1030,11 +1031,6 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                //if (!((bool)user.HasRatingShoulder))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 2 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
 
             }
             catch (Exception ex)
@@ -1049,13 +1045,30 @@ namespace MainSite.Controllers
         public ActionResult ShoulderPost(ShoulderModel model, long contentStateID)
         {
             string viewName = "dbqShoulder";
-
+            long contenttypeid = 2;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 2);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/shoulder.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Shoulder(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
@@ -1099,11 +1112,6 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                //if (!((bool)user.HasRatingNeck))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
             }
             catch (Exception ex)
             {
@@ -1117,13 +1125,30 @@ namespace MainSite.Controllers
         public ActionResult NeckPost(NeckModel model, long contentStateID)
         {
             string viewName = "dbqNeck";
-
+            long contenttypeid = 3;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 3);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/neck.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Neck(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
@@ -1141,7 +1166,7 @@ namespace MainSite.Controllers
         {
             string viewName = "dbqFoot";
             FootModel model = new FootModel();
-            long contenttypeid = 3;
+            long contenttypeid = 4;
             try
             {
                 string templatePath = GetTemplatePath(model);
@@ -1167,11 +1192,6 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                //if (!((bool)user.HasRatingFoot))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
             }
             catch (Exception ex)
             {
@@ -1185,13 +1205,30 @@ namespace MainSite.Controllers
         public ActionResult FootPost(FootModel model, long contentStateID)
         {
             string viewName = "dbqFoot";
-
+            long contenttypeid = 4;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 3);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/foot.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Foot(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
@@ -1209,7 +1246,7 @@ namespace MainSite.Controllers
         {
             string viewName = "dbqSleepapnea";
             SleepapneaModel model = new SleepapneaModel();
-            long contenttypeid = 3;
+            long contenttypeid = 5;
             try
             {
                 string templatePath = GetTemplatePath(model);
@@ -1235,11 +1272,6 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                //if (!((bool)user.HasRatingSleepapnea))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
             }
             catch (Exception ex)
             {
@@ -1253,13 +1285,30 @@ namespace MainSite.Controllers
         public ActionResult SleepapneaPost(SleepapneaModel model, long contentStateID)
         {
             string viewName = "dbqSleepapnea";
-
+            long contenttypeid = 5;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 3);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/sleepapnea.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Sleepapnea(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
@@ -1277,7 +1326,7 @@ namespace MainSite.Controllers
         {
             string viewName = "dbqHeadache";
             HeadacheModel model = new HeadacheModel();
-            long contenttypeid = 3;
+            long contenttypeid = 6;
             try
             {
                 string templatePath = GetTemplatePath(model);
@@ -1303,11 +1352,6 @@ namespace MainSite.Controllers
                 {
                     model.SocialSecurity = user.Ssn;
                 }
-                //if (!((bool)user.HasRatingHeadache))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 3 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
             }
             catch (Exception ex)
             {
@@ -1321,13 +1365,430 @@ namespace MainSite.Controllers
         public ActionResult HeadachePost(HeadacheModel model, long contentStateID)
         {
             string viewName = "dbqHeadache";
-
+            long contenttypeid = 6;
             try
             {
-                long ContentID = FormSave(model, contentStateID, 3);
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
                     // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/headache.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Headache(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Ankle Form
+        * 
+        *************************************************************/
+        public ActionResult Ankle()
+        {
+            string viewName = "dbqAnkle";
+            AnkleModel model = new AnkleModel();
+            long contenttypeid = 7;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<AnkleModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult AnklePost(AnkleModel model, long contentStateID)
+        {
+            string viewName = "dbqAnkle";
+            long contenttypeid = 7;
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/ankle.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Ankle(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Wrist Form
+        * 
+        *************************************************************/
+        public ActionResult Wrist()
+        {
+            string viewName = "dbqWrist";
+            WristModel model = new WristModel();
+            long contenttypeid = 8;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<WristModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult WristPost(WristModel model, long contentStateID)
+        {
+            string viewName = "dbqWrist";
+            long contenttypeid = 8;
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/wrist.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Wrist(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Knee Form
+        * 
+        *************************************************************/
+        public ActionResult Knee()
+        {
+            string viewName = "dbqKnee";
+            KneeModel model = new KneeModel();
+            long contenttypeid = 9;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<KneeModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult KneePost(KneeModel model, long contentStateID)
+        {
+            string viewName = "dbqKnee";
+            long contenttypeid = 9;
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/knee.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Knee(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Hip Form
+        * 
+        *************************************************************/
+        public ActionResult Hip()
+        {
+            string viewName = "dbqHip";
+            HipModel model = new HipModel();
+            long contenttypeid = 10;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<HipModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult HipPost(HipModel model, long contentStateID)
+        {
+            string viewName = "dbqHip";
+            long contenttypeid = 10;
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/hip.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Hip(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(viewName, model);
+        }
+
+        /**************************************************************
+        * Elbow Form
+        * 
+        *************************************************************/
+        public ActionResult Elbow()
+        {
+            string viewName = "dbqElbow";
+            ElbowModel model = new ElbowModel();
+            long contenttypeid = 11;
+            try
+            {
+                string templatePath = GetTemplatePath(model);
+                User user = Auth();
+                BusFacCore busFacCore = new BusFacCore();
+                Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
+                long ContentID = 0;
+                model.UserID = user.UserID;
+                if (content == null)
+                {
+                    ContentID = FormSave(model, 0, contenttypeid);
+                }
+                else
+                {
+                    model = JSONHelper.Deserialize<ElbowModel>(content.ContentMeta);
+                }
+
+                if (string.IsNullOrEmpty(model.NameOfPatient))
+                {
+                    model.NameOfPatient = user.Fullname;
+                }
+                if (string.IsNullOrEmpty(model.SocialSecurity))
+                {
+                    model.SocialSecurity = user.Ssn;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(viewName, model);
+        }
+
+        [HttpPost]
+        public ActionResult ElbowPost(ElbowModel model, long contentStateID)
+        {
+            string viewName = "dbqElbow";
+            long contenttypeid = 11;
+            try
+            {
+                long ContentID = FormSave(model, contentStateID, contenttypeid);
+                if (contentStateID == 6)
+                {
+                    // submit application
+                    BusFacPDF busFacPDF = new BusFacPDF();
+                    string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/elbow.pdf"));
+                    User user = Auth();
+                    byte[] form = busFacPDF.Elbow(pdfTemplatePath, model);
+                    BusFacCore busFacCore = new BusFacCore();
+                    Content content = busFacCore.ContentGet(ContentID);
+                    content.ContentData = form;
+                    long lID = busFacCore.ContentCreateOrModify(content);
+                    if ((!busFacCore.HasError) && (lID > 0))
+                    {
+                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        return RedirectToAction("Product", productModel);
+                    }
+                    else
+                    {
+                        // encountered an error
+                    }
                 }
             }
             catch (Exception ex)
@@ -1337,6 +1798,8 @@ namespace MainSite.Controllers
             return View(viewName, model);
         }
     }
+
+
 
 }
 

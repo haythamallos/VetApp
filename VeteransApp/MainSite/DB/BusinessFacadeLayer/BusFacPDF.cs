@@ -35,7 +35,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             _config = new Config();
         }
- 
+
         public long Save(IBaseModel model, long contentStateID, long contentTypeID)
         {
             long lID = 0;
@@ -43,7 +43,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             {
                 bool bAddID = false;
 
-       
+
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(model.UserID, contentTypeID);
                 if (content == null)
@@ -1089,5 +1089,456 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 }
             }
         }
+
+        /**************************************************************
+          * Neck Form
+          * 
+          *************************************************************/
+        public byte[] Neck(string template, NeckModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Shoulder Form
+          * 
+          *************************************************************/
+        public byte[] Shoulder(string template, ShoulderModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Foot Form
+          * 
+          *************************************************************/
+        public byte[] Foot(string template, FootModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Sleepapnea Form
+          * 
+          *************************************************************/
+        public byte[] Sleepapnea(string template, SleepapneaModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Headache Form
+          * 
+          *************************************************************/
+        public byte[] Headache(string template, HeadacheModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Ankle Form
+          * 
+          *************************************************************/
+        public byte[] Ankle(string template, AnkleModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Wrist Form
+          * 
+          *************************************************************/
+        public byte[] Wrist(string template, WristModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Knee Form
+          * 
+          *************************************************************/
+        public byte[] Knee(string template, KneeModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Hip Form
+          * 
+          *************************************************************/
+        public byte[] Hip(string template, HipModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
+        /**************************************************************
+          * Elbow Form
+          * 
+          *************************************************************/
+        public byte[] Elbow(string template, ElbowModel m)
+        {
+            byte[] form = null;
+
+            try
+            {
+                PdfReader pdfReader = new PdfReader(template);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    PdfStamper pdfStamper = null;
+
+                    using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                    {
+                        // Get Reference to PDF Document Fields
+                        AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                    }
+
+                    // Set the flattening flag to true, so the document is not editable
+                    pdfStamper.FormFlattening = false;
+
+                    // close the pdf stamper
+                    pdfStamper.Close();
+
+                    form = ms.ToArray();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _hasError = true;
+                _errorMessage = ex.Message;
+                _errorStacktrace = ex.StackTrace;
+            }
+
+            return form;
+
+        }
+
     }
 }
