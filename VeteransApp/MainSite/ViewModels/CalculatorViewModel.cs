@@ -189,10 +189,8 @@ namespace MainSite.ViewModels
             {
                 item = lstBilateralList[i];
                 tmpRating = (item.RatingID / 100.0) * curEfficiency;
-                tmpRating = Math.Round(tmpRating, MidpointRounding.AwayFromZero);
                 curEfficiency = curEfficiency - tmpRating;
-                curEfficiency = Math.Round(curEfficiency, MidpointRounding.AwayFromZero);
-                curRating = Math.Round((curRating + tmpRating), MidpointRounding.AwayFromZero);
+                curRating += tmpRating;
             }
 
             efficiencyRating = Convert.ToInt32(Math.Round(curRating, MidpointRounding.AwayFromZero));
@@ -209,12 +207,10 @@ namespace MainSite.ViewModels
             {
                 item = lstFinalSortedList[i];
                 tmpRating = (item.RatingID / 100.0) * curEfficiency;
-                tmpRating = Math.Round(tmpRating, MidpointRounding.AwayFromZero);
                 curEfficiency = curEfficiency - tmpRating;
-                curEfficiency = Math.Round(curEfficiency, MidpointRounding.AwayFromZero);
-                curRating = Math.Round((curRating + tmpRating), MidpointRounding.AwayFromZero);
+                curRating += tmpRating;
             }
-            combinedExactRating = Convert.ToInt32(Math.Round(curRating, MidpointRounding.AwayFromZero));
+            combinedExactRating = Convert.ToInt32(Math.Round(curRating + 0.1, MidpointRounding.AwayFromZero));
             roundedRating = RoundToTens(combinedExactRating);
             result = Convert.ToInt32(roundedRating);
 
