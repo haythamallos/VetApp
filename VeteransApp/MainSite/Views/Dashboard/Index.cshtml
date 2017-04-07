@@ -9,9 +9,12 @@
 <!-- Page Content -->
 <div id="page-wrapper">
     <script>
-        var CurrentRating = @Model.evaluationResults.CurrentRating;
-        var IncreaseRating = @Model.evaluationResults.IncreaseRating;
-        var PotentialDelta = @Model.evaluationResults.PotentialDelta;
+        var CurrentRating = 0;
+        var IncreaseRating = 0;
+        var PotentialRating = 0;
+        CurrentRating = @Model.evaluationResults.CurrentRating;
+        IncreaseRating = @Model.evaluationResults.IncreaseRating;
+        PotentialRating = @Model.evaluationResults.PotentialVARating;
     </script>
     <div class="col-md-12">
         <div class="col-md-9">
@@ -32,7 +35,7 @@
                             </li>
                             <li class="p-r-20">
                                 <h5 class="text-muted"><i class="fa fa-circle" style="color: #4F5467;"></i> Potential</h5>
-                                <h4 class="m-b-0">@Model.evaluationResults.PotentialDelta%</h4>
+                                <h4 class="m-b-0">@Model.evaluationResults.PotentialVARating%</h4>
                             </li>
                         </ul>
                         <h2 class="font-500">For Any Support Call 619-822-2070 </h2>

@@ -773,6 +773,7 @@
     <Content Include="Views\Dashboard\dbqKnee.cshtml" />
     <Content Include="Views\Dashboard\dbqHip.cshtml" />
     <Content Include="Views\Dashboard\dbqElbow.cshtml" />
+    <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

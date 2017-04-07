@@ -60,7 +60,6 @@ namespace MainSite.Controllers
                 BusFacCore busFacCore = new BusFacCore();
                 dashboardModel.BenefitStatuses = busFacCore.GetBenefitStatuses(user.UserID);
 
-                Evaluation evaluation = busFacCore.EvaluationGet(user);
                 dashboardModel.evaluationResults = new EvaluationResults();
                 dashboardModel.evaluationModel = new EvaluationModel();
                 UserModel userModel = UserToModel(user);
@@ -341,21 +340,21 @@ namespace MainSite.Controllers
             try
             {
                 string IsNewEval = GetCookieFieldValue(CookieManager.COOKIE_FIELD_ISNEW_EVAL);
+                EvaluationModel evaluationModel = new EvaluationModel();
+                long lID = 0;
+                BusFacCore busFacCore = new BusFacCore();
                 if (!string.IsNullOrEmpty(IsNewEval) && (IsNewEval == "true"))
                 {
-                    EvaluationModel evaluationModel = new EvaluationModel();
                     evaluationModel.CurrentRating = Convert.ToInt32(GetCookieFieldValue(CookieManager.COOKIE_FIELD_CURRENT_RATING));
                     evaluationModel.HasAClaim = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_A_CLAIM));
                     evaluationModel.HasActiveAppeal = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_HAS_ACTIVE_APPEAL));
                     evaluationModel.IsFirstTimeFiling = Convert.ToBoolean(GetCookieFieldValue(CookieManager.COOKIE_FIELD_IS_FIRST_TIME_FILING));
-                    BusFacCore busFacCore = new BusFacCore();
-                    long lID = busFacCore.EvaluationCreate(evaluationModel, user.UserID);
+                    lID = busFacCore.EvaluationCreate(evaluationModel, user.UserID);
                     if (lID > 0)
                     {
                         bool b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "false");
                     }
                     user.CurrentRating = evaluationModel.CurrentRating;
-                    //user.HasCurrentRating = true;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
             }
@@ -1142,8 +1141,9 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
-                        return RedirectToAction("Product", productModel);
+                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        //return RedirectToAction("Product", productModel);
                     }
                     else
                     {

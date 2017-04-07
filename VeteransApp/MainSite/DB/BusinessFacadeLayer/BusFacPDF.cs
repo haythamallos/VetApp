@@ -1111,6 +1111,40 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
+                        // defaults
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo5[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_Painful[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Pain1[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_FunctionalLoss1[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].SpinalContour[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Loss[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].SeverityAnkylosis[1]", "4");
+                        pdfFormFields.SetField("form1[0].#subform[6].AllNormal_Right1[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].AllNormal_Left1[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Right_Biceps[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Left_Biceps[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Right_Triceps[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Left_Triceps[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Right_Brach[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].Left_Brach[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].ConstantPain[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo13A[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo14B[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[7].Duration[1]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo13[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo14[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo15[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].Comments[9]", "None");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo18[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo19[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo20[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo25[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo22[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[9].YesNo24[0]", "2");
+                        // 14A: Yes, if IVDS is check off on section 1B.
                     }
 
                     // Set the flattening flag to true, so the document is not editable

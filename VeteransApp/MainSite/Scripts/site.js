@@ -392,7 +392,7 @@ Morris.Donut({
         value: IncreaseRating,
     }, {
         label: "Potential",
-        value: PotentialDelta,
+        value: PotentialRating,
     }],
     resize: true,
     colors: ['#f75b36', '#00b5c2', '#4F5467']
