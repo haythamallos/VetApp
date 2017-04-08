@@ -12,7 +12,7 @@
         <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Ankle Disability</h2>
         <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
-        <form id="formsankle" method="post" action="/Dashboard/AnklePost?id=6">
+        <form id="formankle" method="post" action="/Dashboard/AnklePost?id=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @if (Model.ContentStateID == 6)
             {
@@ -90,13 +90,28 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
-
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="submit" id="part4NextBtn">Submit</button>
+                            <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
                 </div>
                 <!-- Part 4 -->
+                <!-- Finish -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="info" data-parent="#accordion" href="#collapsef">Finished</a>
+                        </h4>
+                    </div>
+                    <div id="collapsef" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h2 class="box-title m-b-0 m-t-40">Thank you for completing the questions.  Click submit to process.</h2>
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="finishPrevBtn">Prev</button>
+                            <button class="btn btn-success btn-md pull-right" type="submit" id="finishBtn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Finish -->
 
 
 
@@ -112,26 +127,33 @@
     $('document').ready(function () {
 
         $("#part1NextBtn").on("click", function () {
-            $("#collapse2").collapse('show');
-            $("#collapse1").collapse('hide');
+            if (validate_1()) {
+                $("#collapse2").collapse('show');
+                $("#collapse1").collapse('hide');
 
-            var model = $('#formsankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=2',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+                var model = $('#formankle').serialize();
+                // Serialize model for Posting model
+                $.ajax({
+                    url: '/Dashboard/AnklePost?contentStateID=2',
+                    type: 'POST',
+                    data: model,  // Pass Model to Controller Using Ajax Call
+                    success: function (data) {
+                        // Show Data
+                    }
+                });
+
+            }
+            else {
+                //alert("Not valid");
+                $("#infoAlert").modal('show');
+            }
         });
 
         $("#part2NextBtn").on("click", function () {
             $("#collapse3").collapse('show');
             $("#collapse2").collapse('hide');
 
-            var model = $('#formsankle').serialize();
+            var model = $('#formankle').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/AnklePost?contentStateID=3',
@@ -149,7 +171,7 @@
             $("#collapse2").collapse('hide');
 
 
-            var model = $('#formsankle').serialize();
+            var model = $('#formankle').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/AnklePost?contentStateID=9999',
@@ -166,7 +188,7 @@
             $("#collapse4").collapse('show');
             $("#collapse3").collapse('hide');
 
-            var model = $('#formsankle').serialize();
+            var model = $('#formankle').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/AnklePost?contentStateID=4',
@@ -183,7 +205,7 @@
             $("#collapse2").collapse('show');
             $("#collapse3").collapse('hide');
 
-            var model = $('#formsankle').serialize();
+            var model = $('#formankle').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/AnklePost?contentStateID=9999',
@@ -200,7 +222,7 @@
             $("#collapse3").collapse('show');
             $("#collapse4").collapse('hide');
 
-            var model = $('#formsankle').serialize();
+            var model = $('#formankle').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/AnklePost?contentStateID=9999',
@@ -212,7 +234,82 @@
             });
         });
 
+
+        $("#part4NextBtn").on("click", function () {
+            if (validate_4()) {
+                $("#collapsef").collapse('show');
+                $("#collapse4").collapse('hide');
+
+                var model = $('#formankle').serialize();
+                // Serialize model for Posting model
+                $.ajax({
+                    url: '/Dashboard/AnklePost?contentStateID=5',
+                    type: 'POST',
+                    data: model,  // Pass Model to Controller Using Ajax Call
+                    success: function (data) {
+                        // Show Data
+                    }
+                });
+
+            }
+            else {
+                $("#infoAlert").modal('show');
+            }
+        });
+
+        $("#finishPrevBtn").on("click", function () {
+            $("#collapse4").collapse('show');
+            $("#collapsef").collapse('hide');
+
+            var model = $('#formankle').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/AnklePost?contentStateID=9999',
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        });
+
+
+
+        function validate_1() {
+            var isValid = true;
+            var s;
+
+            s = jQuery('input[name="NameOfPatient"]').val();
+            if ((s == '') || s == null) {
+                isValid = false;
+            }
+
+            s = jQuery('input[name="SocialSecurity"]').val();
+            if ((s == '') || s == null) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validate_2() {
+            var isValid = true;
+
+            return isValid;
+        }
+        function validate_3() {
+            var isValid = true;
+
+            return isValid;
+        }
+        function validate_4() {
+            var isValid = true;
+
+            return isValid;
+        }
     });
 </script>
+
+@Html.Partial("partialModalDBQ")
 
 

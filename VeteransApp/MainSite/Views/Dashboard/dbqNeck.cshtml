@@ -12,7 +12,7 @@
         <h2 class="box-title m-b-0 m-t-40">Answer a Few Questions About Your Neck Disability</h2>
         <p class="text-muted m-b-30 font-13"> Please answer each form section and click next.  It's best to answer these questions if you have access to your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.  Each part is automatically saved when you finish it.</p>
 
-        <form id="formsneck" method="post" action="/Dashboard/NeckPost?contentStateID=6">
+        <form id="formneck" method="post" action="/Dashboard/NeckPost?contentStateID=6">
 
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @if (Model.ContentStateID == 6)
@@ -82,6 +82,7 @@
                     </div>
                 </div>
                 <!-- Part 3 -->
+
                 <!-- Part 4 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -97,6 +98,7 @@
                     </div>
                 </div>
                 <!-- Part 4 -->
+
                 <!-- Finish -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -129,7 +131,7 @@
                 $("#collapse2").collapse('show');
                 $("#collapse1").collapse('hide');
 
-                var model = $('#formsneck').serialize();
+                var model = $('#formneck').serialize();
                 // Serialize model for Posting model
                 $.ajax({
                     url: '/Dashboard/NeckPost?contentStateID=2',
@@ -151,7 +153,7 @@
             $("#collapse3").collapse('show');
             $("#collapse2").collapse('hide');
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=3',
@@ -169,7 +171,7 @@
             $("#collapse2").collapse('hide');
 
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=9999',
@@ -186,7 +188,7 @@
             $("#collapse4").collapse('show');
             $("#collapse3").collapse('hide');
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=4',
@@ -203,7 +205,7 @@
             $("#collapse2").collapse('show');
             $("#collapse3").collapse('hide');
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=9999',
@@ -220,7 +222,7 @@
             $("#collapse3").collapse('show');
             $("#collapse4").collapse('hide');
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=9999',
@@ -238,7 +240,7 @@
                 $("#collapsef").collapse('show');
                 $("#collapse4").collapse('hide');
 
-                var model = $('#formsneck').serialize();
+                var model = $('#formneck').serialize();
                 // Serialize model for Posting model
                 $.ajax({
                     url: '/Dashboard/NeckPost?contentStateID=5',
@@ -259,7 +261,7 @@
             $("#collapse4").collapse('show');
             $("#collapsef").collapse('hide');
 
-            var model = $('#formsneck').serialize();
+            var model = $('#formneck').serialize();
             // Serialize model for Posting model
             $.ajax({
                 url: '/Dashboard/NeckPost?contentStateID=9999',

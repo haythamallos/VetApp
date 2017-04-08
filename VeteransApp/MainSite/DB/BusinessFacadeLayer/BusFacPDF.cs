@@ -117,7 +117,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo20[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo25[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo22[1]", "2");
-
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
 
                         if (!back.S47)
                         {
@@ -1144,6 +1144,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo25[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo22[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo24[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].Left_Reduction[1]", "2");
+                        //
                         // 14A: Yes, if IVDS is check off on section 1B.
                     }
 
@@ -1190,6 +1192,41 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
+                        // defaults
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2B[0]", "Physical limitations, lose of strength, soreness, and pain.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2C[0]", "Severe restriction of range of motion.");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo5[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Painful[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Painful[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Pain1[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_FunctionalLoss1[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Pain1[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_FunctionalLoss1[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Tender[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Tender[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Loss[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Loss[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength3[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength3[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Reduction[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Reduction[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].RAnkylosis4[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].LAnkylosis4[0]", "1");
+
+                        //
+                        //
                     }
 
                     // Set the flattening flag to true, so the document is not editable
