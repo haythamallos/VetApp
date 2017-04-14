@@ -641,7 +641,7 @@
     <Content Include="Content\pdf\foot.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\pdf\headaches.pdf">
+    <Content Include="Content\pdf\headache.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pdf\hip.pdf">
