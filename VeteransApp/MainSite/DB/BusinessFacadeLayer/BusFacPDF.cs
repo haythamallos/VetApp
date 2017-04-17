@@ -1561,7 +1561,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // Defaults
-                        pdfFormFields.SetField("", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
 
                         // Section 2C
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
@@ -1570,30 +1570,42 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[1].Describe2C[0]", Defaults.BACK_SECION_2C);
 
-                        //form1[0].#subform[0].No1[0] 1
-                        //form1[0].#subform[0].AllRecords7[0] 1
-                        //form1[0].#subform[0].AllRecords8[0] 1
-                        //form1[0].#subform[1].Opinion[0] 3
-                        //form1[0].#subform[1].Describe2A[0]  On-set of injury incurred during active duty service. 
-                        //form1[0].#subform[2].YesNo4[1] 1
-                        //form1[0].#subform[2].YesNo5[1] 1
-                        //form1[0].#subform[3].Right_Painful[0] 1
-                        //form1[0].#subform[3].Right_FunctionalLoss[0] 1
-                        //form1[0].#subform[3].Left_Painful[1] 1
-                        //form1[0].#subform[3].Left_FunctionalLoss[0] 1
-                        //form1[0].#subform[3].Right_Pain1[0] 2
-                        //form1[0].#subform[3].Right_FunctionalLoss1[0] 2
-                        //form1[0].#subform[3].Left_Pain1[1] 2
-                        //form1[0].#subform[3].Left_FunctionalLoss1[0] 2
-                        //form1[0].#subform[3].Right_Tender[1] 2
-                        //form1[0].#subform[3].Left_Tender[0] 2
-                        //form1[0].#subform[4].Right_Loss[1] 2
-                        //form1[0].#subform[4].Left_Loss[0] 2
-                        //7A: Rate straight “5” for all four questions. Is there a reduction in muscle strength? “No”
-                        //
-                        //
-                        //
-                        //
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo5[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Painful[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Painful[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_FunctionalLoss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Pain1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_FunctionalLoss1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Pain1[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_FunctionalLoss1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Right_Tender[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[3].Left_Tender[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Loss[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Loss[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength3[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength3[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Reduction[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Reduction[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].RAnkylosis6[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].LAnkylosis6[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].Residuals[4]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].Residuals[3]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[6].YesNo15A[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].YesNo16A[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].YesNo20[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo17B[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo17C[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo18[0]", "2");
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable
@@ -1638,6 +1650,33 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     {
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                        // Defaults
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2B[0]", "Physical limitations, loss of strength, soreness, and pain.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2C[0]", "Physical limitations, loss of strength, soreness, and pain. See section 6A.");
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[2]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Strength2[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength1[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Strength2[0]", "5");
+                        pdfFormFields.SetField("form1[0].#subform[4].Right_Reduction[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].Left_Reduction[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[4].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].RAnkylosis5[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].LAnkylosis5[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].No9C[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[6].YesNo10A[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo13[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo19[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo20[0]", "2");
+
 
                     }
 
@@ -1684,6 +1723,29 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
+                        // Defaults
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe[1]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, loss of strength, soreness, and pain.");
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", "Physical limitations, loss of strength, soreness, and pain. See section 6A.");
+                        pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[4].YesNo6[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].Right_Loss[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].Left_Loss[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[5].YesNo7[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[6].RAnkylosis4[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[5].Left_Reduction[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[6].YesNo10[1]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[7].YesNo13[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo19[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo20[0]", "2");
+                        pdfFormFields.SetField("form1[0].#subform[8].YesNo23[0]", "2");
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable
@@ -1728,6 +1790,40 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     {
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                        // Defaults
+                        pdfFormFields.SetField("", "1");
+                        pdfFormFields.SetField("", "1");
+                        //form1[0].#subform[0].No1[0] 1
+                        //form1[0].#subform[0].AllRecords7[0] 1
+                        //form1[0].#subform[0].AllRecords8[0] 1
+                        //form1[0].#subform[1].Opinion[0] 3
+                        //form1[0].#subform[1].Describe[1] The onset of this disability was during military service, continues to deal with symptoms, and flare ups.
+                        //form1[0].#subform[1].YesNo2[1] 1
+                        //form1[0].#subform[1].Describe1[0] Physical limitations, loss of strength, soreness, and pain.
+                        //form1[0].#subform[1].YesNo3[0] 1
+                        //form1[0].#subform[1].Describe2[0] Physical limitations, loss of strength, soreness, and pain. See Section 6A.
+                        //form1[0].#subform[2].YesNo5[1] 1
+                        //form1[0].#subform[2].Right_Pain1[0] 2
+                        //form1[0].#subform[2].Left_Pain1[0] 2
+                        //form1[0].#subform[3].Right_Tender[1] 2
+                        //form1[0].#subform[3].Left_Tender[0] 2
+                        //form1[0].#subform[4].Right_Strength1[0] 5
+                        //form1[0].#subform[4].Right_Strength2[0] 5
+                        //form1[0].#subform[4].Left_Strength1[0] 5
+                        //form1[0].#subform[4].Left_Strength2[0] 5
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
 
                     }
 
