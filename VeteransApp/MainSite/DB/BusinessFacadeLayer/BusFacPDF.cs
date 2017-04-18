@@ -119,6 +119,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[9].YesNo22[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
 
+                        pdfFormFields.SetField("form1[0].#subform[0].NameOfVeteran[0]", back.NameOfPatient);
+                        pdfFormFields.SetField("form1[0].#subform[0].SSN[0]", back.SocialSecurity);
+
                         if (!back.S47)
                         {
                             if (back.S48)

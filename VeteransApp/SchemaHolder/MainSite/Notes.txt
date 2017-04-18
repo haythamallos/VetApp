@@ -11,3 +11,14 @@ Pass: Mondavi1
 CREATE USER vetdbuser FROM LOGIN vetdbuser;
 EXEC sp_addrolemember N'db_owner', N'vetdbuser'
 GO
+
+-- Prod
+CREATE LOGIN vetdbuser WITH password='gw7Ep6Tkrp0rsRFe';
+
+Way to remember password
+golf walmart 7 EGG park 6 TOKYO korean rope park 0 rope skype ROPE FRUIT egg
+
+-- switch to db
+CREATE USER vetdbuser FROM LOGIN vetdbuser;
+EXEC sp_addrolemember N'db_owner', N'vetdbuser'
+GO
