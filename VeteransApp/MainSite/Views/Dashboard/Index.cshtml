@@ -43,7 +43,48 @@
 
                     </div>
                     <div class="col-md-6">
-                        @if (!Model.userModel.IsRatingProfileFinished)
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">APPLY FOR EACH DISABILITY</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Disability</th>
+                                            <th>Progress</th>
+                                            <th class="text-nowrap">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.BenefitStatuses)
+                                        {
+                                            if (item.Key <= 1)
+                                            {
+                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                <tr>
+                                                    <td>@item.Value.BenefitName</td>
+                                                    <td>
+                                                        <div class="progress progress-xs margin-vertical-10 ">
+                                                            <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap">
+                                                        <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a> |
+                                                        @if (item.Value.ContentStateID > 0)
+                                                        {
+                                                            <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText">  New </a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        @*@if (!Model.userModel.IsRatingProfileFinished)
                         {
                             <div class="panel panel-default">
                                 <div class="panel-heading">We Can Increase Your Rating</div>
@@ -51,7 +92,7 @@
                                     <div class="panel-body">
                                         <p>You currently have a @Model.evaluationResults.CurrentRating% rating disability with the VA.  We can increase your rating to @Model.evaluationResults.PotentialVARating% which means another @string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth) in your pocket every month. </p>
                                         <a href="/Dashboard/RatingsCapture" class="btn btn-custom m-t-10 collapseble">Get Started</a>
-                                        @*<a href="/Dashboard/eBenefits" class="btn btn-custom m-t-10 collapseble">eBenefits</a>*@
+                                        <a href="/Dashboard/eBenefits" class="btn btn-custom m-t-10 collapseble">eBenefits</a>
                                     </div>
                                 </div>
                             </div>
@@ -72,23 +113,32 @@
                                         <tbody>
                                             @foreach (var item in Model.BenefitStatuses)
                                             {
-                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
-                                                <tr>
-                                                    <td>@item.Value.BenefitName</td>
-                                                    <td>
-                                                        <div class="progress progress-xs margin-vertical-10 ">
-                                                            <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap"><a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>  </td>
-                                                </tr>
+                                                if (item.Key <= 1)
+                                                {
+                                                    string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                    <tr>
+                                                        <td>@item.Value.BenefitName</td>
+                                                        <td>
+                                                            <div class="progress progress-xs margin-vertical-10 ">
+                                                                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a> |
+                                                            @if (item.Value.ContentStateID > 0)
+                                                            {
+                                                            <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText">  New </a>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
                                             }
-                                         
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                        }
+                        }*@
                         @*<button id="btnStartApplication"  class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light"><i class="fa fa fa-long-arrow-right"></i> Get Started </button>*@
                     </div>
                 </div>

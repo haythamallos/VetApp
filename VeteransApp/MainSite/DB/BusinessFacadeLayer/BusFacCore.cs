@@ -355,22 +355,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 content = ContentGetLatest(UserID, ct.ContentTypeID);
                 if (content != null)
                 {
+                    benefitStatus.ContentStateID = content.ContentStateID;
                     if ((content.ContentStateID > 0) && (content.ContentStateID <= 5))
                     {
-                        benefitStatus.ActionText = "Finish";
-                        benefitStatus.TooltipText = "Finish Application";
+                        //benefitStatus.ActionText = "Finish";
+                        //benefitStatus.TooltipText = "Finish Application";
+                        benefitStatus.ActionText = "Continue";
+                        benefitStatus.TooltipText = "Continue Application";
                         benefitStatus.Progress = dictContentStates[content.ContentStateID].Code;
                     }
                     else if (content.ContentStateID == 6)
                     {
-                        benefitStatus.ActionText = "Purchase";
-                        benefitStatus.TooltipText = "Purchase Form";
+                        //benefitStatus.ActionText = "Purchase";
+                        //benefitStatus.TooltipText = "Purchase Form";
+                        benefitStatus.ActionText = "Submit";
+                        benefitStatus.TooltipText = "Submt Form";
                         benefitStatus.Progress = "100";
                     }
                     else if (content.ContentStateID == 7)
                     {
                         benefitStatus.ActionText = "Done";
-                        benefitStatus.TooltipText = "Form Purchased";
+                        benefitStatus.TooltipText = "Form Submitted";
                         benefitStatus.Progress = "100";
                     }
                 }

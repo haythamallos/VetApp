@@ -40,11 +40,17 @@ namespace MainSite.Controllers
         {
             _config = new Config();
 
-            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 55, 25 });
+            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25 });
             ViewBag.MovementList90Deg = MovementList90Deg;
 
-            var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 20, 10 });
+            var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 25, 20, 15, 10 });
             ViewBag.MovementList30Deg = MovementList30Deg;
+
+            //var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 55, 25 });
+            //ViewBag.MovementList90Deg = MovementList90Deg;
+
+            //var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 20, 10 });
+            //ViewBag.MovementList30Deg = MovementList30Deg;
 
             var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
@@ -424,12 +430,12 @@ namespace MainSite.Controllers
         }
 
 
-        private long FormSave(IBaseModel model, long contentStateID, long contentTypeID)
+        private long FormSave(IBaseModel model, long contentStateID, long contentTypeID, bool isNew = false)
         {
             long ContentID = 0;
             BusFacPDF busFacPDF = new BusFacPDF();
             model.TemplatePath = GetTemplatePath(model);
-            ContentID = busFacPDF.Save(model, contentStateID, contentTypeID);
+            ContentID = busFacPDF.Save(model, contentStateID, contentTypeID, isNew);
             return ContentID;
         }
 
@@ -908,7 +914,7 @@ namespace MainSite.Controllers
          * Back Form
          * 
          *************************************************************/
-        public ActionResult Back()
+        public ActionResult Back(string isnew)
         {
             string viewName = "dbqBack";
             BackModel model = new BackModel();
@@ -921,23 +927,23 @@ namespace MainSite.Controllers
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ( (content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
                 }
 
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
-                }
+                //if (string.IsNullOrEmpty(model.NameOfPatient))
+                //{
+                //    model.NameOfPatient = user.Fullname;
+                //}
+                //if (string.IsNullOrEmpty(model.SocialSecurity))
+                //{
+                //    model.SocialSecurity = user.Ssn;
+                //}
 
                 //if (!((bool)user.HasRatingBack))
                 //{
@@ -957,6 +963,7 @@ namespace MainSite.Controllers
         public ActionResult BackPost(BackModel model, long contentStateID)
         {
             string viewName = "dbqBack";
+            string filename = viewName;
             long contenttypeid = 1;
             try
             {
@@ -974,8 +981,15 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
-                        return RedirectToAction("Product", productModel);
+                        filename = UtilsString.createFilename(model.NameOfPatient);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
+                        //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
+                        //return RedirectToAction("Product", productModel);
                     }
                     else
                     {
