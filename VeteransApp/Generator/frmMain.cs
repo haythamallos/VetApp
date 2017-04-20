@@ -11023,6 +11023,7 @@ namespace CodeGenerator
                     String line;
                     StringBuilder sb = new StringBuilder();
                     string s = null;
+                    string key1 = "Export Value: ";
                     while ((line = sr.ReadLine()) != null)
                     {
                         // 1.  form1[0].#subform[0].Diagnoses11[0] - CheckBox - Export Value: 1
@@ -11043,12 +11044,30 @@ namespace CodeGenerator
                             s = s.Replace("<<2>>", line.Substring(ind1 + 1, ind2 - ind1 - 1).Trim());
                         }
 
-                        //sb.Append(line);
+                        int ind3 = line.IndexOf(key1, ind2);
+                        if (ind3 != -1)
+                        {
+                            s = s.Replace("<<3>>", line.Substring(ind3 + key1.Length).Trim());
+                        }
+                        else
+                        {
+                            s = s.Replace("<<3>>", string.Empty);
+                        }
+
+                        int ind4 = line.IndexOf("CheckBox");
+                        if (ind4 != -1)
+                        {
+                            s = s.Replace("<<4>>", "CheckBox");
+                        }
+
+                        int ind5 = line.IndexOf("TextField");
+                        if (ind5 != -1)
+                        {
+                            s = s.Replace("<<4>>", "TextField");
+                        }
+                        sb.Append(s + Environment.NewLine);
                     }
-                    if (sb.Length > 0)
-                    {
-                        txtOutput.AppendText(sb.ToString());
-                    }
+                    txtOutput.AppendText(sb.ToString());
                 }
             }
             catch (Exception ex)
