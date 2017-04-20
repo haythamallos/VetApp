@@ -4,7 +4,7 @@ namespace Vetapp.Engine.Common
 {
     public class UtilsString
     {
-        public static string createFilename(string data)
+        public static string createFilename(string data, string contentTypeName)
         {
             string s = null;
             if (!string.IsNullOrEmpty(data))
@@ -12,11 +12,11 @@ namespace Vetapp.Engine.Common
                 string[] words = data.Split();
                 if (words.Length >= 2)
                 {
-                    s = words[1] + "-" + words[0] + ".pdf";
+                    s = words[1] + "-" + words[0] + "-" + contentTypeName + ".pdf";
                 }
                 else if (words.Length >= 1)
                 {
-                    s = words[0] + ".pdf";
+                    s = words[0] + "-" + contentTypeName + ".pdf";
                 }
                 if (!IsLegalFilename(s))
                 {

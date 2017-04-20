@@ -13,7 +13,6 @@ namespace MainSite.Models
         public string NameOfPatient { get; set; }
         public string SocialSecurity { get; set; }
 
-        public string BackDiagnosis { get; set; }
         public bool S47 { get; set; }
         public bool S48 { get; set; }
         public bool S49 { get; set; }

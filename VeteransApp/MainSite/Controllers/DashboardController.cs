@@ -40,10 +40,10 @@ namespace MainSite.Controllers
         {
             _config = new Config();
 
-            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25 });
+            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList90Deg = MovementList90Deg;
 
-            var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 25, 20, 15, 10 });
+            var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList30Deg = MovementList30Deg;
 
             //var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 55, 25 });
@@ -51,6 +51,12 @@ namespace MainSite.Controllers
 
             //var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 20, 10 });
             //ViewBag.MovementList30Deg = MovementList30Deg;
+
+            var MovementList45Deg = new System.Web.Mvc.SelectList(new[] { 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList45Deg = MovementList45Deg;
+
+            var MovementList80Deg = new System.Web.Mvc.SelectList(new[] { 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList80Deg = MovementList80Deg;
 
             var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
@@ -935,21 +941,6 @@ namespace MainSite.Controllers
                 {
                     model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
                 }
-
-                //if (string.IsNullOrEmpty(model.NameOfPatient))
-                //{
-                //    model.NameOfPatient = user.Fullname;
-                //}
-                //if (string.IsNullOrEmpty(model.SocialSecurity))
-                //{
-                //    model.SocialSecurity = user.Ssn;
-                //}
-
-                //if (!((bool)user.HasRatingBack))
-                //{
-                //    PreliminaryModel preliminaryModel = new PreliminaryModel() { ContentTypeID = 1 };
-                //    return RedirectToAction("PreForm", preliminaryModel);
-                //}
             }
             catch (Exception ex)
             {
@@ -962,7 +953,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult BackPost(BackModel model, long contentStateID)
         {
-            string viewName = "dbqBack";
+            string viewName = "Back";
             string filename = viewName;
             long contenttypeid = 1;
             try
@@ -981,7 +972,7 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        filename = UtilsString.createFilename(model.NameOfPatient);
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
                         if (filename == null)
                         {
                             filename = viewName + ".pdf";
@@ -1010,7 +1001,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Shoulder()
         {
-            string viewName = "dbqShoulder";
+            string viewName = "Shoulder";
             ShoulderModel model = new ShoulderModel();
             long contenttypeid = 2;
             try
@@ -1057,7 +1048,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult ShoulderPost(ShoulderModel model, long contentStateID)
         {
-            string viewName = "dbqShoulder";
+            string viewName = "Shoulder";
             long contenttypeid = 2;
             try
             {
@@ -1096,7 +1087,7 @@ namespace MainSite.Controllers
         * Neck Form
         * 
         *************************************************************/
-        public ActionResult Neck()
+        public ActionResult Neck(string isnew)
         {
             string viewName = "dbqNeck";
             NeckModel model = new NeckModel();
@@ -1109,22 +1100,13 @@ namespace MainSite.Controllers
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<NeckModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1139,6 +1121,7 @@ namespace MainSite.Controllers
         public ActionResult NeckPost(NeckModel model, long contentStateID)
         {
             string viewName = "dbqNeck";
+            string filename = viewName;
             long contenttypeid = 3;
             try
             {
@@ -1156,7 +1139,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
@@ -1179,7 +1168,7 @@ namespace MainSite.Controllers
          *************************************************************/
         public ActionResult Foot()
         {
-            string viewName = "dbqFoot";
+            string viewName = "Foot";
             FootModel model = new FootModel();
             long contenttypeid = 4;
             try
@@ -1219,7 +1208,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult FootPost(FootModel model, long contentStateID)
         {
-            string viewName = "dbqFoot";
+            string viewName = "Foot";
             long contenttypeid = 4;
             try
             {
@@ -1260,7 +1249,7 @@ namespace MainSite.Controllers
           *************************************************************/
         public ActionResult Sleepapnea()
         {
-            string viewName = "dbqSleepapnea";
+            string viewName = "Sleepapnea";
             SleepapneaModel model = new SleepapneaModel();
             long contenttypeid = 5;
             try
@@ -1300,7 +1289,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult SleepapneaPost(SleepapneaModel model, long contentStateID)
         {
-            string viewName = "dbqSleepapnea";
+            string viewName = "Sleepapnea";
             long contenttypeid = 5;
             try
             {
@@ -1341,7 +1330,7 @@ namespace MainSite.Controllers
           *************************************************************/
         public ActionResult Headache()
         {
-            string viewName = "dbqHeadache";
+            string viewName = "Headache";
             HeadacheModel model = new HeadacheModel();
             long contenttypeid = 6;
             try
@@ -1381,7 +1370,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult HeadachePost(HeadacheModel model, long contentStateID)
         {
-            string viewName = "dbqHeadache";
+            string viewName = "Headache";
             long contenttypeid = 6;
             try
             {
@@ -1422,7 +1411,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Ankle()
         {
-            string viewName = "dbqAnkle";
+            string viewName = "Ankle";
             AnkleModel model = new AnkleModel();
             long contenttypeid = 7;
             try
@@ -1462,7 +1451,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult AnklePost(AnkleModel model, long contentStateID)
         {
-            string viewName = "dbqAnkle";
+            string viewName = "Ankle";
             long contenttypeid = 7;
             try
             {
@@ -1503,7 +1492,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Wrist()
         {
-            string viewName = "dbqWrist";
+            string viewName = "Wrist";
             WristModel model = new WristModel();
             long contenttypeid = 8;
             try
@@ -1543,7 +1532,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult WristPost(WristModel model, long contentStateID)
         {
-            string viewName = "dbqWrist";
+            string viewName = "Wrist";
             long contenttypeid = 8;
             try
             {
@@ -1584,7 +1573,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Knee()
         {
-            string viewName = "dbqKnee";
+            string viewName = "Knee";
             KneeModel model = new KneeModel();
             long contenttypeid = 9;
             try
@@ -1624,7 +1613,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult KneePost(KneeModel model, long contentStateID)
         {
-            string viewName = "dbqKnee";
+            string viewName = "Knee";
             long contenttypeid = 9;
             try
             {
@@ -1665,7 +1654,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Hip()
         {
-            string viewName = "dbqHip";
+            string viewName = "Hip";
             HipModel model = new HipModel();
             long contenttypeid = 10;
             try
@@ -1705,7 +1694,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult HipPost(HipModel model, long contentStateID)
         {
-            string viewName = "dbqHip";
+            string viewName = "Hip";
             long contenttypeid = 10;
             try
             {
@@ -1746,7 +1735,7 @@ namespace MainSite.Controllers
         *************************************************************/
         public ActionResult Elbow()
         {
-            string viewName = "dbqElbow";
+            string viewName = "Elbow";
             ElbowModel model = new ElbowModel();
             long contenttypeid = 11;
             try
@@ -1786,7 +1775,7 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult ElbowPost(ElbowModel model, long contentStateID)
         {
-            string viewName = "dbqElbow";
+            string viewName = "Elbow";
             long contenttypeid = 11;
             try
             {

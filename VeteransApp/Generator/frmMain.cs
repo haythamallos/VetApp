@@ -105,7 +105,7 @@ namespace CodeGenerator
         private TextBox numApiKeysTextBox;
         private Button btnKeysGnerate;
         private GroupBox miscGroup;
-        private Button genPostalSQLButton;
+        private Button genPDFArraysButton;
         private Button btnGo;
         private ComboBox cboDictionary;
         private Button realtorInfoButton;
@@ -158,7 +158,7 @@ namespace CodeGenerator
             this.miscGroup = new System.Windows.Forms.GroupBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.cboDictionary = new System.Windows.Forms.ComboBox();
-            this.genPostalSQLButton = new System.Windows.Forms.Button();
+            this.genPDFArraysButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.getSQLProdDBButton = new System.Windows.Forms.Button();
             this.btnKeysSqlGenerate = new System.Windows.Forms.Button();
@@ -238,7 +238,7 @@ namespace CodeGenerator
             // 
             // txtOutput
             // 
-            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutput.Location = new System.Drawing.Point(747, 68);
             this.txtOutput.Multiline = true;
@@ -321,7 +321,7 @@ namespace CodeGenerator
             // 
             this.miscGroup.Controls.Add(this.btnGo);
             this.miscGroup.Controls.Add(this.cboDictionary);
-            this.miscGroup.Controls.Add(this.genPostalSQLButton);
+            this.miscGroup.Controls.Add(this.genPDFArraysButton);
             this.miscGroup.Location = new System.Drawing.Point(225, 67);
             this.miscGroup.Name = "miscGroup";
             this.miscGroup.Size = new System.Drawing.Size(357, 38);
@@ -358,14 +358,15 @@ namespace CodeGenerator
             this.cboDictionary.TabIndex = 30;
             this.cboDictionary.Text = "timeWords0.txt";
             // 
-            // genPostalSQLButton
+            // genPDFArraysButton
             // 
-            this.genPostalSQLButton.Location = new System.Drawing.Point(8, 11);
-            this.genPostalSQLButton.Name = "genPostalSQLButton";
-            this.genPostalSQLButton.Size = new System.Drawing.Size(115, 24);
-            this.genPostalSQLButton.TabIndex = 29;
-            this.genPostalSQLButton.Tag = "8";
-            this.genPostalSQLButton.Text = "Gen Postal SQL";
+            this.genPDFArraysButton.Location = new System.Drawing.Point(8, 11);
+            this.genPDFArraysButton.Name = "genPDFArraysButton";
+            this.genPDFArraysButton.Size = new System.Drawing.Size(115, 24);
+            this.genPDFArraysButton.TabIndex = 29;
+            this.genPDFArraysButton.Tag = "8";
+            this.genPDFArraysButton.Text = "Gen PDF Arrays";
+            this.genPDFArraysButton.Click += new System.EventHandler(this.genPDFArraysButton_Click);
             // 
             // groupBox4
             // 
@@ -389,6 +390,7 @@ namespace CodeGenerator
             this.getSQLProdDBButton.TabIndex = 30;
             this.getSQLProdDBButton.Tag = "0";
             this.getSQLProdDBButton.Text = "Gen SQL ProdDB";
+            this.getSQLProdDBButton.Click += new System.EventHandler(this.getSQLProdDBButton_Click);
             // 
             // btnKeysSqlGenerate
             // 
@@ -426,6 +428,7 @@ namespace CodeGenerator
             this.btnKeysGnerate.TabIndex = 26;
             this.btnKeysGnerate.Tag = "8";
             this.btnKeysGnerate.Text = "Gen Keys";
+            this.btnKeysGnerate.Click += new System.EventHandler(this.btnKeysGnerate_Click);
             // 
             // label7
             // 
@@ -564,7 +567,7 @@ namespace CodeGenerator
             // 
             // lblOutput
             // 
-            this.lblOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOutput.BackColor = System.Drawing.Color.Transparent;
             this.lblOutput.Location = new System.Drawing.Point(743, 50);
@@ -1018,8 +1021,8 @@ namespace CodeGenerator
             this.txtCS.Items.AddRange(new object[] {
             "Data Source=HAYTHAMALLO38E3\\SQLEXPRESS;Initial Catalog=localvetdb;Persist Securit" +
                 "y Info=True;User ID=vetdbuser;Password=vetdbuser;",
-            "Data Source=52.8.194.212;Initial Catalog=vetappmaindbprod;Persist Security Info" +
-                "=True;User ID=vetappproddbuser;Password=wRax57uswENADrAc;"});
+            "Data Source=52.8.194.212;Initial Catalog=vetappmaindbprod;Persist Security Info=T" +
+                "rue;User ID=vetappproddbuser;Password=wRax57uswENADrAc;"});
             this.txtCS.Location = new System.Drawing.Point(13, 23);
             this.txtCS.Name = "txtCS";
             this.txtCS.Size = new System.Drawing.Size(1100, 21);
@@ -11000,7 +11003,58 @@ namespace CodeGenerator
         {
         }
 
+        private void btnKeysGnerate_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void getSQLProdDBButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void genPDFArraysButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filepath = @"C:\MyData\Vet App\PDFMappings\neck-mappings.txt";
+                using (StreamReader sr = new StreamReader(filepath))
+                {
+                    String line;
+                    StringBuilder sb = new StringBuilder();
+                    string s = null;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        // 1.  form1[0].#subform[0].Diagnoses11[0] - CheckBox - Export Value: 1
+                        // 2.  form1[0].#subform[0].DateOfDiagnosis11[0] - TextField
+                        // form1[0].#subform[0].ICDCode9[0] - TextField
+                        // { 1, new PDFItem {Code="form1[0].#subform[0].Diagnoses11[0]", ExportValue="1", ItemType="CheckBox" }},
+                        // { <<1>>, new PDFItem { Code = "<<2>>", ExportValue = "<<3>>", ItemType = "<<4>>" }},
+                        s = "{ <<1>>, new PDFItem { Code = \"<<2>>\", ExportValue = \"<<3>>\", ItemType = \"<<4>>\" }},";
+                        int ind1 = line.IndexOf(".");
+                        if (ind1 != -1)
+                        {
+                            s = s.Replace("<<1>>", line.Substring(0, ind1));
+                        }
+
+                        int ind2 = line.IndexOf("-", ind1);
+                        if (ind2 != -1)
+                        {
+                            s = s.Replace("<<2>>", line.Substring(ind1 + 1, ind2 - ind1 - 1).Trim());
+                        }
+
+                        //sb.Append(line);
+                    }
+                    if (sb.Length > 0)
+                    {
+                        txtOutput.AppendText(sb.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 
     [DelimitedRecord(",")]

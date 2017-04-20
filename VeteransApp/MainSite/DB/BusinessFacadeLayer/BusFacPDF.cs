@@ -8,6 +8,7 @@ using MainSite.Classes;
 
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.Common;
+using System.Collections.Generic;
 
 namespace Vetapp.Engine.BusinessFacadeLayer
 {
@@ -121,6 +122,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         pdfFormFields.SetField("form1[0].#subform[0].NameOfVeteran[0]", back.NameOfPatient);
                         pdfFormFields.SetField("form1[0].#subform[0].SSN[0]", back.SocialSecurity);
+
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
 
                         if (!back.S47)
                         {
@@ -276,6 +281,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 back.S60 += ", " + diagnosis;
                             }
 
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[0].NoDiagnoses[0]", "1");
                         }
 
                         if (back.S60.Count() > 1)
@@ -1150,6 +1159,438 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[5].Left_Reduction[1]", "2");
                         //
                         // 14A: Yes, if IVDS is check off on section 1B.
+
+                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
+
+                        pdfFormFields.SetField("form1[0].#subform[0].NameOfVeteran[0]", m.NameOfPatient);
+                        pdfFormFields.SetField("form1[0].#subform[0].SSN[0]", m.SocialSecurity);
+
+                        m.S58 = string.Empty;
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string diagnosis = null;
+
+                        if (!m.S45)
+                        {
+                            if (m.S46)
+                            {
+                                diagnosis = "Mechanical Cervical Pain Syndrome";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses1[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis1[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode1[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S47)
+                            {
+                                diagnosis = "Cervical Sprain/Strain";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses2[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis2[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode2[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S48)
+                            {
+                                diagnosis = "Cervical Spondylosis";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses3[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis3[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode3[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S49)
+                            {
+                                diagnosis = "Degenerative Disc Disease";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses4[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis4[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode4[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S50)
+                            {
+                                diagnosis = "Foraminal Stenosis/Central Stenosis";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses5[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis5[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode5[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S51)
+                            {
+                                diagnosis = "Intervertebral Disc Syndrome";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses6[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis6[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode6[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S52)
+                            {
+                                diagnosis = "Radiculopathy";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses7[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis7[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode7[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S53)
+                            {
+                                diagnosis = "Myelopathy";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses8[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis8[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode8[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S7)
+                            {
+                                diagnosis = "Ankylosis of Cervical Spine";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses9[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis9[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode9[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S6)
+                            {
+                                diagnosis = "Ankylosing Spondylitis of The Cervical Spine";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses10[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis10[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode10[0]", icdcode.RefNumber);
+                                }
+                            }
+                            if (m.S1)
+                            {
+                                diagnosis = "Vertebral Fracture";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses11[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis11[0]", dt);
+                                m.S58 += diagnosis;
+                                if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField("form1[0].#subform[0].ICDCode11[0]", icdcode.RefNumber);
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(m.S54))
+                            {
+                                diagnosis = "Other";
+                                pdfFormFields.SetField("form1[0].#subform[0].Diagnoses12[0]", "1");
+                                pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis12[0]", dt);
+                                pdfFormFields.SetField("form1[0].#subform[0].OtherDiagnosis1[0]", m.S54);
+                                m.S58 += ", " + diagnosis;
+                            }
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[0].NoDiagnoses[0]", "1");
+                        }
+
+                        if (m.S58.Count() > 1)
+                        {
+                            if (m.S58.IndexOf(", ") == 0)
+                            {
+                                m.S58 = m.S58.Remove(0, 2);
+                            }
+                        }
+                        iTextSharp.text.Font normal = FontFactory.GetFont(FontFactory.COURIER, 6f, iTextSharp.text.Font.NORMAL);
+                        if (m.S58.Length > 255)
+                        {
+                            normal = FontFactory.GetFont(FontFactory.COURIER, 2f, iTextSharp.text.Font.NORMAL);
+                        }
+                        //set the field to bold
+                        pdfFormFields.SetFieldProperty("form1[0].#subform[0].Records[1]", "textfont", normal.BaseFont, null);
+                        pdfFormFields.SetField("form1[0].#subform[0].Records[1]", m.S58);
+
+                        pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe[0]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
+
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, lose of strength, soreness, and pain.");
+
+                        SetField_Neck_2B(m, pdfFormFields);
+
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, lose of strength, soreness, and pain.");
+
+                        pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", "Severe restriction of range of motion.");
+
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM1[0]", m.S96);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM2[0]", m.S86);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM3[0]", m.S87);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM4[0]", m.S90);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM5[0]", m.S78);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM6[0]", m.S82);
+
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", m.S109);
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", m.S108);
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", m.S110);
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", m.S111);
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", m.S117);
+                        pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", m.S118);
+
+                        bool isAllSame = true;
+                        if (m.S109 != m.S96)
+                        {
+                            isAllSame = false;
+                        }
+                        if (m.S108 != m.S86)
+                        {
+                            isAllSame = false;
+                        }
+                        if (m.S110 != m.S87)
+                        {
+                            isAllSame = false;
+                        }
+                        if (m.S111 != m.S90)
+                        {
+                            isAllSame = false;
+                        }
+                        if (m.S117 != m.S78)
+                        {
+                            isAllSame = false;
+                        }
+                        if (m.S118 != m.S82)
+                        {
+                            isAllSame = false;
+                        }
+
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Perform[0]", "1");
+
+                        if (isAllSame)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[0]", "2");
+                        }
+                        else
+                        {
+                            // insert values
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", m.S109);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", m.S108);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", m.S110);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", m.S111);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", m.S117);
+                            pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", m.S118);
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1");
+                        }
+
+
+
+
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_Painful[0]", "1"); //122
+                        pdfFormFields.SetField("form1[0].#subform[2].Neck_FunctionalLoss[0]", "1"); //124
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Pain1[1]", "1"); //131
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_FunctionalLoss1[1]", "1"); //129
+
+                        if (m.S135Tenderness)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Tender[0]", "1"); //132
+                            pdfFormFields.SetField("form1[0].#subform[2].Explain[2]", "Mild TTP Lumbar Paraspinal."); //134
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Tender[1]", "2"); //133
+                        }
+
+
+                        if ((m.S145MuscleSpasm) || (m.S145Guarding))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[1]", "1"); //149
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[0]", "2"); //148
+                        }
+
+                        if ((!m.S145MuscleSpasmQuestion) && (!m.S145GuardingQuestion))
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Gait[0]", "1"); //142
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].Gait[1]", "2"); //143
+                            if ((m.S145MuscleSpasm) && (m.S145MuscleSpasmQuestion))
+                            {
+                                pdfFormFields.SetField("form1[0].#subform[3].DueTo[0]", "1"); //144
+                            }
+                            if ((m.S145Guarding) && (m.S145GuardingQuestion))
+                            {
+                                pdfFormFields.SetField("form1[0].#subform[3].DueTo[1]", "2"); //145
+                            }
+                        }
+
+                        pdfFormFields.SetField("form1[0].#subform[3].SpinalContour[1]", "1"); //141
+
+                        if (m.S159)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor1[0]", "1"); //156
+                        }
+                        if (m.S164)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor2[0]", "1"); //161
+                        }
+                        if (m.S158)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor3[0]", "1"); //155
+                        }
+                        if (m.S157)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor4[0]", "1"); //154
+                        }
+                        if (m.S171)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor5[0]", "1"); //168
+                        }
+                        if (m.S170)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor6[0]", "1"); //167
+                        }
+                        if (m.S169)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor7[0]", "1"); //166
+                        }
+                        if (m.S168)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor8[0]", "1"); //165
+                        }
+                        if (m.S167)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor9[0]", "1"); //164
+                        }
+                        if (m.S160)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor10[0]", "1"); //157
+                        }
+                        if (m.S163)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor11[0]", "1"); //160
+                        }
+                        if (m.S161)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor12[0]", "1");//158
+                        }
+                        if (m.S162)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[3].ContributingFactor13[0]", "1"); //159
+                        }
+
+                        if (m.S184 != m.S109)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (m.S185 != m.S108)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (m.S174 != m.S110)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (m.S180 != m.S111)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (m.S175 != m.S117)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (m.S177 != m.S118)
+                        {
+                            isAllSame = false;
+                        }
+
+                        if (!isAllSame)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM19[0]", m.S184); //181
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM20[0]", m.S185); //182
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM21[0]", m.S174); //171
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM22[0]", m.S180); //177
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM23[0]", m.S175); //172
+                            pdfFormFields.SetField("form1[0].#subform[4].ROM24[0]", m.S177); //174
+
+                            pdfFormFields.SetField("form1[0].#subform[4].YesNo6[1]", "1"); //170
+                            pdfFormFields.SetField("form1[0].#subform[4].Right_Limit[0]", "1"); //183
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[4].YesNo6[0]", "2"); //169
+                            pdfFormFields.SetField("form1[0].#subform[4].Right_Limit[1]", "2"); //184
+                        }
+
+                        if (m.S316)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[0]", "1"); //305
+
+                            SetField_SRadiculopathyConstantPainLevelAnswer(m, pdfFormFields);
+                            SetField_SRadiculopathyIntermittentPainLevelAnswer(m, pdfFormFields);
+                            SetField_SRadiculopathyDullPainLevelAnswer(m, pdfFormFields);
+                            SetField_SRadiculopathyTinglingPainLevelAnswer(m, pdfFormFields);
+                            SetField_SRadiculopathyNumbnessPainLevelAnswer(m, pdfFormFields);
+                            SetField_SRadiculopathySeverityLevel(m, pdfFormFields);
+
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2"); //317
+                        }
+
+                        if (m.S51)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[0]", "3"); //330
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[7].YesNo14A[1]", "2"); //377
+                        }
+
+                        if (!string.IsNullOrEmpty(m.S15C))
+                        {
+                            SetField_S15C(m, pdfFormFields);
+                        }
+
+                        if (m.S414)
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[8].YesNo18[0]", "1"); //401
+                            SetField_S17ABrace(m, pdfFormFields);
+                            SetField_S17ACrutches(m, pdfFormFields);
+                            SetField_S17ACane(m, pdfFormFields);
+                            SetField_S17AWalker(m, pdfFormFields);
+
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField("form1[0].#subform[8].YesNo18[1]", "2"); //402
+                        }
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable
@@ -1173,7 +1614,472 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return form;
 
         }
+        private void SetField_Neck_2B(NeckModel model, AcroFields pdfFormFields)
+        {
+            if (!string.IsNullOrEmpty(model.SDominantHand))
+            {
+                switch (model.SDominantHand)
+                {
+                    case "RIGHT":
+                        pdfFormFields.SetField("form1[0].#subform[1].DominantHand[2]", "2");
+                        break;
+                    case "LEFT":
+                        pdfFormFields.SetField("form1[0].#subform[1].DominantHand[1]", "1");
+                        break;
+                    case "AMBIDEXTROUS":
+                        pdfFormFields.SetField("form1[0].#subform[1].DominantHand[0]", "3");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
+        /// <summary>
+        /// Constant pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyConstantPainLevelAnswer(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.SRadiculopathyConstantPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].ConstantPain[0]", "1"); //306
+                switch (m.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Left(m, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Left(m, pdfFormFields);
+                        SetField_SRadiculopathyConstantPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_SRadiculopathyConstantPainLevelAnswer_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyConstantPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[2]", "2"); //315
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[3]", "3"); //316
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity1[0]", "4"); //311
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyConstantPainLevelAnswer_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyConstantPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[1]", "2"); //308
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[0]", "3"); //307
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity1[3]", "4"); //310
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Intermittent pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.SRadiculopathyIntermittentPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].IntermittentPain[2]", "1"); //263
+                switch (m.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(m, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(m, pdfFormFields);
+                        SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyIntermittentPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[1]", "2"); //254
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[0]", "3"); //253
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity2[3]", "4"); //258
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyIntermittentPainLevelAnswer_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyIntermittentPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[2]", "2"); //261
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[3]", "3"); //262
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity2[0]", "4"); //259
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Dull pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyDullPainLevelAnswer(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.SRadiculopathyDullPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[6].DullPain[0]", "1"); //240
+                switch (m.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Left(m, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyDullPainLevelAnswer_Left(m, pdfFormFields);
+                        SetField_SRadiculopathyDullPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyDullPainLevelAnswer_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyDullPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[2]", "2"); //254
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[3]", "3"); //255
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Left_Severity3[0]", "4"); //250
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyDullPainLevelAnswer_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyDullPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[1]", "2"); //247
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[0]", "3"); //246
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[6].Right_Severity3[3]", "4"); //249
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Tingling pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.SRadiculopathyTinglingPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[7].Paresthesias[0]", "1"); //348
+                switch (m.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Left(m, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Left(m, pdfFormFields);
+                        SetField_SRadiculopathyTinglingPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyTinglingPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[2]", "2"); //357
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[3]", "3"); //358
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity4[0]", "4"); //353
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyTinglingPainLevelAnswer_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyTinglingPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[1]", "2"); //350
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[0]", "3"); //349
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity4[3]", "4"); //352
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// Numbness pain radiculopath
+        /// </summary>
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.SRadiculopathyNumbnessPainLevelAnswer)
+            {
+                pdfFormFields.SetField("form1[0].#subform[7].Numbness[2]", "1"); //347
+                switch (m.SRadiculopathyLegSide)
+                {
+                    case "LEFT":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(m, pdfFormFields);
+                        break;
+                    case "RIGHT":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    case "BOTH":
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(m, pdfFormFields);
+                        SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(m, pdfFormFields);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyNumbnessPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[1]", "2"); //338
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[0]", "3"); //329
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity5[3]", "4"); //342
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathyNumbnessPainLevelAnswer_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyNumbnessPainLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[2]", "2"); //345
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[3]", "3"); //346
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity5[0]", "4"); //343
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Numbness pain SRadiculopathySeverityLevel
+        /// </summary>
+        private void SetField_SRadiculopathySeverityLevel(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathyLegSide)
+            {
+                case "LEFT":
+                    SetField_SRadiculopathySeverityLevel_Left(m, pdfFormFields);
+                    break;
+                case "RIGHT":
+                    SetField_SRadiculopathySeverityLevel_Right(m, pdfFormFields);
+                    break;
+                case "BOTH":
+                    SetField_SRadiculopathySeverityLevel_Left(m, pdfFormFields);
+                    SetField_SRadiculopathySeverityLevel_Right(m, pdfFormFields);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void SetField_SRadiculopathySeverityLevel_Left(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathySeverityLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[2]", "2"); //336
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[3]", "3"); //337
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Left_Severity7[0]", "4"); //334
+                    break;
+            }
+        }
+
+        private void SetField_SRadiculopathySeverityLevel_Right(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.SRadiculopathySeverityLevel)
+            {
+                case "MILD":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[1]", "2"); //331
+                    break;
+                case "MODERATE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[0]", "3"); //330
+                    break;
+                case "SEVERE":
+                    pdfFormFields.SetField("form1[0].#subform[7].Right_Severity6[3]", "4"); //333
+                    break;
+            }
+        }
+
+        private void SetField_S15C(NeckModel m, AcroFields pdfFormFields)
+        {
+            switch (m.S15C)
+            {
+                case "ONEWEEK":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[0]", "1"); //379
+                    break;
+                case "TWOWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[4]", "2"); //383
+                    break;
+                case "FOURWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[1]", "3"); //380
+                    break;
+                case "SIXWEEKS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[2]", "4"); //381
+                    break;
+                case "SIXWEEKSPLUS":
+                    pdfFormFields.SetField("form1[0].#subform[7].Duration[3]", "5"); //382
+                    break;
+            }
+        }
+
+        private void SetField_S17ABrace(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.S416)
+            {
+                switch (m.S416Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[0]", "1"); //421
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[1]", "2"); //425
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse2[2]", "3"); //426
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17ACrutches(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.S428)
+            {
+                switch (m.S428Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[2]", "1"); //414
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[1]", "2"); //413
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse3[0]", "3"); //412
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17ACane(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.S417)
+            {
+                switch (m.S417Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[0]", "1"); //409
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[1]", "2"); //410
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse4[2]", "3"); //411
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S17AWalker(NeckModel m, AcroFields pdfFormFields)
+        {
+            if (m.S421)
+            {
+                switch (m.S421Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[2]", "1"); //407
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[1]", "2"); //406
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField("form1[0].#subform[8].FrequencyofUse5[0]", "3"); //405
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         /**************************************************************
           * Shoulder Form
           * 
@@ -1852,5 +2758,21 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
         }
 
+    }
+
+    public class PDFItems
+    {
+        public static Dictionary<int, PDFItem> neckPDFItems = new Dictionary<int, PDFItem>()
+                {
+                    { 1, new PDFItem {Code="form1[0].#subform[0].Diagnoses11[0]", ExportValue="1", ItemType="CheckBox" }},
+                };
+   
+    }
+
+    public class PDFItem
+    {
+        public string Code { get; set; }
+        public string ExportValue { get; set; }
+        public string ItemType { get; set; }
     }
 }

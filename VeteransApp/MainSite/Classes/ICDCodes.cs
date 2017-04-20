@@ -20,6 +20,21 @@ namespace MainSite.Classes
                     { "ankylosing spondylitis of the thoracolumbar spine", new ICDCode {Diagnosis="Ankylosing spondylitis of the thoracolumbar spine", RefNumber="720.9"}},
                     { "vertebral fracture", new ICDCode {Diagnosis="Vertebral Fracture", RefNumber="805.01"}}
                 };
+
+        public static Dictionary<string, ICDCode> neckICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "mechanical cervical pain syndrome", new ICDCode {Diagnosis="Mechanical Cervical Pain Syndrome", RefNumber="723.1"}},
+                    { "cervical sprain/strain", new ICDCode {Diagnosis="Cervical Sprain/Strain", RefNumber="847"}},
+                    { "cervical spondylosis", new ICDCode {Diagnosis="Cervical Spondylosis", RefNumber="721.9"}},
+                    { "degenerative disc disease", new ICDCode {Diagnosis="Degenerative Disc Disease", RefNumber="716.9"}},
+                    { "foraminal stenosis/central stenosis", new ICDCode {Diagnosis="Foraminal Stenosis/Central Stenosis", RefNumber="724.02"}},
+                    { "intervertebral disc syndrome", new ICDCode {Diagnosis="Intervertebral Disc Syndrome", RefNumber="722.1"}},
+                    { "radiculopathy", new ICDCode {Diagnosis="Radiculopathy", RefNumber="723.4"}},
+                    { "myelopathy", new ICDCode {Diagnosis="Myelopathy", RefNumber="721.1"}},
+                    { "ankylosis of cervical spine", new ICDCode {Diagnosis="Ankylosis of Cervical Spine", RefNumber="724.9"}},
+                    { "ankylosing spondylitis of the cervical spine", new ICDCode {Diagnosis="Ankylosing Spondylitis of The Cervical Spine", RefNumber="720.9"}},
+                    { "vertebral fracture", new ICDCode {Diagnosis="Vertebral Fracture", RefNumber="805.2"}}                    
+                };
     }
 
     public class ICDCode
