@@ -111,6 +111,7 @@ namespace CodeGenerator
         private Button realtorInfoButton;
         private Button btnAddAllBusFacCorGet;
         private Button getSQLProdDBButton;
+        private TextBox genPDFFileTextBox;
         private string _strBoolDefaultValue = "false";
 
         public frmMain()
@@ -225,6 +226,7 @@ namespace CodeGenerator
             this.mainFileSystemWatcher = new System.IO.FileSystemWatcher();
             this.txtCS = new System.Windows.Forms.ComboBox();
             this.btnAddAllBusFacCorGet = new System.Windows.Forms.Button();
+            this.genPDFFileTextBox = new System.Windows.Forms.TextBox();
             this.grpOptions.SuspendLayout();
             this.miscGroup.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -981,7 +983,7 @@ namespace CodeGenerator
             // 
             // chkWrite
             // 
-            this.chkWrite.Location = new System.Drawing.Point(1027, 50);
+            this.chkWrite.Location = new System.Drawing.Point(789, 50);
             this.chkWrite.Name = "chkWrite";
             this.chkWrite.Size = new System.Drawing.Size(86, 16);
             this.chkWrite.TabIndex = 9;
@@ -1039,10 +1041,19 @@ namespace CodeGenerator
             this.btnAddAllBusFacCorGet.Text = "Add All BusCoreGet";
             this.btnAddAllBusFacCorGet.Click += new System.EventHandler(this.btn_Click);
             // 
+            // genPDFFileTextBox
+            // 
+            this.genPDFFileTextBox.Location = new System.Drawing.Point(903, 46);
+            this.genPDFFileTextBox.Name = "genPDFFileTextBox";
+            this.genPDFFileTextBox.Size = new System.Drawing.Size(533, 20);
+            this.genPDFFileTextBox.TabIndex = 28;
+            this.genPDFFileTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frmMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(1436, 873);
+            this.Controls.Add(this.genPDFFileTextBox);
             this.Controls.Add(this.btnAddAllBusFacCorGet);
             this.Controls.Add(this.txtCS);
             this.Controls.Add(this.dg);
@@ -11017,7 +11028,8 @@ namespace CodeGenerator
         {
             try
             {
-                string filepath = @"C:\MyData\Vet App\PDFMappings\neck-mappings.txt";
+                string filepath = this.genPDFFileTextBox.Text.Trim();
+                //string filepath = @"C:\MyData\Vet App\PDFMappings\neck-mappings.txt";
                 using (StreamReader sr = new StreamReader(filepath))
                 {
                     String line;

@@ -141,6 +141,7 @@
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
+    <Compile Include="DB\BusinessFacadeLayer\BusFacPDFItems.cs" />
     <Compile Include="DB\Common\UtilsString.cs" />
     <Compile Include="Controllers\CalculatorController.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusCartItem.cs" />

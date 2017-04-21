@@ -999,9 +999,9 @@ namespace MainSite.Controllers
         * Shoulder Form
         * 
         *************************************************************/
-        public ActionResult Shoulder()
+        public ActionResult Shoulder(string isnew)
         {
-            string viewName = "Shoulder";
+            string viewName = "dbqShoulder";
             ShoulderModel model = new ShoulderModel();
             long contenttypeid = 2;
             try
@@ -1012,30 +1012,14 @@ namespace MainSite.Controllers
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
                 }
-
-                if (TempData["Side"] != null)
-                {
-                    model.Side = (string)TempData["Side"];
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
-                }
-
             }
             catch (Exception ex)
             {
@@ -1048,7 +1032,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult ShoulderPost(ShoulderModel model, long contentStateID)
         {
-            string viewName = "Shoulder";
+            string viewName = "dbqShoulder";
+            string filename = viewName;
             long contenttypeid = 2;
             try
             {
@@ -1066,7 +1051,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
