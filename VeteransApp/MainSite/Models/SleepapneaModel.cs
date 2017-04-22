@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MainSite.Models
 {
     public class SleepapneaModel : IBaseModel
@@ -11,7 +13,16 @@ namespace MainSite.Models
         public long UserID { get; set; }
 
         public string NameOfPatient { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
+        public string LastName { get; set; }
         public string SocialSecurity { get; set; }
+
+        public bool S6 { get; set; }
+
+        public bool S20 { get; set; }
+        public string lastSleepStudyDate { get; set; }
+        public string FacilityName { get; set; }
 
     }
 }

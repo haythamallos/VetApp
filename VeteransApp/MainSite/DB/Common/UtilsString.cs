@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 
 namespace Vetapp.Engine.Common
 {
@@ -38,5 +40,35 @@ namespace Vetapp.Engine.Common
                 return false;
             }
         }
+
+        public static SSN ParseSSN(string data)
+        {
+            SSN ssn = null;
+            try
+            {
+                if (!string.IsNullOrEmpty(data))
+                {
+                    string ssnFiltered = new String(data.Where(x => Char.IsDigit(x)).ToArray());
+                    if (ssnFiltered.Length == 9)
+                    {
+                        ssn = new SSN();
+                        ssn.LeftPart = ssnFiltered.Substring(0, 3);
+                        ssn.MiddlePart = ssnFiltered.Substring(4, 2);
+                        ssn.RightPart = ssnFiltered.Substring(5, 4);
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return ssn;
+        }
+    }
+
+    public class SSN
+    {
+        public string LeftPart { get; set; }
+        public string MiddlePart { get; set; }
+        public string RightPart { get; set; }
     }
 }

@@ -57,7 +57,10 @@
                                     <tbody>
                                         @foreach (var item in Model.BenefitStatuses)
                                         {
-                                            if (item.Key <= 3)
+                                            if ((item.Key == 1)
+                                               || (item.Key == 3)
+                                               || (item.Key == 5)
+                                               )
                                             {
                                                 string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
                                                 <tr>

@@ -421,26 +421,26 @@ namespace MainSite.Controllers
             }
             return View("Register2");
         }
-        private string GetTemplatePath(IBaseModel model)
-        {
-            string path = null;
-            switch (model.GetType().Name)
-            {
-                case "BackModel":
-                    path = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                    break;
-                default:
-                    break;
-            }
-            return path;
-        }
+        //private string GetTemplatePath(IBaseModel model)
+        //{
+        //    string path = null;
+        //    switch (model.GetType().Name)
+        //    {
+        //        case "BackModel":
+        //            path = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    return path;
+        //}
 
 
         private long FormSave(IBaseModel model, long contentStateID, long contentTypeID, bool isNew = false)
         {
             long ContentID = 0;
             BusFacPDF busFacPDF = new BusFacPDF();
-            model.TemplatePath = GetTemplatePath(model);
+            //model.TemplatePath = GetTemplatePath(model);
             ContentID = busFacPDF.Save(model, contentStateID, contentTypeID, isNew);
             return ContentID;
         }
@@ -927,7 +927,7 @@ namespace MainSite.Controllers
             long contenttypeid = 1;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1006,7 +1006,7 @@ namespace MainSite.Controllers
             long contenttypeid = 2;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1085,7 +1085,7 @@ namespace MainSite.Controllers
             long contenttypeid = 3;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1164,7 +1164,7 @@ namespace MainSite.Controllers
             long contenttypeid = 4;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1238,35 +1238,31 @@ namespace MainSite.Controllers
           * Sleepapnea Form
           * 
           *************************************************************/
-        public ActionResult Sleepapnea()
+        public ActionResult Sleepapnea(string isnew)
         {
-            string viewName = "Sleepapnea";
+            string viewName = "dbqSleepapnea";
             SleepapneaModel model = new SleepapneaModel();
             long contenttypeid = 5;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<SleepapneaModel>(content.ContentMeta);
                 }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
+                DateTime dtNull = new DateTime();
+                if (dtNull.Equals(model.lastSleepStudyDate))
                 {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
+                    model.lastSleepStudyDate = DateTime.Now.ToShortDateString();
                 }
             }
             catch (Exception ex)
@@ -1280,10 +1276,24 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult SleepapneaPost(SleepapneaModel model, long contentStateID)
         {
-            string viewName = "Sleepapnea";
+            string viewName = "dbqSleepapnea";
+            string filename = viewName;
             long contenttypeid = 5;
             try
             {
+                model.NameOfPatient = string.Empty;
+                if (!string.IsNullOrEmpty(model.FirstName))
+                {
+                    model.NameOfPatient += model.FirstName;
+                }
+                if (!string.IsNullOrEmpty(model.MiddleInitial))
+                {
+                    model.NameOfPatient += " " + model.MiddleInitial;
+                }
+                if (!string.IsNullOrEmpty(model.LastName))
+                {
+                    model.NameOfPatient += " " + model.LastName;
+                }
                 long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
@@ -1298,7 +1308,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
@@ -1326,7 +1342,7 @@ namespace MainSite.Controllers
             long contenttypeid = 6;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1407,7 +1423,7 @@ namespace MainSite.Controllers
             long contenttypeid = 7;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1488,7 +1504,7 @@ namespace MainSite.Controllers
             long contenttypeid = 8;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1569,7 +1585,7 @@ namespace MainSite.Controllers
             long contenttypeid = 9;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1650,7 +1666,7 @@ namespace MainSite.Controllers
             long contenttypeid = 10;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
@@ -1731,7 +1747,7 @@ namespace MainSite.Controllers
             long contenttypeid = 11;
             try
             {
-                string templatePath = GetTemplatePath(model);
+                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);

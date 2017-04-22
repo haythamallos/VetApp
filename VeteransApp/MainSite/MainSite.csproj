@@ -139,7 +139,6 @@
     <Compile Include="Classes\CustomBrowser.cs" />
     <Compile Include="Classes\Defaults.cs" />
     <Compile Include="Classes\Extensions.cs" />
-    <Compile Include="Classes\ICDCodes.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacPDFItems.cs" />
     <Compile Include="DB\Common\UtilsString.cs" />

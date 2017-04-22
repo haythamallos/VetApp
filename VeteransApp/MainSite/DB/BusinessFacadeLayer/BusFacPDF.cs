@@ -294,10 +294,12 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
                         iTextSharp.text.Font normal = FontFactory.GetFont(FontFactory.COURIER, 6f, iTextSharp.text.Font.NORMAL);
-                        if (back.S60.Length > 255)
-                        {
-                            normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
-                        }
+                        normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
+
+                        //if (back.S60.Length > 255)
+                        //{
+                        //    normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
+                        //}
                         //set the field to bold
                         pdfFormFields.SetFieldProperty("form1[0].#subform[0].Records[1]", "textfont", normal.BaseFont, null);
                         pdfFormFields.SetField("form1[0].#subform[0].Records[1]", back.S60);
@@ -1528,7 +1530,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
 
                         if (!isAllSame)
-                        {                            
+                        {
                             pdfFormFields.SetField(PDFItems.neckPDFItems[181].Code, m.S184); //181
                             pdfFormFields.SetField(PDFItems.neckPDFItems[182].Code, m.S185); //182
                             pdfFormFields.SetField(PDFItems.neckPDFItems[171].Code, m.S174); //171
@@ -2278,6 +2280,58 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_2[0].Yes5A[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No5B[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No10[0]", "1");
+
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[44].Code, m.FirstName);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[46].Code, m.MiddleInitial);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[45].Code, m.LastName);
+                        SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
+                        if (ssn != null)
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[41].Code, ssn.LeftPart);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[42].Code, ssn.MiddlePart);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[43].Code, ssn.RightPart);
+
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[68].Code, ssn.LeftPart);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[69].Code, ssn.MiddlePart);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[70].Code, ssn.RightPart);
+
+                        }
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string S17 = "The onset of veterans sleep apnea was during active duty service";
+
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[6].Code, PDFItems.sleepapneaPDFItems[6].ExportValue);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[7].Code, dt);
+                        if (ICDCodes.sleepapneaICDCodes.TryGetValue("obstructive", out icdcode))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[16].Code, icdcode.RefNumber);
+                        }
+
+                        iTextSharp.text.Font normal = FontFactory.GetFont(FontFactory.COURIER, 6f, iTextSharp.text.Font.NORMAL);
+                        normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
+                        //set the field to bold
+                        pdfFormFields.SetFieldProperty(PDFItems.sleepapneaPDFItems[17].Code, "textfont", normal.BaseFont, null);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[17].Code, S17);
+
+                        if (m.S20)
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[20].Code, PDFItems.sleepapneaPDFItems[20].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[21].Code, PDFItems.sleepapneaPDFItems[21].ExportValue);
+                        }
+
+                        if (!string.IsNullOrEmpty(m.lastSleepStudyDate))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[55].Code, m.lastSleepStudyDate);
+                        }
+
+                        if (!string.IsNullOrEmpty(m.FacilityName))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[53].Code, m.FacilityName);
+                        }
 
                     }
 
