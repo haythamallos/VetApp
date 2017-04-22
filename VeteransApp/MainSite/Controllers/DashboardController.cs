@@ -1335,35 +1335,25 @@ namespace MainSite.Controllers
           * Headache Form
           * 
           *************************************************************/
-        public ActionResult Headache()
+        public ActionResult Headache(string isnew)
         {
-            string viewName = "Headache";
+            string viewName = "dbqHeadache";
             HeadacheModel model = new HeadacheModel();
             long contenttypeid = 6;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<HeadacheModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1377,10 +1367,33 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult HeadachePost(HeadacheModel model, long contentStateID)
         {
-            string viewName = "Headache";
+            string viewName = "dbqHeadache";
+            string filename = viewName;
             long contenttypeid = 6;
             try
             {
+                model.NameOfPatient = string.Empty;
+                if (!string.IsNullOrEmpty(model.FirstName))
+                {
+                    model.NameOfPatient += model.FirstName;
+                }
+                if (!string.IsNullOrEmpty(model.MiddleInitial))
+                {
+                    model.NameOfPatient += " " + model.MiddleInitial;
+                }
+                if (!string.IsNullOrEmpty(model.LastName))
+                {
+                    model.NameOfPatient += " " + model.LastName;
+                }
+                if ((model.S26) || (model.S2) || (model.S3) || (model.S4) || (model.S5) || (model.S6) || (!string.IsNullOrEmpty(model.S3AOther)))
+                {
+                    model.S3AYes = true;
+                }
+                if ((model.S75) || (model.S68) || (model.S69) || (model.S70) || (model.S71) || (model.S72) || (!string.IsNullOrEmpty(model.S3BOther)))
+                {
+                    model.S3BYes = true;
+                }
+
                 long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
@@ -1395,7 +1408,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }

@@ -2385,6 +2385,280 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_3[0].No11[0]", "1");
                         pdfFormFields.SetField("F[0].Page_3[0].No52[0]", "1");
 
+                        pdfFormFields.SetField(PDFItems.headachePDFItems[39].Code, m.FirstName);
+                        pdfFormFields.SetField(PDFItems.headachePDFItems[41].Code, m.MiddleInitial);
+                        pdfFormFields.SetField(PDFItems.headachePDFItems[40].Code, m.LastName);
+                        SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
+                        if (ssn != null)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[36].Code, ssn.LeftPart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[37].Code, ssn.MiddlePart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[38].Code, ssn.RightPart);
+
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[85].Code, ssn.LeftPart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[86].Code, ssn.MiddlePart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[87].Code, ssn.RightPart);
+
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[105].Code, ssn.LeftPart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[106].Code, ssn.MiddlePart);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[107].Code, ssn.RightPart);
+
+                        }
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string diagnosis = null;
+                        if (m.S35)
+                        {
+                            diagnosis = "Migrane";
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[35].Code, PDFItems.headachePDFItems[35].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[19].Code, dt);
+                            if (ICDCodes.headacheICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[22].Code, icdcode.RefNumber);
+                            }
+                        }
+                        if (m.S23)
+                        {
+                            diagnosis = "Tension";
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[23].Code, PDFItems.headachePDFItems[23].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[18].Code, dt);
+                            if (ICDCodes.headacheICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[21].Code, icdcode.RefNumber);
+                            }
+                        }
+                        if (m.S24)
+                        {
+                            diagnosis = "Cluster";
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[24].Code, PDFItems.headachePDFItems[24].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[8].Code, dt);
+                            if (ICDCodes.headacheICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[20].Code, icdcode.RefNumber);
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(m.MedicationPlan))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[32].Code, PDFItems.headachePDFItems[32].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[30].Code, m.MedicationPlan);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[33].Code, PDFItems.headachePDFItems[33].ExportValue);
+                        }
+
+                        bool b3A = false;
+                        if (m.S26)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[26].Code, PDFItems.headachePDFItems[26].ExportValue);
+                            b3A = true;
+                        }
+                        if (m.S2)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[2].Code, PDFItems.headachePDFItems[2].ExportValue);
+                            b3A = true;
+                        }
+                        if (m.S3)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[3].Code, PDFItems.headachePDFItems[3].ExportValue);
+                            b3A = true;
+                        }
+                        if (m.S4)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[4].Code, PDFItems.headachePDFItems[4].ExportValue);
+                            b3A = true;
+                        }
+                        if (m.S5)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[5].Code, PDFItems.headachePDFItems[5].ExportValue);
+                            b3A = true;
+                        }
+                        if (!string.IsNullOrEmpty(m.S3AOther))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[6].Code, PDFItems.headachePDFItems[6].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[15].Code, m.S3AOther);
+                            b3A = true;
+                        }
+                        if (b3A)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[1].Code, PDFItems.headachePDFItems[1].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[7].Code, PDFItems.headachePDFItems[7].ExportValue);
+                        }
+                        m.S3AYes = b3A;
+
+
+                        bool b3B = false;
+                        if (m.S75)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[75].Code, PDFItems.headachePDFItems[75].ExportValue);
+                            b3B = true;
+                        }
+                        if (m.S68)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[68].Code, PDFItems.headachePDFItems[68].ExportValue);
+                            b3B = true;
+                        }
+                        if (m.S69)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[69].Code, PDFItems.headachePDFItems[69].ExportValue);
+                            b3B = true;
+                        }
+                        if (m.S70)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[70].Code, PDFItems.headachePDFItems[70].ExportValue);
+                            b3B = true;
+                        }
+                        if (m.S71)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[71].Code, PDFItems.headachePDFItems[71].ExportValue);
+                            b3B = true;
+                        }
+                        if (m.S72)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[72].Code, PDFItems.headachePDFItems[72].ExportValue);
+                            b3B = true;
+                        }
+                        if (!string.IsNullOrEmpty(m.S3BOther))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[73].Code, PDFItems.headachePDFItems[73].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[74].Code, m.S3AOther);
+                            b3B = true;
+                        }
+                        if (b3B)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[77].Code, PDFItems.headachePDFItems[77].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[76].Code, PDFItems.headachePDFItems[76].ExportValue);
+                        }
+                        m.S3BYes = b3B;
+
+                        if (m.S54)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[54].Code, PDFItems.headachePDFItems[54].ExportValue);
+                        }
+                        if (m.S55)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[55].Code, PDFItems.headachePDFItems[55].ExportValue);
+                        }
+                        if (m.S60)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[60].Code, PDFItems.headachePDFItems[60].ExportValue);
+                        }
+                        if (!string.IsNullOrEmpty(m.S3COther))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[61].Code, PDFItems.headachePDFItems[61].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[62].Code, m.S3COther);
+                        }
+
+                        if (m.S66)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[66].Code, PDFItems.headachePDFItems[66].ExportValue);
+                        }
+                        if (m.S65)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[65].Code, PDFItems.headachePDFItems[65].ExportValue);
+                        }
+                        if (m.S64)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[64].Code, PDFItems.headachePDFItems[64].ExportValue);
+                        }
+                        if (!string.IsNullOrEmpty(m.S3DOther))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[63].Code, PDFItems.headachePDFItems[63].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[67].Code, m.S3DOther);
+                        }
+
+                        m.S4AYes = false;
+                        if (m.S56)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[56].Code, PDFItems.headachePDFItems[56].ExportValue);
+                            m.S4AYes = true;
+                        }
+                        if (m.S57)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[57].Code, PDFItems.headachePDFItems[57].ExportValue);
+                            m.S4AYes = true;
+                        }
+                        if (m.S58)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[58].Code, PDFItems.headachePDFItems[58].ExportValue);
+                            m.S4AYes = true;
+                        }
+                        if (m.S59)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[59].Code, PDFItems.headachePDFItems[59].ExportValue);
+                            m.S4AYes = true;
+                        }
+                        if (m.S4AYes)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[46].Code, PDFItems.headachePDFItems[46].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[47].Code, PDFItems.headachePDFItems[47].ExportValue);
+                        }
+
+                        m.S4CYes = false;
+                        if (m.S45)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[45].Code, PDFItems.headachePDFItems[45].ExportValue);
+                            m.S4CYes = true;
+                        }
+                        if (m.S44)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[44].Code, PDFItems.headachePDFItems[44].ExportValue);
+                            m.S4CYes = true;
+                        }
+                        if (m.S43)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[43].Code, PDFItems.headachePDFItems[43].ExportValue);
+                            m.S4CYes = true;
+                        }
+                        if (m.S42)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[42].Code, PDFItems.headachePDFItems[42].ExportValue);
+                            m.S4CYes = true;
+                        }
+                        if (m.S4CYes)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[50].Code, PDFItems.headachePDFItems[50].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[51].Code, PDFItems.headachePDFItems[51].ExportValue);
+                        }
+
+                        switch(m.WorkCondition)
+                        {
+                            case "A":
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[97].Code, PDFItems.headachePDFItems[97].ExportValue);
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[96].Code, Defaults.HEADACHE_SECION_7ARemark);
+                                break;
+                            case "B":
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[97].Code, PDFItems.headachePDFItems[97].ExportValue);
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[96].Code, Defaults.HEADACHE_SECION_7BRemark);
+                                break;
+                            case "C":
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[97].Code, PDFItems.headachePDFItems[97].ExportValue);
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[96].Code, Defaults.HEADACHE_SECION_7CRemark);
+                                break;
+                            case "D":
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[97].Code, PDFItems.headachePDFItems[97].ExportValue);
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[96].Code, Defaults.HEADACHE_SECION_7DRemark);
+                                break;
+                            default:
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[98].Code, PDFItems.headachePDFItems[98].ExportValue);
+                                break;
+                        }
+
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable

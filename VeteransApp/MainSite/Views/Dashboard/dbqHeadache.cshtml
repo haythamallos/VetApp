@@ -14,11 +14,13 @@
 
         <form id="formheadache" method="post" action="/Dashboard/HeadachePost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
-            @if (Model.ContentStateID == 6)
-            {
-                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
-                <hr />
-            }
+            <input id="S3AYes" name="S3AYes" class="form-control" type="hidden" value="@Model.S3AYes">
+            <input id="S3BYes" name="S3BYes" class="form-control" type="hidden" value="@Model.S3BYes">
+            @*@if (Model.ContentStateID == 6)
+                {
+                    <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                    <hr />
+                }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
@@ -31,19 +33,79 @@
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group m-t-20">
-                                <label class="col-md-3">Full Name</label>
-                                <div class="col-xs-4">
-                                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Full Name" value="@Model.NameOfPatient">
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">First Name</label>
+                                    <input id="FirstName" name="FirstName" class="form-control" type="text" required="" placeholder="First Name" value="@Model.FirstName">
                                 </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Middle Initial</label>
+                                    <input id="MiddleInitial" name="MiddleInitial" class="form-control" type="text" required="" placeholder="Middle Initial" value="@Model.MiddleInitial">
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Last Name</label>
+                                    <input id="LastName" name="LastName" class="form-control" type="text" required="" placeholder="Last Name" value="@Model.LastName">
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Social Security Number</label>
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                </div>
+                                <hr />
+                                <label class="font-bold">What is the diagnosis of your service-connected headache condition? (Listed on your rating)</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S35) Migraine including variants
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S23) Tension
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S24) Cluster
+                                    </label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Are you taking medication for your headache condition?  (If yes, describe medication)</label>
+                                    <input id="MedicationPlan" name="MedicationPlan" class="form-control" type="text" required="" placeholder="Medication Plan" value="@Model.MedicationPlan">
+                                </div>
+
                             </div>
-                            <br />
+                            <hr />
                             <div class="form-group m-t-20">
-                                <label class="col-md-3">Social Security Number</label>
-                                <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                <label class="font-bold">Describe your headache pain? (Check all that apply)</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S26) Constant head pain
+                                    </label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S2) Pulsating or throbbing head pain
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S3) Pain localized to one side of the head
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S4) Pain on both sides of the head
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S5) Pain worsens with physical activity
+                                    </label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Other, describe</label>
+                                    <input id="S3AOther" name="S3AOther" class="form-control" type="text" required="" placeholder="Other Headache Pain" value="@Model.S3AOther">
+                                </div>
+
                             </div>
-                            <br />
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
@@ -59,6 +121,91 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">Describe your non-headache pain? (Check all that apply)</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S75) Nausea
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S68) Vomiting
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S69) Sensitivity to light
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S70) Sensitivity to sound
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S71) Changes in vision (such as scotoma, flashes of light, tunnel vision)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S72) Snesory changes (such as feeling of pins and needles in extremities)
+                                    </label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Other, describe</label>
+                                    <input id="S3BOther" name="S3BOther" class="form-control" type="text" required="" placeholder="Other Non-Headache Pain" value="@Model.S3BOther">
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the duration of your head pain?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S54) Less than 1 day
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S55) 1-2 days
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S60) More than 2 days
+                                    </label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Other, describe</label>
+                                    <input id="S3COther" name="S3COther" class="form-control" type="text" required="" placeholder="Other Duration" value="@Model.S3COther">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">Where is your head pain located?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S66) Right side of head
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S65) Left side of head
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S64) Both sides of head
+                                    </label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="col-md-12">Other, describe</label>
+                                    <input id="S3DOther" name="S3DOther" class="form-control" type="text" required="" placeholder="Other Location" value="@Model.S3DOther">
+                                </div>
+                            </div>
+                            <hr />
 
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
@@ -75,27 +222,79 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
+                            @if (Model.S3AYes)
+                            {
+                                <div class="form-group m-t-20">
+                                    <label class="font-bold">How often do you have incappacitating headaches which require you to stop what you are doing and go to a dark and quiet room to lay down?</label>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S56) Less than once every 2 months
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S57) Once in 2 months
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S58) Once every month
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S59) More frequently than once per month
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.S3BYes)
+                            {
+                                <div class="form-group m-t-20">
+                                    <label class="font-bold">How often do you have incappacitating non-migraine headaches which require you to stop what you are doing and go to a dark and quiet room to lay down?</label>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S45) Less than once every 2 months
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S44) Once in 2 months
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S43) Once every month
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label font-normal">
+                                            @Html.EditorFor(x => x.S42) More frequently than once per month
+                                        </label>
+                                    </div>
+                                </div>
+
+                            }
+                            <hr />
+                            <div id="divWork">
+                                <label class="font-bold">Which statement best describes your headache condition? (Only pick one)</label>
+                                <br />
+                                @Html.RadioButtonFor(x => x.WorkCondition, "A") Pt reports at least 1 incapacitating migraines per 2-3 weeks.  Must cease all activities and stay in bed.  Extreme sensitivity to light, sound, and quick movements.  Must take time off work during an incapacitating episode.
+                                <br />
+                                @Html.RadioButtonFor(x => x.WorkCondition, "B") Pt reports at least 1 incapacitating migraines per every 1-2 months.  Must cease all activities and stay in bed.  Extreme sensitivity to light, sound, and quick movements.  Must take time off work during an incapacitating episode.
+                                <br />
+                                @Html.RadioButtonFor(x => x.WorkCondition, "C") I miss work occasionally due to my headaches, 1-2 weeks a year.
+                                <br />
+                               @Html.RadioButtonFor(x => x.WorkCondition, "D") I am not missing any time off work due to my headaches.
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
                 </div>
                 <!-- Part 3 -->
-                <!-- Part 4 -->
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
-                        </h4>
-                    </div>
-                    <div id="collapse4" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Part 4 -->
+
                 <!-- Finish -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -112,11 +311,7 @@
                     </div>
                 </div>
                 <!-- Finish -->
-
-
-
             </div>
-
         </form>
     </div>
 </div>
@@ -185,7 +380,7 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            $("#collapse4").collapse('show');
+            $("#collapsef").collapse('show');
             $("#collapse3").collapse('hide');
 
             var model = $('#formheadache').serialize();
@@ -258,7 +453,7 @@
         });
 
         $("#finishPrevBtn").on("click", function () {
-            $("#collapse4").collapse('show');
+            $("#collapse3").collapse('show');
             $("#collapsef").collapse('hide');
 
             var model = $('#formheadache').serialize();
@@ -279,12 +474,12 @@
             var isValid = true;
             var s;
 
-            s = jQuery('input[name="NameOfPatient"]').val();
+            s = jQuery('input[name="FirstName"]').val();
             if ((s == '') || s == null) {
                 isValid = false;
             }
 
-            s = jQuery('input[name="SocialSecurity"]').val();
+            s = jQuery('input[name="LastName"]').val();
             if ((s == '') || s == null) {
                 isValid = false;
             }

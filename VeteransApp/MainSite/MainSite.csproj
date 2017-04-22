@@ -137,7 +137,6 @@
     </Compile>
     <Compile Include="Classes\CookieManager.cs" />
     <Compile Include="Classes\CustomBrowser.cs" />
-    <Compile Include="Classes\Defaults.cs" />
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacPDFItems.cs" />
