@@ -11,15 +11,20 @@ using System.Web;
 using Stripe;
 using System.Text;
 using System.Collections.Generic;
+using System.Web.Security;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
 
 namespace MainSite.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private Config _config = null;
 
         private User Auth()
         {
+            bool bIsAuth = User.Identity.IsAuthenticated;
             User user = null;
             if (!IsCookieEnabled())
             {
@@ -62,7 +67,6 @@ namespace MainSite.Controllers
             ViewBag.CurrentRatingsList = CurrentRatingsList;
 
         }
-        // GET: Dashboard
         public ActionResult Index()
         {
             User user = Auth();
@@ -307,7 +311,9 @@ namespace MainSite.Controllers
             b = SetCookieField(CookieManager.COOKIE_FIELD_ISNEW_EVAL, "true");
             return View("Register2");
         }
-        public ActionResult Authenticate(UserModel userModel)
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Login(UserModel userModel)
         {
             try
             {
@@ -321,9 +327,17 @@ namespace MainSite.Controllers
                         User user = busFacCore.UserAuthenticate(userModel.Username, userModel.Password);
                         if ((user != null) && (user.UserID > 0))
                         {
+                            //FormsAuthentication.SetAuthCookie(userModel.Username, false);
+
+                            var claims = new List<Claim>();
+                            claims.Add(new Claim(ClaimTypes.Name, userModel.Username));
+                            var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+                            System.Web.HttpContext.Current.Request.GetOwinContext().Authentication.SignIn(identity);
+
                             AssociateEvaluationWithUser(user);
                             bool b = SetCookieField(CookieManager.COOKIE_FIELD_USER_GUID, user.CookieID);
-                            return RedirectToAction("Index");
+                            //return RedirectToAction("Index");
+                            return RedirectToAction("Index", "Dashboard");
                         }
                         else
                         {
@@ -468,6 +482,12 @@ namespace MainSite.Controllers
         }
 
         public ActionResult LogOut()
+        {
+            System.Web.HttpContext.Current.Request.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+        [AllowAnonymous]
+        public ActionResult LoginAccessDenied()
         {
             return RedirectToAction("Index", "Home");
         }

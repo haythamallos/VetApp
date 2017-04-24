@@ -6,6 +6,7 @@ using MainSite.Classes;
 using Vetapp.Engine.BusinessFacadeLayer;
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.Common;
+using System.Web.Security;
 
 namespace MainSite.Controllers
 {
@@ -23,6 +24,7 @@ namespace MainSite.Controllers
         public ActionResult Index()
         {
             bool bCookiesEnabled = SetInitialCookie();
+            //bool bAuth = User.Identity.IsAuthenticated;
             if (!bCookiesEnabled)
             {
                 ViewData["CookiesEnabled"] = false;
@@ -106,6 +108,7 @@ namespace MainSite.Controllers
                             user.NumberOfVisits = nCount;
                             user.LastVisitDate = DateTime.UtcNow;
                             busFacCore.UserCreateOrModify(user);
+                            //FormsAuthentication.SetAuthCookie(userguid, false);
                         }
                     }
                 }

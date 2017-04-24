@@ -5,7 +5,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
     public static class Defaults
     {
         public const string BACK_SECION_2A = "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.";
-        public const string BACK_SECION_2B = "Physical limitations, lose of strength, soreness, and pain.";
+        public const string BACK_SECION_2B = "Physical limitations, loss of strength, soreness, and pain.";
         public const string BACK_SECION_2C = "Severe restriction of range of motion.";
         public const string HEADACHE_SECION_7ARemark = "Pt reports at least 1 incapacitating migraines per 2-3 weeks.  Must cease all activities and stay in bed.  Extreme sensitivity to light, sound, and quick movements.  Must take time off work during an incapacitating episode.";
         public const string HEADACHE_SECION_7BRemark = "Pt reports at least 1 incapacitating migraines per every 1-2 months.  Must cease all activities and stay in bed.  Extreme sensitivity to light, sound, and quick movements.  Must take time off work during an incapacitating episode.";

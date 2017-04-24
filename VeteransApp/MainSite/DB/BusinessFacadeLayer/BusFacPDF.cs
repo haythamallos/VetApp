@@ -633,10 +633,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[8].YesNo18[1]", "2");
                         }
 
+                        // corrections
+                        //pdfFormFields.SetField(PDFItems.backPDFItems[71].Code, PDFItems.backPDFItems[71].ExportValue);
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -1595,7 +1598,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2165,7 +2168,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2230,7 +2233,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2336,7 +2339,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2662,7 +2665,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2754,7 +2757,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2845,7 +2848,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2917,7 +2920,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2985,7 +2988,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -3064,7 +3067,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = false;
+                    pdfStamper.FormFlattening = true;
 
                     // close the pdf stamper
                     pdfStamper.Close();
