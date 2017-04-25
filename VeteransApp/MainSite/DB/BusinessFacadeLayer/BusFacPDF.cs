@@ -126,6 +126,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
 
+                        pdfFormFields.SetField(PDFItems.backPDFItems[329].Code, PDFItems.backPDFItems[329].ExportValue);
+
                         if (!back.S47)
                         {
                             if (back.S48)
@@ -458,19 +460,12 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[2].Right_Tender[1]", "2");
                         }
 
-
-                        if ((back.S145MuscleSpasm) || (back.S145Guarding))
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[1]", "1");
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[0]", "2");
-                        }
-
+                        bool doGuarding = true;
                         if ((!back.S145MuscleSpasmQuestion) && (!back.S145GuardingQuestion))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[3].Gait[0]", "1");
+                            //pdfFormFields.SetField("form1[0].#subform[3].Gait[0]", "1");
+                            pdfFormFields.SetField(PDFItems.backPDFItems[145].Code, PDFItems.backPDFItems[145].ExportValue);
+                            doGuarding = false;
                         }
                         else
                         {
@@ -484,6 +479,18 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField("form1[0].#subform[3].DueTo[1]", "2");
                             }
                         }
+
+                        if (((back.S145MuscleSpasm) || (back.S145Guarding)) && doGuarding)
+                        {
+                            //pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[1]", "1");
+                            pdfFormFields.SetField(PDFItems.backPDFItems[152].Code, PDFItems.backPDFItems[152].ExportValue);
+                        }
+                        else
+                        {
+                            //pdfFormFields.SetField("form1[0].#subform[3].Guarding_Spasms[0]", "2");
+                            pdfFormFields.SetField(PDFItems.backPDFItems[151].Code, PDFItems.backPDFItems[151].ExportValue);
+                        }
+
 
                         pdfFormFields.SetField("form1[0].#subform[3].SpinalContour[1]", "1");
 
@@ -588,21 +595,189 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[4].Right_Limit[1]", "2");
                         }
 
-                        if (back.S316)
-                        {
-                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[0]", "1");
+                        // Radiculopath public use.  Different for internal
+                        //if (back.S316)
+                        //{
+                        //    pdfFormFields.SetField("form1[0].#subform[6].YesNo11[0]", "1");
 
-                            SetField_SRadiculopathyConstantPainLevelAnswer(back, pdfFormFields);
-                            SetField_SRadiculopathyIntermittentPainLevelAnswer(back, pdfFormFields);
-                            SetField_SRadiculopathyDullPainLevelAnswer(back, pdfFormFields);
-                            SetField_SRadiculopathyTinglingPainLevelAnswer(back, pdfFormFields);
-                            SetField_SRadiculopathyNumbnessPainLevelAnswer(back, pdfFormFields);
-                            SetField_SRadiculopathySeverityLevel(back, pdfFormFields);
+                        //    SetField_SRadiculopathyConstantPainLevelAnswer(back, pdfFormFields);
+                        //    SetField_SRadiculopathyIntermittentPainLevelAnswer(back, pdfFormFields);
+                        //    SetField_SRadiculopathyDullPainLevelAnswer(back, pdfFormFields);
+                        //    SetField_SRadiculopathyTinglingPainLevelAnswer(back, pdfFormFields);
+                        //    SetField_SRadiculopathyNumbnessPainLevelAnswer(back, pdfFormFields);
+                        //    SetField_SRadiculopathySeverityLevel(back, pdfFormFields);
 
-                        }
-                        else
+                        //}
+                        //else
+                        //{
+                        //    //pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2");
+                        
+                        //    pdfFormFields.SetField(PDFItems.backPDFItems[334].Code, PDFItems.backPDFItems[334].ExportValue);
+
+                        //}
+
+                        // internal use radiculopath rules
+                        if (!string.IsNullOrEmpty(back.S13AChoice))
                         {
-                            pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2");
+                            if (back.S13AChoice == "NONE")
+                            {
+                                pdfFormFields.SetField(PDFItems.backPDFItems[334].Code, PDFItems.backPDFItems[334].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[317].Code, PDFItems.backPDFItems[317].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[320].Code, PDFItems.backPDFItems[320].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[287].Code, PDFItems.backPDFItems[287].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[281].Code, PDFItems.backPDFItems[281].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[275].Code, PDFItems.backPDFItems[275].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[280].Code, PDFItems.backPDFItems[280].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[314].Code, PDFItems.backPDFItems[314].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[315].Code, PDFItems.backPDFItems[315].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[312].Code, PDFItems.backPDFItems[312].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[311].Code, PDFItems.backPDFItems[311].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[368].Code, PDFItems.backPDFItems[368].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[341].Code, PDFItems.backPDFItems[341].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[344].Code, PDFItems.backPDFItems[344].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[203].Code, PDFItems.backPDFItems[203].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[230].Code, PDFItems.backPDFItems[230].ExportValue);
+                            }
+                            else if (back.S13AChoice == "MILD")
+                            {
+                                pdfFormFields.SetField(PDFItems.backPDFItems[316].Code, PDFItems.backPDFItems[316].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[380].Code, PDFItems.backPDFItems[380].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[377].Code, PDFItems.backPDFItems[377].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[203].Code, PDFItems.backPDFItems[203].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[230].Code, PDFItems.backPDFItems[230].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[287].Code, PDFItems.backPDFItems[287].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[277].Code, PDFItems.backPDFItems[277].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[281].Code, PDFItems.backPDFItems[281].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[278].Code, PDFItems.backPDFItems[278].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[340].Code, PDFItems.backPDFItems[340].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[345].Code, PDFItems.backPDFItems[345].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[268].Code, PDFItems.backPDFItems[268].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[266].Code, PDFItems.backPDFItems[266].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[255].Code, PDFItems.backPDFItems[255].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[247].Code, PDFItems.backPDFItems[247].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[254].Code, PDFItems.backPDFItems[254].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[357].Code, PDFItems.backPDFItems[357].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[359].Code, PDFItems.backPDFItems[359].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[366].Code, PDFItems.backPDFItems[366].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[356].Code, PDFItems.backPDFItems[356].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[354].Code, PDFItems.backPDFItems[354].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[347].Code, PDFItems.backPDFItems[347].ExportValue);
+                            }
+                            else if (back.S13AChoice == "MODERATE")
+                            {
+                                pdfFormFields.SetField(PDFItems.backPDFItems[316].Code, PDFItems.backPDFItems[316].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[380].Code, PDFItems.backPDFItems[380].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[377].Code, PDFItems.backPDFItems[377].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "4");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "4");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "4");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[202].Code, PDFItems.backPDFItems[202].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[205].Code, PDFItems.backPDFItems[205].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "4");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "4");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "4");
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[229].Code, PDFItems.backPDFItems[229].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[232].Code, PDFItems.backPDFItems[232].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "1");
+                                pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "1");
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[285].Code, PDFItems.backPDFItems[285].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[283].Code, PDFItems.backPDFItems[283].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[276].Code, PDFItems.backPDFItems[276].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[279].Code, PDFItems.backPDFItems[279].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[308].Code, PDFItems.backPDFItems[308].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[292].Code, PDFItems.backPDFItems[292].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[305].Code, PDFItems.backPDFItems[305].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[295].Code, PDFItems.backPDFItems[295].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[302].Code, PDFItems.backPDFItems[302].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[298].Code, PDFItems.backPDFItems[298].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[268].Code, PDFItems.backPDFItems[268].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[267].Code, PDFItems.backPDFItems[267].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[258].Code, PDFItems.backPDFItems[258].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[246].Code, PDFItems.backPDFItems[246].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[255].Code, PDFItems.backPDFItems[255].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[357].Code, PDFItems.backPDFItems[357].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[358].Code, PDFItems.backPDFItems[358].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[367].Code, PDFItems.backPDFItems[367].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[356].Code, PDFItems.backPDFItems[356].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[355].Code, PDFItems.backPDFItems[355].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[338].Code, PDFItems.backPDFItems[338].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[339].Code, PDFItems.backPDFItems[339].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[346].Code, PDFItems.backPDFItems[346].ExportValue);
+
+
+                            }
                         }
 
                         if (back.S55)
@@ -634,8 +809,18 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
 
                         // corrections
-                        //pdfFormFields.SetField(PDFItems.backPDFItems[71].Code, PDFItems.backPDFItems[71].ExportValue);
 
+                        switch (back.S13JChoice)
+                        {
+                            case "RIGHT":
+                                pdfFormFields.SetField(PDFItems.backPDFItems[374].Code, PDFItems.backPDFItems[374].ExportValue);
+                                break;
+                            case "LEFT":
+                                pdfFormFields.SetField(PDFItems.backPDFItems[375].Code, PDFItems.backPDFItems[375].ExportValue);
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
                     // Set the flattening flag to true, so the document is not editable

@@ -129,6 +129,12 @@
                                     </label>
                                 </div>
                             </div>
+                            <hr />
+                            <div>
+                                <label class="font-bold">Are you left-handed or right-handed? (Only pick one)</label>
+                                @Html.RadioButtonFor(x => x.S13JChoice, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.S13JChoice, "RIGHT") Right
+                            </div>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>
@@ -290,6 +296,15 @@
                             </div>
                             <hr />
                             <span> Do you have Radiculopathy?</span>
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoice, "NONE") None
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoice, "MILD") Mild
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoice, "MODERATE") Moderate
+                            <br />
+
+                            @*<span> Do you have Radiculopathy?</span>
                             @Html.EditorFor(x => x.S316) Yes
                             <div id="divRadiculopathySection" style="display: none">
                                 <div id="divRadiculopathy" style="display: none">
@@ -352,7 +367,7 @@
                                 @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MODERATE") moderate
                                 @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "SEVERE") severe
 
-                            </div>
+                            </div>*@
                             <div id="div15C" style="display: none">
                                 <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>
                                 <br />
