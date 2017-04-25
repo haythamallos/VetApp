@@ -2674,6 +2674,262 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.shoulderPDFItems[301].Code, m.S301);
                             pdfFormFields.SetField(PDFItems.shoulderPDFItems[300].Code, m.S300);
 
+                            if (m.S231)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[231].Code, PDFItems.shoulderPDFItems[231].ExportValue);
+                                switch (m.S231Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[273].Code, PDFItems.shoulderPDFItems[273].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[232].Code, PDFItems.shoulderPDFItems[232].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[274].Code, PDFItems.shoulderPDFItems[274].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S275)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[275].Code, PDFItems.shoulderPDFItems[275].ExportValue);
+                                switch (m.S275Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[271].Code, PDFItems.shoulderPDFItems[271].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[272].Code, PDFItems.shoulderPDFItems[272].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[270].Code, PDFItems.shoulderPDFItems[270].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S229)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[229].Code, PDFItems.shoulderPDFItems[229].ExportValue);
+                                switch (m.S229Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[268].Code, PDFItems.shoulderPDFItems[268].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[233].Code, PDFItems.shoulderPDFItems[233].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[269].Code, PDFItems.shoulderPDFItems[269].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S228)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[228].Code, PDFItems.shoulderPDFItems[228].ExportValue);
+                                switch (m.S228Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[266].Code, PDFItems.shoulderPDFItems[266].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[267].Code, PDFItems.shoulderPDFItems[267].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[265].Code, PDFItems.shoulderPDFItems[265].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S282)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[282].Code, PDFItems.shoulderPDFItems[282].ExportValue);
+                                switch (m.S282Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[263].Code, PDFItems.shoulderPDFItems[263].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[234].Code, PDFItems.shoulderPDFItems[234].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[264].Code, PDFItems.shoulderPDFItems[264].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S281)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[281].Code, PDFItems.shoulderPDFItems[281].ExportValue);
+                                switch (m.S281Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[261].Code, PDFItems.shoulderPDFItems[261].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[262].Code, PDFItems.shoulderPDFItems[262].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[260].Code, PDFItems.shoulderPDFItems[260].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S280)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[280].Code, PDFItems.shoulderPDFItems[280].ExportValue);
+                                switch (m.S280Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[258].Code, PDFItems.shoulderPDFItems[258].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[235].Code, PDFItems.shoulderPDFItems[235].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[259].Code, PDFItems.shoulderPDFItems[259].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S279)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[279].Code, PDFItems.shoulderPDFItems[279].ExportValue);
+                                switch (m.S279Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[256].Code, PDFItems.shoulderPDFItems[256].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[257].Code, PDFItems.shoulderPDFItems[257].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[255].Code, PDFItems.shoulderPDFItems[255].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S278)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[278].Code, PDFItems.shoulderPDFItems[278].ExportValue);
+                                switch (m.S278Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[253].Code, PDFItems.shoulderPDFItems[253].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[236].Code, PDFItems.shoulderPDFItems[236].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[254].Code, PDFItems.shoulderPDFItems[254].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S237)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[237].Code, PDFItems.shoulderPDFItems[237].ExportValue);
+                                switch (m.S237Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[251].Code, PDFItems.shoulderPDFItems[251].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[252].Code, PDFItems.shoulderPDFItems[252].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[250].Code, PDFItems.shoulderPDFItems[250].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S249)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[249].Code, PDFItems.shoulderPDFItems[249].ExportValue);
+                                switch (m.S249Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[247].Code, PDFItems.shoulderPDFItems[247].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[238].Code, PDFItems.shoulderPDFItems[238].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[248].Code, PDFItems.shoulderPDFItems[248].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S239)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[239].Code, PDFItems.shoulderPDFItems[239].ExportValue);
+                                switch (m.S239Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[245].Code, PDFItems.shoulderPDFItems[245].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[246].Code, PDFItems.shoulderPDFItems[246].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[244].Code, PDFItems.shoulderPDFItems[244].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S243)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[243].Code, PDFItems.shoulderPDFItems[243].ExportValue);
+                                switch (m.S243Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[241].Code, PDFItems.shoulderPDFItems[241].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[240].Code, PDFItems.shoulderPDFItems[240].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[242].Code, PDFItems.shoulderPDFItems[242].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            if (m.S10A == "NO")
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[406].Code, PDFItems.shoulderPDFItems[406].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[407].Code, PDFItems.shoulderPDFItems[407].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[409].Code, PDFItems.shoulderPDFItems[409].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[412].Code, PDFItems.shoulderPDFItems[412].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[420].Code, PDFItems.shoulderPDFItems[420].ExportValue);
+
+                                if (m.S10C == "FREQUENT")
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[410].Code, PDFItems.shoulderPDFItems[410].ExportValue);
+                                }
+                                if (m.S10C == "INFREQUENT")
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[411].Code, PDFItems.shoulderPDFItems[411].ExportValue);
+                                }
+                            }
+
                         }
                         //
                         //

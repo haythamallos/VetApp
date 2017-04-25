@@ -84,5 +84,36 @@ namespace MainSite.Models
         public string S301 { get; set; }
         public string S300 { get; set; }
 
+        public bool S231 { get; set; }
+        public bool S275 { get; set; }
+        public bool S229 { get; set; }
+        public bool S228 { get; set; }
+        public bool S282 { get; set; }
+        public bool S281 { get; set; }
+        public bool S280 { get; set; }
+        public bool S279 { get; set; }
+        public bool S278 { get; set; }
+        public bool S237 { get; set; }
+        public bool S249 { get; set; }
+        public bool S239 { get; set; }
+        public bool S243 { get; set; }
+
+        public string S231Side { get; set; }
+        public string S275Side { get; set; }
+        public string S229Side { get; set; }
+        public string S228Side { get; set; }
+        public string S282Side { get; set; }
+        public string S281Side { get; set; }
+        public string S280Side { get; set; }
+        public string S279Side { get; set; }
+        public string S278Side { get; set; }
+        public string S237Side { get; set; }
+        public string S249Side { get; set; }
+        public string S239Side { get; set; }
+        public string S243Side { get; set; }
+
+        public string S10A { get; set; }
+        public string S10C { get; set; }
+
     }
 }
