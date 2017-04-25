@@ -15,10 +15,10 @@
         <form id="formshoulder" method="post" action="/Dashboard/ShoulderPost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @*@if (Model.ContentStateID == 6)
-            {
-                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
-                <hr />
-            }*@
+                {
+                    <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                    <hr />
+                }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
@@ -39,19 +39,153 @@
                             <br />
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
-                                <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                <div class="col-xs-12">
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
-                            <br />
                             <hr />
+                            <div>
+                                <label class="font-bold">Are you service connected for left, right or both? (Only pick one)</label>
+                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
+                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
+                            </div>
+                            <hr />
+                            <div>
+                                <label class="font-bold">Are you left-handed or right-handed? (Only pick one)</label>
+                                @Html.RadioButtonFor(x => x.LeftOrRightHanded, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.LeftOrRightHanded, "RIGHT") Right
+                            </div>
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the diagnosis of your service-connected shoulder condition? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S64) Shoulder strain
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S64Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S64Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S64Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S65) Shoulder impingement syndrome
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S65Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S65Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S65Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S66) Bicipital tendonitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S66Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S66Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S66Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S67) Bicipital tendon tear
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S67Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S67Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S67Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S68) Rotator cuff tendonitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S68Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S68Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S68Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S69) Rotator cuff tear
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S69Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S69Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S69Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S70) Labral tear, including SLAP
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S70Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S70Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S70Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S71) Subacromial/Subdeloid Bursitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S71Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S71Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S71Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S72) Glenohumeral Joint Ostearthritis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S72Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S72Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S72Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S81) Acromioclavicular Joint Osteoarthritis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S81Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S81Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S81Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S111) Ankylosis Of Glenohumeral Articulations (shoulder joint)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S111Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S111Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S111Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S105) Glenohumeral Joint Instability
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S105Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S105Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S105Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S99) Glenohumeral Joint Dislocation
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S99Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S99Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S99Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S93) Shoulder Joint Replacement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S93Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S93Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S93Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S87) Acromioclavicular Joint Separation
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S87Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S87Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S87Side, "BOTH") Both
+                                </div>
+
+                            </div>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>
                 </div>
                 <!-- Part 1 -->
-
-
                 <!-- Part 2 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -61,14 +195,121 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div id="romrightshoulderdiv" class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> shoulder.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> shoulder.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S156, (SelectList)ViewBag.MovementList180Deg)
 
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S152, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S144, (SelectList)ViewBag.MovementList90Deg)
+
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S148, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> shoulder and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S180, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S181, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S187, (SelectList)ViewBag.MovementList90Deg)
+
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+                                <label>For the <spa>RIGHT</spa> shoulder at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S293, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S286, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S287, (SelectList)ViewBag.MovementList90Deg)
+
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S289, (SelectList)ViewBag.MovementList90Deg)
+
+
+                            </div>
+
+                            <div id="romleftshoulderdiv" class="form-check form-check-inline panel panel-primary">
+                                <hr />
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> shoulder.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>LEFT</spa> shoulder.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S177, (SelectList)ViewBag.MovementList180Deg)
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S173, (SelectList)ViewBag.MovementList180Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S165, (SelectList)ViewBag.MovementList90Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S169, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> shoulder and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S200, (SelectList)ViewBag.MovementList180Deg)
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S194, (SelectList)ViewBag.MovementList180Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S192, (SelectList)ViewBag.MovementList90Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S193, (SelectList)ViewBag.MovementList90Deg)
+                                <hr />
+                                <label>For the <spa>LEFT</spa> shoulder at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S304, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>Abduction (normal endpoint = 180 degrees)</span>
+                                @Html.DropDownListFor(x => x.S297, (SelectList)ViewBag.MovementList180Deg)
+
+                                <br />
+                                <span>External Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S301, (SelectList)ViewBag.MovementList90Deg)
+
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 90 degrees)</span>
+                                @Html.DropDownListFor(x => x.S300, (SelectList)ViewBag.MovementList90Deg)
+
+
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <!-- Part 2 -->
-
                 <!-- Part 3 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -84,7 +325,6 @@
                     </div>
                 </div>
                 <!-- Part 3 -->
-
                 <!-- Part 4 -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -100,7 +340,6 @@
                     </div>
                 </div>
                 <!-- Part 4 -->
-
                 <!-- Finish -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -130,9 +369,9 @@
 <script type="text/javascript">
 
     $('document').ready(function () {
-
         $("#part1NextBtn").on("click", function () {
             if (validate_1()) {
+                setROM();
                 $("#collapse2").collapse('show');
                 $("#collapse1").collapse('hide');
 
@@ -312,6 +551,120 @@
 
             return isValid;
         }
+        //function setInititalROM()
+        //{
+        //    var left = $("#DoInitialROMLeft").val();
+        //    var right = $("#DoInitialROMRight").val();
+        //    var isDivRight = $("#romrightshoulderdiv");
+        //    var isDivLeft = $("#romleftshoulderdiv");
+        //    isDivLeft.hide();
+        //    isDivRight.hide();
+
+        //    if (left == 'True') {
+        //        isDivLeft.show();
+        //    }
+        //    if (right == 'True') {
+        //        isDivRight.show();
+        //    }
+        //}
+        function setROM() {
+            var S64Side = $('input[name=S64Side]:checked').val();
+            var S65Side = $('input[name=S65Side]:checked').val();
+            var S66Side = $('input[name=S66Side]:checked').val();
+            var S67Side = $('input[name=S67Side]:checked').val();
+            var S68Side = $('input[name=S68Side]:checked').val();
+            var S69Side = $('input[name=S69Side]:checked').val();
+            var S70Side = $('input[name=S70Side]:checked').val();
+            var S71Side = $('input[name=S71Side]:checked').val();
+            var S72Side = $('input[name=S72Side]:checked').val();
+            var S81Side = $('input[name=S81Side]:checked').val();
+            var S111Side = $('input[name=S111Side]:checked').val();
+            var S105Side = $('input[name=S105Side]:checked').val();
+            var S99Side = $('input[name=S99Side]:checked').val();
+            var S93Side = $('input[name=S93Side]:checked').val();
+            var S87Side = $('input[name=S87Side]:checked').val();
+
+            var isDivRight = $("#romrightshoulderdiv");
+            var isDivLeft = $("#romleftshoulderdiv");
+            isDivLeft.hide();
+            isDivRight.hide();
+
+            //alert(S64Side + "," + S65Side);
+            if ((S64Side == "BOTH")
+                || (S65Side == "BOTH")
+                || (S66Side == "BOTH")
+                || (S67Side == "BOTH")
+                || (S68Side == "BOTH")
+                || (S69Side == "BOTH")
+                || (S70Side == "BOTH")
+                || (S71Side == "BOTH")
+                || (S72Side == "BOTH")
+                || (S81Side == "BOTH")
+                || (S111Side == "BOTH")
+                || (S105Side == "BOTH")
+                || (S99Side == "BOTH")
+                || (S93Side == "BOTH")
+                || (S87Side == "BOTH")
+                ) {
+                isDivLeft.show();
+                isDivRight.show();
+            }
+            if ((S64Side == "LEFT")
+                || (S65Side == "LEFT")
+                || (S66Side == "LEFT")
+                || (S67Side == "LEFT")
+                || (S68Side == "LEFT")
+                || (S69Side == "LEFT")
+                || (S70Side == "LEFT")
+                || (S71Side == "LEFT")
+                || (S72Side == "LEFT")
+                || (S81Side == "LEFT")
+                || (S111Side == "LEFT")
+                || (S105Side == "LEFT")
+                || (S99Side == "LEFT")
+                || (S93Side == "LEFT")
+                || (S87Side == "LEFT")
+                ) {
+                isDivLeft.show();
+            }
+            if ((S64Side == "RIGHT")
+                || (S65Side == "RIGHT")
+                || (S66Side == "RIGHT")
+                || (S67Side == "RIGHT")
+                || (S68Side == "RIGHT")
+                || (S69Side == "RIGHT")
+                || (S70Side == "RIGHT")
+                || (S71Side == "RIGHT")
+                || (S72Side == "RIGHT")
+                || (S81Side == "RIGHT")
+                || (S111Side == "RIGHT")
+                || (S105Side == "RIGHT")
+                || (S99Side == "RIGHT")
+                || (S93Side == "RIGHT")
+                || (S87Side == "RIGHT")
+                ) {
+                isDivRight.show();
+            }
+
+        }
+        $("input[type=radio]").change(function () {
+            var Selectedvalue = $(this).val();
+            setROM();
+        });
+
+        //$('input[name=S64Side]').click(function () {
+        //    $('#romrightshoulderdiv').hide();
+        //    $('#romleftshoulderdiv').show();
+
+        //    if ($('input[name=S64Side]:checked').val() == "RIGHT") {
+        //        $('#romrightshoulderdiv').show();
+        //    } else if ($('input[name=S64Side]:checked').val() == "LEFT") {
+        //        $('#romleftshoulderdiv').show();
+        //    } else if ($('input[name=S64Side]:checked').val() == "BOTH") {
+        //        $('#romrightshoulderdiv').show();
+        //        $('#romleftshoulderdiv').show();
+        //    }
+        //});
     });
 </script>
 

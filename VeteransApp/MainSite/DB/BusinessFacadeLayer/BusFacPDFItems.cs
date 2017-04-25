@@ -62,6 +62,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "cluster", new ICDCode {Diagnosis="Cluster", RefNumber="339"}}
                 };
 
+        public static Dictionary<string, ICDCode> shoulderICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "shoulder strain", new ICDCode {Diagnosis="Shoulder Strain", RefNumber="840.9"}},
+                    { "shoulder inpingement syndrome", new ICDCode {Diagnosis="Shoulder Inpingement Syndrome", RefNumber="726.2"}},
+                    { "bicipital tendonitis", new ICDCode {Diagnosis="Bicipital Tendonitis", RefNumber="726.12"}},
+                    { "bicipital tendon tear", new ICDCode {Diagnosis="Bicipital Tendon Tear", RefNumber="727.62"}},
+                    { "rotator cuff tendonitis", new ICDCode {Diagnosis="Rotator Cuff Tendonitis", RefNumber="726.1"}},
+                    { "rotator cuff tear", new ICDCode {Diagnosis="Rotator Cuff Tear", RefNumber="727.61"}},
+                    { "labral tear including slap", new ICDCode {Diagnosis="Labral Tear Including SLAP", RefNumber="840.7"}},
+                    { "subacromial/subdeloid bursitis", new ICDCode {Diagnosis="Subacromial/Subdeloid Bursitis", RefNumber="726.19"}},
+                    { "glenohumeral joint ostearthritis", new ICDCode {Diagnosis="Glenohumeral Joint Ostearthritis", RefNumber="715.91"}},
+                    { "acromioclavicular joint osteoarthritis", new ICDCode {Diagnosis="Acromioclavicular Joint Osteoarthritis", RefNumber="715.11"}},
+                    { "ankylosis of glenohumeral articulations", new ICDCode {Diagnosis="Ankylosis Of Glenohumeral Articulations", RefNumber="733.99"}},
+                    { "glenohumeral joint instability", new ICDCode {Diagnosis="Glenohumeral Joint Instability", RefNumber="718.81"}},
+                    { "glenohumeral joint dislocation", new ICDCode {Diagnosis="Glenohumeral Joint Dislocation", RefNumber="831.03"}},
+                    { "shoulder joint replacement", new ICDCode {Diagnosis="Shoulder Joint Replacement", RefNumber="81.8"}},
+                    { "acromioclavicular joint separation", new ICDCode {Diagnosis="Acromioclavicular Joint Separation", RefNumber="831.04"}}
+                };
+
     }
 
     public class ICDCode

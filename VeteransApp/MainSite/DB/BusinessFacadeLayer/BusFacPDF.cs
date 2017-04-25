@@ -2106,8 +2106,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // defaults
-                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[1].Code, PDFItems.shoulderPDFItems[1].ExportValue);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[9].Code, PDFItems.shoulderPDFItems[9].ExportValue);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[10].Code, PDFItems.shoulderPDFItems[10].ExportValue);
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
                         pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
@@ -2162,6 +2163,518 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo18[1]", "1");
                         pdfFormFields.SetField("form1[0].#subform[8].Comments18[0]", "Difficultly with overhead task.");
 
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[15].Code, m.NameOfPatient);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[14].Code, m.SocialSecurity);
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string diagnosis = null;
+
+                        if (!m.S63)
+                        {
+                            if (m.S64)
+                            {
+                                diagnosis = "Shoulder Strain";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[64].Code, PDFItems.shoulderPDFItems[64].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[61].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[62].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S64Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[75].Code, PDFItems.shoulderPDFItems[75].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[74].Code, PDFItems.shoulderPDFItems[74].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[73].Code, PDFItems.shoulderPDFItems[73].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S65)
+                            {
+                                diagnosis = "Shoulder Inpingement Syndrome";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[65].Code, PDFItems.shoulderPDFItems[65].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[60].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[59].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S65Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[21].Code, PDFItems.shoulderPDFItems[21].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[57].Code, PDFItems.shoulderPDFItems[57].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[58].Code, PDFItems.shoulderPDFItems[58].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S66)
+                            {
+                                diagnosis = "Bicipital Tendonitis";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[66].Code, PDFItems.shoulderPDFItems[66].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[52].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[53].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S66Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[56].Code, PDFItems.shoulderPDFItems[56].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[55].Code, PDFItems.shoulderPDFItems[55].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[54].Code, PDFItems.shoulderPDFItems[54].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S67)
+                            {
+                                diagnosis = "Bicipital Tendon Tear";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[67].Code, PDFItems.shoulderPDFItems[67].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[51].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[50].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S67Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[22].Code, PDFItems.shoulderPDFItems[22].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[48].Code, PDFItems.shoulderPDFItems[48].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[49].Code, PDFItems.shoulderPDFItems[49].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S68)
+                            {
+                                diagnosis = "Rotator Cuff Tendonitis";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[68].Code, PDFItems.shoulderPDFItems[68].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[43].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[44].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S68Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[47].Code, PDFItems.shoulderPDFItems[47].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[46].Code, PDFItems.shoulderPDFItems[46].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[45].Code, PDFItems.shoulderPDFItems[45].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S69)
+                            {
+                                diagnosis = "Rotator Cuff Tear";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[69].Code, PDFItems.shoulderPDFItems[69].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[42].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[41].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S69Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[23].Code, PDFItems.shoulderPDFItems[23].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[39].Code, PDFItems.shoulderPDFItems[39].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[40].Code, PDFItems.shoulderPDFItems[40].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S70)
+                            {
+                                diagnosis = "Labral Tear Including SLAP";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[70].Code, PDFItems.shoulderPDFItems[70].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[34].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[35].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S70Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[38].Code, PDFItems.shoulderPDFItems[38].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[37].Code, PDFItems.shoulderPDFItems[37].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[36].Code, PDFItems.shoulderPDFItems[36].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S71)
+                            {
+                                diagnosis = "Subacromial/Subdeloid Bursitis";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[71].Code, PDFItems.shoulderPDFItems[71].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[33].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[32].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S71Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[24].Code, PDFItems.shoulderPDFItems[24].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[30].Code, PDFItems.shoulderPDFItems[30].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[31].Code, PDFItems.shoulderPDFItems[31].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S72)
+                            {
+                                diagnosis = "Glenohumeral Joint Ostearthritis";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[72].Code, PDFItems.shoulderPDFItems[72].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[25].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[26].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S72Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[29].Code, PDFItems.shoulderPDFItems[29].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[28].Code, PDFItems.shoulderPDFItems[28].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[27].Code, PDFItems.shoulderPDFItems[27].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S81)
+                            {
+                                diagnosis = "Acromioclavicular Joint Osteoarthritis";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[81].Code, PDFItems.shoulderPDFItems[81].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[76].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[77].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S81Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[80].Code, PDFItems.shoulderPDFItems[80].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[79].Code, PDFItems.shoulderPDFItems[79].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[78].Code, PDFItems.shoulderPDFItems[78].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S111)
+                            {
+                                diagnosis = "Ankylosis Of Glenohumeral Articulations";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[111].Code, PDFItems.shoulderPDFItems[111].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[106].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[107].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S111Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[110].Code, PDFItems.shoulderPDFItems[110].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[109].Code, PDFItems.shoulderPDFItems[109].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[108].Code, PDFItems.shoulderPDFItems[108].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S105)
+                            {
+                                diagnosis = "Glenohumeral Joint Instability";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[105].Code, PDFItems.shoulderPDFItems[105].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[100].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[101].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S105Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[104].Code, PDFItems.shoulderPDFItems[104].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[103].Code, PDFItems.shoulderPDFItems[103].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[102].Code, PDFItems.shoulderPDFItems[102].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S99)
+                            {
+                                diagnosis = "Glenohumeral Joint Dislocation";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[99].Code, PDFItems.shoulderPDFItems[99].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[94].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[95].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S99Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[98].Code, PDFItems.shoulderPDFItems[98].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[97].Code, PDFItems.shoulderPDFItems[97].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[96].Code, PDFItems.shoulderPDFItems[96].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S93)
+                            {
+                                diagnosis = "Shoulder Joint Replacement";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[93].Code, PDFItems.shoulderPDFItems[93].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[88].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[89].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S93Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[92].Code, PDFItems.shoulderPDFItems[92].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[91].Code, PDFItems.shoulderPDFItems[91].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[90].Code, PDFItems.shoulderPDFItems[90].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (m.S87)
+                            {
+                                diagnosis = "Acromioclavicular Joint Separation";
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[87].Code, PDFItems.shoulderPDFItems[87].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[82].Code, dt);
+                                if (ICDCodes.shoulderICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                                {
+                                    pdfFormFields.SetField(PDFItems.shoulderPDFItems[83].Code, icdcode.RefNumber);
+                                }
+                                switch (m.S87Side)
+                                {
+                                    case "RIGHT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[86].Code, PDFItems.shoulderPDFItems[86].ExportValue);
+                                        break;
+                                    case "LEFT":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[85].Code, PDFItems.shoulderPDFItems[85].ExportValue);
+                                        break;
+                                    case "BOTH":
+                                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[84].Code, PDFItems.shoulderPDFItems[84].ExportValue);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            bool DoInitialROMLeft = false;
+                            bool DoInitialROMRight = false;
+
+                            if ((m.S64Side == "BOTH")
+                                || (m.S65Side == "BOTH")
+                                || (m.S66Side == "BOTH")
+                                || (m.S67Side == "BOTH")
+                                || (m.S68Side == "BOTH")
+                                || (m.S69Side == "BOTH")
+                                || (m.S70Side == "BOTH")
+                                || (m.S71Side == "BOTH")
+                                || (m.S72Side == "BOTH")
+                                || (m.S81Side == "BOTH")
+                                || (m.S111Side == "BOTH")
+                                || (m.S105Side == "BOTH")
+                                || (m.S99Side == "BOTH")
+                                || (m.S93Side == "BOTH")
+                                || (m.S87Side == "BOTH")
+                                )
+                            {
+                                DoInitialROMLeft = true;
+                                DoInitialROMRight = true;
+                            }
+                            if ((m.S64Side == "LEFT")
+                                || (m.S65Side == "LEFT")
+                                || (m.S66Side == "LEFT")
+                                || (m.S67Side == "LEFT")
+                                || (m.S68Side == "LEFT")
+                                || (m.S69Side == "LEFT")
+                                || (m.S70Side == "LEFT")
+                                || (m.S71Side == "LEFT")
+                                || (m.S72Side == "LEFT")
+                                || (m.S81Side == "LEFT")
+                                || (m.S111Side == "LEFT")
+                                || (m.S105Side == "LEFT")
+                                || (m.S99Side == "LEFT")
+                                || (m.S93Side == "LEFT")
+                                || (m.S87Side == "LEFT")
+                                )
+                            {
+                                DoInitialROMLeft = true;
+                            }
+                            if ((m.S64Side == "RIGHT")
+                                || (m.S65Side == "RIGHT")
+                                || (m.S66Side == "RIGHT")
+                                || (m.S67Side == "RIGHT")
+                                || (m.S68Side == "RIGHT")
+                                || (m.S69Side == "RIGHT")
+                                || (m.S70Side == "RIGHT")
+                                || (m.S71Side == "RIGHT")
+                                || (m.S72Side == "RIGHT")
+                                || (m.S81Side == "RIGHT")
+                                || (m.S111Side == "RIGHT")
+                                || (m.S105Side == "RIGHT")
+                                || (m.S99Side == "RIGHT")
+                                || (m.S93Side == "RIGHT")
+                                || (m.S87Side == "RIGHT")
+                                )
+                            {
+                                DoInitialROMRight = true;
+                            }
+
+                            bool SameInitialROMLeft = false;
+                            bool SameInitialROMRight = false;
+
+                            if (DoInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[156].Code, m.S156);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[152].Code, m.S152);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[144].Code, m.S144);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[148].Code, m.S148);
+
+                                if ((m.S156 == m.S180)
+                                    && (m.S152 == m.S181)
+                                    && (m.S144 == m.S187)
+                                    && (m.S148 == m.S188)
+                                    )
+                                {
+                                    SameInitialROMRight = true;
+                                }
+
+                            }
+
+                            if (DoInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[177].Code, m.S177);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[173].Code, m.S173);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[165].Code, m.S165);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[169].Code, m.S169);
+
+                                if ((m.S177 == m.S200)
+                                    && (m.S173 == m.S194)
+                                    && (m.S165 == m.S192)
+                                    && (m.S169 == m.S193)
+                                    )
+                                {
+                                    SameInitialROMLeft = true;
+                                }
+
+                            }
+
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[182].Code, PDFItems.shoulderPDFItems[182].ExportValue);
+                            if (SameInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[184].Code, PDFItems.shoulderPDFItems[184].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[185].Code, PDFItems.shoulderPDFItems[185].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[180].Code, m.S180);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[181].Code, m.S181);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[187].Code, m.S187);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[188].Code, m.S188);
+                            }
+
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[199].Code, PDFItems.shoulderPDFItems[199].ExportValue);
+                            if (SameInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[197].Code, PDFItems.shoulderPDFItems[197].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[196].Code, PDFItems.shoulderPDFItems[196].ExportValue);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[200].Code, m.S200);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[194].Code, m.S194);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[192].Code, m.S192);
+                                pdfFormFields.SetField(PDFItems.shoulderPDFItems[193].Code, m.S193);
+                            }
+
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[294].Code, PDFItems.shoulderPDFItems[294].ExportValue);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[293].Code, m.S293);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[286].Code, m.S286);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[287].Code, m.S287);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[289].Code, m.S289);
+
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[306].Code, PDFItems.shoulderPDFItems[306].ExportValue);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[304].Code, m.S304);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[297].Code, m.S297);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[301].Code, m.S301);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[300].Code, m.S300);
+
+                        }
                         //
                         //
                         //
@@ -2638,7 +3151,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.headachePDFItems[51].Code, PDFItems.headachePDFItems[51].ExportValue);
                         }
 
-                        switch(m.WorkCondition)
+                        switch (m.WorkCondition)
                         {
                             case "A":
                                 pdfFormFields.SetField(PDFItems.headachePDFItems[97].Code, PDFItems.headachePDFItems[97].ExportValue);
