@@ -675,22 +675,6 @@
 
             return isValid;
         }
-        //function setInititalROM()
-        //{
-        //    var left = $("#DoInitialROMLeft").val();
-        //    var right = $("#DoInitialROMRight").val();
-        //    var isDivRight = $("#romrightshoulderdiv");
-        //    var isDivLeft = $("#romleftshoulderdiv");
-        //    isDivLeft.hide();
-        //    isDivRight.hide();
-
-        //    if (left == 'True') {
-        //        isDivLeft.show();
-        //    }
-        //    if (right == 'True') {
-        //        isDivRight.show();
-        //    }
-        //}
         function setROM() {
             var S64Side = $('input[name=S64Side]:checked').val();
             var S65Side = $('input[name=S65Side]:checked').val();
@@ -708,8 +692,8 @@
             var S93Side = $('input[name=S93Side]:checked').val();
             var S87Side = $('input[name=S87Side]:checked').val();
 
-            var isDivRight = $("#romrightshoulderdiv");
-            var isDivLeft = $("#romleftshoulderdiv");
+            var isDivRight = $("#romrightdiv");
+            var isDivLeft = $("#romleftdiv");
             isDivLeft.hide();
             isDivRight.hide();
 
@@ -776,19 +760,6 @@
             setROM();
         });
 
-        //$('input[name=S64Side]').click(function () {
-        //    $('#romrightshoulderdiv').hide();
-        //    $('#romleftshoulderdiv').show();
-
-        //    if ($('input[name=S64Side]:checked').val() == "RIGHT") {
-        //        $('#romrightshoulderdiv').show();
-        //    } else if ($('input[name=S64Side]:checked').val() == "LEFT") {
-        //        $('#romleftshoulderdiv').show();
-        //    } else if ($('input[name=S64Side]:checked').val() == "BOTH") {
-        //        $('#romrightshoulderdiv').show();
-        //        $('#romleftshoulderdiv').show();
-        //    }
-        //});
     });
 </script>
 

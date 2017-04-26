@@ -81,6 +81,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "acromioclavicular joint separation", new ICDCode {Diagnosis="Acromioclavicular Joint Separation", RefNumber="831.04"}}
                 };
 
+        public static Dictionary<string, ICDCode> ankleICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "lateral collateral ligament sprain", new ICDCode {Diagnosis="Lateral Collateral Ligament Sprain", RefNumber="845.09"}},
+                    { "deltoid ligamnet sprain", new ICDCode {Diagnosis="Deltoid Ligamnet Sprain", RefNumber="845.01"}},
+                    { "osteochondritis dissecans to include ostechondral fracture", new ICDCode {Diagnosis="Osteochondritis Dissecans to include Ostechondral Fracture", RefNumber="732.7"}},
+                    { "impingement", new ICDCode {Diagnosis="Impingement", RefNumber="715.17"}},
+                    { "tendonitis", new ICDCode {Diagnosis="Tendonitis", RefNumber="727.06"}},
+                    { "retrocalcaneal bursitis", new ICDCode {Diagnosis="Retrocalcaneal Bursitis", RefNumber="726.71"}},
+                    { "achilles tendon rupture", new ICDCode {Diagnosis="Achilles Tendon Rupture", RefNumber="727.67"}},
+                    { "osteoarthritis of the ankle", new ICDCode {Diagnosis="Osteoarthritis Of The Ankle", RefNumber="715.97"}},
+                    { "avascular necrosis, talus", new ICDCode {Diagnosis="Avascular Necrosis, Talus", RefNumber="733.44"}},
+                    { "ankle joint replacement", new ICDCode {Diagnosis="Ankle Joint Replacement", RefNumber="81.56"}},
+                    { "ankylosis of ankle,subtatalar or tarsal joint", new ICDCode {Diagnosis="Ankylosis Of Ankle,Subtatalar Or Tarsal Joint", RefNumber="718.57"}}
+                };
     }
 
     public class ICDCode

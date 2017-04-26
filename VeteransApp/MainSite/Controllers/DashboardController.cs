@@ -69,6 +69,9 @@ namespace MainSite.Controllers
             var MovementList180Deg = new System.Web.Mvc.SelectList(new[] { 180, 175, 170, 165, 160, 155, 150, 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList180Deg = MovementList180Deg;
 
+            var MovementList20Deg = new System.Web.Mvc.SelectList(new[] { 20, 15, 10, 5, 0 });
+            ViewBag.MovementList20Deg = MovementList20Deg;
+
         }
         public ActionResult Index()
         {
@@ -1044,67 +1047,6 @@ namespace MainSite.Controllers
                     model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
                 }
 
-                //model.DoInitialROMLeft = false;
-                //model.DoInitialROMRight = false;
-
-                //if ((model.S64Side == "BOTH")
-                //    || (model.S65Side == "BOTH")
-                //    || (model.S66Side == "BOTH")
-                //    || (model.S67Side == "BOTH")
-                //    || (model.S68Side == "BOTH")
-                //    || (model.S69Side == "BOTH")
-                //    || (model.S70Side == "BOTH")
-                //    || (model.S71Side == "BOTH")
-                //    || (model.S72Side == "BOTH")
-                //    || (model.S81Side == "BOTH")
-                //    || (model.S111Side == "BOTH")
-                //    || (model.S105Side == "BOTH")
-                //    || (model.S99Side == "BOTH")
-                //    || (model.S93Side == "BOTH")
-                //    || (model.S87Side == "BOTH")
-                //    )
-                //{
-                //    model.DoInitialROMLeft = true;
-                //    model.DoInitialROMRight = true;
-                //}
-                //if ((model.S64Side == "LEFT")
-                //    || (model.S65Side == "LEFT")
-                //    || (model.S66Side == "LEFT")
-                //    || (model.S67Side == "LEFT")
-                //    || (model.S68Side == "LEFT")
-                //    || (model.S69Side == "LEFT")
-                //    || (model.S70Side == "LEFT")
-                //    || (model.S71Side == "LEFT")
-                //    || (model.S72Side == "LEFT")
-                //    || (model.S81Side == "LEFT")
-                //    || (model.S111Side == "LEFT")
-                //    || (model.S105Side == "LEFT")
-                //    || (model.S99Side == "LEFT")
-                //    || (model.S93Side == "LEFT")
-                //    || (model.S87Side == "LEFT")
-                //    )
-                //{
-                //    model.DoInitialROMLeft = true;
-                //}
-                //if ((model.S64Side == "RIGHT")
-                //    || (model.S65Side == "RIGHT")
-                //    || (model.S66Side == "RIGHT")
-                //    || (model.S67Side == "RIGHT")
-                //    || (model.S68Side == "RIGHT")
-                //    || (model.S69Side == "RIGHT")
-                //    || (model.S70Side == "RIGHT")
-                //    || (model.S71Side == "RIGHT")
-                //    || (model.S72Side == "RIGHT")
-                //    || (model.S81Side == "RIGHT")
-                //    || (model.S111Side == "RIGHT")
-                //    || (model.S105Side == "RIGHT")
-                //    || (model.S99Side == "RIGHT")
-                //    || (model.S93Side == "RIGHT")
-                //    || (model.S87Side == "RIGHT")
-                //    )
-                //{
-                //    model.DoInitialROMRight = true;
-                //}
 
             }
             catch (Exception ex)
@@ -1523,35 +1465,25 @@ namespace MainSite.Controllers
         * Ankle Form
         * 
         *************************************************************/
-        public ActionResult Ankle()
+        public ActionResult Ankle(string isnew)
         {
-            string viewName = "Ankle";
+            string viewName = "dbqAnkle";
             AnkleModel model = new AnkleModel();
             long contenttypeid = 7;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<AnkleModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1565,7 +1497,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult AnklePost(AnkleModel model, long contentStateID)
         {
-            string viewName = "Ankle";
+            string viewName = "dbqAnkle";
+            string filename = viewName;
             long contenttypeid = 7;
             try
             {
@@ -1583,7 +1516,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }

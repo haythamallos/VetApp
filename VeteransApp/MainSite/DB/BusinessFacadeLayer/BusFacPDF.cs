@@ -1569,11 +1569,11 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             isAllSame = false;
                         }
 
-                        pdfFormFields.SetField("form1[0].#subform[2].Right_Perform[0]", "1");
+                        pdfFormFields.SetField("form1[0].#subform[2].Right_Perform[0]", "1"); // 112
 
                         if (isAllSame)
                         {
-                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[0]", "2");
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[0]", "2");//114
                         }
                         else
                         {
@@ -1584,7 +1584,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", m.S111);
                             pdfFormFields.SetField("form1[0].#subform[2].PostROM11[0]", m.S117);
                             pdfFormFields.SetField("form1[0].#subform[2].PostROM12[0]", m.S118);
-                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1");
+                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1"); //115
                         }
 
 
@@ -1779,6 +1779,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         {
                             pdfFormFields.SetField(PDFItems.neckPDFItems[402].Code, PDFItems.neckPDFItems[402].ExportValue); //402
                         }
+
+                        // corrections
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[107].Code, PDFItems.neckPDFItems[107].ExportValue);
+
 
                     }
 
@@ -3662,8 +3666,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // defaults
-                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
-                        pdfFormFields.SetField("", "1");
 
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
                         pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, lose of strength, soreness, and pain.");
@@ -3708,6 +3710,407 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo22[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo23[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo24[0]", "2");
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[95].Code, m.NameOfPatient);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[94].Code, m.SocialSecurity);
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[69].Code, PDFItems.anklePDFItems[69].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[76].Code, PDFItems.anklePDFItems[76].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[77].Code, PDFItems.anklePDFItems[77].ExportValue);
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string diagnosis = null;
+
+                        if (m.S82)
+                        {
+                            diagnosis = "Lateral Collateral Ligament Sprain";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[82].Code, PDFItems.anklePDFItems[82].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[66].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[67].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S82Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[101].Code, PDFItems.anklePDFItems[101].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[100].Code, PDFItems.anklePDFItems[190].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[99].Code, PDFItems.anklePDFItems[99].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S83)
+                        {
+                            diagnosis = "Deltoid Ligamnet Sprain";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[83].Code, PDFItems.anklePDFItems[83].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[65].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[64].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S83Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[1].Code, PDFItems.anklePDFItems[1].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[62].Code, PDFItems.anklePDFItems[62].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[63].Code, PDFItems.anklePDFItems[63].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S84)
+                        {
+                            diagnosis = "Osteochondritis Dissecans to include Ostechondral Fracture";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[84].Code, PDFItems.anklePDFItems[84].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[57].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[58].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S84Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[61].Code, PDFItems.anklePDFItems[61].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[60].Code, PDFItems.anklePDFItems[60].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[59].Code, PDFItems.anklePDFItems[59].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S85)
+                        {
+                            diagnosis = "Impingement";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[85].Code, PDFItems.anklePDFItems[85].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[56].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[55].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S85Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[2].Code, PDFItems.anklePDFItems[2].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[53].Code, PDFItems.anklePDFItems[53].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[54].Code, PDFItems.anklePDFItems[54].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S86)
+                        {
+                            diagnosis = "Tendonitis";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[86].Code, PDFItems.anklePDFItems[86].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[48].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[49].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S86Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[52].Code, PDFItems.anklePDFItems[52].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[51].Code, PDFItems.anklePDFItems[51].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[50].Code, PDFItems.anklePDFItems[50].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S87)
+                        {
+                            diagnosis = "Retrocalcaneal Bursitis";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[87].Code, PDFItems.anklePDFItems[87].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[47].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[46].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S87Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[3].Code, PDFItems.anklePDFItems[3].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[44].Code, PDFItems.anklePDFItems[44].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[45].Code, PDFItems.anklePDFItems[45].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S88)
+                        {
+                            diagnosis = "Achilles Tendon Rupture";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[88].Code, PDFItems.anklePDFItems[88].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[39].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[40].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S88Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[43].Code, PDFItems.anklePDFItems[43].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[42].Code, PDFItems.anklePDFItems[42].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[41].Code, PDFItems.anklePDFItems[41].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S89)
+                        {
+                            diagnosis = "Osteoarthritis Of The Ankle";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[89].Code, PDFItems.anklePDFItems[89].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[38].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[37].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S89Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[4].Code, PDFItems.anklePDFItems[4].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[35].Code, PDFItems.anklePDFItems[35].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[36].Code, PDFItems.anklePDFItems[36].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S90)
+                        {
+                            diagnosis = "Avascular Necrosis, Talus";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[90].Code, PDFItems.anklePDFItems[90].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[30].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[31].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S90Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[34].Code, PDFItems.anklePDFItems[34].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[33].Code, PDFItems.anklePDFItems[33].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[32].Code, PDFItems.anklePDFItems[32].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S91)
+                        {
+                            diagnosis = "Ankle Joint Replacement";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[91].Code, PDFItems.anklePDFItems[91].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[29].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[28].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S91Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[5].Code, PDFItems.anklePDFItems[5].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[26].Code, PDFItems.anklePDFItems[26].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[27].Code, PDFItems.anklePDFItems[27].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S92)
+                        {
+                            diagnosis = "Ankylosis Of Ankle,Subtatalar Or Tarsal Joint";
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[92].Code, PDFItems.anklePDFItems[92].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[21].Code, dt);
+                            if (ICDCodes.ankleICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.anklePDFItems[22].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S92Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[25].Code, PDFItems.anklePDFItems[25].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[24].Code, PDFItems.anklePDFItems[24].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.anklePDFItems[23].Code, PDFItems.anklePDFItems[23].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(m.S93Other))
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[93].Code, PDFItems.anklePDFItems[93].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[104].Code, m.S93Other);
+                        }
+
+                        bool DoInitialROMLeft = false;
+                        bool DoInitialROMRight = false;
+
+                        if ((m.S82Side == "BOTH")
+                            || (m.S83Side == "BOTH")
+                            || (m.S84Side == "BOTH")
+                            || (m.S85Side == "BOTH")
+                            || (m.S86Side == "BOTH")
+                            || (m.S87Side == "BOTH")
+                            || (m.S88Side == "BOTH")
+                            || (m.S89Side == "BOTH")
+                            || (m.S90Side == "BOTH")
+                            || (m.S91Side == "BOTH")
+                            || (m.S92Side == "BOTH")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                            DoInitialROMRight = true;
+                        }
+                        if ((m.S82Side == "LEFT")
+                            || (m.S83Side == "LEFT")
+                            || (m.S84Side == "LEFT")
+                            || (m.S85Side == "LEFT")
+                            || (m.S86Side == "LEFT")
+                            || (m.S87Side == "LEFT")
+                            || (m.S88Side == "LEFT")
+                            || (m.S89Side == "LEFT")
+                            || (m.S90Side == "LEFT")
+                            || (m.S91Side == "LEFT")
+                            || (m.S92Side == "LEFT")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                        }
+                        if ((m.S82Side == "RIGHT")
+                            || (m.S83Side == "RIGHT")
+                            || (m.S84Side == "RIGHT")
+                            || (m.S85Side == "RIGHT")
+                            || (m.S86Side == "RIGHT")
+                            || (m.S87Side == "RIGHT")
+                            || (m.S88Side == "RIGHT")
+                            || (m.S89Side == "RIGHT")
+                            || (m.S90Side == "RIGHT")
+                            || (m.S91Side == "RIGHT")
+                            || (m.S92Side == "RIGHT")
+                            )
+                        {
+                            DoInitialROMRight = true;
+                        }
+
+                        bool SameInitialROMLeft = false;
+                        bool SameInitialROMRight = false;
+
+                        if (DoInitialROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[133].Code, m.S133);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[137].Code, m.S137);
+
+                            if ((m.S133 == m.S165)
+                                && (m.S137 == m.S164)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
+
+                        }
+
+                        if (DoInitialROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[121].Code, m.S121);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[117].Code, m.S117);
+
+                            if ((m.S121 == m.S150)
+                                && (m.S117 == m.S151)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
+
+                        }
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[166].Code, PDFItems.anklePDFItems[166].ExportValue);
+                        if (SameInitialROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[168].Code, PDFItems.anklePDFItems[168].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[169].Code, PDFItems.anklePDFItems[169].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[165].Code, m.S165);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[164].Code, m.S164);
+                        }
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[149].Code, PDFItems.anklePDFItems[149].ExportValue);
+                        if (SameInitialROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[147].Code, PDFItems.anklePDFItems[147].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[146].Code, PDFItems.anklePDFItems[146].ExportValue);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[150].Code, m.S150);
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[151].Code, m.S151);
+                        }
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[256].Code, PDFItems.anklePDFItems[256].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[252].Code, m.S252);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[255].Code, m.S255);
+
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[239].Code, PDFItems.shoulderPDFItems[239].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[237].Code, m.S237);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[234].Code, m.S234);
+
+                        //pdfFormFields.SetField(PDFItems.anklePDFItems[133].Code, m.S133);
+
+
+
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable

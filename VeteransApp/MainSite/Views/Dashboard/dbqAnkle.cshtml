@@ -40,10 +40,115 @@
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
                                 <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
                             <br />
+                            <hr />
+                            <div>
+                                <label class="font-bold">What is the diagnosis of your service-connected ankle condition?</label>
+                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
+                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
+                            </div>
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the diagnosis of your service-connected shoulder condition? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S82) Lateral collateral ligament sprain (chronic/recurrent)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S82Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S82Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S82Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S83) Deltoid ligament sprain (chronic/recurrent)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S83Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S83Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S83Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S84) Osteochondritis dissecans to include osteochondral fracture
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S84Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S84Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S84Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S85) Impingement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S85Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S85Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S85Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S86) Tendonitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S86Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S86Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S86Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S87) Retrocalcaneal bursitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S87Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S87Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S87Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S88) Achiles tendon rupture
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S88Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S88Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S88Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S89) Osteoarthritis of the ankle
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S89Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S89Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S89Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S90) Avascular necrosis, talus
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S90Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S90Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S90Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S91) Anide joint replacement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S91Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S91Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S91Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S92) Ankylosis of ankle, subtalar or tarsal joint
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S92Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S92Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S92Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S93Other) Other (specify)
+                                    </label>
+                                </div>
+
+                            </div>
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
@@ -59,7 +164,73 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div id="romrightdiv" class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> ankle.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> ankle.</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S133, (SelectList)ViewBag.MovementList45Deg)
 
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S137, (SelectList)ViewBag.MovementList20Deg)
+                                <hr />
+
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> ankle and record the last repetition below.</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S165, (SelectList)ViewBag.MovementList45Deg)
+
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S164, (SelectList)ViewBag.MovementList20Deg)
+
+                                <hr />
+                                <label>For the <spa>RIGHT</spa> ankle at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S252, (SelectList)ViewBag.MovementList45Deg)
+
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S255, (SelectList)ViewBag.MovementList20Deg)
+
+                            </div>
+
+                            <div id="romleftdiv" class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> ankle.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>LEFT</spa> ankle.</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S121, (SelectList)ViewBag.MovementList45Deg)
+
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S117, (SelectList)ViewBag.MovementList20Deg)
+                                <hr />
+
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> ankle and record the last repetition below.</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S150, (SelectList)ViewBag.MovementList45Deg)
+
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S151, (SelectList)ViewBag.MovementList20Deg)
+
+                                <hr />
+                                <label>For the <spa>LEFT</spa> ankle at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Plantar Flexion (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S237, (SelectList)ViewBag.MovementList45Deg)
+
+                                <br />
+                                <span>Dorsiflexion (normal endpoint = 20 degrees)</span>
+                                @Html.DropDownListFor(x => x.S234, (SelectList)ViewBag.MovementList20Deg)
+
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
@@ -67,7 +238,7 @@
                 </div>
                 <!-- Part 2 -->
                 <!-- Part 3 -->
-                <div class="panel panel-info">
+                @*<div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
@@ -79,10 +250,10 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Part 3 -->
                 <!-- Part 4 -->
-                <div class="panel panel-info">
+                @*<div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
@@ -94,7 +265,7 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Part 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
@@ -128,6 +299,7 @@
 
         $("#part1NextBtn").on("click", function () {
             if (validate_1()) {
+                setROM();
                 $("#collapse2").collapse('show');
                 $("#collapse1").collapse('hide');
 
@@ -150,7 +322,10 @@
         });
 
         $("#part2NextBtn").on("click", function () {
-            $("#collapse3").collapse('show');
+            //$("#collapse3").collapse('show');
+            //$("#collapse2").collapse('hide');
+
+            $("#collapsef").collapse('show');
             $("#collapse2").collapse('hide');
 
             var model = $('#formankle').serialize();
@@ -258,7 +433,9 @@
         });
 
         $("#finishPrevBtn").on("click", function () {
-            $("#collapse4").collapse('show');
+            //$("#collapse4").collapse('show');
+            //$("#collapsef").collapse('hide');
+            $("#collapse2").collapse('show');
             $("#collapsef").collapse('hide');
 
             var model = $('#formankle').serialize();
@@ -307,6 +484,76 @@
 
             return isValid;
         }
+
+        function setROM() {
+            var S64Side = $('input[name=S82Side]:checked').val();
+            var S65Side = $('input[name=S83Side]:checked').val();
+            var S66Side = $('input[name=S84Side]:checked').val();
+            var S67Side = $('input[name=S85Side]:checked').val();
+            var S68Side = $('input[name=S86Side]:checked').val();
+            var S69Side = $('input[name=S87Side]:checked').val();
+            var S70Side = $('input[name=S88Side]:checked').val();
+            var S71Side = $('input[name=S89Side]:checked').val();
+            var S72Side = $('input[name=S90Side]:checked').val();
+            var S81Side = $('input[name=S91Side]:checked').val();
+            var S111Side = $('input[name=S92Side]:checked').val();
+
+            var isDivRight = $("#romrightdiv");
+            var isDivLeft = $("#romleftdiv");
+            isDivLeft.hide();
+            isDivRight.hide();
+
+            //alert(S64Side + "," + S65Side);
+            if ((S64Side == "BOTH")
+                || (S65Side == "BOTH")
+                || (S66Side == "BOTH")
+                || (S67Side == "BOTH")
+                || (S68Side == "BOTH")
+                || (S69Side == "BOTH")
+                || (S70Side == "BOTH")
+                || (S71Side == "BOTH")
+                || (S72Side == "BOTH")
+                || (S81Side == "BOTH")
+                || (S111Side == "BOTH")
+                ) {
+                isDivLeft.show();
+                isDivRight.show();
+            }
+            if ((S64Side == "LEFT")
+                || (S65Side == "LEFT")
+                || (S66Side == "LEFT")
+                || (S67Side == "LEFT")
+                || (S68Side == "LEFT")
+                || (S69Side == "LEFT")
+                || (S70Side == "LEFT")
+                || (S71Side == "LEFT")
+                || (S72Side == "LEFT")
+                || (S81Side == "LEFT")
+                || (S111Side == "LEFT")
+                ) {
+                isDivLeft.show();
+            }
+            if ((S64Side == "RIGHT")
+                || (S65Side == "RIGHT")
+                || (S66Side == "RIGHT")
+                || (S67Side == "RIGHT")
+                || (S68Side == "RIGHT")
+                || (S69Side == "RIGHT")
+                || (S70Side == "RIGHT")
+                || (S71Side == "RIGHT")
+                || (S72Side == "RIGHT")
+                || (S81Side == "RIGHT")
+                || (S111Side == "RIGHT")
+                ) {
+                isDivRight.show();
+            }
+
+        }
+        $("input[type=radio]").change(function () {
+            var Selectedvalue = $(this).val();
+            setROM();
+        });
+
     });
 </script>
 
