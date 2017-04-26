@@ -95,6 +95,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "ankle joint replacement", new ICDCode {Diagnosis="Ankle Joint Replacement", RefNumber="81.56"}},
                     { "ankylosis of ankle,subtatalar or tarsal joint", new ICDCode {Diagnosis="Ankylosis Of Ankle,Subtatalar Or Tarsal Joint", RefNumber="718.57"}}
                 };
+
+        public static Dictionary<string, ICDCode> elbowICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "olecranon bursitis", new ICDCode {Diagnosis="Olecranon Bursitis", RefNumber="726.33"}},
+                    { "tricep tendinitis", new ICDCode {Diagnosis="Tricep Tendinitis", RefNumber="727.09"}},
+                    { "lateral epicondylitis", new ICDCode {Diagnosis="Lateral Epicondylitis", RefNumber="726.32"}},
+                    { "medial epicondylitis", new ICDCode {Diagnosis="Medial Epicondylitis", RefNumber="726.31"}},
+                    { "instability", new ICDCode {Diagnosis="Instability", RefNumber="718.82"}},
+                    { "dislocation, elbow", new ICDCode {Diagnosis="Dislocation, Elbow", RefNumber="831"}},
+                    { "osteoarthritis, elbow", new ICDCode {Diagnosis="Osteoarthritis, Elbow", RefNumber="715.12"}},
+                    { "total elbow arthroplasty", new ICDCode {Diagnosis="Total Elbow Arthroplasty", RefNumber="81.84"}},
+                    { "ankylosis of elbow joint", new ICDCode {Diagnosis="Ankylosis Of Elbow Joint", RefNumber="718.52"}}
+                };
+
     }
 
     public class ICDCode
