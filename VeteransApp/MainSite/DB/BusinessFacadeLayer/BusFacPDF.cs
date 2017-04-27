@@ -4320,7 +4320,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // Defaults
-                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        //pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
@@ -4341,6 +4341,353 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo19[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo20[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo23[0]", "2");
+
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[77].Code, m.NameOfPatient);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[76].Code, m.SocialSecurity);
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[54].Code, PDFItems.hipPDFItems[54].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[61].Code, PDFItems.hipPDFItems[61].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[62].Code, PDFItems.hipPDFItems[62].ExportValue);
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        ICDCode icdcode = null;
+                        string diagnosis = null;
+
+                        if (m.S67)
+                        {
+                            diagnosis = "Osteoarthritis, Hip";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[67].Code, PDFItems.hipPDFItems[67].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[51].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[52].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S67Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[83].Code, PDFItems.hipPDFItems[83].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[82].Code, PDFItems.hipPDFItems[82].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[81].Code, PDFItems.hipPDFItems[81].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S68)
+                        {
+                            diagnosis = "Hip Joint Replacement";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[68].Code, PDFItems.hipPDFItems[68].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[50].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[49].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S68Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[1].Code, PDFItems.hipPDFItems[1].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[47].Code, PDFItems.hipPDFItems[47].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[48].Code, PDFItems.hipPDFItems[48].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S69)
+                        {
+                            diagnosis = "Trochanteris Pain Syndrome";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[69].Code, PDFItems.hipPDFItems[69].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[42].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[43].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S69Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[46].Code, PDFItems.hipPDFItems[46].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[45].Code, PDFItems.hipPDFItems[45].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[44].Code, PDFItems.hipPDFItems[44].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S70)
+                        {
+                            diagnosis = "Femoral Acetabular Impingement Syndrome";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[70].Code, PDFItems.hipPDFItems[70].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[41].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[40].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S70Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[2].Code, PDFItems.hipPDFItems[2].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[38].Code, PDFItems.hipPDFItems[38].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[39].Code, PDFItems.hipPDFItems[39].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S71)
+                        {
+                            diagnosis = "Liopsoas Tendinitis";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[71].Code, PDFItems.hipPDFItems[71].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[33].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[34].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S71Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[37].Code, PDFItems.hipPDFItems[37].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[36].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[35].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S72)
+                        {
+                            diagnosis = "Femoral Neck Stress Fracture";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[72].Code, PDFItems.hipPDFItems[72].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[32].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[31].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S72Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[3].Code, PDFItems.hipPDFItems[3].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[29].Code, PDFItems.hipPDFItems[29].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[30].Code, PDFItems.hipPDFItems[30].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S73)
+                        {
+                            diagnosis = "Avascular Necrosis, Hip";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[73].Code, PDFItems.hipPDFItems[73].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[24].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[25].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S73Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[28].Code, PDFItems.hipPDFItems[28].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[27].Code, PDFItems.hipPDFItems[27].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[26].Code, PDFItems.hipPDFItems[26].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (m.S74)
+                        {
+                            diagnosis = "Ankylosis Of Hip Joint";
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[74].Code, PDFItems.hipPDFItems[74].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[23].Code, dt);
+                            if (ICDCodes.hipICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                            {
+                                pdfFormFields.SetField(PDFItems.hipPDFItems[22].Code, icdcode.RefNumber);
+                            }
+                            switch (m.S74Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[4].Code, PDFItems.hipPDFItems[4].ExportValue);
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[20].Code, PDFItems.hipPDFItems[20].ExportValue);
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.hipPDFItems[21].Code, PDFItems.hipPDFItems[21].ExportValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(m.S75Other))
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[75].Code, PDFItems.hipPDFItems[75].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[86].Code, m.S75Other);
+                        }
+
+                        bool DoInitialROMLeft = false;
+                        bool DoInitialROMRight = false;
+
+                        if ((m.S67Side == "BOTH")
+                            || (m.S68Side == "BOTH")
+                            || (m.S69Side == "BOTH")
+                            || (m.S70Side == "BOTH")
+                            || (m.S71Side == "BOTH")
+                            || (m.S72Side == "BOTH")
+                            || (m.S73Side == "BOTH")
+                            || (m.S74Side == "BOTH")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                            DoInitialROMRight = true;
+                        }
+                        if ((m.S67Side == "LEFT")
+                            || (m.S68Side == "LEFT")
+                            || (m.S69Side == "LEFT")
+                            || (m.S70Side == "LEFT")
+                            || (m.S71Side == "LEFT")
+                            || (m.S72Side == "LEFT")
+                            || (m.S73Side == "LEFT")
+                            || (m.S74Side == "LEFT")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                        }
+                        if ((m.S67Side == "RIGHT")
+                            || (m.S68Side == "RIGHT")
+                            || (m.S69Side == "RIGHT")
+                            || (m.S70Side == "RIGHT")
+                            || (m.S71Side == "RIGHT")
+                            || (m.S72Side == "RIGHT")
+                            || (m.S73Side == "RIGHT")
+                            || (m.S74Side == "RIGHT")
+                            )
+                        {
+                            DoInitialROMRight = true;
+                        }
+
+                        bool SameInitialROMLeft = false;
+                        bool SameInitialROMRight = false;
+
+                        if (DoInitialROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[123].Code, m.S123);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[113].Code, m.S113);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[114].Code, m.S114);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[117].Code, m.S117);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[103].Code, m.S103);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[109].Code, m.S109);
+
+                            if ((m.S123 == m.S159)
+                                && (m.S113 == m.S158)
+                                && (m.S114 == m.S160)
+                                && (m.S117 == m.S161)
+                                && (m.S103 == m.S167)
+                                && (m.S109 == m.S168)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
+
+                        }
+
+                        if (DoInitialROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[154].Code, m.S154);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[144].Code, m.S144);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[145].Code, m.S145);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[148].Code, m.S148);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[134].Code, m.S134);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[140].Code, m.S140);
+
+                            if ((m.S154 == m.S197)
+                                && (m.S144 == m.S198)
+                                && (m.S145 == m.S191)
+                                && (m.S148 == m.S188)
+                                && (m.S134 == m.S189)
+                                && (m.S140 == m.S190)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
+
+                        }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[62].Code, PDFItems.hipPDFItems[62].ExportValue);
+                        if (SameInitialROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[164].Code, PDFItems.hipPDFItems[164].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[165].Code, PDFItems.hipPDFItems[165].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[159].Code, m.S159);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[158].Code, m.S158);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[160].Code, m.S160);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[161].Code, m.S161);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[167].Code, m.S167);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[168].Code, m.S168);
+                        }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[196].Code, PDFItems.hipPDFItems[196].ExportValue);
+                        if (SameInitialROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[194].Code, PDFItems.hipPDFItems[194].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[193].Code, PDFItems.hipPDFItems[193].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[197].Code, m.S197);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[198].Code, m.S198);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[191].Code, m.S191);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[188].Code, m.S188);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[189].Code, m.S189);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[190].Code, m.S190);
+                        }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[284].Code, PDFItems.hipPDFItems[284].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[282].Code, m.S282);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[283].Code, m.S283);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[272].Code, m.S272);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[278].Code, m.S278);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[273].Code, m.S273);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[275].Code, m.S275);
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[324].Code, PDFItems.shoulderPDFItems[324].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[322].Code, m.S322);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[313].Code, m.S313);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[311].Code, m.S311);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[312].Code, m.S312);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[318].Code, m.S318);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[317].Code, m.S317);
 
                     }
 
@@ -4767,13 +5114,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.elbowPDFItems[147].Code, m.S147);
                         }
 
-                        pdfFormFields.SetField(PDFItems.elbowPDFItems[271].Code, PDFItems.elbowPDFItems[271].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[294].Code, PDFItems.elbowPDFItems[294].ExportValue);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[292].Code, m.S292);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[290].Code, m.S290);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[288].Code, m.S288);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[286].Code, m.S286);
 
-                        pdfFormFields.SetField(PDFItems.elbowPDFItems[304].Code, PDFItems.shoulderPDFItems[304].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[262].Code, PDFItems.shoulderPDFItems[262].ExportValue);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[260].Code, m.S260);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[255].Code, m.S255);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[253].Code, m.S253);

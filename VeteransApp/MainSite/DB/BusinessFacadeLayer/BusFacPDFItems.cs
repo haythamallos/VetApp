@@ -109,6 +109,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "ankylosis of elbow joint", new ICDCode {Diagnosis="Ankylosis Of Elbow Joint", RefNumber="718.52"}}
                 };
 
+        public static Dictionary<string, ICDCode> hipICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "osteoarthritis, hip", new ICDCode {Diagnosis="Osteoarthritis, Hip", RefNumber="715.15"}},
+                    { "hip joint replacement", new ICDCode {Diagnosis="Hip Joint Replacement", RefNumber="81.51"}},
+                    { "trochanteris pain syndrome", new ICDCode {Diagnosis="Trochanteris Pain Syndrome", RefNumber="726.5"}},
+                    { "femoral acetabular impingement syndrome", new ICDCode {Diagnosis="Femoral Acetabular Impingement Syndrome", RefNumber="719.95"}},
+                    { "liopsoas lendinitis", new ICDCode {Diagnosis="Liopsoas Tendinitis", RefNumber="719.65"}},
+                    { "femoral neck stress fracture", new ICDCode {Diagnosis="Femoral Neck Stress Fracture", RefNumber="733.96"}},
+                    { "avascular necrosis, hip", new ICDCode {Diagnosis="Avascular Necrosis, Hip", RefNumber="733.42"}},
+                    { "ankylosis of hip joint", new ICDCode {Diagnosis="Ankylosis Of Hip Joint", RefNumber="718.55"}}
+                };
     }
 
     public class ICDCode

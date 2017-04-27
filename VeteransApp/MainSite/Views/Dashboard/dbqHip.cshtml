@@ -14,11 +14,11 @@
 
         <form id="formhip" method="post" action="/Dashboard/HipPost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
-            @if (Model.ContentStateID == 6)
+            @*@if (Model.ContentStateID == 6)
             {
                 <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
                 <hr />
-            }
+            }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
@@ -40,10 +40,92 @@
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
                                 <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
                             <br />
+                            <hr />
+                            <div>
+                                <label class="font-bold">What is the diagnosis of your service-connected hip condition?</label>
+                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
+                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
+                            </div>
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the diagnosis of your service-connected hip condition? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S67) Osteoarthritis, Hip
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S67Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S67Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S67Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S68) Hip Joint Replacement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S68Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S68Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S68Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S69) Trochanteris Pain Syndrome
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S69Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S69Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S69Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S70) Femoral Acetabular Impingement Syndrome
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S70Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S70Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S70Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S71) Liopsoas Tendinitis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S71Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S71Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S71Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S72) Femoral Neck Stress Fracture
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S72Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S72Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S72Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S73) Avascular Necrosis, Hip
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S73Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S73Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S73Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S74) Ankylosis Of Hip Joint
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S74Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S74Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S74Side, "BOTH") Both
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S75Other) Other (specify)
+                                    </label>
+                                </div>
+
+                            </div>
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
@@ -59,7 +141,142 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div id="romrightdiv" class="form-check form-check-inline panel panel-primary">
 
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> hip.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> hip.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S123, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S114, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S117, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S103, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S109, (SelectList)ViewBag.MovementList40Deg)
+
+                                <hr />
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> hip and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S159, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S158, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S160, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S161, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S167, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S168, (SelectList)ViewBag.MovementList40Deg)
+
+                                <hr />
+                                <label>For the <spa>RIGHT</spa> hip at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S282, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S283, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S272, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S278, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S273, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S275, (SelectList)ViewBag.MovementList40Deg)
+
+                            </div>
+
+                            <div id="romleftdiv" class="form-check form-check-inline panel panel-primary">
+
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> hip.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>LEFT</spa> hip.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S154, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S144, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S145, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S148, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S134, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S140, (SelectList)ViewBag.MovementList40Deg)
+
+                                <hr />
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> hip and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S197, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S198, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S191, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S189, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S190, (SelectList)ViewBag.MovementList40Deg)
+
+                                <hr />
+                                <label>For the <spa>LEFT</spa> hip at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 125 degrees)</span>
+                                @Html.DropDownListFor(x => x.S322, (SelectList)ViewBag.MovementList125Deg)
+                                <br />
+                                <span>Extension/Hyperextension (normal endpoint = 30 degrees)</span>
+                                @Html.DropDownListFor(x => x.S313, (SelectList)ViewBag.MovementList30Deg)
+                                <br />
+                                <span>Abduction  (normal endpoint = 45 degrees)</span>
+                                @Html.DropDownListFor(x => x.S311, (SelectList)ViewBag.MovementList45Deg)
+                                <br />
+                                <span>Adduction (normal endpoint = 25 degrees)</span>
+                                @Html.DropDownListFor(x => x.S312, (SelectList)ViewBag.MovementList25Deg)
+                                <br />
+                                <span>External Rotation (normal endpoint = 60 degrees)</span>
+                                @Html.DropDownListFor(x => x.S318, (SelectList)ViewBag.MovementList60Deg)
+                                <br />
+                                <span>Internal Rotation (normal endpoint = 40 degrees)</span>
+                                @Html.DropDownListFor(x => x.S317, (SelectList)ViewBag.MovementList40Deg)
+
+                            </div>
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
@@ -67,7 +284,7 @@
                 </div>
                 <!-- Part 2 -->
                 <!-- Part 3 -->
-                <div class="panel panel-info">
+                @*<div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
@@ -79,10 +296,10 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Part 3 -->
                 <!-- Part 4 -->
-                <div class="panel panel-info">
+                @*<div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
@@ -94,7 +311,7 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Part 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
@@ -128,6 +345,8 @@
 
         $("#part1NextBtn").on("click", function () {
             if (validate_1()) {
+                setROM();
+
                 $("#collapse2").collapse('show');
                 $("#collapse1").collapse('hide');
 
@@ -150,7 +369,10 @@
         });
 
         $("#part2NextBtn").on("click", function () {
-            $("#collapse3").collapse('show');
+            //$("#collapse3").collapse('show');
+            //$("#collapse2").collapse('hide');
+
+            $("#collapsef").collapse('show');
             $("#collapse2").collapse('hide');
 
             var model = $('#formhip').serialize();
@@ -258,7 +480,10 @@
         });
 
         $("#finishPrevBtn").on("click", function () {
-            $("#collapse4").collapse('show');
+            //$("#collapse4").collapse('show');
+            //$("#collapsef").collapse('hide');
+
+            $("#collapse2").collapse('show');
             $("#collapsef").collapse('hide');
 
             var model = $('#formhip').serialize();
@@ -307,6 +532,62 @@
 
             return isValid;
         }
+
+        function setROM() {
+            var S64Side = $('input[name=S67Side]:checked').val();
+            var S65Side = $('input[name=S68Side]:checked').val();
+            var S66Side = $('input[name=S69Side]:checked').val();
+            var S67Side = $('input[name=S70Side]:checked').val();
+            var S68Side = $('input[name=S71Side]:checked').val();
+            var S69Side = $('input[name=S72Side]:checked').val();
+            var S70Side = $('input[name=S73Side]:checked').val();
+            var S71Side = $('input[name=S74Side]:checked').val();
+
+            var isDivRight = $("#romrightdiv");
+            var isDivLeft = $("#romleftdiv");
+            isDivLeft.hide();
+            isDivRight.hide();
+
+            if ((S64Side == "BOTH")
+                || (S65Side == "BOTH")
+                || (S66Side == "BOTH")
+                || (S67Side == "BOTH")
+                || (S68Side == "BOTH")
+                || (S69Side == "BOTH")
+                || (S70Side == "BOTH")
+                || (S71Side == "BOTH")
+                ) {
+                isDivLeft.show();
+                isDivRight.show();
+            }
+            if ((S64Side == "LEFT")
+                || (S65Side == "LEFT")
+                || (S66Side == "LEFT")
+                || (S67Side == "LEFT")
+                || (S68Side == "LEFT")
+                || (S69Side == "LEFT")
+                || (S70Side == "LEFT")
+                || (S71Side == "LEFT")
+                ) {
+                isDivLeft.show();
+            }
+            if ((S64Side == "RIGHT")
+                || (S65Side == "RIGHT")
+                || (S66Side == "RIGHT")
+                || (S67Side == "RIGHT")
+                || (S68Side == "RIGHT")
+                || (S69Side == "RIGHT")
+                || (S70Side == "RIGHT")
+                || (S71Side == "RIGHT")
+                ) {
+                isDivRight.show();
+            }
+
+        }
+        $("input[type=radio]").change(function () {
+            var Selectedvalue = $(this).val();
+            setROM();
+        });
     });
 </script>
 

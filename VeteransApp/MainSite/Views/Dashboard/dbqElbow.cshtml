@@ -46,14 +46,14 @@
                             <br />
                             <hr />
                             <div>
-                                <label class="font-bold">What is the diagnosis of your service-connected ankle condition?</label>
+                                <label class="font-bold">What is the diagnosis of your service-connected elbow condition?</label>
                                 @Html.RadioButtonFor(x => x.Side, "LEFT") Left
                                 @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
                             </div>
                             <hr />
                             <div class="form-group m-t-20">
-                                <label class="font-bold">What is the diagnosis of your service-connected shoulder condition? Check if applies and choose Right, Left or Both?</label>
+                                <label class="font-bold">What is the diagnosis of your service-connected elbow condition? Check if applies and choose Right, Left or Both?</label>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
                                         @Html.EditorFor(x => x.S72) Olecranon Bursitis
@@ -245,7 +245,9 @@
                                 <span>Forarm Pronation</span>
                                 @Html.DropDownListFor(x => x.S254, (SelectList)ViewBag.MovementList80Deg)
 
-                            </div>                            <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
+                            </div>     
+                            <hr />                       
+                            <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
                     </div>

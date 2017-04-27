@@ -45,38 +45,44 @@ namespace MainSite.Controllers
         {
             _config = new Config();
 
-            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
-            ViewBag.MovementList90Deg = MovementList90Deg;
+            var MovementList20Deg = new System.Web.Mvc.SelectList(new[] { 20, 15, 10, 5, 0 });
+            ViewBag.MovementList20Deg = MovementList20Deg;
+
+            var MovementList25Deg = new System.Web.Mvc.SelectList(new[] { 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList25Deg = MovementList25Deg;
 
             var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList30Deg = MovementList30Deg;
 
-            //var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 55, 25 });
-            //ViewBag.MovementList90Deg = MovementList90Deg;
-
-            //var MovementList30Deg = new System.Web.Mvc.SelectList(new[] { 30, 20, 10 });
-            //ViewBag.MovementList30Deg = MovementList30Deg;
+            var MovementList40Deg = new System.Web.Mvc.SelectList(new[] { 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList40Deg = MovementList40Deg;
 
             var MovementList45Deg = new System.Web.Mvc.SelectList(new[] { 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList45Deg = MovementList45Deg;
 
-            var MovementList80Deg = new System.Web.Mvc.SelectList(new[] { 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
-            ViewBag.MovementList80Deg = MovementList80Deg;
-
-            var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
-            ViewBag.CurrentRatingsList = CurrentRatingsList;
-
-            var MovementList180Deg = new System.Web.Mvc.SelectList(new[] { 180, 175, 170, 165, 160, 155, 150, 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
-            ViewBag.MovementList180Deg = MovementList180Deg;
-
-            var MovementList20Deg = new System.Web.Mvc.SelectList(new[] { 20, 15, 10, 5, 0 });
-            ViewBag.MovementList20Deg = MovementList20Deg;
+            var MovementList60Deg = new System.Web.Mvc.SelectList(new[] { 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList60Deg = MovementList60Deg;
 
             var MovementList85Deg = new System.Web.Mvc.SelectList(new[] { 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList85Deg = MovementList85Deg;
 
+            var MovementList80Deg = new System.Web.Mvc.SelectList(new[] { 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList80Deg = MovementList80Deg;
+
+            var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList90Deg = MovementList90Deg;
+
+            var MovementList125Deg = new System.Web.Mvc.SelectList(new[] { 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList125Deg = MovementList125Deg;
+
             var MovementList145Deg = new System.Web.Mvc.SelectList(new[] { 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList145Deg = MovementList145Deg;
+
+            var MovementList180Deg = new System.Web.Mvc.SelectList(new[] { 180, 175, 170, 165, 160, 155, 150, 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList180Deg = MovementList180Deg;
+
+            var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
+            ViewBag.CurrentRatingsList = CurrentRatingsList;
 
         }
         public ActionResult Index()
@@ -1711,35 +1717,25 @@ namespace MainSite.Controllers
         * Hip Form
         * 
         *************************************************************/
-        public ActionResult Hip()
+        public ActionResult Hip(string isnew)
         {
-            string viewName = "Hip";
+            string viewName = "dbqHip";
             HipModel model = new HipModel();
             long contenttypeid = 10;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<HipModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1753,7 +1749,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult HipPost(HipModel model, long contentStateID)
         {
-            string viewName = "Hip";
+            string viewName = "dbqHip";
+            string filename = viewName;
             long contenttypeid = 10;
             try
             {
@@ -1771,7 +1768,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
