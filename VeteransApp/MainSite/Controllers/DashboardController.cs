@@ -404,6 +404,8 @@ namespace MainSite.Controllers
             }
             catch { }
         }
+        [AllowAnonymous]
+        [HttpPost]
         public ActionResult Register(UserModel userModel)
         {
             try
@@ -425,6 +427,11 @@ namespace MainSite.Controllers
                             User user = busFacCore.UserCreate(userModel.Username, userModel.Password);
                             if ((user != null) && (user.UserID > 0))
                             {
+                                var claims = new List<Claim>();
+                                claims.Add(new Claim(ClaimTypes.Name, userModel.Username));
+                                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+                                System.Web.HttpContext.Current.Request.GetOwinContext().Authentication.SignIn(identity);
+
                                 AssociateEvaluationWithUser(user);
                                 bool b = SetCookieField(CookieManager.COOKIE_FIELD_USER_GUID, user.CookieID);
                                 return RedirectToAction("Index");

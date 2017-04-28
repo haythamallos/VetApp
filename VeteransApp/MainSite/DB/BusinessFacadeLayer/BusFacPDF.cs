@@ -8,6 +8,7 @@ using MainSite.Classes;
 
 using Vetapp.Engine.DataAccessLayer.Data;
 using Vetapp.Engine.Common;
+using System.Collections.Generic;
 
 namespace Vetapp.Engine.BusinessFacadeLayer
 {
@@ -279,7 +280,11 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses12[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis12[0]", dt);
                                 pdfFormFields.SetField("form1[0].#subform[0].OtherDiagnosis1[0]", back.S62);
-                                back.S60 += ", " + diagnosis;
+                                back.S60 += ", " + back.S62;
+                            }
+                            if (back.S60.LastIndexOf(",") == 0)
+                            {
+                                back.S60 = back.S60.Replace(",", string.Empty).Trim();
                             }
 
                         }
@@ -288,13 +293,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField("form1[0].#subform[0].NoDiagnoses[0]", "1");
                         }
 
-                        if (back.S60.Count() > 1)
-                        {
-                            if (back.S60.IndexOf(", ") == 0)
-                            {
-                                back.S60 = back.S60.Remove(0, 2);
-                            }
-                        }
+                        //if (back.S60.Count() > 1)
+                        //{
+                        //    if (back.S60.IndexOf(", ") == 0)
+                        //    {
+                        //        back.S60 = back.S60.Remove(0, 2);
+                        //    }
+                        //}
                         iTextSharp.text.Font normal = FontFactory.GetFont(FontFactory.COURIER, 6f, iTextSharp.text.Font.NORMAL);
                         normal = FontFactory.GetFont(FontFactory.COURIER, 4f, iTextSharp.text.Font.NORMAL);
 
@@ -435,13 +440,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         else
                         {
                             // insert values
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", back.S112);
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", back.S111);
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM9[0]", back.S113);
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S114);
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S120);
-                            pdfFormFields.SetField("form1[0].#subform[2].PostROM10[0]", back.S121);
-                            pdfFormFields.SetField("form1[0].#subform[2].Right_Limitation[1]", "1");
+                            pdfFormFields.SetField(PDFItems.backPDFItems[112].Code, back.S112);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[111].Code, back.S111);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[113].Code, back.S113);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[114].Code, back.S114);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[120].Code, back.S120);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[121].Code, back.S121);
+                            pdfFormFields.SetField(PDFItems.backPDFItems[118].Code, PDFItems.backPDFItems[118].ExportValue);
+
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
                         }
 
 
@@ -702,7 +717,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.backPDFItems[345].Code, PDFItems.backPDFItems[345].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[268].Code, PDFItems.backPDFItems[268].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[266].Code, PDFItems.backPDFItems[266].ExportValue);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[255].Code, PDFItems.backPDFItems[255].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[247].Code, PDFItems.backPDFItems[247].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[254].Code, PDFItems.backPDFItems[254].ExportValue);
@@ -712,6 +726,19 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.backPDFItems[356].Code, PDFItems.backPDFItems[356].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[354].Code, PDFItems.backPDFItems[354].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[347].Code, PDFItems.backPDFItems[347].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[307].Code, PDFItems.backPDFItems[307].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[293].Code, PDFItems.backPDFItems[293].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[306].Code, PDFItems.backPDFItems[306].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[294].Code, PDFItems.backPDFItems[294].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[301].Code, PDFItems.backPDFItems[301].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[299].Code, PDFItems.backPDFItems[299].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[259].Code, PDFItems.backPDFItems[259].ExportValue);
+
                             }
                             else if (back.S13AChoice == "MODERATE")
                             {
@@ -766,7 +793,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.backPDFItems[258].Code, PDFItems.backPDFItems[258].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[246].Code, PDFItems.backPDFItems[246].ExportValue);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[255].Code, PDFItems.backPDFItems[255].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[357].Code, PDFItems.backPDFItems[357].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[358].Code, PDFItems.backPDFItems[358].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[367].Code, PDFItems.backPDFItems[367].ExportValue);
@@ -775,6 +801,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.backPDFItems[338].Code, PDFItems.backPDFItems[338].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[339].Code, PDFItems.backPDFItems[339].ExportValue);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[346].Code, PDFItems.backPDFItems[346].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[308].Code, PDFItems.backPDFItems[308].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[292].Code, PDFItems.backPDFItems[292].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[305].Code, PDFItems.backPDFItems[305].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[295].Code, PDFItems.backPDFItems[295].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[302].Code, PDFItems.backPDFItems[302].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[298].Code, PDFItems.backPDFItems[298].ExportValue);
+
+                                pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue);
 
 
                             }
@@ -821,15 +857,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             default:
                                 break;
                         }
+
+                        pdfFormFields.SetField(PDFItems.backPDFItems[313].Code, PDFItems.backPDFItems[313].ExportValue);
+                        pdfFormFields.SetField(PDFItems.backPDFItems[405].Code, PDFItems.backPDFItems[405].ExportValue);
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    pdfStamper.FormFlattening = false;
 
                     // close the pdf stamper
                     pdfStamper.Close();
 
                     form = ms.ToArray();
+                  
 
                 }
 
@@ -1211,6 +1252,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             if (back.S416)
             {
+                pdfFormFields.SetField(PDFItems.backPDFItems[416].Code, PDFItems.backPDFItems[416].ExportValue);
                 switch (back.S416Choice)
                 {
                     case "OCCASIONAL":
@@ -1232,6 +1274,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             if (back.S428)
             {
+                pdfFormFields.SetField(PDFItems.backPDFItems[428].Code, PDFItems.backPDFItems[428].ExportValue);
+
                 switch (back.S428Choice)
                 {
                     case "OCCASIONAL":
@@ -1253,6 +1297,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             if (back.S417)
             {
+                pdfFormFields.SetField(PDFItems.backPDFItems[417].Code, PDFItems.backPDFItems[417].ExportValue);
+
                 switch (back.S417Choice)
                 {
                     case "OCCASIONAL":
@@ -1274,6 +1320,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         {
             if (back.S421)
             {
+                pdfFormFields.SetField(PDFItems.backPDFItems[421].Code, PDFItems.backPDFItems[421].ExportValue);
+
                 switch (back.S421Choice)
                 {
                     case "OCCASIONAL":
@@ -1531,10 +1579,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         pdfFormFields.SetField("form1[0].#subform[1].ROM1[0]", m.S96);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM2[0]", m.S86);
-                        pdfFormFields.SetField("form1[0].#subform[1].ROM3[0]", m.S87);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM4[0]", m.S90);
-                        pdfFormFields.SetField("form1[0].#subform[1].ROM5[0]", m.S78);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM3[0]", m.S87);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM6[0]", m.S82);
+                        pdfFormFields.SetField("form1[0].#subform[1].ROM5[0]", m.S78);
 
                         pdfFormFields.SetField("form1[0].#subform[2].PostROM7[0]", m.S109);
                         pdfFormFields.SetField("form1[0].#subform[2].PostROM8[0]", m.S108);

@@ -120,6 +120,22 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "avascular necrosis, hip", new ICDCode {Diagnosis="Avascular Necrosis, Hip", RefNumber="733.42"}},
                     { "ankylosis of hip joint", new ICDCode {Diagnosis="Ankylosis Of Hip Joint", RefNumber="718.55"}}
                 };
+
+        public static Dictionary<string, ICDCode> wristICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { " Wrist Sprain", new ICDCode {Diagnosis=" Wrist Sprain", RefNumber="842"}},
+                    { "Tendonitis, Wrist", new ICDCode {Diagnosis="Tendonitis, Wrist", RefNumber="727.81"}},
+                    { "Ganglion Cyst", new ICDCode {Diagnosis="Ganglion Cyst", RefNumber="727.4"}},
+                    { "Carpal Metacarpal, Arthritis", new ICDCode {Diagnosis="Carpal Metacarpal, Arthritis", RefNumber="715.94"}},
+                    { "Osteoarthritis, Arthtritis, Wrist", new ICDCode {Diagnosis="Osteoarthritis, Arthtritis, Wrist", RefNumber="715.13"}},
+                    { "DeQuervains Syndrome", new ICDCode {Diagnosis="DeQuervains Syndrome", RefNumber="727.04"}},
+                    { "Triangular Fibrocartilaginous Complex Injury", new ICDCode {Diagnosis="Triangular Fibrocartilaginous Complex Injury", RefNumber="842.09"}},
+                    { "Carpal Instability", new ICDCode {Diagnosis="Carpal Instability", RefNumber="718.84"}},
+                    { "A Vascular Necrosis of Carpal Bones", new ICDCode {Diagnosis="A Vascular Necrosis of Carpal Bones", RefNumber="733.49"}},
+                    { "Wrist Anthroplasty", new ICDCode {Diagnosis="Wrist Anthroplasty", RefNumber="V43.63"}},
+                    { "Ankylosis Of Wrist", new ICDCode {Diagnosis="Ankylosis Of Wrist", RefNumber="718.53"}}
+                };
+
     }
 
     public class ICDCode
