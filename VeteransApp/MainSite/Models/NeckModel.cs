@@ -106,5 +106,9 @@ namespace MainSite.Models
         public string S417Choice { get; set; }
         public string S421Choice { get; set; }
 
+        public string S12AChoice { get; set; }
+        public string S2BChoice { get; set; }
+
+
     }
 }

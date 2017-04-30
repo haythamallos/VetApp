@@ -70,5 +70,25 @@ namespace Vetapp.Engine.Common
         public string LeftPart { get; set; }
         public string MiddlePart { get; set; }
         public string RightPart { get; set; }
+
+        public override string ToString()
+        {
+            string data = string.Empty;
+
+            if (!string.IsNullOrEmpty(LeftPart))
+            {
+                data += LeftPart;
+            }
+            if (!string.IsNullOrEmpty(MiddlePart))
+            {
+                data += "-" + MiddlePart;
+            }
+            if (!string.IsNullOrEmpty(RightPart))
+            {
+                data += "-" + RightPart;
+            }
+
+            return data;
+        }
     }
 }
