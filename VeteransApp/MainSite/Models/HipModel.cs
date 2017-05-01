@@ -77,5 +77,48 @@ namespace MainSite.Models
         public string S318 { get; set; }
         public string S317 { get; set; }
 
+        public bool S262 { get; set; }
+        public bool S216 { get; set; }
+        public bool S217 { get; set; }
+        public string S217Side { get; set; }
+        public bool S261 { get; set; }
+        public string S261Side { get; set; }
+        public bool S215 { get; set; }
+        public string S215Side { get; set; }
+        public bool S214 { get; set; }
+        public string S214Side { get; set; }
+        public bool S269 { get; set; }
+        public string S269Side { get; set; }
+        public bool S268 { get; set; }
+        public string S268Side { get; set; }
+        public bool S267 { get; set; }
+        public string S267Side { get; set; }
+        public bool S266 { get; set; }
+        public string S266Side { get; set; }
+        public bool S265 { get; set; }
+        public string S265Side { get; set; }
+        public bool S223 { get; set; }
+        public string S223Side { get; set; }
+        public bool S235 { get; set; }
+        public string S235Side { get; set; }
+        public bool S225 { get; set; }
+        public string S225Side { get; set; }
+        public bool S229 { get; set; }
+        public string S229Side { get; set; }
+        public bool S264 { get; set; }
+        public string S264Other { get; set; }
+
+        public bool S416 { get; set; }
+
+        public bool S418 { get; set; }
+        public bool S430 { get; set; }
+        public bool S419 { get; set; }
+        public bool S423 { get; set; }
+
+        public string S418Choice { get; set; }
+        public string S430Choice { get; set; }
+        public string S419Choice { get; set; }
+        public string S423Choice { get; set; }
+
     }
 }

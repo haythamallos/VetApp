@@ -43,15 +43,14 @@
                                     <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
-                            <br />
                             <hr />
-                            <div>
+                            @*<div>
                                 <label class="font-bold">What is the diagnosis of your service-connected hip condition?</label>
                                 @Html.RadioButtonFor(x => x.Side, "LEFT") Left
                                 @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
                             </div>
-                            <hr />
+                            <hr />*@
                             <div class="form-group m-t-20">
                                 <label class="font-bold">What is the diagnosis of your service-connected hip condition? Check if applies and choose Right, Left or Both?</label>
                                 <div class="form-check form-check-inline">
@@ -284,7 +283,7 @@
                 </div>
                 <!-- Part 2 -->
                 <!-- Part 3 -->
-                @*<div class="panel panel-info">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
@@ -292,11 +291,182 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">Contributing Factors of Disability (Check All That Apply)</label>
+                                <hr />
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S262) No functional loss for left lower extremity attributable to claimed condition
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S216) No functional loss for right lower extremity attributable to claimed condition
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S217) Less movement than normal (due to ankylosis, limitation or blocking, adhesions, tendon-tie-ups, contracted scars, etc.)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S217Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S217Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S217Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S261) More movement than normal (from flail joints, resections, nonunion of fractures, relaxation of ligaments, etc.)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S261Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S261Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S261Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S215) Weakened movement (due to muscle injury, disease or injury of peripheral nerves, divided or lengthened tendons, etc.)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S215Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S215Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S215Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S214) Excess fatigability
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S214Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S214Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S214Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S269) Incoordination, impaired ability to execute skilled movements smoothly
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S269Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S269Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S269Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S268) Pain on movement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S268Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S268Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S268Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S267) Swelling
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S267Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S267Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S267Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S266) Deformity
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S266Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S266Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S266Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S265) Atrophy of disuse
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S265Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S265Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S265Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S223) Instability of station
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S223Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S223Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S223Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S235) Disturbance of locomotion
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S235Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S235Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S235Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S225) Interference with sitting
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S225Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S225Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S225Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S229) Interference with standing
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S229Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S229Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S229Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S264)Other, describe:
+                                    </label>
+                                    <br />
+                                    <div class="col-xs-12">
+                                        @Html.EditorFor(x => x.S264Other, new { htmlAttributes = new { style = "width: 600px" } })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr />
+                            <span>Do you use any assistive devices for walking?</span>
+                            @Html.EditorFor(x => x.S416) Yes
+                            <hr />
+                            <div id="div12A" style="display: none">
+                                <span> Brace</span>
+                                @Html.EditorFor(x => x.S418) Yes
+                                <div id="div12ABrace" style="display: none">
+                                    <span>Frequency of BRACE use:</span>
+                                    @Html.RadioButtonFor(x => x.S418Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S418Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S418Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span>Crutches</span>
+                                @Html.EditorFor(x => x.S430) Yes
+                                <div id="div12ACrutches" style="display: none">
+                                    <span>Frequency of CRUTCHES use:</span>
+                                    @Html.RadioButtonFor(x => x.S430Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S430Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S430Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span> Cane</span>
+                                @Html.EditorFor(x => x.S419) Yes
+                                <div id="div12ACane" style="display: none">
+                                    <span>Frequency of CANE use:</span>
+                                    @Html.RadioButtonFor(x => x.S419Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S419Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S419Choice, "CONSTANT") Constant
+                                </div>
+                                <br />
+                                <span> Walker</span>
+                                @Html.EditorFor(x => x.S423) Yes
+                                <div id="div12AWalker" style="display: none">
+                                    <span>Frequency of WALKER use:</span>
+                                    @Html.RadioButtonFor(x => x.S423Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S423Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S423Choice, "CONSTANT") Constant
+                                </div>
+                            </div>
+                            <hr />
+
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <!-- Part 3 -->
                 <!-- Part 4 -->
                 @*<div class="panel panel-info">
@@ -369,11 +539,11 @@
         });
 
         $("#part2NextBtn").on("click", function () {
-            //$("#collapse3").collapse('show');
-            //$("#collapse2").collapse('hide');
-
-            $("#collapsef").collapse('show');
+            $("#collapse3").collapse('show');
             $("#collapse2").collapse('hide');
+
+            //$("#collapsef").collapse('show');
+            //$("#collapse2").collapse('hide');
 
             var model = $('#formhip').serialize();
             // Serialize model for Posting model
@@ -407,7 +577,10 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            $("#collapse4").collapse('show');
+            //$("#collapse4").collapse('show');
+            //$("#collapse3").collapse('hide');
+
+            $("#collapsef").collapse('show');
             $("#collapse3").collapse('hide');
 
             var model = $('#formhip').serialize();
@@ -483,7 +656,7 @@
             //$("#collapse4").collapse('show');
             //$("#collapsef").collapse('hide');
 
-            $("#collapse2").collapse('show');
+            $("#collapse3").collapse('show');
             $("#collapsef").collapse('hide');
 
             var model = $('#formhip').serialize();
@@ -587,6 +760,61 @@
         $("input[type=radio]").change(function () {
             var Selectedvalue = $(this).val();
             setROM();
+        });
+
+        $('#S416').change(function () {
+
+            if (this.checked) {
+
+                $('#div12A').show();
+            }
+            else {
+                $('#div12A').hide();
+            }
+        });
+
+        $('#S418').change(function () {
+
+            if (this.checked) {
+
+                $('#div12ABrace').show();
+            }
+            else {
+                $('#div12ABrace').hide();
+            }
+        });
+
+        $('#S430').change(function () {
+
+            if (this.checked) {
+
+                $('#div12ACrutches').show();
+            }
+            else {
+                $('#div12ACrutches').hide();
+            }
+        });
+
+        $('#S419').change(function () {
+
+            if (this.checked) {
+
+                $('#div12ACane').show();
+            }
+            else {
+                $('#div12ACane').hide();
+            }
+        });
+
+        $('#S423').change(function () {
+
+            if (this.checked) {
+
+                $('#div12AWalker').show();
+            }
+            else {
+                $('#div12AWalker').hide();
+            }
         });
     });
 </script>

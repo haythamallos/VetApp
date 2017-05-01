@@ -616,7 +616,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         //else
                         //{
                         //    //pdfFormFields.SetField("form1[0].#subform[6].YesNo11[1]", "2");
-                        
+
                         //    pdfFormFields.SetField(PDFItems.backPDFItems[334].Code, PDFItems.backPDFItems[334].ExportValue);
 
                         //}
@@ -875,7 +875,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     pdfStamper.Close();
 
                     form = ms.ToArray();
-                  
+
 
                 }
 
@@ -4633,6 +4633,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
+                        string S79 = string.Empty;
 
                         if (m.S67)
                         {
@@ -4643,20 +4644,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[52].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S67Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[83].Code, PDFItems.hipPDFItems[83].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[82].Code, PDFItems.hipPDFItems[82].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[81].Code, PDFItems.hipPDFItems[81].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S68)
                         {
@@ -4667,20 +4673,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[49].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S68Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[1].Code, PDFItems.hipPDFItems[1].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[47].Code, PDFItems.hipPDFItems[47].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[48].Code, PDFItems.hipPDFItems[48].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S69)
                         {
@@ -4691,20 +4702,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[43].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S69Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[46].Code, PDFItems.hipPDFItems[46].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[45].Code, PDFItems.hipPDFItems[45].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[44].Code, PDFItems.hipPDFItems[44].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S70)
                         {
@@ -4715,20 +4731,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[40].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S70Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[2].Code, PDFItems.hipPDFItems[2].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[38].Code, PDFItems.hipPDFItems[38].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[39].Code, PDFItems.hipPDFItems[39].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S71)
                         {
@@ -4739,20 +4760,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[34].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S71Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[37].Code, PDFItems.hipPDFItems[37].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[36].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[35].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S72)
                         {
@@ -4763,20 +4789,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[31].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S72Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[3].Code, PDFItems.hipPDFItems[3].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[29].Code, PDFItems.hipPDFItems[29].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[30].Code, PDFItems.hipPDFItems[30].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S73)
                         {
@@ -4787,20 +4818,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[25].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S73Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[28].Code, PDFItems.hipPDFItems[28].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[27].Code, PDFItems.hipPDFItems[27].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[26].Code, PDFItems.hipPDFItems[26].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
                         if (m.S74)
                         {
@@ -4811,27 +4847,35 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[22].Code, icdcode.RefNumber);
                             }
+                            S79 += diagnosis;
                             switch (m.S74Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[4].Code, PDFItems.hipPDFItems[4].ExportValue);
+                                    S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[20].Code, PDFItems.hipPDFItems[20].ExportValue);
+                                    S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[21].Code, PDFItems.hipPDFItems[21].ExportValue);
+                                    S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
+                            S79 += ".  ";
                         }
 
                         if (!string.IsNullOrEmpty(m.S75Other))
                         {
                             pdfFormFields.SetField(PDFItems.hipPDFItems[75].Code, PDFItems.hipPDFItems[75].ExportValue);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[86].Code, m.S75Other);
+                            S79 += m.S75Other + ".";
                         }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[79].Code, S79);
 
                         bool DoInitialROMLeft = false;
                         bool DoInitialROMRight = false;
@@ -4921,10 +4965,14 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         }
 
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[62].Code, PDFItems.hipPDFItems[62].ExportValue);
+                        bool SameFinalROMLeft = false;
+                        bool SameFinalROMRight = false;
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[162].Code, PDFItems.hipPDFItems[162].ExportValue);
                         if (SameInitialROMRight)
                         {
                             pdfFormFields.SetField(PDFItems.hipPDFItems[164].Code, PDFItems.hipPDFItems[164].ExportValue);
+                            SameFinalROMRight = true;
                         }
                         else
                         {
@@ -4935,12 +4983,26 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.hipPDFItems[161].Code, m.S161);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[167].Code, m.S167);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[168].Code, m.S168);
+
+                            if ((m.S159 == m.S282)
+                                && (m.S158 == m.S283)
+                                && (m.S160 == m.S272)
+                                && (m.S161 == m.S278)
+                                && (m.S167 == m.S273)
+                                && (m.S168 == m.S275)
+                                && (SameInitialROMRight)
+                                )
+                            {
+                                SameFinalROMRight = true;
+                            }
+
                         }
 
                         pdfFormFields.SetField(PDFItems.hipPDFItems[196].Code, PDFItems.hipPDFItems[196].ExportValue);
                         if (SameInitialROMLeft)
                         {
                             pdfFormFields.SetField(PDFItems.hipPDFItems[194].Code, PDFItems.hipPDFItems[194].ExportValue);
+                            SameFinalROMLeft = true;
                         }
                         else
                         {
@@ -4951,23 +5013,157 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.hipPDFItems[188].Code, m.S188);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[189].Code, m.S189);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[190].Code, m.S190);
+
+                            if ((m.S197 == m.S322)
+                                && (m.S198 == m.S313)
+                                && (m.S191 == m.S311)
+                                && (m.S188 == m.S312)
+                                && (m.S189 == m.S318)
+                                && (m.S190 == m.S317)
+                                && (SameInitialROMLeft)
+                                )
+                            {
+                                SameFinalROMLeft = true;
+                            }
+
                         }
 
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[284].Code, PDFItems.hipPDFItems[284].ExportValue);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[282].Code, m.S282);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[283].Code, m.S283);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[272].Code, m.S272);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[278].Code, m.S278);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[273].Code, m.S273);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[275].Code, m.S275);
+                        if (SameFinalROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[285].Code, PDFItems.hipPDFItems[285].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[284].Code, PDFItems.hipPDFItems[284].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[282].Code, m.S282);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[283].Code, m.S283);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[272].Code, m.S272);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[278].Code, m.S278);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[273].Code, m.S273);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[275].Code, m.S275);
+                        }
 
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[324].Code, PDFItems.shoulderPDFItems[324].ExportValue);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[322].Code, m.S322);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[313].Code, m.S313);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[311].Code, m.S311);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[312].Code, m.S312);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[318].Code, m.S318);
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[317].Code, m.S317);
+                        if (SameFinalROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[323].Code, PDFItems.hipPDFItems[323].ExportValue);
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[324].Code, PDFItems.hipPDFItems[324].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[322].Code, m.S322);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[313].Code, m.S313);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[311].Code, m.S311);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[312].Code, m.S312);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[318].Code, m.S318);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[317].Code, m.S317);
+                        }
+
+
+
+                        if (m.S262)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[262].Code, PDFItems.hipPDFItems[262].ExportValue);
+                        }
+                        if (m.S216)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[216].Code, PDFItems.hipPDFItems[216].ExportValue);
+                        }
+                        SetContributingFactorsHip(pdfFormFields, m.S217, m.S217Side, 217, 259, 218, 260);
+                        SetContributingFactorsHip(pdfFormFields, m.S261, m.S261Side, 261, 257, 258, 256);
+                        SetContributingFactorsHip(pdfFormFields, m.S215, m.S215Side, 215, 254, 219, 255);
+                        SetContributingFactorsHip(pdfFormFields, m.S214, m.S214Side, 214, 252, 253, 251);
+                        SetContributingFactorsHip(pdfFormFields, m.S269, m.S269Side, 269, 249, 220, 250);
+                        SetContributingFactorsHip(pdfFormFields, m.S268, m.S268Side, 268, 247, 248, 246);
+                        SetContributingFactorsHip(pdfFormFields, m.S267, m.S267Side, 267, 244, 221, 245);
+                        SetContributingFactorsHip(pdfFormFields, m.S266, m.S266Side, 266, 242, 243, 241);
+                        SetContributingFactorsHip(pdfFormFields, m.S265, m.S265Side, 265, 239, 222, 240);
+                        SetContributingFactorsHip(pdfFormFields, m.S223, m.S223Side, 223, 237, 238, 236);
+                        SetContributingFactorsHip(pdfFormFields, m.S235, m.S235Side, 235, 233, 224, 234);
+                        SetContributingFactorsHip(pdfFormFields, m.S225, m.S225Side, 225, 231, 232, 230);
+                        SetContributingFactorsHip(pdfFormFields, m.S229, m.S229Side, 229, 227, 226, 228);
+                        if (m.S264)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[263].Code, m.S264Other);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[264].Code, PDFItems.hipPDFItems[264].ExportValue);
+                        }
+
+                        if (m.S416)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[416].Code, PDFItems.hipPDFItems[416].ExportValue);
+                            SetField_S12ABrace_Hip(m, pdfFormFields);
+                            SetField_S12ACrutches_Hip(m, pdfFormFields);
+                            SetField_S12ACane_Hip(m, pdfFormFields);
+                            SetField_S12AWalker_Hip(m, pdfFormFields);
+
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[417].Code, PDFItems.hipPDFItems[417].ExportValue);
+                        }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[295].Code, "5");
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[293].Code, "5");
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[294].Code, "5");
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[334].Code, "5");
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[326].Code, "5");
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[327].Code, "5");
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[299].Code, PDFItems.hipPDFItems[299].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[332].Code, PDFItems.hipPDFItems[332].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[343].Code, PDFItems.hipPDFItems[343].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[405].Code, PDFItems.hipPDFItems[405].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[407].Code, PDFItems.hipPDFItems[407].ExportValue);
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[479].Code, PDFItems.hipPDFItems[479].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[477].Code, "Sedentary occupation highly suggested due to flareups and severity of symptoms.");
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[106].Code, PDFItems.hipPDFItems[106].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[137].Code, PDFItems.hipPDFItems[137].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[162].Code, PDFItems.hipPDFItems[162].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[169].Code, PDFItems.hipPDFItems[169].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[173].Code, PDFItems.hipPDFItems[173].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[199].Code, PDFItems.hipPDFItems[199].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[196].Code, PDFItems.hipPDFItems[196].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[212].Code, PDFItems.hipPDFItems[212].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[184].Code, PDFItems.hipPDFItems[184].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[209].Code, PDFItems.hipPDFItems[209].ExportValue);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[178].Code, PDFItems.hipPDFItems[178].ExportValue);
+
+                        if ((DoInitialROMLeft) && (DoInitialROMRight))
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[179].Code, PDFItems.hipPDFItems[179].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[181].Code, PDFItems.hipPDFItems[181].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[204].Code, PDFItems.hipPDFItems[204].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[202].Code, PDFItems.hipPDFItems[202].ExportValue);
+                        }
+                        else if (DoInitialROMRight)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[194].Code, PDFItems.hipPDFItems[194].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[201].Code, PDFItems.hipPDFItems[201].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[323].Code, PDFItems.hipPDFItems[323].ExportValue);
+
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[154].Code, "125");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[144].Code, "30");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[145].Code, "45");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[148].Code, "25");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[134].Code, "60");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[140].Code, "40");
+                        }
+                        else if (DoInitialROMLeft)
+                        {
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[164].Code, PDFItems.hipPDFItems[164].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[180].Code, PDFItems.hipPDFItems[180].ExportValue);
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[285].Code, PDFItems.hipPDFItems[285].ExportValue);
+
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[123].Code, "125");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[113].Code, "30");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[114].Code, "45");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[117].Code, "25");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[103].Code, "60");
+                            pdfFormFields.SetField(PDFItems.hipPDFItems[109].Code, "40");
+
+                        }
+
 
                         IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.hipPDFItems[54].Code);
                         Rectangle rect = lstPos[0].position;
@@ -5003,6 +5199,119 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
         }
 
+        private void SetContributingFactorsHip(AcroFields pdfFormFields, bool f, string side, int indCheck, int indRight, int indLeft, int indBoth)
+        {
+            if (f)
+            {
+                pdfFormFields.SetField(PDFItems.hipPDFItems[indCheck].Code, PDFItems.hipPDFItems[indCheck].ExportValue);
+                switch (side)
+                {
+                    case "RIGHT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[indRight].Code, PDFItems.hipPDFItems[indRight].ExportValue);
+                        break;
+                    case "LEFT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[indLeft].Code, PDFItems.hipPDFItems[indLeft].ExportValue);
+                        break;
+                    case "BOTH":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[indBoth].Code, PDFItems.hipPDFItems[indBoth].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
+
+        private void SetField_S12ABrace_Hip(HipModel m, AcroFields pdfFormFields)
+        {
+            if (m.S418)
+            {
+                pdfFormFields.SetField(PDFItems.hipPDFItems[418].Code, PDFItems.hipPDFItems[418].ExportValue);
+                switch (m.S418Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[436].Code, PDFItems.hipPDFItems[436].ExportValue);
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[440].Code, PDFItems.hipPDFItems[440].ExportValue);
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[441].Code, PDFItems.hipPDFItems[441].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S12ACrutches_Hip(HipModel m, AcroFields pdfFormFields)
+        {
+            if (m.S430)
+            {
+                pdfFormFields.SetField(PDFItems.hipPDFItems[430].Code, PDFItems.hipPDFItems[430].ExportValue);
+
+                switch (m.S430Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[429].Code, PDFItems.hipPDFItems[429].ExportValue);
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[428].Code, PDFItems.hipPDFItems[428].ExportValue);
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[427].Code, PDFItems.hipPDFItems[427].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S12ACane_Hip(HipModel m, AcroFields pdfFormFields)
+        {
+            if (m.S419)
+            {
+                pdfFormFields.SetField(PDFItems.hipPDFItems[419].Code, PDFItems.hipPDFItems[419].ExportValue);
+
+                switch (m.S419Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[424].Code, PDFItems.hipPDFItems[424].ExportValue);
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[425].Code, PDFItems.hipPDFItems[425].ExportValue);
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[426].Code, PDFItems.hipPDFItems[426].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetField_S12AWalker_Hip(HipModel m, AcroFields pdfFormFields)
+        {
+            if (m.S423)
+            {
+                pdfFormFields.SetField(PDFItems.hipPDFItems[423].Code, PDFItems.hipPDFItems[423].ExportValue);
+
+                switch (m.S423Choice)
+                {
+                    case "OCCASIONAL":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[422].Code, PDFItems.hipPDFItems[422].ExportValue);
+                        break;
+                    case "REGULAR":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[421].Code, PDFItems.hipPDFItems[421].ExportValue);
+                        break;
+                    case "CONSTANT":
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[420].Code, PDFItems.hipPDFItems[420].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         /**************************************************************
           * Elbow Form
           * 
@@ -5293,7 +5602,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     break;
                             }
                         }
- 
+
 
                         if (!string.IsNullOrEmpty(m.S81Other))
                         {
@@ -5418,7 +5727,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[288].Code, m.S288);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[286].Code, m.S286);
 
-                        pdfFormFields.SetField(PDFItems.elbowPDFItems[262].Code, PDFItems.shoulderPDFItems[262].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[262].Code, PDFItems.elbowPDFItems[262].ExportValue);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[260].Code, m.S260);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[255].Code, m.S255);
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[253].Code, m.S253);
