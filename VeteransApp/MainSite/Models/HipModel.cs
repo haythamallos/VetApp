@@ -32,6 +32,7 @@ namespace MainSite.Models
         public bool S74 { get; set; }
         public string S74Side { get; set; }
         public string S75Other { get; set; }
+        public string S75Side { get; set; }
 
         // Initial Right ROM
         public string S123 { get; set; }

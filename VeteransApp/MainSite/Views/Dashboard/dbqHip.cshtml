@@ -120,8 +120,12 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
-                                        @Html.EditorFor(x => x.S75Other) Other (specify)
+                                        Other (specify):  @Html.EditorFor(x => x.S75Other) 
                                     </label>
+                                    @Html.RadioButtonFor(x => x.S75Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S75Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S75Side, "BOTH") Both
+
                                 </div>
 
                             </div>
@@ -141,7 +145,7 @@
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div id="romrightdiv" class="form-check form-check-inline panel panel-primary">
-
+                                <hr />
                                 <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> hip.</label>
                                 <hr />
                                 <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> hip.</label>
@@ -163,8 +167,7 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 40 degrees)</span>
                                 @Html.DropDownListFor(x => x.S109, (SelectList)ViewBag.MovementList40Deg)
-
-                                <hr />
+                                <br />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> hip and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 125 degrees)</span>
@@ -184,8 +187,7 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 40 degrees)</span>
                                 @Html.DropDownListFor(x => x.S168, (SelectList)ViewBag.MovementList40Deg)
-
-                                <hr />
+                                <br />
                                 <label>For the <spa>RIGHT</spa> hip at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 125 degrees)</span>
@@ -209,7 +211,7 @@
                             </div>
 
                             <div id="romleftdiv" class="form-check form-check-inline panel panel-primary">
-
+                                <hr />
                                 <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> hip.</label>
                                 <hr />
                                 <label>Please perform the following Range of Motion for the <spa>LEFT</spa> hip.</label>
@@ -231,8 +233,7 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 40 degrees)</span>
                                 @Html.DropDownListFor(x => x.S140, (SelectList)ViewBag.MovementList40Deg)
-
-                                <hr />
+                                <br />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> hip and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 125 degrees)</span>
@@ -252,8 +253,7 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 40 degrees)</span>
                                 @Html.DropDownListFor(x => x.S190, (SelectList)ViewBag.MovementList40Deg)
-
-                                <hr />
+                                <br />
                                 <label>For the <spa>LEFT</spa> hip at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 125 degrees)</span>
@@ -273,7 +273,6 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 40 degrees)</span>
                                 @Html.DropDownListFor(x => x.S317, (SelectList)ViewBag.MovementList40Deg)
-
                             </div>
                             <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>

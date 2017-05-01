@@ -39,17 +39,17 @@
                             <br />
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
-                                <div class="col-xs-12">
+                                <div class="col-xs-4">
                                     <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
-                            <hr />
+                            @*<hr />
                             <div>
                                 <label class="font-bold">Are you service connected for left, right or both? (Only pick one)</label>
                                 @Html.RadioButtonFor(x => x.Side, "LEFT") Left
                                 @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
-                            </div>
+                            </div>*@
                             <hr />
                             <div>
                                 <label class="font-bold">Are you left-handed or right-handed? (Only pick one)</label>
