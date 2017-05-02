@@ -48,6 +48,8 @@ namespace MainSite.Models
         public string S93Side { get; set; }
         public bool S87 { get; set; }
         public string S87Side { get; set; }
+        public string S128Other { get; set; }
+        public string S128Side { get; set; }
 
         //public bool DoInitialROMLeft { get; set; }
         //public bool DoInitialROMRight { get; set; }
@@ -112,7 +114,8 @@ namespace MainSite.Models
         public string S239Side { get; set; }
         public string S243Side { get; set; }
 
-        public string S10A { get; set; }
+        public bool S10A { get; set; }
+        public string S10ASide { get; set; }
         public string S10C { get; set; }
 
     }
