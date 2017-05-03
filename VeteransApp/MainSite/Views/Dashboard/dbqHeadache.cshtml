@@ -66,10 +66,18 @@
                                         @Html.EditorFor(x => x.S24) Cluster
                                     </label>
                                 </div>
-                                <div class="col-xs-12">
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Are you taking medication for your headache condition?  (If yes, describe medication)
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.MedicationPlan, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Are you taking medication for your headache condition?  (If yes, describe medication)</label>
                                     <input id="MedicationPlan" name="MedicationPlan" class="form-control" type="text" required="" placeholder="Medication Plan" value="@Model.MedicationPlan">
-                                </div>
+                                </div>*@
 
                             </div>
                             <hr />
@@ -100,10 +108,18 @@
                                         @Html.EditorFor(x => x.S5) Pain worsens with physical activity
                                     </label>
                                 </div>
-                                <div class="col-xs-12">
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Other, describe:
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.S3AOther, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Other, describe</label>
                                     <input id="S3AOther" name="S3AOther" class="form-control" type="text" required="" placeholder="Other Headache Pain" value="@Model.S3AOther">
-                                </div>
+                                </div>*@
 
                             </div>
                             <hr />
@@ -153,10 +169,18 @@
                                         @Html.EditorFor(x => x.S72) Snesory changes (such as feeling of pins and needles in extremities)
                                     </label>
                                 </div>
-                                <div class="col-xs-12">
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Other, describe:
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.S3BOther, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Other, describe</label>
                                     <input id="S3BOther" name="S3BOther" class="form-control" type="text" required="" placeholder="Other Non-Headache Pain" value="@Model.S3BOther">
-                                </div>
+                                </div>*@
 
                             </div>
                             <hr />
@@ -177,10 +201,18 @@
                                         @Html.EditorFor(x => x.S60) More than 2 days
                                     </label>
                                 </div>
-                                <div class="col-xs-12">
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Other, describe:
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.S3COther, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Other, describe</label>
                                     <input id="S3COther" name="S3COther" class="form-control" type="text" required="" placeholder="Other Duration" value="@Model.S3COther">
-                                </div>
+                                </div>*@
                             </div>
                             <hr />
                             <div class="form-group m-t-20">
@@ -200,10 +232,18 @@
                                         @Html.EditorFor(x => x.S64) Both sides of head
                                     </label>
                                 </div>
-                                <div class="col-xs-12">
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Other, describe:
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.S3DOther, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Other, describe</label>
                                     <input id="S3DOther" name="S3DOther" class="form-control" type="text" required="" placeholder="Other Location" value="@Model.S3DOther">
-                                </div>
+                                </div>*@
                             </div>
                             <hr />
 

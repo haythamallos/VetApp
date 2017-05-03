@@ -51,20 +51,33 @@
                                     <label class="col-md-12">Social Security Number</label>
                                     <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">Have you been prescribed the use of a breathing assistance device such as a continuous positive airway pressure (CPAP) machine?</label>
-                                    <br />
-                                    @Html.EditorFor(x => x.S20) Yes
-                                </div>
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">What is the approximate date of your last study?</label>
-                                    <br />
+                                <label class="form-check-label font-normal">Have you been prescribed the use of a breathing assistance device such as a continuous positive airway pressure (CPAP) machine?</label>
+                                <br />
+                                @Html.EditorFor(x => x.S20) Yes
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    What is the approximate date of your last study?
+                                </label>
+                                <br />
+                                @Html.TextBoxFor(x => x.lastSleepStudyDate, new { @class = "date-picker" })
+
+
+                                @*<div class="col-xs-12">
+                                    <label class="col-md-6">What is the approximate date of your last study?</label>
                                     @Html.TextBoxFor(x => x.lastSleepStudyDate, new { @class = "date-picker" })
-                                </div>
-                                <div class="col-xs-12">
+                                </div>*@
+                                <br />
+                                <label class="form-check-label font-normal">
+                                    Facility Name: 
+                                </label>
+                                <br />
+                                @Html.EditorFor(x => x.FacilityName, new { htmlAttributes = new { style = "width: 600px" } })
+
+
+                                @*<div class="col-xs-12">
                                     <label class="col-md-12">Name of facility where sleep study performed, if known.</label>
                                     <input id="FacilityName" name="FacilityName" class="form-control" type="text" required="" placeholder="Facility Name" value="@Model.FacilityName">
-                                </div>
+                                </div>*@
                             </div>
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>

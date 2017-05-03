@@ -34,6 +34,7 @@ namespace MainSite.Models
         public bool S80 { get; set; }
         public string S80Side { get; set; }
         public string S81Other { get; set; }
+        public string S81Side { get; set; }
 
         // Initial Right ROM
         public string S130 { get; set; }
@@ -66,6 +67,34 @@ namespace MainSite.Models
         public string S255 { get; set; }
         public string S253 { get; set; }
         public string S254 { get; set; }
+
+        public bool S195 { get; set; }
+        public bool S239 { get; set; }
+        public bool S193 { get; set; }
+        public bool S192 { get; set; }
+        public bool S247 { get; set; }
+        public bool S246 { get; set; }
+        public bool S245 { get; set; }
+        public bool S244 { get; set; }
+        public bool S243 { get; set; }
+        public bool S201 { get; set; }
+        public bool S213 { get; set; }
+        public bool S203 { get; set; }
+        public bool S207 { get; set; }
+
+        public string S195Side { get; set; }
+        public string S239Side { get; set; }
+        public string S193Side { get; set; }
+        public string S192Side { get; set; }
+        public string S247Side { get; set; }
+        public string S246Side { get; set; }
+        public string S245Side { get; set; }
+        public string S244Side { get; set; }
+        public string S243Side { get; set; }
+        public string S201Side { get; set; }
+        public string S213Side { get; set; }
+        public string S203Side { get; set; }
+        public string S207Side { get; set; }
 
     }
 }
