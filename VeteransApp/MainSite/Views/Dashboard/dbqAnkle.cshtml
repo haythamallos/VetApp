@@ -45,13 +45,13 @@
                             </div>
                             <br />
                             <hr />
-                            <div>
+                            @*<div>
                                 <label class="font-bold">What is the diagnosis of your service-connected ankle condition?</label>
                                 @Html.RadioButtonFor(x => x.Side, "LEFT") Left
                                 @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
                             </div>
-                            <hr />
+                            <hr />*@
                             <div class="form-group m-t-20">
                                 <label class="font-bold">What is the diagnosis of your service-connected ankle condition? Check if applies and choose Right, Left or Both?</label>
                                 <div class="form-check form-check-inline">
@@ -144,8 +144,14 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
-                                        @Html.EditorFor(x => x.S93Other) Other (specify)
+                                        Other (specify):
                                     </label>
+                                    @Html.RadioButtonFor(x => x.S93Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S93Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S93Side, "BOTH") Both
+                                    <br />
+                                    @Html.EditorFor(x => x.S93Other, new { htmlAttributes = new { style = "width: 600px" } })
+
                                 </div>
 
                             </div>
@@ -238,7 +244,7 @@
                 </div>
                 <!-- Part 2 -->
                 <!-- Part 3 -->
-                @*<div class="panel panel-info">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
@@ -246,14 +252,122 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">Which limitations affect you? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S187) Loss movement than normal
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S187Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S187Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S187Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S223) More movement than normal
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S223Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S223Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S223Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S185) Weakened movement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S185Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S185Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S185Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S184) Excess fatigability
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S184Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S184Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S184Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S231) Incordination, impaired ability to execute skilled movements smoothly
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S231Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S231Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S231Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S230) Pain on movement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S230Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S230Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S230Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S229) Swelling
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S229Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S229Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S229Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S228) Deformity
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S228Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S228Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S228Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S227) Atrophy of disuse
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S227Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S227Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S227Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S189) Instability of station
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S189Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S189Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S189Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S201) Disturbance of locomotion
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S201Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S201Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S201Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S191) Interference with sitting
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S191Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S191Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S191Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S195) Interference with standing
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S195Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S195Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S195Side, "BOTH") Both
+                                </div>
+                            </div>
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <!-- Part 3 -->
                 <!-- Part 4 -->
-                @*<div class="panel panel-info">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
@@ -265,7 +379,7 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <!-- Part 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
@@ -322,10 +436,7 @@
         });
 
         $("#part2NextBtn").on("click", function () {
-            //$("#collapse3").collapse('show');
-            //$("#collapse2").collapse('hide');
-
-            $("#collapsef").collapse('show');
+            $("#collapse3").collapse('show');
             $("#collapse2").collapse('hide');
 
             var model = $('#formankle').serialize();
@@ -433,9 +544,7 @@
         });
 
         $("#finishPrevBtn").on("click", function () {
-            //$("#collapse4").collapse('show');
-            //$("#collapsef").collapse('hide');
-            $("#collapse2").collapse('show');
+            $("#collapse4").collapse('show');
             $("#collapsef").collapse('hide');
 
             var model = $('#formankle').serialize();

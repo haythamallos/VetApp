@@ -40,6 +40,7 @@ namespace MainSite.Models
         public bool S92 { get; set; }
         public string S92Side { get; set; }
         public string S93Other { get; set; }
+        public string S93Side { get; set; }
 
         // Initial Right ROM
         public string S133 { get; set; }
@@ -60,5 +61,34 @@ namespace MainSite.Models
         // Flareup Left ROM
         public string S237 { get; set; }
         public string S234 { get; set; }
+
+        public bool S187 { get; set; }
+        public bool S223 { get; set; }
+        public bool S185 { get; set; }
+        public bool S184 { get; set; }
+        public bool S231 { get; set; }
+        public bool S230 { get; set; }
+        public bool S229 { get; set; }
+        public bool S228 { get; set; }
+        public bool S227 { get; set; }
+        public bool S189 { get; set; }
+        public bool S201 { get; set; }
+        public bool S191 { get; set; }
+        public bool S195 { get; set; }
+
+        public string S187Side { get; set; }
+        public string S223Side { get; set; }
+        public string S185Side { get; set; }
+        public string S184Side { get; set; }
+        public string S231Side { get; set; }
+        public string S230Side { get; set; }
+        public string S229Side { get; set; }
+        public string S228Side { get; set; }
+        public string S227Side { get; set; }
+        public string S189Side { get; set; }
+        public string S201Side { get; set; }
+        public string S191Side { get; set; }
+        public string S195Side { get; set; }
+
     }
 }
