@@ -136,6 +136,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "Ankylosis Of Wrist", new ICDCode {Diagnosis="Ankylosis Of Wrist", RefNumber="718.53"}}
                 };
 
+        public static Dictionary<string, ICDCode> kneeICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "knee strain", new ICDCode {Diagnosis="Knee Strain", RefNumber="844.9"}},
+                    { "knee tendonitits", new ICDCode {Diagnosis="Knee Tendonitits", RefNumber="726.64"}},
+                    { "knee meniscal tear", new ICDCode {Diagnosis="Knee Meniscal Tear", RefNumber="836.2"}},
+                    { "knee anterior cruciate ligament tear", new ICDCode {Diagnosis="Knee Anterior Cruciate Ligament Tear", RefNumber="844.2"}},
+                    { "knee posterior cruciate ligament tear", new ICDCode {Diagnosis="Knee Posterior Cruciate Ligament Tear", RefNumber="S83.521A"}},
+                    { "patellar or quadriceps tendon rupture", new ICDCode {Diagnosis="Patellar or Quadriceps Tendon Rupture", RefNumber="727.66"}},
+                    { "knee joint osteoarthritis", new ICDCode {Diagnosis="Knee Joint Osteoarthritis", RefNumber="715.96"}},
+                    { "knee joint ankylosis", new ICDCode {Diagnosis="Knee Joint Ankylosis", RefNumber="718.56"}},
+                    { "knee fracture", new ICDCode {Diagnosis="Knee fracture", RefNumber="823.8"}},
+                    { "stress fracture of tibia", new ICDCode {Diagnosis="Stress Fracture Of Tibia", RefNumber="823.22"}},
+                    { "tibia and/or fibula fracture", new ICDCode {Diagnosis="Tibia and/or Fibula Fracture", RefNumber="733.93"}},
+                    { "recurrent patellar dislocation", new ICDCode {Diagnosis="Recurrent Patellar Dislocation", RefNumber="836.3"}},
+                    { "recurrent subluxation", new ICDCode {Diagnosis="Recurrent Subluxation", RefNumber="718.36"}},
+                    { "knee instability", new ICDCode {Diagnosis="Knee Instability", RefNumber="718.86"}},
+                    { "patellar dislocation", new ICDCode {Diagnosis="Patellar Dislocation", RefNumber="836.3"}},
+                    { "knee cartilage restoration surgery", new ICDCode {Diagnosis="Knee Cartilage Restoration Surgery", RefNumber="81.5"}},
+                    { "shin splints", new ICDCode {Diagnosis="Shin Splints", RefNumber="844.9"}},
+                    { "patellofemoral pain syndrome", new ICDCode {Diagnosis="Patellofemoral Pain Syndrome", RefNumber="719.46"}}
+                };
     }
 
     public class ICDCode
