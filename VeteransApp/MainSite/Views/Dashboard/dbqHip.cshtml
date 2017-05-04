@@ -714,6 +714,7 @@
             var S69Side = $('input[name=S72Side]:checked').val();
             var S70Side = $('input[name=S73Side]:checked').val();
             var S71Side = $('input[name=S74Side]:checked').val();
+            var S75Side = $('input[name=S75Side]:checked').val();
 
             var isDivRight = $("#romrightdiv");
             var isDivLeft = $("#romleftdiv");
@@ -728,6 +729,7 @@
                 || (S69Side == "BOTH")
                 || (S70Side == "BOTH")
                 || (S71Side == "BOTH")
+                || (S75Side == "BOTH")
                 ) {
                 isDivLeft.show();
                 isDivRight.show();
@@ -740,6 +742,7 @@
                 || (S69Side == "LEFT")
                 || (S70Side == "LEFT")
                 || (S71Side == "LEFT")
+                || (S75Side == "LEFT")
                 ) {
                 isDivLeft.show();
             }
@@ -751,6 +754,7 @@
                 || (S69Side == "RIGHT")
                 || (S70Side == "RIGHT")
                 || (S71Side == "RIGHT")
+                || (S75Side == "RIGHT")
                 ) {
                 isDivRight.show();
             }

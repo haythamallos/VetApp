@@ -43,15 +43,7 @@
                                     <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
-                            <br />
                             <hr />
-                            @*<div>
-                                <label class="font-bold">What is the diagnosis of your service-connected ankle condition?</label>
-                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
-                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
-                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
-                            </div>
-                            <hr />*@
                             <div class="form-group m-t-20">
                                 <label class="font-bold">What is the diagnosis of your service-connected ankle condition? Check if applies and choose Right, Left or Both?</label>
                                 <div class="form-check form-check-inline">
@@ -237,6 +229,7 @@
                                 @Html.DropDownListFor(x => x.S234, (SelectList)ViewBag.MovementList20Deg)
 
                             </div>
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
@@ -606,6 +599,7 @@
             var S72Side = $('input[name=S90Side]:checked').val();
             var S81Side = $('input[name=S91Side]:checked').val();
             var S111Side = $('input[name=S92Side]:checked').val();
+            var S93Side = $('input[name=S93Side]:checked').val();
 
             var isDivRight = $("#romrightdiv");
             var isDivLeft = $("#romleftdiv");
@@ -624,6 +618,7 @@
                 || (S72Side == "BOTH")
                 || (S81Side == "BOTH")
                 || (S111Side == "BOTH")
+                || (S93Side == "BOTH")
                 ) {
                 isDivLeft.show();
                 isDivRight.show();
@@ -639,7 +634,8 @@
                 || (S72Side == "LEFT")
                 || (S81Side == "LEFT")
                 || (S111Side == "LEFT")
-                ) {
+                 || (S93Side == "LEFT")
+               ) {
                 isDivLeft.show();
             }
             if ((S64Side == "RIGHT")
@@ -653,7 +649,8 @@
                 || (S72Side == "RIGHT")
                 || (S81Side == "RIGHT")
                 || (S111Side == "RIGHT")
-                ) {
+                 || (S93Side == "RIGHT")
+               ) {
                 isDivRight.show();
             }
 

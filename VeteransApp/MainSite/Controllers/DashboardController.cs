@@ -75,6 +75,9 @@ namespace MainSite.Controllers
             var MovementList125Deg = new System.Web.Mvc.SelectList(new[] { 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList125Deg = MovementList125Deg;
 
+            var MovementList140Deg = new System.Web.Mvc.SelectList(new[] { 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList140Deg = MovementList140Deg;
+
             var MovementList145Deg = new System.Web.Mvc.SelectList(new[] { 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList145Deg = MovementList145Deg;
 
@@ -1206,35 +1209,25 @@ namespace MainSite.Controllers
          * Foot Form
          * 
          *************************************************************/
-        public ActionResult Foot()
+        public ActionResult Foot(string isnew)
         {
-            string viewName = "Foot";
+            string viewName = "dbqFoot";
             FootModel model = new FootModel();
             long contenttypeid = 4;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<FootModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1248,7 +1241,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult FootPost(FootModel model, long contentStateID)
         {
-            string viewName = "Foot";
+            string viewName = "dbqFoot";
+            string filename = viewName;
             long contenttypeid = 4;
             try
             {
@@ -1266,7 +1260,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
@@ -1562,35 +1562,25 @@ namespace MainSite.Controllers
         * Wrist Form
         * 
         *************************************************************/
-        public ActionResult Wrist()
+        public ActionResult Wrist(string isnew)
         {
-            string viewName = "Wrist";
+            string viewName = "dbqWrist";
             WristModel model = new WristModel();
             long contenttypeid = 8;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<WristModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1604,7 +1594,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult WristPost(WristModel model, long contentStateID)
         {
-            string viewName = "Wrist";
+            string viewName = "dbqWrist";
+            string filename = viewName;
             long contenttypeid = 8;
             try
             {
@@ -1622,7 +1613,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }
@@ -1643,35 +1640,25 @@ namespace MainSite.Controllers
         * Knee Form
         * 
         *************************************************************/
-        public ActionResult Knee()
+        public ActionResult Knee(string isnew)
         {
-            string viewName = "Knee";
+            string viewName = "dbqKnee";
             KneeModel model = new KneeModel();
             long contenttypeid = 9;
             try
             {
-                //string templatePath = GetTemplatePath(model);
                 User user = Auth();
                 BusFacCore busFacCore = new BusFacCore();
                 Content content = busFacCore.ContentGetLatest(user.UserID, contenttypeid);
                 long ContentID = 0;
                 model.UserID = user.UserID;
-                if (content == null)
+                if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
-                    ContentID = FormSave(model, 0, contenttypeid);
+                    ContentID = FormSave(model, 0, contenttypeid, true);
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<KneeModel>(content.ContentMeta);
-                }
-
-                if (string.IsNullOrEmpty(model.NameOfPatient))
-                {
-                    model.NameOfPatient = user.Fullname;
-                }
-                if (string.IsNullOrEmpty(model.SocialSecurity))
-                {
-                    model.SocialSecurity = user.Ssn;
                 }
             }
             catch (Exception ex)
@@ -1685,7 +1672,8 @@ namespace MainSite.Controllers
         [HttpPost]
         public ActionResult KneePost(KneeModel model, long contentStateID)
         {
-            string viewName = "Knee";
+            string viewName = "dbqKnee";
+            string filename = viewName;
             long contenttypeid = 9;
             try
             {
@@ -1703,7 +1691,13 @@ namespace MainSite.Controllers
                     long lID = busFacCore.ContentCreateOrModify(content);
                     if ((!busFacCore.HasError) && (lID > 0))
                     {
-                        PDFHelper.ReturnPDF(form, viewName + ".pdf");
+                        filename = UtilsString.createFilename(model.NameOfPatient, viewName);
+                        if (filename == null)
+                        {
+                            filename = viewName + ".pdf";
+                        }
+                        PDFHelper.ReturnPDF(form, filename);
+
                         //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
                         //return RedirectToAction("Product", productModel);
                     }

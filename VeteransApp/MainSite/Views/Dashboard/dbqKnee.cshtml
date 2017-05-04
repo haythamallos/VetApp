@@ -43,7 +43,166 @@
                                     <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
                                 </div>
                             </div>
-                            <br />
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the diagnosis of your service-connected knee condition? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S57) Knee strain
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S57Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S57Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S57Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S58) Knee tendonitis/tendonosis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S58Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S58Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S58Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S59) Knee meniscal tear
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S59Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S59Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S59Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S60) Knee anterior cruciate ligament tear
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S60Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S60Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S60Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S61) Knee posterior cruciate ligament tear
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S61Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S61Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S61Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S62) Patellar or quadriceps tendon rupture
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S62Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S62Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S62Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S63) Knee joint osteoarthritis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S63Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S63Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S63Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S64) Knee joint ankylosis
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S64Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S64Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S64Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S65) Knee fracture (including patellar fracture)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S65Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S65Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S65Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S79) Stress fracture of tibia
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S79Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S79Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S79Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S127) Tibia and/or Fibula fracture
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S127Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S127Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S127Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S121) Recurrent patellar dislocation
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S121Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S121Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S121Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S115) Recurrent subluxation
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S115Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S115Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S115Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S109) Knee instability
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S109Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S109Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S109Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S103) Patellar dislocation
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S103Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S103Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S103Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S85) Knee cartilage restoration surgery
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S85Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S85Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S85Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S97) Shin splints (including tibia and/or fibula stress fracture and or exertional compartment syndrome)
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S97Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S97Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S97Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S91) Patellofemoral pain syndrome
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S91Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S91Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S91Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        Other (specify):
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S165Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S165Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S165Side, "BOTH") Both
+                                    <br />
+                                    @Html.EditorFor(x => x.S165Other, new { htmlAttributes = new { style = "width: 600px" } })
+
+                                </div>
+
+                            </div>
                             <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
@@ -59,7 +218,78 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div id="romrightdiv" class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> knee.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> knee.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S171, (SelectList)ViewBag.MovementList140Deg)
 
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> knee and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S203, (SelectList)ViewBag.MovementList140Deg)
+
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S202, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                                <hr />
+                                <label>For the <spa>RIGHT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S313, (SelectList)ViewBag.MovementList140Deg)
+
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S314, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                            </div>
+
+                            <div id="romleftdiv" class="form-check form-check-inline panel panel-primary">
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> knee.</label>
+                                <hr />
+                                <label>Please perform the following Range of Motion for the <spa>LEFT</spa> knee.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S146, (SelectList)ViewBag.MovementList140Deg)
+
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> knee and record the last repetition below.</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S187, (SelectList)ViewBag.MovementList140Deg)
+
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                                <hr />
+                                <label>For the <spa>LEFT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
+                                <br />
+                                <span>Flexion (normal endpoint = 140 degrees)</span>
+                                @Html.DropDownListFor(x => x.S287, (SelectList)ViewBag.MovementList140Deg)
+
+                                <br />
+                                <span>Extension</span>
+                                @Html.DropDownListFor(x => x.S284, (SelectList)ViewBag.MovementList140Deg)
+                                <hr />
+
+                            </div>
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
@@ -75,6 +305,114 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">Which limitations affect you? Check if applies and choose Right, Left or Both?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S226) Loss movement than normal
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S226Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S226Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S226Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S270) More movement than normal
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S270Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S270Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S270Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S224) Weakened movement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S224Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S224Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S224Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S223) Excess fatigability
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S223Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S223Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S223Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S278) Incordination, impaired ability to execute skilled movements smoothly
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S278Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S278Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S278Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S277) Pain on movement
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S277Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S277Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S277Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S276) Swelling
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S276Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S276Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S276Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S275) Deformity
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S275Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S275Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S275Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S274) Atrophy of disuse
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S274Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S274Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S274Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S232) Instability of station
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S232Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S232Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S232Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S244) Disturbance of locomotion
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S244Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S244Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S244Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S234) Interference with sitting
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S234Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S234Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S234Side, "BOTH") Both
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S238) Interference with standing
+                                    </label>
+                                    @Html.RadioButtonFor(x => x.S238Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.S238Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.S238Side, "BOTH") Both
+                                </div>
+                            </div>
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
                         </div>
@@ -128,6 +466,7 @@
 
         $("#part1NextBtn").on("click", function () {
             if (validate_1()) {
+                setROM();
                 $("#collapse2").collapse('show');
                 $("#collapse1").collapse('hide');
 
@@ -307,6 +646,102 @@
 
             return isValid;
         }
+
+        function setROM() {
+            var S57Side = $('input[name=S57Side]:checked').val();
+            var S58Side = $('input[name=S58Side]:checked').val();
+            var S59Side = $('input[name=S59Side]:checked').val();
+            var S60Side = $('input[name=S60Side]:checked').val();
+            var S61Side = $('input[name=S61Side]:checked').val();
+            var S62Side = $('input[name=S62Side]:checked').val();
+            var S63Side = $('input[name=S63Side]:checked').val();
+            var S64Side = $('input[name=S64Side]:checked').val();
+            var S65Side = $('input[name=S65Side]:checked').val();
+            var S79Side = $('input[name=S79Side]:checked').val();
+            var S127Side = $('input[name=S127Side]:checked').val();
+            var S121Side = $('input[name=S121Side]:checked').val();
+            var S115Side = $('input[name=S115Side]:checked').val();
+            var S109Side = $('input[name=S109Side]:checked').val();
+            var S103Side = $('input[name=S103Side]:checked').val();
+            var S85Side = $('input[name=S85Side]:checked').val();
+            var S97Side = $('input[name=S97Side]:checked').val();
+            var S165Side = $('input[name=S165Side]:checked').val();
+
+            var isDivRight = $("#romrightdiv");
+            var isDivLeft = $("#romleftdiv");
+            isDivLeft.hide();
+            isDivRight.hide();
+
+            if ((S57Side == "BOTH")
+                || (S58Side == "BOTH")
+                || (S59Side == "BOTH")
+                || (S60Side == "BOTH")
+                || (S61Side == "BOTH")
+                || (S62Side == "BOTH")
+                || (S63Side == "BOTH")
+                || (S64Side == "BOTH")
+                || (S65Side == "BOTH")
+                || (S79Side == "BOTH")
+                || (S127Side == "BOTH")
+                || (S121Side == "BOTH")
+                || (S115Side == "BOTH")
+                || (S109Side == "BOTH")
+                || (S103Side == "BOTH")
+                || (S85Side == "BOTH")
+                || (S97Side == "BOTH")
+                || (S165Side == "BOTH")
+                ) {
+                isDivLeft.show();
+                isDivRight.show();
+            }
+            if ((S57Side == "LEFT")
+                || (S58Side == "LEFT")
+                || (S59Side == "LEFT")
+                || (S60Side == "LEFT")
+                || (S61Side == "LEFT")
+                || (S62Side == "LEFT")
+                || (S63Side == "LEFT")
+                || (S64Side == "LEFT")
+                || (S65Side == "LEFT")
+                || (S79Side == "LEFT")
+                || (S127Side == "LEFT")
+                || (S121Side == "LEFT")
+                || (S115Side == "LEFT")
+                || (S109Side == "LEFT")
+                || (S103Side == "LEFT")
+                || (S85Side == "LEFT")
+                || (S97Side == "LEFT")
+                || (S165Side == "LEFT")
+                ) {
+                isDivLeft.show();
+            }
+            if ((S57Side == "RIGHT")
+                || (S58Side == "RIGHT")
+                || (S59Side == "RIGHT")
+                || (S60Side == "RIGHT")
+                || (S61Side == "RIGHT")
+                || (S62Side == "RIGHT")
+                || (S63Side == "RIGHT")
+                || (S64Side == "RIGHT")
+                || (S65Side == "RIGHT")
+                || (S79Side == "RIGHT")
+                || (S127Side == "RIGHT")
+                || (S121Side == "RIGHT")
+                || (S115Side == "RIGHT")
+                || (S109Side == "RIGHT")
+                || (S103Side == "RIGHT")
+                || (S85Side == "RIGHT")
+                || (S97Side == "RIGHT")
+                || (S165Side == "RIGHT")
+                ) {
+                isDivRight.show();
+            }
+
+        }
+        $("input[type=radio]").change(function () {
+            var Selectedvalue = $(this).val();
+            setROM();
+        });
     });
 </script>
 
