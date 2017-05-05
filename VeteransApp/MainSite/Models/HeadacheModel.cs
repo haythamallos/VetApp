@@ -19,6 +19,7 @@ namespace MainSite.Models
         public bool S35 { get; set; }
         public bool S23 { get; set; }
         public bool S24 { get; set; }
+        public string S25Other { get; set; }
         public string MedicationPlan { get; set; }
 
         public bool S26 { get; set; }

@@ -3806,9 +3806,14 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_2[0].Yes5A[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No5B[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No10[0]", "1");
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[22].Code, PDFItems.sleepapneaPDFItems[22].ExportValue);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[24].Code, PDFItems.sleepapneaPDFItems[24].ExportValue);
 
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[44].Code, m.FirstName);
-                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[46].Code, m.MiddleInitial);
+                        if (!string.IsNullOrEmpty(m.MiddleInitial))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[46].Code, m.MiddleInitial);
+                        }
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[45].Code, m.LastName);
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
                         if (ssn != null)
@@ -3922,7 +3927,11 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_3[0].No52[0]", "1");
 
                         pdfFormFields.SetField(PDFItems.headachePDFItems[39].Code, m.FirstName);
-                        pdfFormFields.SetField(PDFItems.headachePDFItems[41].Code, m.MiddleInitial);
+                        if (!string.IsNullOrEmpty(m.MiddleInitial))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[41].Code, m.MiddleInitial);
+                        }
+
                         pdfFormFields.SetField(PDFItems.headachePDFItems[40].Code, m.LastName);
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
                         if (ssn != null)
@@ -3973,6 +3982,12 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.headachePDFItems[20].Code, icdcode.RefNumber);
                             }
+                        }
+                        if (!string.IsNullOrEmpty(m.S25Other))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[25].Code, PDFItems.headachePDFItems[25].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[11].Code, dt);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[10].Code, m.S25Other);
                         }
 
                         if (!string.IsNullOrEmpty(m.MedicationPlan))
@@ -4111,65 +4126,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.headachePDFItems[67].Code, m.S3DOther);
                         }
 
-                        m.S4AYes = false;
-                        if (m.S56)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[56].Code, PDFItems.headachePDFItems[56].ExportValue);
-                            m.S4AYes = true;
-                        }
-                        if (m.S57)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[57].Code, PDFItems.headachePDFItems[57].ExportValue);
-                            m.S4AYes = true;
-                        }
-                        if (m.S58)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[58].Code, PDFItems.headachePDFItems[58].ExportValue);
-                            m.S4AYes = true;
-                        }
-                        if (m.S59)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[59].Code, PDFItems.headachePDFItems[59].ExportValue);
-                            m.S4AYes = true;
-                        }
-                        if (m.S4AYes)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[46].Code, PDFItems.headachePDFItems[46].ExportValue);
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[47].Code, PDFItems.headachePDFItems[47].ExportValue);
-                        }
-
-                        m.S4CYes = false;
-                        if (m.S45)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[45].Code, PDFItems.headachePDFItems[45].ExportValue);
-                            m.S4CYes = true;
-                        }
-                        if (m.S44)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[44].Code, PDFItems.headachePDFItems[44].ExportValue);
-                            m.S4CYes = true;
-                        }
-                        if (m.S43)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[43].Code, PDFItems.headachePDFItems[43].ExportValue);
-                            m.S4CYes = true;
-                        }
-                        if (m.S42)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[42].Code, PDFItems.headachePDFItems[42].ExportValue);
-                            m.S4CYes = true;
-                        }
-                        if (m.S4CYes)
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[50].Code, PDFItems.headachePDFItems[50].ExportValue);
-                        }
-                        else
-                        {
-                            pdfFormFields.SetField(PDFItems.headachePDFItems[51].Code, PDFItems.headachePDFItems[51].ExportValue);
-                        }
 
                         switch (m.WorkCondition)
                         {
@@ -4193,6 +4149,84 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.headachePDFItems[98].Code, PDFItems.headachePDFItems[98].ExportValue);
                                 break;
                         }
+
+                        if ((m.S35) && (((m.S23) || (m.S24) || (!string.IsNullOrEmpty(m.S25Other)))))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[46].Code, PDFItems.headachePDFItems[46].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[48].Code, PDFItems.headachePDFItems[48].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[51].Code, PDFItems.headachePDFItems[51].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[53].Code, PDFItems.headachePDFItems[53].ExportValue);
+
+                            if (m.S56)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[56].Code, PDFItems.headachePDFItems[56].ExportValue);
+                            }
+                            if (m.S57)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[57].Code, PDFItems.headachePDFItems[57].ExportValue);
+                            }
+                            if (m.S58)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[58].Code, PDFItems.headachePDFItems[58].ExportValue);
+                            }
+                            if (m.S59)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[59].Code, PDFItems.headachePDFItems[59].ExportValue);
+                            }
+
+                        }
+                        else if ((m.S23) || (m.S24) || (!string.IsNullOrEmpty(m.S25Other)))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[47].Code, PDFItems.headachePDFItems[47].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[49].Code, PDFItems.headachePDFItems[49].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[50].Code, PDFItems.headachePDFItems[50].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[52].Code, PDFItems.headachePDFItems[52].ExportValue);
+
+                            if (m.S45)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[45].Code, PDFItems.headachePDFItems[45].ExportValue);
+                            }
+                            if (m.S44)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[44].Code, PDFItems.headachePDFItems[44].ExportValue);
+                            }
+                            if (m.S43)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[43].Code, PDFItems.headachePDFItems[43].ExportValue);
+                            }
+                            if (m.S42)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[42].Code, PDFItems.headachePDFItems[42].ExportValue);
+                            }
+
+
+                        }
+                        else if (m.S35)
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[46].Code, PDFItems.headachePDFItems[46].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[48].Code, PDFItems.headachePDFItems[48].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[51].Code, PDFItems.headachePDFItems[51].ExportValue);
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[53].Code, PDFItems.headachePDFItems[53].ExportValue);
+
+                            if (m.S56)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[56].Code, PDFItems.headachePDFItems[56].ExportValue);
+                            }
+                            if (m.S57)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[57].Code, PDFItems.headachePDFItems[57].ExportValue);
+                            }
+                            if (m.S58)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[58].Code, PDFItems.headachePDFItems[58].ExportValue);
+                            }
+                            if (m.S59)
+                            {
+                                pdfFormFields.SetField(PDFItems.headachePDFItems[59].Code, PDFItems.headachePDFItems[59].ExportValue);
+                            }
+
+                        }
+
 
                         IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.headachePDFItems[34].Code);
                         Rectangle rect = lstPos[0].position;
@@ -5324,9 +5358,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // Defaults
-                        pdfFormFields.SetField(PDFItems.kneePDFItems[44].Code, PDFItems.kneePDFItems[44].ExportValue);
-                        pdfFormFields.SetField(PDFItems.kneePDFItems[51].Code, PDFItems.kneePDFItems[51].ExportValue);
-                        pdfFormFields.SetField(PDFItems.kneePDFItems[52].Code, PDFItems.kneePDFItems[52].ExportValue);
+                        PdfFill.SetMedicalRecordReviewSection(pdfFormFields, PDFItems.kneePDFItems, 44, 51, 52);
 
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
                         pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
@@ -5366,24 +5398,24 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         // p8 - Right index
                         // p9 - Left index
                         // p10 - Both index
-                        SetConditionKnee(pdfFormFields, m.S57, "Knee Strain", 57, 41, 42, sb, m.S57Side, 73, 72, 71, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S58, "Knee Tendonitits", 58, 40, 39, sb, m.S58Side, 1, 37, 38, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S59, "Knee Meniscal Tear", 59, 32, 33, sb, m.S59Side, 36, 35, 34, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S60, "Knee Anterior Cruciate Ligament Tear", 60, 31, 30, sb, m.S60Side, 2, 28, 29, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S61, "Knee Posterior Cruciate Ligament Tear", 61, 23, 24, sb, m.S61Side, 27, 26, 25, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S62, "Patellar or Quadriceps Tendon Rupture", 62, 22, 21, sb, m.S62Side, 3, 19, 20, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S63, "Knee Joint Osteoarthritis", 63, 14, 15, sb, m.S63Side, 18, 17, 16, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S64, "Knee Joint Ankylosis", 64, 13, 12, sb, m.S64Side, 4, 10, 11, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S65, "Knee fracture", 65, 13, 12, sb, m.S65Side, 5, 6, 7, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S79, "Stress Fracture Of Tibia", 79, 74, 75, sb, m.S79Side, 78, 77, 76, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S127, "Tibia and/or Fibula Fracture", 127, 122, 123, sb, m.S127Side, 126, 125, 124, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S121, "Recurrent Patellar Dislocation", 121, 116, 117, sb, m.S121Side, 120, 119, 118, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S115, "Recurrent Subluxation", 115, 110, 111, sb, m.S115Side, 114, 113, 112, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S109, "Knee Instability", 109, 104, 105, sb, m.S109Side, 108, 107, 106, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S103, "Patellar Dislocation", 103, 98, 99, sb, m.S103Side, 102, 101, 100, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S85, "Knee Cartilage Restoration Surgery", 85, 80, 81, sb, m.S85Side, 84, 83, 82, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S97, "Shin Splints", 97, 92, 93, sb, m.S97Side, 96, 95, 94, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
-                        SetConditionKnee(pdfFormFields, m.S91, "Patellofemoral Pain Syndrome", 91, 86, 87, sb, m.S91Side, 90, 89, 88, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S57, "Knee Strain", 57, 41, 42, sb, m.S57Side, 73, 72, 71, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S58, "Knee Tendonitits", 58, 40, 39, sb, m.S58Side, 1, 37, 38, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S59, "Knee Meniscal Tear", 59, 32, 33, sb, m.S59Side, 36, 35, 34, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S60, "Knee Anterior Cruciate Ligament Tear", 60, 31, 30, sb, m.S60Side, 2, 28, 29, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S61, "Knee Posterior Cruciate Ligament Tear", 61, 23, 24, sb, m.S61Side, 27, 26, 25, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S62, "Patellar or Quadriceps Tendon Rupture", 62, 22, 21, sb, m.S62Side, 3, 19, 20, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S63, "Knee Joint Osteoarthritis", 63, 14, 15, sb, m.S63Side, 18, 17, 16, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S64, "Knee Joint Ankylosis", 64, 13, 12, sb, m.S64Side, 4, 10, 11, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S65, "Knee fracture", 65, 13, 12, sb, m.S65Side, 5, 6, 7, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S79, "Stress Fracture Of Tibia", 79, 74, 75, sb, m.S79Side, 78, 77, 76, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S127, "Tibia and/or Fibula Fracture", 127, 122, 123, sb, m.S127Side, 126, 125, 124, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S121, "Recurrent Patellar Dislocation", 121, 116, 117, sb, m.S121Side, 120, 119, 118, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S115, "Recurrent Subluxation", 115, 110, 111, sb, m.S115Side, 114, 113, 112, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S109, "Knee Instability", 109, 104, 105, sb, m.S109Side, 108, 107, 106, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S103, "Patellar Dislocation", 103, 98, 99, sb, m.S103Side, 102, 101, 100, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S85, "Knee Cartilage Restoration Surgery", 85, 80, 81, sb, m.S85Side, 84, 83, 82, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S97, "Shin Splints", 97, 92, 93, sb, m.S97Side, 96, 95, 94, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S91, "Patellofemoral Pain Syndrome", 91, 86, 87, sb, m.S91Side, 90, 89, 88, PDFItems.kneePDFItems, ICDCodes.kneeICDCodes);
 
 
                         if (!string.IsNullOrEmpty(m.S165Other))
@@ -5416,278 +5448,316 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.kneePDFItems[69].Code, sb.ToString());
 
 
-                        //bool DoInitialROMLeft = false;
-                        //bool DoInitialROMRight = false;
+                        bool DoInitialROMLeft = false;
+                        bool DoInitialROMRight = false;
 
-                        //if ((m.S82Side == "BOTH")
-                        //    || (m.S83Side == "BOTH")
-                        //    || (m.S84Side == "BOTH")
-                        //    || (m.S85Side == "BOTH")
-                        //    || (m.S86Side == "BOTH")
-                        //    || (m.S87Side == "BOTH")
-                        //    || (m.S88Side == "BOTH")
-                        //    || (m.S89Side == "BOTH")
-                        //    || (m.S90Side == "BOTH")
-                        //    || (m.S91Side == "BOTH")
-                        //    || (m.S92Side == "BOTH")
-                        //    )
-                        //{
-                        //    DoInitialROMLeft = true;
-                        //    DoInitialROMRight = true;
-                        //}
-                        //if ((m.S82Side == "LEFT")
-                        //    || (m.S83Side == "LEFT")
-                        //    || (m.S84Side == "LEFT")
-                        //    || (m.S85Side == "LEFT")
-                        //    || (m.S86Side == "LEFT")
-                        //    || (m.S87Side == "LEFT")
-                        //    || (m.S88Side == "LEFT")
-                        //    || (m.S89Side == "LEFT")
-                        //    || (m.S90Side == "LEFT")
-                        //    || (m.S91Side == "LEFT")
-                        //    || (m.S92Side == "LEFT")
-                        //    )
-                        //{
-                        //    DoInitialROMLeft = true;
-                        //}
-                        //if ((m.S82Side == "RIGHT")
-                        //    || (m.S83Side == "RIGHT")
-                        //    || (m.S84Side == "RIGHT")
-                        //    || (m.S85Side == "RIGHT")
-                        //    || (m.S86Side == "RIGHT")
-                        //    || (m.S87Side == "RIGHT")
-                        //    || (m.S88Side == "RIGHT")
-                        //    || (m.S89Side == "RIGHT")
-                        //    || (m.S90Side == "RIGHT")
-                        //    || (m.S91Side == "RIGHT")
-                        //    || (m.S92Side == "RIGHT")
-                        //    )
-                        //{
-                        //    DoInitialROMRight = true;
-                        //}
+                        if ((m.S57Side == "BOTH")
+                            || (m.S58Side == "BOTH")
+                            || (m.S59Side == "BOTH")
+                            || (m.S60Side == "BOTH")
+                            || (m.S61Side == "BOTH")
+                            || (m.S62Side == "BOTH")
+                            || (m.S63Side == "BOTH")
+                            || (m.S64Side == "BOTH")
+                            || (m.S65Side == "BOTH")
+                            || (m.S79Side == "BOTH")
+                            || (m.S127Side == "BOTH")
+                            || (m.S121Side == "BOTH")
+                            || (m.S115Side == "BOTH")
+                            || (m.S109Side == "BOTH")
+                            || (m.S103Side == "BOTH")
+                            || (m.S85Side == "BOTH")
+                            || (m.S97Side == "BOTH")
+                            || (m.S91Side == "BOTH")
+                            || (m.S165Side == "BOTH")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                            DoInitialROMRight = true;
+                        }
+                        if ((m.S57Side == "LEFT")
+                            || (m.S58Side == "LEFT")
+                            || (m.S59Side == "LEFT")
+                            || (m.S60Side == "LEFT")
+                            || (m.S61Side == "LEFT")
+                            || (m.S62Side == "LEFT")
+                            || (m.S63Side == "LEFT")
+                            || (m.S64Side == "LEFT")
+                            || (m.S65Side == "LEFT")
+                            || (m.S79Side == "LEFT")
+                            || (m.S127Side == "LEFT")
+                            || (m.S121Side == "LEFT")
+                            || (m.S115Side == "LEFT")
+                            || (m.S109Side == "LEFT")
+                            || (m.S103Side == "LEFT")
+                            || (m.S85Side == "LEFT")
+                            || (m.S97Side == "LEFT")
+                            || (m.S91Side == "LEFT")
+                            || (m.S165Side == "LEFT")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                        }
+                        if ((m.S57Side == "RIGHT")
+                            || (m.S58Side == "RIGHT")
+                            || (m.S59Side == "RIGHT")
+                            || (m.S60Side == "RIGHT")
+                            || (m.S61Side == "RIGHT")
+                            || (m.S62Side == "RIGHT")
+                            || (m.S63Side == "RIGHT")
+                            || (m.S64Side == "RIGHT")
+                            || (m.S65Side == "RIGHT")
+                            || (m.S79Side == "RIGHT")
+                            || (m.S127Side == "RIGHT")
+                            || (m.S121Side == "RIGHT")
+                            || (m.S115Side == "RIGHT")
+                            || (m.S109Side == "RIGHT")
+                            || (m.S103Side == "RIGHT")
+                            || (m.S85Side == "RIGHT")
+                            || (m.S97Side == "RIGHT")
+                            || (m.S91Side == "RIGHT")
+                            || (m.S165Side == "RIGHT")
+                            )
+                        {
+                            DoInitialROMRight = true;
+                        }
 
-                        //bool SameInitialROMLeft = false;
-                        //bool SameInitialROMRight = false;
-                        //bool SameFinalROMLeft = false;
-                        //bool SameFinalROMRight = false;
+                        bool SameInitialROMLeft = false;
+                        bool SameInitialROMRight = false;
+                        bool SameFinalROMLeft = false;
+                        bool SameFinalROMRight = false;
 
-                        //if ((DoInitialROMLeft) && (DoInitialROMRight))
-                        //{
-                        //    // set the RIGHT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[133].Code, m.S133);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[137].Code, m.S137);
+                        if ((DoInitialROMLeft) && (DoInitialROMRight))
+                        {
+                            // set the RIGHT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[171].Code, m.S171);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[175].Code, m.S175);
 
-                        //    if ((m.S133 == m.S165)
-                        //        && (m.S137 == m.S164)
-                        //        )
-                        //    {
-                        //        SameInitialROMRight = true;
-                        //    }
+                            if ((m.S171 == m.S203)
+                                && (m.S175 == m.S202)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
 
-                        //    // Set the LEFT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[121].Code, m.S121);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[117].Code, m.S117);
+                            // Set the LEFT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[146].Code, m.S146);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[142].Code, m.S142);
 
-                        //    if ((m.S121 == m.S150)
-                        //        && (m.S117 == m.S151)
-                        //        )
-                        //    {
-                        //        SameInitialROMLeft = true;
-                        //    }
-
-
-                        //    // Second test RIGHT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[166].Code, PDFItems.kneePDFItems[166].ExportValue);
-                        //    if (SameInitialROMRight)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[168].Code, PDFItems.kneePDFItems[168].ExportValue);
-                        //        SameFinalROMRight = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[169].Code, PDFItems.kneePDFItems[169].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[165].Code, m.S165);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[164].Code, m.S164);
-
-                        //        if ((m.S165 == m.S252)
-                        //            && (m.S164 == m.S255)
-                        //            && (SameInitialROMRight)
-                        //            )
-                        //        {
-                        //            SameFinalROMRight = true;
-                        //        }
-
-                        //    }
-
-                        //    // Second test LEFT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[149].Code, PDFItems.kneePDFItems[149].ExportValue);
-                        //    if (SameInitialROMLeft)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[147].Code, PDFItems.kneePDFItems[147].ExportValue);
-                        //        SameFinalROMLeft = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[146].Code, PDFItems.kneePDFItems[146].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[150].Code, m.S150);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[151].Code, m.S151);
-
-                        //        if ((m.S150 == m.S237)
-                        //            && (m.S151 == m.S234)
-                        //            && (SameInitialROMLeft)
-                        //            )
-                        //        {
-                        //            SameFinalROMLeft = true;
-                        //        }
-
-                        //    }
-
-                        //    // Final test RIGHT
-                        //    if (SameFinalROMRight)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[257].Code, PDFItems.kneePDFItems[257].ExportValue);
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[256].Code, PDFItems.kneePDFItems[256].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[252].Code, m.S252);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[255].Code, m.S255);
-                        //    }
-
-                        //    // Final test LEFT
-                        //    if (SameFinalROMLeft)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[238].Code, PDFItems.kneePDFItems[238].ExportValue);
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[239].Code, PDFItems.kneePDFItems[239].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[237].Code, m.S237);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[234].Code, m.S234);
-                        //    }
-
-                        //}
-                        //else if (DoInitialROMRight)
-                        //{
-                        //    // the default for initial LEFT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[121].Code, "45");
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[117].Code, "20");
-
-                        //    // set the values for initial RIGHT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[133].Code, m.S133);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[137].Code, m.S137);
-
-                        //    if ((m.S133 == m.S165)
-                        //        && (m.S137 == m.S164)
-                        //        )
-                        //    {
-                        //        SameInitialROMRight = true;
-                        //    }
-
-                        //    // Second test for setting RIGHT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[166].Code, PDFItems.kneePDFItems[166].ExportValue);
-                        //    if (SameInitialROMRight)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[168].Code, PDFItems.kneePDFItems[168].ExportValue);
-                        //        SameFinalROMRight = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[169].Code, PDFItems.kneePDFItems[169].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[165].Code, m.S165);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[164].Code, m.S164);
-
-                        //        if ((m.S165 == m.S252)
-                        //            && (m.S164 == m.S255)
-                        //            && (SameInitialROMRight)
-                        //            )
-                        //        {
-                        //            SameFinalROMRight = true;
-                        //        }
-
-                        //    }
-
-                        //    // final RIGHT
-                        //    if (SameFinalROMRight)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[257].Code, PDFItems.kneePDFItems[257].ExportValue);
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[256].Code, PDFItems.kneePDFItems[256].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[252].Code, m.S252);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[255].Code, m.S255);
-                        //    }
-
-                        //    // set the LEFT repeat to no change
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[149].Code, PDFItems.kneePDFItems[149].ExportValue);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[147].Code, PDFItems.kneePDFItems[147].ExportValue);
-
-                        //    // set the LEFT Flare-up to no change
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[238].Code, PDFItems.kneePDFItems[238].ExportValue);
-
-                        //}
-                        //else if (DoInitialROMLeft)
-                        //{
-                        //    // the default for initial RIGHT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[130].Code, "45");
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[134].Code, "20");
-
-                        //    // set the initial LEFT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[121].Code, m.S121);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[117].Code, m.S117);
-
-                        //    if ((m.S121 == m.S150)
-                        //        && (m.S117 == m.S151)
-                        //        )
-                        //    {
-                        //        SameInitialROMLeft = true;
-                        //    }
+                            if ((m.S146 == m.S187)
+                                && (m.S142 == m.S188)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
 
 
-                        //    // Second test LEFT
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[149].Code, PDFItems.kneePDFItems[149].ExportValue);
-                        //    if (SameInitialROMLeft)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[147].Code, PDFItems.kneePDFItems[147].ExportValue);
-                        //        SameFinalROMLeft = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[146].Code, PDFItems.kneePDFItems[146].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[150].Code, m.S150);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[151].Code, m.S151);
+                            // Second test RIGHT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[204].Code, PDFItems.kneePDFItems[204].ExportValue);
+                            if (SameInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[206].Code, PDFItems.kneePDFItems[168].ExportValue);
+                                SameFinalROMRight = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[207].Code, PDFItems.kneePDFItems[207].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[203].Code, m.S203);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[202].Code, m.S202);
 
-                        //        if ((m.S150 == m.S237)
-                        //            && (m.S151 == m.S234)
-                        //            && (SameInitialROMLeft)
-                        //            )
-                        //        {
-                        //            SameFinalROMLeft = true;
-                        //        }
+                                if ((m.S203 == m.S313)
+                                    && (m.S202 == m.S314)
+                                    && (SameInitialROMRight)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
 
-                        //    }
+                            }
 
-                        //    // final LEFT
-                        //    if (SameFinalROMLeft)
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[238].Code, PDFItems.kneePDFItems[238].ExportValue);
-                        //    }
-                        //    else
-                        //    {
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[239].Code, PDFItems.kneePDFItems[239].ExportValue);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[237].Code, m.S237);
-                        //        pdfFormFields.SetField(PDFItems.kneePDFItems[234].Code, m.S234);
-                        //    }
+                            // Second test LEFT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[186].Code, PDFItems.kneePDFItems[186].ExportValue);
+                            if (SameInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[184].Code, PDFItems.kneePDFItems[184].ExportValue);
+                                SameFinalROMLeft = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[183].Code, PDFItems.kneePDFItems[183].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[187].Code, m.S187);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[188].Code, m.S188);
 
-                        //    // set the RIGHT repeat to no change
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[166].Code, PDFItems.kneePDFItems[166].ExportValue);
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[168].Code, PDFItems.kneePDFItems[168].ExportValue);
+                                if ((m.S187 == m.S287)
+                                    && (m.S188 == m.S284)
+                                    && (SameInitialROMLeft)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
 
-                        //    // set the RIGHT Flare-up to no change
-                        //    pdfFormFields.SetField(PDFItems.kneePDFItems[257].Code, PDFItems.kneePDFItems[257].ExportValue);
+                            }
 
-                        //}
+                            // Final test RIGHT
+                            if (SameFinalROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[316].Code, PDFItems.kneePDFItems[316].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[315].Code, PDFItems.kneePDFItems[315].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[313].Code, m.S313);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[314].Code, m.S314);
+                            }
+
+                            // Final test LEFT
+                            if (SameFinalROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[288].Code, PDFItems.kneePDFItems[288].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[289].Code, PDFItems.kneePDFItems[289].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[287].Code, m.S287);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[284].Code, m.S284);
+                            }
+
+                        }
+                        else if (DoInitialROMRight)
+                        {
+                            // the default for initial LEFT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[146].Code, "140");
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[142].Code, "140");
+
+                            // set the values for initial RIGHT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[171].Code, m.S171);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[175].Code, m.S175);
+
+                            if ((m.S171 == m.S203)
+                                && (m.S175 == m.S202)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
+
+                            // Second test for setting RIGHT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[204].Code, PDFItems.kneePDFItems[204].ExportValue);
+                            if (SameInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[206].Code, PDFItems.kneePDFItems[168].ExportValue);
+                                SameFinalROMRight = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[207].Code, PDFItems.kneePDFItems[207].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[203].Code, m.S203);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[202].Code, m.S202);
+
+                                if ((m.S203 == m.S313)
+                                    && (m.S202 == m.S314)
+                                    && (SameInitialROMRight)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
+
+                            }
+
+                            // final RIGHT
+                            if (SameFinalROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[316].Code, PDFItems.kneePDFItems[316].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[315].Code, PDFItems.kneePDFItems[315].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[313].Code, m.S313);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[314].Code, m.S314);
+                            }
+
+                            // set the LEFT repeat to no change
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[186].Code, PDFItems.kneePDFItems[186].ExportValue);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[184].Code, PDFItems.kneePDFItems[184].ExportValue);
+
+                            // set the LEFT Flare-up to no change
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[288].Code, PDFItems.kneePDFItems[288].ExportValue);
+
+                        }
+                        else if (DoInitialROMLeft)
+                        {
+                            // the default for initial RIGHT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[130].Code, "140");
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[134].Code, "140");
+
+                            // set the initial LEFT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[146].Code, m.S146);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[142].Code, m.S142);
+
+                            if ((m.S146 == m.S187)
+                                && (m.S142 == m.S188)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
+
+                            // Second test LEFT
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[186].Code, PDFItems.kneePDFItems[186].ExportValue);
+                            if (SameInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[184].Code, PDFItems.kneePDFItems[184].ExportValue);
+                                SameFinalROMLeft = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[183].Code, PDFItems.kneePDFItems[183].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[187].Code, m.S187);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[188].Code, m.S188);
+
+                                if ((m.S187 == m.S287)
+                                    && (m.S188 == m.S284)
+                                    && (SameInitialROMLeft)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
+
+                            }
+
+                            // final LEFT
+                            if (SameFinalROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[288].Code, PDFItems.kneePDFItems[288].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[289].Code, PDFItems.kneePDFItems[289].ExportValue);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[287].Code, m.S287);
+                                pdfFormFields.SetField(PDFItems.kneePDFItems[284].Code, m.S284);
+                            }
+
+                            // set the RIGHT repeat to no change
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[204].Code, PDFItems.kneePDFItems[204].ExportValue);
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[206].Code, PDFItems.kneePDFItems[206].ExportValue);
+
+                            // set the RIGHT Flare-up to no change
+                            pdfFormFields.SetField(PDFItems.kneePDFItems[288].Code, PDFItems.kneePDFItems[288].ExportValue);
+
+                        }
+
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S226, m.S226Side, 226, 268, 227, 269);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S270, m.S270Side, 270, 266, 267, 265);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S224, m.S224Side, 224, 263, 228, 264);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S223, m.S223Side, 223, 261, 262, 260);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S278, m.S278Side, 278, 258, 229, 359);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S277, m.S277Side, 277, 256, 257, 255);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S276, m.S276Side, 276, 253, 230, 354);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S275, m.S275Side, 275, 251, 252, 250);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S274, m.S274Side, 274, 248, 231, 249);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S232, m.S232Side, 232, 246, 247, 245);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S244, m.S244Side, 244, 242, 233, 243);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S234, m.S234Side, 234, 240, 241, 239);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.kneePDFItems, m.S238, m.S238Side, 238, 236, 235, 237);
+
 
                         IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.kneePDFItems[51].Code);
                         Rectangle rect = lstPos[0].position;
@@ -5724,53 +5794,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
         }
 
-        // SetConditionKnee(m.S57, "Knee Strain", 57, 41, 42, S168, m.S58Side, 73, 72, 71);
-        // p1 - Main condition check
-        // p2 - The condition text
-        // p3 - Condition index
-        // p4 - date
-        // p5 - icd code index
-        // p6 - overall condition text
-        // p7 - condition side
-        // p8 - Right index
-        // p9 - Left index
-        // p10 - Both index
-        private void SetConditionKnee(AcroFields pdfFormFields, bool p1, string p2, int p3, int p4, int p5, StringBuilder p6, string p7, int p8, int p9, int p10, Dictionary<int, PDFItem> items, Dictionary<string, ICDCode> icdcodes)
-        {
-            string dt = System.DateTime.Today.ToShortDateString();
-            ICDCode icdcode = null;
-            string diagnosis = null;
 
-            if (p1)
-            {
-                diagnosis = p2;
-                pdfFormFields.SetField(items[p3].Code, items[p3].ExportValue);
-                pdfFormFields.SetField(items[p4].Code, dt);
-                if (icdcodes.TryGetValue(diagnosis.ToLower(), out icdcode))
-                {
-                    pdfFormFields.SetField(items[p5].Code, icdcode.RefNumber);
-                }
-                p6.Append(diagnosis);
-                switch (p7)
-                {
-                    case "RIGHT":
-                        pdfFormFields.SetField(items[p8].Code, items[p8].ExportValue);
-                        p6.Append(", Right");
-                        break;
-                    case "LEFT":
-                        pdfFormFields.SetField(items[p9].Code, items[p9].ExportValue);
-                        p6.Append(", Left");
-                        break;
-                    case "BOTH":
-                        pdfFormFields.SetField(items[p10].Code, items[p10].ExportValue);
-                        p6.Append(", Bilateral");
-                        break;
-                    default:
-                        break;
-                }
-                p6.Append(".  ");
-            }
-        }
         /**************************************************************
           * Hip Form
           * 
@@ -7648,6 +7672,89 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
             return form;
 
+        }
+    }
+
+    public class PdfFill
+    {
+        // SetClaimedConditionsSection
+        // p1 - Main condition check
+        // p2 - The condition text
+        // p3 - Condition index
+        // p4 - date
+        // p5 - icd code index
+        // p6 - overall condition text
+        // p7 - condition side
+        // p8 - Right index
+        // p9 - Left index
+        // p10 - Both index
+        public static void SetClaimedConditionsSection(AcroFields pdfFormFields, bool p1, string p2, int p3, int p4, int p5, StringBuilder p6, string p7, int p8, int p9, int p10, Dictionary<int, PDFItem> items, Dictionary<string, ICDCode> icdcodes)
+        {
+            string dt = System.DateTime.Today.ToShortDateString();
+            ICDCode icdcode = null;
+            string diagnosis = null;
+
+            if (p1)
+            {
+                diagnosis = p2;
+                pdfFormFields.SetField(items[p3].Code, items[p3].ExportValue);
+                pdfFormFields.SetField(items[p4].Code, dt);
+                if ((icdcodes != null) && (p5 > 0))
+                {
+                    if (icdcodes.TryGetValue(diagnosis.ToLower(), out icdcode))
+                    {
+                        pdfFormFields.SetField(items[p5].Code, icdcode.RefNumber);
+                    }
+                }
+                p6.Append(diagnosis);
+                switch (p7)
+                {
+                    case "RIGHT":
+                        pdfFormFields.SetField(items[p8].Code, items[p8].ExportValue);
+                        p6.Append(", Right");
+                        break;
+                    case "LEFT":
+                        pdfFormFields.SetField(items[p9].Code, items[p9].ExportValue);
+                        p6.Append(", Left");
+                        break;
+                    case "BOTH":
+                        pdfFormFields.SetField(items[p10].Code, items[p10].ExportValue);
+                        p6.Append(", Bilateral");
+                        break;
+                    default:
+                        break;
+                }
+                p6.Append(".  ");
+            }
+        }
+
+        public static void SetMedicalRecordReviewSection(AcroFields pdfFormFields, Dictionary<int, PDFItem> items, int p1, int p2, int p3)
+        {
+            pdfFormFields.SetField(items[p1].Code, items[p1].ExportValue);
+            pdfFormFields.SetField(items[p2].Code, items[p2].ExportValue);
+            pdfFormFields.SetField(items[p3].Code, items[p3].ExportValue);
+        }
+
+        public static void SetContributingFactorsSection(AcroFields pdfFormFields, Dictionary<int, PDFItem> items, bool pCheck, string pSide, int pInd, int indRight, int indLeft, int indBoth)
+        {
+            if (pCheck)
+            {
+                pdfFormFields.SetField(items[pInd].Code, items[pInd].ExportValue);
+                switch (pSide)
+                {
+                    case "RIGHT":
+                        pdfFormFields.SetField(items[indRight].Code, items[indRight].ExportValue);
+                        break;
+                    case "LEFT":
+                        pdfFormFields.SetField(items[indLeft].Code, items[indLeft].ExportValue);
+                        break;
+                    case "BOTH":
+                        pdfFormFields.SetField(items[indBoth].Code, items[indBoth].ExportValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

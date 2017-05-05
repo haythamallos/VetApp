@@ -33,27 +33,31 @@
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group m-t-20">
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">First Name</label>
-                                    <input id="FirstName" name="FirstName" class="form-control" type="text" required="" placeholder="First Name" value="@Model.FirstName">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">First Name</label>
+                                    <br />
+                                    @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { style = "width: 600px" } })
                                 </div>
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">Middle Initial</label>
-                                    <input id="MiddleInitial" name="MiddleInitial" class="form-control" type="text" required="" placeholder="Middle Initial" value="@Model.MiddleInitial">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">Middle Initial</label>
+                                    <br />
+                                    @Html.EditorFor(x => x.MiddleInitial, new { htmlAttributes = new { style = "width: 50px" } })
                                 </div>
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">Last Name</label>
-                                    <input id="LastName" name="LastName" class="form-control" type="text" required="" placeholder="Last Name" value="@Model.LastName">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">Last Name</label>
+                                    <br />
+                                    @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { style = "width: 600px" } })
                                 </div>
-                                <div class="col-xs-12">
-                                    <label class="col-md-12">Social Security Number</label>
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">Social Security Number</label>
+                                    <br />
+                                    @Html.EditorFor(x => x.SocialSecurity, new { htmlAttributes = new { style = "width: 600px" } })
                                 </div>
                                 <hr />
                                 <label class="font-bold">What is the diagnosis of your service-connected headache condition? (Listed on your rating)</label>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
-                                        @Html.EditorFor(x => x.S35) Migraine including variants
+                                        @Html.EditorFor(x => x.S35) Migraine including variants (migraines)
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -65,6 +69,14 @@
                                     <label class="form-check-label font-normal">
                                         @Html.EditorFor(x => x.S24) Cluster
                                     </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        Other (specify):
+                                    </label>
+                                    <br />
+                                    @Html.EditorFor(x => x.S25Other, new { htmlAttributes = new { style = "width: 600px" } })
+
                                 </div>
                                 <br />
                                 <label class="form-check-label font-normal">
@@ -166,7 +178,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
-                                        @Html.EditorFor(x => x.S72) Snesory changes (such as feeling of pins and needles in extremities)
+                                        @Html.EditorFor(x => x.S72) Sensory changes (such as feeling of pins and needles in extremities)
                                     </label>
                                 </div>
                                 <br />
@@ -292,7 +304,7 @@
                             @if (Model.S3BYes)
                             {
                                 <div class="form-group m-t-20">
-                                    <label class="font-bold">How often do you have incappacitating non-migraine headaches which require you to stop what you are doing and go to a dark and quiet room to lay down?</label>
+                                    <label class="font-bold">How often do you have incapacitating non-migraine headaches which require you to stop what you are doing and go to a dark and quiet room to lay down?</label>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label font-normal">
                                             @Html.EditorFor(x => x.S45) Less than once every 2 months

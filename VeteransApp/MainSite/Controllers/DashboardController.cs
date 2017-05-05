@@ -1330,19 +1330,19 @@ namespace MainSite.Controllers
             long contenttypeid = 5;
             try
             {
-                model.NameOfPatient = string.Empty;
-                if (!string.IsNullOrEmpty(model.FirstName))
-                {
-                    model.NameOfPatient += model.FirstName;
-                }
-                if (!string.IsNullOrEmpty(model.MiddleInitial))
-                {
-                    model.NameOfPatient += " " + model.MiddleInitial;
-                }
-                if (!string.IsNullOrEmpty(model.LastName))
-                {
-                    model.NameOfPatient += " " + model.LastName;
-                }
+                //model.NameOfPatient = string.Empty;
+                //if (!string.IsNullOrEmpty(model.FirstName))
+                //{
+                //    model.NameOfPatient += model.FirstName;
+                //}
+                //if (!string.IsNullOrEmpty(model.MiddleInitial))
+                //{
+                //    model.NameOfPatient += " " + model.MiddleInitial;
+                //}
+                //if (!string.IsNullOrEmpty(model.LastName))
+                //{
+                //    model.NameOfPatient += " " + model.LastName;
+                //}
                 long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {
@@ -1421,19 +1421,19 @@ namespace MainSite.Controllers
             long contenttypeid = 6;
             try
             {
-                model.NameOfPatient = string.Empty;
-                if (!string.IsNullOrEmpty(model.FirstName))
-                {
-                    model.NameOfPatient += model.FirstName;
-                }
-                if (!string.IsNullOrEmpty(model.MiddleInitial))
-                {
-                    model.NameOfPatient += " " + model.MiddleInitial;
-                }
-                if (!string.IsNullOrEmpty(model.LastName))
-                {
-                    model.NameOfPatient += " " + model.LastName;
-                }
+                //model.NameOfPatient = string.Empty;
+                //if (!string.IsNullOrEmpty(model.FirstName))
+                //{
+                //    model.NameOfPatient += model.FirstName;
+                //}
+                //if (!string.IsNullOrEmpty(model.MiddleInitial))
+                //{
+                //    model.NameOfPatient += " " + model.MiddleInitial;
+                //}
+                //if (!string.IsNullOrEmpty(model.LastName))
+                //{
+                //    model.NameOfPatient += " " + model.LastName;
+                //}
                 if ((model.S26) || (model.S2) || (model.S3) || (model.S4) || (model.S5) || (model.S6) || (!string.IsNullOrEmpty(model.S3AOther)))
                 {
                     model.S3AYes = true;
