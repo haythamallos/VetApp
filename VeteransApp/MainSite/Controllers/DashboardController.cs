@@ -63,11 +63,14 @@ namespace MainSite.Controllers
             var MovementList60Deg = new System.Web.Mvc.SelectList(new[] { 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList60Deg = MovementList60Deg;
 
-            var MovementList85Deg = new System.Web.Mvc.SelectList(new[] { 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
-            ViewBag.MovementList85Deg = MovementList85Deg;
+            var MovementList70Deg = new System.Web.Mvc.SelectList(new[] {70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList70Deg = MovementList70Deg;
 
             var MovementList80Deg = new System.Web.Mvc.SelectList(new[] { 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList80Deg = MovementList80Deg;
+
+            var MovementList85Deg = new System.Web.Mvc.SelectList(new[] { 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            ViewBag.MovementList85Deg = MovementList85Deg;
 
             var MovementList90Deg = new System.Web.Mvc.SelectList(new[] { 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList90Deg = MovementList90Deg;

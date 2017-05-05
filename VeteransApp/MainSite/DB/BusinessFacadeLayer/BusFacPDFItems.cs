@@ -123,17 +123,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
         public static Dictionary<string, ICDCode> wristICDCodes = new Dictionary<string, ICDCode>()
                 {
-                    { " Wrist Sprain", new ICDCode {Diagnosis=" Wrist Sprain", RefNumber="842"}},
-                    { "Tendonitis, Wrist", new ICDCode {Diagnosis="Tendonitis, Wrist", RefNumber="727.81"}},
-                    { "Ganglion Cyst", new ICDCode {Diagnosis="Ganglion Cyst", RefNumber="727.4"}},
-                    { "Carpal Metacarpal, Arthritis", new ICDCode {Diagnosis="Carpal Metacarpal, Arthritis", RefNumber="715.94"}},
-                    { "Osteoarthritis, Arthtritis, Wrist", new ICDCode {Diagnosis="Osteoarthritis, Arthtritis, Wrist", RefNumber="715.13"}},
-                    { "DeQuervains Syndrome", new ICDCode {Diagnosis="DeQuervains Syndrome", RefNumber="727.04"}},
-                    { "Triangular Fibrocartilaginous Complex Injury", new ICDCode {Diagnosis="Triangular Fibrocartilaginous Complex Injury", RefNumber="842.09"}},
-                    { "Carpal Instability", new ICDCode {Diagnosis="Carpal Instability", RefNumber="718.84"}},
-                    { "A Vascular Necrosis of Carpal Bones", new ICDCode {Diagnosis="A Vascular Necrosis of Carpal Bones", RefNumber="733.49"}},
-                    { "Wrist Anthroplasty", new ICDCode {Diagnosis="Wrist Anthroplasty", RefNumber="V43.63"}},
-                    { "Ankylosis Of Wrist", new ICDCode {Diagnosis="Ankylosis Of Wrist", RefNumber="718.53"}}
+                    { "wrist sprain", new ICDCode {Diagnosis="Wrist Sprain", RefNumber="842"}},
+                    { "tendonitis, wrist", new ICDCode {Diagnosis="Tendonitis, Wrist", RefNumber="727.81"}},
+                    { "ganglion cyst", new ICDCode {Diagnosis="Ganglion Cyst", RefNumber="727.4"}},
+                    { "carpal metacarpal, arthritis", new ICDCode {Diagnosis="Carpal Metacarpal, Arthritis", RefNumber="715.94"}},
+                    { "osteoarthritis, arthtritis, wrist", new ICDCode {Diagnosis="Osteoarthritis, Arthtritis, Wrist", RefNumber="715.13"}},
+                    { "dequervains syndrome", new ICDCode {Diagnosis="DeQuervains Syndrome", RefNumber="727.04"}},
+                    { "triangular fibrocartilaginous complex injury", new ICDCode {Diagnosis="Triangular Fibrocartilaginous Complex Injury", RefNumber="842.09"}},
+                    { "carpal instability", new ICDCode {Diagnosis="Carpal Instability", RefNumber="718.84"}},
+                    { "avascular necrosis of carpal bones", new ICDCode {Diagnosis="Avascular Necrosis of Carpal Bones", RefNumber="733.49"}},
+                    { "wrist anthroplasty", new ICDCode {Diagnosis="Wrist Anthroplasty", RefNumber="V43.63"}},
+                    { "ankylosis of wrist", new ICDCode {Diagnosis="Ankylosis Of Wrist", RefNumber="718.53"}}
                 };
 
         public static Dictionary<string, ICDCode> kneeICDCodes = new Dictionary<string, ICDCode>()
@@ -157,6 +157,21 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "shin splints", new ICDCode {Diagnosis="Shin Splints", RefNumber="844.9"}},
                     { "patellofemoral pain syndrome", new ICDCode {Diagnosis="Patellofemoral Pain Syndrome", RefNumber="719.46"}}
                 };
+
+        public static Dictionary<string, ICDCode> footICDCodes = new Dictionary<string, ICDCode>()
+                {
+                    { "flat foot", new ICDCode {Diagnosis="Flat Foot", RefNumber="754.61"}},
+                    { "morton's neuroma", new ICDCode {Diagnosis="Morton's Neuroma", RefNumber="355.6"}},
+                    { "metartarsalgia", new ICDCode {Diagnosis="Metartarsalgia", RefNumber="726.7"}},
+                    { "hammer toes", new ICDCode {Diagnosis="Hammer Toes", RefNumber="735.4"}},
+                    { "hallux valgus", new ICDCode {Diagnosis="Hallux Valgus", RefNumber="727.1"}},
+                    { "hallux rigidus", new ICDCode {Diagnosis="Hallux Rigidus", RefNumber="735.2"}},
+                    { "acquired pes cavus", new ICDCode {Diagnosis="Acquired Pes Cavus", RefNumber="754.71"}},
+                    { "malunion/nounion Of tarsal/metartarsal bones", new ICDCode {Diagnosis="Malunion/Nounion Of Tarsal/Metartarsal Bones", RefNumber="733.81"}},
+                    { "foot injuriies", new ICDCode {Diagnosis="Foot Injuriies", RefNumber="959.7"}},
+                    { "plantar fasciitis", new ICDCode {Diagnosis="Plantar Fasciitis", RefNumber="728.71"}}
+                };
+
     }
 
     public class ICDCode

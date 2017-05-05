@@ -14,11 +14,11 @@
 
         <form id="formknee" method="post" action="/Dashboard/KneePost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
-            @if (Model.ContentStateID == 6)
+            @*@if (Model.ContentStateID == 6)
             {
                 <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
                 <hr />
-            }
+            }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
@@ -267,7 +267,7 @@
                                 @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList140Deg)
                                 <hr />
 
-                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> knee and record the last repetition below.</label>
+                                <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> knee and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S187, (SelectList)ViewBag.MovementList140Deg)

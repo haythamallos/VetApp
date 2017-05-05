@@ -5267,7 +5267,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // Defaults
-                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[2].Code, PDFItems.wristPDFItems[2].ExportValue);
 
                         // Section 2C
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
@@ -5311,6 +5311,413 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo17B[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo17C[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo18[0]", "2");
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        StringBuilder sb = new StringBuilder();
+
+                        // p1 - Main condition check
+                        // p2 - The condition text
+                        // p3 - Condition index
+                        // p4 - date
+                        // p5 - icd code index
+                        // p6 - overall condition text
+                        // p7 - condition side
+                        // p8 - Right index
+                        // p9 - Left index
+                        // p10 - Both index
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S64, "Wrist Sprain", 64, 61, 62, sb, m.S64Side, 75, 74, 73, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S65, "Tendonitis, Wrist", 65, 60, 59, sb, m.S65Side, 21, 57, 58, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S66, "Ganglion Cyst", 66, 52, 53, sb, m.S66Side, 56, 55, 54, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S67, "Carpal Metacarpal, Arthritis", 67, 51, 50, sb, m.S67Side, 22, 48, 49, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S68, "Osteoarthritis, Arthtritis, Wrist", 68, 43, 44, sb, m.S68Side, 47, 46, 45, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S69, "DeQuervains Syndrome", 69, 42, 41, sb, m.S69Side, 23, 39, 40, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S70, "Triangular Fibrocartilaginous Complex Injury", 70, 34, 35, sb, m.S70Side, 38, 37, 36, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S71, "Carpal Instability", 71, 33, 32, sb, m.S71Side, 24, 30, 31, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S72, "Avascular Necrosis of Carpal Bones", 72, 25, 26, sb, m.S72Side, 29, 28, 27, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S81, "Wrist Anthroplasty", 81, 76, 77, sb, m.S81Side, 80, 79, 78, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S87, "Ankylosis Of Wrist", 87, 82, 83, sb, m.S87Side, 86, 85, 84, PDFItems.wristPDFItems, ICDCodes.wristICDCodes);
+                        if (!string.IsNullOrEmpty(m.S103Other))
+                        {
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[103].Code, PDFItems.wristPDFItems[103].ExportValue);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[106].Code, m.S103Other);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[102].Code, dt);
+                            sb.Append(m.S103Other);
+                            switch (m.S103Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.wristPDFItems[88].Code, PDFItems.wristPDFItems[88].ExportValue);
+                                    sb.Append(", Right");
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.wristPDFItems[98].Code, PDFItems.wristPDFItems[98].ExportValue);
+                                    sb.Append(", Left");
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.wristPDFItems[89].Code, PDFItems.wristPDFItems[89].ExportValue);
+                                    sb.Append(", Bilateral");
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            sb.Append(".");
+                        }
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[17].Code, sb.ToString());
+
+
+
+
+
+
+                        bool DoInitialROMLeft = false;
+                        bool DoInitialROMRight = false;
+
+                        if ((m.S64Side == "BOTH")
+                            || (m.S65Side == "BOTH")
+                            || (m.S66Side == "BOTH")
+                            || (m.S67Side == "BOTH")
+                            || (m.S68Side == "BOTH")
+                            || (m.S69Side == "BOTH")
+                            || (m.S70Side == "BOTH")
+                            || (m.S71Side == "BOTH")
+                            || (m.S72Side == "BOTH")
+                            || (m.S81Side == "BOTH")
+                            || (m.S87Side == "BOTH")
+                            || (m.S103Side == "BOTH")
+                                        )
+                        {
+                            DoInitialROMLeft = true;
+                            DoInitialROMRight = true;
+                        }
+                        if ((m.S64Side == "LEFT")
+                            || (m.S65Side == "LEFT")
+                            || (m.S66Side == "LEFT")
+                            || (m.S67Side == "LEFT")
+                            || (m.S68Side == "LEFT")
+                            || (m.S69Side == "LEFT")
+                            || (m.S70Side == "LEFT")
+                            || (m.S71Side == "LEFT")
+                            || (m.S72Side == "LEFT")
+                            || (m.S81Side == "LEFT")
+                            || (m.S87Side == "LEFT")
+                            || (m.S103Side == "LEFT")
+                            )
+                        {
+                            DoInitialROMLeft = true;
+                        }
+                        if ((m.S64Side == "RIGHT")
+                            || (m.S65Side == "RIGHT")
+                            || (m.S66Side == "RIGHT")
+                            || (m.S67Side == "RIGHT")
+                            || (m.S68Side == "RIGHT")
+                            || (m.S69Side == "RIGHT")
+                            || (m.S70Side == "RIGHT")
+                            || (m.S71Side == "RIGHT")
+                            || (m.S72Side == "RIGHT")
+                            || (m.S81Side == "RIGHT")
+                            || (m.S87Side == "RIGHT")
+                            || (m.S103Side == "RIGHT")
+                            )
+                        {
+                            DoInitialROMRight = true;
+                        }
+
+                        bool SameInitialROMLeft = false;
+                        bool SameInitialROMRight = false;
+                        bool SameFinalROMLeft = false;
+                        bool SameFinalROMRight = false;
+
+                        if ((DoInitialROMLeft) && (DoInitialROMRight))
+                        {
+                            // set the RIGHT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[135].Code, m.S135);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[131].Code, m.S131);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[123].Code, m.S123);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[127].Code, m.S127);
+
+                            if ((m.S135 == m.S159)
+                                && (m.S131 == m.S160)
+                                && (m.S123 == m.S166)
+                                && (m.S127 == m.S167)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
+
+                            // Set the LEFT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[156].Code, m.S156);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[152].Code, m.S152);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[144].Code, m.S144);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[148].Code, m.S148);
+
+                            if ((m.S156 == m.S179)
+                                && (m.S152 == m.S173)
+                                && (m.S144 == m.S171)
+                                && (m.S148 == m.S172)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
+
+
+                            // Second test RIGHT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[161].Code, PDFItems.wristPDFItems[161].ExportValue);
+                            if (SameInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[163].Code, PDFItems.wristPDFItems[163].ExportValue);
+                                SameFinalROMRight = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[164].Code, PDFItems.wristPDFItems[164].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[159].Code, m.S159);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[160].Code, m.S160);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[166].Code, m.S166);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[167].Code, m.S167);
+
+                                if ((m.S159 == m.S272)
+                                    && (m.S160 == m.S265)
+                                    && (m.S166 == m.S266)
+                                    && (m.S167 == m.S268)
+                                    && (SameInitialROMRight)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
+
+                            }
+
+                            // Second test LEFT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[178].Code, PDFItems.wristPDFItems[178].ExportValue);
+                            if (SameInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[176].Code, PDFItems.wristPDFItems[176].ExportValue);
+                                SameFinalROMLeft = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[175].Code, PDFItems.wristPDFItems[175].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[179].Code, m.S179);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[173].Code, m.S173);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[171].Code, m.S171);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[172].Code, m.S172);
+
+                                if ((m.S179 == m.S283)
+                                    && (m.S173 == m.S276)
+                                    && (m.S171 == m.S280)
+                                    && (m.S172 == m.S279)
+                                    && (SameInitialROMLeft)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
+
+                            }
+
+                            // Final test RIGHT
+                            if (SameFinalROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[274].Code, PDFItems.wristPDFItems[274].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[273].Code, PDFItems.wristPDFItems[273].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[272].Code, m.S272);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[265].Code, m.S265);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[266].Code, m.S266);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[268].Code, m.S268);
+                            }
+
+                            // Final test LEFT
+                            if (SameFinalROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[284].Code, PDFItems.wristPDFItems[284].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[285].Code, PDFItems.wristPDFItems[285].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[283].Code, m.S283);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[276].Code, m.S276);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[280].Code, m.S280);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[279].Code, m.S279);
+                            }
+
+                        }
+                        else if (DoInitialROMRight)
+                        {
+                            // the default for initial LEFT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[156].Code, "80");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[152].Code, "70");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[144].Code, "45");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[148].Code, "20");
+
+                            // set the values for initial RIGHT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[135].Code, m.S135);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[131].Code, m.S131);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[123].Code, m.S123);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[127].Code, m.S127);
+
+                            if ((m.S135 == m.S159)
+                                && (m.S131 == m.S160)
+                                && (m.S123 == m.S166)
+                                && (m.S127 == m.S167)
+                                )
+                            {
+                                SameInitialROMRight = true;
+                            }
+
+                            // Second test RIGHT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[161].Code, PDFItems.wristPDFItems[161].ExportValue);
+                            if (SameInitialROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[163].Code, PDFItems.wristPDFItems[163].ExportValue);
+                                SameFinalROMRight = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[164].Code, PDFItems.wristPDFItems[164].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[159].Code, m.S159);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[160].Code, m.S160);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[166].Code, m.S166);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[167].Code, m.S167);
+
+                                if ((m.S159 == m.S272)
+                                    && (m.S160 == m.S265)
+                                    && (m.S166 == m.S266)
+                                    && (m.S167 == m.S268)
+                                    && (SameInitialROMRight)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
+
+                            }
+
+                            // final RIGHT
+                            if (SameFinalROMRight)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[274].Code, PDFItems.wristPDFItems[274].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[273].Code, PDFItems.wristPDFItems[273].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[272].Code, m.S272);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[265].Code, m.S265);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[266].Code, m.S266);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[268].Code, m.S268);
+                            }
+
+
+                            // set the LEFT repeat to no change
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[178].Code, PDFItems.wristPDFItems[178].ExportValue);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[176].Code, PDFItems.wristPDFItems[176].ExportValue);
+
+                            // set the LEFT Flare-up to no change
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[284].Code, PDFItems.wristPDFItems[284].ExportValue);
+
+                        }
+                        else if (DoInitialROMLeft)
+                        {
+                            // the default for initial RIGHT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[135].Code, "80");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[131].Code, "70");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[123].Code, "45");
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[127].Code, "20");
+
+                            // set the initial LEFT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[156].Code, m.S156);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[152].Code, m.S152);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[144].Code, m.S144);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[148].Code, m.S148);
+
+                            if ((m.S156 == m.S179)
+                                && (m.S152 == m.S173)
+                                && (m.S144 == m.S171)
+                                && (m.S148 == m.S172)
+                                )
+                            {
+                                SameInitialROMLeft = true;
+                            }
+
+                            // Second test LEFT
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[178].Code, PDFItems.wristPDFItems[178].ExportValue);
+                            if (SameInitialROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[176].Code, PDFItems.wristPDFItems[176].ExportValue);
+                                SameFinalROMLeft = true;
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[175].Code, PDFItems.wristPDFItems[175].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[179].Code, m.S179);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[173].Code, m.S173);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[171].Code, m.S171);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[172].Code, m.S172);
+
+                                if ((m.S179 == m.S283)
+                                    && (m.S173 == m.S276)
+                                    && (m.S171 == m.S280)
+                                    && (m.S172 == m.S279)
+                                    && (SameInitialROMLeft)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
+
+                            }
+
+
+                            // final LEFT
+                            if (SameFinalROMLeft)
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[284].Code, PDFItems.wristPDFItems[284].ExportValue);
+                            }
+                            else
+                            {
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[285].Code, PDFItems.wristPDFItems[285].ExportValue);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[283].Code, m.S283);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[276].Code, m.S276);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[280].Code, m.S280);
+                                pdfFormFields.SetField(PDFItems.wristPDFItems[279].Code, m.S279);
+                            }
+
+                            // set the RIGHT repeat to no change
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[161].Code, PDFItems.wristPDFItems[161].ExportValue);
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[163].Code, PDFItems.wristPDFItems[163].ExportValue);
+
+                            // set the RIGHT Flare-up to no change
+                            pdfFormFields.SetField(PDFItems.wristPDFItems[274].Code, PDFItems.wristPDFItems[274].ExportValue);
+
+                        }
+
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S210, m.S210Side, 210, 252, 211, 253);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S254, m.S254Side, 254, 250, 251, 249);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S208, m.S208Side, 208, 247, 212, 248);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S207, m.S207Side, 207, 245, 246, 244);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S261, m.S261Side, 261, 242, 213, 243);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S260, m.S260Side, 260, 240, 241, 239);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S259, m.S259Side, 259, 237, 214, 238);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S258, m.S258Side, 258, 235, 236, 234);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S257, m.S257Side, 257, 232, 215, 233);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S216, m.S216Side, 216, 230, 231, 229);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S228, m.S228Side, 228, 226, 217, 227);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S218, m.S218Side, 218, 224, 225, 223);
+                        PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S222, m.S222Side, 222, 220, 219, 221);
+
+
+
+
+
+
+                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.wristPDFItems[2].Code);
+                        Rectangle rect = lstPos[0].position;
+                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        cb.SetFontAndSize(bf, 12);
+                        cb.BeginText();
+                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                        cb.ShowText(string.Empty);
+                        cb.EndText();
 
                     }
 
