@@ -33,16 +33,17 @@
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Full Name</label>
                                 <div class="col-xs-4">
-                                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Full Name" value="@Model.NameOfPatient">
+                                    @Html.EditorFor(x => x.NameOfPatient, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
                                 </div>
                             </div>
                             <br />
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
                                 <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="password" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                    @Html.EditorFor(x => x.SocialSecurity, new { htmlAttributes = new { @class = "form-control", placeholder = "Social Security" } })
                                 </div>
                             </div>
+                            <br />
                             <hr />
                             <div class="form-group m-t-20">
                                 <label class="font-bold">What is the diagnosis of your service-connected knee condition? Check if applies and choose Right, Left or Both?</label>

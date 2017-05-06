@@ -31,27 +31,36 @@
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group m-t-20">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label font-normal">First Name</label>
-                                    <br />
-                                    @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { style = "width: 600px" } })
+                                <div class="form-group m-t-20">
+                                    <label class="col-md-3">First Name</label>
+                                    <div class="col-xs-4">
+                                        @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label font-normal">Middle Initial</label>
-                                    <br />
-                                    @Html.EditorFor(x => x.MiddleInitial, new { htmlAttributes = new { style = "width: 50px" } })
+                                <br />
+                                <div class="form-group m-t-20">
+                                    <label class="col-md-3">Middle Initial</label>
+                                    <div class="col-xs-4">
+                                        @Html.EditorFor(x => x.MiddleInitial, new { htmlAttributes = new { @class = "form-control", placeholder = "Middle Initial" } })
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label font-normal">Last Name</label>
-                                    <br />
-                                    @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { style = "width: 600px" } })
+                                <br />
+                                <div class="form-group m-t-20">
+                                    <label class="col-md-3">Last Name</label>
+                                    <div class="col-xs-4">
+                                        @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label font-normal">Social Security Number</label>
-                                    <br />
-                                    @Html.EditorFor(x => x.SocialSecurity, new { htmlAttributes = new { style = "width: 600px" } })
+                                <br />
+                                <div class="form-group m-t-20">
+                                    <label class="col-md-3">Social Security Number</label>
+                                    <div class="col-xs-4">
+                                        @Html.EditorFor(x => x.SocialSecurity, new { htmlAttributes = new { @class = "form-control", placeholder = "Social Security" } })
+                                    </div>
                                 </div>
+                                <br />
                                 <hr />
+
                                 <label class="form-check-label font-normal">Have you been prescribed the use of a breathing assistance device such as a continuous positive airway pressure (CPAP) machine?</label>
                                 <br />
                                 @Html.EditorFor(x => x.S20) Yes

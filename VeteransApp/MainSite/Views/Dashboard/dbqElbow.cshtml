@@ -14,11 +14,11 @@
 
         <form id="formelbow" method="post" action="/Dashboard/ElbowPost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
-            @if (Model.ContentStateID == 6)
+            @*@if (Model.ContentStateID == 6)
             {
                 <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
                 <hr />
-            }
+            }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
@@ -33,14 +33,14 @@
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Full Name</label>
                                 <div class="col-xs-4">
-                                    <input id="NameOfPatient" name="NameOfPatient" class="form-control" type="text" required="" placeholder="Full Name" value="@Model.NameOfPatient">
+                                    @Html.EditorFor(x => x.NameOfPatient, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
                                 </div>
                             </div>
                             <br />
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
                                 <div class="col-xs-4">
-                                    <input id="SocialSecurity" name="SocialSecurity" class="form-control" type="text" required="" placeholder="Social Security" value="@Model.SocialSecurity">
+                                    @Html.EditorFor(x => x.SocialSecurity, new { htmlAttributes = new { @class = "form-control", placeholder = "Social Security" } })
                                 </div>
                             </div>
                             <br />
