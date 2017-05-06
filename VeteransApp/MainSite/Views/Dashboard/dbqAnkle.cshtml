@@ -6,6 +6,32 @@
 
 @model MainSite.Models.AnkleModel
 
+<style>
+    .panel-heading {
+        cursor: pointer;
+    }
+.clickable
+{
+    cursor: pointer;
+}
+
+.clickable .glyphicon
+{
+    background: rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px
+}
+
+.panel-heading span
+{
+    margin-top: -23px;
+    font-size: 15px;
+    margin-right: -9px;
+}
+a.clickable { color: inherit; }
+a.clickable:hover { text-decoration:none; }
+</style>
 
 <div id="page-wrapper">
     <div class="col-xs-12">
@@ -21,11 +47,11 @@
             }*@
             <div class="panel-group col-lg-12" id="accordion">
 
-                <!-- Part 1 -->
+                <!-- Section 1 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part1Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse1">Part 1</a>
+                            <a class="info" data-parent="#accordion" href="#collapse1">Section 1</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
@@ -153,12 +179,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Part 1 -->
-                <!-- Part 2 -->
+                <!-- Section 1 -->
+                <!-- Section 2 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part2Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse2">Part 2</a>
+                            <a class="info" data-parent="#accordion" href="#collapse2">Section 2</a>
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
@@ -236,12 +262,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Part 2 -->
-                <!-- Part 3 -->
+                <!-- Section 2 -->
+                <!-- Section 3 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part3Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
+                            <a class="info" data-parent="#accordion" href="#collapse3">Section 3</a>
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
@@ -359,12 +385,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Part 3 -->
-                <!-- Part 4 -->
+                <!-- Section 3 -->
+                <!-- Section 4 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part4Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
+                            <a class="info" data-parent="#accordion" href="#collapse4">Section 4</a>
                         </h4>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
@@ -374,10 +400,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Part 4 -->
+                <!-- Section 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="partfShow">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapsef">Finished</a>
                         </h4>
@@ -405,132 +431,66 @@
 
     $('document').ready(function () {
 
+        initpanels();
+
+        function save(stateid) {
+            var model = $('#formankle').serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/AnklePost?contentStateID=' + stateid,
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        }
+
         $("#part1NextBtn").on("click", function () {
-            if (validate_1()) {
-                setROM();
-                $("#collapse2").collapse('show');
-                $("#collapse1").collapse('hide');
-
-                var model = $('#formankle').serialize();
-                // Serialize model for Posting model
-                $.ajax({
-                    url: '/Dashboard/AnklePost?contentStateID=2',
-                    type: 'POST',
-                    data: model,  // Pass Model to Controller Using Ajax Call
-                    success: function (data) {
-                        // Show Data
-                    }
-                });
-
-            }
-            else {
-                //alert("Not valid");
-                $("#infoAlert").modal('show');
-            }
+            show2();
+            //if (validate_1()) {
+            //    setROM();
+            //    $("#collapse2").collapse('show');
+            //    $("#collapse1").collapse('hide');
+            //    save(2);
+            //}
         });
 
         $("#part2NextBtn").on("click", function () {
             $("#collapse3").collapse('show');
             $("#collapse2").collapse('hide');
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=3',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            save(3);
         });
 
         $("#part2PrevBtn").on("click", function () {
             $("#collapse1").collapse('show');
             $("#collapse2").collapse('hide');
-
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            save(9999);
         });
 
         $("#part3NextBtn").on("click", function () {
             $("#collapse4").collapse('show');
             $("#collapse3").collapse('hide');
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=4',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            save(4);
         });
 
         $("#part3PrevBtn").on("click", function () {
             $("#collapse2").collapse('show');
             $("#collapse3").collapse('hide');
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            save(9999);
         });
 
         $("#part4PrevBtn").on("click", function () {
             $("#collapse3").collapse('show');
             $("#collapse4").collapse('hide');
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+            save(9999);
         });
-
 
         $("#part4NextBtn").on("click", function () {
             if (validate_4()) {
                 $("#collapsef").collapse('show');
                 $("#collapse4").collapse('hide');
-
-                var model = $('#formankle').serialize();
-                // Serialize model for Posting model
-                $.ajax({
-                    url: '/Dashboard/AnklePost?contentStateID=5',
-                    type: 'POST',
-                    data: model,  // Pass Model to Controller Using Ajax Call
-                    success: function (data) {
-                        // Show Data
-                    }
-                });
-
+                save(5);
             }
             else {
                 $("#infoAlert").modal('show');
@@ -540,53 +500,8 @@
         $("#finishPrevBtn").on("click", function () {
             $("#collapse4").collapse('show');
             $("#collapsef").collapse('hide');
-
-            var model = $('#formankle').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/AnklePost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+            save(9999);
         });
-
-
-
-        function validate_1() {
-            var isValid = true;
-            var s;
-
-            s = jQuery('input[name="NameOfPatient"]').val();
-            if ((s == '') || s == null) {
-                isValid = false;
-            }
-
-            s = jQuery('input[name="SocialSecurity"]').val();
-            if ((s == '') || s == null) {
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        function validate_2() {
-            var isValid = true;
-
-            return isValid;
-        }
-        function validate_3() {
-            var isValid = true;
-
-            return isValid;
-        }
-        function validate_4() {
-            var isValid = true;
-
-            return isValid;
-        }
 
         function setROM() {
             var S64Side = $('input[name=S82Side]:checked').val();
@@ -659,6 +574,56 @@
         $("input[type=radio]").change(function () {
             var Selectedvalue = $(this).val();
             setROM();
+        });
+
+        function hideall() {
+            $("#collapse1").collapse('hide');
+            $("#collapse2").collapse('hide');
+            $("#collapse3").collapse('hide');
+            $("#collapse4").collapse('hide');
+            $("#collapsef").collapse('hide');
+        }
+
+        function initpanels() {
+            hideall();
+            $("#collapse1").collapse('show');
+        }
+
+        function show1() {
+            hideall();
+            save(9999);
+            $("#collapse1").collapse('show');
+        }
+        function show2() {
+            hideall();
+            save(9999);
+            $("#collapse2").collapse('show');
+        }
+
+        $("#part1Show").on("click", function () {
+            show1();
+        });
+
+        $("#part2Show").on("click", function () {
+            show2();
+        });
+
+        $("#part3Show").on("click", function () {
+            hideall();
+            save(9999);
+            $("#collapse3").collapse('show');
+        });
+
+        $("#part4Show").on("click", function () {
+            hideall();
+            save(9999);
+            $("#collapse4").collapse('show');
+        });
+
+        $("#partfShow").on("click", function () {
+            hideall();
+            save(9999);
+            $("#collapsef").collapse('show');
         });
 
     });
