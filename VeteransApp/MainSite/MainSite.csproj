@@ -239,6 +239,7 @@
     <Compile Include="Models\HipModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KneeModel.cs" />
+    <Compile Include="Models\UserNewModel.cs" />
     <Compile Include="Models\WristModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ChargeModel.cs" />
@@ -824,7 +825,7 @@
     <Content Include="Views\Dashboard\dbqHip.cshtml" />
     <Content Include="Views\Dashboard\dbqElbow.cshtml" />
     <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
-    <Content Include="Views\Shared\partialModalsAuth.cshtml" />
+    <Content Include="Views\Dashboard\ClientCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

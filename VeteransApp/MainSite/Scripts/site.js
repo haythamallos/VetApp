@@ -257,9 +257,9 @@ Morris.Donut({
 });
 
 
-$("#btnNewClientModal").click(function () {
-    $('#newclientmodal').modal('show');
-});
+//$("#btnNewClientModal").click(function () {
+//    $('#newclientmodal').modal('show');
+//});
 
 //function showAlert(x) {
 

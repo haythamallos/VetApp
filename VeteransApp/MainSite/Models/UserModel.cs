@@ -14,5 +14,6 @@ namespace MainSite.Models
         public bool HasCurrentRating { get; set; }
         public long InternalCalculatedRating { get; set; }
         public bool IsRatingProfileFinished { get; set; }
+
     }
 }

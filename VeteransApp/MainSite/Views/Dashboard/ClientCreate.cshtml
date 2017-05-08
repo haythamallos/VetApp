@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "New Client";
+    ViewData["Description"] = "New Client";
+}
+
+@model MainSite.Models.UserNewModel
+
+<div id="page-wrapper">
+    <h3 class="box-title"> Please fill out the form related to new client and hit submit. </h3>
+    <div class="white-box">
+        <form class="form-horizontal" method="post" action="/Dashboard/ClientCreatePost">
+            <div class="form-group">
+                <label class="col-md-12" for="example-email">Email <span class="help"> e.g. "example@gmail.com"</span> (Required)</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(x => x.Username, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Email" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12">Full Name (Optional)</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(x => x.FullName, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Full Name" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12">Phone (Optional)</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(x => x.PhoneNumber, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Phone Number" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12">Note  (Optional)</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(x => x.Message, new { htmlAttributes = new { style = "width: 100%", @class = "form-control", placeholder = "Note" } })
+                </div>
+            </div>
+            <button type="submit" name="submit" value="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+            <button type="submit" name="submit" value="cancel"  class="btn btn-inverse waves-effect waves-light">Cancel</button>
+        </form>
+
+    </div>
+</div>

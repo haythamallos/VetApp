@@ -34,11 +34,6 @@
 
 
 <body>
-
-    @Html.Partial("partialModalsAuth")
-
-
-
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
@@ -71,9 +66,9 @@
                             <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>
                             <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><h6><span class="label label-danger">@data.UserCart.lstProductModel.Count item - @data.UserCart.TotalPriceText</span></h6></a></li>
                         }*@
-                    <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" id="btnNewClientModal"><span class="label"></span><i class="icon-plus"></i><i class="icon-user"></i></a></li>
-                    <li><a href="/Dashboard" class="hidden-xs waves-effect waves-light"><i class="icon-home ti-menu"></i></a></li>
-                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut"><i class="icon-logout"></i></a></li>
+                    <li><a href="/Dashboard/ClientCreate" class="hidden-xs waves-effect waves-light" data-placement="bottom" data-toggle="tooltip" data-original-title="Create new client"><i class="icon-plus"></i><i class="icon-user"></i></a></li>
+                    <li><a href="/Dashboard" class="hidden-xs waves-effect waves-light" data-placement="bottom" data-toggle="tooltip" data-original-title="Switch to your login dashboard"><i class="icon-home ti-menu"></i></a></li>
+                    <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut" data-placement="left" data-toggle="tooltip" data-original-title="Logout"><i class="icon-logout"></i></a></li>
                     <!-- /.dropdown -->
                 </ul>
 

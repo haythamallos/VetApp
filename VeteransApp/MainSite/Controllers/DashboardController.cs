@@ -1877,6 +1877,76 @@ namespace MainSite.Controllers
             }
             return View(viewName, model);
         }
+        //[HttpGet]
+        //public ActionResult ClientNew(UserModel model)
+        //{
+        //    try
+        //    {
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return View(model);
+        //}
+        [HttpGet]
+        public ActionResult ClientCreate(UserModel model)
+        {
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ClientCreatePost(UserNewModel model, string submit)
+        {
+            string viewName = "ClientCreate";
+            try
+            {
+                if (submit == "submit")
+                {
+                    BusFacCore busFacCore = new BusFacCore();
+                    BusUser busUser = new BusUser();
+                    if ((busUser.IsValidUsername(model.Username)))
+                    {
+                        bool UserExist = busFacCore.Exist(model.Username);
+                        if (!UserExist)
+                        {
+                            string password = string.Empty;
+                            User user = busFacCore.UserCreate(model.Username, password);
+                            if ((user != null) && (user.UserID > 0))
+                            {
+                                AssociateEvaluationWithUser(user);
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                ViewData["HasError"] = true;
+                            }
+                        }
+                        else
+                        {
+                            ViewData["UserExist"] = true;
+                        }
+                    }
+                    else
+                    {
+                        ViewData["InvalidCredentials"] = true;
+                    }
+
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }              
+
+            }
+            catch (Exception ex)
+            {
+                ViewData["HasError"] = true;
+            }
+
+            return View(viewName, model);
+        }
     }
 
 }
