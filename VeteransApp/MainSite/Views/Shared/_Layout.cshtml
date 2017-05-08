@@ -31,27 +31,48 @@
 
 
 </head>
+
+
 <body>
+
+    @Html.Partial("partialModalsAuth")
+
+
+
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
     </div>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
                 <div class="top-left-part"><a class="logo" href="/Dashboard"><b><span>VeteranApp</span></b></a></div>
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+                    <li>
+                        <form role="search" class="app-search hidden-xs">
+                            <input type="text" placeholder="Search..." class="form-control">
+                            <a href=""><i class="fa fa-search"></i></a>
+                        </form>
+                    </li>
+                    <li>
+                        <form role="search" class="app-search hidden-xs">
+                            <h2><label class="label">Active Session</label><span class="label label-default">@data.user.Username</span></h2>
+                        </form>
+
+                    </li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    @if ((data.UserCart != null) && (data.UserCart.lstProductModel != null) && (data.UserCart.lstProductModel.Count > 0))
-                    {
-                        <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>
-                        <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><h6><span class="label label-danger">@data.UserCart.lstProductModel.Count item - @data.UserCart.TotalPriceText</span></h6></a></li>
-                    }
-
+                 
+                    @*@if ((data.UserCart != null) && (data.UserCart.lstProductModel != null) && (data.UserCart.lstProductModel.Count > 0))
+                        {
+                            <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>
+                            <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><h6><span class="label label-danger">@data.UserCart.lstProductModel.Count item - @data.UserCart.TotalPriceText</span></h6></a></li>
+                        }*@
+                    <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" id="btnNewClientModal"><span class="label"></span><i class="icon-plus"></i><i class="icon-user"></i></a></li>
+                    <li><a href="/Dashboard" class="hidden-xs waves-effect waves-light"><i class="icon-home ti-menu"></i></a></li>
                     <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/LogOut"><i class="icon-logout"></i></a></li>
                     <!-- /.dropdown -->
                 </ul>

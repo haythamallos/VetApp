@@ -824,6 +824,7 @@
     <Content Include="Views\Dashboard\dbqHip.cshtml" />
     <Content Include="Views\Dashboard\dbqElbow.cshtml" />
     <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
+    <Content Include="Views\Shared\partialModalsAuth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

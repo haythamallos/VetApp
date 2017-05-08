@@ -223,6 +223,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 User user = UserGet(userguid);
                 if (user != null)
                 {
+                    layoutData.user = user;
                     EnumContent enumContent = enumContent = new EnumContent() { UserID = user.UserID, IsDisabled = false };
                     enumContent.SP_ENUM_NAME = "spContentEnum1";
                     ArrayList arContent = ContentGetList(enumContent);
@@ -1892,6 +1893,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         public int NumPurchasedForms { get; set; }
         public bool IsProfileComplete { get; set; }
         public ProductCartModel UserCart { get; set; }
+        public User user { get; set; }
     }
 
     public class ContentDashboard

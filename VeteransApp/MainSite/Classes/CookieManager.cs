@@ -16,5 +16,6 @@ namespace MainSite.Classes
         public static readonly string COOKIE_FIELD_HAS_ACTIVE_APPEAL = @"HasActiveAppeal";
         public static readonly string COOKIE_FIELD_CURRENT_RATING = @"CurrentRating";
         public static readonly string COOKIE_FIELD_ISNEW_EVAL = @"IsNewEval";
+        public static readonly string COOKIE_FIELD_ACTIVEUSER_GUID = @"ActiveUserGuid";
     }
 }

@@ -33,6 +33,11 @@ namespace MainSite.Controllers
             else
             {
                 string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
+                string activeuserguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID);
+                if (!string.IsNullOrEmpty(activeuserguid))
+                {
+                    userguid = activeuserguid;
+                }
                 if (!string.IsNullOrEmpty(userguid))
                 {
                     BusFacCore busFacCore = new BusFacCore();
