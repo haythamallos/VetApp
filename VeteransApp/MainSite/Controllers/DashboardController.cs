@@ -268,7 +268,7 @@ namespace MainSite.Controllers
                 Username = user.Username,
                 Password = user.Passwd,
                 FullName = user.Fullname,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = UtilsString.OnlyDigits(user.PhoneNumber),
                 Message = user.UserMessage,
                 SSN = user.Ssn,
                 InternalCalculatedRating = user.InternalCalculatedRating,
@@ -298,7 +298,7 @@ namespace MainSite.Controllers
                 {
                     if (!user.Ssn.Equals(profileModel.userModel.SSN))
                     {
-                        user.Ssn = UtilsSecurity.encrypt(profileModel.userModel.SSN);
+                        user.Ssn = UtilsSecurity.encrypt(UtilsString.OnlyDigits(profileModel.userModel.SSN));
                     }
                 }
                 else
@@ -306,7 +306,7 @@ namespace MainSite.Controllers
                     user.Ssn = null;
                 }
 
-                user.PhoneNumber = profileModel.userModel.PhoneNumber;
+                user.PhoneNumber = UtilsString.OnlyDigits(profileModel.userModel.PhoneNumber);
                 if (!user.Passwd.Equals(profileModel.userModel.Password))
                 {
                     user.Passwd = UtilsSecurity.encrypt(profileModel.userModel.Password);
@@ -412,6 +412,20 @@ namespace MainSite.Controllers
                     user.CurrentRating = evaluationModel.CurrentRating;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
+            }
+            catch { }
+        }
+        private void AssociateEvaluationWithUserInternal(User user, UserNewModel userNew)
+        {
+            try
+            {
+                EvaluationModel evaluationModel = new EvaluationModel();
+                long lID = 0;
+                BusFacCore busFacCore = new BusFacCore();
+                evaluationModel.CurrentRating = userNew.CurrentRating;
+                lID = busFacCore.EvaluationCreate(evaluationModel, user.UserID);
+                user.CurrentRating = evaluationModel.CurrentRating;
+                lID = busFacCore.UserCreateOrModify(user);
             }
             catch { }
         }
@@ -1892,9 +1906,19 @@ namespace MainSite.Controllers
         //    return View(model);
         //}
         [HttpGet]
-        public ActionResult ClientCreate(UserModel model)
+        public ActionResult ClientCreate(UserNewModel model)
         {
             return View(model);
+        }
+        [HttpGet]
+        public ActionResult SwitchHome(UserNewModel model)
+        {
+            string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
+            if (!string.IsNullOrEmpty(userguid))
+            {
+                bool b = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, userguid);
+            }
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public ActionResult ClientCreatePost(UserNewModel model, string submit)
@@ -1911,11 +1935,13 @@ namespace MainSite.Controllers
                         bool UserExist = busFacCore.Exist(model.Username);
                         if (!UserExist)
                         {
-                            string password = string.Empty;
-                            User user = busFacCore.UserCreate(model.Username, password);
+                            string password = model.Username + "001";
+                            User userSource = Auth();
+                            User user = busFacCore.UserCreate(model.Username, password, userSource.UserID);
                             if ((user != null) && (user.UserID > 0))
                             {
-                                AssociateEvaluationWithUser(user);
+                                AssociateEvaluationWithUserInternal(user, model);
+                                bool b = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, user.CookieID);
                                 return RedirectToAction("Index");
                             }
                             else
@@ -1945,6 +1971,20 @@ namespace MainSite.Controllers
                 ViewData["HasError"] = true;
             }
 
+            return View(viewName, model);
+        }
+        [HttpPost]
+        public ActionResult SearchResults(string pattern)
+        {
+            string viewName = "SearchResults";
+            SearchResultModel model = new SearchResultModel();
+
+            if (!string.IsNullOrEmpty(pattern))
+            {
+                BusFacCore busFacCore = new BusFacCore();
+                List<User> lstUser = busFacCore.Search(pattern);
+                model.lstUser = lstUser;
+            }
             return View(viewName, model);
         }
     }

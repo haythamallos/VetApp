@@ -63,6 +63,16 @@ namespace Vetapp.Engine.Common
             }
             return ssn;
         }
+
+        public static string OnlyDigits(string data)
+        {
+            string justNumbers = null;
+            if (!string.IsNullOrEmpty(data))
+            {
+                justNumbers = new String(data.Where(Char.IsDigit).ToArray());
+            }
+            return justNumbers;
+        }
     }
 
     public class SSN

@@ -186,6 +186,7 @@
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="DB\BusinessAccessLayer\BusJctUserUser.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacPDFItems.cs" />
     <Compile Include="DB\Common\UtilsString.cs" />
     <Compile Include="Controllers\CalculatorController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="DB\DataAccessLayer\Data\Dbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Evaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Data\JctUserContentType.cs" />
+    <Compile Include="DB\DataAccessLayer\Data\JctUserUser.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Purchase.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Side.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Syslog.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="DB\DataAccessLayer\Enum\EnumDbversion.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumEvaluation.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumJctUserContentType.cs" />
+    <Compile Include="DB\DataAccessLayer\Enum\EnumJctUserUser.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumPurchase.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumSide.cs" />
     <Compile Include="DB\DataAccessLayer\Enum\EnumSyslog.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="Models\HipModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KneeModel.cs" />
+    <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\UserNewModel.cs" />
     <Compile Include="Models\WristModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -826,6 +830,7 @@
     <Content Include="Views\Dashboard\dbqElbow.cshtml" />
     <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
     <Content Include="Views\Dashboard\ClientCreate.cshtml" />
+    <Content Include="Views\Dashboard\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

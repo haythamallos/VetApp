@@ -17,6 +17,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-12">Current VA rating from <span> <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a>.</span>? (Required)</label>
+                <div class="col-md-12">
+                    @Html.DropDownListFor(x => x.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-12">Full Name (Optional)</label>
                 <div class="col-md-12">
                     @Html.EditorFor(x => x.FullName, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Full Name" } })
@@ -31,7 +37,7 @@
             <div class="form-group">
                 <label class="col-md-12">Note  (Optional)</label>
                 <div class="col-md-12">
-                    @Html.EditorFor(x => x.Message, new { htmlAttributes = new { style = "width: 100%", @class = "form-control", placeholder = "Note" } })
+                    @Html.EditorFor(x => x.Note, new { htmlAttributes = new { style = "width: 100%", @class = "form-control", placeholder = "Note" } })
                 </div>
             </div>
             <button type="submit" name="submit" value="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

@@ -10,5 +10,6 @@ namespace MainSite.Models
         public string Note { get; set; }
         public string ErrorMessage { get; set; }
         public bool Exists { get; set; }
+        public int CurrentRating { get; set; }
     }
 }

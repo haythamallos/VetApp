@@ -110,13 +110,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return arUser;
         }
 
-        public User UserCreate(string username, string password)
+        public User UserCreate(string username, string password, long user_source_id = 0)
         {
             User user = null;
             try
             {
                 string passwordEncrypted = UtilsSecurity.encrypt(password);
-                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1, CookieID = Guid.NewGuid().ToString(), NumberOfVisits = 1 };
+                User userTmp = new User() { Username = username, Passwd = passwordEncrypted, UserRoleID = 1, CookieID = Guid.NewGuid().ToString(), NumberOfVisits = 1, UserSourceID = user_source_id };
                 long lID = UserCreateOrModify(userTmp);
                 if (lID > 0)
                 {
@@ -133,13 +133,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return user;
         }
 
-        public User UserAuthenticate(string username, string password, long userroleid = 1)
+        public User UserAuthenticate(string username, string password)
         {
             User user = null;
             try
             {
                 string passwordEncrypted = UtilsSecurity.encrypt(password);
-                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted, UserRoleID = userroleid };
+                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted};
                 ArrayList arUser = UserGetList(enumUser);
                 if ((arUser != null) && (arUser.Count == 1))
                 {
@@ -215,7 +215,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return user;
         }
 
-        public LayoutData GetLayoutData(string userguid)
+        public LayoutData GetLayoutData(string userguid, string sourceUserguid)
         {
             LayoutData layoutData = new LayoutData();
             if (!string.IsNullOrEmpty(userguid))
@@ -248,6 +248,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     enumContent = null;
 
                     layoutData.UserCart = GetUserCart(user);
+
+                    if (!string.IsNullOrEmpty(sourceUserguid))
+                    {
+                        User sourceUser = UserGet(sourceUserguid);
+                        if (sourceUser != null)
+                        {
+                            layoutData.sourceUser = sourceUser;
+                        }
+                    }
+
                 }
             }
             return layoutData;
@@ -505,6 +515,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return lstJctUserContentType;
         }
 
+        public List<User> Search(string pattern)
+        {
+            List<User> lstUser = new List<User>();
+            EnumUser enumUser = new EnumUser();
+            enumUser.Firstname = "%" + pattern + "%";
+            enumUser.Fullname = "%" + pattern + "%";
+            enumUser.Lastname = "%" + pattern + "%";
+            enumUser.PhoneNumber = "%" + pattern + "%";
+            enumUser.Username = "%" + pattern + "%";
+            return lstUser;
+        }
         /*********************** CUSTOM END *********************/
 
 
@@ -1884,7 +1905,122 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     ErrorCode error = new ErrorCode();
                 }
             }
-        }
+        }
+
+        //------------------------------------------
+        /// <summary>
+        /// JctUserUserCreateOrModify
+        /// </summary>
+        /// <param name="">pJctUserUser</param>
+        /// <returns>long</returns>
+        /// 
+        public long JctUserUserCreateOrModify(JctUserUser pJctUserUser)
+        {
+            long lID = 0;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserUser busJctUserUser = null;
+                busJctUserUser = new BusJctUserUser(conn);
+                busJctUserUser.Save(pJctUserUser);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                lID = pJctUserUser.JctUserUserID;
+                _hasError = busJctUserUser.HasError;
+                if (busJctUserUser.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return lID;
+        }
+
+        /// <summary>
+        /// JctUserUserGetList
+        /// </summary>
+        /// <param name="">pEnumJctUserUser</param>
+        /// <returns>ArrayList</returns>
+        /// 
+        public ArrayList JctUserUserGetList(EnumJctUserUser pEnumJctUserUser)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserUser busJctUserUser = null;
+                busJctUserUser = new BusJctUserUser(conn);
+                items = busJctUserUser.Get(pEnumJctUserUser);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busJctUserUser.HasError;
+                if (busJctUserUser.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// JctUserUserGet
+        /// </summary>
+        /// <param name="">pLngJctUserUserID</param>
+        /// <returns>JctUserUser</returns>
+        /// 
+        public JctUserUser JctUserUserGet(long pLngJctUserUserID)
+        {
+            JctUserUser jct_user_user = new JctUserUser() { JctUserUserID = pLngJctUserUserID };
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusJctUserUser busJctUserUser = null;
+                busJctUserUser = new BusJctUserUser(conn);
+                busJctUserUser.Load(jct_user_user);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busJctUserUser.HasError;
+                if (busJctUserUser.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return jct_user_user;
+        }
+
+        /// <summary>
+        /// JctUserUserRemove
+        /// </summary>
+        /// <param name="">pJctUserUserID</param>
+        /// <returns>void</returns>
+        /// 
+        public void JctUserUserRemove(long pJctUserUserID)
+        {
+            bool bConn = false;
+
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                JctUserUser jct_user_user = new JctUserUser();
+                jct_user_user.JctUserUserID = pJctUserUserID;
+                BusJctUserUser bus = null;
+                bus = new BusJctUserUser(conn);
+                bus.Delete(jct_user_user);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = bus.HasError;
+                if (bus.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+        }
     }
 
     public class LayoutData
@@ -1894,6 +2030,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
         public bool IsProfileComplete { get; set; }
         public ProductCartModel UserCart { get; set; }
         public User user { get; set; }
+        public User sourceUser { get; set; }
     }
 
     public class ContentDashboard

@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumUser.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	3/23/2017	Created
+    /// 001	HA	5/9/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -85,6 +85,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private DateTime _dtBeginLastVisitDate = new DateTime();
         private DateTime _dtEndLastVisitDate = new DateTime();
         private bool? _bIsRatingProfileFinished = null;
+        private long _lUserSourceID = 0;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -168,7 +169,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_END_LAST_VISIT_DATE = "EndLastVisitDate"; //Attribute LastVisitDate  name
                                                                                     /// <summary>IsRatingProfileFinished Attribute type string</summary>
         public static readonly string TAG_IS_RATING_PROFILE_FINISHED = "IsRatingProfileFinished"; //Attribute IsRatingProfileFinished  name
-                                                                                                  // Stored procedure name
+                                                                                                  /// <summary>UserSourceID Attribute type string</summary>
+        public static readonly string TAG_USER_SOURCE_ID = "UserSourceID"; //Attribute UserSourceID  name
+                                                                           // Stored procedure name
         public string SP_ENUM_NAME = "spUserEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the User Class of type bool</summary>
@@ -410,6 +413,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _bIsRatingProfileFinished; }
             set { _bIsRatingProfileFinished = value; }
+        }
+        /// <summary>UserSourceID is a Property in the User Class of type long</summary>
+        public long UserSourceID
+        {
+            get { return _lUserSourceID; }
+            set { _lUserSourceID = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -683,6 +692,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 sbReturn.Append(TAG_END_LAST_VISIT_DATE + ":\n");
             }
             sbReturn.Append(TAG_IS_RATING_PROFILE_FINISHED + ":  " + IsRatingProfileFinished + "\n");
+            sbReturn.Append(TAG_USER_SOURCE_ID + ":  " + UserSourceID + "\n");
 
             return sbReturn.ToString();
         }
@@ -816,6 +826,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                 sbReturn.Append("<" + TAG_END_LAST_VISIT_DATE + "></" + TAG_END_LAST_VISIT_DATE + ">\n");
             }
             sbReturn.Append("<" + TAG_IS_RATING_PROFILE_FINISHED + ">" + IsRatingProfileFinished + "</" + TAG_IS_RATING_PROFILE_FINISHED + ">\n");
+            sbReturn.Append("<" + TAG_USER_SOURCE_ID + ">" + UserSourceID + "</" + TAG_USER_SOURCE_ID + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -1252,6 +1263,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 IsRatingProfileFinished = false;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_USER_SOURCE_ID);
+                UserSourceID = (long)Convert.ToInt32(xResultNode.InnerText);
+            }
+            catch
+            {
+                UserSourceID = 0;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -1593,6 +1614,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     IsRatingProfileFinished = false;
                 }
 
+                Console.WriteLine(TAG_USER_SOURCE_ID + ":  ");
+                try
+                {
+                    UserSourceID = (long)Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    UserSourceID = 0;
+                }
+
 
             }
             catch (Exception e)
@@ -1670,6 +1701,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramBeginLastVisitDate = null;
             SqlParameter paramEndLastVisitDate = null;
             SqlParameter paramIsRatingProfileFinished = null;
+            SqlParameter paramUserSourceID = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -2076,6 +2108,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_IS_RATING_PROFILE_FINISHED + "=" + IsRatingProfileFinished + "\n");
             paramIsRatingProfileFinished.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramIsRatingProfileFinished);
+            paramUserSourceID = new SqlParameter("@" + TAG_USER_SOURCE_ID, UserSourceID);
+            sbLog.Append(TAG_USER_SOURCE_ID + "=" + UserSourceID + "\n");
+            paramUserSourceID.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramUserSourceID);
         }
 
     }
