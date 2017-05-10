@@ -274,7 +274,8 @@ namespace MainSite.Controllers
                 InternalCalculatedRating = user.InternalCalculatedRating,
                 CurrentRating = (int)user.CurrentRating,
                 HasCurrentRating = (bool)user.HasCurrentRating,
-                IsRatingProfileFinished = (bool)user.IsRatingProfileFinished
+                IsRatingProfileFinished = (bool)user.IsRatingProfileFinished,
+                UserRoleID = user.UserRoleID
             };
             return userModel;
         }
@@ -937,19 +938,24 @@ namespace MainSite.Controllers
                 {
                     user.HasCurrentRating = true;
                     user.CurrentRating = model.Rating;
+                    NameSet nameSet = UtilsString.ParseFullname(model.Fullname);
+                    user.Fullname = model.Fullname;
+                    user.Firstname = nameSet.FirstName;
+                    user.Middlename = nameSet.MiddleInitial;
+                    user.Lastname = nameSet.LastName;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
-                else if (submitID == "OVERALLRATING_NONE")
-                {
-                    user.HasCurrentRating = true;
-                    user.CurrentRating = 0;
-                    lID = busFacCore.UserCreateOrModify(user);
-                }
-                else if (submitID == "NOT_CONNECTED")
-                {
-                    jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = false };
-                    lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
-                }
+                //else if (submitID == "OVERALLRATING_NONE")
+                //{
+                //    user.HasCurrentRating = true;
+                //    user.CurrentRating = 0;
+                //    lID = busFacCore.UserCreateOrModify(user);
+                //}
+                //else if (submitID == "NOT_CONNECTED")
+                //{
+                //    jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = false };
+                //    lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                //}
                 else if (long.TryParse(submitID, out lParsedContentTypeID))
                 {
                     if (!(bool)contentType.HasSides)
@@ -1990,7 +1996,27 @@ namespace MainSite.Controllers
                 if ((userSource != null) && (userSource.UserRoleID > 1))
                 {
                     List<User> lstUser = busFacCore.Search(pattern, userSource.UserID);
-                    model.lstUser = lstUser;
+                    if (lstUser.Count > 0)
+                    {
+                        List<UserModel> lstUserModel = new List<UserModel>();
+                        UserModel userModel = null;
+                        foreach (User user in lstUser)
+                        {
+                            userModel = new UserModel()
+                            {
+                                CurrentRating = (int)user.CurrentRating,
+                                FullName = user.Fullname,
+                                PhoneNumber = user.PhoneNumber,
+                                Username = user.Username,
+                                DateCreated = user.DateCreated,
+                                CookieID = user.CookieID
+                            };
+                            lstUserModel.Add(userModel);
+                        }
+                        model.lstUserModel = lstUserModel;
+                    }
+                    model.numresults = lstUser.Count;
+                    model.searchText = pattern;
                 }
             }
             return View(viewName, model);
@@ -2001,11 +2027,17 @@ namespace MainSite.Controllers
             string viewName = "SearchResults";
             SearchResultModel model = new SearchResultModel();
 
-            BusFacCore busFacCore = new BusFacCore();
-            List<User> lstUser = busFacCore.Search(null, 0);
-            model.lstUser = lstUser;
+            //BusFacCore busFacCore = new BusFacCore();
+            //List<User> lstUser = busFacCore.Search(null, 0);
+            //model.lstUser = lstUser;
 
             return View(viewName, model);
+        }
+        [HttpGet]
+        public ActionResult SetUser(string id)
+        {
+            bool b = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, id);
+            return RedirectToAction("Index");
         }
     }
 

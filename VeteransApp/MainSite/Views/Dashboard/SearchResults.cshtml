@@ -5,16 +5,57 @@
     ViewData["Description"] = "Search Results";
 }
 
+@using MainSite.Models
 @model MainSite.Models.SearchResultModel
 
+<!-- Page Content -->
 <div id="page-wrapper">
-    <div class="col-xs-12">
-        <!-- /.row -->
-        <div class="row">
-            <h2>SearchResults</h2>
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Search Result</h4>
+            </div>
         </div>
-        <!--row -->
+        <!-- .row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title">Search Here</h3>
+                    <form class="form-group" role="search" method="post" action="/Dashboard/SearchResults">
+                        <div class="input-group">
+                            <input type="text" name="pattern" id="pattern" class="form-control" placeholder="@Model.searchText">
+                            <span class="input-group-btn"><button type="submit" class="btn waves-effect waves-light btn-info"><i class="fa fa-search"></i></button></span>
+                        </div>
+                    </form>
+                    <h2 class="m-t-40">Search Result For "Client"</h2>
+                    <small>Number of results found: @Model.numresults</small>
+                    <hr>
+                    <ul class="search-listing">
+                        @foreach (UserModel userModel in Model.lstUserModel)
+                        {
+                            <li>
+                                <h3><a href="/Dashboard/SetUser?id=@userModel.CookieID">@userModel.Username</a></h3>
+                                <p>[fullname=@userModel.FullName][currentrating=@userModel.CurrentRating][phone=@userModel.PhoneNumber][datecreated=@userModel.DateCreated.ToLongDateString() + @userModel.DateCreated.ToShortTimeString() (UTC)]</p>
+                            </li>
+                        }
+                    </ul>
+                    @*<ul class="pagination m-b-0">
+                        <li class="disabled"> <a href="#"><i class="fa fa-angle-left"></i></a> </li>
+                        <li> <a href="javascript:void(0)">1</a> </li>
+                        <li class="active"> <a href="javascript:void(0)">2</a> </li>
+                        <li> <a href="javascript:void(0)">3</a> </li>
+                        <li> <a href="javascript:void(0)">4</a> </li>
+                        <li> <a href="javascript:void(0)">5</a> </li>
+                        <li> <a href="javascript:void(0)"><i class="fa fa-angle-right"></i></a> </li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
     </div>
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2016 &copy; Pixel Admin brought to you by themedesigner.in </footer>
 </div>
+<!-- /#page-wrapper -->
 
 

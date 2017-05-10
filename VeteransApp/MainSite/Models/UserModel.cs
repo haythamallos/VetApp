@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MainSite.Models
 {
     public class UserModel
@@ -14,6 +16,8 @@ namespace MainSite.Models
         public bool HasCurrentRating { get; set; }
         public long InternalCalculatedRating { get; set; }
         public bool IsRatingProfileFinished { get; set; }
-
+        public DateTime DateCreated { get; set; }
+        public string CookieID { get; set; }
+        public long UserRoleID { get; set; }
     }
 }

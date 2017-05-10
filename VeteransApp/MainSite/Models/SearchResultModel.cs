@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
-using Vetapp.Engine.DataAccessLayer.Data;
 
 namespace MainSite.Models
 {
     public class SearchResultModel
     {
-        public List<User> lstUser { get; set; }
+        public List<UserModel> lstUserModel { get; set; }
+        public string searchText { get; set; }
+        public int numresults { get; set; }
+        public SearchResultModel()
+        {
+            lstUserModel = new List<UserModel>();
+        }
     }
 }

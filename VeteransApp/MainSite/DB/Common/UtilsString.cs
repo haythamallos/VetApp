@@ -73,6 +73,32 @@ namespace Vetapp.Engine.Common
             }
             return justNumbers;
         }
+
+        public static NameSet ParseFullname(string fullname)
+        {
+            NameSet o = new NameSet();
+            if (!string.IsNullOrEmpty(fullname))
+            {
+                string[] words = fullname.Split();
+                if (words.Length > 2)
+                {
+                    o.FirstName = words[0].Trim();
+                    o.MiddleInitial = words[1].Substring(0, 1).Trim();
+                    o.LastName = words[2].Trim();
+                }
+                else if (words.Length > 1)
+                {
+                    o.FirstName = words[0].Trim();
+                    o.LastName = words[1].Trim();
+                }
+                else
+                {
+                    o.FirstName = words[0].Trim();
+                }
+            }
+            return o;
+        }
+
     }
 
     public class SSN
@@ -100,5 +126,13 @@ namespace Vetapp.Engine.Common
 
             return data;
         }
+    }
+
+    public class NameSet
+    {
+        public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
+        public string LastName { get; set; }
+        public string Fullname { get; set; }
     }
 }

@@ -18,7 +18,7 @@
                         <a href="https://www.ebenefits.va.gov/" target="_blank">
                             <img src="@Model.imageURL" alt="ebenefits" width="150">
                             <div class="caption">
-                                <p>Check your disability ratings through eBenefits.</p>
+                                <p>Check your disability ratings through eBenefits.  You must be service-connected with the VA to receive benefits using our service.</p>
                             </div>
                         </a>
                     </div>
@@ -26,15 +26,19 @@
                         <form id="formratingcaptureoverall" method="post" action="/Dashboard/RatingsCapturePost">
                             <input id="ContentTypeID" name="ContentTypeID" class="form-control" type="hidden" value="@Model.ContentTypeID">
                             <div class="text-left"><span class="text-muted"> We have a good chance of getting you the maximum VA rating.</span></div>
-                            <h3>Please Answer The Question Below To Get Started</h3>
+                            <h3>Please answer the questions below to get started</h3>
                             <hr />
-                            <label class="control-label">Do you currently have an overall rating by the VA?  If so, what is it?  Check your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a> account.</label>
+                            <label class="control-label">What is your full legal name as it is known to VA?</label>
+                            <br />
+                            @Html.EditorFor(x => x.Fullname, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name", onkeyup = "toggleButton(this,'submitID');" } })
+                            <hr />
+                            <label class="control-label">What is your overall service-connected disability rating by the VA?  Check your <a href="https://www.ebenefits.va.gov/" target="_blank">eBenefits</a> account.</label>
                             <br />
                             @Html.DropDownListFor(x => x.Rating, (SelectList)ViewBag.CurrentRatingsList)
                             <hr />
-                            <button name="submitID" value="OVERALLRATING_SUBMIT" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
-                            <button name="submitID" value="OVERALLRATING_NONE" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
-                            <span class="text-muted"> These answers are stored as part of your profile and may be modified at anytime.</span>
+                            <button id="submitID" name="submitID" value="OVERALLRATING_SUBMIT" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Submit</button>
+                            @*<button name="submitID" value="OVERALLRATING_NONE" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">I Don't Have An Overall VA Rating</button>
+                                <span class="text-muted"> These answers are stored as part of your profile and may be modified at anytime.</span>*@
                         </form>
                     </div>
                 }
@@ -71,13 +75,13 @@
                                 @Html.DropDownListFor(x => x.RatingRightSide, (SelectList)ViewBag.CurrentRatingsList)
 
                                 @*<label class="control-label">Do you have disability on left, right, or both sides of your @Model.contentType.VisibleCode?</label>
-                                <br />*@
+                                    <br />*@
                                 @*@Html.RadioButtonFor(x => x.Side, 2)
-                                <span>Left</span>
-                                @Html.RadioButtonFor(x => x.Side, 3)
-                                <span>Right</span>
-                                @Html.RadioButtonFor(x => x.Side, 4)
-                                <span>Both</span>*@
+                                    <span>Left</span>
+                                    @Html.RadioButtonFor(x => x.Side, 3)
+                                    <span>Right</span>
+                                    @Html.RadioButtonFor(x => x.Side, 4)
+                                    <span>Both</span>*@
                             }
                             <hr />
                             @if (!string.IsNullOrEmpty(Model.Message))
@@ -101,4 +105,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    toggleButton('Fullname', 'submitID');
+
+    function toggleButton(ref, bttnID) {
+        document.getElementById(bttnID).disabled = ((ref.value !== ref.defaultValue) ? false : true);
+    }
+
+</script>
 

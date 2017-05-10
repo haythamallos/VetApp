@@ -20,6 +20,7 @@ namespace MainSite.Models
         public bool AskSide { get; set; }
         public bool IsProfileFinished { get; set; }
         public string Message { get; set; }
+        public string Fullname { get; set; }
 
         public PreliminaryModel()
         {
