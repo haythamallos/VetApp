@@ -56,7 +56,7 @@
                     {
                         <li>
                             <form role="search" class="app-search hidden-xs" method="post" action="/Dashboard/SearchResults">
-                                <input type="text" name="searchdata" id="searchdata" placeholder="Search..." class="form-control">
+                                <input type="text" name="pattern" id="pattern" placeholder="Search..." class="form-control">
                             </form>
                         </li>
                        <li>
@@ -69,7 +69,21 @@
 
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                 
+                   @if ((data.sourceUser != null) && ((data.sourceUser.UserRoleID == 3) || (data.sourceUser.UserRoleID == 4)))
+                   {
+                    <li class="mega-dropdown">
+                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">Admin <i class="icon-options-vertical"></i></a>
+                        <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
+
+                            <li class="col-sm-12 m-t-40 demo-box">
+                                <div class="row">
+                                    <div class="col-sm-2"><div class="white-box text-center bg-purple"><a href="/Dashboard/Users"  class="text-white"><i class="glyphicon icon-user"  data-icon="v"></i><br />Users</a></div></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                   }
+
                     @*@if ((data.UserCart != null) && (data.UserCart.lstProductModel != null) && (data.UserCart.lstProductModel.Count > 0))
                         {
                             <li class="right-side-toggle"> <a class="waves-effect waves-light" href="/Dashboard/ProductCart"><i class="ti-shopping-cart"></i><div class="notify"><span class="heartbit"></span><span class="point"></span></div></a></li>

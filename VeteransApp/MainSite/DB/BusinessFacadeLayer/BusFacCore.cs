@@ -515,15 +515,68 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return lstJctUserContentType;
         }
 
-        public List<User> Search(string pattern)
+        public List<User> Search(string pattern, long lSourceUserID)
         {
             List<User> lstUser = new List<User>();
             EnumUser enumUser = new EnumUser();
-            enumUser.Firstname = "%" + pattern + "%";
-            enumUser.Fullname = "%" + pattern + "%";
-            enumUser.Lastname = "%" + pattern + "%";
-            enumUser.PhoneNumber = "%" + pattern + "%";
-            enumUser.Username = "%" + pattern + "%";
+            enumUser.UserSourceID = lSourceUserID;
+            if (!string.IsNullOrEmpty(pattern))
+            {
+                enumUser.UserRoleID = 1;
+                enumUser.Firstname = "%" + pattern + "%";
+                enumUser.Fullname = "%" + pattern + "%";
+                enumUser.Lastname = "%" + pattern + "%";
+                enumUser.PhoneNumber = "%" + pattern + "%";
+                enumUser.Username = "%" + pattern + "%";
+                ArrayList arUser = UserGetList(enumUser, "spUserEnum1");
+                if (arUser != null)
+                {
+                    lstUser = arUser.Cast<User>().ToList();
+                }
+            }
+            return lstUser;
+        }
+
+        public ArrayList UserGetList(EnumUser pEnumUser, string spname)
+        {
+            ArrayList items = null;
+            bool bConn = false;
+            SqlConnection conn = getDBConnection();
+            if (conn != null)
+            {
+                BusUser busUser = null;
+                busUser = new BusUser(conn);
+                busUser.SP_ENUM_NAME = spname;
+                items = busUser.Get(pEnumUser);
+                // close the db connection
+                bConn = CloseConnection(conn);
+                _hasError = busUser.HasError;
+                if (busUser.HasError)
+                {
+                    // error
+                    ErrorCode error = new ErrorCode();
+                }
+            }
+            return items;
+        }
+
+        public List<User> SearchAdmin(string pattern, long lUserRoleID)
+        {
+            List<User> lstUser = new List<User>();
+            EnumUser enumUser = new EnumUser() { UserRoleID = lUserRoleID };
+            if (!string.IsNullOrEmpty(pattern))
+            {
+                enumUser.Firstname = "%" + pattern + "%";
+                enumUser.Fullname = "%" + pattern + "%";
+                enumUser.Lastname = "%" + pattern + "%";
+                enumUser.PhoneNumber = "%" + pattern + "%";
+                enumUser.Username = "%" + pattern + "%";
+            }
+            ArrayList arUser = UserGetList(enumUser);
+            if (arUser != null)
+            {
+                lstUser = arUser.Cast<User>().ToList();
+            }
             return lstUser;
         }
         /*********************** CUSTOM END *********************/

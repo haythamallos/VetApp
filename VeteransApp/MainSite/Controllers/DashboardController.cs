@@ -68,7 +68,7 @@ namespace MainSite.Controllers
             var MovementList60Deg = new System.Web.Mvc.SelectList(new[] { 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList60Deg = MovementList60Deg;
 
-            var MovementList70Deg = new System.Web.Mvc.SelectList(new[] {70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
+            var MovementList70Deg = new System.Web.Mvc.SelectList(new[] { 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
             ViewBag.MovementList70Deg = MovementList70Deg;
 
             var MovementList80Deg = new System.Web.Mvc.SelectList(new[] { 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 });
@@ -364,8 +364,12 @@ namespace MainSite.Controllers
                             System.Web.HttpContext.Current.Request.GetOwinContext().Authentication.SignIn(identity);
 
                             AssociateEvaluationWithUser(user);
+                            string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
+                            if ((!string.IsNullOrEmpty(userguid)) && (user.CookieID != userguid))
+                            {
+                                bool b2 = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, string.Empty);
+                            }
                             bool b = SetCookieField(CookieManager.COOKIE_FIELD_USER_GUID, user.CookieID);
-                            //return RedirectToAction("Index");
                             return RedirectToAction("Index", "Dashboard");
                         }
                         else
@@ -1963,7 +1967,7 @@ namespace MainSite.Controllers
                 else
                 {
                     return RedirectToAction("Index", "Dashboard");
-                }              
+                }
 
             }
             catch (Exception ex)
@@ -1981,10 +1985,26 @@ namespace MainSite.Controllers
 
             if (!string.IsNullOrEmpty(pattern))
             {
+                User userSource = Auth();
                 BusFacCore busFacCore = new BusFacCore();
-                List<User> lstUser = busFacCore.Search(pattern);
-                model.lstUser = lstUser;
+                if ((userSource != null) && (userSource.UserRoleID > 1))
+                {
+                    List<User> lstUser = busFacCore.Search(pattern, userSource.UserID);
+                    model.lstUser = lstUser;
+                }
             }
+            return View(viewName, model);
+        }
+        [HttpGet]
+        public ActionResult SearchAdmin()
+        {
+            string viewName = "SearchResults";
+            SearchResultModel model = new SearchResultModel();
+
+            BusFacCore busFacCore = new BusFacCore();
+            List<User> lstUser = busFacCore.Search(null, 0);
+            model.lstUser = lstUser;
+
             return View(viewName, model);
         }
     }
