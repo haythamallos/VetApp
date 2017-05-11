@@ -81,7 +81,17 @@
                             <input id="SSN" name="SSN" value="@Model.userModel.SSN" type="password" placeholder="123 45 6789" class="form-control form-control-line">
                         </div>
                     </div>
-                    <br />
+                    <hr />
+                    @if (Model.userModel.UserRoleID > 1)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3">Permission Role:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.userModel.UserRoleText </p>
+                            </div>
+                        </div>
+                        <hr />
+                    }
                     <div class="form-group">
                         <div class="col-sm-12">
                             <button class="btn btn-success">Update Profile</button>

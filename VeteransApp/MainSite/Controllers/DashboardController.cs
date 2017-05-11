@@ -46,6 +46,22 @@ namespace MainSite.Controllers
             }
             return user;
         }
+        private User AuthSourceUser()
+        {
+            User user = null;
+            try
+            {
+                bool bIsAuth = User.Identity.IsAuthenticated;
+                string userguid = GetCookieFieldValue(CookieManager.COOKIE_FIELD_USER_GUID);
+                BusFacCore busFacCore = new BusFacCore();
+                user = busFacCore.UserGet(userguid);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return user;
+        }
         public DashboardController()
         {
             _config = new Config();
@@ -277,6 +293,23 @@ namespace MainSite.Controllers
                 IsRatingProfileFinished = (bool)user.IsRatingProfileFinished,
                 UserRoleID = user.UserRoleID
             };
+            switch(user.UserRoleID)
+            {
+                case 1:
+                    userModel.UserRoleText = "Client";
+                    break;
+                case 2:
+                    userModel.UserRoleText = "Staff";
+                    break;
+                case 3:
+                    userModel.UserRoleText = "Power User";
+                    break;
+                case 4:
+                    userModel.UserRoleText = "Admin";
+                    break;
+                default:
+                    break;
+            }
             return userModel;
         }
         public ActionResult ProfileUpdate()
@@ -285,6 +318,11 @@ namespace MainSite.Controllers
             User user = Auth();
             UserModel userModel = UserToModel(user);
             profileModel.userModel = userModel;
+            User userSource = AuthSourceUser();
+            if ((userSource != null) && (userSource.UserRoleID == 4))
+            {
+                profileModel.IsAdmin = true;
+            }
             return View(profileModel);
         }
         public ActionResult ProfileUpdateAction(ProfileModel profileModel)
@@ -441,8 +479,9 @@ namespace MainSite.Controllers
             try
             {
                 BusFacCore busFacCore = new BusFacCore();
+                UtilsValidation utilsValidation = new UtilsValidation();
                 BusUser busUser = new BusUser();
-                if ((busUser.IsValidUsername(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
+                if ((utilsValidation.IsValidEmail(userModel.Username)) && (busUser.IsValidPasswd(userModel.Password)))
                 {
                     if (!(userModel.Password.Equals(userModel.ConfirmPassword, StringComparison.Ordinal)))
                     {
@@ -1939,8 +1978,8 @@ namespace MainSite.Controllers
                 if (submit == "submit")
                 {
                     BusFacCore busFacCore = new BusFacCore();
-                    BusUser busUser = new BusUser();
-                    if ((busUser.IsValidUsername(model.Username)))
+                    UtilsValidation utilsValidation = new UtilsValidation();
+                    if ((utilsValidation.IsValidEmail(model.Username)))
                     {
                         bool UserExist = busFacCore.Exist(model.Username);
                         if (!UserExist)
@@ -1991,7 +2030,7 @@ namespace MainSite.Controllers
 
             if (!string.IsNullOrEmpty(pattern))
             {
-                User userSource = Auth();
+                User userSource = AuthSourceUser();
                 BusFacCore busFacCore = new BusFacCore();
                 if ((userSource != null) && (userSource.UserRoleID > 1))
                 {

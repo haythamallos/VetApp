@@ -211,6 +211,7 @@
     <Compile Include="DB\Common\JSONHelper.cs" />
     <Compile Include="DB\Common\UtilsImage.cs" />
     <Compile Include="DB\Common\UtilsSecurity.cs" />
+    <Compile Include="DB\Common\UtilsValidation.cs" />
     <Compile Include="DB\DataAccessLayer\Data\CartItem.cs" />
     <Compile Include="DB\DataAccessLayer\Data\Content.cs" />
     <Compile Include="DB\DataAccessLayer\Data\ContentState.cs" />

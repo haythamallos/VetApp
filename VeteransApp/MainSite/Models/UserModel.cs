@@ -19,5 +19,6 @@ namespace MainSite.Models
         public DateTime DateCreated { get; set; }
         public string CookieID { get; set; }
         public long UserRoleID { get; set; }
+        public string UserRoleText { get; set; }
     }
 }

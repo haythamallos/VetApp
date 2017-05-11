@@ -7,6 +7,7 @@ namespace MainSite.Models
     {
         public UserModel userModel { get; set; }
         public List<DisabilityItem> lstDisabilityItem { get; set; }
+        public bool IsAdmin { get; set; }
         public ProfileModel()
         {
             lstDisabilityItem = new List<DisabilityItem>();
