@@ -20,5 +20,7 @@ namespace MainSite.Models
         public string CookieID { get; set; }
         public long UserRoleID { get; set; }
         public string UserRoleText { get; set; }
+        public bool IsDisabled { get; set; }
+
     }
 }

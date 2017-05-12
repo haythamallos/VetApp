@@ -77,7 +77,11 @@
 
                             <li class="col-sm-12 m-t-40 demo-box">
                                 <div class="row">
-                                    <div class="col-sm-2"><div class="white-box text-center bg-purple"><a href="/Dashboard/Users"  class="text-white"><i class="glyphicon icon-user"  data-icon="v"></i><br />Users</a></div></div>
+                                    <form role="search" class="app-search hidden-xs" method="post" action="/Dashboard/SearchResults">
+                                        <button name="pattern" value="---" class="btn btn-primary btn-rounded waves-effect waves-light" type="submit"><span class="btn-label"><i class="fa fa-users"></i></span>Users</button>                                    
+                                    </form>
+
+                                    @*<div class="col-sm-2"><div class="white-box text-center bg-purple"><a href="/Dashboard/SearchResultsUsers"  class="text-white"><i class="glyphicon icon-user"  data-icon="v"></i><br />Users</a></div></div>*@
                                 </div>
                             </li>
                         </ul>

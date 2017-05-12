@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="col-md-12" for="example-email">Email <span class="help"> e.g. "example@gmail.com"</span> (Required)</label>
                 <div class="col-md-12">
-                    @Html.EditorFor(x => x.Username, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Email", onkeyup = "toggleButton(this,'submit');" } })
+                    @Html.EditorFor(x => x.Username, new { htmlAttributes = new { style = "width: 400px", @class = "form-control", placeholder = "Email", type = "email", onkeyup = "toggleButton(this,'submit');" } })
                 </div>
             </div>
             <div class="form-group">

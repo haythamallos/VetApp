@@ -139,7 +139,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             try
             {
                 string passwordEncrypted = UtilsSecurity.encrypt(password);
-                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted};
+                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted };
                 ArrayList arUser = UserGetList(enumUser);
                 if ((arUser != null) && (arUser.Count == 1))
                 {
@@ -237,7 +237,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 cntSaved++;
                             }
-                            if ( (c.ContentStateID == 7) || (c.ContentStateID == 8))
+                            if ((c.ContentStateID == 7) || (c.ContentStateID == 8))
                             {
                                 cntPurchased++;
                             }
@@ -520,19 +520,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             List<User> lstUser = new List<User>();
             EnumUser enumUser = new EnumUser();
             enumUser.UserSourceID = lSourceUserID;
-            if (!string.IsNullOrEmpty(pattern))
+            enumUser.UserRoleID = 1;
+            enumUser.Firstname = "%" + pattern + "%";
+            enumUser.Fullname = "%" + pattern + "%";
+            enumUser.Lastname = "%" + pattern + "%";
+            enumUser.PhoneNumber = "%" + pattern + "%";
+            enumUser.Username = "%" + pattern + "%";
+            ArrayList arUser = UserGetList(enumUser, "spUserEnum1");
+            if (arUser != null)
             {
-                enumUser.UserRoleID = 1;
-                enumUser.Firstname = "%" + pattern + "%";
-                enumUser.Fullname = "%" + pattern + "%";
-                enumUser.Lastname = "%" + pattern + "%";
-                enumUser.PhoneNumber = "%" + pattern + "%";
-                enumUser.Username = "%" + pattern + "%";
-                ArrayList arUser = UserGetList(enumUser, "spUserEnum1");
-                if (arUser != null)
-                {
-                    lstUser = arUser.Cast<User>().ToList();
-                }
+                lstUser = arUser.Cast<User>().ToList();
             }
             return lstUser;
         }
@@ -560,19 +557,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return items;
         }
 
-        public List<User> SearchAdmin(string pattern, long lUserRoleID)
+        public List<User> SearchAdmin(string pattern)
         {
             List<User> lstUser = new List<User>();
-            EnumUser enumUser = new EnumUser() { UserRoleID = lUserRoleID };
-            if (!string.IsNullOrEmpty(pattern))
-            {
-                enumUser.Firstname = "%" + pattern + "%";
-                enumUser.Fullname = "%" + pattern + "%";
-                enumUser.Lastname = "%" + pattern + "%";
-                enumUser.PhoneNumber = "%" + pattern + "%";
-                enumUser.Username = "%" + pattern + "%";
-            }
-            ArrayList arUser = UserGetList(enumUser);
+            EnumUser enumUser = new EnumUser();
+            enumUser.Firstname = "%" + pattern + "%";
+            enumUser.Fullname = "%" + pattern + "%";
+            enumUser.Lastname = "%" + pattern + "%";
+            enumUser.PhoneNumber = "%" + pattern + "%";
+            enumUser.Username = "%" + pattern + "%";
+            ArrayList arUser = UserGetList(enumUser, "spUserEnum2");
             if (arUser != null)
             {
                 lstUser = arUser.Cast<User>().ToList();

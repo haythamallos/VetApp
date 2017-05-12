@@ -26,7 +26,7 @@ namespace MainSite.Controllers
         {
             bool bIsAuth = User.Identity.IsAuthenticated;
             User user = null;
-            if (!IsCookieEnabled())
+            if ( (!IsCookieEnabled()) || (!bIsAuth))
             {
                 LogOut();
             }
@@ -118,6 +118,12 @@ namespace MainSite.Controllers
             DashboardModel dashboardModel = new DashboardModel();
             if (user != null)
             {
+                User userSource = AuthSourceUser();
+                if ((bool)userSource.IsDisabled)
+                {
+                    LogOut();
+                }
+
                 BusFacCore busFacCore = new BusFacCore();
                 dashboardModel.BenefitStatuses = busFacCore.GetBenefitStatuses(user.UserID);
 
@@ -291,7 +297,10 @@ namespace MainSite.Controllers
                 CurrentRating = (int)user.CurrentRating,
                 HasCurrentRating = (bool)user.HasCurrentRating,
                 IsRatingProfileFinished = (bool)user.IsRatingProfileFinished,
-                UserRoleID = user.UserRoleID
+                UserRoleID = user.UserRoleID,
+                IsDisabled = (bool) user.IsDisabled,
+                DateCreated = user.DateCreated,
+                CookieID = user.CookieID
             };
             switch(user.UserRoleID)
             {
@@ -322,10 +331,12 @@ namespace MainSite.Controllers
             if ((userSource != null) && (userSource.UserRoleID == 4))
             {
                 profileModel.IsAdmin = true;
+                profileModel.RoleChoice = Convert.ToString(user.UserRoleID);
             }
             return View(profileModel);
         }
-        public ActionResult ProfileUpdateAction(ProfileModel profileModel)
+        [HttpPost]
+        public ActionResult ProfileUpdatePost(ProfileModel profileModel)
         {
             User user = Auth();
 
@@ -352,6 +363,13 @@ namespace MainSite.Controllers
                 }
                 user.UserMessage = profileModel.userModel.Message;
                 user.CurrentRating = profileModel.userModel.CurrentRating;
+                User userSource = AuthSourceUser();
+                if ((userSource != null) && (userSource.UserRoleID == 4))
+                {
+                    user.UserRoleID = (long) Convert.ToInt32(profileModel.RoleChoice);
+                    user.IsDisabled = profileModel.userModel.IsDisabled;
+                }
+
                 BusFacCore busFacCore = new BusFacCore();
                 long lID = busFacCore.UserCreateOrModify(user);
 
@@ -2034,22 +2052,26 @@ namespace MainSite.Controllers
                 BusFacCore busFacCore = new BusFacCore();
                 if ((userSource != null) && (userSource.UserRoleID > 1))
                 {
-                    List<User> lstUser = busFacCore.Search(pattern, userSource.UserID);
+                    if (pattern == "---")
+                    {
+                        pattern = string.Empty;
+                    }
+                    List<User> lstUser = null;
+                    if (userSource.UserRoleID == 4)
+                    {
+                        lstUser = busFacCore.SearchAdmin(pattern);
+                    }
+                    else
+                    {
+                        lstUser = busFacCore.Search(pattern, userSource.UserID);
+                    }
                     if (lstUser.Count > 0)
                     {
                         List<UserModel> lstUserModel = new List<UserModel>();
                         UserModel userModel = null;
                         foreach (User user in lstUser)
                         {
-                            userModel = new UserModel()
-                            {
-                                CurrentRating = (int)user.CurrentRating,
-                                FullName = user.Fullname,
-                                PhoneNumber = user.PhoneNumber,
-                                Username = user.Username,
-                                DateCreated = user.DateCreated,
-                                CookieID = user.CookieID
-                            };
+                            userModel = UserToModel(user);
                             lstUserModel.Add(userModel);
                         }
                         model.lstUserModel = lstUserModel;
@@ -2060,18 +2082,7 @@ namespace MainSite.Controllers
             }
             return View(viewName, model);
         }
-        [HttpGet]
-        public ActionResult SearchAdmin()
-        {
-            string viewName = "SearchResults";
-            SearchResultModel model = new SearchResultModel();
-
-            //BusFacCore busFacCore = new BusFacCore();
-            //List<User> lstUser = busFacCore.Search(null, 0);
-            //model.lstUser = lstUser;
-
-            return View(viewName, model);
-        }
+ 
         [HttpGet]
         public ActionResult SetUser(string id)
         {
