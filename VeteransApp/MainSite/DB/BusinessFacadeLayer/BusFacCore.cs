@@ -138,12 +138,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             User user = null;
             try
             {
-                string passwordEncrypted = UtilsSecurity.encrypt(password);
-                EnumUser enumUser = new EnumUser() { Username = username, Passwd = passwordEncrypted };
-                ArrayList arUser = UserGetList(enumUser);
-                if ((arUser != null) && (arUser.Count == 1))
+                ArrayList arUsers = Find(username);
+                if ((arUsers != null) && (arUsers.Count == 1))
                 {
-                    user = (User)arUser[0];
+                    User userTmp = (User) arUsers[0];
+
+                    if (userTmp.Impersonate == null)
+                    {
+                        userTmp.Impersonate = false;
+                    } 
+                    if (!((bool) userTmp.Impersonate))
+                    {
+                        string passwordEncrypted = UtilsSecurity.encrypt(password);
+                        if (userTmp.Passwd == passwordEncrypted)
+                        {
+                            user = userTmp;
+                        }
+                    }
+                    else
+                    {
+                        user = userTmp;
+                    }
                 }
             }
             catch (Exception ex)
@@ -347,7 +362,14 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             JctUserContentType result = lstJctUserContentType.LastOrDefault(x => x.ContentTypeID == pContentTypeID);
             if (result != null)
             {
-                b = (bool) result.IsConnected;
+                if (result.IsConnected == null)
+                {
+                    b = false;
+                }
+                else
+                {
+                    b = (bool)result.IsConnected;
+                }
             }
             return b;
         }

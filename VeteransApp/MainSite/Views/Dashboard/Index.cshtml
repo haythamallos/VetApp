@@ -73,30 +73,34 @@
                                         <tbody>
                                             @foreach (var item in Model.BenefitStatuses)
                                             {
-                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
-                                                <tr>
-                                                    @if (@item.Value.IsConnected)
-                                                    {
-                                                        <td><label class="font-bold">@item.Value.BenefitName</label></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>@item.Value.BenefitName</td>
-                                                    }
-
-                                                    <td>
-                                                        <div class="progress progress-xs margin-vertical-10 ">
-                                                            <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
-                                                        @if (item.Value.ContentStateID > 0)
+                                                if (@item.Key != 4)
+                                                {
+                                                    string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                    <tr>
+                                                        @if (item.Value.IsConnected)
                                                         {
-                                                            <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
+                                                            <td><label class="font-bold">@item.Value.BenefitName</label></td>
                                                         }
-                                                    </td>
-                                                </tr>
+                                                        else
+                                                        {
+                                                            <td>@item.Value.BenefitName</td>
+                                                        }
+
+                                                        <td>
+                                                            <div class="progress progress-xs margin-vertical-10 ">
+                                                                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
+                                                            @if (item.Value.ContentStateID > 0)
+                                                            {
+                                                                <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+
                                             }
 
                                         </tbody>

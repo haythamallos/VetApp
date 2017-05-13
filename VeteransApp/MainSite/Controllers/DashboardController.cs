@@ -285,6 +285,10 @@ namespace MainSite.Controllers
         }
         private UserModel UserToModel(User user)
         {
+            if (user.IsDisabled == null)
+            {
+                user.IsDisabled = false;
+            }
             UserModel userModel = new UserModel()
             {
                 Username = user.Username,
@@ -302,6 +306,7 @@ namespace MainSite.Controllers
                 DateCreated = user.DateCreated,
                 CookieID = user.CookieID
             };
+
             switch(user.UserRoleID)
             {
                 case 1:

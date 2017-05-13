@@ -15,7 +15,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
     /// File:  User.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	5/9/2017	Created
+    /// 001	HA	5/13/2017	Created
     /// 
     /// ----------------------------------------------------
     /// Abstracts the User database table.
@@ -91,6 +91,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         private bool? _bIsRatingProfileFinished = null;
         /// <summary>UserSourceID Attribute type String</summary>
         private long _lUserSourceID = 0;
+        /// <summary>Impersonate Attribute type String</summary>
+        private bool? _bImpersonate = null;
 
         private ErrorCode _errorCode = null;
         private bool _hasError = false;
@@ -168,6 +170,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string DB_FIELD_IS_RATING_PROFILE_FINISHED = "is_rating_profile_finished"; //Table IsRatingProfileFinished field name
                                                                                                           /// <summary>user_source_id Database field </summary>
         public static readonly string DB_FIELD_USER_SOURCE_ID = "user_source_id"; //Table UserSourceID field name
+                                                                                  /// <summary>impersonate Database field </summary>
+        public static readonly string DB_FIELD_IMPERSONATE = "impersonate"; //Table Impersonate field name
 
         // Attribute variables
         /// <summary>TAG_ID Attribute type string</summary>
@@ -238,6 +242,8 @@ namespace Vetapp.Engine.DataAccessLayer.Data
         public static readonly string TAG_IS_RATING_PROFILE_FINISHED = "IsRatingProfileFinished"; //Table IsRatingProfileFinished field name
                                                                                                   /// <summary>UserSourceID Attribute type string</summary>
         public static readonly string TAG_USER_SOURCE_ID = "UserSourceID"; //Table UserSourceID field name
+                                                                           /// <summary>Impersonate Attribute type string</summary>
+        public static readonly string TAG_IMPERSONATE = "Impersonate"; //Table Impersonate field name
 
         // Stored procedure names
         private static readonly string SP_INSERT_NAME = "spUserInsert"; //Insert sp name
@@ -451,6 +457,12 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             get { return _lUserSourceID; }
             set { _lUserSourceID = value; }
         }
+        /// <summary>Impersonate is a Property in the User Class of type bool</summary>
+        public bool? Impersonate
+        {
+            get { return _bImpersonate; }
+            set { _bImpersonate = value; }
+        }
 
 
         /*********************** CUSTOM NON-META BEGIN *********************/
@@ -599,6 +611,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             }
             sbReturn.Append(TAG_IS_RATING_PROFILE_FINISHED + ":  " + IsRatingProfileFinished + "\n");
             sbReturn.Append(TAG_USER_SOURCE_ID + ":  " + UserSourceID + "\n");
+            sbReturn.Append(TAG_IMPERSONATE + ":  " + Impersonate + "\n");
 
             return sbReturn.ToString();
         }
@@ -685,6 +698,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             }
             sbReturn.Append("<" + TAG_IS_RATING_PROFILE_FINISHED + ">" + IsRatingProfileFinished + "</" + TAG_IS_RATING_PROFILE_FINISHED + ">\n");
             sbReturn.Append("<" + TAG_USER_SOURCE_ID + ">" + UserSourceID + "</" + TAG_USER_SOURCE_ID + ">\n");
+            sbReturn.Append("<" + TAG_IMPERSONATE + ">" + Impersonate + "</" + TAG_IMPERSONATE + ">\n");
             sbReturn.Append("</User>" + "\n");
 
             return sbReturn.ToString();
@@ -1045,6 +1059,16 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             {
                 UserSourceID = 0;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_IMPERSONATE);
+                Impersonate = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                Impersonate = false;
+            }
         }
         /// <summary>Calls sqlLoad() method which gets record from database with user_id equal to the current object's UserID </summary>
         public void Load(SqlConnection conn)
@@ -1273,6 +1297,9 @@ namespace Vetapp.Engine.DataAccessLayer.Data
                 Console.WriteLine(User.TAG_USER_SOURCE_ID + ":  ");
                 UserSourceID = (long)Convert.ToInt32(Console.ReadLine());
 
+                Console.WriteLine(User.TAG_IMPERSONATE + ":  ");
+                Impersonate = Convert.ToBoolean(Console.ReadLine());
+
             }
             catch (Exception e)
             {
@@ -1318,6 +1345,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramLastVisitDate = null;
             SqlParameter paramIsRatingProfileFinished = null;
             SqlParameter paramUserSourceID = null;
+            SqlParameter paramImpersonate = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1502,6 +1530,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramUserSourceID.DbType = DbType.Int32;
             paramUserSourceID.Direction = ParameterDirection.Input;
 
+            paramImpersonate = new SqlParameter("@" + TAG_IMPERSONATE, Impersonate);
+            paramImpersonate.DbType = DbType.Boolean;
+            paramImpersonate.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1541,6 +1573,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramLastVisitDate);
             cmd.Parameters.Add(paramIsRatingProfileFinished);
             cmd.Parameters.Add(paramUserSourceID);
+            cmd.Parameters.Add(paramImpersonate);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1583,6 +1616,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramLastVisitDate = null;
             paramIsRatingProfileFinished = null;
             paramUserSourceID = null;
+            paramImpersonate = null;
             paramPKID = null;
             cmd = null;
         }
@@ -1664,6 +1698,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             SqlParameter paramLastVisitDate = null;
             SqlParameter paramIsRatingProfileFinished = null;
             SqlParameter paramUserSourceID = null;
+            SqlParameter paramImpersonate = null;
             SqlParameter paramPKID = null;
 
             //Create a command object identifying
@@ -1853,6 +1888,10 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramUserSourceID.DbType = DbType.Int32;
             paramUserSourceID.Direction = ParameterDirection.Input;
 
+            paramImpersonate = new SqlParameter("@" + TAG_IMPERSONATE, Impersonate);
+            paramImpersonate.DbType = DbType.Boolean;
+            paramImpersonate.Direction = ParameterDirection.Input;
+
             paramPKID = new SqlParameter();
             paramPKID.ParameterName = "@PKID";
             paramPKID.DbType = DbType.Int32;
@@ -1893,6 +1932,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             cmd.Parameters.Add(paramLastVisitDate);
             cmd.Parameters.Add(paramIsRatingProfileFinished);
             cmd.Parameters.Add(paramUserSourceID);
+            cmd.Parameters.Add(paramImpersonate);
             cmd.Parameters.Add(paramPKID);
 
             // execute the command
@@ -1935,6 +1975,7 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             paramLastVisitDate = null;
             paramIsRatingProfileFinished = null;
             paramUserSourceID = null;
+            paramImpersonate = null;
             paramPKID = null;
             cmd = null;
         }
@@ -2163,6 +2204,11 @@ namespace Vetapp.Engine.DataAccessLayer.Data
             try
             {
                 this.UserSourceID = Convert.ToInt32(rdr[DB_FIELD_USER_SOURCE_ID].ToString().Trim());
+            }
+            catch { }
+            try
+            {
+                this.Impersonate = Convert.ToBoolean(rdr[DB_FIELD_IMPERSONATE].ToString().Trim());
             }
             catch { }
         }

@@ -17,7 +17,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
     /// File:  EnumUser.cs
     /// History
     /// ----------------------------------------------------
-    /// 001	HA	5/9/2017	Created
+    /// 001	HA	5/13/2017	Created
     /// 
     /// ----------------------------------------------------
     /// </summary>
@@ -86,6 +86,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         private DateTime _dtEndLastVisitDate = new DateTime();
         private bool? _bIsRatingProfileFinished = null;
         private long _lUserSourceID = 0;
+        private bool? _bImpersonate = null;
         //		private string _strOrderByEnum = "ASC";
         private string _strOrderByField = DB_FIELD_ID;
 
@@ -171,7 +172,9 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         public static readonly string TAG_IS_RATING_PROFILE_FINISHED = "IsRatingProfileFinished"; //Attribute IsRatingProfileFinished  name
                                                                                                   /// <summary>UserSourceID Attribute type string</summary>
         public static readonly string TAG_USER_SOURCE_ID = "UserSourceID"; //Attribute UserSourceID  name
-                                                                           // Stored procedure name
+                                                                           /// <summary>Impersonate Attribute type string</summary>
+        public static readonly string TAG_IMPERSONATE = "Impersonate"; //Attribute Impersonate  name
+                                                                       // Stored procedure name
         public string SP_ENUM_NAME = "spUserEnum"; //Enum sp name
 
         /// <summary>HasError is a Property in the User Class of type bool</summary>
@@ -419,6 +422,12 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
         {
             get { return _lUserSourceID; }
             set { _lUserSourceID = value; }
+        }
+        /// <summary>Impersonate is a Property in the User Class of type bool</summary>
+        public bool? Impersonate
+        {
+            get { return _bImpersonate; }
+            set { _bImpersonate = value; }
         }
 
         /// <summary>Count Property. Type: int</summary>
@@ -693,6 +702,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             }
             sbReturn.Append(TAG_IS_RATING_PROFILE_FINISHED + ":  " + IsRatingProfileFinished + "\n");
             sbReturn.Append(TAG_USER_SOURCE_ID + ":  " + UserSourceID + "\n");
+            sbReturn.Append(TAG_IMPERSONATE + ":  " + Impersonate + "\n");
 
             return sbReturn.ToString();
         }
@@ -827,6 +837,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             }
             sbReturn.Append("<" + TAG_IS_RATING_PROFILE_FINISHED + ">" + IsRatingProfileFinished + "</" + TAG_IS_RATING_PROFILE_FINISHED + ">\n");
             sbReturn.Append("<" + TAG_USER_SOURCE_ID + ">" + UserSourceID + "</" + TAG_USER_SOURCE_ID + ">\n");
+            sbReturn.Append("<" + TAG_IMPERSONATE + ">" + Impersonate + "</" + TAG_IMPERSONATE + ">\n");
             sbReturn.Append("</" + ENTITY_NAME + ">" + "\n");
 
             return sbReturn.ToString();
@@ -1273,6 +1284,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             {
                 UserSourceID = 0;
             }
+
+            try
+            {
+                xResultNode = xNode.SelectSingleNode(TAG_IMPERSONATE);
+                Impersonate = Convert.ToBoolean(xResultNode.InnerText);
+            }
+            catch
+            {
+                Impersonate = false;
+            }
         }
         /// <summary>Prompt for values</summary>
         public void Prompt()
@@ -1624,6 +1645,16 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
                     UserSourceID = 0;
                 }
 
+                Console.WriteLine(TAG_IMPERSONATE + ":  ");
+                try
+                {
+                    Impersonate = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch
+                {
+                    Impersonate = false;
+                }
+
 
             }
             catch (Exception e)
@@ -1702,6 +1733,7 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             SqlParameter paramEndLastVisitDate = null;
             SqlParameter paramIsRatingProfileFinished = null;
             SqlParameter paramUserSourceID = null;
+            SqlParameter paramImpersonate = null;
             DateTime dtNull = new DateTime();
 
             sbLog = new System.Text.StringBuilder();
@@ -2112,6 +2144,10 @@ namespace Vetapp.Engine.DataAccessLayer.Enumeration
             sbLog.Append(TAG_USER_SOURCE_ID + "=" + UserSourceID + "\n");
             paramUserSourceID.Direction = ParameterDirection.Input;
             _cmd.Parameters.Add(paramUserSourceID);
+            paramImpersonate = new SqlParameter("@" + TAG_IMPERSONATE, Impersonate);
+            sbLog.Append(TAG_IMPERSONATE + "=" + Impersonate + "\n");
+            paramImpersonate.Direction = ParameterDirection.Input;
+            _cmd.Parameters.Add(paramImpersonate);
         }
 
     }
