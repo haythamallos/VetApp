@@ -171,7 +171,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     { "foot injuriies", new ICDCode {Diagnosis="Foot Injuriies", RefNumber="959.7"}},
                     { "plantar fasciitis", new ICDCode {Diagnosis="Plantar Fasciitis", RefNumber="728.71"}}
                 };
-
     }
 
     public class ICDCode

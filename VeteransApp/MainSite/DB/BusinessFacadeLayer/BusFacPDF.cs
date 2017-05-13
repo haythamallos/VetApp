@@ -3734,7 +3734,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
 
                         // defaults
-                        pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
+                        //pdfFormFields.SetField("form1[0].#subform[0].No1[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords7[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[0].AllRecords8[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
@@ -3753,6 +3753,70 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo19[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo20[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[8].YesNo24[0]", "2");
+
+                        pdfFormFields.SetField(PDFItems.footPDFItems[49].Code, PDFItems.footPDFItems[49].ExportValue);
+                        pdfFormFields.SetField(PDFItems.footPDFItems[73].Code, m.NameOfPatient);
+
+                        SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
+                        if (ssn != null)
+                        {
+                            pdfFormFields.SetField(PDFItems.footPDFItems[72].Code, ssn.ToString());
+                        }
+                        else
+                        {
+                            pdfFormFields.SetField(PDFItems.footPDFItems[72].Code, m.SocialSecurity);
+                        }
+
+                        string dt = System.DateTime.Today.ToShortDateString();
+                        StringBuilder sb = new StringBuilder();
+
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S62, "Flat Foot", 62, 46, 47, sb, m.Side, 79, 78, 77, PDFItems.footPDFItems, ICDCodes.footICDCodes);
+                        PdfFill.SetClaimedConditionsSection(pdfFormFields, m.S71, "Plantar Fasciitis", 71, 9, 8, sb, m.Side, 5, 6, 7, PDFItems.footPDFItems, ICDCodes.footICDCodes);
+
+
+                        if (!string.IsNullOrEmpty(m.S112Other))
+                        {
+                            pdfFormFields.SetField(PDFItems.footPDFItems[112].Code, PDFItems.footPDFItems[165].ExportValue);
+                            pdfFormFields.SetField(PDFItems.footPDFItems[115].Code, m.S112Other);
+                            pdfFormFields.SetField(PDFItems.footPDFItems[111].Code, dt);
+                            sb.Append(m.S112Other);
+                            switch (m.Side)
+                            {
+                                case "RIGHT":
+                                    pdfFormFields.SetField(PDFItems.footPDFItems[97].Code, PDFItems.footPDFItems[97].ExportValue);
+                                    sb.Append(", Right");
+                                    break;
+                                case "LEFT":
+                                    pdfFormFields.SetField(PDFItems.footPDFItems[108].Code, PDFItems.footPDFItems[108].ExportValue);
+                                    sb.Append(", Left");
+                                    break;
+                                case "BOTH":
+                                    pdfFormFields.SetField(PDFItems.footPDFItems[109].Code, PDFItems.footPDFItems[109].ExportValue);
+                                    sb.Append(", Bilateral");
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            sb.Append(".");
+                        }
+
+                        pdfFormFields.SetField(PDFItems.footPDFItems[75].Code, sb.ToString());
+
+
+
+
+
+                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.footPDFItems[49].Code);
+                        Rectangle rect = lstPos[0].position;
+                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        cb.SetFontAndSize(bf, 12);
+                        cb.BeginText();
+                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                        cb.ShowText(string.Empty);
+                        cb.EndText();
+
                     }
 
                     // Set the flattening flag to true, so the document is not editable

@@ -43,8 +43,5 @@ ELSE
 
 go
 
---UPDATE [user] set user_role_id = 2
---go
-
 INSERT INTO [dbversion] (dbversion_id, date_created, major_num, minor_num,notes) VALUES (7, GETDATE(), 1, 6,'Upgrade-6')
 GO

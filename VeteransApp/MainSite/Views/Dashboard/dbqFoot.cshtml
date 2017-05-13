@@ -6,6 +6,36 @@
 
 @model MainSite.Models.FootModel
 
+<style>
+    .panel-heading {
+        cursor: pointer;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+        .clickable .glyphicon {
+            background: rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+    .panel-heading span {
+        margin-top: -23px;
+        font-size: 15px;
+        margin-right: -9px;
+    }
+
+    a.clickable {
+        color: inherit;
+    }
+
+        a.clickable:hover {
+            text-decoration: none;
+        }
+</style>
 
 <div id="page-wrapper">
     <div class="col-xs-12">
@@ -15,15 +45,15 @@
         <form id="formfoot" method="post" action="/Dashboard/FootPost?contentStateID=6">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @*@if (Model.ContentStateID == 6)
-            {
-                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
-                <hr />
-            }*@
+                {
+                    <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                    <hr />
+                }*@
             <div class="panel-group col-lg-12" id="accordion">
 
                 <!-- Part 1 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part1Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse1">Part 1</a>
                         </h4>
@@ -37,6 +67,7 @@
                                 </div>
                             </div>
                             <br />
+                            <hr />
                             <div class="form-group m-t-20">
                                 <label class="col-md-3">Social Security Number</label>
                                 <div class="col-xs-4">
@@ -45,6 +76,37 @@
                             </div>
                             <br />
                             <hr />
+                            <div>
+                                <label class="font-bold">which side is the diagnosis of your service-connected foot condition?</label>
+                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
+                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">What is the diagnosis of your service-connected foot condition?</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S62) Flat Foot (pes planus)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S71) Plantar Fasciitis
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        Other (specify):
+                                    </label>
+                                    <br />
+                                    @Html.EditorFor(x => x.S112Other, new { htmlAttributes = new { style = "width: 600px" } })
+
+                                </div>
+
+                            </div>
+                            <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>
@@ -52,7 +114,7 @@
                 <!-- Part 1 -->
                 <!-- Part 2 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part2Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse2">Part 2</a>
                         </h4>
@@ -68,7 +130,7 @@
                 <!-- Part 2 -->
                 <!-- Part 3 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part3Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
                         </h4>
@@ -81,10 +143,9 @@
                     </div>
                 </div>
                 <!-- Part 3 -->
-
                 <!-- Part 4 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part4Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
                         </h4>
@@ -97,10 +158,9 @@
                     </div>
                 </div>
                 <!-- Part 4 -->
-
                 <!-- Finish -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="partfShow">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapsef">Finished</a>
                         </h4>
@@ -127,187 +187,118 @@
 
     $('document').ready(function () {
 
+        var postcall = "FootPost";
+        var formname = "formfoot";
+
+        initpanels();
+        function save(stateid) {
+            var model = $('#' + formname).serialize();
+            // Serialize model for Posting model
+            $.ajax({
+                url: '/Dashboard/' + postcall + '?contentStateID=' + stateid,
+                type: 'POST',
+                data: model,  // Pass Model to Controller Using Ajax Call
+                success: function (data) {
+                    // Show Data
+                }
+            });
+        }
+
         $("#part1NextBtn").on("click", function () {
-            if (validate_1()) {
-                $("#collapse2").collapse('show');
-                $("#collapse1").collapse('hide');
-
-                var model = $('#formfoot').serialize();
-                // Serialize model for Posting model
-                $.ajax({
-                    url: '/Dashboard/FootPost?contentStateID=2',
-                    type: 'POST',
-                    data: model,  // Pass Model to Controller Using Ajax Call
-                    success: function (data) {
-                        // Show Data
-                    }
-                });
-
-            }
-            else {
-                //alert("Not valid");
-                $("#infoAlert").modal('show');
-            }
+            show2();
         });
 
         $("#part2NextBtn").on("click", function () {
-            $("#collapse3").collapse('show');
-            $("#collapse2").collapse('hide');
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=3',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            show3();
         });
 
         $("#part2PrevBtn").on("click", function () {
-            $("#collapse1").collapse('show');
-            $("#collapse2").collapse('hide');
-
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            show1();
         });
 
         $("#part3NextBtn").on("click", function () {
-            $("#collapse4").collapse('show');
-            $("#collapse3").collapse('hide');
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=4',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            show4();
         });
 
         $("#part3PrevBtn").on("click", function () {
-            $("#collapse2").collapse('show');
-            $("#collapse3").collapse('hide');
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
-
+            show2();
         });
 
         $("#part4PrevBtn").on("click", function () {
-            $("#collapse3").collapse('show');
-            $("#collapse4").collapse('hide');
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+            show3();
         });
 
-
         $("#part4NextBtn").on("click", function () {
-            if (validate_4()) {
-                $("#collapsef").collapse('show');
-                $("#collapse4").collapse('hide');
-
-                var model = $('#formfoot').serialize();
-                // Serialize model for Posting model
-                $.ajax({
-                    url: '/Dashboard/FootPost?contentStateID=5',
-                    type: 'POST',
-                    data: model,  // Pass Model to Controller Using Ajax Call
-                    success: function (data) {
-                        // Show Data
-                    }
-                });
-
-            }
-            else {
-                $("#infoAlert").modal('show');
-            }
+            showf();
         });
 
         $("#finishPrevBtn").on("click", function () {
-            $("#collapse4").collapse('show');
-            $("#collapsef").collapse('hide');
-
-            var model = $('#formfoot').serialize();
-            // Serialize model for Posting model
-            $.ajax({
-                url: '/Dashboard/FootPost?contentStateID=9999',
-                type: 'POST',
-                data: model,  // Pass Model to Controller Using Ajax Call
-                success: function (data) {
-                    // Show Data
-                }
-            });
+            show3();
         });
 
+        $("input[type=radio]").change(function () {
+            var Selectedvalue = $(this).val();
+        });
 
-
-        function validate_1() {
-            var isValid = true;
-            var s;
-
-            s = jQuery('input[name="NameOfPatient"]').val();
-            if ((s == '') || s == null) {
-                isValid = false;
-            }
-
-            s = jQuery('input[name="SocialSecurity"]').val();
-            if ((s == '') || s == null) {
-                isValid = false;
-            }
-
-            return isValid;
+        function hideall() {
+            $("#collapse1").collapse('hide');
+            $("#collapse2").collapse('hide');
+            $("#collapse3").collapse('hide');
+            $("#collapse4").collapse('hide');
+            $("#collapsef").collapse('hide');
         }
 
-        function validate_2() {
-            var isValid = true;
-
-            return isValid;
+        function initpanels() {
+            hideall();
+            $("#collapse1").collapse('show');
         }
-        function validate_3() {
-            var isValid = true;
 
-            return isValid;
+        function show1() {
+            hideall();
+            save(2);
+            $("#collapse1").collapse('show');
         }
-        function validate_4() {
-            var isValid = true;
+        function show2() {
+            hideall();
+            save(2);
+            $("#collapse2").collapse('show');
+        }
+        function show3() {
+            hideall();
+            save(2);
+            $("#collapse3").collapse('show');
+        }
+        function show4() {
+            hideall();
+            save(2);
+            $("#collapse4").collapse('show');
+        }
+        function showf() {
+            hideall();
+            save(2);
+            $("#collapsef").collapse('show');
+        }
 
-            return isValid;
-        }
+        $("#part1Show").on("click", function () {
+            show1();
+        });
+
+        $("#part2Show").on("click", function () {
+            show2();
+        });
+
+        $("#part3Show").on("click", function () {
+            show3();
+        });
+
+        $("#part4Show").on("click", function () {
+            show4();
+        });
+
+        $("#partfShow").on("click", function () {
+            showf();
+        });
+
     });
 </script>
 
