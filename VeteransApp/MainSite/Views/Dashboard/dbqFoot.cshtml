@@ -51,11 +51,11 @@
                 }*@
             <div class="panel-group col-lg-12" id="accordion">
 
-                <!-- Part 1 -->
+                <!-- Section 1 -->
                 <div class="panel panel-info">
                     <div class="panel-heading" id="part1Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse1">Part 1</a>
+                            <a class="info" data-parent="#accordion" href="#collapse1">Section 1</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
@@ -111,43 +111,163 @@
                         </div>
                     </div>
                 </div>
-                <!-- Part 1 -->
-                <!-- Part 2 -->
+                <!-- Section 1 -->
+                <!-- Section 2 -->
                 <div class="panel panel-info">
                     <div class="panel-heading" id="part2Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse2">Part 2</a>
+                            <a class="info" data-parent="#accordion" href="#collapse2">Section 2</a>
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="form-group m-t-20">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.HasPainOnUse) Has pain on use of feet and manipulation of the feet
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.HasSwelling) Has swelling on use
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.HasCalluses) Has characteristic calluses
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.HasTenderness) Has tenderness on the plantar surface
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.HasMarkedDeformity) Has marked deformity such as pronation or abduction
+                                    </label>
+                                </div>
+                              
 
+                            </div>
+                            <hr />
+                            <div>
+                                <label class="font-bold">Have you tried to use any of these devices? (Check all that apply)</label>
+                                <hr />
+                                @Html.EditorFor(x => x.DeviceArchSupport) Arch supports
+                                <br />
+                                @Html.EditorFor(x => x.DeviceBuiltupShoes) Built-up shoes
+                                <br />
+                                @Html.EditorFor(x => x.DeviceOrthotics) Orthotics
+                                <br />
+                            </div>
+                            <br />
+                            <hr />
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part2PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part2NextBtn">Next</button>
                         </div>
                     </div>
                 </div>
-                <!-- Part 2 -->
-                <!-- Part 3 -->
+                <!-- Section 2 -->
+                <!-- Section 3 -->
                 <div class="panel panel-info">
                     <div class="panel-heading" id="part3Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse3">Part 3</a>
+                            <a class="info" data-parent="#accordion" href="#collapse3">Section 3</a>
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
-                            <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
-                        </div>
+                            <div class="form-group m-t-20">
+                                <label class="font-bold">Which limitations affect you? Check all that apply.</label>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S430) Less movement than normal (due to ankylosis, limitation or blocking, adhesions, tendon-tie-ups, contracted scars, etc.)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S474) More movement than normal (from flail joints, resections, nonunion of fractures, relaxation of ligaments, etc..)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S428) Weakened movement (due to muscle injury, disease or injury of peripheral nerves, divided or lengthened tendons, etc.)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S427) Excess fatigability
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S490) Incoordination, impaired ability to execute skilled movements smoothly
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S481) Pain on movement
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S489) Pain on weight-bearing
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S485) Pain on non weight-bearing
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S480) Swelling
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S479) Deformity
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S478) Atrophy of disuse
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S436) Instability of station
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S448) Disturbance of locomotion
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S438) Interference with sitting
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label font-normal">
+                                        @Html.EditorFor(x => x.S442) Interference with standing
+                                    </label>
+                                </div>
+                            </div>
+                            <hr />
+                                <button class="btn btn-warning btn-md pull-left" type="button" id="part3PrevBtn">Prev</button>
+                                <button class="btn btn-success btn-md pull-right" type="button" id="part3NextBtn">Next</button>
+                            </div>
                     </div>
                 </div>
-                <!-- Part 3 -->
-                <!-- Part 4 -->
-                <div class="panel panel-info">
+                <!-- Section 3 -->
+                <!-- Section 4 -->
+                @*<div class="panel panel-info">
                     <div class="panel-heading" id="part4Show">
                         <h4 class="panel-title">
-                            <a class="info" data-parent="#accordion" href="#collapse4">Part 4</a>
+                            <a class="info" data-parent="#accordion" href="#collapse4">Section 4</a>
                         </h4>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
@@ -156,8 +276,8 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
-                <!-- Part 4 -->
+                </div>*@
+                <!-- Section 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
                     <div class="panel-heading" id="partfShow">
@@ -217,7 +337,7 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            show4();
+            showf();
         });
 
         $("#part3PrevBtn").on("click", function () {
@@ -244,7 +364,7 @@
             $("#collapse1").collapse('hide');
             $("#collapse2").collapse('hide');
             $("#collapse3").collapse('hide');
-            $("#collapse4").collapse('hide');
+            //$("#collapse4").collapse('hide');
             $("#collapsef").collapse('hide');
         }
 
