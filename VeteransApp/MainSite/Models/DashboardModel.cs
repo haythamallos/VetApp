@@ -36,5 +36,6 @@ namespace MainSite.Models
         public string BenefitName { get; set; }
         public string BenefitCode { get; set; }
         public long ContentStateID { get; set; }
+        public bool IsConnected { get; set; }
     }
 }

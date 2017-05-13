@@ -1002,16 +1002,16 @@ namespace MainSite.Controllers
                     user.Lastname = nameSet.LastName;
                     lID = busFacCore.UserCreateOrModify(user);
                 }
+                else if (submitID == "NOT_CONNECTED")
+                {
+                    jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = false };
+                    lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
+                }
                 //else if (submitID == "OVERALLRATING_NONE")
                 //{
                 //    user.HasCurrentRating = true;
                 //    user.CurrentRating = 0;
                 //    lID = busFacCore.UserCreateOrModify(user);
-                //}
-                //else if (submitID == "NOT_CONNECTED")
-                //{
-                //    jctUserContentType = new JctUserContentType() { UserID = user.UserID, ContentTypeID = model.ContentTypeID, IsConnected = false };
-                //    lJctUserContentTypeID = busFacCore.JctUserContentTypeCreateOrModify(jctUserContentType);
                 //}
                 else if (long.TryParse(submitID, out lParsedContentTypeID))
                 {
@@ -2007,6 +2007,15 @@ namespace MainSite.Controllers
                             User user = busFacCore.UserCreate(model.Username, password, userSource.UserID);
                             if ((user != null) && (user.UserID > 0))
                             {
+                                if (model.CurrentRating > 0)
+                                {
+                                    user.HasCurrentRating = true;
+                                    user.CurrentRating = model.CurrentRating;
+                                }
+                                user.Fullname = model.FullName;
+                                user.PhoneNumber = model.PhoneNumber;
+                                user.InternalNotes = model.Note;
+                                long lID = busFacCore.UserCreateOrModify(user);
                                 AssociateEvaluationWithUserInternal(user, model);
                                 bool b = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, user.CookieID);
                                 return RedirectToAction("Index");

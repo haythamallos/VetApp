@@ -341,10 +341,21 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             return content;
         }
 
+        private bool GetIsServiceConnected(List<JctUserContentType> lstJctUserContentType, long pContentTypeID)
+        {
+            bool b = false;
+            JctUserContentType result = lstJctUserContentType.LastOrDefault(x => x.ContentTypeID == pContentTypeID);
+            if (result != null)
+            {
+                b = (bool) result.IsConnected;
+            }
+            return b;
+        }
         public Dictionary<long, BenefitStatus> GetBenefitStatuses(long UserID)
         {
             Dictionary<long, BenefitStatus> dictBenefitStatuses = new Dictionary<long, BenefitStatus>();
             Dictionary<long, ContentState> dictContentStates = new Dictionary<long, ContentState>();
+            List<JctUserContentType> lstJctUserContentType = new List<JctUserContentType>();
 
             EnumContentType enumContentType = new EnumContentType();
             ArrayList arContentType = ContentTypeGetList(enumContentType);
@@ -357,12 +368,21 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 dictContentStates.Add(cs.ContentStateID, cs);
             }
 
+            EnumJctUserContentType enumJctUserContentType = new EnumJctUserContentType();
+            enumJctUserContentType.UserID = UserID;
+            ArrayList arJctUserContentType = JctUserContentTypeGetList(enumJctUserContentType);
+            if (arJctUserContentType != null)
+            {
+                lstJctUserContentType = arJctUserContentType.Cast<JctUserContentType>().ToList();
+            }
+
             BenefitStatus benefitStatus = null;
             Content content = null;
 
             foreach (ContentType ct in arContentType)
             {
-                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode, BenefitCode = ct.Code };
+                bool IsServiceConnected = GetIsServiceConnected(lstJctUserContentType, ct.ContentTypeID);
+                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode, BenefitCode = ct.Code, IsConnected = IsServiceConnected };
                 content = ContentGetLatest(UserID, ct.ContentTypeID);
                 if (content != null)
                 {

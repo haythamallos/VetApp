@@ -87,7 +87,15 @@
                                                 {
                                                     string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
                                                     <tr>
-                                                        <td>@item.Value.BenefitName</td>
+                                                        @if (@item.Value.IsConnected)
+                                                        {                                                            
+                                                            <td><label class="font-bold">@item.Value.BenefitName</label></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>@item.Value.BenefitName</td>
+                                                        }
+
                                                         <td>
                                                             <div class="progress progress-xs margin-vertical-10 ">
                                                                 <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
