@@ -3158,7 +3158,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 if (SameInitialROMRight)
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[184].Code, PDFItems.shoulderPDFItems[184].ExportValue);
-                                    SameFinalROMRight = true;
                                 }
                                 else
                                 {
@@ -3167,24 +3166,22 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[181].Code, m.S181);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[187].Code, m.S187);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[188].Code, m.S188);
-
-                                    if ((m.S180 == m.S293)
-                                        && (m.S181 == m.S286)
-                                        && (m.S187 == m.S287)
-                                        && (m.S188 == m.S289)
-                                        && (SameInitialROMRight)
-                                        )
-                                    {
-                                        SameFinalROMRight = true;
-                                    }
-
                                 }
+                                if ((m.S180 == m.S293)
+                                    && (m.S181 == m.S286)
+                                    && (m.S187 == m.S287)
+                                    && (m.S188 == m.S289)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
+
+
 
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[199].Code, PDFItems.shoulderPDFItems[199].ExportValue);
                                 if (SameInitialROMLeft)
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[197].Code, PDFItems.shoulderPDFItems[197].ExportValue);
-                                    SameFinalROMLeft = true;
                                 }
                                 else
                                 {
@@ -3193,18 +3190,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[194].Code, m.S194);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[192].Code, m.S192);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[193].Code, m.S193);
-
-                                    if ((m.S200 == m.S304)
-                                        && (m.S194 == m.S297)
-                                        && (m.S192 == m.S301)
-                                        && (m.S193 == m.S300)
-                                        && (SameInitialROMLeft)
-                                        )
-                                    {
-                                        SameFinalROMLeft = true;
-                                    }
-
                                 }
+                                if ((m.S200 == m.S304)
+                                    && (m.S194 == m.S297)
+                                    && (m.S192 == m.S301)
+                                    && (m.S193 == m.S300)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
+
 
                                 if (SameFinalROMRight)
                                 {
@@ -3261,7 +3256,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 if (SameInitialROMRight)
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[184].Code, PDFItems.shoulderPDFItems[184].ExportValue);
-                                    SameFinalROMRight = true;
                                 }
                                 else
                                 {
@@ -3270,18 +3264,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[181].Code, m.S181);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[187].Code, m.S187);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[188].Code, m.S188);
-
-                                    if ((m.S180 == m.S293)
-                                        && (m.S181 == m.S286)
-                                        && (m.S187 == m.S287)
-                                        && (m.S188 == m.S289)
-                                        && (SameInitialROMRight)
-                                        )
-                                    {
-                                        SameFinalROMRight = true;
-                                    }
-
                                 }
+                                if ((m.S180 == m.S293)
+                                    && (m.S181 == m.S286)
+                                    && (m.S187 == m.S287)
+                                    && (m.S188 == m.S289)
+                                    )
+                                {
+                                    SameFinalROMRight = true;
+                                }
+
 
                                 // final RIGHT
                                 if (SameFinalROMRight)
@@ -3333,7 +3325,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 if (SameInitialROMLeft)
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[197].Code, PDFItems.shoulderPDFItems[197].ExportValue);
-                                    SameFinalROMLeft = true;
                                 }
                                 else
                                 {
@@ -3342,18 +3333,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[194].Code, m.S194);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[192].Code, m.S192);
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[193].Code, m.S193);
-
-                                    if ((m.S200 == m.S304)
-                                        && (m.S194 == m.S297)
-                                        && (m.S192 == m.S301)
-                                        && (m.S193 == m.S300)
-                                        && (SameInitialROMLeft)
-                                        )
-                                    {
-                                        SameFinalROMLeft = true;
-                                    }
-
                                 }
+                                if ((m.S200 == m.S304)
+                                    && (m.S194 == m.S297)
+                                    && (m.S192 == m.S301)
+                                    && (m.S193 == m.S300)
+                                    )
+                                {
+                                    SameFinalROMLeft = true;
+                                }
+
 
                                 // final LEFT
                                 if (SameFinalROMLeft)
@@ -3386,6 +3375,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[284].Code, PDFItems.shoulderPDFItems[284].ExportValue);
                             }
+
+
+
 
                             if (m.S231)
                             {
@@ -4114,7 +4106,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_1[0].B1[0]", "1");
                         pdfFormFields.SetField("F[0].Page_1[0].No4A[0]", "1");
                         pdfFormFields.SetField("F[0].Page_1[0].No4B[0]", "1");
-                        pdfFormFields.SetField("F[0].Page_2[0].Yes5A[0]", "1");
+                        //pdfFormFields.SetField("F[0].Page_2[0].Yes5A[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No5B[0]", "1");
                         pdfFormFields.SetField("F[0].Page_2[0].No10[0]", "1");
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[22].Code, PDFItems.sleepapneaPDFItems[22].ExportValue);
@@ -4168,12 +4160,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         if (!string.IsNullOrEmpty(m.lastSleepStudyDate))
                         {
                             pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[55].Code, m.lastSleepStudyDate);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[52].Code, PDFItems.sleepapneaPDFItems[52].ExportValue);
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[49].Code, PDFItems.sleepapneaPDFItems[49].ExportValue);
+
                         }
 
                         if (!string.IsNullOrEmpty(m.FacilityName))
                         {
                             pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[53].Code, m.FacilityName);
                         }
+
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[54].Code, "OSA dx");
 
                         IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.sleepapneaPDFItems[23].Code);
                         Rectangle rect = lstPos[0].position;
@@ -4639,6 +4636,11 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo22[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo23[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo24[0]", "2");
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[342].Code, PDFItems.anklePDFItems[342].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[345].Code, PDFItems.anklePDFItems[345].ExportValue);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[367].Code, PDFItems.anklePDFItems[367].ExportValue);
+
+
 
                         pdfFormFields.SetField(PDFItems.anklePDFItems[95].Code, m.NameOfPatient);
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
@@ -5096,30 +5098,26 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[168].Code, PDFItems.anklePDFItems[168].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[169].Code, PDFItems.anklePDFItems[169].ExportValue);
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[165].Code, m.S165);
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[164].Code, m.S164);
-
-                                if ((m.S165 == m.S252)
-                                    && (m.S164 == m.S255)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
-
                             }
+                            if ((m.S165 == m.S252)
+                                && (m.S164 == m.S255)
+                                )
+                            {
+                                SameFinalROMRight = true;
+                            }
+
 
                             // Second test LEFT
                             pdfFormFields.SetField(PDFItems.anklePDFItems[149].Code, PDFItems.anklePDFItems[149].ExportValue);
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[147].Code, PDFItems.anklePDFItems[147].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -5127,15 +5125,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[150].Code, m.S150);
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[151].Code, m.S151);
 
-                                if ((m.S150 == m.S237)
-                                    && (m.S151 == m.S234)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
-
                             }
+                            if ((m.S150 == m.S237)
+    && (m.S151 == m.S234)
+    )
+                            {
+                                SameFinalROMLeft = true;
+                            }
+
+
 
                             // Final test RIGHT
                             if (SameFinalROMRight)
@@ -5184,7 +5182,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[168].Code, PDFItems.anklePDFItems[168].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -5192,15 +5189,14 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[165].Code, m.S165);
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[164].Code, m.S164);
 
-                                if ((m.S165 == m.S252)
-                                    && (m.S164 == m.S255)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
-
                             }
+                            if ((m.S165 == m.S252)
+    && (m.S164 == m.S255)
+    )
+                            {
+                                SameFinalROMRight = true;
+                            }
+
 
                             // final RIGHT
                             if (SameFinalROMRight)
@@ -5245,7 +5241,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[147].Code, PDFItems.anklePDFItems[147].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -5253,14 +5248,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[150].Code, m.S150);
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[151].Code, m.S151);
 
-                                if ((m.S150 == m.S237)
-                                    && (m.S151 == m.S234)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S150 == m.S237)
+    && (m.S151 == m.S234)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             // final LEFT
@@ -5776,7 +5770,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[163].Code, PDFItems.wristPDFItems[163].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -5786,16 +5779,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[166].Code, m.S166);
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[167].Code, m.S167);
 
-                                if ((m.S159 == m.S272)
-                                    && (m.S160 == m.S265)
-                                    && (m.S166 == m.S266)
-                                    && (m.S167 == m.S268)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S159 == m.S272)
+    && (m.S160 == m.S265)
+    && (m.S166 == m.S266)
+    && (m.S167 == m.S268)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             // Second test LEFT
@@ -5803,7 +5795,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[176].Code, PDFItems.wristPDFItems[176].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -5813,16 +5804,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[171].Code, m.S171);
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[172].Code, m.S172);
 
-                                if ((m.S179 == m.S283)
-                                    && (m.S173 == m.S276)
-                                    && (m.S171 == m.S280)
-                                    && (m.S172 == m.S279)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S179 == m.S283)
+    && (m.S173 == m.S276)
+    && (m.S171 == m.S280)
+    && (m.S172 == m.S279)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             // Final test RIGHT
@@ -5882,7 +5872,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[163].Code, PDFItems.wristPDFItems[163].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -5892,16 +5881,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[166].Code, m.S166);
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[167].Code, m.S167);
 
-                                if ((m.S159 == m.S272)
-                                    && (m.S160 == m.S265)
-                                    && (m.S166 == m.S266)
-                                    && (m.S167 == m.S268)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S159 == m.S272)
+    && (m.S160 == m.S265)
+    && (m.S166 == m.S266)
+    && (m.S167 == m.S268)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             // final RIGHT
@@ -5955,7 +5943,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[176].Code, PDFItems.wristPDFItems[176].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -5965,16 +5952,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[171].Code, m.S171);
                                 pdfFormFields.SetField(PDFItems.wristPDFItems[172].Code, m.S172);
 
-                                if ((m.S179 == m.S283)
-                                    && (m.S173 == m.S276)
-                                    && (m.S171 == m.S280)
-                                    && (m.S172 == m.S279)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S179 == m.S283)
+    && (m.S173 == m.S276)
+    && (m.S171 == m.S280)
+    && (m.S172 == m.S279)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
 
@@ -6161,7 +6147,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
 
                             sb.Append(".");
-                        }                       
+                        }
 
                         pdfFormFields.SetField(PDFItems.kneePDFItems[69].Code, sb.ToString());
 
@@ -6275,7 +6261,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[206].Code, PDFItems.kneePDFItems[168].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -6283,22 +6268,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[203].Code, m.S203);
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[202].Code, m.S202);
 
-                                if ((m.S203 == m.S313)
-                                    && (m.S202 == m.S314)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
-
                             }
+                            if ((m.S203 == m.S313)
+    && (m.S202 == m.S314)
+    )
+                            {
+                                SameFinalROMRight = true;
+                            }
+
 
                             // Second test LEFT
                             pdfFormFields.SetField(PDFItems.kneePDFItems[186].Code, PDFItems.kneePDFItems[186].ExportValue);
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[184].Code, PDFItems.kneePDFItems[184].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -6306,14 +6289,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[187].Code, m.S187);
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[188].Code, m.S188);
 
-                                if ((m.S187 == m.S287)
-                                    && (m.S188 == m.S284)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S187 == m.S287)
+    && (m.S188 == m.S284)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             // Final test RIGHT
@@ -6363,7 +6345,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[206].Code, PDFItems.kneePDFItems[168].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -6371,14 +6352,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[203].Code, m.S203);
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[202].Code, m.S202);
 
-                                if ((m.S203 == m.S313)
-                                    && (m.S202 == m.S314)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S203 == m.S313)
+    && (m.S202 == m.S314)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             // final RIGHT
@@ -6423,7 +6403,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[184].Code, PDFItems.kneePDFItems[184].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -6431,15 +6410,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[187].Code, m.S187);
                                 pdfFormFields.SetField(PDFItems.kneePDFItems[188].Code, m.S188);
 
-                                if ((m.S187 == m.S287)
-                                    && (m.S188 == m.S284)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
                             }
+                            if ((m.S187 == m.S287)
+    && (m.S188 == m.S284)
+    )
+                            {
+                                SameFinalROMLeft = true;
+                            }
+
 
                             // final LEFT
                             if (SameFinalROMLeft)
@@ -6932,7 +6911,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[164].Code, PDFItems.hipPDFItems[164].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -6944,25 +6922,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[167].Code, m.S167);
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[168].Code, m.S168);
 
-                                if ((m.S159 == m.S282)
-                                    && (m.S158 == m.S283)
-                                    && (m.S160 == m.S272)
-                                    && (m.S161 == m.S278)
-                                    && (m.S167 == m.S273)
-                                    && (m.S168 == m.S275)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S159 == m.S282)
+    && (m.S158 == m.S283)
+    && (m.S160 == m.S272)
+    && (m.S161 == m.S278)
+    && (m.S167 == m.S273)
+    && (m.S168 == m.S275)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             pdfFormFields.SetField(PDFItems.hipPDFItems[196].Code, PDFItems.hipPDFItems[196].ExportValue);
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[194].Code, PDFItems.hipPDFItems[194].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -6974,18 +6950,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[189].Code, m.S189);
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[190].Code, m.S190);
 
-                                if ((m.S197 == m.S322)
-                                    && (m.S198 == m.S313)
-                                    && (m.S191 == m.S311)
-                                    && (m.S188 == m.S312)
-                                    && (m.S189 == m.S318)
-                                    && (m.S190 == m.S317)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S197 == m.S322)
+    && (m.S198 == m.S313)
+    && (m.S191 == m.S311)
+    && (m.S188 == m.S312)
+    && (m.S189 == m.S318)
+    && (m.S190 == m.S317)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             if (SameFinalROMRight)
@@ -7051,7 +7026,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[164].Code, PDFItems.hipPDFItems[164].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -7063,18 +7037,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[167].Code, m.S167);
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[168].Code, m.S168);
 
-                                if ((m.S159 == m.S282)
-                                    && (m.S158 == m.S283)
-                                    && (m.S160 == m.S272)
-                                    && (m.S161 == m.S278)
-                                    && (m.S167 == m.S273)
-                                    && (m.S168 == m.S275)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S159 == m.S282)
+    && (m.S158 == m.S283)
+    && (m.S160 == m.S272)
+    && (m.S161 == m.S278)
+    && (m.S167 == m.S273)
+    && (m.S168 == m.S275)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             if (SameFinalROMRight)
@@ -7132,7 +7105,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[194].Code, PDFItems.hipPDFItems[194].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -7144,18 +7116,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[189].Code, m.S189);
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[190].Code, m.S190);
 
-                                if ((m.S197 == m.S322)
-                                    && (m.S198 == m.S313)
-                                    && (m.S191 == m.S311)
-                                    && (m.S188 == m.S312)
-                                    && (m.S189 == m.S318)
-                                    && (m.S190 == m.S317)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S197 == m.S322)
+    && (m.S198 == m.S313)
+    && (m.S191 == m.S311)
+    && (m.S188 == m.S312)
+    && (m.S189 == m.S318)
+    && (m.S190 == m.S317)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             if (SameFinalROMLeft)
@@ -7887,7 +7858,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[175].Code, PDFItems.elbowPDFItems[175].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -7897,24 +7867,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[171].Code, m.S171);
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[172].Code, m.S172);
 
-                                if ((m.S170 == m.S292)
-                                    && (m.S169 == m.S290)
-                                    && (m.S171 == m.S288)
-                                    && (m.S172 == m.S286)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
-
                             }
+                            if ((m.S170 == m.S292)
+    && (m.S169 == m.S290)
+    && (m.S171 == m.S288)
+    && (m.S172 == m.S286)
+    )
+                            {
+                                SameFinalROMRight = true;
+                            }
+
+
 
                             // Second test LEFT
                             pdfFormFields.SetField(PDFItems.elbowPDFItems[153].Code, PDFItems.elbowPDFItems[153].ExportValue);
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[151].Code, PDFItems.elbowPDFItems[151].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -7924,16 +7893,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[148].Code, m.S148);
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[147].Code, m.S147);
 
-                                if ((m.S154 == m.S260)
-                                    && (m.S155 == m.S255)
-                                    && (m.S148 == m.S253)
-                                    && (m.S147 == m.S254)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S154 == m.S260)
+    && (m.S155 == m.S255)
+    && (m.S148 == m.S253)
+    && (m.S147 == m.S254)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             // Final test RIGHT
@@ -7993,7 +7961,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMRight)
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[175].Code, PDFItems.elbowPDFItems[175].ExportValue);
-                                SameFinalROMRight = true;
                             }
                             else
                             {
@@ -8003,16 +7970,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[171].Code, m.S171);
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[172].Code, m.S172);
 
-                                if ((m.S170 == m.S292)
-                                    && (m.S169 == m.S290)
-                                    && (m.S171 == m.S288)
-                                    && (m.S172 == m.S286)
-                                    && (SameInitialROMRight)
-                                    )
-                                {
-                                    SameFinalROMRight = true;
-                                }
 
+                            }
+                            if ((m.S170 == m.S292)
+    && (m.S169 == m.S290)
+    && (m.S171 == m.S288)
+    && (m.S172 == m.S286)
+    )
+                            {
+                                SameFinalROMRight = true;
                             }
 
                             // final RIGHT
@@ -8066,7 +8032,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             if (SameInitialROMLeft)
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[151].Code, PDFItems.elbowPDFItems[151].ExportValue);
-                                SameFinalROMLeft = true;
                             }
                             else
                             {
@@ -8076,16 +8041,15 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[148].Code, m.S148);
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[147].Code, m.S147);
 
-                                if ((m.S154 == m.S260)
-                                    && (m.S155 == m.S255)
-                                    && (m.S148 == m.S253)
-                                    && (m.S147 == m.S254)
-                                    && (SameInitialROMLeft)
-                                    )
-                                {
-                                    SameFinalROMLeft = true;
-                                }
 
+                            }
+                            if ((m.S154 == m.S260)
+    && (m.S155 == m.S255)
+    && (m.S148 == m.S253)
+    && (m.S147 == m.S254)
+    )
+                            {
+                                SameFinalROMLeft = true;
                             }
 
                             // final LEFT

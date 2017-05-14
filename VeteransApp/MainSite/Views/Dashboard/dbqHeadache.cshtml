@@ -55,7 +55,7 @@
 
                 <!-- Section 1 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part1Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse1">Section 1</a>
                         </h4>
@@ -180,7 +180,7 @@
                 <!-- Section 1 -->
                 <!-- Section 2 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part2Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse2">Section 2</a>
                         </h4>
@@ -305,7 +305,7 @@
                 <!-- Section 2 -->
                 <!-- Section 3 -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="part3Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Section 3</a>
                         </h4>
@@ -387,7 +387,7 @@
 
                 <!-- Finish -->
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="partfShow">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapsef">Finished</a>
                         </h4>
@@ -441,7 +441,7 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            show4();
+            showf();
         });
 
         $("#part3PrevBtn").on("click", function () {
@@ -468,7 +468,7 @@
             $("#collapse1").collapse('hide');
             $("#collapse2").collapse('hide');
             $("#collapse3").collapse('hide');
-            $("#collapse4").collapse('hide');
+            //$("#collapse4").collapse('hide');
             $("#collapsef").collapse('hide');
         }
 
