@@ -20,7 +20,7 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="white-box col-md-6">
+                    <div class="white-box col-md-3">
 
                         <h3 class="box-title text-center">Total Combined Disability and Potential Increase</h3>
                         <div id="morris-donut-chart" class="ecomm-donute" style="height: 200px;"></div>
@@ -38,11 +38,11 @@
                                 <h4 class="m-b-0">@Model.evaluationResults.PotentialVARating%</h4>
                             </li>
                         </ul>
-                        <h2 class="font-500">For Any Support Call 619-822-2070 </h2>
-                        <p>Please contact us if you have any questions</p>
+                        @*<h2 class="font-500">For Any Support Call 619-822-2070 </h2>
+                        <p>Please contact us if you have any questions</p>*@
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-9">
 
                         @if ((!Model.userModel.IsRatingProfileFinished) && (Model.userModel.UserRoleID == 1))
                         {
@@ -68,36 +68,61 @@
                                                 <th>Disability</th>
                                                 <th>Progress</th>
                                                 <th class="text-nowrap">Action</th>
-                                            </tr>
+                                                <th>Current Rating</th>
+                                                <th>Max Rating</th>
+                                           </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model.BenefitStatuses)
                                             {
-                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
-                                                <tr>
-                                                    @if (item.Value.IsConnected)
-                                                    {
-                                                        <td><label class="font-bold">@item.Value.BenefitName</label></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>@item.Value.BenefitName</td>
-                                                    }
+                                                if (item.Value.IsConnected)
+                                                {
+                                                    string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                    <tr>
+                                                        <td class="bg-success"><label class="font-bold">@item.Value.BenefitName</label></td>
+                                                        <td>
+                                                            <div class="progress progress-xs margin-vertical-10 ">
+                                                                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
+                                                            @if (item.Value.ContentStateID > 0)
+                                                            {
+                                                                <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
+                                                            }
+                                                        </td>
+                                                        <td><label class="font-bold">@item.Value.CurrentRating%</label></td>
+                                                        <td><label class="font-bold">@item.Value.MaxRating%</label></td>
 
-                                                    <td>
-                                                        <div class="progress progress-xs margin-vertical-10 ">
-                                                            <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
-                                                        @if (item.Value.ContentStateID > 0)
-                                                        {
-                                                            <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
-                                                        }
-                                                    </td>
-                                                </tr>
+                                                    </tr>
+                                                }
+                                            }
 
+                                            @foreach (var item in Model.BenefitStatuses)
+                                            {
+                                                if (!item.Value.IsConnected)
+                                                {
+                                                    string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                    <tr>
+                                                        <td class="bg-danger"><label class="font-light">@item.Value.BenefitName</label></td>
+                                                        <td>
+                                                            <div class="progress progress-xs margin-vertical-10 ">
+                                                                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
+                                                            @if (item.Value.ContentStateID > 0)
+                                                            {
+                                                                <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
+                                                            }
+                                                        </td>
+                                                        <td><label class="font-bold">@item.Value.CurrentRating%</label></td>
+                                                        <td><label class="font-bold">@item.Value.MaxRating%</label></td>
+
+                                                    </tr>
+                                                }
                                             }
 
                                         </tbody>
@@ -110,29 +135,30 @@
             </div>
         </div>
         <div class="col-md-3">
-            @if (Model.evaluationResults != null)
-            {
-                <div class="white-box">
-                    <h3 class="box-title">Free Evaluation Results</h3>
-                    <hr>
-                    <p class="text-blue font-bold">More $ Month</p>
-                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
-                    <hr>
-                    <p class="text-blue font-bold">More $ Year</p>
-                    <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
-                    <hr>
-                    <p class="text-blue font-bold">Current VA Rating</p>
-                    <h1>@Model.evaluationResults.CurrentRating%</h1>
-                    <hr>
-                    <p class="text-blue font-bold">Potential VA Rating</p>
-                    <h1>@Model.evaluationResults.PotentialVARating%</h1>
-                    <hr>
-                    <p class="text-blue font-bold">Total Per Month After Increase</p>
-                    <h1>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h1>
-                </div>
-            }
+            <div class="white-box">
+                <h3 class="box-title">Free Evaluation Results</h3>
+                <hr>
+                <p class="text-blue font-bold">More $ Month</p>
+                <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerMonth)</h1>
+                <hr>
+                <p class="text-blue font-bold">More $ Year</p>
+                <h1>@string.Format("{0:c0}", Model.evaluationResults.AmountIncreasePerYear)</h1>
+                <hr>
+                <p class="text-blue font-bold">Current VA Rating</p>
+                <h1>@Model.evaluationResults.CurrentRating%</h1>
+                <hr>
+                <p class="text-blue font-bold">Potential VA Rating</p>
+                <h1>@Model.evaluationResults.PotentialVARating%</h1>
+                <hr>
+                <p class="text-blue font-bold">Total Per Month After Increase</p>
+                <h1>@string.Format("{0:c0}", Model.evaluationResults.TotalPerMonthAfterIncrease)</h1>
+            </div>
 
         </div>
 
     </div>
 </div>
+@*else
+    {
+        <td>@item.Value.BenefitName</td>
+    }*@

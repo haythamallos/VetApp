@@ -37,5 +37,8 @@ namespace MainSite.Models
         public string BenefitCode { get; set; }
         public long ContentStateID { get; set; }
         public bool IsConnected { get; set; }
+        public long CurrentRating { get; set; }
+        public long MaxRating { get; set; }
+        public string Analysis { get; set; }
     }
 }

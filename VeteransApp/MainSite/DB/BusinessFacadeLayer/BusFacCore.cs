@@ -404,7 +404,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             foreach (ContentType ct in arContentType)
             {
                 bool IsServiceConnected = GetIsServiceConnected(lstJctUserContentType, ct.ContentTypeID);
-                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode, BenefitCode = ct.Code, IsConnected = IsServiceConnected };
+                benefitStatus = new BenefitStatus() { Key = ct.ContentTypeID, ActionText = "Start", Progress = "0", TooltipText = "Start Application", BenefitName = ct.VisibleCode, BenefitCode = ct.Code, IsConnected = IsServiceConnected, MaxRating = ct.MaxRating };
+                JctUserContentType jct = lstJctUserContentType.LastOrDefault(x => x.ContentTypeID == ct.ContentTypeID);
+                if (jct != null)
+                {
+                    benefitStatus.CurrentRating = jct.Rating;
+                }
+
                 content = ContentGetLatest(UserID, ct.ContentTypeID);
                 if (content != null)
                 {
@@ -421,8 +427,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     {
                         //benefitStatus.ActionText = "Purchase";
                         //benefitStatus.TooltipText = "Purchase Form";
-                        benefitStatus.ActionText = "Submit";
-                        benefitStatus.TooltipText = "Submt Form";
+                        benefitStatus.ActionText = "Continue";
+                        benefitStatus.TooltipText = "Continue Form";
                         benefitStatus.Progress = "100";
                     }
                     else if (content.ContentStateID == 7)
