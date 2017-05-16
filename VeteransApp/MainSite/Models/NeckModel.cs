@@ -92,7 +92,7 @@ namespace MainSite.Models
         public bool SRadiculopathyNumbnessPainLevelAnswer { get; set; }
 
         public string SRadiculopathySeverityLevel { get; set; }
-        public string S15C { get; set; }
+        public string S14C { get; set; }
 
         public bool S414 { get; set; }
 

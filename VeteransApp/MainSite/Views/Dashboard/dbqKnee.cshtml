@@ -251,73 +251,62 @@
                         <div class="panel-body">
                             <div id="romrightdiv" class="form-check form-check-inline panel panel-primary">
                                 <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>RIGHT</spa> knee.</label>
-                                <hr />
                                 <label>Please perform the following Range of Motion for the <spa>RIGHT</spa> knee.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S171, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList0Deg)
 
+                                <hr />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> knee and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S203, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S202, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S202, (SelectList)ViewBag.MovementList0Deg)
 
                                 <hr />
                                 <label>For the <spa>RIGHT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S313, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S314, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S314, (SelectList)ViewBag.MovementList0Deg)
 
                             </div>
 
                             <div id="romleftdiv" class="form-check form-check-inline panel panel-primary">
-                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> knee.</label>
                                 <hr />
+                                <label class="font-bold">We will ask you to complete a series of Range of Motion test for the <spa>LEFT</spa> knee.</label>
                                 <label>Please perform the following Range of Motion for the <spa>LEFT</spa> knee.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S146, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList0Deg)
 
+                                <hr />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> knee and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S187, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList0Deg)
 
                                 <hr />
                                 <label>For the <spa>LEFT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 140 degrees)</span>
                                 @Html.DropDownListFor(x => x.S287, (SelectList)ViewBag.MovementList140Deg)
-
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S284, (SelectList)ViewBag.MovementList140Deg)
-                                <hr />
+                                @Html.DropDownListFor(x => x.S284, (SelectList)ViewBag.MovementList0Deg)
 
                             </div>
                             <hr />
@@ -459,6 +448,82 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <span>Do you use any assistive devices for walking?</span>
+                            @Html.EditorFor(x => x.S505) Yes
+                            <hr />
+                            <div id="div14A">
+                                <span> Brace</span>
+                                @Html.EditorFor(x => x.S519) Yes
+                                <div id="div14ABrace">
+                                    <span>Frequency of BRACE use:</span>
+                                    @Html.RadioButtonFor(x => x.S519Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S519Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S519Choice, "CONSTANT") Constant
+                                    @Html.RadioButtonFor(x => x.S519Choice, "NONE") None
+                                </div>
+                                <br />
+                                <span>Crutches</span>
+                                @Html.EditorFor(x => x.S531) Yes
+                                <div id="div14ACrutches">
+                                    <span>Frequency of CRUTCHES use:</span>
+                                    @Html.RadioButtonFor(x => x.S531Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S531Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S531Choice, "CONSTANT") Constant
+                                    @Html.RadioButtonFor(x => x.S531Choice, "NONE") None
+                               </div>
+                                <br />
+                                <span> Cane</span>
+                                @Html.EditorFor(x => x.S520) Yes
+                                <div id="div14ACane">
+                                    <span>Frequency of CANE use:</span>
+                                    @Html.RadioButtonFor(x => x.S520Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S520Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S520Choice, "CONSTANT") Constant
+                                    @Html.RadioButtonFor(x => x.S520Choice, "NONE") None
+                               </div>
+                                <br />
+                                <span> Walker</span>
+                                @Html.EditorFor(x => x.S524) Yes
+                                <div id="div14AWalker">
+                                    <span>Frequency of WALKER use:</span>
+                                    @Html.RadioButtonFor(x => x.S524Choice, "OCCASIONAL") Occasional
+                                    @Html.RadioButtonFor(x => x.S524Choice, "REGULAR") Regular
+                                    @Html.RadioButtonFor(x => x.S524Choice, "CONSTANT") Constant
+                                    @Html.RadioButtonFor(x => x.S524Choice, "NONE") None
+                                </div>
+                            </div>
+                            <hr />
+
+                            <label class="form-check-label font-normal">Have you ever had a total knee replacement and/or a meniscectomy?</label>
+                            <br />
+                            @Html.EditorFor(x => x.S462) Yes
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label font-normal">
+                                    If so, which side?
+                                </label>
+                                @Html.RadioButtonFor(x => x.S11ASide, "RIGHT") Right
+                                @Html.RadioButtonFor(x => x.S11ASide, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.S11ASide, "BOTH") Both
+                                @Html.RadioButtonFor(x => x.S11ASide, "NONE") None
+                            </div>
+                            <label class="form-check-label font-normal">
+                                If so, what was the approximate date of the surgery?
+                            </label>
+                            <br />
+                            @Html.TextBoxFor(x => x.surgeryDate, new { @class = "date-picker" })
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label font-normal">
+                                    Which type of surgery?
+                                </label>
+                                @Html.RadioButtonFor(x => x.S11ASurgeryType, "KNEE") Knee Replacement
+                                @Html.RadioButtonFor(x => x.S11ASurgeryType, "MENISCECTOMY") Meniscectomy
+                                @Html.RadioButtonFor(x => x.S11ASurgeryType, "BOTH") Both
+                                @Html.RadioButtonFor(x => x.S11ASurgeryType, "NONE") None
+                            </div>
+                            <hr />
+
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
@@ -704,6 +769,65 @@
             var Selectedvalue = $(this).val();
             setROM();
         });
+
+        $(function () {
+            $('#surgeryDate').datepicker();
+        })
+
+        //$('#S505').change(function () {
+
+        //    if (this.checked) {
+
+        //        $('#div14A').show();
+        //    }
+        //    else {
+        //        $('#div14A').hide();
+        //    }
+        //});
+
+        //$('#S519').change(function () {
+
+        //    if (this.checked) {
+
+        //        $('#div14ABrace').show();
+        //    }
+        //    else {
+        //        $('#div14ABrace').hide();
+        //    }
+        //});
+
+        //$('#S531').change(function () {
+
+        //    if (this.checked) {
+
+        //        $('#div14ACrutches').show();
+        //    }
+        //    else {
+        //        $('#div14ACrutches').hide();
+        //    }
+        //});
+
+        //$('#S520').change(function () {
+
+        //    if (this.checked) {
+
+        //        $('#div14ACane').show();
+        //    }
+        //    else {
+        //        $('#div14ACane').hide();
+        //    }
+        //});
+
+        //$('#S524').change(function () {
+
+        //    if (this.checked) {
+
+        //        $('#div14AWalker').show();
+        //    }
+        //    else {
+        //        $('#div14AWalker').hide();
+        //    }
+        //});
     });
 </script>
 

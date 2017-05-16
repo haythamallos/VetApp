@@ -325,29 +325,7 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
-                            @*<div class="form-check form-check-inline panel panel-primary">
-                                <label class="font-bold">Please perform the joint movement tests again and select the answer</label>
-                                <hr />
-                                <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(x => x.S184, (SelectList)ViewBag.MovementList90Deg)
-                                <hr />
-                                <span>Extension (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S185, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S174, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S180, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S177, (SelectList)ViewBag.MovementList30Deg)
-
-                            </div>
-                            <hr />*@
+                        
                             <span> Do you have Radiculopathy?</span>
                             <br />
                             @Html.RadioButtonFor(x => x.S13AChoice, "NONE") None
@@ -357,70 +335,7 @@
                             @Html.RadioButtonFor(x => x.S13AChoice, "MODERATE") Moderate
                             <br />
 
-                            @*<span> Do you have Radiculopathy?</span>
-                                @Html.EditorFor(x => x.S316) Yes
-                                <div id="divRadiculopathySection" style="display: none">
-                                    <div id="divRadiculopathy" style="display: none">
-                                        <span>If you have Radiculopathy, is it left, right or both legs?</span>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "LEFT") Left
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "RIGHT") Right
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyLegSide, "BOTH") Both
-                                    </div>
-                                    <hr />
-                                    <span> Do you have CONSTANT pain?</span>
-                                    @Html.EditorFor(x => x.SRadiculopathyConstantPainLevelAnswer) Yes
-                                    <div id="divConstant" style="display: none">
-                                        <label class="font-bold">
-                                            If you have CONSTANT pain, is it:
-                                        </label>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MILD") mild
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "MODERATE") moderate
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyConstantPainLevel, "SEVERE") severe
-                                    </div>
-                                    <hr />
-                                    <span>Do you have INTERMITTENT pain?</span>
-                                    @Html.EditorFor(x => x.SRadiculopathyIntermittentPainLevelAnswer) Yes
-                                    <div id="divIntermittent" style="display: none">
-                                        <span>If you have INTERMITTENT pain, is it:</span>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MILD") mild
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "MODERATE") moderate
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyIntermittentPainLevel, "SEVERE") severe
-                                    </div>
-                                    <hr />
-                                    <span>Do you have DULL pain?</span>
-                                    @Html.EditorFor(x => x.SRadiculopathyDullPainLevelAnswer) Yes
-                                    <div id="divDull" style="display: none">
-                                        <span>If you have DULL pain, is it:</span>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MILD") mild
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "MODERATE") moderate
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyDullPainLevel, "SEVERE") severe
-                                    </div>
-                                    <hr />
-                                    <span>Do you have Tingling or loss of sensation pain?</span>
-                                    @Html.EditorFor(x => x.SRadiculopathyTinglingPainLevelAnswer) Yes
-                                    <div id="divTingling" style="display: none">
-                                        <span>If you have Tingling or loss of sensation pain, is it:</span>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MILD") mild
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "MODERATE") moderate
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyTinglingPainLevel, "SEVERE") severe
-                                    </div>
-                                    <hr />
-                                    <span>Do you have NUMBNESS pain?</span>
-                                    @Html.EditorFor(x => x.SRadiculopathyNumbnessPainLevelAnswer) Yes
-                                    <div id="divNumbness" style="display: none">
-                                        <span>If you have NUMBNESS pain, is it:</span>
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MILD") mild
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "MODERATE") moderate
-                                        @Html.RadioButtonFor(x => x.SRadiculopathyNumbnessPainLevel, "SEVERE") severe
-                                    </div>
-
-                                    <hr />
-                                    <span> What is severity of your radiculopathy?</span>
-                                    @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MILD") mild
-                                    @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "MODERATE") moderate
-                                    @Html.RadioButtonFor(x => x.SRadiculopathySeverityLevel, "SEVERE") severe
-
-                                </div>*@
+                         
                             <div id="div15C" style="display: none">
                                 <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>
                                 <br />

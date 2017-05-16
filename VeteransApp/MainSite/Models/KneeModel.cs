@@ -101,5 +101,23 @@ namespace MainSite.Models
         public string S234Side { get; set; }
         public string S238Side { get; set; }
 
+        public bool S505 { get; set; }
+
+        public bool S519 { get; set; }
+        public bool S531 { get; set; }
+        public bool S520 { get; set; }
+        public bool S524 { get; set; }
+
+        public string S519Choice { get; set; }
+        public string S531Choice { get; set; }
+        public string S520Choice { get; set; }
+        public string S524Choice { get; set; }
+
+        public bool S462 { get; set; }
+        public string surgeryDate { get; set; }
+        public string S11ASide { get; set; }
+        public string S11ASurgeryType { get; set; }
+
+
     }
 }
