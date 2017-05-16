@@ -40,5 +40,6 @@ namespace MainSite.Models
         public long CurrentRating { get; set; }
         public long MaxRating { get; set; }
         public string Analysis { get; set; }
+        public long DeltaRating { get; set; }
     }
 }

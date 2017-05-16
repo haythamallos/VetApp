@@ -39,7 +39,7 @@
                             </li>
                         </ul>
                         @*<h2 class="font-500">For Any Support Call 619-822-2070 </h2>
-                        <p>Please contact us if you have any questions</p>*@
+                            <p>Please contact us if you have any questions</p>*@
 
                     </div>
                     <div class="col-md-9">
@@ -70,7 +70,7 @@
                                                 <th class="text-nowrap">Action</th>
                                                 <th>Current Rating</th>
                                                 <th>Max Rating</th>
-                                           </tr>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model.BenefitStatuses)
@@ -79,7 +79,11 @@
                                                 {
                                                     string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
                                                     <tr>
-                                                        <td class="bg-success"><label class="font-bold">@item.Value.BenefitName</label></td>
+                                                        <td class="bg-success">
+                                                            @*<label class="font-bold">@item.Value.BenefitName</label>*@
+                                                            <label class="font-bold"><a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.BenefitName </a></label>
+
+                                                        </td>
                                                         <td>
                                                             <div class="progress progress-xs margin-vertical-10 ">
                                                                 <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
@@ -105,7 +109,10 @@
                                                 {
                                                     string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
                                                     <tr>
-                                                        <td class="bg-danger"><label class="font-light">@item.Value.BenefitName</label></td>
+                                                        <td class="bg-danger">
+                                                            @*<label class="font-light">@item.Value.BenefitName</label>*@
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.BenefitName </a>
+                                                        </td>
                                                         <td>
                                                             <div class="progress progress-xs margin-vertical-10 ">
                                                                 <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>

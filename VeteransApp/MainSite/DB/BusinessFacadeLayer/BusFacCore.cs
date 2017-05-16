@@ -409,6 +409,11 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 if (jct != null)
                 {
                     benefitStatus.CurrentRating = jct.Rating;
+                    benefitStatus.DeltaRating = ct.MaxRating - jct.Rating;
+                    if (benefitStatus.DeltaRating < 0)
+                    {
+                        benefitStatus.DeltaRating = 0;
+                    }
                 }
 
                 content = ContentGetLatest(UserID, ct.ContentTypeID);
@@ -440,6 +445,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 }
                 dictBenefitStatuses.Add(ct.ContentTypeID, benefitStatus);
             }
+            dictBenefitStatuses = dictBenefitStatuses.OrderByDescending(x => x.Value.DeltaRating).ToDictionary(x => x.Key, x => x.Value);
             return dictBenefitStatuses;
         }
 
