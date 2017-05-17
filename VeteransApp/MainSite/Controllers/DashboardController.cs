@@ -26,7 +26,7 @@ namespace MainSite.Controllers
         {
             bool bIsAuth = User.Identity.IsAuthenticated;
             User user = null;
-            if ( (!IsCookieEnabled()) || (!bIsAuth))
+            if ((!IsCookieEnabled()) || (!bIsAuth))
             {
                 LogOut();
             }
@@ -305,12 +305,12 @@ namespace MainSite.Controllers
                 HasCurrentRating = (bool)user.HasCurrentRating,
                 IsRatingProfileFinished = (bool)user.IsRatingProfileFinished,
                 UserRoleID = user.UserRoleID,
-                IsDisabled = (bool) user.IsDisabled,
+                IsDisabled = (bool)user.IsDisabled,
                 DateCreated = user.DateCreated,
                 CookieID = user.CookieID
             };
 
-            switch(user.UserRoleID)
+            switch (user.UserRoleID)
             {
                 case 1:
                     userModel.UserRoleText = "Client";
@@ -372,10 +372,15 @@ namespace MainSite.Controllers
                 user.UserMessage = profileModel.userModel.Message;
                 user.CurrentRating = profileModel.userModel.CurrentRating;
                 User userSource = AuthSourceUser();
-                if ((userSource != null) && (userSource.UserRoleID == 4))
+                if ((userSource != null) && (userSource.UserRoleID == 4) && (!string.IsNullOrEmpty(profileModel.RoleChoice)))
                 {
-                    user.UserRoleID = (long) Convert.ToInt32(profileModel.RoleChoice);
-                    user.IsDisabled = profileModel.userModel.IsDisabled;
+
+                    long tmpRoleID = (long)Convert.ToInt32(profileModel.RoleChoice);
+                    if ((tmpRoleID >= 1) && (tmpRoleID <= 3))
+                    {
+                        user.UserRoleID = tmpRoleID;
+                        user.IsDisabled = profileModel.userModel.IsDisabled;
+                    }
                 }
 
                 BusFacCore busFacCore = new BusFacCore();
@@ -2073,7 +2078,7 @@ namespace MainSite.Controllers
             }
             return View(viewName, model);
         }
- 
+
         [HttpGet]
         public ActionResult SetUser(string id)
         {

@@ -21,6 +21,9 @@ namespace MainSite.Models
         public long UserRoleID { get; set; }
         public string UserRoleText { get; set; }
         public bool IsDisabled { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
+        public string LastName { get; set; }
 
     }
 }
