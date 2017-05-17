@@ -128,7 +128,14 @@ namespace MainSite.Controllers
                 }
 
                 BusFacCore busFacCore = new BusFacCore();
-                dashboardModel.BenefitStatuses = busFacCore.GetBenefitStatuses(user.UserID);
+                Dictionary<long, BenefitStatus> dictBenefitStatuses = new Dictionary<long, BenefitStatus>();
+                Dictionary<long, BenefitStatus> dictBenefitStatusesQualify = new Dictionary<long, BenefitStatus>();
+                Dictionary<long, BenefitStatus> dictBenefitStatusesNonQualify = new Dictionary<long, BenefitStatus>();
+
+                busFacCore.GetBenefitStatuses(user.UserID, ref dictBenefitStatuses, ref dictBenefitStatusesQualify, ref dictBenefitStatusesNonQualify);
+                dashboardModel.BenefitStatuses = dictBenefitStatuses;
+                dashboardModel.BenefitStatusesQualify = dictBenefitStatusesQualify;
+                dashboardModel.BenefitStatusesNonQualify = dictBenefitStatusesNonQualify;
 
                 dashboardModel.evaluationResults = new EvaluationResults();
                 dashboardModel.evaluationModel = new EvaluationModel();
@@ -335,6 +342,8 @@ namespace MainSite.Controllers
             User user = Auth();
             UserModel userModel = UserToModel(user);
             profileModel.userModel = userModel;
+            BusFacCore busFacCore = new BusFacCore();
+            profileModel.lstUserDisability = busFacCore.GetLatestUserDisability(user.UserID);
             User userSource = AuthSourceUser();
             if ((userSource != null) && (userSource.UserRoleID == 4))
             {
@@ -370,6 +379,10 @@ namespace MainSite.Controllers
                     user.Passwd = UtilsSecurity.encrypt(profileModel.userModel.Password);
                 }
                 user.UserMessage = profileModel.userModel.Message;
+                if (user.CurrentRating != profileModel.userModel.CurrentRating)
+                {
+                    user.IsRatingProfileFinished = false;
+                }
                 user.CurrentRating = profileModel.userModel.CurrentRating;
                 User userSource = AuthSourceUser();
                 if ((userSource != null) && (userSource.UserRoleID == 4) && (!string.IsNullOrEmpty(profileModel.RoleChoice)))
@@ -398,8 +411,9 @@ namespace MainSite.Controllers
                 }
             }
             catch (Exception ex) { }
+            return RedirectToAction("Index", "Dashboard");
 
-            return View("ProfileUpdate", profileModel);
+            //return View("ProfileUpdate", profileModel);
         }
         public ActionResult Evaluation(EvaluationModel evaluationModel)
         {
@@ -944,19 +958,28 @@ namespace MainSite.Controllers
                 {
                     BusFacCore busFacCore = new BusFacCore();
                     List<ContentType> lstContentType = busFacCore.ContentTypeGetList();
-                    List<JctUserContentType> lstJctUserContentTypeOfUser = busFacCore.JctUserContentTypeGetList(user);
+                    //List<JctUserContentType> lstJctUserContentTypeOfUser = busFacCore.JctUserContentTypeGetList(user);
                     bool bFound = false;
-                    foreach (ContentType ct in lstContentType)
+                    if (model.ContentTypeID < lstContentType.Count)
                     {
-                        // does user have an entry?
-                        if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == ct.ContentTypeID)))
-                        {
-                            returnContentType = ct;
-                            model.AskSide = (bool)ct.HasSides;
-                            bFound = true;
-                            break;
-                        }
+                        returnContentType = lstContentType[(int)model.ContentTypeID];
+                        model.AskSide = (bool)returnContentType.HasSides;
+                        bFound = true;
+
                     }
+                    else { bFound = false; }
+
+                    //foreach (ContentType ct in lstContentType)
+                    //{
+                    //    // does user have an entry?
+                    //    if (!(lstJctUserContentTypeOfUser.Exists(x => x.ContentTypeID == ct.ContentTypeID)))
+                    //    {
+                    //        returnContentType = ct;
+                    //        model.AskSide = (bool)ct.HasSides;
+                    //        bFound = true;
+                    //        break;
+                    //    }
+                    //}
                     if (!bFound)
                     {
                         user.IsRatingProfileFinished = true;

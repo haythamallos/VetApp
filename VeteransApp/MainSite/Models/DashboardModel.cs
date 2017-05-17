@@ -8,6 +8,8 @@ namespace MainSite.Models
         public EvaluationResults evaluationResults { get; set; }
         public EvaluationModel evaluationModel { get; set; }
         public Dictionary<long, BenefitStatus> BenefitStatuses { get; set; }
+        public Dictionary<long, BenefitStatus> BenefitStatusesQualify { get; set; }
+        public Dictionary<long, BenefitStatus> BenefitStatusesNonQualify { get; set; }
         public UserModel userModel { get; set; }
         public bool IsProfileComplete { get; set; }
 

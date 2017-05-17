@@ -141,13 +141,13 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                 ArrayList arUsers = Find(username);
                 if ((arUsers != null) && (arUsers.Count == 1))
                 {
-                    User userTmp = (User) arUsers[0];
+                    User userTmp = (User)arUsers[0];
 
                     if (userTmp.Impersonate == null)
                     {
                         userTmp.Impersonate = false;
-                    } 
-                    if (!((bool) userTmp.Impersonate))
+                    }
+                    if (!((bool)userTmp.Impersonate))
                     {
                         string passwordEncrypted = UtilsSecurity.encrypt(password);
                         if (userTmp.Passwd == passwordEncrypted)
@@ -373,9 +373,39 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             }
             return b;
         }
-        public Dictionary<long, BenefitStatus> GetBenefitStatuses(long UserID)
+        public List<UserDisability> GetLatestUserDisability(long UserID)
         {
-            Dictionary<long, BenefitStatus> dictBenefitStatuses = new Dictionary<long, BenefitStatus>();
+            List<UserDisability> lstUserDisability = new List<UserDisability>();
+            try
+            {
+                EnumJctUserContentType enumJctUserContentType = new EnumJctUserContentType();
+                enumJctUserContentType.UserID = UserID;
+                ArrayList arJctUserContentType = JctUserContentTypeGetList(enumJctUserContentType);
+                if (arJctUserContentType != null)
+                {
+                    UserDisability userDisability = null;
+                    List<JctUserContentType> lstJctUserContentTypeTmp = arJctUserContentType.Cast<JctUserContentType>().ToList();
+                    EnumContentType enumContentType = new EnumContentType();
+                    ArrayList arContentType = ContentTypeGetList(enumContentType);
+                    foreach (ContentType ct in arContentType)
+                    {
+                        JctUserContentType jct = lstJctUserContentTypeTmp.LastOrDefault(x => x.ContentTypeID == ct.ContentTypeID);
+                        if (jct != null)
+                        {
+                            userDisability = new UserDisability() { jctUserContentType = jct, contentType = ct};
+                            lstUserDisability.Add(userDisability);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            { }
+            return lstUserDisability;
+        }
+
+        public void GetBenefitStatuses(long UserID, ref Dictionary<long, BenefitStatus> dictBenefitStatuses, ref Dictionary<long, BenefitStatus> dictBenefitStatusesQualify, ref Dictionary<long, BenefitStatus> dictBenefitStatusesNonQualify)
+        {
             Dictionary<long, ContentState> dictContentStates = new Dictionary<long, ContentState>();
             List<JctUserContentType> lstJctUserContentType = new List<JctUserContentType>();
 
@@ -444,9 +474,19 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                     }
                 }
                 dictBenefitStatuses.Add(ct.ContentTypeID, benefitStatus);
+                if ((!IsServiceConnected) || (benefitStatus.DeltaRating == 0))
+                {
+                    dictBenefitStatusesNonQualify.Add(ct.ContentTypeID, benefitStatus);
+                }
+                else
+                {
+                    dictBenefitStatusesQualify.Add(ct.ContentTypeID, benefitStatus);
+                }
             }
             dictBenefitStatuses = dictBenefitStatuses.OrderByDescending(x => x.Value.DeltaRating).ToDictionary(x => x.Key, x => x.Value);
-            return dictBenefitStatuses;
+            dictBenefitStatusesQualify = dictBenefitStatusesQualify.OrderByDescending(x => x.Value.DeltaRating).ToDictionary(x => x.Key, x => x.Value);
+            dictBenefitStatusesNonQualify = dictBenefitStatusesNonQualify.OrderByDescending(x => x.Value.DeltaRating).ToDictionary(x => x.Key, x => x.Value);
+            //return dictBenefitStatuses;
         }
 
         public CartItem CartItemGet(long UserID, long ContentID)

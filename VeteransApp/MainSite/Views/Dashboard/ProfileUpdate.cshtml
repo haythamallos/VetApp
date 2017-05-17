@@ -4,13 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using MainSite.Models;
 @model MainSite.Models.ProfileModel
 <div id="page-wrapper">
     <div class="col-xs-12">
         <div class="white-box">
             <form id="formqback" class="form-horizontal" method="post" action="/Dashboard/ProfileUpdatePost">
                 <div class="panel panel-default">
-                    <div class="panel-heading"> Veteran Profile </div>
+                    <div class="panel-heading"> Profile </div>
                     <div class="panel-wrapper collapse in">
                         <ul class="nav customtab nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#tab1" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> General</span></a></li>
@@ -82,8 +83,47 @@
                                         <div class="col-md-12">
                                             @Html.DropDownListFor(x => x.userModel.CurrentRating, (SelectList)ViewBag.CurrentRatingsList)
                                         </div>
+                                        <label class="col-md-12 text-warning">Note:  Changing overall rating will require inputting disabilities rating again from the dashboard "Get Started".</label>
+
                                     </div>
                                     <hr />
+                                    @foreach (UserDisability userDisability in Model.lstUserDisability)
+                                    {
+                                        <div class="form-group">
+                                            <label class="col-md-3">@userDisability.contentType.VisibleCode</label>
+                                            <label class="col-md-3">@userDisability.jctUserContentType.Rating%</label>
+                                            @switch (@userDisability.jctUserContentType.SideID)
+                                            {
+                                                case 1:
+                                                    <label class="col-md-3">No Side</label>
+                                                    break;
+                                                case 2:
+                                                    <label class="col-md-3">Left Side</label>
+                                                    break;
+                                                case 3:
+                                                    <label class="col-md-3">Right Side</label>
+                                                    break;
+                                                case 4:
+                                                    <label class="col-md-3">Both Sides</label>
+                                                    break;
+                                                default:
+                                                    <label class="col-md-3"></label>
+                                                    break;
+                                            }
+                                            @if ( (@userDisability.jctUserContentType.IsConnected != null) && ((bool)@userDisability.jctUserContentType.IsConnected))
+                                            {
+                                            <label class="col-md-3">Service Connected</label>
+                                            }
+                                            else
+                                            {
+                                            <label class="col-md-3">Non-Service Connected</label>
+                                            }
+                                            @*<div class="col-md-12">
+                                                    @Html.DropDownListFor(x => userDisability.jctUserContentType.Rating, (SelectList)ViewBag.CurrentRatingsList)
+                                                </div>*@
+                                        </div>
+                                        <hr />
+                                    }
                                     <div class="clearfix"></div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab3">
