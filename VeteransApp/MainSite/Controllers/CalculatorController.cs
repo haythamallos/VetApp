@@ -4,6 +4,7 @@ using MainSite.ViewModels;
 
 namespace MainSite.Controllers
 {
+    [Authorize]
     public class CalculatorController : Controller
     {
         public ActionResult Index()

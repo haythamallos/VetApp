@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Load VA Calculator Widget to iFrame</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        #load {
+            /*position: absolute;
+            background-color: blue;*/
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            height: 50%;
+            display: none;
+        }
+
+        #loadMe {
+            /*background-color: blue;
+            color: #fff;*/
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80px;
+            height: 30px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+
+        $(document).ready(function () {
+            $('#loadMe').click(function (e) {
+                $('#load').show();
+                $("#load").attr("src", "http://localhost:64464/CalculatorWidget");
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--<p id="loadMe">loadMe</p>
+    <b>Load my website here.</b>-->
+    <!--<iframe id="load" src=""></iframe>-->
+    <iframe width="400" height="400" src="http://localhost:64464/CalculatorWidget"></iframe>
+</body>
+</html>

@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaHolder", "SchemaHolde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator", "Generator\CodeGenerator.csproj", "{442D6DFB-17D2-4954-B19C-D729501EDB37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WidgetClientSite", "WidgetClientSite\WidgetClientSite.csproj", "{E15734D2-FB20-473C-A3FA-4EDB66A543E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{442D6DFB-17D2-4954-B19C-D729501EDB37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15734D2-FB20-473C-A3FA-4EDB66A543E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15734D2-FB20-473C-A3FA-4EDB66A543E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15734D2-FB20-473C-A3FA-4EDB66A543E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15734D2-FB20-473C-A3FA-4EDB66A543E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

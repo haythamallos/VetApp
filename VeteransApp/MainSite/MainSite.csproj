@@ -186,6 +186,7 @@
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\RatingProjections.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalculatorWidgetController.cs" />
     <Compile Include="DB\BusinessAccessLayer\BusJctUserUser.cs" />
     <Compile Include="DB\BusinessFacadeLayer\BusFacPDFItems.cs" />
     <Compile Include="DB\Common\UtilsString.cs" />
@@ -832,6 +833,7 @@
     <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
     <Content Include="Views\Dashboard\ClientCreate.cshtml" />
     <Content Include="Views\Dashboard\SearchResults.cshtml" />
+    <Content Include="Views\CalculatorWidget\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
