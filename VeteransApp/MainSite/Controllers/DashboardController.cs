@@ -22,6 +22,21 @@ namespace MainSite.Controllers
     {
         private Config _config = null;
 
+        private string[] arVarianceHistory = new string[] { "Onset of injury began during active duty service. Please see active duty records.",
+                                                            "Dx and Hx well-established by VA and military.",
+                                                            "Original injury incurred during active duty service, condition has continued.",
+                                                            "Pt describes original diagnosis during the military, confirmed by VA and service-connected." };
+
+
+        private string[] arVarianceFlareUps = new string[]  { "Pt states during a flare-up they are unable to have FROM with great pain and stiffness.",
+                                                            "Pt describes pain, tenderness, and very restricted LROM.",
+                                                            "Pt describes occasional swelling during a flare with highly restricted range of motion.",
+                                                            "During a flare pt is very restricted with physical activities."};
+
+        private string[] arVarianceFunctionLoss= new string[]  { "Pt reports weakened movement and tiring easily.",
+                                                            "Pt describes constant pain with movement and unable to perform some physical tasks.",
+                                                            "Pt states there is intermittent pain and swelling with daily activities.",
+                                                            "Pt reports occasional loss of movement and extreme tenderness when exerting."};
         private User Auth()
         {
             bool bIsAuth = User.Identity.IsAuthenticated;
@@ -116,6 +131,25 @@ namespace MainSite.Controllers
 
             var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
+
+
+            var VarianceHistory = new System.Web.Mvc.SelectList(new[] { "Onset of injury began during active duty service. Please see active duty records.",
+                                                                        "Dx and Hx well-established by VA and military.",
+                                                                        "Original injury incurred during active duty service, condition has continued.",
+                                                                        "Pt describes original diagnosis during the military, confirmed by VA and service-connected."});
+            ViewBag.VarianceHistory = VarianceHistory;
+
+            var VarianceFlareUps = new System.Web.Mvc.SelectList(new[] { "Pt states during a flare-up they are unable to have FROM with great pain and stiffness.",
+                                                                        "Pt describes pain, tenderness, and very restricted LROM.",
+                                                                        "Pt describes occasional swelling during a flare with highly restricted range of motion.",
+                                                                        "During a flare pt is very restricted with physical activities."});
+            ViewBag.VarianceFlareUps = VarianceFlareUps;
+
+            var VarianceFunctionLoss = new System.Web.Mvc.SelectList(new[] { "Pt reports weakened movement and tiring easily.",
+                                                                        "Pt describes constant pain with movement and unable to perform some physical tasks.",
+                                                                        "Pt states there is intermittent pain and swelling with daily activities.",
+                                                                        "Pt reports occasional loss of movement and extreme tenderness when exerting."});
+            ViewBag.VarianceFunctionLoss = VarianceFunctionLoss;
 
         }
         public ActionResult Index()
@@ -1191,12 +1225,23 @@ namespace MainSite.Controllers
                 if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
                     ContentID = FormSave(model, 0, contenttypeid, true);
+                    int ind = 0;
+                    Random rnd = new Random();
+
+                    ind = rnd.Next(0, arVarianceHistory.Length);
+                    model.VarianceHistoryWriteIn = arVarianceHistory[ind];
+
+                    ind = rnd.Next(0, arVarianceFlareUps.Length);
+                    model.VarianceFlareUpsWriteIn = arVarianceFlareUps[ind];
+
+                    ind = rnd.Next(0, arVarianceFunctionLoss.Length);
+                    model.VarianceFunctionLossWriteIn = arVarianceFlareUps[ind];
+
                 }
                 else
                 {
                     model = JSONHelper.Deserialize<ShoulderModel>(content.ContentMeta);
                 }
-
 
             }
             catch (Exception ex)

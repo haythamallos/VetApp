@@ -223,6 +223,27 @@
                                 </div>
 
                             </div>
+                            <hr />
+                            <span>Describe the history:  </span>
+                            @Html.EditorFor(x => x.VarianceHistoryWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                            <br />
+                            <span>or choose other</span>
+                            @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);" })
+
+                            <hr />
+                            <span>Describe flare-ups imact function?:  </span>
+                            @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                            <br />
+                            <span>or choose other</span>
+                            @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);" })
+
+                            <hr />
+                            <span>Describe flare-ups imact function?:  </span>
+                            @Html.EditorFor(x => x.VarianceFunctionLossWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                            <br />
+                            <span>or choose other</span>
+                            @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);" })
+
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>
@@ -508,6 +529,7 @@
                                     @Html.RadioButtonFor(x => x.S10ASide, "BOTH") Both
 
                                 </div>
+
                             </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="part4PrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
@@ -765,6 +787,15 @@
 
  
     });
+    function onChangeHistory(value) {
+        document.getElementById('VarianceHistoryWriteIn').value = value;
+    }
+    function onChangeFlareUps(value) {
+        document.getElementById('VarianceFlareUpsWriteIn').value = value;
+    }
+    function onChangeFunctionLoss(value) {
+        document.getElementById('VarianceFunctionLossWriteIn').value = value;
+    }
 </script>
 
 @Html.Partial("partialModalDBQ")

@@ -2573,12 +2573,16 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[1].Code, PDFItems.shoulderPDFItems[1].ExportValue);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[9].Code, PDFItems.shoulderPDFItems[9].ExportValue);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[10].Code, PDFItems.shoulderPDFItems[10].ExportValue);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[132].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[133].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[134].Code, m.VarianceFunctionLossWriteIn
+                            );
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe2B[0]", "Physical limitations, loss of strength, soreness, and pain.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe2B[0]", "Physical limitations, loss of strength, soreness, and pain.");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe2C[0]", "Severe restriction of range of motion.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe2C[0]", "Severe restriction of range of motion.");
                         pdfFormFields.SetField("form1[0].#subform[2].YesNo4[1]", "1");
                         pdfFormFields.SetField("form1[0].#subform[2].YesNo5[1]", "1");
                         pdfFormFields.SetField("form1[0].#subform[3].Right_Painful[0]", "1");
