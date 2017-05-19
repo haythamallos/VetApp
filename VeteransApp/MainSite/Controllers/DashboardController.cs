@@ -66,8 +66,11 @@ namespace MainSite.Controllers
         {
             _config = new Config();
 
-            var MovementList0Deg = new System.Web.Mvc.SelectList(new[] { 0 });
-            ViewBag.MovementList0Deg = MovementList0Deg;
+            var MovementList0to110Deg = new System.Web.Mvc.SelectList(new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110 });
+            ViewBag.MovementList0To110Deg = MovementList0to110Deg;
+
+            var MovementList0to45Deg = new System.Web.Mvc.SelectList(new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45 });
+            ViewBag.MovementList0To45Deg = MovementList0to45Deg;
 
             var MovementList20Deg = new System.Web.Mvc.SelectList(new[] { 20, 15, 10, 5, 0 });
             ViewBag.MovementList20Deg = MovementList20Deg;

@@ -257,7 +257,7 @@
                                 @Html.DropDownListFor(x => x.S171, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S175, (SelectList)ViewBag.MovementList0To45Deg)
 
                                 <hr />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> knee and record the last repetition below.</label>
@@ -266,7 +266,7 @@
                                 @Html.DropDownListFor(x => x.S203, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S202, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S202, (SelectList)ViewBag.MovementList0To45Deg)
 
                                 <hr />
                                 <label>For the <spa>RIGHT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
@@ -275,7 +275,7 @@
                                 @Html.DropDownListFor(x => x.S313, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S314, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S314, (SelectList)ViewBag.MovementList0To45Deg)
 
                             </div>
 
@@ -288,7 +288,7 @@
                                 @Html.DropDownListFor(x => x.S146, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S142, (SelectList)ViewBag.MovementList0To45Deg)
 
                                 <hr />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> knee and record the last repetition below.</label>
@@ -297,7 +297,7 @@
                                 @Html.DropDownListFor(x => x.S187, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList0To45Deg)
 
                                 <hr />
                                 <label>For the <spa>LEFT</spa> knee at its worst or during a flare-up, what is the range for each motion?</label>
@@ -306,7 +306,7 @@
                                 @Html.DropDownListFor(x => x.S287, (SelectList)ViewBag.MovementList140Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S284, (SelectList)ViewBag.MovementList0Deg)
+                                @Html.DropDownListFor(x => x.S284, (SelectList)ViewBag.MovementList0To45Deg)
 
                             </div>
                             <hr />
@@ -540,6 +540,11 @@
                     <div id="collapsef" class="panel-collapse collapse">
                         <div class="panel-body">
                             <h2 class="box-title m-b-0 m-t-40">Thank you for completing the questions.  Click submit to process.</h2>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label font-normal">
+                                    @Html.EditorFor(x => x.IsFormReadonly) Check this to make the generated dbq form NOT editable
+                                </label>
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="finishPrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="submit" id="finishBtn">Submit</button>
                         </div>

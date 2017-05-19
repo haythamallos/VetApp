@@ -135,6 +135,11 @@
                     <div id="collapsef" class="panel-collapse collapse">
                         <div class="panel-body">
                             <h2 class="box-title m-b-0 m-t-40">Thank you for completing the questions.  Click submit to process.</h2>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label font-normal">
+                                    @Html.EditorFor(x => x.IsFormReadonly) Check this to make the generated dbq form NOT editable
+                                </label>
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="finishPrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="submit" id="finishBtn">Submit</button>
                         </div>

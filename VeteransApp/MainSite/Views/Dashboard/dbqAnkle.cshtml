@@ -391,7 +391,7 @@
                 </div>
                 <!-- Section 3 -->
                 <!-- Section 4 -->
-                <div class="panel panel-info">
+                @*<div class="panel panel-info">
                     <div class="panel-heading" id="part4Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse4">Section 4</a>
@@ -403,7 +403,7 @@
                             <button class="btn btn-success btn-md pull-right" type="button" id="part4NextBtn">Next</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Section 4 -->
                 <!-- Finish -->
                 <div class="panel panel-info">
@@ -415,6 +415,11 @@
                     <div id="collapsef" class="panel-collapse collapse">
                         <div class="panel-body">
                             <h2 class="box-title m-b-0 m-t-40">Thank you for completing the questions.  Click submit to process.</h2>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label font-normal">
+                                    @Html.EditorFor(x => x.IsFormReadonly) Check this to make the generated dbq form NOT editable
+                                </label>
+                            </div>
                             <button class="btn btn-warning btn-md pull-left" type="button" id="finishPrevBtn">Prev</button>
                             <button class="btn btn-success btn-md pull-right" type="submit" id="finishBtn">Submit</button>
                         </div>
@@ -534,7 +539,7 @@
         });
 
         $("#part3NextBtn").on("click", function () {
-            show4();
+            showf();
         });
 
         $("#part3PrevBtn").on("click", function () {
@@ -550,7 +555,7 @@
         });
 
         $("#finishPrevBtn").on("click", function () {
-            show4();
+            show3();
         });
 
         $("input[type=radio]").change(function () {

@@ -5,6 +5,8 @@ namespace MainSite.Models
 {
     public class SleepapneaModel : IBaseModel
     {
+        public bool IsFormReadonly { get; set; }
+
         public long ContentID { get; set; }
         public long ContentTypeID { get; set; }
         public long ContentStateID { get; set; }

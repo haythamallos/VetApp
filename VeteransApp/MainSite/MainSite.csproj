@@ -833,6 +833,7 @@
     <Content Include="Views\Dashboard\partialModalDBQ.cshtml" />
     <Content Include="Views\Dashboard\ClientCreate.cshtml" />
     <Content Include="Views\Dashboard\SearchResults.cshtml" />
+    <Content Include="Views\Shared\_LayoutWidget.cshtml" />
     <Content Include="Views\CalculatorWidget\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

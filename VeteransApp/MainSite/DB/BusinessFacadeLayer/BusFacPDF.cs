@@ -851,24 +851,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.backPDFItems[313].Code, PDFItems.backPDFItems[313].ExportValue);
                         pdfFormFields.SetField(PDFItems.backPDFItems[405].Code, PDFItems.backPDFItems[405].ExportValue);
 
+                        if (back.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
 
+                        }
                         pdfFormFields.SetField(PDFItems.backPDFItems[459].Code, PDFItems.backPDFItems[459].ExportValue);
                         pdfFormFields.SetField(PDFItems.backPDFItems[457].Code, "Due to the flareups and severity of this condition, sedentary occupation is recommended.");
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (back.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -2038,19 +2044,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.neckPDFItems[115].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.neckPDFItems[115].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -3714,25 +3726,26 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 }
                             }
 
-                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.shoulderPDFItems[2].Code);
-                            Rectangle rect = lstPos[0].position;
-                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                            cb.SetFontAndSize(bf, 12);
-                            cb.BeginText();
-                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                            cb.ShowText(string.Empty);
-                            cb.EndText();
-
-
+                            if (m.IsFormReadonly)
+                            {
+                                IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.shoulderPDFItems[2].Code);
+                                Rectangle rect = lstPos[0].position;
+                                PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                                cb.SetFontAndSize(bf, 12);
+                                cb.BeginText();
+                                cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                                cb.ShowText(string.Empty);
+                                cb.EndText();
+                            }
                         }
-                        //
-                        //
-                        //
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -4095,20 +4108,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.footPDFItems, m.S438, m.Side, 438, 445, 444, 443);
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.footPDFItems, m.S442, m.Side, 442, 439, 440, 441);
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.footPDFItems[49].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.footPDFItems[49].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
+
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -4220,20 +4240,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[54].Code, "OSA dx");
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.sleepapneaPDFItems[23].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.sleepapneaPDFItems[23].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
+
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -4583,21 +4610,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         }
 
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.headachePDFItems[34].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.headachePDFItems[34].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -5561,27 +5594,29 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
 
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.anklePDFItems[69].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.anklePDFItems[69].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
-
-
-
+                        }
                     }
 
                     // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
-
                     form = ms.ToArray();
 
                 }
@@ -6063,21 +6098,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
 
 
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.wristPDFItems[2].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.wristPDFItems[2].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -6654,21 +6695,28 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.kneePDFItems[51].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.kneePDFItems[51].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
+
 
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -7544,21 +7592,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         }
 
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.hipPDFItems[54].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.hipPDFItems[54].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
@@ -8609,21 +8663,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
 
+                        if (m.IsFormReadonly)
+                        {
+                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.elbowPDFItems[59].Code);
+                            Rectangle rect = lstPos[0].position;
+                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                            cb.SetFontAndSize(bf, 12);
+                            cb.BeginText();
+                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                            cb.ShowText(string.Empty);
+                            cb.EndText();
+                        }
 
-                        IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.elbowPDFItems[59].Code);
-                        Rectangle rect = lstPos[0].position;
-                        PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        cb.SetFontAndSize(bf, 12);
-                        cb.BeginText();
-                        cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                        cb.ShowText(string.Empty);
-                        cb.EndText();
 
                     }
 
-                    // Set the flattening flag to true, so the document is not editable
-                    pdfStamper.FormFlattening = true;
+                    if (m.IsFormReadonly)
+                    {
+                        // Set the flattening flag to true, so the document is not editable
+                        pdfStamper.FormFlattening = true;
+                    }
 
                     // close the pdf stamper
                     pdfStamper.Close();
