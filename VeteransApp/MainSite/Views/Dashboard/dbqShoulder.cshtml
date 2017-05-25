@@ -76,12 +76,12 @@
                             <br />
                             <hr />
                             @*<hr />
-                            <div>
-                                <label class="font-bold">Are you service connected for left, right or both? (Only pick one)</label>
-                                @Html.RadioButtonFor(x => x.Side, "LEFT") Left
-                                @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
-                                @Html.RadioButtonFor(x => x.Side, "BOTH") Both
-                            </div>*@
+                                <div>
+                                    <label class="font-bold">Are you service connected for left, right or both? (Only pick one)</label>
+                                    @Html.RadioButtonFor(x => x.Side, "LEFT") Left
+                                    @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
+                                    @Html.RadioButtonFor(x => x.Side, "BOTH") Both
+                                </div>*@
                             <div class="form-group m-t-20">
                                 <div>
                                     <label class="font-bold">Are you left-handed or right-handed? (Only pick one)</label>
@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label font-normal">
-                                        Other (specify):  
+                                        Other (specify):
                                     </label>
                                     @Html.RadioButtonFor(x => x.S128Side, "RIGHT") Right
                                     @Html.RadioButtonFor(x => x.S128Side, "LEFT") Left
@@ -223,27 +223,65 @@
                                 </div>
 
                             </div>
-                            <hr />
-                            <span>Describe the history:  </span>
-                            @Html.EditorFor(x => x.VarianceHistoryWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
-                            <br />
-                            <span>or choose other</span>
-                            @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);" })
 
-                            <hr />
-                            <span>Describe flare-ups imact function?:  </span>
-                            @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
-                            <br />
-                            <span>or choose other</span>
-                            @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);" })
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Describe the history:  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceHistoryWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                </div>
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>or choose </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
 
-                            <hr />
-                            <span>Describe flare-ups imact function?:  </span>
-                            @Html.EditorFor(x => x.VarianceFunctionLossWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
-                            <br />
-                            <span>or choose other</span>
-                            @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);" })
+                            </div>
 
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Does the veteran report flare-ups impact function?  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                </div>
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>or choose </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Does the veteran report having any functional loss?  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceFunctionLossWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                </div>
+                                <br />
+                                <div class="col-md-5">
+                                    <span>or choose </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+                            <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>
@@ -510,10 +548,10 @@
                             <div class="form-group m-t-20">
                                 <div class="form-check form-check-inline">
                                     <label class="font-bold">Do you have a history of shoulder instability or dislocation?</label>
-                                    <br />    
-                                    @Html.EditorFor(x => x.S10A) Yes                                
+                                    <br />
+                                    @Html.EditorFor(x => x.S10A) Yes
                                     @*@Html.RadioButtonFor(x => x.S10A, "YES") Yes
-                                    @Html.RadioButtonFor(x => x.S10A, "NO") No*@
+                                        @Html.RadioButtonFor(x => x.S10A, "NO") No*@
                                 </div>
                                 <hr />
                                 <div id="divS10A" class="form-check form-check-inline" style="display: none">
@@ -571,7 +609,7 @@
 <script type="text/javascript">
 
     $('document').ready(function () {
- 
+
         function setROM() {
             var S64Side = $('input[name=S64Side]:checked').val();
             var S65Side = $('input[name=S65Side]:checked').val();
@@ -785,17 +823,30 @@
             showf();
         });
 
- 
+
     });
     function onChangeHistory(value) {
-        document.getElementById('VarianceHistoryWriteIn').value = value;
+        if (value != '-- Choose Phrase --')
+        {
+            document.getElementById('VarianceHistoryWriteIn').value = value;
+            document.getElementById("VarianceHistory").selectedIndex = 0;
+        }
     }
     function onChangeFlareUps(value) {
-        document.getElementById('VarianceFlareUpsWriteIn').value = value;
+        if (value != '-- Choose Phrase --') {
+            document.getElementById('VarianceFlareUpsWriteIn').value = value;
+            document.getElementById("VarianceFlareUps").selectedIndex = 0;
+        }
+
     }
     function onChangeFunctionLoss(value) {
-        document.getElementById('VarianceFunctionLossWriteIn').value = value;
+        if (value != '-- Choose Phrase --') {
+            document.getElementById('VarianceFunctionLossWriteIn').value = value;
+            document.getElementById("VarianceFunctionLoss").selectedIndex = 0;
+        }
+
     }
+
 </script>
 
 @Html.Partial("partialModalDBQ")

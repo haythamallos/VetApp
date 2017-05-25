@@ -133,19 +133,22 @@ namespace MainSite.Controllers
             ViewBag.CurrentRatingsList = CurrentRatingsList;
 
 
-            var VarianceHistory = new System.Web.Mvc.SelectList(new[] { "Onset of injury began during active duty service. Please see active duty records.",
+            var VarianceHistory = new System.Web.Mvc.SelectList(new[] { "-- Choose Phrase --",
+                                                                        "Onset of injury began during active duty service. Please see active duty records.",
                                                                         "Dx and Hx well-established by VA and military.",
                                                                         "Original injury incurred during active duty service, condition has continued.",
                                                                         "Pt describes original diagnosis during the military, confirmed by VA and service-connected."});
             ViewBag.VarianceHistory = VarianceHistory;
 
-            var VarianceFlareUps = new System.Web.Mvc.SelectList(new[] { "Pt states during a flare-up they are unable to have FROM with great pain and stiffness.",
+            var VarianceFlareUps = new System.Web.Mvc.SelectList(new[] { "-- Choose Phrase --",
+                                                                        "Pt states during a flare-up they are unable to have FROM with great pain and stiffness.",
                                                                         "Pt describes pain, tenderness, and very restricted LROM.",
                                                                         "Pt describes occasional swelling during a flare with highly restricted range of motion.",
                                                                         "During a flare pt is very restricted with physical activities."});
             ViewBag.VarianceFlareUps = VarianceFlareUps;
 
-            var VarianceFunctionLoss = new System.Web.Mvc.SelectList(new[] { "Pt reports weakened movement and tiring easily.",
+            var VarianceFunctionLoss = new System.Web.Mvc.SelectList(new[] { "-- Choose Phrase --",
+                                                                        "Pt reports weakened movement and tiring easily.",
                                                                         "Pt describes constant pain with movement and unable to perform some physical tasks.",
                                                                         "Pt states there is intermittent pain and swelling with daily activities.",
                                                                         "Pt reports occasional loss of movement and extreme tenderness when exerting."});
@@ -1225,6 +1228,7 @@ namespace MainSite.Controllers
                 if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
                     ContentID = FormSave(model, 0, contenttypeid, true);
+
                     int ind = 0;
                     Random rnd = new Random();
 
@@ -1319,6 +1323,18 @@ namespace MainSite.Controllers
                 if ((content == null) || (!string.IsNullOrEmpty(isnew)))
                 {
                     ContentID = FormSave(model, 0, contenttypeid, true);
+
+                    int ind = 0;
+                    Random rnd = new Random();
+
+                    ind = rnd.Next(0, arVarianceHistory.Length);
+                    model.VarianceHistoryWriteIn = arVarianceHistory[ind];
+
+                    ind = rnd.Next(0, arVarianceFlareUps.Length);
+                    model.VarianceFlareUpsWriteIn = arVarianceFlareUps[ind];
+
+                    ind = rnd.Next(0, arVarianceFunctionLoss.Length);
+                    model.VarianceFunctionLossWriteIn = arVarianceFlareUps[ind];
                 }
                 else
                 {

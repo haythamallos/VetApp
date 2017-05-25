@@ -1579,7 +1579,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
 
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe[0]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe[0]", "The onset of this disability was during military service, continues to deal with symptoms, and flare ups.");
 
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
                         pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, loss of strength, soreness, and pain.");
@@ -1587,10 +1587,14 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         //SetField_Neck_2B(m, pdfFormFields);
 
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, loss of strength, soreness, and pain.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe1[0]", "Physical limitations, loss of strength, soreness, and pain.");
 
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
-                        pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", "Severe restriction of range of motion.");
+                        //pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", "Severe restriction of range of motion.");
+
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[65].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[66].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[67].Code, m.VarianceFunctionLossWriteIn);
 
                         pdfFormFields.SetField("form1[0].#subform[1].ROM1[0]", m.S96);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM2[0]", m.S86);
@@ -1686,9 +1690,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 }
                                 if (m.S145Guarding)
                                 {
-                                        pdfFormFields.SetField(PDFItems.neckPDFItems[145].Code, PDFItems.neckPDFItems[145].ExportValue); //145
-                                    }
+                                    pdfFormFields.SetField(PDFItems.neckPDFItems[145].Code, PDFItems.neckPDFItems[145].ExportValue); //145
                                 }
+                            }
                             else
                             {
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[148].Code, PDFItems.neckPDFItems[148].ExportValue); //148
@@ -2575,8 +2579,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[10].Code, PDFItems.shoulderPDFItems[10].ExportValue);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[132].Code, m.VarianceHistoryWriteIn);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[133].Code, m.VarianceFlareUpsWriteIn);
-                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[134].Code, m.VarianceFunctionLossWriteIn
-                            );
+                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[134].Code, m.VarianceFunctionLossWriteIn);
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
                         //pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
@@ -6674,7 +6677,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                             else if (m.S11ASurgeryType == "MENISCECTOMY")
                             {
-                                if ( (m.S11ASide == "RIGHT") || (m.S11ASide == "BOTH"))
+                                if ((m.S11ASide == "RIGHT") || (m.S11ASide == "BOTH"))
                                 {
                                     pdfFormFields.SetField(PDFItems.kneePDFItems[462].Code, PDFItems.kneePDFItems[462].ExportValue);
                                     pdfFormFields.SetField(PDFItems.kneePDFItems[465].Code, PDFItems.kneePDFItems[465].ExportValue);
