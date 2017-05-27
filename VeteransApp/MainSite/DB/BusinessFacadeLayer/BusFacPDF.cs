@@ -7801,12 +7801,21 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[6].YesNo13[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[6].YesNo18[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo19[0]", "2");
-                        pdfFormFields.SetField("form1[0].#subform[6].Residuals[6]", "1");
+                        //pdfFormFields.SetField("form1[0].#subform[6].Residuals[6]", "1");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo22[1]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo23[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[7].YesNo24[0]", "2");
                         pdfFormFields.SetField("form1[0].#subform[2].Right_Painful[0]", "1");
                         pdfFormFields.SetField("form1[0].#subform[2].Right_FunctionalLoss[0]", "1");
+
+                        // correction defaults
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[146].Code, PDFItems.elbowPDFItems[146].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[297].Code, PDFItems.elbowPDFItems[297].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[264].Code, PDFItems.elbowPDFItems[264].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[421].Code, PDFItems.elbowPDFItems[421].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[423].Code, PDFItems.elbowPDFItems[423].ExportValue);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[458].Code, PDFItems.elbowPDFItems[458].ExportValue);
+
 
                         pdfFormFields.SetField(PDFItems.elbowPDFItems[83].Code, m.NameOfPatient);
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
@@ -8668,6 +8677,27 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 default:
                                     break;
                             }
+                        }
+                        switch (m.SideHand)
+                        {
+                            case "RIGHT":
+                                pdfFormFields.SetField(PDFItems.elbowPDFItems[102].Code, PDFItems.elbowPDFItems[102].ExportValue);
+                                break;
+                            case "LEFT":
+                                pdfFormFields.SetField(PDFItems.elbowPDFItems[105].Code, PDFItems.elbowPDFItems[105].ExportValue);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        switch (m.Side)
+                        {
+                            case "BOTH":
+                                pdfFormFields.SetField(PDFItems.elbowPDFItems[182].Code, PDFItems.elbowPDFItems[182].ExportValue);
+                                pdfFormFields.SetField(PDFItems.elbowPDFItems[180].Code, PDFItems.elbowPDFItems[180].ExportValue);
+                                break;
+                            default:
+                                break;
                         }
 
                         if (m.IsFormReadonly)

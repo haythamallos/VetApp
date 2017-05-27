@@ -82,6 +82,12 @@
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
                             </div>
                             <hr />
+                            <div>
+                                <label class="font-bold">Are you right or left handed?</label>
+                                @Html.RadioButtonFor(x => x.SideHand, "LEFT") Left
+                                @Html.RadioButtonFor(x => x.SideHand, "RIGHT") Right
+                            </div>
+                            <hr />
                             <div class="form-group m-t-20">
                                 <label class="font-bold">What is the diagnosis of your service-connected elbow condition? Check if applies and choose Right, Left or Both?</label>
                                 <div class="form-check form-check-inline">
