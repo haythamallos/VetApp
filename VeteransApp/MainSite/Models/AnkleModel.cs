@@ -17,8 +17,6 @@ namespace MainSite.Models
 
         public string Side { get; set; }
 
-        public bool S81 { get; set; }
-        public string S81Side { get; set; }
         public bool S82 { get; set; }
         public string S82Side { get; set; }
         public bool S83 { get; set; }

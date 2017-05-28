@@ -74,13 +74,13 @@
                                 </div>
                             </div>
                             <br />
-                            <hr />
+                            @*<hr />
                             <div>
                                 <label class="font-bold">What is the diagnosis of your service-connected elbow condition?</label>
                                 @Html.RadioButtonFor(x => x.Side, "LEFT") Left
                                 @Html.RadioButtonFor(x => x.Side, "RIGHT") Right
                                 @Html.RadioButtonFor(x => x.Side, "BOTH") Both
-                            </div>
+                            </div>*@
                             <hr />
                             <div>
                                 <label class="font-bold">Are you right or left handed?</label>
@@ -250,7 +250,7 @@
                                 @Html.DropDownListFor(x => x.S122, (SelectList)ViewBag.MovementList145Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList180Deg)
+                                @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList0To110Deg)
                                 <br />
                                 <span>Forarm Supination</span>
                                 @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList85Deg)
@@ -265,7 +265,7 @@
                                 @Html.DropDownListFor(x => x.S154, (SelectList)ViewBag.MovementList145Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S155, (SelectList)ViewBag.MovementList180Deg)
+                                @Html.DropDownListFor(x => x.S155, (SelectList)ViewBag.MovementList0To110Deg)
                                 <br />
                                 <span>Forarm Supination</span>
                                 @Html.DropDownListFor(x => x.S148, (SelectList)ViewBag.MovementList85Deg)
@@ -280,7 +280,7 @@
                                 @Html.DropDownListFor(x => x.S260, (SelectList)ViewBag.MovementList145Deg)
                                 <br />
                                 <span>Extension</span>
-                                @Html.DropDownListFor(x => x.S255, (SelectList)ViewBag.MovementList180Deg)
+                                @Html.DropDownListFor(x => x.S255, (SelectList)ViewBag.MovementList0To110Deg)
                                 <br />
                                 <span>Forarm Supination</span>
                                 @Html.DropDownListFor(x => x.S253, (SelectList)ViewBag.MovementList85Deg)

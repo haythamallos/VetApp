@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    @Html.Partial("partialModalsHome")
+    @*@Html.Partial("partialModalsHome")
 
     <header id="header">
         <div class="header_top">
@@ -28,31 +28,27 @@
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
                                 <li><a href="/Home"><i class="fa fa-home"></i> Home</a></li>
-                                @*<li><a class="popup-youtube btn btn-danger" href="http://www.youtube.com/watch?v=sK7riqg2mr4">Get Started video</a></li>*@
+                                <li><a class="popup-youtube btn btn-danger" href="http://www.youtube.com/watch?v=sK7riqg2mr4">Get Started video</a></li>
                                 <li><a href="javascript:void(0)" id="btnPhoneFormModal"><i class="fa fa-phone"></i> 619-822-2070</a></li>
-                                @*<li><a href="javascript:void(0)" data-toggle="modal" data-target="#contactformmodal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>*@
+                                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#contactformmodal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>
                                 <li><a href="javascript:void(0)" id="btnContactFormModal"><i class="fa fa-envelope"></i> info@vvcservices.com</a></li>
                                 <li><a href="javascript:void(0)" id="btnFreeEvaluation"><i class="fa fa-star"></i> Free Evaluation</a></li>
                                 <li><a href="javascript:void(0)" id="btnTestimonialsModal"><i class="fa fa-heart"></i> Testimonials</a></li>
                                 <li><a href="/Home/Login2"><i class="fa fa-sign-in"></i> Sign in</a></li>
-                                @*<li><a href="/Home/Register2"><i class="fa fa-long-arrow-up"></i> Sign Up</a></li>*@
+                                <li><a href="/Home/Register2"><i class="fa fa-long-arrow-up"></i> Sign Up</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="social-icons pull-right">
                             <ul class="nav navbar-nav">
-                                @*@if (User.Identity.IsAuthenticated)
-                                    {
-                                        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                                    }*@
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </header>*@
 
 
     @RenderBody()
