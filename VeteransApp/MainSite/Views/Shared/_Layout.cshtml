@@ -35,7 +35,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-
+    @RenderSection("viewcss", false)
 </head>
 
 
@@ -137,6 +137,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", required: false)
+
+    @RenderSection("viewjs", false)
+
 
 </body>
 </html>

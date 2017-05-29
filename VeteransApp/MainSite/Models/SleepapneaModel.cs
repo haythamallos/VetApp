@@ -5,6 +5,13 @@ namespace MainSite.Models
 {
     public class SleepapneaModel : IBaseModel
     {
+        public string VarianceHistory { get; set; }
+        public string VarianceHistoryWriteIn { get; set; }
+        public string VarianceFlareUps { get; set; }
+        public string VarianceFlareUpsWriteIn { get; set; }
+        public string VarianceFunctionLoss { get; set; }
+        public string VarianceFunctionLossWriteIn { get; set; }
+
         public bool IsFormReadonly { get; set; }
 
         public long ContentID { get; set; }

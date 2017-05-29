@@ -8,14 +8,7 @@
 
 <!-- Page Content -->
 <div id="page-wrapper">
-    <script>
-        var CurrentRating = 0;
-        var IncreaseRating = 0;
-        var PotentialRating = 0;
-        CurrentRating = @Model.evaluationResults.CurrentRating;
-        IncreaseRating = @Model.evaluationResults.IncreaseRating;
-        PotentialRating = @Model.evaluationResults.PotentialVARating;
-    </script>
+
     <div class="col-md-12">
         <div class="col-md-9">
             <div class="row">
@@ -176,7 +169,36 @@
 
     </div>
 </div>
-@*else
-    {
-        <td>@item.Value.BenefitName</td>
-    }*@
+
+@section viewjs {
+
+    <script>
+        var CurrentRating = 0;
+        var IncreaseRating = 0;
+        var PotentialRating = 0;
+        CurrentRating = @Model.evaluationResults.CurrentRating;
+        IncreaseRating = @Model.evaluationResults.IncreaseRating;
+        PotentialRating = @Model.evaluationResults.PotentialVARating;
+
+        // Morris donut chart
+        Morris.Donut({
+            element: 'morris-donut-chart',
+            data: [{
+                label: "Current",
+                value: CurrentRating,
+
+            }, {
+                label: "Increase",
+                value: IncreaseRating,
+            }, {
+                label: "Potential",
+                value: PotentialRating,
+            }],
+            resize: true,
+            colors: ['#f75b36', '#00b5c2', '#4F5467']
+        });
+
+    </script>
+
+}
+

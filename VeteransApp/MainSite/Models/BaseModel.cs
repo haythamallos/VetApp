@@ -13,6 +13,13 @@ namespace MainSite.Models
         string NameOfPatient { get; set; }
         string SocialSecurity { get; set; }
 
+        string VarianceHistory { get; set; }
+        string VarianceHistoryWriteIn { get; set; }
+        string VarianceFlareUps { get; set; }
+        string VarianceFlareUpsWriteIn { get; set; }
+        string VarianceFunctionLoss { get; set; }
+        string VarianceFunctionLossWriteIn { get; set; }
+
     }
 
     //public class BaseModel : IBaseModel

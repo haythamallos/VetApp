@@ -1,4 +1,29 @@
-﻿// Write your Javascript code.
+﻿// Global variables
+//var varianceDefaultChoice = "-- Choose Phrase or Write Your Own Above --";
+localStorage.setItem("varianceDefaultChoice", "-- Choose Phrase or Write Your Own Above --");
+function onChangeHistory(value) {
+    var varianceDefaultChoice = localStorage.getItem("varianceDefaultChoice");
+    if (value != varianceDefaultChoice) {
+        document.getElementById('VarianceHistoryWriteIn').value = value;
+        document.getElementById("VarianceHistory").selectedIndex = 0;
+    }
+}
+function onChangeFlareUps(value) {
+    var varianceDefaultChoice = localStorage.getItem("varianceDefaultChoice");
+    if (value != varianceDefaultChoice) {
+        document.getElementById('VarianceFlareUpsWriteIn').value = value;
+        document.getElementById("VarianceFlareUps").selectedIndex = 0;
+    }
+
+}
+function onChangeFunctionLoss(value) {
+    var varianceDefaultChoice = localStorage.getItem("varianceDefaultChoice");
+    if (value != varianceDefaultChoice) {
+        document.getElementById('VarianceFunctionLossWriteIn').value = value;
+        document.getElementById("VarianceFunctionLoss").selectedIndex = 0;
+    }
+
+}
 
 $("#btnTestSmallModal").click(function () {
     $('#smallmodaluserexist').modal('show');
@@ -238,23 +263,6 @@ $('#formbackbutton').click(function () {
 
 
 
-// Morris donut chart
-Morris.Donut({
-    element: 'morris-donut-chart',
-    data: [{
-        label: "Current",
-        value: CurrentRating,
-
-    }, {
-        label: "Increase",
-        value: IncreaseRating,
-    }, {
-        label: "Potential",
-        value: PotentialRating,
-    }],
-    resize: true,
-    colors: ['#f75b36', '#00b5c2', '#4F5467']
-});
 
 
 

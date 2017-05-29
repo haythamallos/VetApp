@@ -107,6 +107,64 @@
 
                             </div>
                             <hr />
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Describe the history:  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceHistoryWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                </div>
+                                <hr />
+                                <div class="col-md-5">
+                                    <span> or </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Does the veteran report flare-ups impact function?  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px;" } })
+                                </div>
+                                <hr />
+                                <div class="col-md-5">
+                                    <span> or </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <hr />
+                                <div class="col-md-5">
+                                    <span>Does the veteran report having any functional loss?  </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(x => x.VarianceFunctionLossWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                </div>
+                                <br />
+                                <div class="col-md-5">
+                                    <span> or </span>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+                            <hr />
                             <button class="btn btn-success btn-md pull-right" type="button" id="part1NextBtn">Next</button>
                         </div>
                     </div>

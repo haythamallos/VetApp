@@ -851,6 +851,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.backPDFItems[313].Code, PDFItems.backPDFItems[313].ExportValue);
                         pdfFormFields.SetField(PDFItems.backPDFItems[405].Code, PDFItems.backPDFItems[405].ExportValue);
 
+                        pdfFormFields.SetField(PDFItems.backPDFItems[65].Code, back.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.backPDFItems[66].Code, back.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.backPDFItems[67].Code, back.VarianceFunctionLossWriteIn);
+
                         if (back.IsFormReadonly)
                         {
                             IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
@@ -869,6 +873,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.backPDFItems[457].Code, "Due to the flareups and severity of this condition, sedentary occupation is recommended.");
 
                     }
+
 
                     if (back.IsFormReadonly)
                     {
@@ -1592,10 +1597,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo3[0]", "1");
                         //pdfFormFields.SetField("form1[0].#subform[1].Describe2[0]", "Severe restriction of range of motion.");
 
-                        pdfFormFields.SetField(PDFItems.neckPDFItems[65].Code, m.VarianceHistoryWriteIn);
-                        pdfFormFields.SetField(PDFItems.neckPDFItems[66].Code, m.VarianceFlareUpsWriteIn);
-                        pdfFormFields.SetField(PDFItems.neckPDFItems[67].Code, m.VarianceFunctionLossWriteIn);
-
                         pdfFormFields.SetField("form1[0].#subform[1].ROM1[0]", m.S96);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM2[0]", m.S86);
                         pdfFormFields.SetField("form1[0].#subform[1].ROM4[0]", m.S90);
@@ -2047,6 +2048,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                             }
                         }
+
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[65].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[66].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.neckPDFItems[67].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {
@@ -2577,9 +2582,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[1].Code, PDFItems.shoulderPDFItems[1].ExportValue);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[9].Code, PDFItems.shoulderPDFItems[9].ExportValue);
                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[10].Code, PDFItems.shoulderPDFItems[10].ExportValue);
-                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[132].Code, m.VarianceHistoryWriteIn);
-                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[133].Code, m.VarianceFlareUpsWriteIn);
-                        pdfFormFields.SetField(PDFItems.shoulderPDFItems[134].Code, m.VarianceFunctionLossWriteIn);
                         pdfFormFields.SetField("form1[0].#subform[1].Opinion[0]", "3");
                         //pdfFormFields.SetField("form1[0].#subform[1].Describe2A[0]", "On-set of injury incurred during active duty service.");
                         pdfFormFields.SetField("form1[0].#subform[1].YesNo2[1]", "1");
@@ -3797,6 +3799,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 }
                             }
 
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[132].Code, m.VarianceHistoryWriteIn);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[133].Code, m.VarianceFlareUpsWriteIn);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[134].Code, m.VarianceFunctionLossWriteIn);
+
                             if (m.IsFormReadonly)
                             {
                                 IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.shoulderPDFItems[2].Code);
@@ -4178,6 +4184,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.footPDFItems, m.S448, m.Side, 448, 437, 446, 447);
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.footPDFItems, m.S438, m.Side, 438, 445, 444, 443);
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.footPDFItems, m.S442, m.Side, 442, 439, 440, 441);
+
+                        pdfFormFields.SetField(PDFItems.footPDFItems[83].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.footPDFItems[85].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.footPDFItems[91].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {
@@ -5676,6 +5686,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             }
                         }
 
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[107].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[109].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[110].Code, m.VarianceFunctionLossWriteIn);
+
                         if (m.IsFormReadonly)
                         {
                             IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.anklePDFItems[69].Code);
@@ -6176,9 +6190,9 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S218, m.S218Side, 218, 224, 225, 223);
                         PdfFill.SetContributingFactorsSection(pdfFormFields, PDFItems.wristPDFItems, m.S222, m.S222Side, 222, 220, 219, 221);
 
-
-
-
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[108].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[109].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[110].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {
@@ -6192,8 +6206,6 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             cb.ShowText(string.Empty);
                             cb.EndText();
                         }
-
-
                     }
 
                     if (m.IsFormReadonly)
@@ -6776,6 +6788,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 }
                             }
                         }
+
+                        pdfFormFields.SetField(PDFItems.kneePDFItems[130].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.kneePDFItems[131].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.kneePDFItems[132].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {
@@ -7673,6 +7689,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.hipPDFItems[202].Code, PDFItems.hipPDFItems[202].ExportValue);
 
                         }
+
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[90].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[91].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[92].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {
@@ -8774,6 +8794,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             default:
                                 break;
                         }
+
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[96].Code, m.VarianceHistoryWriteIn);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[97].Code, m.VarianceFlareUpsWriteIn);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[98].Code, m.VarianceFunctionLossWriteIn);
 
                         if (m.IsFormReadonly)
                         {

@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             <hr />
-                            @*<div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline">
                                 <hr />
                                 <div class="col-md-5">
                                     <span>Describe the history:  </span>
@@ -162,10 +162,10 @@
                                 </div>
                                 <hr />
                                 <div class="col-md-5">
-                                    <span>or choose </span>
+                                    <span> or </span>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);" })
+                                    @Html.DropDownListFor(x => x.VarianceHistory, (SelectList)ViewBag.VarianceHistory, new { @onchange = "onChangeHistory(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
                                 </div>
                                 <div class="col-md-12">
                                 </div>
@@ -178,14 +178,14 @@
                                     <span>Does the veteran report flare-ups impact function?  </span>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px" } })
+                                    @Html.EditorFor(x => x.VarianceFlareUpsWriteIn, new { htmlAttributes = new { style = "width: 600px;" } })
                                 </div>
                                 <hr />
                                 <div class="col-md-5">
-                                    <span>or choose </span>
+                                    <span> or </span>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);" })
+                                    @Html.DropDownListFor(x => x.VarianceFlareUps, (SelectList)ViewBag.VarianceFlareUps, new { @onchange = "onChangeFlareUps(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
                                 </div>
                                 <div class="col-md-12">
                                 </div>
@@ -201,15 +201,15 @@
                                 </div>
                                 <br />
                                 <div class="col-md-5">
-                                    <span>or choose </span>
+                                    <span> or </span>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);" })
+                                    @Html.DropDownListFor(x => x.VarianceFunctionLoss, (SelectList)ViewBag.VarianceFunctionLoss, new { @onchange = "onChangeFunctionLoss(this.options[this.selectedIndex].innerHTML);", style = "width: 600px; font-size:90%;" })
                                 </div>
                                 <div class="col-md-12">
                                 </div>
                             </div>
-                            <hr />*@
+                            <hr />
                             <div>
                                 <label class="font-bold">Are you left-handed or right-handed? (Only pick one)</label>
                                 @Html.RadioButtonFor(x => x.S2BChoice, "LEFT") Left
@@ -621,20 +621,20 @@
         });
 
         function onChangeHistory(value) {
-            if (value != '-- Choose Phrase --') {
+            if (value != varianceDefaultChoice) {
                 document.getElementById('VarianceHistoryWriteIn').value = value;
                 document.getElementById("VarianceHistory").selectedIndex = 0;
             }
         }
         function onChangeFlareUps(value) {
-            if (value != '-- Choose Phrase --') {
+            if (value != varianceDefaultChoice) {
                 document.getElementById('VarianceFlareUpsWriteIn').value = value;
                 document.getElementById("VarianceFlareUps").selectedIndex = 0;
             }
 
         }
         function onChangeFunctionLoss(value) {
-            if (value != '-- Choose Phrase --') {
+            if (value != varianceDefaultChoice) {
                 document.getElementById('VarianceFunctionLossWriteIn').value = value;
                 document.getElementById("VarianceFunctionLoss").selectedIndex = 0;
             }
