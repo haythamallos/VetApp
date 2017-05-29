@@ -3219,9 +3219,10 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             bool SameFinalROMLeft = false;
                             bool SameFinalROMRight = false;
 
+
                             if ((DoInitialROMLeft) && (DoInitialROMRight))
                             {
-                                // set the RIGHT
+                                // set the inital RIGHT
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[156].Code, m.S156);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[152].Code, m.S152);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[144].Code, m.S144);
@@ -3236,7 +3237,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                     SameInitialROMRight = true;
                                 }
 
-                                // Set the LEFT
+                                // Set the initial LEFT
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[177].Code, m.S177);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[173].Code, m.S173);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[165].Code, m.S165);
@@ -5384,8 +5385,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         else if (DoInitialROMLeft)
                         {
                             // the default for initial RIGHT
-                            pdfFormFields.SetField(PDFItems.anklePDFItems[130].Code, "45");
-                            pdfFormFields.SetField(PDFItems.anklePDFItems[134].Code, "20");
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[133].Code, "45");
+                            pdfFormFields.SetField(PDFItems.anklePDFItems[137].Code, "20");
 
                             // set the initial LEFT
                             pdfFormFields.SetField(PDFItems.anklePDFItems[121].Code, m.S121);
