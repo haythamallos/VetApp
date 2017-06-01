@@ -57,7 +57,7 @@ namespace Vetapp.Engine.Common
                     {
                         ssn = new SSN();
                         ssn.LeftPart = ssnFiltered.Substring(0, 3);
-                        ssn.MiddlePart = ssnFiltered.Substring(4, 2);
+                        ssn.MiddlePart = ssnFiltered.Substring(3, 2);
                         ssn.RightPart = ssnFiltered.Substring(5, 4);
                     }
                 }
