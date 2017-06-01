@@ -1750,7 +1750,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
                         if (m.S161)
                         {
-                            pdfFormFields.SetField(PDFItems.neckPDFItems[158].Code, PDFItems.neckPDFItems[1658].ExportValue);//158
+                            pdfFormFields.SetField(PDFItems.neckPDFItems[158].Code, PDFItems.neckPDFItems[158].ExportValue);//158
                         }
                         if (m.S162)
                         {
