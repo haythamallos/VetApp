@@ -80,7 +80,11 @@ namespace MainSite.Utils
             var response = HttpContext.Current.Response;
 
             if (!string.IsNullOrEmpty(attachmentFilename))
-                response.AddHeader("Content-Disposition", "attachment; filename=" + attachmentFilename);
+            {
+                // Force the pdf document to be displayed in the browser
+                response.AddHeader("Content-Disposition", "inline;");
+                //response.AddHeader("Content-Disposition", "attachment; filename=" + attachmentFilename);
+            }
 
             response.ContentType = "application/pdf";
             response.BinaryWrite(contents);
