@@ -11,5 +11,6 @@ namespace MainSite.Models
         public string ErrorMessage { get; set; }
         public bool Exists { get; set; }
         public int CurrentRating { get; set; }
+        public bool ShowUnderwritingWizard { get; set; }
     }
 }

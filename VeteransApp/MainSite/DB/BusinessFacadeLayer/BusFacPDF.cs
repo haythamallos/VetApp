@@ -89,19 +89,43 @@ namespace Vetapp.Engine.BusinessFacadeLayer
             try
             {
                 PdfReader pdfReader = new PdfReader(pdfTemplatePath);
+                //if (pdfReader.HasUsageRights())
+                //{
+                //    pdfReader.RemoveUsageRights();
+                //}
 
+                //if (pdfReader.HasUsageRights())
+                //{
+                //    pdfReader.RemoveUsageRights();
+                //    PdfStamper pdfStamper = null;
+                //    using (MemoryStream ms = new MemoryStream())
+                //    {
+                //        using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
+                //        {
+                //            pdfStamper.FormFlattening = false;
+
+                //        }
+                //        // close the pdf stamper
+                //        pdfStamper.Close();
+                //        pdfReader.Close();
+                //        form = ms.ToArray();
+                //        return form;
+                //    }
+                //}
                 using (MemoryStream ms = new MemoryStream())
                 {
                     PdfStamper pdfStamper = null;
-
                     using (pdfStamper = new PdfStamper(pdfReader, ms, '\0', true))
                     {
+
                         // Get Reference to PDF Document Fields
                         AcroFields pdfFormFields = pdfStamper.AcroFields;
-                        back.S60 = string.Empty;
+                        //back.S60 = string.Empty;
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
+
+                        pdfFormFields.GenerateAppearances = true; ;
 
                         // defaults
                         //form1[0].#subform[9].YesNo22[1]
@@ -145,7 +169,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Mechanical back pain syndrome";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses1[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis1[0]", dt);
-                                back.S60 += diagnosis;
+                                //back.S60 += diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode1[0]", icdcode.RefNumber);
@@ -156,7 +180,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Lumbosacral sprain/strain";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses2[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis2[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode2[0]", icdcode.RefNumber);
@@ -167,7 +191,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Facet joint arthropathy";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses3[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis3[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode3[0]", icdcode.RefNumber);
@@ -178,7 +202,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Degenerative disc disease";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses4[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis4[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode4[0]", icdcode.RefNumber);
@@ -189,7 +213,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Degenerative scoliosis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses16[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis16[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode16[0]", icdcode.RefNumber);
@@ -200,7 +224,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Foraminal/lateral recess/central stenosis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses5[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis5[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode5[0]", icdcode.RefNumber);
@@ -211,7 +235,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Degenerative spondylolisthesis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses6[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis6[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode6[0]", icdcode.RefNumber);
@@ -222,7 +246,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Spondylolysis/isthmic spondylolisthesis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses7[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis7[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode7[0]", icdcode.RefNumber);
@@ -233,7 +257,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Intervertebral disc syndrome";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses8[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis8[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode8[0]", icdcode.RefNumber);
@@ -244,7 +268,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Radiculopathy";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses9[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis9[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode9[0]", icdcode.RefNumber);
@@ -255,7 +279,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Ankylosis of thoracolumbar spine";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses10[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis10[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode10[0]", icdcode.RefNumber);
@@ -266,7 +290,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Ankylosing spondylitis of the thoracolumbar spine";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses11[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis11[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode11[0]", icdcode.RefNumber);
@@ -277,7 +301,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Vertebral fracture";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses15[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis15[0]", dt);
-                                back.S60 += ", " + diagnosis;
+                                //back.S60 += ", " + diagnosis;
                                 if (ICDCodes.backICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode15[0]", icdcode.RefNumber);
@@ -289,12 +313,12 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses12[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis12[0]", dt);
                                 pdfFormFields.SetField("form1[0].#subform[0].OtherDiagnosis1[0]", back.S62);
-                                back.S60 += ", " + back.S62;
+                                //back.S60 += ", " + back.S62;
                             }
-                            if (back.S60.LastIndexOf(",") == 0)
-                            {
-                                back.S60 = back.S60.Replace(",", string.Empty).Trim();
-                            }
+                            //if (back.S60.LastIndexOf(",") == 0)
+                            //{
+                            //    back.S60 = back.S60.Replace(",", string.Empty).Trim();
+                            //}
 
                         }
                         else
@@ -855,20 +879,20 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.backPDFItems[66].Code, back.VarianceFlareUpsWriteIn);
                         pdfFormFields.SetField(PDFItems.backPDFItems[67].Code, back.VarianceFunctionLossWriteIn);
 
-                        if (back.IsFormReadonly)
-                        {
-                            IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
-                            Rectangle rect = lstPos[0].position;
-                            PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
-                            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                            cb.SetFontAndSize(bf, 12);
-                            cb.BeginText();
-                            cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
-                            cb.ShowText(string.Empty);
-                            cb.EndText();
+                        //if (back.IsFormReadonly)
+                        //{
+                        //    IList<AcroFields.FieldPosition> lstPos = pdfFormFields.GetFieldPositions(PDFItems.backPDFItems[118].Code);
+                        //    Rectangle rect = lstPos[0].position;
+                        //    PdfContentByte cb = pdfStamper.GetOverContent(lstPos[0].page);
+                        //    BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        //    cb.SetFontAndSize(bf, 12);
+                        //    cb.BeginText();
+                        //    cb.SetTextMatrix(rect.Left + 1, rect.Bottom + 2);
+                        //    cb.ShowText(string.Empty);
+                        //    cb.EndText();
 
 
-                        }
+                        //}
                         pdfFormFields.SetField(PDFItems.backPDFItems[459].Code, PDFItems.backPDFItems[459].ExportValue);
                         pdfFormFields.SetField(PDFItems.backPDFItems[457].Code, "Due to the flareups and severity of this condition, sedentary occupation is recommended.");
 
@@ -1425,7 +1449,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         }
 
 
-                        m.S58 = string.Empty;
+                        //m.S58 = string.Empty;
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
@@ -1437,7 +1461,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Mechanical Cervical Pain Syndrome";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses1[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis1[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode1[0]", icdcode.RefNumber);
@@ -1448,7 +1472,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Cervical Sprain/Strain";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses2[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis2[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode2[0]", icdcode.RefNumber);
@@ -1459,7 +1483,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Cervical Spondylosis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses3[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis3[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode3[0]", icdcode.RefNumber);
@@ -1470,7 +1494,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Degenerative Disc Disease";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses4[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis4[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode4[0]", icdcode.RefNumber);
@@ -1481,7 +1505,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Foraminal Stenosis/Central Stenosis";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses5[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis5[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode5[0]", icdcode.RefNumber);
@@ -1492,7 +1516,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Intervertebral Disc Syndrome";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses6[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis6[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode6[0]", icdcode.RefNumber);
@@ -1503,7 +1527,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Radiculopathy";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses7[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis7[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode7[0]", icdcode.RefNumber);
@@ -1514,7 +1538,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Myelopathy";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses8[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis8[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode8[0]", icdcode.RefNumber);
@@ -1525,7 +1549,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Ankylosis of Cervical Spine";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses9[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis9[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode9[0]", icdcode.RefNumber);
@@ -1536,7 +1560,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Ankylosing Spondylitis of The Cervical Spine";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses10[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis10[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode10[0]", icdcode.RefNumber);
@@ -1547,7 +1571,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 diagnosis = "Vertebral Fracture";
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses11[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis11[0]", dt);
-                                m.S58 += diagnosis + ". ";
+                                //m.S58 += diagnosis + ". ";
                                 if (ICDCodes.neckICDCodes.TryGetValue(diagnosis.ToLower(), out icdcode))
                                 {
                                     pdfFormFields.SetField("form1[0].#subform[0].ICDCode11[0]", icdcode.RefNumber);
@@ -1560,7 +1584,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField("form1[0].#subform[0].Diagnoses12[0]", "1");
                                 pdfFormFields.SetField("form1[0].#subform[0].DateOfDiagnosis12[0]", dt);
                                 pdfFormFields.SetField("form1[0].#subform[0].OtherDiagnosis1[0]", m.S54);
-                                m.S58 += "." + m.S54;
+                                //m.S58 += "." + m.S54;
                             }
 
                             //if (m.S58.LastIndexOf(",") == 0)
@@ -2684,7 +2708,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
-                        string S17 = string.Empty;
+                        //string S17 = string.Empty;
                         if (!m.S63)
                         {
                             if (m.S64)
@@ -2696,25 +2720,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[62].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S64Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[75].Code, PDFItems.shoulderPDFItems[75].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[74].Code, PDFItems.shoulderPDFItems[74].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[73].Code, PDFItems.shoulderPDFItems[73].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S65)
                             {
@@ -2725,25 +2749,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[59].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S65Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[21].Code, PDFItems.shoulderPDFItems[21].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[57].Code, PDFItems.shoulderPDFItems[57].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[58].Code, PDFItems.shoulderPDFItems[58].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S66)
                             {
@@ -2754,25 +2778,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[53].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S66Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[56].Code, PDFItems.shoulderPDFItems[56].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[55].Code, PDFItems.shoulderPDFItems[55].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[54].Code, PDFItems.shoulderPDFItems[54].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S67)
                             {
@@ -2783,25 +2807,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[50].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S67Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[22].Code, PDFItems.shoulderPDFItems[22].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[48].Code, PDFItems.shoulderPDFItems[48].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[49].Code, PDFItems.shoulderPDFItems[49].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S68)
                             {
@@ -2812,25 +2836,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[44].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S68Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[47].Code, PDFItems.shoulderPDFItems[47].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[46].Code, PDFItems.shoulderPDFItems[46].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[45].Code, PDFItems.shoulderPDFItems[45].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S69)
                             {
@@ -2841,25 +2865,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[41].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S69Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[23].Code, PDFItems.shoulderPDFItems[23].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[39].Code, PDFItems.shoulderPDFItems[39].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[40].Code, PDFItems.shoulderPDFItems[40].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S70)
                             {
@@ -2870,25 +2894,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[35].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S70Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[38].Code, PDFItems.shoulderPDFItems[38].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[37].Code, PDFItems.shoulderPDFItems[37].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[36].Code, PDFItems.shoulderPDFItems[36].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S71)
                             {
@@ -2899,25 +2923,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[32].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S71Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[24].Code, PDFItems.shoulderPDFItems[24].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[30].Code, PDFItems.shoulderPDFItems[30].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[31].Code, PDFItems.shoulderPDFItems[31].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S72)
                             {
@@ -2928,25 +2952,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[26].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S72Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[29].Code, PDFItems.shoulderPDFItems[29].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[28].Code, PDFItems.shoulderPDFItems[28].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[27].Code, PDFItems.shoulderPDFItems[27].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S81)
                             {
@@ -2957,25 +2981,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[77].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S81Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[80].Code, PDFItems.shoulderPDFItems[80].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[79].Code, PDFItems.shoulderPDFItems[79].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[78].Code, PDFItems.shoulderPDFItems[78].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S111)
                             {
@@ -2986,25 +3010,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[107].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S111Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[110].Code, PDFItems.shoulderPDFItems[110].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[109].Code, PDFItems.shoulderPDFItems[109].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[108].Code, PDFItems.shoulderPDFItems[108].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S105)
                             {
@@ -3015,25 +3039,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[101].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S105Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[104].Code, PDFItems.shoulderPDFItems[104].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[103].Code, PDFItems.shoulderPDFItems[103].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[102].Code, PDFItems.shoulderPDFItems[102].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S99)
                             {
@@ -3044,25 +3068,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[95].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S99Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[98].Code, PDFItems.shoulderPDFItems[98].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[97].Code, PDFItems.shoulderPDFItems[97].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[96].Code, PDFItems.shoulderPDFItems[96].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S93)
                             {
@@ -3073,25 +3097,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[89].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S93Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[92].Code, PDFItems.shoulderPDFItems[92].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[91].Code, PDFItems.shoulderPDFItems[91].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[90].Code, PDFItems.shoulderPDFItems[90].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
                             if (m.S87)
                             {
@@ -3102,25 +3126,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 {
                                     pdfFormFields.SetField(PDFItems.shoulderPDFItems[83].Code, icdcode.RefNumber);
                                 }
-                                S17 += diagnosis;
+                                //S17 += diagnosis;
                                 switch (m.S87Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[86].Code, PDFItems.shoulderPDFItems[86].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[85].Code, PDFItems.shoulderPDFItems[85].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[84].Code, PDFItems.shoulderPDFItems[84].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
 
                             if (!string.IsNullOrEmpty(m.S128Other))
@@ -3128,29 +3152,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[128].Code, PDFItems.shoulderPDFItems[128].ExportValue);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[131].Code, m.S128Other);
                                 pdfFormFields.SetField(PDFItems.shoulderPDFItems[127].Code, dt);
-                                S17 += m.S128Other;
+                                //S17 += m.S128Other;
                                 switch (m.S128Side)
                                 {
                                     case "RIGHT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[113].Code, PDFItems.shoulderPDFItems[113].ExportValue);
-                                        S17 += ", Right";
+                                        //S17 += ", Right";
                                         break;
                                     case "LEFT":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[124].Code, PDFItems.shoulderPDFItems[124].ExportValue);
-                                        S17 += ", Left";
+                                        //S17 += ", Left";
                                         break;
                                     case "BOTH":
                                         pdfFormFields.SetField(PDFItems.shoulderPDFItems[125].Code, PDFItems.shoulderPDFItems[125].ExportValue);
-                                        S17 += ", Bilateral";
+                                        //S17 += ", Bilateral";
                                         break;
                                     default:
                                         break;
                                 }
 
-                                S17 += ".  ";
+                                //S17 += ".  ";
                             }
 
-                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[17].Code, S17);
+                            //pdfFormFields.SetField(PDFItems.shoulderPDFItems[17].Code, S17);
+                            pdfFormFields.SetField(PDFItems.shoulderPDFItems[17].Code, m.S17);
 
                             bool DoInitialROMLeft = false;
                             bool DoInitialROMRight = false;
@@ -3943,29 +3968,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.footPDFItems[112].Code, PDFItems.footPDFItems[165].ExportValue);
                             pdfFormFields.SetField(PDFItems.footPDFItems[115].Code, m.S112Other);
                             pdfFormFields.SetField(PDFItems.footPDFItems[111].Code, dt);
-                            sb.Append(m.S112Other);
+                            //sb.Append(m.S112Other);
                             switch (m.Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.footPDFItems[97].Code, PDFItems.footPDFItems[97].ExportValue);
-                                    sb.Append(", Right");
+                                    //sb.Append(", Right");
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.footPDFItems[108].Code, PDFItems.footPDFItems[108].ExportValue);
-                                    sb.Append(", Left");
+                                    //sb.Append(", Left");
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.footPDFItems[109].Code, PDFItems.footPDFItems[109].ExportValue);
-                                    sb.Append(", Bilateral");
+                                    //sb.Append(", Bilateral");
                                     break;
                                 default:
                                     break;
                             }
 
-                            sb.Append(".");
+                            //sb.Append(".");
                         }
 
-                        pdfFormFields.SetField(PDFItems.footPDFItems[75].Code, sb.ToString());
+                        //pdfFormFields.SetField(PDFItems.footPDFItems[75].Code, sb.ToString());
+                        pdfFormFields.SetField(PDFItems.footPDFItems[75].Code, m.S75);
 
                         if ((!string.IsNullOrEmpty(m.Side)) && (m.Side == "RIGHT"))
                         {
@@ -4262,12 +4288,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[22].Code, PDFItems.sleepapneaPDFItems[22].ExportValue);
                         pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[24].Code, PDFItems.sleepapneaPDFItems[24].ExportValue);
 
-                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[44].Code, m.FirstName);
+                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[18].Code, m.S18);
+
+                        if (!string.IsNullOrEmpty(m.FirstName))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[44].Code, m.FirstName);
+                        }
+
                         if (!string.IsNullOrEmpty(m.MiddleInitial))
                         {
                             pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[46].Code, m.MiddleInitial);
                         }
-                        pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[45].Code, m.LastName);
+
+                        if (!string.IsNullOrEmpty(m.LastName))
+                        {
+                            pdfFormFields.SetField(PDFItems.sleepapneaPDFItems[45].Code, m.LastName);
+                        }
+
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
                         if (ssn != null)
                         {
@@ -4391,13 +4428,23 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         pdfFormFields.SetField("F[0].Page_3[0].No11[0]", "1");
                         pdfFormFields.SetField("F[0].Page_3[0].No52[0]", "1");
 
-                        pdfFormFields.SetField(PDFItems.headachePDFItems[39].Code, m.FirstName);
+                        pdfFormFields.SetField(PDFItems.headachePDFItems[28].Code, m.S28);
+
+                        if (!string.IsNullOrEmpty(m.FirstName))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[39].Code, m.FirstName);
+                        }
+
                         if (!string.IsNullOrEmpty(m.MiddleInitial))
                         {
                             pdfFormFields.SetField(PDFItems.headachePDFItems[41].Code, m.MiddleInitial);
                         }
 
-                        pdfFormFields.SetField(PDFItems.headachePDFItems[40].Code, m.LastName);
+                        if (!string.IsNullOrEmpty(m.LastName))
+                        {
+                            pdfFormFields.SetField(PDFItems.headachePDFItems[40].Code, m.LastName);
+                        }
+
                         SSN ssn = UtilsString.ParseSSN(m.SocialSecurity);
                         if (ssn != null)
                         {
@@ -4825,7 +4872,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
-                        string S97 = string.Empty;
+                        //string S97 = string.Empty;
 
                         if (m.S82)
                         {
@@ -4836,25 +4883,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[67].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S82Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[101].Code, PDFItems.anklePDFItems[101].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[100].Code, PDFItems.anklePDFItems[190].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[99].Code, PDFItems.anklePDFItems[99].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S83)
                         {
@@ -4865,25 +4912,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[64].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S83Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[1].Code, PDFItems.anklePDFItems[1].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[62].Code, PDFItems.anklePDFItems[62].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[63].Code, PDFItems.anklePDFItems[63].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S84)
                         {
@@ -4894,25 +4941,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[58].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S84Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[61].Code, PDFItems.anklePDFItems[61].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[60].Code, PDFItems.anklePDFItems[60].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[59].Code, PDFItems.anklePDFItems[59].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S85)
                         {
@@ -4923,25 +4970,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[55].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S85Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[2].Code, PDFItems.anklePDFItems[2].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[53].Code, PDFItems.anklePDFItems[53].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[54].Code, PDFItems.anklePDFItems[54].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S86)
                         {
@@ -4952,25 +4999,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[49].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S86Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[52].Code, PDFItems.anklePDFItems[52].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[51].Code, PDFItems.anklePDFItems[51].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[50].Code, PDFItems.anklePDFItems[50].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S87)
                         {
@@ -4981,25 +5028,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[46].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S87Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[3].Code, PDFItems.anklePDFItems[3].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[44].Code, PDFItems.anklePDFItems[44].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[45].Code, PDFItems.anklePDFItems[45].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S88)
                         {
@@ -5010,25 +5057,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[40].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S88Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[43].Code, PDFItems.anklePDFItems[43].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[42].Code, PDFItems.anklePDFItems[42].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[41].Code, PDFItems.anklePDFItems[41].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S89)
                         {
@@ -5039,25 +5086,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[37].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S89Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[4].Code, PDFItems.anklePDFItems[4].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[35].Code, PDFItems.anklePDFItems[35].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[36].Code, PDFItems.anklePDFItems[36].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S90)
                         {
@@ -5068,25 +5115,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[31].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S90Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[34].Code, PDFItems.anklePDFItems[34].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[33].Code, PDFItems.anklePDFItems[33].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[32].Code, PDFItems.anklePDFItems[32].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S91)
                         {
@@ -5097,25 +5144,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[28].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S91Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[5].Code, PDFItems.anklePDFItems[5].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[26].Code, PDFItems.anklePDFItems[26].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[27].Code, PDFItems.anklePDFItems[27].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
                         if (m.S92)
                         {
@@ -5126,25 +5173,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.anklePDFItems[22].Code, icdcode.RefNumber);
                             }
-                            S97 += diagnosis;
+                            //S97 += diagnosis;
                             switch (m.S92Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[25].Code, PDFItems.anklePDFItems[25].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[24].Code, PDFItems.anklePDFItems[24].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[23].Code, PDFItems.anklePDFItems[23].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S97 += ".  ";
+                            //S97 += ".  ";
                         }
 
                         if (!string.IsNullOrEmpty(m.S93Other))
@@ -5152,29 +5199,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.anklePDFItems[93].Code, PDFItems.anklePDFItems[93].ExportValue);
                             pdfFormFields.SetField(PDFItems.anklePDFItems[104].Code, m.S93Other);
                             pdfFormFields.SetField(PDFItems.anklePDFItems[20].Code, dt);
-                            S97 += m.S93Other;
+                            //S97 += m.S93Other;
                             switch (m.S93Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[6].Code, PDFItems.anklePDFItems[6].ExportValue);
-                                    S97 += ", Right";
+                                    //S97 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[17].Code, PDFItems.anklePDFItems[17].ExportValue);
-                                    S97 += ", Left";
+                                    //S97 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.anklePDFItems[18].Code, PDFItems.anklePDFItems[18].ExportValue);
-                                    S97 += ", Bilateral";
+                                    //S97 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
 
-                            S97 += ".";
+                            //S97 += ".";
                         }
 
-                        pdfFormFields.SetField(PDFItems.anklePDFItems[97].Code, S97);
+                        //pdfFormFields.SetField(PDFItems.anklePDFItems[97].Code, S97);
+                        pdfFormFields.SetField(PDFItems.anklePDFItems[97].Code, m.S97);
 
 
                         bool DoInitialROMLeft = false;
@@ -5857,7 +5905,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                             sb.Append(".");
                         }
-                        pdfFormFields.SetField(PDFItems.wristPDFItems[17].Code, sb.ToString());
+                        //pdfFormFields.SetField(PDFItems.wristPDFItems[17].Code, sb.ToString());
+                        pdfFormFields.SetField(PDFItems.wristPDFItems[17].Code, m.S17);
 
 
 
@@ -6347,7 +6396,8 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             sb.Append(".");
                         }
 
-                        pdfFormFields.SetField(PDFItems.kneePDFItems[69].Code, sb.ToString());
+                        //pdfFormFields.SetField(PDFItems.kneePDFItems[69].Code, sb.ToString());
+                        pdfFormFields.SetField(PDFItems.kneePDFItems[69].Code, m.S69);
 
 
                         bool DoInitialROMLeft = false;
@@ -6990,7 +7040,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
-                        string S79 = string.Empty;
+                        //string S79 = string.Empty;
 
                         if (m.S67)
                         {
@@ -7001,25 +7051,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[52].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S67Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[83].Code, PDFItems.hipPDFItems[83].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[82].Code, PDFItems.hipPDFItems[82].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[81].Code, PDFItems.hipPDFItems[81].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S68)
                         {
@@ -7030,25 +7080,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[49].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S68Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[1].Code, PDFItems.hipPDFItems[1].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[47].Code, PDFItems.hipPDFItems[47].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[48].Code, PDFItems.hipPDFItems[48].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S69)
                         {
@@ -7059,25 +7109,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[43].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S69Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[46].Code, PDFItems.hipPDFItems[46].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[45].Code, PDFItems.hipPDFItems[45].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[44].Code, PDFItems.hipPDFItems[44].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S70)
                         {
@@ -7088,25 +7138,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[40].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S70Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[2].Code, PDFItems.hipPDFItems[2].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[38].Code, PDFItems.hipPDFItems[38].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[39].Code, PDFItems.hipPDFItems[39].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S71)
                         {
@@ -7117,25 +7167,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[34].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S71Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[37].Code, PDFItems.hipPDFItems[37].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[36].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[36].Code, PDFItems.hipPDFItems[35].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S72)
                         {
@@ -7146,25 +7196,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[31].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S72Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[3].Code, PDFItems.hipPDFItems[3].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[29].Code, PDFItems.hipPDFItems[29].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[30].Code, PDFItems.hipPDFItems[30].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S73)
                         {
@@ -7175,25 +7225,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[25].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S73Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[28].Code, PDFItems.hipPDFItems[28].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[27].Code, PDFItems.hipPDFItems[27].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[26].Code, PDFItems.hipPDFItems[26].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
                         if (m.S74)
                         {
@@ -7204,25 +7254,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.hipPDFItems[22].Code, icdcode.RefNumber);
                             }
-                            S79 += diagnosis;
+                            //S79 += diagnosis;
                             switch (m.S74Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[4].Code, PDFItems.hipPDFItems[4].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[20].Code, PDFItems.hipPDFItems[20].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[21].Code, PDFItems.hipPDFItems[21].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
 
                         if (!string.IsNullOrEmpty(m.S75Other))
@@ -7230,29 +7280,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.hipPDFItems[75].Code, PDFItems.hipPDFItems[75].ExportValue);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[86].Code, m.S75Other);
                             pdfFormFields.SetField(PDFItems.hipPDFItems[19].Code, dt);
-                            S79 += m.S75Other;
+                            //S79 += m.S75Other;
                             switch (m.S75Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[5].Code, PDFItems.hipPDFItems[5].ExportValue);
-                                    S79 += ", Right";
+                                    //S79 += ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[16].Code, PDFItems.hipPDFItems[16].ExportValue);
-                                    S79 += ", Left";
+                                    //S79 += ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.hipPDFItems[17].Code, PDFItems.hipPDFItems[17].ExportValue);
-                                    S79 += ", Bilateral";
+                                    //S79 += ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
 
-                            S79 += ".  ";
+                            //S79 += ".  ";
                         }
 
-                        pdfFormFields.SetField(PDFItems.hipPDFItems[79].Code, S79);
+                        //pdfFormFields.SetField(PDFItems.hipPDFItems[79].Code, S79);
+                        pdfFormFields.SetField(PDFItems.hipPDFItems[79].Code, m.S79);
 
                         bool DoInitialROMLeft = false;
                         bool DoInitialROMRight = false;
@@ -7931,7 +7982,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                         string dt = System.DateTime.Today.ToShortDateString();
                         ICDCode icdcode = null;
                         string diagnosis = null;
-                        string S85 = string.Empty;
+                        //string S85 = string.Empty;
 
                         if (m.S72)
                         {
@@ -7942,25 +7993,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[57].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S72Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[89].Code, PDFItems.elbowPDFItems[89].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[88].Code, PDFItems.elbowPDFItems[88].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[87].Code, PDFItems.elbowPDFItems[87].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S73)
                         {
@@ -7971,25 +8022,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[54].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S73Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[1].Code, PDFItems.elbowPDFItems[1].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[52].Code, PDFItems.elbowPDFItems[52].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[53].Code, PDFItems.elbowPDFItems[53].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S74)
                         {
@@ -8000,25 +8051,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[48].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S74Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[51].Code, PDFItems.elbowPDFItems[51].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[50].Code, PDFItems.elbowPDFItems[50].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[49].Code, PDFItems.elbowPDFItems[49].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S75)
                         {
@@ -8029,25 +8080,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[45].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S75Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[2].Code, PDFItems.elbowPDFItems[2].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[43].Code, PDFItems.elbowPDFItems[43].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[44].Code, PDFItems.elbowPDFItems[44].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S76)
                         {
@@ -8058,25 +8109,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[39].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S76Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[42].Code, PDFItems.elbowPDFItems[42].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[41].Code, PDFItems.elbowPDFItems[41].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[40].Code, PDFItems.elbowPDFItems[40].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S77)
                         {
@@ -8087,25 +8138,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[36].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S77Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[3].Code, PDFItems.elbowPDFItems[3].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[34].Code, PDFItems.elbowPDFItems[34].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[35].Code, PDFItems.elbowPDFItems[35].ExportValue);
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S78)
                         {
@@ -8116,25 +8167,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[30].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S78Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[33].Code, PDFItems.elbowPDFItems[33].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[32].Code, PDFItems.elbowPDFItems[32].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[31].Code, PDFItems.elbowPDFItems[31].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S79)
                         {
@@ -8145,25 +8196,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[27].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S79Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[4].Code, PDFItems.elbowPDFItems[4].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[25].Code, PDFItems.elbowPDFItems[25].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[26].Code, PDFItems.elbowPDFItems[26].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
                         if (m.S80)
                         {
@@ -8174,25 +8225,25 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             {
                                 pdfFormFields.SetField(PDFItems.elbowPDFItems[21].Code, icdcode.RefNumber);
                             }
-                            S85 += diagnosis;
+                            //S85+= diagnosis;
                             switch (m.S80Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[24].Code, PDFItems.elbowPDFItems[24].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[23].Code, PDFItems.elbowPDFItems[23].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[22].Code, PDFItems.elbowPDFItems[22].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
-                            S85 += ".  ";
+                            //S85+= ".  ";
                         }
 
                         if (!string.IsNullOrEmpty(m.S81Other))
@@ -8200,29 +8251,30 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                             pdfFormFields.SetField(PDFItems.elbowPDFItems[81].Code, PDFItems.elbowPDFItems[81].ExportValue);
                             pdfFormFields.SetField(PDFItems.elbowPDFItems[92].Code, m.S81Other);
                             pdfFormFields.SetField(PDFItems.elbowPDFItems[19].Code, dt);
-                            S85 += m.S81Other;
+                            //S85+= m.S81Other;
                             switch (m.S81Side)
                             {
                                 case "RIGHT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[5].Code, PDFItems.elbowPDFItems[5].ExportValue);
-                                    S85 += ", Right";
+                                    //S85+= ", Right";
                                     break;
                                 case "LEFT":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[16].Code, PDFItems.elbowPDFItems[16].ExportValue);
-                                    S85 += ", Left";
+                                    //S85+= ", Left";
                                     break;
                                 case "BOTH":
                                     pdfFormFields.SetField(PDFItems.elbowPDFItems[17].Code, PDFItems.elbowPDFItems[17].ExportValue);
-                                    S85 += ", Bilateral";
+                                    //S85+= ", Bilateral";
                                     break;
                                 default:
                                     break;
                             }
 
-                            S85 += ".";
+                            //S85+= ".";
                         }
 
-                        pdfFormFields.SetField(PDFItems.elbowPDFItems[85].Code, S85);
+                        //pdfFormFields.SetField(PDFItems.elbowPDFItems[85].Code, S85);
+                        pdfFormFields.SetField(PDFItems.elbowPDFItems[85].Code, m.S85);
 
                         bool DoInitialROMLeft = false;
                         bool DoInitialROMRight = false;

@@ -23,6 +23,7 @@ namespace MainSite.Models
         public string SocialSecurity { get; set; }
 
         public string Side { get; set; }
+        public string S79 { get; set; }
 
         public bool S67 { get; set; }
         public string S67Side { get; set; }

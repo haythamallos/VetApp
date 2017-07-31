@@ -72,6 +72,7 @@ namespace MainSite.Models
         public bool S4CYes { get; set; }
 
         public string WorkCondition { get; set; }
+        public string S28 { get; set; }
 
     }
 }

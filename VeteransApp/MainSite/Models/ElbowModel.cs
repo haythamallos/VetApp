@@ -24,6 +24,7 @@ namespace MainSite.Models
 
         public string Side { get; set; }
         public string SideHand { get; set; }
+        public string S85 { get; set; }
 
         public bool S72 { get; set; }
         public string S72Side { get; set; }

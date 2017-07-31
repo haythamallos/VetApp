@@ -244,6 +244,7 @@
     <Compile Include="Models\HipModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KneeModel.cs" />
+    <Compile Include="Models\PdfModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\UserNewModel.cs" />
     <Compile Include="Models\WristModel.cs" />
@@ -777,7 +778,9 @@
     <Content Include="Scripts\_references.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -835,6 +838,7 @@
     <Content Include="Views\Dashboard\SearchResults.cshtml" />
     <Content Include="Views\Shared\_LayoutWidget.cshtml" />
     <Content Include="Views\CalculatorWidget\Index.cshtml" />
+    <Content Include="Views\Dashboard\dbqView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

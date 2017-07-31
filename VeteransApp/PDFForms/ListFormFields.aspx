@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ListFormFields.aspx.cs" Inherits="ListFormFields" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <h2>List PDF Form Fields</h2>
     <p>
         This demo shows how to use iTextSharp to list the form fields in a specified PDF document.
@@ -13,13 +13,13 @@
         </asp:DropDownList>
     </p>
     <p>
-        <asp:Button ID="btnShowFields" runat="server" Text="Show Form Fields" 
-            onclick="btnShowFields_Click" />
+        <asp:Button ID="btnShowFields" runat="server" Text="Show Form Fields"
+            OnClick="btnShowFields_Click" />
         &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate Sample PDF" 
-            onclick="btnGeneratePDF_Click" />
-                &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnSerializeFields" runat="server" Text="Serialize Form Fields" OnClick="btnSerializeFields_Click"  />
+        <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate Sample PDF"
+            OnClick="btnGeneratePDF_Click" />
+        &nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnSerializeFields" runat="server" Text="Serialize Form Fields" OnClick="btnSerializeFields_Click" />
 
     </p>
     <hr />

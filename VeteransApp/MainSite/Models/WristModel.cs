@@ -108,5 +108,7 @@ namespace MainSite.Models
         public string S218Side { get; set; }
         public string S222Side { get; set; }
 
+        public string S17 { get; set; }
+
     }
 }

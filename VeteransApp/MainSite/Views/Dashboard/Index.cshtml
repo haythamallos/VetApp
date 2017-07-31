@@ -54,47 +54,52 @@
                         {
                             <div class="white-box">
                                 <div class="table-responsive">
-                                    <h3 class="box-title m-b-0">QUALIFYING DISABILITIES</h3>
-                                    <table class="table table-bordered bg-success">
-                                        <thead>
-                                            <tr>
-                                                <th>Disability</th>
-                                                <th>Progress</th>
-                                                <th class="text-nowrap">Action</th>
-                                                <th>Potential Increase Of</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model.BenefitStatusesQualify)
-                                            {
-                                                string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                    @if (Model.BenefitStatusesQualify.Count > 0)
+                                    {
+                                        <h3 class="box-title m-b-0">QUALIFYING DISABILITIES</h3>
+                                        <table class="table table-bordered bg-success">
+                                            <thead>
                                                 <tr>
-                                                    <td class="bg-success">
-                                                        @*<label class="font-bold">@item.Value.BenefitName</label>*@
-                                                        <label class="font-bold"><a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.BenefitName </a></label>
-
-                                                    </td>
-                                                    <td>
-                                                        <div class="progress progress-xs margin-vertical-10 ">
-                                                            <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
-                                                        @if (item.Value.ContentStateID > 0)
-                                                        {
-                                                            <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
-                                                        }
-                                                    </td>
-                                                    <td><label class="font-bold">@item.Value.DeltaRating%</label></td>
-                                                    @*<td><label class="font-bold">@item.Value.MaxRating%</label></td>*@
-
+                                                    <th>Disability</th>
+                                                    <th>Progress</th>
+                                                    <th class="text-nowrap">Action</th>
+                                                    <th>Potential Increase Of</th>
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.BenefitStatusesQualify)
+                                                {
+                                                    string hreftext = "/Dashboard/" + @item.Value.BenefitCode;
+                                                    <tr>
+                                                        <td class="bg-success">
+                                                            @*<label class="font-bold">@item.Value.BenefitName</label>*@
+                                                            <label class="font-bold"><a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.BenefitName </a></label>
 
-                                    <h3 class="box-title m-b-0">NON-QUALIFYING DISABILITIES</h3>
+                                                        </td>
+                                                        <td>
+                                                            <div class="progress progress-xs margin-vertical-10 ">
+                                                                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-original-title="@item.Value.Progress%" style="width: @item.Value.Progress%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <a href="@hreftext" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> @item.Value.ActionText </a>
+                                                            @if (item.Value.ContentStateID > 0)
+                                                            {
+                                                                <a href="@hreftext?isnew=true" data-toggle="tooltip" data-original-title="@item.Value.TooltipText"> | New </a>
+                                                            }
+                                                        </td>
+                                                        <td><label class="font-bold">@item.Value.DeltaRating%</label></td>
+                                                        @*<td><label class="font-bold">@item.Value.MaxRating%</label></td>*@
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+
+
+                                    @*<h3 class="box-title m-b-0">NON-QUALIFYING DISABILITIES</h3>*@
+                                    <h3 class="box-title m-b-0">DISABILITIES</h3>
                                     <table class="table table-bordered bg-danger">
                                         <thead>
                                             <tr>

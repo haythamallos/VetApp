@@ -40,6 +40,11 @@
                     @Html.EditorFor(x => x.Note, new { htmlAttributes = new { style = "width: 100%", @class = "form-control", placeholder = "Note" } })
                 </div>
             </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label font-normal">
+                    @Html.EditorFor(x => x.ShowUnderwritingWizard) Show Underwriting Wizard
+                </label>
+            </div>
             <button type="submit" id="submit" name="submit" value="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
             <button type="submit" name="submit" value="cancel"  class="btn btn-inverse waves-effect waves-light">Cancel</button>
 

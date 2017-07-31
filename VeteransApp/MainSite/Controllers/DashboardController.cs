@@ -640,27 +640,37 @@ namespace MainSite.Controllers
             return ContentID;
         }
 
-        [HttpPost]
-        public ActionResult BackFormToPdf(BackModel backModel, string submitButton)
-        {
-            try
-            {
-                BusFacPDF busFacPDF = new BusFacPDF();
-                string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
-                User user = Auth();
-                backModel.NameOfPatient = user.Fullname;
-                backModel.SocialSecurity = user.Ssn;
+        //[HttpPost]
+        //public ActionResult BackFormToPdf(BackModel backModel, string submitButton)
+        //{
+        //    try
+        //    {
+        //        BusFacPDF busFacPDF = new BusFacPDF();
+        //        string pdfTemplatePath = Server.MapPath(Url.Content("~/Content/pdf/back.pdf"));
+        //        User user = Auth();
+        //        backModel.NameOfPatient = user.Fullname;
+        //        backModel.SocialSecurity = user.Ssn;
 
-                byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
-                PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+        //        byte[] form = busFacPDF.Back(pdfTemplatePath, backModel);
+        //        //PDFHelper.ReturnPDF(form, "back-dbq.pdf");
+        //        string attachmentFilename = "back-hay.pdf";
+        //        string path = AppDomain.CurrentDomain.BaseDirectory + "App_Data/";
+        //        string fullPath = path + attachmentFilename;
+        //        System.IO.File.WriteAllBytes(fullPath, form);
 
-            }
-            catch (Exception ex)
-            {
+        //        // Force the pdf document to be displayed in the browser
+        //        Response.AppendHeader("Content-Disposition", "inline;");
 
-            }
-            return View(backModel);
-        }
+        //        //return System.IO.File(fullPath, System.Net.Mime.MediaTypeNames.Application.Pdf, attachmentFilename);
+        //        return File(fullPath, "application/pdf");
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return View(backModel);
+        //}
 
         public ActionResult LogOut()
         {
@@ -1167,6 +1177,27 @@ namespace MainSite.Controllers
             return View(viewName, model);
         }
 
+        [HttpGet]
+        public ActionResult dbqView(long id, string filename)
+        {
+            
+            long ContentID = id;
+            BusFacCore busFacCore = new BusFacCore();
+            Content content = busFacCore.ContentGet(ContentID);
+            byte[] form = content.ContentData;
+
+            string attachmentFilename = filename;
+            string path = AppDomain.CurrentDomain.BaseDirectory + "App_Data/";
+            string fullPath = path + attachmentFilename;
+            System.IO.File.WriteAllBytes(fullPath, form);
+
+            // Force the pdf document to be displayed in the browser
+            Response.AppendHeader("Content-Disposition", "inline;");
+
+            //return System.IO.File(fullPath, System.Net.Mime.MediaTypeNames.Application.Pdf, attachmentFilename);
+            return File(fullPath, "application/pdf");
+        }
+
         [HttpPost]
         public ActionResult BackPost(BackModel model, long contentStateID)
         {
@@ -1196,8 +1227,21 @@ namespace MainSite.Controllers
                         }
                         PDFHelper.ReturnPDF(form, filename);
 
-                        //ProductModel productModel = new ProductModel() { ContentTypeID = model.ContentTypeID };
-                        //return RedirectToAction("Product", productModel);
+
+                        //PdfModel pdfModel = new PdfModel() { ContentID = lID, Filename = filename };
+                        //return View("dbqView", pdfModel);
+
+                        //string attachmentFilename = "back-hay.pdf";
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "App_Data/";
+                        //string fullPath = path + attachmentFilename;
+                        //System.IO.File.WriteAllBytes(fullPath, form);
+
+                        //// Force the pdf document to be displayed in the browser
+                        //Response.AppendHeader("Content-Disposition", "inline;");
+
+                        ////return System.IO.File(fullPath, System.Net.Mime.MediaTypeNames.Application.Pdf, attachmentFilename);
+                        //return File(fullPath, "application/pdf");
+
                     }
                     else
                     {
@@ -2082,6 +2126,7 @@ namespace MainSite.Controllers
                                 user.Fullname = model.FullName;
                                 user.PhoneNumber = model.PhoneNumber;
                                 user.InternalNotes = model.Note;
+                                user.IsRatingProfileFinished = (!model.ShowUnderwritingWizard);
                                 long lID = busFacCore.UserCreateOrModify(user);
                                 AssociateEvaluationWithUserInternal(user, model);
                                 bool b = SetCookieField(CookieManager.COOKIE_FIELD_ACTIVEUSER_GUID, user.CookieID);

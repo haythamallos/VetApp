@@ -22,6 +22,8 @@ namespace MainSite.Models
         public string NameOfPatient { get; set; }
         public string SocialSecurity { get; set; }
 
+        public string S69 { get; set; }
+
         public bool S57 { get; set; }
         public string S57Side { get; set; }
         public bool S58 { get; set; }

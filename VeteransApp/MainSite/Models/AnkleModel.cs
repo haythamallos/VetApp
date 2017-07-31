@@ -97,5 +97,7 @@ namespace MainSite.Models
         public string S191Side { get; set; }
         public string S195Side { get; set; }
 
+        public string S97 { get; set; }
+
     }
 }

@@ -20,6 +20,17 @@ public class PDFHelper
         return fields;
     }
 
+    public static Dictionary<string, string> GetFormFieldNames2(string pdfPath)
+    {
+        var fields = new Dictionary<string, string>();
+
+        var reader = new PdfReader(pdfPath);
+        foreach (DictionaryEntry entry in reader.AcroFields.Fields)
+            fields.Add(entry.Key.ToString(), string.Empty);
+        reader.Close();
+
+        return fields;
+    }
     public static byte[] GeneratePDF(string pdfPath, Dictionary<string, string> formFieldMap)
     {
         var output = new MemoryStream();
@@ -83,4 +94,35 @@ public class PDFHelper
         response.BinaryWrite(contents);
         response.End();
     }
+
+    public static string GetPosition(AcroFields.Item item)
+    {
+        var valueDict = item.GetValue(0);
+        var appearanceDict = valueDict.GetAsDict(PdfName.AP);
+
+        if (appearanceDict != null)
+        {
+            var normalAppearances = appearanceDict.GetAsDict(PdfName.N);
+            // /D is for the "down" appearances.
+
+            // if there are normal appearances, one key will be "Off", and the other
+            // will be the export value... there should only be two.
+            if (normalAppearances != null)
+            {
+                foreach (var curKey in normalAppearances.Keys)
+                    if (!PdfName.OFF.Equals(curKey))
+                        return curKey.ToString().Substring(1); // string will have a leading '/' character, so remove it!
+            }
+        }
+
+        // if that doesn't work, there might be an /AS key, whose value is a name with 
+        // the export value, again with a leading '/', so remove it!
+        var curVal = valueDict.GetAsName(PdfName.AS);
+        if (curVal != null)
+            return curVal.ToString().Substring(1);
+        else
+            return string.Empty;
+    }
+
+  
 }

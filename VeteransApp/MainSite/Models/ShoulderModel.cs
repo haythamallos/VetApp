@@ -26,6 +26,7 @@ namespace MainSite.Models
         public string LeftOrRightHanded { get; set; }
 
         public bool S63 { get; set; }
+        public string S17 { get; set; }
 
         public bool S64 { get; set; }
         public string S64Side { get; set; }

@@ -79,5 +79,7 @@ namespace MainSite.Models
         public string S112Other { get; set; }
         public string S112Side { get; set; }
 
+        public string S75 { get; set; }
+
     }
 }

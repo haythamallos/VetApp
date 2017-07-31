@@ -32,6 +32,7 @@ namespace MainSite.Models
         public bool S20 { get; set; }
         public string lastSleepStudyDate { get; set; }
         public string FacilityName { get; set; }
+        public string S18 { get; set; }
 
     }
 }

@@ -1,0 +1,14 @@
+﻿@model MainSite.Models.PdfModel
+    @{
+        ViewBag.Title = "DBQ View Edit";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @*<iframe src="@Url.Action("PostAndShow", "Dashboard")" width="600" height="600"></iframe>*@
+    <div id="page-wrapper">
+
+        <div class="col-xs-12">
+            <iframe src="@Url.Action("dbqView", "Dashboard", new { id = Model.ContentID, filename = Model.Filename })" width="1000" height="800"></iframe>
+        </div>
+    </div>
+
