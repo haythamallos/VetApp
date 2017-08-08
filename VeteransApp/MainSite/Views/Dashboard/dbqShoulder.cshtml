@@ -323,7 +323,13 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 90 degrees)</span>
                                 @Html.DropDownListFor(x => x.S148, (SelectList)ViewBag.MovementList90Deg)
-                                <hr />
+
+                                <input id="S180" name="S180" class="form-control" type="hidden" value="180">
+                                <input id="S181" name="S181" class="form-control" type="hidden" value="180">
+                                <input id="S187" name="S187" class="form-control" type="hidden" value="90">
+                                <input id="S188" name="S188" class="form-control" type="hidden" value="90">
+
+                                @*<hr />
 
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>RIGHT</spa> shoulder and record the last repetition below.</label>
                                 <br />
@@ -340,7 +346,8 @@
 
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList90Deg)
+                                @Html.DropDownListFor(x => x.S188, (SelectList)ViewBag.MovementList90Deg)*@
+
                                 <hr />
                                 <label>For the <spa>RIGHT</spa> shoulder at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />
@@ -379,7 +386,13 @@
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 90 degrees)</span>
                                 @Html.DropDownListFor(x => x.S169, (SelectList)ViewBag.MovementList90Deg)
-                                <hr />
+
+                                <input id="S200" name="S200" class="form-control" type="hidden" value="180">
+                                <input id="S194" name="S194" class="form-control" type="hidden" value="180">
+                                <input id="S192" name="S192" class="form-control" type="hidden" value="90">
+                                <input id="S193" name="S193" class="form-control" type="hidden" value="90">
+
+                                @*<hr />
                                 <label>Please perform the following Range of Motion 3 repetitions for the <spa>LEFT</spa> shoulder and record the last repetition below.</label>
                                 <br />
                                 <span>Flexion (normal endpoint = 180 degrees)</span>
@@ -392,7 +405,8 @@
                                 @Html.DropDownListFor(x => x.S192, (SelectList)ViewBag.MovementList90Deg)
                                 <br />
                                 <span>Internal Rotation (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(x => x.S193, (SelectList)ViewBag.MovementList90Deg)
+                                @Html.DropDownListFor(x => x.S193, (SelectList)ViewBag.MovementList90Deg)*@
+
                                 <hr />
                                 <label>For the <spa>LEFT</spa> shoulder at its worst or during a flare-up, what is the range for each motion?</label>
                                 <br />

@@ -269,7 +269,14 @@
 
                             </div>
                             <hr />
-                            <label class="font-bold">Please perform the movement tests above again and choose the answer that best reflects your ability for that movement this second time.</label>
+                            <input id="S109" name="S109" class="form-control" type="hidden" value="45">
+                            <input id="S108" name="S108" class="form-control" type="hidden" value="45">
+                            <input id="S110" name="S110" class="form-control" type="hidden" value="45">
+                            <input id="S111" name="S111" class="form-control" type="hidden" value="45">
+                            <input id="S117" name="S117" class="form-control" type="hidden" value="80">
+                            <input id="S118" name="S118" class="form-control" type="hidden" value="80">
+
+                            @*<label class="font-bold">Please perform the movement tests above again and choose the answer that best reflects your ability for that movement this second time.</label>
                             <hr />
                             <div class="form-check form-check-inline panel panel-primary">
                                 <span>Forward Flexion (normal endpoint = 45 degrees)</span>
@@ -295,7 +302,7 @@
                                 @Html.DropDownListFor(x => x.S118, (SelectList)ViewBag.MovementList80Deg)
 
                             </div>
-                            <hr />
+                            <hr />*@
                             <div class="form-check form-check-inline panel panel-primary">
                                 <label class="font-bold">Please perform the joint movement tests again for the final time and select the answer</label>
                                 <hr />
