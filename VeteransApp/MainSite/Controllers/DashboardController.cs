@@ -134,7 +134,6 @@ namespace MainSite.Controllers
             var CurrentRatingsList = new System.Web.Mvc.SelectList(new[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
             ViewBag.CurrentRatingsList = CurrentRatingsList;
 
-
             var VarianceHistory = new System.Web.Mvc.SelectList(new[] { VARIANCE_DEFAULT_CHOICE,
                                                                         "Onset of injury began during active duty service. Please see active duty records.",
                                                                         "Dx and Hx well-established by VA and military.",
@@ -155,6 +154,12 @@ namespace MainSite.Controllers
                                                                         "Pt states there is intermittent pain and swelling with daily activities.",
                                                                         "Pt reports occasional loss of movement and extreme tenderness when exerting."});
             ViewBag.VarianceFunctionLoss = VarianceFunctionLoss;
+
+            var MuscleStrength = new System.Web.Mvc.SelectList(new[] { "5","4"});
+            ViewBag.MuscleStrength = MuscleStrength;
+
+            var ReflexExam = new System.Web.Mvc.SelectList(new[] { "3", "2", "1" });
+            ViewBag.ReflexExam = ReflexExam;
 
         }
         public ActionResult Index()

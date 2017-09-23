@@ -126,6 +126,10 @@ namespace MainSite.Models
 
         public string S13JChoice { get; set; }
         public string S13AChoice { get; set; }
+        public string S13AChoiceLeftLeg { get; set; }
+        public string S13AChoiceRightLeg { get; set; }
+
+        public string S13AChoice199 = "5";
 
     }
 

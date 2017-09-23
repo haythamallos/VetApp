@@ -45,10 +45,10 @@
         <form id="formback" method="post" action="/Dashboard/BackPost?contentStateID=6" target="_blank">
             <input id="UserID" name="UserID" class="form-control" type="hidden" value="@Model.UserID">
             @*@if (Model.ContentStateID == 6)
-            {
-                <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
-                <hr />
-            }*@
+                {
+                    <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">You Have Completed This Form Already, Click To Purchase</button>
+                    <hr />
+                }*@
             <div class="panel-group col-lg-12" id="accordion">
                 <div class="panel panel-info">
                     <div class="panel-heading" id="part1Show">
@@ -280,28 +280,28 @@
                             <input id="S121" name="S121" class="form-control" type="hidden" value="30">
 
                             @*<label class="font-bold">Please perform the movement tests above again and choose the answer that best reflects your ability for that movement this second time.</label>
-                            <hr />
-                            <div class="form-check form-check-inline panel panel-primary">
-                                <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList90Deg)
                                 <hr />
-                                <span>Extension (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S111, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S114, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S120, (SelectList)ViewBag.MovementList30Deg)
-                                <hr />
-                                <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                @Html.DropDownListFor(x => x.S121, (SelectList)ViewBag.MovementList30Deg)
+                                <div class="form-check form-check-inline panel panel-primary">
+                                    <span>Forward Flexion (normal endpoint = 90 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList90Deg)
+                                    <hr />
+                                    <span>Extension (normal endpoint = 30 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S111, (SelectList)ViewBag.MovementList30Deg)
+                                    <hr />
+                                    <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList30Deg)
+                                    <hr />
+                                    <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S114, (SelectList)ViewBag.MovementList30Deg)
+                                    <hr />
+                                    <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S120, (SelectList)ViewBag.MovementList30Deg)
+                                    <hr />
+                                    <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
+                                    @Html.DropDownListFor(x => x.S121, (SelectList)ViewBag.MovementList30Deg)
 
-                            </div>
-                            <hr />*@
+                                </div>
+                                <hr />*@
                             <div class="form-check form-check-inline panel panel-primary">
                                 <label class="font-bold">Please perform the joint movement tests again for the final time and select the answer</label>
                                 <hr />
@@ -331,7 +331,7 @@
                     </div>
                 </div> <!-- primary -->
                 <div class="panel panel-info">
-                    <div class="panel-heading"  id="part3Show">
+                    <div class="panel-heading" id="part3Show">
                         <h4 class="panel-title">
                             <a class="info" data-parent="#accordion" href="#collapse3">Section 3</a>
                         </h4>
@@ -400,17 +400,38 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
-                        
-                            <span> Do you have Radiculopathy?</span>
+
+                            <span> Do you have Radiculopathy in your legs?</span>
                             <br />
-                            @Html.RadioButtonFor(x => x.S13AChoice, "NONE") None
+                            @Html.RadioButtonFor(x => x.S13AChoice, "YES") Yes
                             <br />
-                            @Html.RadioButtonFor(x => x.S13AChoice, "MILD") Mild
-                            <br />
-                            @Html.RadioButtonFor(x => x.S13AChoice, "MODERATE") Moderate
+                            @Html.RadioButtonFor(x => x.S13AChoice, "NO") No
                             <br />
 
-                         
+                            <span> LEFT leg Radiculopathy.  Choose one.</span>
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceLeftLeg, "NONE") None
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceLeftLeg, "MILD") Mild
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceLeftLeg, "MODERATE") Moderate
+                            <br />
+                            <div id="ModerateLeftLegRad" style="display: none">
+                                <span> Left Leg Radiculopathy</span>
+                            </div>
+
+                            <span> RIGHT leg Radiculopathy.  Choose one.</span>
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceRightLeg, "NONE") None
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceRightLeg, "MILD") Mild
+                            <br />
+                            @Html.RadioButtonFor(x => x.S13AChoiceRightLeg, "MODERATE") Moderate
+                            <br />
+                            <div id="ModerateRightLegRad" style="display: none">
+                                <span> Right Leg Radiculopathy</span>
+                            </div>
+
                             <div id="div15C" style="display: none">
                                 <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>
                                 <br />
@@ -766,6 +787,16 @@
             }
         });
 
+        $('#S13AChoiceRightLeg').change(function () {
+            alert(this.textContent);
+            //if (this.textContent) {
+
+            //    $('#ModerateRightLegRad').show();
+            //}
+            //else {
+            //    $('#ModerateRightLegRad').hide();
+            //}
+        });
     });
 </script>
 
