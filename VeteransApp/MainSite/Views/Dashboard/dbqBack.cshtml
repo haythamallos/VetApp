@@ -408,6 +408,7 @@
                             @Html.RadioButtonFor(x => x.S13AChoice, "NO") No
                             <br />
 
+                            <hr />
                             <span> LEFT leg Radiculopathy.  Choose one.</span>
                             <br />
                             @Html.RadioButtonFor(x => x.S13AChoiceLeftLeg, "NONE") None
@@ -416,9 +417,45 @@
                             <br />
                             @Html.RadioButtonFor(x => x.S13AChoiceLeftLeg, "MODERATE") Moderate
                             <br />
-                            <div id="ModerateLeftLegRad" style="display: none">
-                                <span> Left Leg Radiculopathy</span>
-                            </div>
+
+                            <hr />
+                            <span> Advanced Override for <b>MODERATE LEFT</b> Muscle Strength Values</span>
+                            <br />
+                            <span>Hip Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice226, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Knee Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice219, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Knee Extension</span>
+                            @Html.DropDownListFor(x => x.S13AChoice220, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Ankle Plantar Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice225, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Ankle Dorsiflexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice224, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Foot Abduction</span>
+                            @Html.DropDownListFor(x => x.S13AChoice221, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Foot Adduction</span>
+                            @Html.DropDownListFor(x => x.S13AChoice222, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Great Toe</span>
+                            @Html.DropDownListFor(x => x.S13AChoice223, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>REFLEX EXAM:  Left Knee</span>
+                            @Html.DropDownListFor(x => x.S13AChoice242, (SelectList)ViewBag.ReflexExam)
+                            <br />
+                            <span>REFLEX EXAM:  Left Ankle</span>
+                            @Html.DropDownListFor(x => x.S13AChoice243, (SelectList)ViewBag.ReflexExam)
+
+
+                            <hr />
+
+                            @*<div id="ModerateLeftLegRadDiv" style="display: none">
+                            </div>*@
 
                             <span> RIGHT leg Radiculopathy.  Choose one.</span>
                             <br />
@@ -428,9 +465,43 @@
                             <br />
                             @Html.RadioButtonFor(x => x.S13AChoiceRightLeg, "MODERATE") Moderate
                             <br />
-                            <div id="ModerateRightLegRad" style="display: none">
-                                <span> Right Leg Radiculopathy</span>
-                            </div>
+                            <hr />
+                            <span> Advanced Override for <b>MODERATE RIGHT</b> Muscle Strength Values</span>
+                            <span>Hip Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice199, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Knee Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice192, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Knee Extension</span>
+                            @Html.DropDownListFor(x => x.S13AChoice193, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Ankle Plantar Flexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice198, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Ankle Dorsiflexion</span>
+                            @Html.DropDownListFor(x => x.S13AChoice197, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Foot Abduction</span>
+                            @Html.DropDownListFor(x => x.S13AChoice194, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Foot Adduction</span>
+                            @Html.DropDownListFor(x => x.S13AChoice195, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>Great Toe</span>
+                            @Html.DropDownListFor(x => x.S13AChoice196, (SelectList)ViewBag.MuscleStrength)
+                            <br />
+                            <span>REFLEX EXAM:  Right Knee</span>
+                            @Html.DropDownListFor(x => x.S13AChoice244, (SelectList)ViewBag.ReflexExam)
+                            <br />
+                            <span>REFLEX EXAM:  Right Ankle</span>
+                            @Html.DropDownListFor(x => x.S13AChoice241, (SelectList)ViewBag.ReflexExam)
+
+
+                            @*<div id="ModerateRightLegRadDiv" style="display: none">
+                            </div>*@
+
+
 
                             <div id="div15C" style="display: none">
                                 <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>
@@ -787,16 +858,41 @@
             }
         });
 
-        $('#S13AChoiceRightLeg').change(function () {
-            alert(this.textContent);
-            //if (this.textContent) {
+        // bind the change function as usual
+        //$(':radio[name=S13AChoiceRightLeg]').change(function () {
+        //    if ($(this).val() == 'MODERATE') {
+        //        // show div
+        //        $('#ModerateRightLegRadDiv').show();
+        //    }
+        //    else {
+        //        // hide div
+        //        $('#ModerateRightLegRadDiv').hide();
+        //    }
+        //}).change();  // and immediately trigger it
 
-            //    $('#ModerateRightLegRad').show();
-            //}
-            //else {
-            //    $('#ModerateRightLegRad').hide();
-            //}
-        });
+        // bind the change function as usual
+        //$(':radio[name=S13AChoiceLeftLeg]').change(function () {
+        //    if ($(this).val() == 'MODERATE') {
+        //        // show div
+        //        $('#ModerateLeftLegRadDiv').show();
+        //    }
+        //    else {
+        //        // hide div
+        //        $('#ModerateLeftLegRadDiv').hide();
+        //    }
+        //}).change();  // and immediately trigger it
+
+        // bind the change function as usual
+        //$(':radio[name=S13AChoice]').change(function () {
+        //    if ($(this).val() == 'YES') {
+        //        // show div
+        //        $('#RadiculopathyDiv').show();
+        //    }
+        //    else {
+        //        // hide div
+        //        $('#RadiculopathyDiv').hide();
+        //    }
+        //}).change();  // and immediately trigger it
     });
 </script>
 

@@ -129,7 +129,32 @@ namespace MainSite.Models
         public string S13AChoiceLeftLeg { get; set; }
         public string S13AChoiceRightLeg { get; set; }
 
+        // right leg
         public string S13AChoice199 = "5";
+        public string S13AChoice192 = "5";
+        public string S13AChoice193 = "5";
+        public string S13AChoice198 = "5";
+        public string S13AChoice197 = "5";
+        public string S13AChoice194 = "4";
+        public string S13AChoice195 = "4";
+        public string S13AChoice196 = "4";
+
+        public string S13AChoice244 = "2";
+        public string S13AChoice241 = "1";
+
+        // left leg
+        public string S13AChoice226 = "5";
+        public string S13AChoice219 = "5";
+        public string S13AChoice220 = "5";
+        public string S13AChoice225 = "5";
+        public string S13AChoice224 = "5";
+        public string S13AChoice221 = "4";
+        public string S13AChoice222 = "4";
+        public string S13AChoice223 = "4";
+
+        public string S13AChoice242 = "2";
+        public string S13AChoice243 = "1";
+
 
     }
 
