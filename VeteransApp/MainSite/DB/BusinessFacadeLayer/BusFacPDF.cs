@@ -828,17 +828,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                             if (back.S13AChoiceRightLeg == "MODERATE")
                             {
-                                pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "4", true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, back.S13AChoice199, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, back.S13AChoice192, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, back.S13AChoice193, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, back.S13AChoice198, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, back.S13AChoice197, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, back.S13AChoice194, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, back.S13AChoice195, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, back.S13AChoice196, true);
 
-                                pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "1", true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, back.S13AChoice244, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, back.S13AChoice241, true);
 
                                 pdfFormFields.SetField(PDFItems.backPDFItems[202].Code, PDFItems.backPDFItems[202].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[205].Code, PDFItems.backPDFItems[205].ExportValue, true);
@@ -861,17 +861,17 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                             if (back.S13AChoiceLeftLeg == "MODERATE")
                             {
-                                pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "4", true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, back.S13AChoice226, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, back.S13AChoice219, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, back.S13AChoice220, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, back.S13AChoice225, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, back.S13AChoice224, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, back.S13AChoice221, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, back.S13AChoice222, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, back.S13AChoice223, true);
 
-                                pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2", true);
-                                pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "1", true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, back.S13AChoice242, true);
+                                pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, back.S13AChoice243, true);
 
                                 pdfFormFields.SetField(PDFItems.backPDFItems[229].Code, PDFItems.backPDFItems[229].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.backPDFItems[232].Code, PDFItems.backPDFItems[232].ExportValue, true);

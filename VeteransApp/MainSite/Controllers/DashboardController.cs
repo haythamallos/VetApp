@@ -155,7 +155,7 @@ namespace MainSite.Controllers
                                                                         "Pt reports occasional loss of movement and extreme tenderness when exerting."});
             ViewBag.VarianceFunctionLoss = VarianceFunctionLoss;
 
-            var MuscleStrength = new System.Web.Mvc.SelectList(new[] { "5","4"});
+            var MuscleStrength = new System.Web.Mvc.SelectList((new[] { "5","4"}));
             ViewBag.MuscleStrength = MuscleStrength;
 
             var ReflexExam = new System.Web.Mvc.SelectList(new[] { "3", "2", "1" });
@@ -1172,7 +1172,73 @@ namespace MainSite.Controllers
                 else
                 {
                     model = JSONHelper.Deserialize<BackModel>(content.ContentMeta);
+
                 }
+
+                // Right leg advanced feature defaults
+                var MuscleStrength199 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice199);
+                ViewBag.MuscleStrength199 = MuscleStrength199;
+
+                var MuscleStrength192 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice192);
+                ViewBag.MuscleStrength192 = MuscleStrength192;
+
+                var MuscleStrength193 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice193);
+                ViewBag.MuscleStrength193 = MuscleStrength193;
+
+                var MuscleStrength198 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice198);
+                ViewBag.MuscleStrength198 = MuscleStrength198;
+
+                var MuscleStrength197 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice197);
+                ViewBag.MuscleStrength197 = MuscleStrength197;
+
+                var MuscleStrength194 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice194);
+                ViewBag.MuscleStrength194 = MuscleStrength194;
+
+                var MuscleStrength195 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice195);
+                ViewBag.MuscleStrength195 = MuscleStrength195;
+
+                var MuscleStrength196 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice196);
+                ViewBag.MuscleStrength196 = MuscleStrength196;
+
+                var ReflexExam244 = new System.Web.Mvc.SelectList((new[] { "3", "2", "1" }), model.S13AChoice244);
+                ViewBag.ReflexExam244 = ReflexExam244;
+
+                var ReflexExam241 = new System.Web.Mvc.SelectList((new[] { "3", "2", "1" }), model.S13AChoice241);
+                ViewBag.ReflexExam241 = ReflexExam241;
+
+
+                // left leg advanced options
+                var MuscleStrength226 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice226);
+                ViewBag.MuscleStrength226 = MuscleStrength226;
+
+                var MuscleStrength219 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice219);
+                ViewBag.MuscleStrength219 = MuscleStrength219;
+
+                var MuscleStrength220 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice220);
+                ViewBag.MuscleStrength220 = MuscleStrength220;
+
+                var MuscleStrength225 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice225);
+                ViewBag.MuscleStrength225 = MuscleStrength225;
+
+                var MuscleStrength224 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice224);
+                ViewBag.MuscleStrength224 = MuscleStrength224;
+
+                var MuscleStrength221 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice221);
+                ViewBag.MuscleStrength221 = MuscleStrength221;
+
+                var MuscleStrength222 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice222);
+                ViewBag.MuscleStrength222 = MuscleStrength222;
+
+                var MuscleStrength223 = new System.Web.Mvc.SelectList((new[] { "5", "4" }), model.S13AChoice223);
+                ViewBag.MuscleStrength223 = MuscleStrength223;
+
+                var ReflexExam242 = new System.Web.Mvc.SelectList((new[] { "3", "2", "1" }), model.S13AChoice242);
+                ViewBag.ReflexExam242 = ReflexExam242;
+
+                var ReflexExam243 = new System.Web.Mvc.SelectList((new[] { "3", "2", "1" }), model.S13AChoice241);
+                ViewBag.ReflexExam243 = ReflexExam243;
+
+
             }
             catch (Exception ex)
             {
@@ -1211,6 +1277,28 @@ namespace MainSite.Controllers
             long contenttypeid = 1;
             try
             {
+                model.S13AChoice226 = Request.Form["S13AChoice226"].ToString();
+                model.S13AChoice219 = Request.Form["S13AChoice219"].ToString();
+                model.S13AChoice220 = Request.Form["S13AChoice220"].ToString();
+                model.S13AChoice225 = Request.Form["S13AChoice225"].ToString();
+                model.S13AChoice224 = Request.Form["S13AChoice224"].ToString();
+                model.S13AChoice221 = Request.Form["S13AChoice221"].ToString();
+                model.S13AChoice222 = Request.Form["S13AChoice222"].ToString();
+                model.S13AChoice223 = Request.Form["S13AChoice223"].ToString();
+                model.S13AChoice242 = Request.Form["S13AChoice242"].ToString();
+                model.S13AChoice243 = Request.Form["S13AChoice243"].ToString();
+
+                model.S13AChoice199 = Request.Form["S13AChoice199"].ToString();
+                model.S13AChoice192 = Request.Form["S13AChoice192"].ToString();
+                model.S13AChoice193 = Request.Form["S13AChoice193"].ToString();
+                model.S13AChoice198 = Request.Form["S13AChoice198"].ToString();
+                model.S13AChoice197 = Request.Form["S13AChoice197"].ToString();
+                model.S13AChoice194 = Request.Form["S13AChoice194"].ToString();
+                model.S13AChoice195 = Request.Form["S13AChoice195"].ToString();
+                model.S13AChoice196 = Request.Form["S13AChoice196"].ToString();
+                model.S13AChoice244 = Request.Form["S13AChoice244"].ToString();
+                model.S13AChoice241 = Request.Form["S13AChoice241"].ToString();
+
                 long ContentID = FormSave(model, contentStateID, contenttypeid);
                 if (contentStateID == 6)
                 {

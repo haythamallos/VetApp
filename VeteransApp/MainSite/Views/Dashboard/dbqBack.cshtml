@@ -279,29 +279,6 @@
                             <input id="S120" name="S120" class="form-control" type="hidden" value="30">
                             <input id="S121" name="S121" class="form-control" type="hidden" value="30">
 
-                            @*<label class="font-bold">Please perform the movement tests above again and choose the answer that best reflects your ability for that movement this second time.</label>
-                                <hr />
-                                <div class="form-check form-check-inline panel panel-primary">
-                                    <span>Forward Flexion (normal endpoint = 90 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S112, (SelectList)ViewBag.MovementList90Deg)
-                                    <hr />
-                                    <span>Extension (normal endpoint = 30 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S111, (SelectList)ViewBag.MovementList30Deg)
-                                    <hr />
-                                    <span>Right Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S113, (SelectList)ViewBag.MovementList30Deg)
-                                    <hr />
-                                    <span>Left Lateral Flexion (normal endpoint = 30 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S114, (SelectList)ViewBag.MovementList30Deg)
-                                    <hr />
-                                    <span>Right Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S120, (SelectList)ViewBag.MovementList30Deg)
-                                    <hr />
-                                    <span>Left Lateral Rotation (normal endpoint = 30 degrees)</span>
-                                    @Html.DropDownListFor(x => x.S121, (SelectList)ViewBag.MovementList30Deg)
-
-                                </div>
-                                <hr />*@
                             <div class="form-check form-check-inline panel panel-primary">
                                 <label class="font-bold">Please perform the joint movement tests again for the final time and select the answer</label>
                                 <hr />
@@ -422,34 +399,34 @@
                             <span> Advanced Override for <b>MODERATE LEFT</b> Muscle Strength Values</span>
                             <br />
                             <span>Hip Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice226, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice226, (SelectList)ViewBag.MuscleStrength226)
                             <br />
                             <span>Knee Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice219, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice219, (SelectList)ViewBag.MuscleStrength219)
                             <br />
                             <span>Knee Extension</span>
-                            @Html.DropDownListFor(x => x.S13AChoice220, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice220, (SelectList)ViewBag.MuscleStrength220)
                             <br />
                             <span>Ankle Plantar Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice225, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice225, (SelectList)ViewBag.MuscleStrength225)
                             <br />
                             <span>Ankle Dorsiflexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice224, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice224, (SelectList)ViewBag.MuscleStrength224)
                             <br />
                             <span>Foot Abduction</span>
-                            @Html.DropDownListFor(x => x.S13AChoice221, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice221, (SelectList)ViewBag.MuscleStrength221)
                             <br />
                             <span>Foot Adduction</span>
-                            @Html.DropDownListFor(x => x.S13AChoice222, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice222, (SelectList)ViewBag.MuscleStrength222)
                             <br />
                             <span>Great Toe</span>
-                            @Html.DropDownListFor(x => x.S13AChoice223, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice223, (SelectList)ViewBag.MuscleStrength223)
                             <br />
                             <span>REFLEX EXAM:  Left Knee</span>
-                            @Html.DropDownListFor(x => x.S13AChoice242, (SelectList)ViewBag.ReflexExam)
+                            @Html.DropDownListFor(x => x.S13AChoice242, (SelectList)ViewBag.ReflexExam242)
                             <br />
                             <span>REFLEX EXAM:  Left Ankle</span>
-                            @Html.DropDownListFor(x => x.S13AChoice243, (SelectList)ViewBag.ReflexExam)
+                            @Html.DropDownListFor(x => x.S13AChoice243, (SelectList)ViewBag.ReflexExam243)
 
 
                             <hr />
@@ -467,35 +444,36 @@
                             <br />
                             <hr />
                             <span> Advanced Override for <b>MODERATE RIGHT</b> Muscle Strength Values</span>
+                            <br />
                             <span>Hip Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice199, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice199, (SelectList)ViewBag.MuscleStrength199)
                             <br />
                             <span>Knee Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice192, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice192, (SelectList)ViewBag.MuscleStrength192)
                             <br />
                             <span>Knee Extension</span>
-                            @Html.DropDownListFor(x => x.S13AChoice193, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice193, (SelectList)ViewBag.MuscleStrength193)
                             <br />
                             <span>Ankle Plantar Flexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice198, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice198, (SelectList)ViewBag.MuscleStrength198)
                             <br />
                             <span>Ankle Dorsiflexion</span>
-                            @Html.DropDownListFor(x => x.S13AChoice197, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice197, (SelectList)ViewBag.MuscleStrength197)
                             <br />
                             <span>Foot Abduction</span>
-                            @Html.DropDownListFor(x => x.S13AChoice194, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice194, (SelectList)ViewBag.MuscleStrength194)
                             <br />
                             <span>Foot Adduction</span>
-                            @Html.DropDownListFor(x => x.S13AChoice195, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice195, (SelectList)ViewBag.MuscleStrength195)
                             <br />
                             <span>Great Toe</span>
-                            @Html.DropDownListFor(x => x.S13AChoice196, (SelectList)ViewBag.MuscleStrength)
+                            @Html.DropDownListFor(x => x.S13AChoice196, (SelectList)ViewBag.MuscleStrength196)
                             <br />
                             <span>REFLEX EXAM:  Right Knee</span>
-                            @Html.DropDownListFor(x => x.S13AChoice244, (SelectList)ViewBag.ReflexExam)
+                            @Html.DropDownListFor(x => x.S13AChoice244, (SelectList)ViewBag.ReflexExam244)
                             <br />
                             <span>REFLEX EXAM:  Right Ankle</span>
-                            @Html.DropDownListFor(x => x.S13AChoice241, (SelectList)ViewBag.ReflexExam)
+                            @Html.DropDownListFor(x => x.S13AChoice241, (SelectList)ViewBag.ReflexExam241)
 
 
                             @*<div id="ModerateRightLegRadDiv" style="display: none">
