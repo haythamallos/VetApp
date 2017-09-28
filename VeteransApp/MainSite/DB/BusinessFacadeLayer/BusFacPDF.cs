@@ -891,187 +891,7 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                             }
 
-                            //if (back.S13AChoice == "NONE")
-                            //{
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[334].Code, PDFItems.backPDFItems[334].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[317].Code, PDFItems.backPDFItems[317].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[320].Code, PDFItems.backPDFItems[320].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[287].Code, PDFItems.backPDFItems[287].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[281].Code, PDFItems.backPDFItems[281].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[275].Code, PDFItems.backPDFItems[275].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[280].Code, PDFItems.backPDFItems[280].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[314].Code, PDFItems.backPDFItems[314].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[315].Code, PDFItems.backPDFItems[315].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[312].Code, PDFItems.backPDFItems[312].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[311].Code, PDFItems.backPDFItems[311].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[368].Code, PDFItems.backPDFItems[368].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[341].Code, PDFItems.backPDFItems[341].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[344].Code, PDFItems.backPDFItems[344].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[203].Code, PDFItems.backPDFItems[203].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[230].Code, PDFItems.backPDFItems[230].ExportValue, true);
-                            //}
-                            //else if (back.S13AChoice == "MILD")
-                            //{
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[316].Code, PDFItems.backPDFItems[316].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[380].Code, PDFItems.backPDFItems[380].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[377].Code, PDFItems.backPDFItems[377].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[203].Code, PDFItems.backPDFItems[203].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[230].Code, PDFItems.backPDFItems[230].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[287].Code, PDFItems.backPDFItems[287].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[277].Code, PDFItems.backPDFItems[277].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[281].Code, PDFItems.backPDFItems[281].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[278].Code, PDFItems.backPDFItems[278].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[340].Code, PDFItems.backPDFItems[340].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[345].Code, PDFItems.backPDFItems[345].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[268].Code, PDFItems.backPDFItems[268].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[266].Code, PDFItems.backPDFItems[266].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[247].Code, PDFItems.backPDFItems[247].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[254].Code, PDFItems.backPDFItems[254].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[357].Code, PDFItems.backPDFItems[357].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[359].Code, PDFItems.backPDFItems[359].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[366].Code, PDFItems.backPDFItems[366].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[356].Code, PDFItems.backPDFItems[356].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[354].Code, PDFItems.backPDFItems[354].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[347].Code, PDFItems.backPDFItems[347].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[307].Code, PDFItems.backPDFItems[307].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[293].Code, PDFItems.backPDFItems[293].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[306].Code, PDFItems.backPDFItems[306].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[294].Code, PDFItems.backPDFItems[294].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[301].Code, PDFItems.backPDFItems[301].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[299].Code, PDFItems.backPDFItems[299].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[259].Code, PDFItems.backPDFItems[259].ExportValue, true);
-
-                            //}
-                            //else if (back.S13AChoice == "MODERATE")
-                            //{
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[316].Code, PDFItems.backPDFItems[316].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[380].Code, PDFItems.backPDFItems[380].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[377].Code, PDFItems.backPDFItems[377].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[199].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[192].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[193].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[198].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[197].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[194].Code, "4", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[195].Code, "4", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[196].Code, "4", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[202].Code, PDFItems.backPDFItems[202].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[205].Code, PDFItems.backPDFItems[205].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[226].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[219].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[220].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[225].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[224].Code, "5", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[221].Code, "4", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[222].Code, "4", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[223].Code, "4", true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[229].Code, PDFItems.backPDFItems[229].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[232].Code, PDFItems.backPDFItems[232].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[244].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[242].Code, "2", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[241].Code, "1", true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[243].Code, "1", true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[310].Code, PDFItems.backPDFItems[310].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[288].Code, PDFItems.backPDFItems[288].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[270].Code, PDFItems.backPDFItems[270].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[274].Code, PDFItems.backPDFItems[274].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[285].Code, PDFItems.backPDFItems[285].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[283].Code, PDFItems.backPDFItems[283].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[276].Code, PDFItems.backPDFItems[276].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[279].Code, PDFItems.backPDFItems[279].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[308].Code, PDFItems.backPDFItems[308].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[292].Code, PDFItems.backPDFItems[292].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[305].Code, PDFItems.backPDFItems[305].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[295].Code, PDFItems.backPDFItems[295].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[302].Code, PDFItems.backPDFItems[302].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[298].Code, PDFItems.backPDFItems[298].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[268].Code, PDFItems.backPDFItems[268].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[267].Code, PDFItems.backPDFItems[267].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[258].Code, PDFItems.backPDFItems[258].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[245].Code, PDFItems.backPDFItems[245].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[246].Code, PDFItems.backPDFItems[246].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[357].Code, PDFItems.backPDFItems[357].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[358].Code, PDFItems.backPDFItems[358].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[367].Code, PDFItems.backPDFItems[367].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[356].Code, PDFItems.backPDFItems[356].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[355].Code, PDFItems.backPDFItems[355].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[338].Code, PDFItems.backPDFItems[338].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[339].Code, PDFItems.backPDFItems[339].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[346].Code, PDFItems.backPDFItems[346].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[308].Code, PDFItems.backPDFItems[308].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[292].Code, PDFItems.backPDFItems[292].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[305].Code, PDFItems.backPDFItems[305].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[295].Code, PDFItems.backPDFItems[295].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[302].Code, PDFItems.backPDFItems[302].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[298].Code, PDFItems.backPDFItems[298].ExportValue, true);
-
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[318].Code, PDFItems.backPDFItems[318].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[321].Code, PDFItems.backPDFItems[321].ExportValue, true);
-                            //    pdfFormFields.SetField(PDFItems.backPDFItems[255].Code, PDFItems.backPDFItems[255].ExportValue, true);
-
-
-                            //}
+                           
                         }
 
                         if (back.S55)
@@ -2144,12 +1964,93 @@ namespace Vetapp.Engine.BusinessFacadeLayer
 
                         if (!string.IsNullOrEmpty(m.S12AChoice))
                         {
-                            if (m.S12AChoice == "NONE")
+                            if (m.S12AChoice == "NO")
                             {
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[317].Code, PDFItems.neckPDFItems[317].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[192].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[193].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[194].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[195].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[196].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[220].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[221].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[222].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[223].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[224].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[225].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[226].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[227].Code, "5", true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[322].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[326].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[323].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[324].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[325].Code, "2", true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[202].Code, PDFItems.neckPDFItems[202].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[231].Code, PDFItems.neckPDFItems[231].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[277].Code, PDFItems.neckPDFItems[277].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[276].Code, PDFItems.neckPDFItems[276].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[269].Code, PDFItems.neckPDFItems[269].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[270].Code, PDFItems.neckPDFItems[270].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[289].Code, PDFItems.neckPDFItems[289].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[280].Code, PDFItems.neckPDFItems[280].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[301].Code, PDFItems.neckPDFItems[301].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[300].Code, PDFItems.neckPDFItems[300].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[301].Code, PDFItems.neckPDFItems[301].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[312].Code, PDFItems.neckPDFItems[312].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[257].Code, PDFItems.neckPDFItems[257].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[246].Code, PDFItems.neckPDFItems[246].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[354].Code, PDFItems.neckPDFItems[354].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[341].Code, PDFItems.neckPDFItems[341].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[332].Code, PDFItems.neckPDFItems[332].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[335].Code, PDFItems.neckPDFItems[335].ExportValue, true);
 
+
+                            }
+                            else if (m.S12AChoice == "YES")
+                            {
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[305].Code, PDFItems.neckPDFItems[305].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[306].Code, PDFItems.neckPDFItems[306].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[263].Code, PDFItems.neckPDFItems[263].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[240].Code, PDFItems.neckPDFItems[240].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[348].Code, PDFItems.neckPDFItems[348].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[347].Code, PDFItems.neckPDFItems[347].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[361].Code, PDFItems.neckPDFItems[361].ExportValue, true);
+
+                            }
+
+                            if ((m.S12AChoiceLeftArm != "NONE") && (m.S12AChoiceRightArm != "NONE"))
+                            {
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[364].Code, PDFItems.neckPDFItems[364].ExportValue, true);
+                            }
+
+                            if (m.S12AChoiceRightArm == "NONE")
+                            {
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[367].Code, PDFItems.neckPDFItems[367].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[332].Code, PDFItems.neckPDFItems[332].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[202].Code, PDFItems.neckPDFItems[202].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[277].Code, PDFItems.neckPDFItems[277].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[276].Code, PDFItems.neckPDFItems[276].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[280].Code, PDFItems.neckPDFItems[280].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[295].Code, PDFItems.neckPDFItems[295].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[290].Code, PDFItems.neckPDFItems[290].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[309].Code, PDFItems.neckPDFItems[309].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[260].Code, PDFItems.neckPDFItems[260].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[243].Code, PDFItems.neckPDFItems[243].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[351].Code, PDFItems.neckPDFItems[351].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[344].Code, PDFItems.neckPDFItems[344].ExportValue, true);
+
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, "5", true);
@@ -2161,52 +2062,46 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, "5", true);
 
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[220].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[221].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[222].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[223].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[224].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[225].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[226].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[227].Code, "5", true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[231].Code, PDFItems.neckPDFItems[231].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[202].Code, PDFItems.neckPDFItems[202].ExportValue, true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[277].Code, PDFItems.neckPDFItems[277].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[269].Code, PDFItems.neckPDFItems[269].ExportValue, true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[276].Code, PDFItems.neckPDFItems[276].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[270].Code, PDFItems.neckPDFItems[270].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[304].Code, PDFItems.neckPDFItems[304].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[301].Code, PDFItems.neckPDFItems[301].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[300].Code, PDFItems.neckPDFItems[300].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[322].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[326].Code, "2", true);
 
                             }
-                            else if (m.S12AChoice == "MILD")
+                            else if (m.S12AChoiceRightArm == "MILD")
                             {
-                                // Common if Raduciculopath
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[305].Code, PDFItems.neckPDFItems[305].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[361].Code, PDFItems.neckPDFItems[361].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[364].Code, PDFItems.neckPDFItems[364].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[192].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[193].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[194].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[195].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[196].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, "5", true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[322].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[326].Code, "2", true);
 
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[331].Code, PDFItems.neckPDFItems[331].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[336].Code, PDFItems.neckPDFItems[336].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[192].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[193].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[194].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[195].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[196].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[345].Code, PDFItems.neckPDFItems[345].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[350].Code, PDFItems.neckPDFItems[350].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[242].Code, PDFItems.neckPDFItems[242].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[261].Code, PDFItems.neckPDFItems[261].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[308].Code, PDFItems.neckPDFItems[308].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[296].Code, PDFItems.neckPDFItems[296].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[295].Code, PDFItems.neckPDFItems[295].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[290].Code, PDFItems.neckPDFItems[290].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[277].Code, PDFItems.neckPDFItems[277].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[274].Code, PDFItems.neckPDFItems[274].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[202].Code, PDFItems.neckPDFItems[202].ExportValue, true);
 
+                            }
+
+                            if (m.S12AChoiceLeftArm == "NONE")
+                            {
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[220].Code, "5", true);
@@ -2218,105 +2113,126 @@ namespace Vetapp.Engine.BusinessFacadeLayer
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[226].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[227].Code, "5", true);
 
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[201].Code, PDFItems.neckPDFItems[201].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[230].Code, PDFItems.neckPDFItems[230].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[233].Code, PDFItems.neckPDFItems[233].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[204].Code, PDFItems.neckPDFItems[204].ExportValue, true);
-
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[323].Code, "2", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[324].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[325].Code, "2", true);
 
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[231].Code, PDFItems.neckPDFItems[231].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[277].Code, PDFItems.neckPDFItems[277].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[269].Code, PDFItems.neckPDFItems[269].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[274].Code, PDFItems.neckPDFItems[274].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[272].Code, PDFItems.neckPDFItems[272].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[296].Code, PDFItems.neckPDFItems[296].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[282].Code, PDFItems.neckPDFItems[282].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[295].Code, PDFItems.neckPDFItems[295].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[270].Code, PDFItems.neckPDFItems[270].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[289].Code, PDFItems.neckPDFItems[289].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[283].Code, PDFItems.neckPDFItems[283].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[290].Code, PDFItems.neckPDFItems[290].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[288].Code, PDFItems.neckPDFItems[288].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[263].Code, PDFItems.neckPDFItems[263].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[261].Code, PDFItems.neckPDFItems[261].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[254].Code, PDFItems.neckPDFItems[254].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[240].Code, PDFItems.neckPDFItems[240].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[242].Code, PDFItems.neckPDFItems[242].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[249].Code, PDFItems.neckPDFItems[249].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[348].Code, PDFItems.neckPDFItems[348].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[350].Code, PDFItems.neckPDFItems[350].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[357].Code, PDFItems.neckPDFItems[357].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[347].Code, PDFItems.neckPDFItems[347].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[345].Code, PDFItems.neckPDFItems[345].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[338].Code, PDFItems.neckPDFItems[338].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[314].Code, PDFItems.neckPDFItems[314].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[255].Code, PDFItems.neckPDFItems[255].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[248].Code, PDFItems.neckPDFItems[248].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[356].Code, PDFItems.neckPDFItems[356].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[339].Code, PDFItems.neckPDFItems[339].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[335].Code, PDFItems.neckPDFItems[335].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[366].Code, PDFItems.neckPDFItems[366].ExportValue, true);
 
                             }
-                            else if (m.S12AChoice == "MODERATE")
+                            else if (m.S12AChoiceLeftArm == "MILD")
                             {
-                                // Common if Raduciculopath
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[305].Code, PDFItems.neckPDFItems[305].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[361].Code, PDFItems.neckPDFItems[361].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[364].Code, PDFItems.neckPDFItems[364].ExportValue, true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[330].Code, PDFItems.neckPDFItems[330].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[337].Code, PDFItems.neckPDFItems[337].ExportValue, true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[192].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[193].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[196].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[220].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[221].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[222].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[223].Code, "5", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[224].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[225].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[226].Code, "5", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[227].Code, "5", true);
 
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, "5", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, "5", true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[194].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[195].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[223].Code, "4", true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[224].Code, "4", true);
-
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, "2", true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[323].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[324].Code, "2", true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[325].Code, "2", true);
 
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[230].Code, PDFItems.neckPDFItems[230].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[233].Code, PDFItems.neckPDFItems[233].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[231].Code, PDFItems.neckPDFItems[231].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[269].Code, PDFItems.neckPDFItems[269].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[272].Code, PDFItems.neckPDFItems[272].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[282].Code, PDFItems.neckPDFItems[282].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[283].Code, PDFItems.neckPDFItems[283].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[288].Code, PDFItems.neckPDFItems[288].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[315].Code, PDFItems.neckPDFItems[315].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[254].Code, PDFItems.neckPDFItems[254].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[249].Code, PDFItems.neckPDFItems[249].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[357].Code, PDFItems.neckPDFItems[357].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[338].Code, PDFItems.neckPDFItems[338].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[336].Code, PDFItems.neckPDFItems[336].ExportValue, true);
+
+                            }
+
+                            if (m.S12AChoiceRightArm == "MODERATE")
+                            {
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[189].Code, m.S12AChoice189, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[190].Code, m.S12AChoice190, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[191].Code, m.S12AChoice191, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[192].Code, m.S12AChoice192, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[193].Code, m.S12AChoice193, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[196].Code, m.S12AChoice196, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[197].Code, m.S12AChoice197, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[198].Code, m.S12AChoice198, true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[194].Code, m.S12AChoice194, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[195].Code, m.S12AChoice195, true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[327].Code, m.S12AChoice327, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[322].Code, m.S12AChoice322, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[326].Code, m.S12AChoice326, true);
+
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[201].Code, PDFItems.neckPDFItems[201].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[204].Code, PDFItems.neckPDFItems[204].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[299].Code, PDFItems.neckPDFItems[299].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[279].Code, PDFItems.neckPDFItems[279].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[267].Code, PDFItems.neckPDFItems[267].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[275].Code, PDFItems.neckPDFItems[275].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[271].Code, PDFItems.neckPDFItems[271].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[296].Code, PDFItems.neckPDFItems[296].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[282].Code, PDFItems.neckPDFItems[282].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[295].Code, PDFItems.neckPDFItems[295].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[283].Code, PDFItems.neckPDFItems[283].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[290].Code, PDFItems.neckPDFItems[290].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[288].Code, PDFItems.neckPDFItems[288].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[263].Code, PDFItems.neckPDFItems[263].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[307].Code, PDFItems.neckPDFItems[307].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[262].Code, PDFItems.neckPDFItems[262].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[253].Code, PDFItems.neckPDFItems[253].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[240].Code, PDFItems.neckPDFItems[240].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[241].Code, PDFItems.neckPDFItems[241].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[250].Code, PDFItems.neckPDFItems[250].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[348].Code, PDFItems.neckPDFItems[348].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[349].Code, PDFItems.neckPDFItems[349].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[358].Code, PDFItems.neckPDFItems[358].ExportValue, true);
-                                pdfFormFields.SetField(PDFItems.neckPDFItems[347].Code, PDFItems.neckPDFItems[347].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[346].Code, PDFItems.neckPDFItems[346].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[330].Code, PDFItems.neckPDFItems[330].ExportValue, true);
+
+                            }
+
+                            if (m.S12AChoiceLeftArm == "MODERATE")
+                            {
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[218].Code, m.S12AChoice218, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[219].Code, m.S12AChoice219, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[220].Code, m.S12AChoice220, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[221].Code, m.S12AChoice221, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[222].Code, m.S12AChoice222, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[225].Code, m.S12AChoice225, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[226].Code, m.S12AChoice226, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[227].Code, m.S12AChoice227, true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[223].Code, m.S12AChoice223, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[224].Code, m.S12AChoice224, true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[323].Code, m.S12AChoice323, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[324].Code, m.S12AChoice324, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[325].Code, m.S12AChoice325, true);
+
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[230].Code, PDFItems.neckPDFItems[230].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[233].Code, PDFItems.neckPDFItems[233].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[265].Code, PDFItems.neckPDFItems[265].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[267].Code, PDFItems.neckPDFItems[267].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[270].Code, PDFItems.neckPDFItems[270].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[282].Code, PDFItems.neckPDFItems[282].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[283].Code, PDFItems.neckPDFItems[283].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[288].Code, PDFItems.neckPDFItems[288].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[316].Code, PDFItems.neckPDFItems[316].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[253].Code, PDFItems.neckPDFItems[253].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[250].Code, PDFItems.neckPDFItems[250].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[358].Code, PDFItems.neckPDFItems[358].ExportValue, true);
                                 pdfFormFields.SetField(PDFItems.neckPDFItems[329].Code, PDFItems.neckPDFItems[329].ExportValue, true);
+                                pdfFormFields.SetField(PDFItems.neckPDFItems[337].Code, PDFItems.neckPDFItems[337].ExportValue, true);
 
                             }
                         }

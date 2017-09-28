@@ -408,14 +408,129 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <span> Do you have Radiculopathy?</span>
+                            @*<span> Do you have Radiculopathy?</span>
                             <br />
                             @Html.RadioButtonFor(x => x.S12AChoice, "NONE") None
                             <br />
                             @Html.RadioButtonFor(x => x.S12AChoice, "MILD") Mild
                             <br />
                             @Html.RadioButtonFor(x => x.S12AChoice, "MODERATE") Moderate
+                            <br />*@
+
+
+
+                            <span> Do you have Radiculopathy in your arms?</span>
                             <br />
+                            @Html.RadioButtonFor(x => x.S12AChoice, "YES") Yes
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoice, "NO") No
+                            <br />
+
+                            <hr />
+                            <span> LEFT Arm Radiculopathy.  Choose one.</span>
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceLeftArm, "NONE") None
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceLeftArm, "MILD") Mild
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceLeftArm, "MODERATE") Moderate
+                            <br />
+
+                            <hr />
+                            <span> Advanced Override for <b>MODERATE LEFT</b> Muscle Strength Values</span>
+                            <br />
+                            <span>Shoulder Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice227, (SelectList)ViewBag.MuscleStrength227)
+                            <br />
+                            <span>Shoulder Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice218, (SelectList)ViewBag.MuscleStrength218)
+                            <br />
+                            <span>Shoulder Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice219, (SelectList)ViewBag.MuscleStrength219)
+                            <br />
+                            <span>Shoulder Rotation</span>
+                            @Html.DropDownListFor(x => x.S12AChoice226, (SelectList)ViewBag.MuscleStrength226)
+                            <br />
+                            <span>Elbow Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice225, (SelectList)ViewBag.MuscleStrength225)
+                            <br />
+                            <span>Elbow Extension</span>
+                            @Html.DropDownListFor(x => x.S12AChoice220, (SelectList)ViewBag.MuscleStrength220)
+                            <br />
+                            <span>Wrist Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice221, (SelectList)ViewBag.MuscleStrength221)
+                            <br />
+                            <span>Wrist Extension</span>
+                            @Html.DropDownListFor(x => x.S12AChoice222, (SelectList)ViewBag.MuscleStrength222)
+                            <br />
+                            <span>Finger Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice224, (SelectList)ViewBag.MuscleStrength224)
+                            <br />
+                            <span>Finger Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice223, (SelectList)ViewBag.MuscleStrength223)
+                            <br />
+                            <span>REFLEX EXAM:  Left Biceps</span>
+                            @Html.DropDownListFor(x => x.S12AChoice323, (SelectList)ViewBag.ReflexExam323)
+                            <br />
+                            <span>REFLEX EXAM:  Left Tricepts</span>
+                            @Html.DropDownListFor(x => x.S12AChoice324, (SelectList)ViewBag.ReflexExam324)
+                            <br />
+                            <span>REFLEX EXAM:  Left Brachioradials</span>
+                            @Html.DropDownListFor(x => x.S12AChoice325, (SelectList)ViewBag.ReflexExam325)
+
+
+                            <hr />
+                            <span> RIGHT Arm Radiculopathy.  Choose one.</span>
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceRightArm, "NONE") None
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceRightArm, "MILD") Mild
+                            <br />
+                            @Html.RadioButtonFor(x => x.S12AChoiceRightArm, "MODERATE") Moderate
+                            <br />
+                            <hr />
+                            <span> Advanced Override for <b>MODERATE RIGHT</b> Muscle Strength Values</span>
+                            <br />
+                            <span>Shoulder Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice198, (SelectList)ViewBag.MuscleStrength198)
+                            <br />
+                            <span>Shoulder Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice189, (SelectList)ViewBag.MuscleStrength189)
+                            <br />
+                            <span>Shoulder Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice190, (SelectList)ViewBag.MuscleStrength190)
+                            <br />
+                            <span>Shoulder Rotation</span>
+                            @Html.DropDownListFor(x => x.S12AChoice197, (SelectList)ViewBag.MuscleStrength197)
+                            <br />
+                            <span>Elbow Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice196, (SelectList)ViewBag.MuscleStrength196)
+                            <br />
+                            <span>Elbow Extension</span>
+                            @Html.DropDownListFor(x => x.S12AChoice191, (SelectList)ViewBag.MuscleStrength191)
+                            <br />
+                            <span>Wrist Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice192, (SelectList)ViewBag.MuscleStrength192)
+                            <br />
+                            <span>Wrist Extension</span>
+                            @Html.DropDownListFor(x => x.S12AChoice193, (SelectList)ViewBag.MuscleStrength193)
+                            <br />
+                            <span>Finger Flexion</span>
+                            @Html.DropDownListFor(x => x.S12AChoice195, (SelectList)ViewBag.MuscleStrength195)
+                            <br />
+                            <span>Finger Abduction</span>
+                            @Html.DropDownListFor(x => x.S12AChoice194, (SelectList)ViewBag.MuscleStrength194)
+                            <br />
+                            <span>REFLEX EXAM:  Right Biceps</span>
+                            @Html.DropDownListFor(x => x.S12AChoice327, (SelectList)ViewBag.ReflexExam327)
+                            <br />
+                            <span>REFLEX EXAM:  Right Tricepts</span>
+                            @Html.DropDownListFor(x => x.S12AChoice322, (SelectList)ViewBag.ReflexExam322)
+                            <br />
+                            <span>REFLEX EXAM:  Right Brachioradials</span>
+                            @Html.DropDownListFor(x => x.S12AChoice326, (SelectList)ViewBag.ReflexExam326)
+
+
 
                             <div id="div14C" style="display: none">
                                 <span> What is the total duration of all incapacitating episodes over the past 12 months:</span>

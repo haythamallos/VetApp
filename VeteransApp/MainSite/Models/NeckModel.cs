@@ -118,6 +118,44 @@ namespace MainSite.Models
         public string S12AChoice { get; set; }
         public string S2BChoice { get; set; }
 
+        public string S12AChoiceLeftArm { get; set; }
+        public string S12AChoiceRightArm { get; set; }
+
+        // right arm
+        public string S12AChoice189 = "5";
+        public string S12AChoice190 = "5";
+        public string S12AChoice191 = "5";
+        public string S12AChoice192 = "5";
+        public string S12AChoice193 = "5";
+        public string S12AChoice198 = "5";
+        public string S12AChoice197 = "5";
+        public string S12AChoice196 = "5";
+
+        public string S12AChoice195 = "4";
+        public string S12AChoice194 = "4";
+
+        public string S12AChoice327 = "2";
+        public string S12AChoice322 = "2";
+        public string S12AChoice326 = "1";
+
+
+
+        // left arm
+        public string S12AChoice218 = "5";
+        public string S12AChoice219 = "5";
+        public string S12AChoice220 = "5";
+        public string S12AChoice221 = "5";
+        public string S12AChoice222 = "5";
+        public string S12AChoice227 = "5";
+        public string S12AChoice226 = "5";
+        public string S12AChoice225 = "5";
+
+        public string S12AChoice224 = "4";
+        public string S12AChoice223 = "4";
+
+        public string S12AChoice323 = "2";
+        public string S12AChoice324 = "2";
+        public string S12AChoice325 = "1";
 
     }
 }
